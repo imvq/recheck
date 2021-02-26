@@ -1,11 +1,9 @@
 import React from 'react';
 
+import LandingPage from 'components/related/LandingPage';
+
 /**
  * Main wrapper.
  * Container component.
  */
-const App: React.FC = () => (
-  <div />
-);
-
-export default App;
+export default () => <LandingPage />;
