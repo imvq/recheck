@@ -5,7 +5,7 @@ import React from 'react';
  * Container component.
  */
 const App: React.FC = () => (
-  <div></div>
+  <div />
 );
 
 export default App;
