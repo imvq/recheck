@@ -1,4 +1,3 @@
-import React from 'react';
 import withStyles from 'react-css-modules';
 
 import TelegramButton from 'components/common/Button/Telegram';

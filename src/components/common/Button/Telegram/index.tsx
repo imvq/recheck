@@ -1,4 +1,3 @@
-import React from 'react';
 import withStyles from 'react-css-modules';
 
 import { ReactComponent as TelegramSVG } from 'assets/svg/btn/Telegram.svg';

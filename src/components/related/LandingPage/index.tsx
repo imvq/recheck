@@ -1,4 +1,3 @@
-import React from 'react';
 import withStyles from 'react-css-modules';
 
 import Footer from 'components/common/Footer';
@@ -14,7 +13,7 @@ import styles from './styles.module.scss';
  * Landing page parts wrapper.
  * Presentational component.
  */
-const LandingPage: React.FC = () => (
+export default withStyles(() => (
   <div styleName='LandingPage'>
     <GreetingsView />
     <HowToWorkView />
@@ -23,6 +22,4 @@ const LandingPage: React.FC = () => (
     <MotivatorView />
     <Footer />
   </div>
-);
-
-export default withStyles(LandingPage, styles);
+), styles);
