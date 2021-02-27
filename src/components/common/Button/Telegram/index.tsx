@@ -2,9 +2,13 @@ import React from 'react';
 import withStyles from 'react-css-modules';
 
 import { ReactComponent as TelegramSVG } from 'assets/svg/btn/Telegram.svg';
-import { SocialButtonProps } from './types';
-import styles from './index.module.scss';
+import { TelegramButtonProps } from './types';
+import styles from './styles.module.scss';
 
-export default withStyles(({ onClick }: SocialButtonProps) => (
+/**
+ * Programmed SVG component representing a Telegram bot button.
+ * Presentational component.
+ */
+export default withStyles(({ onClick }: TelegramButtonProps) => (
   <TelegramSVG styleName='TelegramButton' onClick={onClick} />
 ), styles);

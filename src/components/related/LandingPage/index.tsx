@@ -8,7 +8,7 @@ import InfoblockView from './InfoblockView';
 import MainSwipeView from './MainSwipeView';
 import MotivatorView from './MotivatorView';
 
-import styles from './index.module.scss';
+import styles from './styles.module.scss';
 
 /**
  * Landing page parts wrapper.

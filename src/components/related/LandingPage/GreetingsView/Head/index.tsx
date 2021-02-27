@@ -2,8 +2,8 @@ import React from 'react';
 import withStyles from 'react-css-modules';
 
 import TelegramButton from 'components/common/Button/Telegram';
-import logoFull from 'assets/svg/logoFull.svg';
-import styles from './index.module.scss';
+import { ReactComponent as Logo } from 'assets/svg/logo/LogoFull.svg';
+import styles from './styles.module.scss';
 
 /**
  * Upper wrapper for logo and tabs.
@@ -11,7 +11,7 @@ import styles from './index.module.scss';
  */
 const Head: React.FC = () => (
   <div styleName='Head'>
-    <img styleName='Head__Logo' src={logoFull} alt='' />
+    <Logo styleName='Head__Logo' />
     <div>
       <button type='button'>Поиск</button>
       <button type='button'>О платформе</button>

@@ -1,3 +1,3 @@
-export type SocialButtonProps = {
+export type TelegramButtonProps = {
   onClick?: (...args: any[]) => void;
 };
