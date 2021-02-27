@@ -10,6 +10,10 @@ import MotivatorView from './MotivatorView';
 
 import styles from './index.module.scss';
 
+/**
+ * Landing page parts wrapper.
+ * Presentational component.
+ */
 const LandingPage: React.FC = () => (
   <div styleName='LandingPage'>
     <GreetingsView />

@@ -1,0 +1,9 @@
+@import '~styles/abstracts/variables';
+
+.GreetingsView {
+  height: $greetings-view-height;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-image: url(~assets/svg/rectUpper.svg);
+}

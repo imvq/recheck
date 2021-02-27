@@ -1,1 +1,7 @@
+/* Colors. */
 $color-background-default: #fff;
+
+/* Sizes. */
+$greetings-view-height: 100vh;
+$greetings-view-head-height: $greetings-view-height / 7;
+$greetings-view-content-height: $greetings-view-height - $greetings-view-head-height;

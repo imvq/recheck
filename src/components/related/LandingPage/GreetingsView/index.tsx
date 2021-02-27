@@ -1,5 +1,17 @@
 import React from 'react';
+import withStyles from 'react-css-modules';
 
-export default () => (
-  <div />
+import Head from './Head';
+import styles from './index.module.scss';
+
+/**
+ * Upper block of the landing page.
+ * Presentational component.
+ */
+const GreetingsView: React.FC = () => (
+  <div styleName='GreetingsView'>
+    <Head />
+  </div>
 );
+
+export default withStyles(GreetingsView, styles);
