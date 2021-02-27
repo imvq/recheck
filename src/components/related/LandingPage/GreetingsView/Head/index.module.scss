@@ -3,4 +3,9 @@
 .Head {
   height: $greetings-view-head-height;
   display: flex;
+  justify-content: space-around;
+}
+
+.Head__Logo {
+  width: 14.5vw;
 }
