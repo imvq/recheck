@@ -2,6 +2,8 @@
 $color-background-default: #fff;
 
 /* Sizes. */
-$greetings-view-height: 100vh;
-$greetings-view-head-height: $greetings-view-height / 7;
-$greetings-view-content-height: $greetings-view-height - $greetings-view-head-height;
+$greetings-view-height: 100%;
+$greetings-view-head-height: 80px;
+$greetings-view-content-height: calc(
+  #{$greetings-view-height} - #{$greetings-view-head-height}
+);

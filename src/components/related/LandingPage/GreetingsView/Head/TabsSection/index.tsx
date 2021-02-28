@@ -2,6 +2,10 @@ import withStyles from 'react-css-modules';
 
 import styles from './styles.module.scss';
 
+/**
+ * Header buttons wrapper.
+ * Presentational component.
+ */
 export default withStyles(() => (
   <div styleName='Wrapper'>
     <button styleName='Tab' type='button'>Поиск</button>
