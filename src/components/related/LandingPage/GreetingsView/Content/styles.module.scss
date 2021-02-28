@@ -1,9 +1,31 @@
 @import '~styles/abstracts/variables';
+@import '~styles/base/typography';
 
 .Content {
   height: $greetings-view-content-height;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .Content__Pic {
   height: 100%;
+}
+
+.Content__InteractionGroup {
+  margin-left: -15%;
+  margin-bottom: 6%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.Content__CallToAction {
+  width: 450px;
+  height: 108px;
+  font-family: OpenSans-SemiBold;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: center;
 }
