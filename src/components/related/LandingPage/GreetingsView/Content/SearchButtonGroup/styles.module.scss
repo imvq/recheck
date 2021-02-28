@@ -1,0 +1,31 @@
+@import '~styles/abstracts/variables';
+@import '~styles/abstracts/externals';
+
+.SearchButtonGroup {
+  position: relative;
+}
+
+.SearchButtonGroup__Button {
+  position: relative;
+  z-index: 1;
+  transition: .1s;
+  cursor: pointer;
+
+  &:hover {
+    opacity: $opacity-button-hover;
+    // Use hardware acceleration if possible.
+    filter: alpha(opacity=#{$opacity-button-hover * 100});
+  }
+
+  &:active {
+    opacity: $opacity-button-active;
+    // Use hardware acceleration if possible.
+    filter: alpha(opacity=#{$opacity-button-active * 100});
+  }
+}
+
+.SearchButtonGroup__RocketLine {
+  position: absolute;
+  top: $greetings-content-button-height / 2;
+  right: $greetings-content-button-width / 2;
+}

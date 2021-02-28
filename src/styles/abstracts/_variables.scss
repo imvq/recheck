@@ -7,3 +7,8 @@ $greetings-view-head-height: 80px;
 $greetings-view-content-height: calc(
   #{$greetings-view-height} - #{$greetings-view-head-height}
 );
+
+/* Misc. */
+$opacity-button-idle: 1;
+$opacity-button-hover: .8;
+$opacity-button-active: .5;
