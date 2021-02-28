@@ -23,9 +23,3 @@
     filter: alpha(opacity=#{$opacity-button-active * 100});
   }
 }
-
-.SearchButtonGroup__RocketLine {
-  position: absolute;
-  top: $greetings-content-button-height / 2;
-  right: $greetings-content-button-width / 2;
-}

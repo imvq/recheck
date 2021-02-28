@@ -1,0 +1,15 @@
+@import '~styles/abstracts/externals';
+
+.RocketGroup__Line {
+  position: absolute;
+  top: $greetings-content-button-height / 2;
+  right: $greetings-content-button-width / 2;
+}
+
+.RocketGroup__Rocket {
+  position: absolute;
+  top: 250px;
+  right: 225px;
+  width: 140px;
+  height: 132px;
+}

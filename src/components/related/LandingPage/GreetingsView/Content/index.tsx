@@ -1,7 +1,7 @@
 import withStyles from 'react-css-modules';
 
 import GreetingsContentPic from 'assets/images/GreetingsContentPic.png';
-import SearchButton from './SearchButtonGroup';
+import SearchButtonGroup from './SearchButtonGroup';
 
 import styles from './styles.module.scss';
 
@@ -16,9 +16,7 @@ export default withStyles(() => (
       <p styleName='Content__CallToAction'>
         Найди отзывы о кандидате с прошлых мест работы
       </p>
-      <div>
-        <SearchButton />
-      </div>
+      <SearchButtonGroup />
     </div>
   </div>
 ), styles);

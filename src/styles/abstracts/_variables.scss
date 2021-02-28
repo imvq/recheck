@@ -9,6 +9,8 @@ $greetings-view-content-height: calc(
 );
 
 /* Misc. */
-$opacity-button-idle: 1;
 $opacity-button-hover: .8;
 $opacity-button-active: .5;
+$opacity-button-idle-inversed: .8;
+$opacity-button-hover-inversed: 1;
+$opacity-button-active-inversed: .5;

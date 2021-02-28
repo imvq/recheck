@@ -1,7 +1,7 @@
 import withStyles from 'react-css-modules';
 
-import TelegramButton from 'components/common/Button/Telegram';
 import { ReactComponent as Logo } from 'assets/svg/logo/LogoFull.svg';
+import TelegramButton from './TelegramBtn';
 import TabsSection from './TabsSection';
 import styles from './styles.module.scss';
 
