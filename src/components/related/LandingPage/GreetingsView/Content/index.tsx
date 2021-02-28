@@ -15,8 +15,8 @@ export default withStyles(() => (
     <div styleName='Content__InteractionGroup'>
       <p styleName='Content__CallToAction'>
         Найди отзывы о кандидате с прошлых мест работы
+        <SearchButtonGroup />
       </p>
-      <SearchButtonGroup />
     </div>
   </div>
 ), styles);
