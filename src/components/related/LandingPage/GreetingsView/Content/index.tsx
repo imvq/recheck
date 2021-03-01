@@ -21,7 +21,7 @@ export default withStyles(() => (
     </div>
     <div styleName='Content__TextWrapper'>
       <p styleName='Content__ActionGroup'>
-        Найди отзывы о кандидате с прошлых мест работы
+        <span>Найди отзывы о кандидате с прошлых мест работы</span>
         <SearchButtonGroup />
       </p>
     </div>
