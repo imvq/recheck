@@ -11,12 +11,14 @@ import styles from './styles.module.scss';
  */
 export default withStyles(() => (
   <div styleName='Content'>
-    {/* <img styleName='Content__Pic' src={GreetingsContentPic} alt='' />
-    <div styleName='Content__InteractionGroup'>
-      <p styleName='Content__CallToAction'>
+    <div styleName='Content__PicWrapper'>
+      <img styleName='Content__Pic' src={GreetingsContentPic} alt='' />
+    </div>
+    <div styleName='Content__TextWrapper'>
+      <p styleName='Content__ActionGroup'>
         Найди отзывы о кандидате с прошлых мест работы
         <SearchButtonGroup />
       </p>
-    </div> */}
+    </div>
   </div>
 ), styles);

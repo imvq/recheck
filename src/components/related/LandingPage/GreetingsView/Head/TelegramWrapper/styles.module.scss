@@ -3,9 +3,10 @@
 .Wrapper {
   grid-area: TelegramWrapper;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding-top: 2.5em;
+  margin-left: 6.9em;
 }
 
 .TelegramButton {

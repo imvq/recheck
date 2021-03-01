@@ -1,12 +1,12 @@
 .LogoWrapper {
   grid-area: LogoWrapper;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+  margin-top: 2em;
+  margin-right: 8.7em;
 }
 
 .Logo {
-  margin-top: 2em;
-  margin-right: 5em;
   cursor: pointer;
 }

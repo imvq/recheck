@@ -4,28 +4,33 @@
 .Content {
   grid-area: Content;
   display: flex;
-  justify-content: space-evenly;
-  background-color: pink;
+  justify-content: center;
+}
+
+.Content__PicWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: -7.3em;
+  margin-right: -7.8em;
 }
 
 .Content__Pic {
-  height: 80%;
+  width: 715px;
+  height: 450px;
 }
 
-.Content__InteractionGroup {
-  margin-left: -25%;
-  margin-bottom: 18%;
+.Content__TextWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: flex-start;
+  margin-top: 12.3em;
 }
 
-.Content__CallToAction {
-  width: 350px;
-  height: 108px;
+.Content__ActionGroup {
+  width: $greetings-view-content-action-group-width;
   font-family: OpenSans-SemiBold;
   font-weight: 600;
-  font-size: 1.5em;
+  font-size: 1.9em;
   line-height: 40px;
   text-align: center;
 }
