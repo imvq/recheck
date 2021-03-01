@@ -17,6 +17,7 @@
 .Content__Pic {
   width: 715px;
   height: 450px;
+  user-select: none;
 }
 
 .Content__TextWrapper {
@@ -33,4 +34,5 @@
   font-size: 1.9em;
   line-height: 40px;
   text-align: center;
+  user-select: none;
 }

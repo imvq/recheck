@@ -12,7 +12,12 @@ import styles from './styles.module.scss';
 export default withStyles(() => (
   <div styleName='Content'>
     <div styleName='Content__PicWrapper'>
-      <img styleName='Content__Pic' src={GreetingsContentPic} alt='' />
+      <img
+        styleName='Content__Pic'
+        src={GreetingsContentPic}
+        alt=''
+        draggable='false'
+      />
     </div>
     <div styleName='Content__TextWrapper'>
       <p styleName='Content__ActionGroup'>
