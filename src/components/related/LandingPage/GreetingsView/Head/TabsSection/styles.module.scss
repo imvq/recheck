@@ -1,8 +1,9 @@
 .Wrapper {
+  grid-area: TabSection;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  padding-top: 2.5em;
   align-items: center;
-  width: 33vw;
 }
 
 .Tab {
@@ -11,4 +12,5 @@
   outline: none;
   font-family: OpenSans-Regular;
   font-size: 1em;
+  cursor: pointer;
 }

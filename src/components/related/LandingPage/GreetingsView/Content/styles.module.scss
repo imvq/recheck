@@ -2,9 +2,10 @@
 @import '~styles/base/typography';
 
 .Content {
-  height: $greetings-view-content-height;
+  grid-area: Content;
   display: flex;
   justify-content: space-evenly;
+  background-color: pink;
 }
 
 .Content__Pic {

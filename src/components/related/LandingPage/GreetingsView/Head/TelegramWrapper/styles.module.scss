@@ -1,5 +1,13 @@
 @import '~styles/abstracts/variables';
 
+.Wrapper {
+  grid-area: TelegramWrapper;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2.5em;
+}
+
 .TelegramButton {
   opacity: $opacity-button-idle-inversed;
   // Use hardware acceleration if possible.

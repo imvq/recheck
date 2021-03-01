@@ -1,7 +1,7 @@
 import withStyles from 'react-css-modules';
 
-import { ReactComponent as Logo } from 'assets/svg/logo/LogoFull.svg';
-import TelegramButton from './TelegramBtn';
+import LogoWrapper from './LogoWrapper';
+import TelegramWrapper from './TelegramWrapper';
 import TabsSection from './TabsSection';
 import styles from './styles.module.scss';
 
@@ -11,8 +11,8 @@ import styles from './styles.module.scss';
  */
 export default withStyles(() => (
   <div styleName='Head'>
-    <Logo />
+    <LogoWrapper />
     <TabsSection />
-    <TelegramButton />
+    <TelegramWrapper />
   </div>
 ), styles);

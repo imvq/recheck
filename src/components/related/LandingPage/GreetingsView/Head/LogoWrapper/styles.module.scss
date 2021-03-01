@@ -1,0 +1,12 @@
+.LogoWrapper {
+  grid-area: LogoWrapper;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Logo {
+  margin-top: 2em;
+  margin-right: 5em;
+  cursor: pointer;
+}

@@ -9,5 +9,7 @@ import styles from './styles.module.scss';
  * Presentational component.
  */
 export default withStyles(({ onClick }: TelegramButtonProps) => (
-  <TelegramSVG styleName='TelegramButton' onClick={onClick} />
+  <div styleName='Wrapper'>
+    <TelegramSVG styleName='TelegramButton' onClick={onClick} />
+  </div>
 ), styles);

@@ -1,7 +1,13 @@
 @import '~styles/abstracts/variables';
 
 .LandingPage {
-  height: 100%;
-  display: grid;
   background-color: $color-background-default;
+  display: grid;
+  grid-template:
+    'GreetingsView' 118vh
+    'HowToWorkView' 1fr
+    'InfoblockView' 1fr
+    'MainSwipeView' 1fr
+    'MotivatorView' 1fr
+    'Footer' 1fr;
 }
