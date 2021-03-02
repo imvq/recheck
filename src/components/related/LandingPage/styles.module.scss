@@ -4,7 +4,7 @@
   background-color: $color-background-default;
   display: grid;
   grid-template:
-    'GreetingsView' 118vh
+    'GreetingsView' 1fr
     'HowToWorkView' 334vh
     'InfoblockView' 1fr
     'MainSwipeView' 1fr

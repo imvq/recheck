@@ -1,3 +1,25 @@
+@import '~styles/abstracts/variables';
+
 .TitleView {
-  background-color: rgb(190, 243, 225);
+  grid-area: TitleView;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.TitleView__TextWrapper {
+  margin-top: 7.58rem;
+}
+
+.TitleView__Text {
+  font-family: OpenSans-SemiBold;
+  font-size: 1.7rem;
+}
+
+.TitleView__Text--ColorpickMain {
+  color: $color-foreground-pick-main;
+}
+
+.TitleView__Text--ColorpickAux1 {
+  color: $color-foreground-pick-aux1;
 }
