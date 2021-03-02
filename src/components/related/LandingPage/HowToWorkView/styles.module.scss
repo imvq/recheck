@@ -1,0 +1,8 @@
+.HowToWork {
+  display: grid;
+  grid-template:
+    'TitleView'      12rem
+    'StepFirstView'  1fr
+    'StepSecondView' 1fr
+    'StepThirdView'  1fr;
+}
