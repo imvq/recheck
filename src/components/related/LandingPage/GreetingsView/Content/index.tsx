@@ -20,10 +20,10 @@ export default withStyles(() => (
       />
     </div>
     <div styleName='Content__TextWrapper'>
-      <p styleName='Content__ActionGroup'>
+      <div styleName='Content__ActionGroup'>
         <span>Найди отзывы о кандидате с прошлых мест работы</span>
         <SearchButtonGroup />
-      </p>
+      </div>
     </div>
   </div>
 ), styles);
