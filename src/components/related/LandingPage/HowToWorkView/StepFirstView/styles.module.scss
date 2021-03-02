@@ -1,4 +1,51 @@
+@import '~styles/base/typography';
+
 .StepFirst {
   grid-area: StepFirstView;
-  background-color: papayawhip;
+  display: grid;
+  grid-template: 'ImageWrapper TextWrapper' 1fr / 1fr 1fr;
+}
+
+.StepFirst__ImageWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding-top: 2.5rem;
+  padding-right: 12.4rem;
+}
+
+.StepFirst__TextWrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 7.8rem;
+  padding-left: 4.7rem;
+}
+
+.StepFirst__Text {
+  &>h1 {
+    font-family: OpenSans-SemiBold;
+    font-size: 1.2rem;
+    max-width: 32rem;
+    line-height: 2.5rem;
+  }
+
+  &>p {
+    font-family: OpenSans-Regular;
+    font-size: .9rem;
+    max-width: 24rem;
+    line-height: 1.28rem;
+  }
+
+  user-select: none;
+  z-index: 0;
+}
+
+.StepFirst__TextBackground {
+  position: absolute;
+  top: 3.1rem;
+  left: -7.52rem;
+
+  z-index: -1;
 }
