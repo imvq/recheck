@@ -36,12 +36,16 @@
   z-index: 0;
 }
 
-.StepSecond__Titile {
+.StepSecond__TitleWrapper {
+  margin-bottom: .25rem;
+  z-index: 1;
+}
+
+.StepSecond__Title {
   font-family: OpenSans-SemiBold;
   font-size: 1.2rem;
   line-height: 1.6rem;
   max-width: 25rem;
-  z-index: 1;
   user-select: none;
 }
 

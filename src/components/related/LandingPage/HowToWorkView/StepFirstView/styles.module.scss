@@ -3,49 +3,65 @@
 .StepFirst {
   grid-area: StepFirstView;
   display: grid;
-  grid-template: 'ImageWrapper TextWrapper' 1fr / 1fr 1fr;
+  grid-template: 'Aux Main' 1fr / 1fr 1fr;
+}
+
+.StepFirst__CentralizingBox:first-child {
+  position: relative;
+  grid-area: Aux;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.StepFirst__CentralizingBox:last-child {
+  position: relative;
+  grid-area: Main;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.StepFirst__ParagraphWrapper {
+  position: absolute;
+  left: 4.75rem;
+  top: 8.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.StepFirst__ParagraphBackground {
+  position: absolute;
+  right: -6rem;
+  top: -5rem;
+  z-index: 0;
+}
+
+.StepFirst__TitileWrapper {
+  margin-bottom: .25rem;
+  z-index: 1;
+}
+
+.StepFirst__Titile {
+  font-family: OpenSans-SemiBold;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  max-width: 25rem;
+  user-select: none;
+}
+
+.StepFirst__Text {
+  font-family: OpenSans-Regular;
+  font-size: .9rem;
+  max-width: 24rem;
+  line-height: 1.28rem;
+  z-index: 1;
+  user-select: none;
 }
 
 .StepFirst__ImageWrapper {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding-top: 2.5rem;
-  padding-right: 12.4rem;
-}
-
-.StepFirst__TextWrapper {
-  position: relative;
-  display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 7.8rem;
-  padding-left: 4.7rem;
-}
-
-.StepFirst__Text {
-  &>h1 {
-    font-family: OpenSans-SemiBold;
-    font-size: 1.2rem;
-    max-width: 32rem;
-    line-height: 2.5rem;
-  }
-
-  &>p {
-    font-family: OpenSans-Regular;
-    font-size: .9rem;
-    max-width: 24rem;
-    line-height: 1.28rem;
-  }
-
-  user-select: none;
-  z-index: 0;
-}
-
-.StepFirst__TextBackground {
-  position: absolute;
-  top: 3.1rem;
-  left: -7.52rem;
-
-  z-index: -1;
+  padding-top: 2.72rem;
+  padding-right: 12.5rem;
 }

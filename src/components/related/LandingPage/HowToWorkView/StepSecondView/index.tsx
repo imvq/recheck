@@ -9,9 +9,11 @@ export default withStyles(() => (
 
     <div styleName='StepSecond__CentralizingBox'>
       <div styleName='StepSecond__ParagraphWrapper'>
-        <h1 styleName='StepSecond__Titile'>
-          Взамен оставляйте отзыв о человеке из вашей команды.
-        </h1>
+        <div styleName='StepSecond__TitleWrapper'>
+          <h1 styleName='StepSecond__Title'>
+            Взамен оставляйте отзыв о человеке из вашей команды.
+          </h1>
+        </div>
         <p styleName='StepSecond__Text'>
           Оставив отзыв о коллеге, с которым тесно работали,
           вы увидите информацию о кандидиате бесплатно.
