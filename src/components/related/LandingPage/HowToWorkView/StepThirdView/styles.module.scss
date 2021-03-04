@@ -1,4 +1,82 @@
+@import '~styles/abstracts/variables';
+@import '~styles/base/typography';
+
 .StepThird {
   grid-area: StepThirdView;
-  background-color: rgb(255, 213, 248);
+  display: grid;
+  grid-template: 'Aux Main' 1fr / 1fr 1fr;
+}
+
+.StepThird__CentralizingBox:first-child {
+  position: relative;
+  grid-area: Aux;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.StepThird__CentralizingBox:last-child {
+  position: relative;
+  grid-area: Main;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.StepThird__ParagraphWrapper {
+  position: absolute;
+  left: 3.2rem;
+  top: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.StepThird__ParagraphBackground {
+  position: absolute;
+  right: -7rem;
+  top: -5rem;
+  z-index: 0;
+}
+
+.StepThird__TitileWrapper {
+  margin-top: -.8rem;
+  margin-bottom: .25rem;
+  z-index: 1;
+}
+
+.StepThird__Titile {
+  font-family: OpenSans-SemiBold;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  max-width: 25rem;
+  user-select: none;
+}
+
+.StepThird__Titile--HighlightedMain {
+  color: $color-foreground-pick-main;
+}
+
+.StepThird__Titile--HighlightedAux1 {
+  color: $color-foreground-pick-aux1;
+}
+
+.StepThird__Text {
+  font-family: OpenSans-Regular;
+  font-size: .9rem;
+  max-width: 25rem;
+  line-height: 1.28rem;
+  z-index: 1;
+  user-select: none;
+}
+
+.StepThird__ImageWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 5.1rem;
+  padding-right: 11.2rem;
+}
+
+.StepThird__Image {
+  width: 320px;
+  height: 361px;
 }
