@@ -1,14 +1,23 @@
 import withStyles from 'react-css-modules';
 
-import PicSVG from 'assets/svg/misc/StageFirstPic.svg';
+import Pic from 'assets/images/misc/StageFirstPic-min.png';
 import ParagraphBackground from 'assets/svg/misc/StageFirstTextBck.svg';
 import styles from './styles.module.scss';
 
+/**
+ * First part of 'How to work' section.
+ * Presentational component.
+ */
 export default withStyles(() => (
   <div styleName='StepFirst'>
     <div styleName='StepFirst__CentralizingBox'>
       <div styleName='StepFirst__ImageWrapper'>
-        <img src={PicSVG} alt='' />
+        <img
+          styleName='StepFirst__Image'
+          draggable='false'
+          src={Pic}
+          alt=''
+        />
       </div>
     </div>
 

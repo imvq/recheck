@@ -1,9 +1,13 @@
 import withStyles from 'react-css-modules';
 
-import PicSVG from 'assets/svg/misc/StageSecondPic.svg';
+import Pic from 'assets/images/misc/StageSecondPic-min.png';
 import ParagraphBackground from 'assets/svg/misc/StageSecondTextBck.svg';
 import styles from './styles.module.scss';
 
+/**
+ * Middle part of 'How to work' section.
+ * Presentational component.
+ */
 export default withStyles(() => (
   <div styleName='StepSecond'>
 
@@ -29,7 +33,12 @@ export default withStyles(() => (
 
     <div styleName='StepSecond__CentralizingBox'>
       <div styleName='StepSecond__ImageWrapper'>
-        <img src={PicSVG} alt='' />
+        <img
+          styleName='StepSecond__Image'
+          draggable='false'
+          src={Pic}
+          alt=''
+        />
       </div>
     </div>
   </div>
