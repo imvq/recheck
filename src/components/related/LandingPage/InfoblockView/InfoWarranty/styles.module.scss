@@ -1,7 +1,56 @@
+@import '~styles/abstracts/variables';
+
 .InfoWarranty {
   grid-area: InfoWarranty;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: rgb(247, 158, 136);
+  background-color: rgb(184, 252, 252);
+}
+
+.InfoWarranty__BoardWrapper {
+  margin-top: -6.3rem;
+}
+
+.InfoWarranty__Board {
+  width: 275px;
+  height: 224px;
+  background: url(~assets/svg/misc/InfoWarrantyBoard.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: drop-shadow(10px 5px 10px rgba(0, 0, 0, .25));
+}
+
+.InfoWarranty__ParagraphWrapper {
+  padding-top: 4.3rem;
+  padding-left: 1.5rem;
+  height: 100%;
+}
+
+.InfoWarranty__TitleWrapper {
+  margin-bottom: .2rem;
+}
+
+.InfoWarranty__Title {
+  font-family: OpenSans-SemiBold;
+  font-size: 1rem;
+  line-height: 1.35rem;
+  max-width: 25rem;
+  user-select: none;
+}
+
+.InfoWarranty__Text {
+  font-family: OpenSans-Regular;
+  font-size: .9rem;
+  line-height: 1.3rem;
+  max-width: 14rem;
+  user-select: none;
+}
+
+.InfoWarranty__Title--HighlightedMain {
+  color: $color-foreground-pick-main;
+}
+
+.InfoWarrantyd__Title--HighlightedAux1 {
+  color: $color-foreground-pick-aux1;
 }
