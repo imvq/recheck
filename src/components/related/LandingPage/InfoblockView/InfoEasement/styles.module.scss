@@ -1,7 +1,47 @@
+@import '~styles/abstracts/variables';
+
 .InfoEasement {
   grid-area: InfoEasement;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: antiquewhite;
+}
+
+.InfoEasement__BoardWrapper {
+  margin-top: -6.3rem;
+}
+
+.InfoEasement__Board {
+  width: 275px;
+  height: 224px;
+  background: url(~assets/svg/misc/InfoEasementBoard.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: drop-shadow(8px 5px 8px rgba(0, 0, 0, .25));
+}
+
+.InfoEasement__ParagraphWrapper {
+  padding-top: 4.3rem;
+  padding-left: 1.5rem;
+  height: 100%;
+}
+
+.InfoEasement__TitleWrapper {
+  margin-bottom: .2rem;
+}
+
+.InfoEasement__Title {
+  font-family: OpenSans-SemiBold;
+  font-size: 1rem;
+  line-height: 1.35rem;
+  max-width: 25rem;
+  user-select: none;
+}
+
+.InfoEasement__Text {
+  font-family: OpenSans-Regular;
+  font-size: .9rem;
+  line-height: 1.3rem;
+  max-width: 14.5rem;
+  user-select: none;
 }
