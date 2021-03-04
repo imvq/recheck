@@ -37,13 +37,13 @@
   z-index: 0;
 }
 
-.StepThird__TitileWrapper {
+.StepThird__TitleWrapper {
   margin-top: -.8rem;
   margin-bottom: .25rem;
   z-index: 1;
 }
 
-.StepThird__Titile {
+.StepThird__Title {
   font-family: OpenSans-SemiBold;
   font-size: 1.2rem;
   line-height: 1.6rem;
@@ -51,11 +51,11 @@
   user-select: none;
 }
 
-.StepThird__Titile--HighlightedMain {
+.StepThird__Title--HighlightedMain {
   color: $color-foreground-pick-main;
 }
 
-.StepThird__Titile--HighlightedAux1 {
+.StepThird__Title--HighlightedAux1 {
   color: $color-foreground-pick-aux1;
 }
 

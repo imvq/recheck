@@ -4,10 +4,10 @@
   background-color: $color-background-default;
   display: grid;
   grid-template:
-    'GreetingsView' 1fr
-    'HowToWorkView' 334vh
-    'InfoblockView' 1fr
-    'MainSwipeView' 1fr
-    'MotivatorView' 1fr
-    'Footer' 1fr;
+    'GreetingsView'
+    'HowToWorkView'
+    'InfoblockView'
+    'MainSwipeView'
+    'MotivatorView'
+    'Footer';
 }

@@ -1,0 +1,56 @@
+@import '~styles/abstracts/variables';
+
+.InfoTimeSave {
+  grid-area: InfoTimeSave;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: rgb(184, 252, 252);
+}
+
+.InfoTimeSave__BoardWrapper {
+  margin-top: -6.3rem;
+}
+
+.InfoTimeSave__Board {
+  width: 275px;
+  height: 224px;
+  background: url(~assets/svg/misc/InfoTimeSaveBoard.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: drop-shadow(10px 5px 10px rgba(0, 0, 0, .25));
+}
+
+.InfoTimeSave__ParagraphWrapper {
+  padding-top: 4.3rem;
+  padding-left: 1.5rem;
+  height: 100%;
+}
+
+.InfoTimeSave__TitleWrapper {
+  margin-bottom: .2rem;
+}
+
+.InfoTimeSave__Title {
+  font-family: OpenSans-SemiBold;
+  font-size: 1rem;
+  line-height: 1.6rem;
+  max-width: 25rem;
+  user-select: none;
+}
+
+.InfoTimeSave__Text {
+  font-family: OpenSans-Regular;
+  font-size: .9rem;
+  line-height: 1.3rem;
+  max-width: 14rem;
+  user-select: none;
+}
+
+.InfoTimeSave__Title--HighlightedMain {
+  color: $color-foreground-pick-main;
+}
+
+.InfoTimeSaved__Title--HighlightedAux1 {
+  color: $color-foreground-pick-aux1;
+}

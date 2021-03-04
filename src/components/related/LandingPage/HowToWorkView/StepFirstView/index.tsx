@@ -23,8 +23,8 @@ export default withStyles(() => (
 
     <div styleName='StepFirst__CentralizingBox'>
       <div styleName='StepFirst__ParagraphWrapper'>
-        <div styleName='StepFirst__TitileWrapper'>
-          <h1 styleName='StepFirst__Titile'>
+        <div styleName='StepFirst__TitleWrapper'>
+          <h1 styleName='StepFirst__Title'>
             Воспользуйтесь поиском кандидата.
           </h1>
         </div>

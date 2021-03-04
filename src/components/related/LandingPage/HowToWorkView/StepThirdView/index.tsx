@@ -23,11 +23,11 @@ export default withStyles(() => (
 
     <div styleName='StepThird__CentralizingBox'>
       <div styleName='StepThird__ParagraphWrapper'>
-        <div styleName='StepThird__TitileWrapper'>
-          <h1 styleName='StepThird__Titile'>
+        <div styleName='StepThird__TitleWrapper'>
+          <h1 styleName='StepThird__Title'>
             <span>Получите отзыв о кандидате в </span>
-            <span styleName='StepThird__Titile--HighlightedMain'>re</span>
-            <span styleName='StepThird__Titile--HighlightedAux1'>Check.</span>
+            <span styleName='StepThird__Title--HighlightedMain'>re</span>
+            <span styleName='StepThird__Title--HighlightedAux1'>Check.</span>
           </h1>
         </div>
         <p styleName='StepThird__Text'>
