@@ -1,1 +1,7 @@
+@import '~styles/abstracts/variables';
 @import './base/reset';
+
+:root {
+  // Patch to disable browser font scale influence.
+  font-size: 16px;
+}
