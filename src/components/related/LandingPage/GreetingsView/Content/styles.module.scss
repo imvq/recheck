@@ -10,13 +10,13 @@
 .Content__PicWrapper {
   display: flex;
   justify-content: flex-end;
-  margin-left: -9.881vw;
-  margin-right: -10.558vw;
+  margin-left: -7.3em;
+  margin-right: -7.8em;
 }
 
 .Content__Pic {
-  width: 60.490vw;
-  height: 81.081vh;
+  width: 715px;
+  height: 450px;
   user-select: none;
 }
 
@@ -24,14 +24,14 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 35.459vh;
+  margin-top: 12.3em;
 }
 
 .Content__ActionGroup {
   width: $greetings-view-content-action-group-width;
   font-family: OpenSans-SemiBold;
-  font-size: 2.571vw;
-  line-height: 3.384vw;
+  font-size: 1.9em;
+  line-height: 40px;
   text-align: center;
   user-select: none;
 }
