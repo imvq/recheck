@@ -22,8 +22,8 @@
 
 .StepSecond__ParagraphWrapper {
   position: absolute;
-  right: -3.187vw;
-  top:  21.770vh;
+  right: -2.55rem;
+  top: 8.3rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -31,31 +31,29 @@
 
 .StepSecond__ParagraphBackground {
   position: absolute;
-  width: 52.812vw;
-  height: 43.278vh;
-  right: -8.75vw;
-  top: -11.016vh;
+  right: -7rem;
+  top: -4.2rem;
   z-index: 0;
 }
 
 .StepSecond__TitleWrapper {
-  margin-bottom: 0.655vh;
+  margin-bottom: .25rem;
   z-index: 1;
 }
 
 .StepSecond__Title {
   font-family: OpenSans-SemiBold;
-  font-size: 1.5vw;
-  line-height: 4.196vh;
-  max-width: 31.25vw;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  max-width: 25rem;
   user-select: none;
 }
 
 .StepSecond__Text {
   font-family: OpenSans-Regular;
-  font-size: 1.125vw;
-  max-width: 30vw;
-  line-height: 3.357vh;
+  font-size: .9rem;
+  max-width: 24rem;
+  line-height: 1.28rem;
   z-index: 1;
   user-select: none;
 }
@@ -64,13 +62,13 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 0.524vh;
-  padding-left: 17.5vw;
+  padding-top: .2rem;
+  padding-left: 14rem;
 }
 
 .StepSecond__Image {
-  width: 25vw;
-  height: 59.180vh;
+  width: 320px;
+  height: 361px;
   user-select: none;
 }
 
