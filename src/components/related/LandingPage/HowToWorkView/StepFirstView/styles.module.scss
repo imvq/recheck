@@ -22,8 +22,8 @@
 
 .StepFirst__ParagraphWrapper {
   position: absolute;
-  left: 4.75rem;
-  top: 8.3rem;
+  left: 7.087rem;
+  top: 12.3836rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -31,29 +31,31 @@
 
 .StepFirst__ParagraphBackground {
   position: absolute;
-  right: -6rem;
-  top: -5rem;
+  right: -8.952rem;
+  top: -7.46rem;
+  width: 63.037rem;
+  height: 24.618rem;
   z-index: 0;
 }
 
 .StepFirst__TitleWrapper {
-  margin-bottom: .25rem;
+  margin-bottom: .373rem;
   z-index: 1;
 }
 
 .StepFirst__Title {
   font-family: OpenSans-SemiBold;
-  font-size: 1.2rem;
-  line-height: 1.6rem;
-  max-width: 25rem;
+  font-size: 1.790rem;
+  line-height: 2.387rem;
+  max-width: 37.3rem;
   user-select: none;
 }
 
 .StepFirst__Text {
   font-family: OpenSans-Regular;
-  font-size: .9rem;
-  max-width: 24rem;
-  line-height: 1.28rem;
+  font-size: 1.3428rem;
+  max-width: 35.808rem;
+  line-height: 1.909rem;
   z-index: 1;
   user-select: none;
 }
@@ -62,12 +64,12 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 2.72rem;
-  padding-right: 12.5rem;
+  padding-top: 4.058rem;
+  padding-right: 18.65rem;
 }
 
 .StepFirst__Image {
-  width: 320px;
-  height: 320px;
+  width: 29.84rem;
+  height: 29.84rem;
   user-select: none;
 }

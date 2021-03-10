@@ -2,14 +2,17 @@
 
 .GreetingsView {
   width: 100%;
+  // max-width: 1920px;
   height: fit-content;
   grid-area: GreetingsView;
   background-image: url(~assets/svg/misc/RectUpper.svg);
   // Support Firefox ignoring preserveAspectRatio="none" in SVG.
   background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 
   display: grid;
   grid-template:
-    'Head'     6.826rem
-    'Content'  34.134rem;
+    'Head'     8rem
+    'Content'  45rem;
 }

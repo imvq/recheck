@@ -1,15 +1,17 @@
 @import '~styles/abstracts/variables';
 
+$width-offset: 3rem;
+
 .Wrapper {
   grid-area: TelegramWrapper;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 2.5rem;
-  margin-left: 6.9rem;
+  margin-left: $greetings-view-head-padding-horizontal + $width-offset;
 }
 
 .TelegramButton {
+  width: $greetings-view-head-edge-elems-width-base - $width-offset;
   opacity: $opacity-button-idle-inversed;
   // Use hardware acceleration if possible.
   filter: alpha(opacity=#{$opacity-button-idle-inversed * 100});

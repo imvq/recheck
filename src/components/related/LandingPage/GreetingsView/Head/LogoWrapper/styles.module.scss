@@ -1,12 +1,14 @@
+@import '~styles/abstracts/variables';
+
 .LogoWrapper {
   grid-area: LogoWrapper;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 2rem;
-  margin-right: 8.7rem;
+  margin-right: $greetings-view-head-padding-horizontal;
 }
 
 .Logo {
   cursor: pointer;
+  width: $greetings-view-head-edge-elems-width-base;
 }

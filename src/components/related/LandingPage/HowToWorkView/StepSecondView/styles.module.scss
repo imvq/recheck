@@ -22,8 +22,8 @@
 
 .StepSecond__ParagraphWrapper {
   position: absolute;
-  right: -2.55rem;
-  top: 8.3rem;
+  right: -3.804rem;
+  top: 12.383rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -31,29 +31,31 @@
 
 .StepSecond__ParagraphBackground {
   position: absolute;
-  right: -7rem;
-  top: -4.2rem;
+  right: -10.444rem;
+  top: -6.266rem;
+  width: 63.037rem;
+  height: 24.618rem;
   z-index: 0;
 }
 
 .StepSecond__TitleWrapper {
-  margin-bottom: .25rem;
+  margin-bottom: .373rem;
   z-index: 1;
 }
 
 .StepSecond__Title {
   font-family: OpenSans-SemiBold;
-  font-size: 1.2rem;
-  line-height: 1.6rem;
-  max-width: 25rem;
+  font-size: 1.790rem;
+  line-height: 2.387rem;
+  max-width: 37.3rem;
   user-select: none;
 }
 
 .StepSecond__Text {
   font-family: OpenSans-Regular;
-  font-size: .9rem;
-  max-width: 24rem;
-  line-height: 1.28rem;
+  font-size: 1.342rem;
+  max-width: 35.808rem;
+  line-height: 1.909rem;
   z-index: 1;
   user-select: none;
 }
@@ -62,13 +64,13 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: .2rem;
-  padding-left: 14rem;
+  padding-top: .298rem;
+  padding-left: 20.888rem;
 }
 
 .StepSecond__Image {
-  width: 320px;
-  height: 361px;
+  width: 29.84rem;
+  height: 33.663rem;
   user-select: none;
 }
 

@@ -5,11 +5,13 @@ $color-foreground-pick-aux1: #33c7ba;
 
 /* Sizes. */
 $greetings-view-height: 100%;
+$greetings-view-head-edge-elems-width-base: 15rem;
+$greetings-view-head-padding-horizontal: 16rem;
 $greetings-view-head-height: 80px;
 $greetings-view-content-height: calc(
   #{$greetings-view-height} - #{$greetings-view-head-height}
 );
-$greetings-view-content-action-group-width: 14em;
+$greetings-view-content-action-group-width: 38rem;
 
 /* Misc. */
 $opacity-button-hover: .8;

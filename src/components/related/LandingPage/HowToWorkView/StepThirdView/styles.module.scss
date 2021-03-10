@@ -23,8 +23,8 @@
 
 .StepThird__ParagraphWrapper {
   position: absolute;
-  left: 3.2rem;
-  top: 10rem;
+  left: 4.774rem;
+  top: 14.92rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -32,22 +32,24 @@
 
 .StepThird__ParagraphBackground {
   position: absolute;
-  right: -7rem;
-  top: -5rem;
+  right: -10.444rem;
+  top: -7.46rem;
+  width: 64.902rem;
+  height: 26.483rem;
   z-index: 0;
 }
 
 .StepThird__TitleWrapper {
-  margin-top: -.8rem;
-  margin-bottom: .25rem;
+  margin-top: -1.1936rem;
+  margin-bottom: .373rem;
   z-index: 1;
 }
 
 .StepThird__Title {
   font-family: OpenSans-SemiBold;
-  font-size: 1.2rem;
-  line-height: 1.6rem;
-  max-width: 25rem;
+  font-size: 1.790rem;
+  line-height: 2.387rem;
+  max-width: 37.3rem;
   user-select: none;
 }
 
@@ -61,9 +63,9 @@
 
 .StepThird__Text {
   font-family: OpenSans-Regular;
-  font-size: .9rem;
-  max-width: 25rem;
-  line-height: 1.28rem;
+  font-size: 1.3428rem;
+  max-width: 37.3rem;
+  line-height: 1.909rem;
   z-index: 1;
   user-select: none;
 }
@@ -72,12 +74,12 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-top: 5.1rem;
-  padding-right: 11.2rem;
+  padding-top: 4rem;
+  padding-right: 16.710rem;
 }
 
 .StepThird__Image {
-  width: 320px;
-  height: 361px;
+  width: 28.84rem;
+  height: 32.534rem;
   user-select: none;
 }

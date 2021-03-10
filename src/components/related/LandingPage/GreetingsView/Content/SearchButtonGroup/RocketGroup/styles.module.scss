@@ -2,14 +2,16 @@
 
 .RocketGroup__Line {
   position: absolute;
-  right: $greetings-view-content-action-group-width / 2 - .6em;
-  top: -.92em;
+  width: 150rem;
+  height: 45rem;
+  right: $greetings-view-content-action-group-width / 2 - 48rem;
+  top: 2.5rem;
 }
 
 .RocketGroup__Rocket {
   position: absolute;
-  top: 6.75em;
-  right: 10em;
-  width: 120px;
-  height: 110px;
+  top: 16.5rem;
+  right: 27.5rem;
+  width: 9.5rem;
+  height: 9.2rem;
 }
