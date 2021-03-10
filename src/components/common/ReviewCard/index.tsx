@@ -3,7 +3,6 @@ import withStyles from 'react-css-modules';
 import { ReactComponent as LogoSVG } from 'assets/svg/logo/LogoFull.svg';
 import { ReactComponent as DetailsButton } from 'assets/svg/btn/Details.svg';
 import { ReactComponent as GiveFeedbackButton } from 'assets/svg/btn/GiveFeedback.svg';
-import Lada from 'assets/images/photos/Lada.png';
 import styles from './styles.module.scss';
 
 import { ReviewCardProps } from './types';
@@ -13,12 +12,12 @@ import { ReviewCardProps } from './types';
  * Presentational component.
  */
 export default withStyles(({
-  name, company, position, experience, review, nReviews
+  name, photoUrl, company, position, experience, review, nReviews
 }: ReviewCardProps) => (
   <div styleName='ReviewCard'>
     <div styleName='ReviewCard__Body'>
       <div styleName='ReviewCard__PhotoWrapper'>
-        <img styleName='ReviewCard__Photo' src={Lada} alt='' />
+        <img styleName='ReviewCard__Photo' src={photoUrl} alt='' />
       </div>
       <div styleName='ReviewCard__TextWrapper'>
         <div styleName='ReviewCard__TitleWrapper'>

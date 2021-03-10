@@ -1,5 +1,6 @@
 import withStyles from 'react-css-modules';
 
+import Lada from 'assets/images/photos/Lada.png';
 import ReviewCard from 'components/common/ReviewCard';
 import TitleView from './TitleView';
 
@@ -11,6 +12,7 @@ export default withStyles(() => (
     <div styleName='MainSwipeView__CardsView'>
       <ReviewCard
         name='Лада Клищенко'
+        photoUrl={Lada}
         position='Team Lead of Data Analyst team'
         company='airSlate | workflow Automation'
         experience='Июль 2019 — Февраль 2020'
