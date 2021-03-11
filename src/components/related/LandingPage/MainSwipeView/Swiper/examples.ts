@@ -4,7 +4,7 @@ import Lada from 'assets/images/photos/Lada.png';
 
 const examples: ReviewCardData[] = [
   {
-    name: 'Лада Клищенко',
+    name: 'Лада Клищенко1',
     photoUrl: Lada,
     position: 'Team Lead of Data Analyst team',
     company: 'airSlate | workflow Automation',
@@ -19,7 +19,7 @@ const examples: ReviewCardData[] = [
     nReviews: 27
   },
   {
-    name: 'Лада Клищенко',
+    name: 'Лада Клищенко2',
     photoUrl: Lada,
     position: 'Team Lead of Data Analyst team',
     company: 'airSlate | workflow Automation',
@@ -34,7 +34,7 @@ const examples: ReviewCardData[] = [
     nReviews: 27
   },
   {
-    name: 'Лада Клищенко',
+    name: 'Лада Клищенко3',
     photoUrl: Lada,
     position: 'Team Lead of Data Analyst team',
     company: 'airSlate | workflow Automation',

@@ -20,6 +20,7 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    pointer-events: none;
     width: 2 * $width-review-card * $scale-reducer-unfocused;
   }
 

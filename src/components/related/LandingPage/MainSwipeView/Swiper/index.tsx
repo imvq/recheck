@@ -29,21 +29,31 @@ export default withStyles(() => {
     }));
   }, []);
 
+  const onPrevClicked = () => {
+    const [last] = cards.splice(2, 1);
+    cards.unshift(last);
+    setCards(cards.slice());
+  };
+
+  const onNextClicked = () => {
+    const [first] = cards.splice(0, 1);
+    cards.push(first);
+    setCards(cards.slice());
+  };
+
   return (
     <div styleName='Swiper'>
-      <ArrowLeft styleName='Swiper__Arrow Swiper__Arrow--left-sided' />
+      <ArrowLeft
+        styleName='Swiper__Arrow Swiper__Arrow--left-sided'
+        onClick={onPrevClicked}
+      />
       <div styleName='Swiper__JustificationWrapper'>
-        <div styleName='Swiper__CardWrapper'>
-          {cards[0]}
-        </div>
-        <div styleName='Swiper__CardWrapper'>
-          {cards[1]}
-        </div>
-        <div styleName='Swiper__CardWrapper'>
-          {cards[2]}
-        </div>
+        {cards.map(card => <div styleName='Swiper__CardWrapper'>{card}</div>)}
       </div>
-      <ArrowRight styleName='Swiper__Arrow Swiper__Arrow--right-sided' />
+      <ArrowRight
+        styleName='Swiper__Arrow Swiper__Arrow--right-sided'
+        onClick={onNextClicked}
+      />
     </div>
   );
 }, styles, { allowMultiple: true });
