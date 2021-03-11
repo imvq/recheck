@@ -54,8 +54,10 @@ export default withStyles(({
     </div>
     <div styleName='ReviewCard__Toolbar'>
       <a href='/' styleName='ReviewCard__ReviewLinks'>{`${nReviews} отзывов`}</a>
-      <DetailsButton styleName='ReviewCard__Button' />
-      <div styleName='ReviewCard__LastButtonWrapper'>
+      <div styleName='ReviewCard__ButtonWrapper'>
+        <DetailsButton styleName='ReviewCard__Button' />
+      </div>
+      <div styleName='ReviewCard__ButtonWrapper--last'>
         <GiveFeedbackButton styleName='ReviewCard__Button' />
       </div>
     </div>

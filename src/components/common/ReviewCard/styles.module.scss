@@ -116,11 +116,16 @@
     font-family: OpenSans-SemiBold;
   }
 
-  &__LastButtonWrapper {
-    margin-right: 3em;
+  &__ButtonWrapper {
+    margin-right: 2.8em;
+
+    &--last {
+      margin-right: 4.5em;
+    }
   }
 
   &__Button {
     height: 2.75em;
+    width: auto;
   }
 }
