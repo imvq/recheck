@@ -19,7 +19,7 @@ const examples: ReviewCardData[] = [
     nReviews: 27
   },
   {
-    name: 'Володя Моцар',
+    name: 'Лада Клищенко',
     photoUrl: Lada,
     position: 'Team Lead of Data Analyst team',
     company: 'airSlate | workflow Automation',
@@ -34,7 +34,7 @@ const examples: ReviewCardData[] = [
     nReviews: 27
   },
   {
-    name: 'Валера Кажан',
+    name: 'Лада Клищенко',
     photoUrl: Lada,
     position: 'Team Lead of Data Analyst team',
     company: 'airSlate | workflow Automation',

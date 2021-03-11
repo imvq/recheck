@@ -2,6 +2,8 @@ import React from 'react';
 import withStyles from 'react-css-modules';
 
 import ReviewCard from 'components/common/ReviewCard';
+import { ReactComponent as ArrowLeft } from 'assets/svg/btn/ArrowLeft.svg';
+import { ReactComponent as ArrowRight } from 'assets/svg/btn/ArrowRight.svg';
 import styles from './styles.module.scss';
 import examples from './examples';
 
@@ -29,6 +31,7 @@ export default withStyles(() => {
 
   return (
     <div styleName='Swiper'>
+      <ArrowLeft styleName='Swiper__Arrow Swiper__Arrow--left-sided' />
       <div styleName='Swiper__JustificationWrapper'>
         <div styleName='Swiper__CardWrapper'>
           {cards[0]}
@@ -40,6 +43,7 @@ export default withStyles(() => {
           {cards[2]}
         </div>
       </div>
+      <ArrowRight styleName='Swiper__Arrow Swiper__Arrow--right-sided' />
     </div>
   );
-}, styles);
+}, styles, { allowMultiple: true });

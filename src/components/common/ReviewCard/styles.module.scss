@@ -1,3 +1,4 @@
+@import '~styles/abstracts/variables';
 @import '~styles/base/typography';
 
 .ReviewCard {
@@ -5,7 +6,7 @@
   $width-wrapper-photo: 30%;
   $margin-top-wrappers-basic: 2.5em;
 
-  width: 67.38em;
+  width: $width-review-card;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -116,7 +117,7 @@
   }
 
   &__LastButtonWrapper {
-    margin-left: 1em;
+    margin-right: 3em;
   }
 
   &__Button {
