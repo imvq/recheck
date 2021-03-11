@@ -42,7 +42,7 @@ export default withStyles(() => {
   };
 
   return (
-    <div styleName='Swiper'>
+    <div key={Math.random()} styleName='Swiper'>
       <ArrowLeft
         styleName='Swiper__Arrow Swiper__Arrow--left-sided'
         onClick={onPrevClicked}

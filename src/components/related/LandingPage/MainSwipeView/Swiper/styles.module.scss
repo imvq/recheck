@@ -1,10 +1,13 @@
 @import '~styles/abstracts/variables';
+@import '~styles/base/animations';
 
 .Swiper {
   $shift-inverting: 15em;
   $size-font-normal: 1em;
   $scale-reducer-unfocused: .8;
   $size-font-reduced: $size-font-normal * $scale-reducer-unfocused;
+
+  animation: fade 0.4s;
 
   grid-area: CardsView;
   display: flex;
@@ -53,6 +56,11 @@
 
   &__Arrow {
     width: 1.625rem;
+    transition-duration: 300ms;
+
+    &:hover {
+      transform: scale(1.25);
+    }
 
     &--left-sided {
       margin-right: -$shift-inverting / 2;
