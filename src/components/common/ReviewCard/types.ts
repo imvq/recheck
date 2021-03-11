@@ -1,9 +1,3 @@
-export type ReviewCardProps = {
-  name: string;
-  photoUrl: string;
-  position: string;
-  company: string;
-  experience: string;
-  review: string;
-  nReviews: number;
-};
+import { ReviewCardData } from 'types.common';
+
+export type ReviewCardProps = ReviewCardData;

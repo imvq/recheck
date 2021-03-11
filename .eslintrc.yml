@@ -6,6 +6,9 @@ env:
   node: true
   jest: true
 
+globals:
+  JSX: true
+
 extends: ['plugin:react/recommended', 'airbnb']
 plugins: ['react', '@typescript-eslint']
 
@@ -28,6 +31,7 @@ rules:
   jsx-quotes: ['error', 'prefer-single']
   dot-notation: 0
   comma-dangle: 0
+  arrow-parens: 0
   arrow-body-style: 0
   max-classes-per-file: 0
   prefer-destructuring: 0

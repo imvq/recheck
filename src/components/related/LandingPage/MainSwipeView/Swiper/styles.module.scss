@@ -1,0 +1,46 @@
+.Swiper {
+  grid-area: CardsView;
+  display: flex;
+  justify-content: center;
+  font-size: 1rem;
+  user-select: none;
+
+  &__JustificationWrapper {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 0;
+  }
+
+  &__CardWrapper {
+    $shift-inverting: -15em;
+    $size-font-normal: 1em;
+    $size-font-reduced: $size-font-normal * .8;
+    $margin-top-for-unfocused: 4em;
+    $z-index-for-focused: 2;
+
+    position: absolute;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    z-index: $z-index-for-focused;
+    font-size: $size-font-normal;
+
+    &:first-child {
+      z-index: $z-index-for-focused - 1;
+      left: $shift-inverting;
+      font-size: $size-font-reduced;
+      margin-top: $margin-top-for-unfocused;
+      filter: brightness(60%);
+    }
+
+    &:last-child {
+      z-index: $z-index-for-focused - 2;
+      right: $shift-inverting;
+      font-size: $size-font-reduced;
+      margin-top: $margin-top-for-unfocused;
+      filter: brightness(60%);
+    }
+  }
+}
