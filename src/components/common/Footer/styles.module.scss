@@ -1,0 +1,57 @@
+@import '~styles/base/typography';
+
+.Footer {
+  grid-area: Footer;
+  height: 17.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e1e6fb;
+  border-top: 0.2rem solid #9ea9d1;
+
+  &__SectionWrapper {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 23rem;
+    height: 100%;
+    padding-left: 1.5rem;
+    padding-top: 3.5rem;
+
+    &:first-child {
+      padding: 0;
+      justify-content: center;
+    }
+  }
+
+  &__EmptyWrapper {
+    width: 6rem;
+  }
+
+  &__Logo {
+    width: 15rem;
+  }
+
+  &__Text {
+    font-family: OpenSans-Regular;
+    font-size: 1.25rem;
+    line-height: 2.4rem;
+
+    &>a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    &--marked {
+      font-family: OpenSans-Bold;
+    }
+  }
+
+  &__SocialLink {
+    width: fit-content;
+  }
+
+  &__SocialIcon {
+    width: 2.5em;
+  }
+}
