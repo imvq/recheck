@@ -1,14 +1,2 @@
 @import './base/reset';
 @import './base/patch';
-
-@media screen and (max-width: 1536px) {
-  :root {
-    font-size: 0.8rem;
-  }
-}
-
-@media screen and (max-width: 1280px) {
-  :root {
-    font-size: 0.6rem;
-  }
-}
