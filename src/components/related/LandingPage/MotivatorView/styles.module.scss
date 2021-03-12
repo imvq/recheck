@@ -1,0 +1,12 @@
+.MotivatorView {
+  grid-area: MotivatorView;
+  height: 70rem;
+  background-image: url(~assets/images/MotivatorBck.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  display: grid;
+  grid-template:
+    'TitleView' 14.5rem
+    'FocusView' 35.785rem;
+}
