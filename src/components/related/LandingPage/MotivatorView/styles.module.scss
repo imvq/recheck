@@ -8,5 +8,56 @@
   display: grid;
   grid-template:
     'TitleView' 14.5rem
-    'FocusView' 35.785rem;
+    'FocusView' 1fr;
+
+  &__FocusView {
+    position: relative;
+    grid-area: FocusView;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__Anchor {
+    position: relative;
+    width: 0;
+
+    &--sticky {
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__MotivationBadgeWrapper {
+    position: absolute;
+
+    &:nth-child(1) {
+      top: 15rem;
+      right: 10rem;
+    }
+
+    &:nth-child(2) {
+      top: 0;
+      right: -13rem;
+    }
+
+    &:nth-child(3) {
+      top: 13rem;
+      left: 13rem;
+    }
+  }
+
+  &__PhoneImage {
+    width: 42rem;
+    padding-left: 10rem;
+  }
+
+  &__Button {
+    position: absolute;
+    bottom: 16rem;
+    width: 15rem;
+    padding-left: 3.5rem;
+  }
 }
