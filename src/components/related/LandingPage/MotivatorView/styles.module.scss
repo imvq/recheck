@@ -69,6 +69,10 @@
         margin-left: -$width-motivator-badge / 2;
       }
     }
+
+    @include respond(xs) {
+      margin-bottom: 1rem;
+    }
   }
 
   &__PhoneImage {
