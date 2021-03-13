@@ -1,3 +1,4 @@
+@import '~styles/abstracts/variables';
 @import '~styles/abstracts/mixins';
 
 .HowToWork {
@@ -14,5 +15,6 @@
       'StepFirstView'  15rem
       'StepSecondView' 15rem
       'StepThirdView'  15rem;
+    background-color: lighten($color-background-rect, 2);
   }
 }

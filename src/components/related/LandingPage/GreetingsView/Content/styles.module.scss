@@ -6,6 +6,11 @@
   grid-area: Content;
   display: flex;
   justify-content: center;
+
+  @include respond(xs) {
+    background-color: $color-background-rect;
+    border-bottom-right-radius: 50%;
+  }
 }
 
 .Content__PicWrapper {

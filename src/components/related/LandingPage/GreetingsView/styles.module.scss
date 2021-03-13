@@ -18,8 +18,7 @@
   
   @include respond(xs) {
     background-image: none;
-    background-color: $color-background-rect;
-    border-bottom-right-radius: 50%;
+    background-color: lighten($color-background-rect, 2);
 
     grid-template:
       'Head'     8rem
