@@ -1,10 +1,17 @@
 @import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
 @import '~styles/base/typography';
 
 .StepThird {
   grid-area: StepThirdView;
   display: grid;
   grid-template: 'Aux Main' 1fr / 1fr 1fr;
+
+  @include respond(xs) {
+    display: flex;
+    align-items: center;
+    background-color: $color-background-rect;
+  }
 }
 
 .StepThird__CentralizingBox:first-child {
@@ -12,6 +19,10 @@
   grid-area: Aux;
   display: flex;
   justify-content: flex-end;
+
+  @include respond(xs) {
+    display: none;
+  }
 }
 
 .StepThird__CentralizingBox:last-child {
@@ -19,6 +30,11 @@
   grid-area: Main;
   display: flex;
   justify-content: flex-start;
+
+  @include respond(xs) {
+    display: flex;
+    width: 100%;
+  }
 }
 
 .StepThird__ParagraphWrapper {
@@ -28,6 +44,11 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  @include respond(xs) {
+    position: static;
+    align-items: center;
+  }
 }
 
 .StepThird__ParagraphBackground {
@@ -37,6 +58,10 @@
   width: 64.902rem;
   height: 26.483rem;
   z-index: 0;
+
+  @include respond(xs) {
+    display: none;
+  }
 }
 
 .StepThird__TitleWrapper {
@@ -51,6 +76,11 @@
   line-height: 2.387rem;
   max-width: 37.3rem;
   user-select: none;
+
+  @include respond(xs) {
+    text-align: center;
+    max-width: initial;
+  }
 }
 
 .StepThird__Title--HighlightedMain {
@@ -68,6 +98,11 @@
   line-height: 1.909rem;
   z-index: 1;
   user-select: none;
+
+  @include respond(xs) {
+    text-align: center;
+    max-width: initial;
+  }
 }
 
 .StepThird__ImageWrapper {
