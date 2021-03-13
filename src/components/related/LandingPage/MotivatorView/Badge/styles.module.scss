@@ -1,3 +1,4 @@
+@import '~styles/abstracts/variables';
 @import '~styles/base/typography';
 
 .Badge {
@@ -6,12 +7,12 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   font-family: OpenSans-Regular;
   font-size: 1.2rem;
   background-color: $color-background;
   width: 25rem;
-  height: 6.5rem;
+  min-height: 6.5rem;
   border-radius: 1rem;
   filter: drop-shadow(.5rem .3125rem .5rem rgba(0, 0, 0, .25));
 
@@ -22,11 +23,20 @@
     box-sizing: border-box;
     padding-left: $shift-default;
     padding-right: $shift-default;
+    margin-bottom: 1rem;
+    margin-top: .5rem;
   }
 
-  &__Logo {
-    width: 5rem;
-    margin-top: -.7rem;
+  &__LogoText {
+    font-family: OpenSans-SemiBold;
+
+    &--accent-main {
+      color: $color-foreground-pick-main;
+    }
+
+    &--accent-aux1 {
+      color: $color-foreground-pick-aux1;
+    }
   }
 
   &__Paragraph {

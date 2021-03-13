@@ -11,9 +11,12 @@ import styles from './styles.module.scss';
 export default withStyles(({ text }: BadgeProps) => (
   <div styleName='Badge'>
     <div styleName='Badge__TitleWrapper'>
-      <LogoSVG styleName='Badge__Logo' />
+      <span>
+        <span styleName='Badge__LogoText Badge__LogoText--accent-main'>re</span>
+        <span styleName='Badge__LogoText Badge__LogoText--accent-aux1'>Check</span>
+      </span>
       <span>now</span>
     </div>
     <div styleName='Badge__Paragraph'><p>{text}</p></div>
   </div>
-), styles);
+), styles, { allowMultiple: true });
