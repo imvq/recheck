@@ -1,3 +1,6 @@
+@import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
+
 .MotivatorView {
   grid-area: MotivatorView;
   height: 70rem;
@@ -9,7 +12,11 @@
   grid-template:
     'TitleView' 14.5rem
     'FocusView' 1fr;
-
+  
+  @include respond(xs) {
+    height: 80rem;
+  }
+  
   &__FocusView {
     position: relative;
     grid-area: FocusView;
@@ -36,16 +43,31 @@
     &:nth-child(1) {
       top: 15rem;
       right: 10rem;
+
+      @include respond(xs) {
+        position: static;
+        margin-left: -$width-motivator-badge / 2;
+      }
     }
 
     &:nth-child(2) {
       top: 0;
       right: -13rem;
+
+      @include respond(xs) {
+        position: static;
+        margin-left: -$width-motivator-badge / 2;
+      }
     }
 
     &:nth-child(3) {
       top: 13rem;
       left: 13rem;
+
+      @include respond(xs) {
+        position: static;
+        margin-left: -$width-motivator-badge / 2;
+      }
     }
   }
 

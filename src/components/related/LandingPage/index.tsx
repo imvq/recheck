@@ -18,7 +18,7 @@ export default withStyles(() => (
     <GreetingsView />
     <HowToWorkView />
     <InfoblockView />
-    {/* <MotivatorView />
-    <Footer /> */}
+    <MotivatorView />
+    {/* <Footer /> */}
   </div>
 ), styles);
