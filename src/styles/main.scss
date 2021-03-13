@@ -1,2 +1,29 @@
 @import './base/reset';
 @import './base/patch';
+@import '~styles/abstracts/mixins';
+
+:root {
+  @include respond(xxxd) {
+    font-size: 0.9rem;
+  }
+
+  @include respond(xxd) {
+    font-size: 0.83rem;
+  }
+
+  @include respond(xd) {
+    font-size: 0.8rem;
+  }
+
+  @include respond(lg) {
+    font-size: 0.7rem;
+  }
+
+  @include respond(md) {
+    font-size: 0.6rem;
+  }
+
+  @include respond(sm) {
+    font-size: 0.5rem;
+  } 
+}
