@@ -1,4 +1,5 @@
 @import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
 
 .InfoEasement {
   grid-area: InfoEasement;
@@ -9,6 +10,10 @@
 
 .InfoEasement__BoardWrapper {
   margin-top: -9.399rem;
+
+  @include respond(xs) {
+    margin-top: 0;
+  }
 }
 
 .InfoEasement__Board {

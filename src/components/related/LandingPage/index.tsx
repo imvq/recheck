@@ -17,9 +17,8 @@ export default withStyles(() => (
   <div styleName='LandingPage'>
     <GreetingsView />
     <HowToWorkView />
-    {/* <InfoblockView />
-    <MainSwipeView />
-    <MotivatorView /> */}
-    {/* <Footer /> */}
+    <InfoblockView />
+    {/* <MotivatorView />
+    <Footer /> */}
   </div>
 ), styles);

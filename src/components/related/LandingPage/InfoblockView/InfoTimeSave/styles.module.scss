@@ -1,14 +1,23 @@
 @import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
 
 .InfoTimeSave {
   grid-area: InfoTimeSave;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
+  @include respond(xs) {
+    justify-content: center;
+  }
 }
 
 .InfoTimeSave__BoardWrapper {
   margin-top: -9.399rem;
+
+  @include respond(xs) {
+    margin-top: 0;
+  }
 }
 
 .InfoTimeSave__Board {
