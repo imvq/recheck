@@ -19,6 +19,7 @@ export default withStyles(({ onClose }: SearchPopupProps) => (
         <h1 styleName='SearchPopup__Header'>Поиск кандидата</h1>
         <input styleName='SearchPopup__Input' type='text' placeholder='Ссылка на LinkedIn' />
         <FindButton styleName='SearchPopup__Button' />
+        <button styleName='SearchPopup__MobileButton' type='button'>Найти кандидата</button>
       </div>
     </div>
     <div
