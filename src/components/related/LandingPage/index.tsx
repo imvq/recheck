@@ -19,6 +19,6 @@ export default withStyles(() => (
     <HowToWorkView />
     <InfoblockView />
     <MotivatorView />
-    {/* <Footer /> */}
+    <Footer />
   </div>
 ), styles);
