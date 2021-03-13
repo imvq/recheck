@@ -1,4 +1,12 @@
+@import '~styles/abstracts/variables';
+@import '~styles/base/typography';
+
 .SearchPopup {
+  $background: #f0f3ff;
+  $height-full: 36.5rem;
+  $height-pic: 14rem;
+  $color-borders: #b8b8b8;
+
   position: fixed;
   display: flex;
   justify-content: center;
@@ -15,9 +23,72 @@
   }
 
   &__Frame {
-    width: 70rem;
-    height: 40rem;
-    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 76.5rem;
+    height: $height-full;
+    background-color: $background;
     z-index: 4;
+  }
+
+  &__StagePicWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: $height-pic;
+    border-bottom: 0.078vw solid $color-borders;
+  }
+
+  &__StagePic {
+    width: 90%;
+    height: fit-content;
+  }
+
+  &__ContentWrapper {
+    width: 100%;
+    height: $height-full - $height-pic;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  &__Header {
+    font-family: OpenSans-Regular;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  &__Input {
+    min-width: 43rem;
+    font-family: OpenSans-Regular;
+    font-size: 1.6rem;
+    padding: .2rem;
+    padding-left: .5rem;
+    border-radius: 1rem;
+    outline: none;
+    background-color: $background;
+    border-color: $color-borders;
+  }
+
+  &__Button {
+    width: 15rem;
+    transition: .1s;
+    cursor: pointer;
+    filter: drop-shadow(.2rem .3125rem .5rem rgba(0, 0, 0, .25));
+
+    &:hover {
+      opacity: $opacity-button-hover;
+      // Use hardware acceleration if possible.
+      filter: alpha(opacity=#{$opacity-button-hover * 100});
+    }
+
+    &:active {
+      opacity: $opacity-button-active;
+      // Use hardware acceleration if possible.
+      filter: alpha(opacity=#{$opacity-button-active * 100});
+    }
   }
 }
