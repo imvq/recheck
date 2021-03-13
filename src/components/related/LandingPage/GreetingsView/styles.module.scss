@@ -19,5 +19,7 @@
   @include respond(xs) {
     background-image: none;
     background-color: $color-background-rect;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
   }
 }
