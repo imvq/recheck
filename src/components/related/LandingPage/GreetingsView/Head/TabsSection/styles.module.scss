@@ -1,9 +1,15 @@
+@import '~styles/abstracts/mixins';
+
 .Wrapper {
   grid-area: TabSection;
   display: flex;
   justify-content: space-around;
   padding-top: .2rem;
   align-items: center;
+
+  @include respond(xs) {
+    display: none;
+  }
 }
 
 .Tab {

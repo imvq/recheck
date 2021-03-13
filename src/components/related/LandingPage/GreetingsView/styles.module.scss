@@ -1,8 +1,8 @@
 @import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
 
 .GreetingsView {
   width: 100%;
-  // max-width: 1920px;
   height: fit-content;
   grid-area: GreetingsView;
   background-image: url(~assets/svg/misc/RectUpper.svg);
@@ -15,4 +15,9 @@
   grid-template:
     'Head'     8rem
     'Content'  45rem;
+  
+  @include respond(xs) {
+    background-image: none;
+    background-color: $color-background-rect;
+  }
 }

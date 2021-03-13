@@ -16,10 +16,10 @@ import styles from './styles.module.scss';
 export default withStyles(() => (
   <div styleName='LandingPage'>
     <GreetingsView />
-    <HowToWorkView />
+    {/* <HowToWorkView />
     <InfoblockView />
     <MainSwipeView />
     <MotivatorView />
-    <Footer />
+    <Footer /> */}
   </div>
 ), styles);

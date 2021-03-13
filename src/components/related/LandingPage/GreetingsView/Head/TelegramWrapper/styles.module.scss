@@ -1,4 +1,5 @@
 @import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
 
 $width-offset: 3rem;
 
@@ -8,6 +9,10 @@ $width-offset: 3rem;
   justify-content: flex-start;
   align-items: center;
   margin-left: $greetings-view-head-padding-horizontal + $width-offset;
+
+  @include respond(xs) {
+    margin: 0;
+  }
 }
 
 .TelegramButton {

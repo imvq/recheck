@@ -1,4 +1,5 @@
 @import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
 
 .LogoWrapper {
   grid-area: LogoWrapper;
@@ -6,6 +7,10 @@
   justify-content: flex-end;
   align-items: center;
   margin-right: $greetings-view-head-padding-horizontal;
+
+  @include respond(xs) {
+    margin: 0;
+  }
 }
 
 .Logo {

@@ -1,10 +1,15 @@
 @import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
 
 .RocketGroup__Line {
   position: absolute;
   height: 45rem;
   right: $greetings-view-content-action-group-width / 2 - 1rem;
   top: 2.5rem;
+
+  @include respond(xs) {
+    display: none;
+  }
 }
 
 .RocketGroup__Rocket {
@@ -13,4 +18,8 @@
   right: 27.5rem;
   width: 9.5rem;
   height: 9.2rem;
+
+  @include respond(xs) {
+    display: none;
+  }
 }
