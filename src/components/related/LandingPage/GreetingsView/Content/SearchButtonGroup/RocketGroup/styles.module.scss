@@ -20,6 +20,8 @@
   height: 9.2rem;
 
   @include respond(xs) {
-    display: none;
+    position: static;
+    width: 15rem;
+    height: 15rem;
   }
 }
