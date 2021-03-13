@@ -1,6 +1,5 @@
 import withStyles from 'react-css-modules';
 
-import { ReactComponent as LogoSVG } from 'assets/svg/logo/LogoFull.svg';
 import { BadgeProps } from './types';
 import styles from './styles.module.scss';
 

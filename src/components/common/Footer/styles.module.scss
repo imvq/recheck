@@ -1,3 +1,4 @@
+@import '~styles/abstracts/variables';
 @import '~styles/base/typography';
 
 .Footer {
@@ -30,6 +31,7 @@
 
   &__Logo {
     width: 15rem;
+    height: $logo-rect-height-base;
   }
 
   &__Text {
