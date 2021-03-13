@@ -1,6 +1,7 @@
 import withStyles from 'react-css-modules';
 
 import Footer from 'components/common/Footer';
+import PopupView from './PopupView';
 import GreetingsView from './GreetingsView';
 import HowToWorkView from './HowToWorkView';
 import InfoblockView from './InfoblockView';
@@ -15,9 +16,11 @@ import styles from './styles.module.scss';
  */
 export default withStyles(() => (
   <div styleName='LandingPage'>
+    <PopupView />
     <GreetingsView />
     <HowToWorkView />
     <InfoblockView />
+    <MainSwipeView />
     <MotivatorView />
     <Footer />
   </div>
