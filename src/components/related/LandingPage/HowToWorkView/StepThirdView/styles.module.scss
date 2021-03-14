@@ -10,8 +10,7 @@
   @include respond(xs) {
     display: flex;
     align-items: center;
-    background-color: $color-background-rect;
-    border-bottom-left-radius: 20%;
+    background-color: darken($color-background-rect, 10);
   }
 }
 

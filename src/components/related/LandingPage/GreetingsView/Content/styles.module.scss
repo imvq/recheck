@@ -9,7 +9,6 @@
 
   @include respond(xs) {
     background-color: $color-background-rect;
-    border-bottom-right-radius: 50%;
   }
 }
 

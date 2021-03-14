@@ -10,7 +10,7 @@
   @include respond(xs) {
     display: flex;
     align-items: center;
-    background-color: darken($color-background-rect, 10);
+    background-color: $color-background-rect;
   }
 }
 
