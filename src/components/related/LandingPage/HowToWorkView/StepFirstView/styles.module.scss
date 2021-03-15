@@ -29,10 +29,9 @@
   position: relative;
   grid-area: Main;
   display: flex;
-  justify-content: flex-start;
 
   @include respond(xs) {
-    display: flex;
+    justify-content: center;
     width: 100%;
   }
 }

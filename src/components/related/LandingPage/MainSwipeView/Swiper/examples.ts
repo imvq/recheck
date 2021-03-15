@@ -1,10 +1,28 @@
 import { ReviewCardData } from 'types.common';
 
 import Lada from 'assets/images/photos/Lada.png';
+import Kate from 'assets/images/photos/Kate.png';
+import Ciri from 'assets/images/photos/Ciri.png';
 
 const examples: ReviewCardData[] = [
   {
-    name: 'Лада Клищенко1',
+    name: 'Екатерина Мазур',
+    photoUrl: Kate,
+    position: '--',
+    company: '--',
+    experience: '--',
+    review: `
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+        deserunt mollit anim id est laborum.
+        `,
+    nReviews: 27
+  },
+  {
+    name: 'Лада Клищенко',
     photoUrl: Lada,
     position: 'Team Lead of Data Analyst team',
     company: 'airSlate | workflow Automation',
@@ -19,32 +37,18 @@ const examples: ReviewCardData[] = [
     nReviews: 27
   },
   {
-    name: 'Лада Клищенко2',
-    photoUrl: Lada,
-    position: 'Team Lead of Data Analyst team',
-    company: 'airSlate | workflow Automation',
-    experience: 'Июль 2019 — Февраль 2020',
+    name: 'Кирилл Усачёв',
+    photoUrl: Ciri,
+    position: '--',
+    company: '--',
+    experience: '--',
     review: `
-        Лада проработала 8 месяцев в airSlate как Team Lead of Data Analyst team.
-        Помимо поставленных задач, она взяла на себя разработку автоматизированной
-        библиотеки лендингов, вместе с командой они создали более 200 тысяч старниц
-        в течение нескольких месяцев. Лада целеустремленный, ответственный и постоянно
-        растущий профессионал.
-        `,
-    nReviews: 27
-  },
-  {
-    name: 'Лада Клищенко3',
-    photoUrl: Lada,
-    position: 'Team Lead of Data Analyst team',
-    company: 'airSlate | workflow Automation',
-    experience: 'Июль 2019 — Февраль 2020',
-    review: `
-        Лада проработала 8 месяцев в airSlate как Team Lead of Data Analyst team.
-        Помимо поставленных задач, она взяла на себя разработку автоматизированной
-        библиотеки лендингов, вместе с командой они создали более 200 тысяч старниц
-        в течение нескольких месяцев. Лада целеустремленный, ответственный и постоянно
-        растущий профессионал.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+        deserunt mollit anim id est laborum.
         `,
     nReviews: 27
   }
