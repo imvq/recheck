@@ -7,7 +7,7 @@
   $scale-reducer-unfocused: .8;
   $size-font-reduced: $size-font-normal * $scale-reducer-unfocused;
 
-  animation: fade 0.4s;
+  animation: fade 1.4s;
 
   grid-area: CardsView;
   display: flex;
