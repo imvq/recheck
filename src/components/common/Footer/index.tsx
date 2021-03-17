@@ -22,7 +22,7 @@ export default withStyles(() => (
     </div>
     <div styleName='Footer__SectionWrapper'>
       <span styleName='Footer__Text Footer__Text--marked'>Почта:</span>
-      <span styleName='Footer__Text'>pochtapochta@gmail.com</span>
+      <span styleName='Footer__Text'>info@recheck-candidate.com</span>
     </div>
     <div styleName='Footer__SectionWrapper'>
       <span styleName='Footer__Text Footer__Text--marked'>Соц. сети:</span>
