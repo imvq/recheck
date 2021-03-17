@@ -1,6 +1,7 @@
 import { Link as ScrollLink } from 'react-scroll';
 import withStyles from 'react-css-modules';
 
+import SearchEntry from './SearchEntry';
 import styles from './styles.module.scss';
 
 /**
@@ -8,13 +9,13 @@ import styles from './styles.module.scss';
  * Presentational component.
  */
 export default withStyles(() => (
-  <div styleName='Wrapper'>
-    <button styleName='Tab' type='button'>Поиск</button>
+  <div styleName='TabSection'>
+    <SearchEntry />
     <ScrollLink to='HowToWorkTitle' spy smooth duration={300}>
-      <button styleName='Tab' type='button'>О платформе</button>
+      <button styleName='TabSection__Tab' type='button'>О платформе</button>
     </ScrollLink>
     <ScrollLink to='MainSwipeViewTitle' spy smooth>
-      <button styleName='Tab' type='button'>Отзывы</button>
+      <button styleName='TabSection__Tab' type='button'>Отзывы</button>
     </ScrollLink>
   </div>
 ), styles);

@@ -1,4 +1,5 @@
 @import './variables';
+@import './mixins';
 
 %Button {
   cursor: pointer;
@@ -15,5 +16,51 @@
     opacity: $opacity-button-active;
     // Use hardware acceleration if possible.
     filter: alpha(opacity=#{$opacity-button-active * 100});
+  }
+}
+
+%TabEntry {
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+  font-family: OpenSans-Regular;
+  font-size: 1.3rem;
+}
+
+%FooterMenuEntry {
+  cursor: pointer;
+  font-family: OpenSans-Regular;
+  font-size: 1.25rem;
+  line-height: 2.4rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &--marked {
+    font-family: OpenSans-Bold;
+
+    &:hover {
+      text-decoration: none;
+      cursor: default;
+    }
+
+    @include respond(xs) {
+      display: none;
+    }
+  }
+
+  &--disabled {
+    &:hover {
+      text-decoration: none;
+      cursor: default;
+    }
+  }
+
+  @include respond(xs) {
+    font-size: 1.5rem;
+    font-family: OpenSans-Bold;
   }
 }

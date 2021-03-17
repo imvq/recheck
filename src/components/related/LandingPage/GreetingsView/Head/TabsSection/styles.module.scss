@@ -1,6 +1,7 @@
 @import '~styles/abstracts/mixins';
+@import '~styles/abstracts/placeholders';
 
-.Wrapper {
+.TabSection {
   grid-area: TabSection;
   display: flex;
   justify-content: space-around;
@@ -10,14 +11,8 @@
   @include respond(xs) {
     display: none;
   }
-}
 
-.Tab {
-  border: none;
-  background: none;
-  outline: none;
-  font-family: OpenSans-Regular;
-  font-size: 1.3rem;
-  cursor: pointer;
-  user-select: none;
+  &__Tab {
+    @extend %TabEntry;
+  }
 }
