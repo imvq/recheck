@@ -1,3 +1,4 @@
+import { Link as ScrollLink } from 'react-scroll';
 import withStyles from 'react-css-modules';
 
 import { ReactComponent as LogoSVG } from 'assets/svg/logo/LogoFull.svg';
@@ -16,9 +17,13 @@ export default withStyles(() => (
     </div>
     <div styleName='Footer__SectionWrapper'>
       <span styleName='Footer__Text Footer__Text--marked'>Меню:</span>
-      <span styleName='Footer__Text'><a href='/'>Процессы</a></span>
-      <span styleName='Footer__Text'><a href='/'>О платформе</a></span>
-      <span styleName='Footer__Text'><a href='/'>Отзывы</a></span>
+      <span styleName='Footer__Text'>Процессы</span>
+      <ScrollLink to='HowToWorkTitle' spy smooth>
+        <span styleName='Footer__Text'>О платформе</span>
+      </ScrollLink>
+      <ScrollLink to='MainSwipeViewTitle' spy smooth duration={300}>
+        <span styleName='Footer__Text'>Отзывы</span>
+      </ScrollLink>
     </div>
     <div styleName='Footer__SectionWrapper'>
       <span styleName='Footer__Text Footer__Text--marked'>Почта:</span>

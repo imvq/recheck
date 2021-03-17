@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
  * Prsentational component.
  */
 export default withStyles(() => (
-  <div styleName='TitleView'>
+  <div styleName='TitleView' id='HowToWorkTitle'>
     <div styleName='TitleView__TextWrapper'>
       <span styleName='TitleView__Text'>
         <span>Как работает </span>
