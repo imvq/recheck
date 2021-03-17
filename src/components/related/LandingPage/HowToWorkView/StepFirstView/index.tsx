@@ -1,6 +1,6 @@
 import withStyles from 'react-css-modules';
 
-import Pic from 'assets/images/misc/StageFirstPic-min.png';
+import Pic from 'assets/svg/LandingPage/HowToWorkView/StepFirstView/Pic.svg';
 import ParagraphBackground from 'assets/svg/misc/StageFirstTextBck.svg';
 import styles from './styles.module.scss';
 

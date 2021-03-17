@@ -1,7 +1,7 @@
 import withStyles from 'react-css-modules';
 
-import { ReactComponent as LineSVG } from 'assets/svg/misc/RocketLine.svg';
-import Rocket from 'assets/images/Rocket.png';
+import RocketLine from 'assets/svg/LandingPage/GreetingsView/Content/SearchButtonGroup/RocketGroup/RocketLine.svg';
+import Rocket from 'assets/svg/LandingPage/GreetingsView/Content/SearchButtonGroup/RocketGroup/Rocket.svg';
 import styles from './styles.module.scss';
 
 /**
@@ -10,7 +10,7 @@ import styles from './styles.module.scss';
  */
 export default withStyles(() => (
   <div>
-    <LineSVG styleName='RocketGroup__Line' />
-    <img styleName='RocketGroup__Rocket' src={Rocket} alt='' />
+    <img styleName='RocketGroup__Line' src={RocketLine} alt='' draggable='false' />
+    <img styleName='RocketGroup__Rocket' src={Rocket} alt='' draggable='false' />
   </div>
 ), styles);

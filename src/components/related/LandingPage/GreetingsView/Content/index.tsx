@@ -1,6 +1,6 @@
 import withStyles from 'react-css-modules';
 
-import GreetingsContentPic from 'assets/images/GreetingsContentPic.png';
+import ContentPic from 'assets/svg/LandingPage/GreetingsView/Content/ContentPic.svg';
 import SearchButtonGroup from './SearchButtonGroup';
 
 import styles from './styles.module.scss';
@@ -14,7 +14,7 @@ export default withStyles(() => (
     <div styleName='Content__PicWrapper'>
       <img
         styleName='Content__Pic'
-        src={GreetingsContentPic}
+        src={ContentPic}
         alt=''
         draggable='false'
       />

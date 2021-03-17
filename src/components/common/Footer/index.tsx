@@ -1,7 +1,7 @@
 import withStyles from 'react-css-modules';
 
 import { ReactComponent as LogoSVG } from 'assets/svg/logo/LogoFull.svg';
-import TelegramIcon from 'assets/images/btn/TelegramIcon.png';
+import TelegramIcon from 'assets/images/Footer/TelegramIcon.png';
 
 import styles from './styles.module.scss';
 

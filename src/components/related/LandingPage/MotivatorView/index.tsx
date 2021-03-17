@@ -1,7 +1,7 @@
 import withStyles from 'react-css-modules';
 
 import { ReactComponent as FindButton } from 'assets/svg/btn/FindCandidate.svg';
-import PhoneImage from 'assets/images/misc/Phone.png';
+import PhoneImage from 'assets/images/LandingPage/MotivatorView/Phone.png';
 import TitleView from './TitleView';
 import Badge from './Badge';
 import styles from './styles.module.scss';
