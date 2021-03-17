@@ -1,7 +1,7 @@
 import withStyles from 'react-css-modules';
 
 import LogoWrapper from './LogoWrapper';
-import TelegramWrapper from './TelegramWrapper';
+import CabinetWrapper from './CabinetWrapper';
 import TabsSection from './TabsSection';
 import styles from './styles.module.scss';
 
@@ -13,6 +13,6 @@ export default withStyles(() => (
   <div styleName='Head'>
     <LogoWrapper />
     <TabsSection />
-    <TelegramWrapper />
+    <CabinetWrapper />
   </div>
 ), styles);

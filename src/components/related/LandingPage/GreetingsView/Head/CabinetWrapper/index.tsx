@@ -1,6 +1,6 @@
 import withStyles from 'react-css-modules';
 
-import { ReactComponent as TelegramSVG } from 'assets/svg/btn/Telegram.svg';
+import { ReactComponent as CabinetIcon } from 'assets/svg/common/CabinetIcon.svg';
 import { TelegramButtonProps } from './types';
 import styles from './styles.module.scss';
 
@@ -9,7 +9,7 @@ import styles from './styles.module.scss';
  * Presentational component.
  */
 export default withStyles(({ onClick }: TelegramButtonProps) => (
-  <div styleName='Wrapper'>
-    <TelegramSVG styleName='TelegramButton' onClick={onClick} />
+  <div styleName='CabinetWrapper'>
+    <CabinetIcon styleName='CabinetWrapper__Button' onClick={onClick} />
   </div>
 ), styles);
