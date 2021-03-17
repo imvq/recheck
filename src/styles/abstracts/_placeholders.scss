@@ -1,0 +1,19 @@
+@import './variables';
+
+%Button {
+  cursor: pointer;
+  transition: .1s;
+  filter: drop-shadow(.2rem .3125rem .5rem rgba(0, 0, 0, .25));
+
+  &:hover {
+    opacity: $opacity-button-hover;
+    // Use hardware acceleration if possible.
+    filter: alpha(opacity=#{$opacity-button-hover * 100});
+  }
+
+  &:active {
+    opacity: $opacity-button-active;
+    // Use hardware acceleration if possible.
+    filter: alpha(opacity=#{$opacity-button-active * 100});
+  }
+}

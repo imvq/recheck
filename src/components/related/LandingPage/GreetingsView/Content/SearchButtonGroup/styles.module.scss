@@ -1,25 +1,14 @@
 @import '~styles/abstracts/variables';
+@import '~styles/abstracts/placeholders';
 
 .SearchButtonGroup {
   position: relative;
-}
 
-.SearchButtonGroup__Button {
-  width: 16rem;
-  position: relative;
-  z-index: 1;
-  transition: .1s;
-  cursor: pointer;
+  &__Button {
+    @extend %Button;
 
-  &:hover {
-    opacity: $opacity-button-hover;
-    // Use hardware acceleration if possible.
-    filter: alpha(opacity=#{$opacity-button-hover * 100});
-  }
-
-  &:active {
-    opacity: $opacity-button-active;
-    // Use hardware acceleration if possible.
-    filter: alpha(opacity=#{$opacity-button-active * 100});
+    width: 16rem;
+    position: relative;
+    z-index: 1;
   }
 }
