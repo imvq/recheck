@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -rf build & react-scripts build & mv build dist-frontent"
+    "build": "rm -rf dist-frontent & react-scripts build & mv build dist-frontent"
   },
   "eslintConfig": {
     "extends": [
