@@ -77,15 +77,17 @@
     }
   }
 
+  &__SmartScrollLink {
+    @include respond(xs) {
+      display: none;
+    }
+  }
+
   &__SocialLink {
     width: fit-content;
   }
 
   &__SocialIcon {
     width: 2.5em;
-
-    @include respond(xs) {
-      width: fit-content;
-    }
   }
 }

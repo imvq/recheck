@@ -3,7 +3,6 @@ import withStyles from 'react-css-modules';
 
 import { ReactComponent as LogoSVG } from 'assets/svg/logo/LogoFull.svg';
 import TelegramIcon from 'assets/images/Footer/TelegramIcon.png';
-import SearchEntry from './SearchEntry';
 
 import styles from './styles.module.scss';
 
@@ -18,11 +17,13 @@ export default withStyles(() => (
     </div>
     <div styleName='Footer__SectionWrapper'>
       <span styleName='Footer__Text Footer__Text--marked'>Меню:</span>
-      <SearchEntry />
-      <ScrollLink to='HowToWorkTitle' spy smooth>
+      <ScrollLink to='HowToWorkTitle' spy smooth duration={900}>
         <span styleName='Footer__Text'>О платформе</span>
       </ScrollLink>
-      <ScrollLink to='MainSwipeViewTitle' spy smooth duration={300}>
+      <ScrollLink to='InfoblockTitle' spy smooth duration={600}>
+        <span styleName='Footer__Text'>Преимущества</span>
+      </ScrollLink>
+      <ScrollLink styleName='Footer__SmartScrollLink' to='MainSwipeViewTitle' spy smooth duration={300}>
         <span styleName='Footer__Text'>Отзывы</span>
       </ScrollLink>
     </div>
