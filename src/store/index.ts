@@ -1,8 +1,10 @@
 import { combineReducers, createStore } from 'redux';
 
+import { authReducer } from './auth/reducers';
 import { interactionStateReducer } from './interaction/reducers';
 
 const rootReducer = combineReducers({
+  auth: authReducer,
   interaction: interactionStateReducer
 });
 
@@ -15,4 +17,5 @@ export const store = createStore(
   && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+export * from './auth/actions';
 export * from './interaction/actions';

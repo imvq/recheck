@@ -1,0 +1,26 @@
+@import '~styles/abstracts/placeholders';
+@import '~styles/abstracts/variables';
+@import '~styles/abstracts/mixins';
+
+.CabinetWrapper {
+  $width-offset: 12rem;
+
+  grid-area: TelegramWrapper;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: $greetings-view-head-padding-horizontal + $width-offset;
+
+  @include respond(xs) {
+    margin: 0;
+  }
+
+  &__Button {
+    @extend %Button;
+  
+    width: $greetings-view-head-edge-elems-width-base - $width-offset;
+    opacity: $opacity-button-idle-inversed;
+    // Use hardware acceleration if possible.
+    filter: alpha(opacity=#{$opacity-button-idle-inversed * 100});
+  }
+}

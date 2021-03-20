@@ -1,3 +1,6 @@
+import { AuthActionType } from './auth/types';
 import { InteractionStateActionType } from './interaction/types';
 
-export type AppActionType = InteractionStateActionType;
+export type AppActionType =
+   AuthActionType
+ | InteractionStateActionType;
