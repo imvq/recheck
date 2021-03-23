@@ -1,0 +1,44 @@
+import { createGlobalStyle } from 'styled-components';
+
+import { respond, ScreenBreakpoint } from 'tools.common';
+
+/**
+ * Global patch style component.
+ */
+export default createGlobalStyle`
+  html, body, #root {
+    height: 100%;
+    font-size: 16px;
+    font-family: Sans-Serif;
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  :root {
+    ${respond(ScreenBreakpoint.XXXD)} {
+      font-size: 0.9rem;
+    }
+
+    ${respond(ScreenBreakpoint.XXD)} {
+      font-size: 0.83rem;
+    }
+
+    ${respond(ScreenBreakpoint.XD)} {
+      font-size: 0.8rem;
+    }
+
+    ${respond(ScreenBreakpoint.LG)} {
+      font-size: 0.7rem;
+    }
+
+    ${respond(ScreenBreakpoint.MD)} {
+      font-size: 0.6rem;
+    }
+
+    ${respond(ScreenBreakpoint.SM)} {
+      font-size: 0.5rem;
+    }
+  }
+`;
