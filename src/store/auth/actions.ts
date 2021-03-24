@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Dispatch } from 'redux';
 
 import { AppActionType } from '../types';
@@ -5,7 +6,7 @@ import { AuthActionType, SET_IS_AUTHORIZED } from './types';
 
 // ============= Action creators =============
 
-export const createSetIsAuthorizedAC = (isAuthorized: boolean)
+export const setIsAuthorized = (isAuthorized: boolean)
   : AuthActionType => ({
   type: SET_IS_AUTHORIZED,
   payload: isAuthorized
@@ -13,8 +14,10 @@ export const createSetIsAuthorizedAC = (isAuthorized: boolean)
 
 // ============= Thunk creators ==============
 
-export const createCheckAuthorizationThunk = () => (
+export const checkAuthorization = () => (
   dispatch: Dispatch<AppActionType>
 ) => {
-  // TODO: Check stuff.
+  axios.get('https://api.linkedin.com/v2/me')
+    .then(() => dispatch(setIsAuthorized(true)))
+    .catch(() => dispatch(setIsAuthorized(false)));
 };

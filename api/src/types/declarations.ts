@@ -34,27 +34,13 @@ export type StringIndexable = {
   [key: string]: string;
 };
 
-// ========================= DTOs ==========================
+// ==================== Response DTOs ======================
 
-export type AuthCheckResponse = {
-  email: string;
+export type ExchangeAuthCodeResponseDto = {
+  accessToken: string;
 };
 
 export type HealthResponseDTO = {
   message: string;
   version: string;
-};
-
-export type JwtUserDTO = {
-  email: string;
-  iat: string;
-  exp: string;
-};
-
-export type SimpleResponseDTO = {
-  message: string;
-};
-
-export type StageResponseDTO = {
-  stage: 'Confirmation' | 'Photo' | 'Location' | 'Complete';
 };

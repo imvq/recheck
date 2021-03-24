@@ -108,14 +108,6 @@ export default class App {
     this.app.use(fileUpload({
       limits: { fileSize: Constants.MAX_UPLOADED_FILE_SIZE }
     }));
-
-    // Provide database connection on each request.
-    this.app.use(async (
-      _request: Request, _response: Response, advance: NextFunction
-    ) => {
-      await connect();
-      advance();
-    });
   }
 
   /**

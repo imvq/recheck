@@ -1,9 +1,7 @@
-import { Path, GET, Context, ServiceContext } from 'typescript-rest';
-import { JwtCookieGuard } from 'typescript-rest-jwt-guard';
+import { Path, GET } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import Types from '@types';
-import Cookies from '@common/Cookies';
 import HealthService from '@services/Health';
 
 /**
@@ -20,17 +18,5 @@ export default class HealthController {
   @GET
   public getHealthStatus(): Types.HealthResponseDTO {
     return this.injectedService.getHealthStatus();
-  }
-
-  /**
-   * Getting basic health status and current API vesion
-   * with am authenticated request.
-   */
-  @JwtCookieGuard(Cookies.BEARER)
-  @Path('/secured')
-  @GET
-  public getHealthStatusSecured(@Context _context: ServiceContext):
-    Types.HealthResponseDTO {
-    return this.injectedService.getHealthStatusSecured();
   }
 }

@@ -1,6 +1,7 @@
 import { FunctionComponent, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 
+import * as computed from 'utils/computed';
 import { AppState, setPageLocked } from 'store';
 import { LoginBadgeStateProps, LoginBadgeDispatchProps } from './types';
 import { LoginButton, Menu, MenuEntry } from './styled';
@@ -26,18 +27,27 @@ const LoginBadge: FunctionComponent<LoginBadgeStateProps & LoginBadgeDispatchPro
       if (props.isAuthorized == null) {
         props.lockPage();
       } else {
-        setIsExpanded(!isExpanded);
+        setIsExpanded(true);
       }
+    } else {
+      setIsExpanded(false);
     }
-  }, []);
+  }, [props.isAuthorized, isExpanded]);
 
   return (
     <div>
       <LoginButton onClick={toggleMenu} />
       <Menu isExpanded={isExpanded}>
         {props.isAuthorized
-          ? <MenuEntry>Войти через LinkedIn</MenuEntry>
-          : <MenuEntry>Выйти</MenuEntry>}
+          ? <MenuEntry>Выйти</MenuEntry>
+          : (
+            <MenuEntry onClick={() => {
+              window.location.replace(computed.LINKEDIN_REDIRECT_URL);
+            }}
+            >
+              Войти через LinkedIn
+            </MenuEntry>
+          )}
       </Menu>
     </div>
   );
