@@ -8,7 +8,7 @@ const cssVarsLocal = {
 };
 
 /**
- * Login button.
+ * Styled component for login button.
  */
 export const LoginButton = styled(CabinetSvg)`
   ${mixins.DefaultButton}
@@ -19,4 +19,16 @@ export const LoginButton = styled(CabinetSvg)`
   );
   opacity: ${cssVars.opacityButtonIdleInversed};
   filter: alpha(opacity=${cssVars.opacityButtonIdleInversed} * 100);
+`;
+
+/**
+ * Styled component for badge menu.
+ */
+export const Menu = styled.ul<{ isExpanded: boolean }>`
+  visibility: ${props => (props.isExpanded ? 'visible' : 'hidden')};
+  position: absolute;
+`;
+
+export const MenuEntry = styled.li`
+  background-color: red;
 `;

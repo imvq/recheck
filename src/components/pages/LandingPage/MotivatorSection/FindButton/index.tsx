@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
-import { createSetSearchPopupDisplayStateAC } from 'store';
+import { setIsSearchPopupVisible } from 'store';
 import FindCandidateBtn from 'assets/images/pages/LandingPage/MotivatorSection/FindCandidateBtn.svg';
 import { FindButtonProps, FindButtonDispatchProps } from './types';
 
 const mapDispatchToProps: FindButtonDispatchProps = ({
-  setIsSearchPopupVisible: createSetSearchPopupDisplayStateAC
+  setIsSearchPopupVisible
 });
 
 /**
@@ -20,8 +20,8 @@ const View = ({ onClick }: FindButtonProps) => (
  * Wrapper for search button.
  * Container component.
  */
-const Container = ({ setIsSearchPopupVisible }: FindButtonDispatchProps) => (
-  <View onClick={setIsSearchPopupVisible} />
+const Container = (props: FindButtonDispatchProps) => (
+  <View onClick={props.setIsSearchPopupVisible} />
 );
 
 export default connect(null, mapDispatchToProps)(Container);

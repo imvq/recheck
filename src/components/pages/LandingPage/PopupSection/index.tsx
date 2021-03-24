@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { AppState, createSetSearchPopupDisplayStateAC } from 'store';
+import { AppState, setIsSearchPopupVisible } from 'store';
 import SearchPopup from 'components/reusables/SearchPopup';
 import { PopupViewDispatchProps, PopupViewStateProps } from './types';
 
@@ -9,19 +9,17 @@ const mapStateToProps = (state: AppState): PopupViewStateProps => ({
 });
 
 const mapDispatchToProps: PopupViewDispatchProps = {
-  setIsSearchPopupVisible: createSetSearchPopupDisplayStateAC
+  setIsSearchPopupVisible
 };
 
 /**
  * Wrapper for popups.
  * Container component.
  */
-const PopupContainer = ({
-  isSearchPopupVisible, setIsSearchPopupVisible
-}: PopupViewStateProps & PopupViewDispatchProps) => (
+const PopupContainer = (props: PopupViewStateProps & PopupViewDispatchProps) => (
   <div style={{ position: 'absolute' }}>
-    {isSearchPopupVisible
-      ? <SearchPopup onClose={() => setIsSearchPopupVisible(false)} />
+    {props.isSearchPopupVisible
+      ? <SearchPopup onClose={() => props.setIsSearchPopupVisible(false)} />
       : null}
   </div>
 );

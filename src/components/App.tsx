@@ -1,6 +1,7 @@
 import { Provider } from 'react-redux';
 
 import { store as appStore } from 'store';
+import PageLockManager from 'components/reusables/PageLockManager';
 import GlobalStyle from 'components/reusables/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
 
@@ -12,7 +13,9 @@ export default () => (
   <>
     <GlobalStyle />
     <Provider store={appStore}>
-      <LandingPage />
+      <PageLockManager>
+        <LandingPage />
+      </PageLockManager>
     </Provider>
   </>
 );
