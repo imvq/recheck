@@ -1,4 +1,4 @@
-import InfoEasementBoardSvg from 'assets/svg/misc/InfoEasementBoard.svg';
+import InfoEasementBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoEasementBoard.svg';
 import { Wrapper } from './styled';
 import {
   BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title, Text

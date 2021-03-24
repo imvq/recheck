@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { AppState, createSetSearchPopupDisplayStateAC } from 'store';
-import SearchPopup from 'components/reusables/popups/SearchPopup';
+import SearchPopup from 'components/reusables/SearchPopup';
 import { PopupViewDispatchProps, PopupViewStateProps } from './types';
 
 const mapStateToProps = (state: AppState): PopupViewStateProps => ({

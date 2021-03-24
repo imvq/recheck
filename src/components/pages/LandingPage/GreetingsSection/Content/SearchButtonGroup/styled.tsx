@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { mixins } from 'style.common';
-import { ReactComponent as SearchButtonSvg } from 'assets/svg/btn/Search.svg';
+import { ReactComponent as SearchButtonSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/Search.svg';
 
 /**
  * Styled component for search button group outer wrapper.

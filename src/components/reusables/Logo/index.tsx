@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { cssVars } from 'style.common';
-import { ReactComponent as LogoSvg } from 'assets/svg/logo/LogoFull.svg';
+import { ReactComponent as LogoSvg } from 'assets/images/common/LogoFull.svg';
 
 /**
  * Website logo.

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { createSetSearchPopupDisplayStateAC } from 'store';
-import FindCandidateBtn from 'assets/svg/LandingPage/MotivatorSection/FindCandidateBtn.svg';
+import FindCandidateBtn from 'assets/images/pages/LandingPage/MotivatorSection/FindCandidateBtn.svg';
 import { FindButtonProps, FindButtonDispatchProps } from './types';
 
 const mapDispatchToProps: FindButtonDispatchProps = ({

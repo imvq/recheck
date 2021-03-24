@@ -1,5 +1,5 @@
-import PictureSvg from 'assets/svg/LandingPage/HowToWorkView/StepSecond/Pic.svg';
-import ParagraphBackgroundSvg from 'assets/svg/misc/StageSecondTextBck.svg';
+import PictureSvg from 'assets/images/pages/LandingPage/HowToWorkSection/StepSecond/Pic.svg';
+import ParagraphBackgroundSvg from 'assets/images/pages/LandingPage/HowToWorkSection/StepSecond/StepSecondTextBck.svg';
 import {
   Wrapper, CentralizingBox, ParagraphWrapper, ParagraphBackground,
   TitleWrapper, Title, Text, ImageWrapper, Image

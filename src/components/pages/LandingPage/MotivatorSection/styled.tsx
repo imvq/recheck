@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { cssVars, mixins } from 'style.common';
 import { respond, ScreenBreakpoint } from 'tools.common';
-import MotivatorBackground from 'assets/images/LandingPage/MotivatorSection/Background.png';
+import MotivatorBackground from 'assets/images/pages/LandingPage/MotivatorSection/Background.png';
 
 const mixinsLocal = {
   MotivatorBadgeAdapted: css`

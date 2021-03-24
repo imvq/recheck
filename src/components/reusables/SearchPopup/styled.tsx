@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 import { animations, mixins } from 'style.common';
 import { respond, ScreenBreakpoint } from 'tools.common';
-import SearchStage1Pic from 'assets/images/popups/SearchPopup/SearchStage1Pic.png';
-import { ReactComponent as FindButtonSvg } from 'assets/svg/btn/FindCandidate.svg';
+import SearchStage1Pic from 'assets/images/reusables/SearchPopup/SearchStage1Pic.png';
+import { ReactComponent as FindButtonSvg } from 'assets/images/reusables/SearchPopup/FindCandidate.svg';
 
 const cssVarsLocal = {
   background: '#f0f3ff',

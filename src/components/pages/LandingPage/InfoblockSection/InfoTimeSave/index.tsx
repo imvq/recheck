@@ -1,4 +1,4 @@
-import InfoTimeSaveBoardSvg from 'assets/svg/misc/InfoTimeSaveBoard.svg';
+import InfoTimeSaveBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoTimeSaveBoard.svg';
 import { Wrapper } from './styled';
 import {
   BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title,

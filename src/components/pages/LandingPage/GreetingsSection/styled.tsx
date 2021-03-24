@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import RectUpper from 'assets/svg/misc/RectUpper.svg';
+import RectUpper from 'assets/images/pages/LandingPage/GreetingsSection/RectUpper.svg';
 import { respond, ScreenBreakpoint } from 'tools.common';
 
 /**

@@ -1,4 +1,4 @@
-import ContentPic from 'assets/svg/LandingPage/GreetingsView/Content/ContentPic.svg';
+import ContentPic from 'assets/images/pages/LandingPage/GreetingsSection/Content/ContentPic.svg';
 import SearchButtonGroup from './SearchButtonGroup';
 import {
   Wrapper, TextWrapper, PictureWrapper, Picture, ActionGroup

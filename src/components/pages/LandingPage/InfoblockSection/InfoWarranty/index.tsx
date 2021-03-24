@@ -1,4 +1,4 @@
-import InfoWarrantyBoardSvg from 'assets/svg/misc/InfoWarrantyBoard.svg';
+import InfoWarrantyBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoWarrantyBoard.svg';
 import { Wrapper } from './styled';
 import {
   BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title, Text

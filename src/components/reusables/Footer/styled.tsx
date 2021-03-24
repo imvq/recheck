@@ -1,10 +1,9 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Link as ScrollLink } from 'react-scroll';
 
-import { cssVars, mixins } from 'style.common';
 import { respond, ScreenBreakpoint } from 'tools.common';
 import Logo from 'components/reusables/Logo';
-import TelegramIconImage from 'assets/images/Footer/TelegramIcon.png';
+import TelegramIconImage from 'assets/images/reusables/Footer/TelegramIcon.png';
 
 /**
  * Styled component for footer wrapper.

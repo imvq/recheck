@@ -1,4 +1,4 @@
-import PhoneImage from 'assets/images/LandingPage/MotivatorSection/Phone.png';
+import PhoneImage from 'assets/images/pages/LandingPage/MotivatorSection/Phone.png';
 import {
   Wrapper, FocusView, Anchor, AnchorSticky, MotivatorBadgeWrapper,
   Image, ButtonWrapper

@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components';
 
 import { cssVars } from 'style.common';
-import { ReactComponent as LogoSvg } from 'assets/svg/logo/LogoFull.svg';
-import { ReactComponent as DetailsButtonSvg } from 'assets/svg/btn/Details.svg';
-import { ReactComponent as FeedbackButtonSvg } from 'assets/svg/btn/GiveFeedback.svg';
+import { ReactComponent as LogoSvg } from 'assets/images/common/LogoFull.svg';
+import { ReactComponent as DetailsButtonSvg } from 'assets/images/reusables/ReviewCard/Details.svg';
+import { ReactComponent as FeedbackButtonSvg } from 'assets/images/reusables/ReviewCard/Feedback.svg';
 
 const cssVarsLocal = {
   heightTitle: '2.625em',
