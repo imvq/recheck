@@ -1,11 +1,11 @@
-import { Wrapper, Button } from './styled';
-import { CabinetButtonProps } from './types';
+import LoginBadge from 'components/reusables/LoginBadge';
+import { Wrapper } from './styled';
 
 /**
  * Cabinet wrapper.
  */
-export default ({ onClick }: CabinetButtonProps) => (
+export default () => (
   <Wrapper>
-    <Button onClick={onClick} />
+    <LoginBadge />
   </Wrapper>
 );
