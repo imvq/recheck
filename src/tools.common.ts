@@ -1,3 +1,14 @@
+import Cookies from 'universal-cookie';
+
+// ==================== Shared objects ===================
+
+/**
+ * Wrapper controling all website client cookies.
+ */
+export const cookieManager = new Cookies();
+
+// ======================== Enums ========================
+
 /**
  * Represents width of the screen.
  * Is to be used in style mixins.
@@ -12,6 +23,8 @@ export enum ScreenBreakpoint {
   XXD = '1600px',
   XXXD = '1728px'
 }
+
+// ====================== Functions ======================
 
 /**
  * Get media query for screen size.

@@ -1,11 +1,7 @@
-import {
-  AuthState,
-  AuthActionType,
-  SET_IS_AUTHORIZED
-} from './types';
+import { AuthState, AuthActionType, SET_IS_AUTHORIZED } from './types';
 
 const initialState: AuthState = {
-  isAuthorized: false
+  isAuthorized: null
 };
 
 export function authReducer(
