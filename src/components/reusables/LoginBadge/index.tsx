@@ -1,10 +1,15 @@
 import { FunctionComponent, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
+import OutsideClickHandler from 'react-outside-click-handler';
 
 import * as computed from 'utils/computed';
+import { cookieManager } from 'tools.common';
+import { ReactComponent as DoorSvg } from 'assets/images/reusables/LoginBadge/Door.svg';
 import { AppState, setPageLocked } from 'store';
 import { LoginBadgeStateProps, LoginBadgeDispatchProps } from './types';
-import { LoginButton, Menu, MenuEntry } from './styled';
+import {
+  Wrapper, LoginButton, Menu, MenuEntry, DoorWrapper
+} from './styled';
 
 const mapStateToProps = (store: AppState): LoginBadgeStateProps => ({
   isAuthorized: store.auth.isAuthorized
@@ -35,21 +40,31 @@ const LoginBadge: FunctionComponent<LoginBadgeStateProps & LoginBadgeDispatchPro
   }, [props.isAuthorized, isExpanded]);
 
   return (
-    <div>
-      <LoginButton onClick={toggleMenu} />
-      <Menu isExpanded={isExpanded}>
-        {props.isAuthorized
-          ? <MenuEntry>Выйти</MenuEntry>
-          : (
-            <MenuEntry onClick={() => {
-              window.location.replace(computed.LINKEDIN_REDIRECT_URL);
-            }}
-            >
-              Войти через LinkedIn
-            </MenuEntry>
-          )}
-      </Menu>
-    </div>
+    <OutsideClickHandler onOutsideClick={() => setIsExpanded(false)}>
+      <Wrapper>
+        <LoginButton onClick={toggleMenu} />
+        <Menu isExpanded={isExpanded}>
+          {props.isAuthorized
+            ? (
+              <MenuEntry onClick={() => {
+                cookieManager.remove('BEARER');
+              }}
+              >
+                Выйти
+              </MenuEntry>
+            )
+            : (
+              <MenuEntry onClick={() => {
+                window.location.replace(computed.LINKEDIN_REDIRECT_URL);
+              }}
+              >
+                <DoorWrapper><DoorSvg /></DoorWrapper>
+                <span>Войти через LinkedIn</span>
+              </MenuEntry>
+            )}
+        </Menu>
+      </Wrapper>
+    </OutsideClickHandler>
   );
 };
 
