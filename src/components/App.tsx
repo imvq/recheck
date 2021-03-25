@@ -30,7 +30,7 @@ export default () => (
             <PageLockManager />
           </Route>
           <Route path='/profile'>
-            <StartupManager />
+            <StartupManager redirectHomeOnFail />
             <PageLockManager>
               <ProfilePage />
             </PageLockManager>
