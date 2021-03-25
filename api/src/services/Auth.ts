@@ -4,18 +4,19 @@ import axios from 'axios';
 import Dtos from '@dto';
 import Types from '@types';
 import Logger from '@common/Logger';
+import Computed from '@common/Computed';
 
 /**
  * Service in charge of authorization stuff.
  */
 export default class AuthService {
-  public async exchangeAuthCode(codeDto: Dtos.ExchangeAuthCodeDto)
+  public async exchangeAuthCode(exchangeDto: Dtos.ExchangeAuthCodeDto)
     : Promise<Types.ExchangeAuthCodeResponseDto> {
     try {
       const params = new URLSearchParams();
       params.append('grant_type', 'authorization_code');
-      params.append('code', codeDto.code);
-      params.append('redirect_uri', process.env.AUTH_RETURN_HOSTNAME as string);
+      params.append('code', exchangeDto.code);
+      params.append('redirect_uri', exchangeDto.redirectPath);
       params.append('client_id', process.env.LINKEDIN_APP_CLIENT_ID as string);
       params.append('client_secret', process.env.LINKEDIN_APP_CLIENT_SECRET as string);
 

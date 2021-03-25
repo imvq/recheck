@@ -56,7 +56,7 @@ const LoginBadge: FunctionComponent<LoginBadgeStateProps & LoginBadgeDispatchPro
             )
             : (
               <MenuEntry onClick={() => {
-                window.location.replace(computed.LINKEDIN_REDIRECT_URL);
+                window.location.replace(computed.LINKEDIN_PROFILE_REDIRECT_URL);
               }}
               >
                 <DoorWrapper><DoorSvg /></DoorWrapper>
