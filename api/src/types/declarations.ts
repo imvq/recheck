@@ -40,6 +40,10 @@ export type ExchangeAuthCodeResponseDto = {
   accessToken: string;
 };
 
+export type CheckAuthResponseDto = {
+  success: boolean;
+};
+
 export type HealthResponseDTO = {
   message: string;
   version: string;

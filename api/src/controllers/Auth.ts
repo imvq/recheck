@@ -1,4 +1,4 @@
-import { Path, POST } from 'typescript-rest';
+import { Path, GET, POST, Context, ServiceContext } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import Dtos from '@dto';
@@ -20,5 +20,12 @@ export default class AuthController {
   public exchangeAuthCode(data: Dtos.ExchangeAuthCodeDto)
     : Promise<Types.ExchangeAuthCodeResponseDto> {
     return this.injectedService.exchangeAuthCode(data);
+  }
+
+  @Path('/check')
+  @GET
+  public checkAuth(@Context context: ServiceContext)
+    : Promise<Types.CheckAuthResponseDto> {
+    return this.injectedService.checkAuth(context.request.cookies);
   }
 }

@@ -50,7 +50,8 @@ const LoginBadge: FunctionComponent<LoginBadgeStateProps & LoginBadgeDispatchPro
                 cookieManager.remove('BEARER');
               }}
               >
-                Выйти
+                <DoorWrapper><DoorSvg /></DoorWrapper>
+                <span>Выйти</span>
               </MenuEntry>
             )
             : (

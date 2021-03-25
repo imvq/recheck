@@ -27,7 +27,13 @@ const OAuthManager:FunctionComponent<OAuthManagerDispatchProps> = (props) => {
     `${process.env.REACT_APP_API}/auth/confirm`,
     { code: queries.code }
   ).then((response) => {
-    cookieManager.set('BEARER', response.data['accessToken']);
+    cookieManager.set(
+      'access_token', response.data['accessToken'],
+      {
+        path: '/',
+        expires: new Date(Date.now() + 5259492)
+      }
+    );
     props.setIsAuthorized(true);
   }).catch(() => {
     props.setIsAuthorized(false);
