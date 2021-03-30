@@ -39,6 +39,14 @@ export const animations = {
       transform: scale(1);
       opacity: 1;
     }
+  `,
+  slideIn: keyframes`
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0%);
+    }
   `
 };
 

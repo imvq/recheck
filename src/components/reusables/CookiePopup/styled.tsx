@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { cssVars } from 'style.common';
+import { animations, cssVars } from 'style.common';
 
 /**
  * Styled component for main wrapper of cookie popup.
@@ -14,6 +14,8 @@ export const Wrapper = styled.div`
   background-color: #e1e6fb;
   z-index: ${cssVars.zIndexPopupCookie};
   border-top: .3rem solid #9ea9d1;
+
+  animation: ${animations.slideIn} 1.2s;
   
   display: flex;
   justify-content: space-between;
