@@ -3,7 +3,7 @@ swagger:
   entryFile:
     - ./src/controllers/*
   outputFormat: OpenApi_3
-  name: Meety
-  description: Meety website API
+  name: reCheck
+  description: reCheck website API
   produces: [application/json]
   version: 1.0.0

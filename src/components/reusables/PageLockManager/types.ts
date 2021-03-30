@@ -1,3 +1,3 @@
-export type SessionManagerStateProps = {
+export type PageLockManagerStateProps = {
   isPageLocked: boolean;
 };

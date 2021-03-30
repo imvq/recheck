@@ -7,6 +7,7 @@ import { respond, ScreenBreakpoint } from 'tools.common';
  * Styled component for Header.
  */
 export const Wrapper = styled.div`
+  height: 8rem;
   display: grid;
   grid-template: 'LogoWrapper LoginBadge';
   

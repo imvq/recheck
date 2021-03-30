@@ -1,4 +1,6 @@
-import { Wrapper, AdaptedHeader } from './styled';
+import {
+  Wrapper, AdaptedHeader, AdaptedFooter
+} from './styled';
 
 /**
  * Profile page. Used to view reviews.
@@ -6,5 +8,6 @@ import { Wrapper, AdaptedHeader } from './styled';
 export default () => (
   <Wrapper>
     <AdaptedHeader />
+    <AdaptedFooter />
   </Wrapper>
 );

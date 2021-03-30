@@ -4,7 +4,6 @@ import axios from 'axios';
 import Dtos from '@dto';
 import Types from '@types';
 import Logger from '@common/Logger';
-import Computed from '@common/Computed';
 
 /**
  * Service in charge of authorization stuff.

@@ -4,3 +4,7 @@ export class ExchangeAuthCodeDto {
     public redirectPath: string
   ) {}
 }
+
+export class UserDto {
+  public constructor(public email: string) {}
+}

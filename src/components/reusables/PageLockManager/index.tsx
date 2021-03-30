@@ -1,11 +1,11 @@
-import { FunctionComponent, useEffect } from 'react';
+import { FunctionComponent, ReactNode } from 'react';
 import { connect } from 'react-redux';
 
 import PageLoader from 'components/reusables/PageLockManager/PageLoader';
 import { AppState } from 'store';
-import { SessionManagerStateProps } from './types';
+import { PageLockManagerStateProps } from './types';
 
-const mapStateToProps = (store: AppState): SessionManagerStateProps => ({
+const mapStateToProps = (store: AppState): PageLockManagerStateProps => ({
   isPageLocked: store.interaction.isPageLocked
 });
 
@@ -13,7 +13,9 @@ const mapStateToProps = (store: AppState): SessionManagerStateProps => ({
  * Component for checking page lock status and preventing
  * users from doing stuff that might be inaccessible to them.
  */
-const PageLockManager: FunctionComponent<SessionManagerStateProps> = (props) => {
+const PageLockManager: FunctionComponent<
+  PageLockManagerStateProps
+> = (props) => {
   return props.isPageLocked
     ? <PageLoader>{props.children}</PageLoader>
     : <>{props.children}</>;

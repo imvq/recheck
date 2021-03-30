@@ -48,3 +48,11 @@ export type HealthResponseDTO = {
   message: string;
   version: string;
 };
+
+export type UserResponseDto = {
+  email: string;
+  name: string;
+  photoUrl: string;
+  searches: number;
+  availableSearches: number;
+};
