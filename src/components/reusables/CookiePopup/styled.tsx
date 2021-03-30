@@ -47,7 +47,7 @@ export const AdaptedImage = styled.img`
  */
 export const TextWrapper = styled.div`
   margin-left: 2rem;
-  font-size: 1.3em;
+  font-size: 1.3rem;
   font-weight: 600;
 `;
 
@@ -66,7 +66,7 @@ export const LinkButton = styled.button`
   background: none;
   outline: none;
   user-select: none;
-  font-size: 1.4em;
+  font-size: 1.4rem;
   font-weight: 600;
   text-decoration: underline;
   color: ${cssVars.colorForegroundPickAux1};
