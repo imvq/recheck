@@ -1,4 +1,6 @@
-import { Wrapper } from './styled';
+import {
+  Wrapper, SubsectionsWrapper, InfoBlockDesktopOnlyWrapper
+} from './styled';
 import TitleView from './TitleView';
 import InfoTimeSave from './InfoTimeSave';
 import InfoEasement from './InfoEasement';
@@ -10,8 +12,13 @@ import InfoWarranty from './InfoWarranty';
 export default () => (
   <Wrapper>
     <TitleView />
-    <InfoTimeSave />
-    <InfoEasement />
-    <InfoWarranty />
+    <InfoBlockDesktopOnlyWrapper><InfoTimeSave /></InfoBlockDesktopOnlyWrapper>
+    <InfoBlockDesktopOnlyWrapper><InfoEasement /></InfoBlockDesktopOnlyWrapper>
+    <InfoBlockDesktopOnlyWrapper><InfoWarranty /></InfoBlockDesktopOnlyWrapper>
+    <SubsectionsWrapper>
+      <InfoTimeSave />
+      <InfoEasement />
+      <InfoWarranty />
+    </SubsectionsWrapper>
   </Wrapper>
 );

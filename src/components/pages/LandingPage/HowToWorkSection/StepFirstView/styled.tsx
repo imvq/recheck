@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { cssVars, mixins } from 'style.common';
+import { respond, ScreenBreakpoint } from 'tools.common';
 
 /**
  * Styled component for first step section wrapper.
@@ -9,6 +10,14 @@ export const Wrapper = styled.div`
   ${mixins.HTWLeftOrientedSectionWrapper}
 
   grid-area: StepFirstView;
+
+  ${respond(ScreenBreakpoint.XS)} {
+    background-color: ${cssVars.colorBackgroundBadge};
+    box-sizing: border-box;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
 `;
 
 /**

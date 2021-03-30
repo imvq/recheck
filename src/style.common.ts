@@ -6,6 +6,7 @@ import { respond, ScreenBreakpoint } from 'tools.common';
  * Encapsulation for reusable styles variables.
  */
 export const cssVars = {
+  colorBackgroundBadge: '#cad0eb',
   colorBackgroundRect: '#e9edfb',
   colorForegroundPickMain: '#4f69ca',
   colorForegroundPickAux1: '#33c7ba',
@@ -86,7 +87,6 @@ export const mixins = {
     ${respond(ScreenBreakpoint.XS)} {
       display: flex;
       align-items: center;
-      background-color: darken(${cssVars.colorBackgroundRect}, 10);
     }
   `,
   HTWparagraphBackground: css`

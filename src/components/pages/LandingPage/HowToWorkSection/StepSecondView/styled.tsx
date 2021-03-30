@@ -14,7 +14,11 @@ export const Wrapper = styled.div`
   ${respond(ScreenBreakpoint.XS)} {
     display: flex;
     align-items: center;
-    background-color: ${cssVars.colorBackgroundRect};
+    background-color: ${cssVars.colorBackgroundBadge};
+    box-sizing: border-box;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
   }
 `;
 

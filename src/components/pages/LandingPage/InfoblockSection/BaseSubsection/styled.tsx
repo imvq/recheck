@@ -7,10 +7,10 @@ import { respond, ScreenBreakpoint } from 'tools.common';
  * Styled component for board wrapper.
  */
 export const BoardWrapper = styled.div`
-  margin-top: -9.399rem;
+  margin-top: 5rem;
 
   ${respond(ScreenBreakpoint.XS)} {
-    margin-top: 0;
+    margin: 1rem;
   }
 `;
 

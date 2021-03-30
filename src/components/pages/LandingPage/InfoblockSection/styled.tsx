@@ -13,9 +13,31 @@ export const Wrapper = styled.div`
   
   ${respond(ScreenBreakpoint.XS)} {
     grid-template:
-      'TitleView'    12rem
-      'InfoTimeSave' 25rem
-      'InfoEasement' 25rem
-      'InfoWarranty' 25rem;
+      'TitleView'  12rem
+      'InfoBlocks';
+  }
+`;
+
+/**
+ * Styled component for all the subsections wrapper.
+ */
+export const SubsectionsWrapper = styled.div`
+  display: none;
+
+  ${respond(ScreenBreakpoint.XS)} {
+    grid-area: InfoBlocks;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+/**
+ * Wrapper disappearing when it's not desktop layout.
+ */
+export const InfoBlockDesktopOnlyWrapper = styled.div`
+  ${respond(ScreenBreakpoint.XS)} {
+    display: none;
   }
 `;

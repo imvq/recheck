@@ -27,7 +27,7 @@ export enum ScreenBreakpoint {
 // ====================== Functions ======================
 
 /**
- * Get media query for screen size.
+ * Get media query for max screen size.
  *
  * @param {string} screen Screen size
  * @returns {string} Media query to apply

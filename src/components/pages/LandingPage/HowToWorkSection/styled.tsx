@@ -22,6 +22,5 @@ export const Wrapper = styled.div`
       'StepSecondView' 15rem
       'StepThirdView'  15rem;
     margin-top: 0;
-    background-color: lighten(${cssVars.colorBackgroundRect}, 2);
   }
 `;
