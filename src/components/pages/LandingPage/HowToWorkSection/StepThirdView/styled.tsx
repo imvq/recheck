@@ -12,11 +12,7 @@ export const Wrapper = styled.div`
   grid-area: StepThirdView;
 
   ${respond(ScreenBreakpoint.XS)} {
-    background-color: ${cssVars.colorBackgroundBadge};
-    box-sizing: border-box;
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 1rem;
+    ${mixins.HTWBadge};
   }
 `;
 

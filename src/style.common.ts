@@ -6,7 +6,7 @@ import { respond, ScreenBreakpoint } from 'tools.common';
  * Encapsulation for reusable styles variables.
  */
 export const cssVars = {
-  colorBackgroundBadge: '#cad0eb',
+  colorBackgroundBadge: '#dde0ee',
   colorBackgroundRect: '#e9edfb',
   colorForegroundPickMain: '#4f69ca',
   colorForegroundPickAux1: '#33c7ba',
@@ -56,6 +56,14 @@ export const mixins = {
       opacity: ${cssVars.opacityButtonActive};
       filter: alpha(opacity=${cssVars.opacityButtonActive} * 100);
     }
+  `,
+  HTWBadge: css`
+    background-color: ${cssVars.colorBackgroundBadge};
+    box-sizing: border-box;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    font-weight: 600;
   `,
   HTWLeftOrientedCentralizingBox: css`
     &:first-child {

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import { cssVars } from 'style.common';
 import { respond, ScreenBreakpoint } from 'tools.common';
 
 /**
@@ -17,10 +16,10 @@ export const Wrapper = styled.div`
 
   ${respond(ScreenBreakpoint.XS)} {
     grid-template:
-      'TitleView'      15rem
-      'StepFirstView'  15rem
-      'StepSecondView' 15rem
-      'StepThirdView'  15rem;
+      'TitleView TitleView      TitleView' 15rem
+      '.         StepFirstView          .' 20rem
+      '.         StepSecondView         .' 20rem
+      '.         StepThirdView          .' 20rem / 10vw 80vw 10vw;
     margin-top: 0;
   }
 `;

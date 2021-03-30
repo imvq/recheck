@@ -12,13 +12,10 @@ export const Wrapper = styled.div`
   grid-template: 'Main Aux' 1fr / 1fr 1fr;
 
   ${respond(ScreenBreakpoint.XS)} {
+    ${mixins.HTWBadge};
+
     display: flex;
     align-items: center;
-    background-color: ${cssVars.colorBackgroundBadge};
-    box-sizing: border-box;
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 1rem;
   }
 `;
 
