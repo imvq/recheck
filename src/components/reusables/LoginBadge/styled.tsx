@@ -53,15 +53,15 @@ export const MenuEntry = styled.li`
   box-sizing: border-box;
   padding: .8rem;
   border-radius: .4rem;
-  background-color: #e5e5e5;
+  background-color: #f0f3ff;
   filter: drop-shadow(.2rem .4rem .2rem rgba(0, 0, 0, .25));
 
   &:hover {
-    background-color: #d4d4d4;
+    background-color: #cacdd6;
   }
 
   &:active {
-    background-color: #b8b8b8;
+    background-color: #9fa1a7;
   }
 `;
 
