@@ -19,7 +19,10 @@ export const cssVars = {
   opacityButtonIdleInversed: '.8',
   sectionShadow: 'drop-shadow(1rem 1rem .6rem rgba(0, 0, 0, .1))',
   widthMotivatorBadge: '25rem',
-  widthReviewCard: '67.38em'
+  widthReviewCard: '67.38em',
+  zIndexPopupCookie: '100',
+  zIndexScrollButton: '200',
+  zIndexPopupSearch: '300'
 };
 
 /**

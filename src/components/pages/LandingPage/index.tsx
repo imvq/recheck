@@ -1,3 +1,4 @@
+import CookiePopup from 'components/reusables/CookiePopup';
 import ScrollButton from 'components/reusables/ScrollButton';
 import { Wrapper } from './styled';
 import PopupSection from './PopupSection';
@@ -20,6 +21,7 @@ export default () => (
     <MainSwipeSection />
     <MotivatorSection />
     <Footer />
+    <CookiePopup />
     <ScrollButton />
   </Wrapper>
 );
