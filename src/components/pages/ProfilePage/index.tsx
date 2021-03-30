@@ -1,5 +1,5 @@
 import {
-  Wrapper, AdaptedHeader, AdaptedFooter
+  Wrapper, AdaptedHeader
 } from './styled';
 
 /**
@@ -8,6 +8,5 @@ import {
 export default () => (
   <Wrapper>
     <AdaptedHeader />
-    <AdaptedFooter />
   </Wrapper>
 );
