@@ -22,7 +22,8 @@ export const cssVars = {
   widthReviewCard: '67.38em',
   zIndexPopupCookie: '100',
   zIndexScrollButton: '200',
-  zIndexPopupSearch: '300'
+  zIndexPopupSearch: '300',
+  zIndexPageLoader: '900'
 };
 
 /**

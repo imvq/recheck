@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { ReactComponent as LoaderCircle } from 'assets/images/reusables/PageLoader/LoaderCircle.svg';
+import { cssVars } from 'style.common';
 
 /**
  * Styled component for page loader wrapper.
@@ -12,7 +13,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: ${cssVars.zIndexPageLoader};
   background-color: #fff;
   opacity: .8;
 `;
