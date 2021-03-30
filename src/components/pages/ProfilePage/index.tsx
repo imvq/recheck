@@ -1,3 +1,4 @@
+import ScrollButton from 'components/reusables/ScrollButton';
 import {
   Wrapper, AdaptedHeader
 } from './styled';
@@ -8,5 +9,6 @@ import {
 export default () => (
   <Wrapper>
     <AdaptedHeader />
+    <ScrollButton />
   </Wrapper>
 );

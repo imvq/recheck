@@ -1,3 +1,4 @@
+import ScrollButton from 'components/reusables/ScrollButton';
 import { Wrapper } from './styled';
 import PopupSection from './PopupSection';
 import GreetingsSection from './GreetingsSection';
@@ -19,5 +20,6 @@ export default () => (
     <MainSwipeSection />
     <MotivatorSection />
     <Footer />
+    <ScrollButton />
   </Wrapper>
 );
