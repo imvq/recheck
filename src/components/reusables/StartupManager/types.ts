@@ -10,4 +10,5 @@ export type StartupManagerStateProps = {
 
 export type StartupManagerDispatchProps = {
   checkAuthorization: () => void;
+  unlockPage: () => void;
 };

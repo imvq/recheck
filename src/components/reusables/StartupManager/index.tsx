@@ -1,7 +1,7 @@
 import { FunctionComponent, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { AppState, checkAuthorization } from 'store';
+import { AppState, checkAuthorization, setPageUnlocked } from 'store';
 import { StartupManagerStateProps, StartupManagerDispatchProps, StartupManagerOwnProps } from './types';
 
 const mapStateToProps = (store: AppState): StartupManagerStateProps => ({
@@ -9,7 +9,8 @@ const mapStateToProps = (store: AppState): StartupManagerStateProps => ({
 });
 
 const mapDispatchToProps: StartupManagerDispatchProps = {
-  checkAuthorization
+  checkAuthorization,
+  unlockPage: setPageUnlocked
 };
 
 /**
@@ -27,6 +28,8 @@ const StartupManager: FunctionComponent<
     if (props.redirectHomeOnFail && props.isAuthorized != null && !props.isAuthorized) {
       window.location.replace(process.env.REACT_APP_START_PAGE as string);
     }
+
+    props.unlockPage();
   }, [props.isAuthorized]);
 
   return <></>;
