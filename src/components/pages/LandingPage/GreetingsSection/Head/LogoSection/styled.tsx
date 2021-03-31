@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import { cssVars } from 'style.common';
-import { respond, ScreenBreakpoint } from 'tools.common';
+import { cssVars } from 'utils/style.common';
+import { ScreenBreakpoint } from 'utils/enums';
+import { respond } from 'utils/functions';
 
 /**
  * Styled component for logo image wrapper.

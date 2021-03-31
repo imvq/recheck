@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 import * as computed from 'utils/computed';
-import { cookieManager } from 'tools.common';
+import { cookieManager } from 'utils/functions';
 import { ReactComponent as DoorSvg } from 'assets/images/reusables/LoginBadge/Door.svg';
 import { AppState, setPageLocked } from 'store';
 import { LoginBadgeStateProps, LoginBadgeDispatchProps } from './types';

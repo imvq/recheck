@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { ReactComponent as LoaderCircle } from 'assets/images/reusables/PageLoader/LoaderCircle.svg';
-import { cssVars } from 'style.common';
+import { cssVars } from 'utils/style.common';
 
 /**
  * Styled component for page loader wrapper.

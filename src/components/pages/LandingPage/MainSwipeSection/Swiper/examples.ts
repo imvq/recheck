@@ -1,4 +1,4 @@
-import { ReviewCardData } from 'types.common';
+import { ReviewCardData } from 'utils/types.common';
 
 import Lada from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Lada.png';
 import Kate from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Kate.png';

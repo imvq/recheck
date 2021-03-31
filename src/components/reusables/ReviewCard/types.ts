@@ -1,3 +1,3 @@
-import { ReviewCardData } from 'types.common';
+import { ReviewCardData } from 'utils/types.common';
 
 export type ReviewCardProps = ReviewCardData;

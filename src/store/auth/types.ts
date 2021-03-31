@@ -1,4 +1,4 @@
-import { Nullable } from 'types.common';
+import { Nullable } from 'utils/types.common';
 
 export const SET_IS_AUTHORIZED = 'SET_IS_LOGGED_IN';
 

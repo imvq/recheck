@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { respond, ScreenBreakpoint } from 'tools.common';
+import { ScreenBreakpoint } from 'utils/enums';
+import { respond } from 'utils/functions';
 
 /**
  * Styled component for title outer wrapper.

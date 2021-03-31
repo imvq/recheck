@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import { cssVars } from 'style.common';
-import { respond, ScreenBreakpoint } from 'tools.common';
+import { cssVars } from 'utils/style.common';
+import { ScreenBreakpoint } from 'utils/enums';
+import { respond } from 'utils/functions';
 import { ReactComponent as RocketLineSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/RocketLine.svg';
 import { ReactComponent as RocketSvg } from 'assets/images/pages//LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/Rocket.svg';
 

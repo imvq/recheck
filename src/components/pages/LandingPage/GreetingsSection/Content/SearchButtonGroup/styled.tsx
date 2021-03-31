@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { mixins } from 'style.common';
+import { mixins } from 'utils/style.common';
 import { ReactComponent as SearchButtonSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/Search.svg';
 
 /**

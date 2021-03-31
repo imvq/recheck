@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { cssVars } from 'style.common';
+import { cssVars } from 'utils/style.common';
 
 const cssVarsLocal = {
   colorBackground: '#cad0eb',

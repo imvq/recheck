@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { animations, cssVars } from 'style.common';
+import { animations, cssVars } from 'utils/style.common';
 
 /**
  * Styled component for main wrapper of cookie popup.

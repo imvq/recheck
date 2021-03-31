@@ -1,4 +1,4 @@
-import { Nullable } from 'types.common';
+import { Nullable } from 'utils/types.common';
 
 export type StartupManagerOwnProps = {
   redirectHomeOnFail?: boolean;

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { animations, cssVars } from 'style.common';
+import { animations, cssVars } from 'utils/style.common';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/pages/LandingPage/MainSwipeSection/ArrowLeft.svg';
 import { ReactComponent as ArrowRightSvg } from 'assets/images/pages/LandingPage/MainSwipeSection/ArrowRight.svg';
 

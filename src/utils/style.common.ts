@@ -1,6 +1,7 @@
 import { css, keyframes } from 'styled-components';
 
-import { respond, ScreenBreakpoint } from 'tools.common';
+import { ScreenBreakpoint } from 'utils/enums';
+import { respond } from 'utils/functions';
 
 /**
  * Encapsulation for reusable styles variables.

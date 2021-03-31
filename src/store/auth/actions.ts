@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 
-import { cookieManager } from 'tools.common';
+import { cookieManager } from 'utils/functions';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
 

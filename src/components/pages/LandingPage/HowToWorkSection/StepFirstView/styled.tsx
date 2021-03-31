@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import { cssVars, mixins } from 'style.common';
-import { respond, ScreenBreakpoint } from 'tools.common';
+import { cssVars, mixins } from 'utils/style.common';
+import { ScreenBreakpoint } from 'utils/enums';
+import { respond } from 'utils/functions';
 
 /**
  * Styled component for first step section wrapper.

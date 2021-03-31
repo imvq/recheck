@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { cssVars } from 'style.common';
+import { cssVars } from 'utils/style.common';
 import { ReactComponent as LogoSvg } from 'assets/images/common/LogoFull.svg';
 
 /**

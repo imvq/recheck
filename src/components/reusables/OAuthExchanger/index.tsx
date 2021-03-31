@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import axios from 'axios';
 
 import * as constants from 'utils/constants';
-import { cookieManager } from 'tools.common';
+import { cookieManager } from 'utils/functions';
 import { setPageLocked, setPageUnlocked, setIsAuthorized } from 'store';
 import { OAuthExchangerDispatchProps } from './types';
 

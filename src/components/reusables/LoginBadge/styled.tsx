@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { animations, cssVars, mixins } from 'style.common';
+import { animations, cssVars, mixins } from 'utils/style.common';
 import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
 
 const cssVarsLocal = {
