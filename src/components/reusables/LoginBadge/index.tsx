@@ -47,7 +47,9 @@ const LoginBadge: FunctionComponent<LoginBadgeStateProps & LoginBadgeDispatchPro
           {props.isAuthorized
             ? (
               <MenuEntry onClick={() => {
-                cookieManager.remove('BEARER');
+                props.lockPage();
+                cookieManager.remove('access_token');
+                window.location.replace(process.env.REACT_APP_START_PAGE as string);
               }}
               >
                 <DoorWrapper><DoorSvg /></DoorWrapper>
