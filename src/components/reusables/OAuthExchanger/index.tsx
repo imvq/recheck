@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router';
 import queryString from 'query-string';
 import axios from 'axios';
 
+import * as constants from 'utils/constants';
 import { cookieManager } from 'tools.common';
 import { setPageLocked, setPageUnlocked, setIsAuthorized } from 'store';
 import { OAuthExchangerDispatchProps } from './types';
@@ -31,7 +32,7 @@ const OAuthExchanger: FunctionComponent<OAuthExchangerDispatchProps> = (props) =
 
   const cookieData = {
     path: '/',
-    expires: new Date(Date.now() + 5259492)
+    expires: new Date(Date.now() + constants.MONTH_MS * 2)
   };
 
   axios.post(`${process.env.REACT_APP_API}/auth/confirm`, postData)
