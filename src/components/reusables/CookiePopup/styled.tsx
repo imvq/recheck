@@ -64,6 +64,7 @@ export const StyledLink = styled(Link)`
  * Styled component for accept button (as a link).
  */
 export const LinkButton = styled.button`
+  cursor: pointer;
   border: none;
   background: none;
   outline: none;
