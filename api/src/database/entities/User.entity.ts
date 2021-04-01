@@ -8,7 +8,7 @@ import {
 /**
  * User model.
  */
-@Entity({ name: 'user' })
+@Entity({ name: 'users' })
 export default class User {
   @Index({ unique: true })
   @PrimaryColumn('int', { nullable: false })
