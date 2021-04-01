@@ -42,13 +42,10 @@ export const Wrapper = styled.div`
     border: none;
     border-radius: 1rem;
     width: fit-content;
-    /* max-width: 95%; */
     margin: 1rem;
     padding: 1rem;
 
     animation: ${animations.slideIn} .2s;
-    /* left: 50%;
-    transform: translateX(-50%); */
   }
 `;
 

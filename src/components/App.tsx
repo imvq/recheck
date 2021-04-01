@@ -8,6 +8,7 @@ import PageLockManager from 'components/reusables/PageLockManager';
 import GlobalStyle from 'components/reusables/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
 import ProfilePage from 'components/pages/ProfilePage';
+import NotFoundPage from 'components/pages/NotFoundPage';
 
 /**
  * Main wrapper.
@@ -34,6 +35,9 @@ export default () => (
             <PageLockManager>
               <ProfilePage />
             </PageLockManager>
+          </Route>
+          <Route>
+            <NotFoundPage />
           </Route>
         </Switch>
       </BrowserRouter>
