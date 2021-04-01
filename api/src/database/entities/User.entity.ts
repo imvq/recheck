@@ -20,4 +20,7 @@ export default class User {
 
   @Column('int', { nullable: false })
   reviewsAvailable: number = 0;
+
+  @Column({ type: 'timestamptz' })
+  lastUpdatedAt: Date = new Date();
 }
