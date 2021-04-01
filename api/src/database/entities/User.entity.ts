@@ -1,9 +1,4 @@
-import {
-  Entity,
-  PrimaryColumn,
-  Column,
-  Index
-} from 'typeorm';
+import { Entity, PrimaryColumn, Column, Index } from 'typeorm';
 
 /**
  * User model.
