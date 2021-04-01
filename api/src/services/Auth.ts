@@ -4,6 +4,7 @@ import axios from 'axios';
 import Dtos from '@dto';
 import Types from '@types';
 import Logger from '@common/Logger';
+import * as Cookies from '@common/Cookies';
 
 /**
  * Service in charge of authorization stuff.
@@ -25,9 +26,7 @@ export default class AuthService {
         { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
       );
 
-      return {
-        accessToken: data['access_token']
-      };
+      return { accessToken: data[Cookies.BEARER] };
     } catch (error) {
       Logger.ifdev()?.log(JSON.stringify(error));
       throw error instanceof Errors.UnauthorizedError ? error
@@ -39,7 +38,7 @@ export default class AuthService {
     : Promise<Types.CheckAuthResponseDto> {
     try {
       const config = { headers: {
-        Authorization: `Bearer ${cookies['access_token']}`
+        Authorization: `Bearer ${cookies[Cookies.BEARER]}`
       } };
       await axios.get('https://api.linkedin.com/v2/me', config);
 

@@ -1,5 +1,4 @@
 import { Server, Errors } from 'typescript-rest';
-import fileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
@@ -13,7 +12,7 @@ import express, {
   NextFunction
 } from 'express';
 
-import Constants from '@common/Constants';
+import * as Constants from '@common/Constants';
 import Computed from '@common/Computed';
 import Types from '@types';
 import Utils from '@utils';
@@ -103,11 +102,6 @@ export default class App {
 
     // Provide functionality to read cookies.
     this.app.use(cookieParser());
-
-    // Provide functionality to upload files.
-    this.app.use(fileUpload({
-      limits: { fileSize: Constants.MAX_UPLOADED_FILE_SIZE }
-    }));
 
     // Provide database connection on each request.
     this.app.use(async (

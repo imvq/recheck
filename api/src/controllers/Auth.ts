@@ -22,6 +22,9 @@ export default class AuthController {
     return this.injectedService.exchangeAuthCode(data);
   }
 
+  /**
+   * Check if the user is authorized with LinkedIn.
+   */
   @Path('/check')
   @GET
   public checkAuth(@Context context: ServiceContext)
