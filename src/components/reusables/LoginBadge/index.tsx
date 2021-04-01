@@ -1,14 +1,16 @@
 import { FunctionComponent, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 import * as computed from 'utils/computed';
 import { cookieManager } from 'utils/functions';
 import { ReactComponent as DoorSvg } from 'assets/images/reusables/LoginBadge/Door.svg';
+import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
 import { AppState, setPageLocked } from 'store';
 import { LoginBadgeStateProps, LoginBadgeDispatchProps } from './types';
 import {
-  Wrapper, LoginButton, Menu, MenuEntry, DoorWrapper
+  Wrapper, LoginButton, Menu, MenuEntry, SvgWrapper
 } from './styled';
 
 const mapStateToProps = (store: AppState): LoginBadgeStateProps => ({
@@ -26,6 +28,7 @@ const mapDispatchToProps: LoginBadgeDispatchProps = {
  */
 const LoginBadge: FunctionComponent<LoginBadgeStateProps & LoginBadgeDispatchProps> = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const history = useHistory();
 
   const toggleMenu = useCallback(() => {
     if (!isExpanded) {
@@ -46,22 +49,28 @@ const LoginBadge: FunctionComponent<LoginBadgeStateProps & LoginBadgeDispatchPro
         <Menu isExpanded={isExpanded}>
           {props.isAuthorized
             ? (
-              <MenuEntry onClick={() => {
-                props.lockPage();
-                cookieManager.remove('BEARER');
-                window.location.replace(process.env.REACT_APP_START_PAGE as string);
-              }}
-              >
-                <DoorWrapper><DoorSvg /></DoorWrapper>
-                <span>Выйти</span>
-              </MenuEntry>
+              <>
+                <MenuEntry onClick={() => history.push('/profile')}>
+                  <SvgWrapper><CabinetSvg /></SvgWrapper>
+                  <span>Профиль</span>
+                </MenuEntry>
+                <MenuEntry onClick={() => {
+                  props.lockPage();
+                  cookieManager.remove('BEARER');
+                  window.location.replace(process.env.REACT_APP_START_PAGE as string);
+                }}
+                >
+                  <SvgWrapper><DoorSvg /></SvgWrapper>
+                  <span>Выйти</span>
+                </MenuEntry>
+              </>
             )
             : (
               <MenuEntry onClick={() => {
                 window.location.replace(computed.LINKEDIN_PROFILE_REDIRECT_URL);
               }}
               >
-                <DoorWrapper><DoorSvg /></DoorWrapper>
+                <SvgWrapper><DoorSvg /></SvgWrapper>
                 <span>Войти через LinkedIn</span>
               </MenuEntry>
             )}

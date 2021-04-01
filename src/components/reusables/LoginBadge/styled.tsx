@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { animations, cssVars, mixins } from 'utils/style.common';
+import { cssVars, mixins } from 'utils/style.common';
 import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
 
 const cssVarsLocal = {
@@ -36,6 +36,7 @@ export const Menu = styled.ul<{ isExpanded: boolean }>`
   position: absolute;
   right: 0;
   user-select: none;
+  border-radius: .4rem;
 `;
 
 /**
@@ -52,7 +53,6 @@ export const MenuEntry = styled.li`
   align-items: center;
   box-sizing: border-box;
   padding: .8rem;
-  border-radius: .4rem;
   background-color: #f0f3ff;
   filter: drop-shadow(.2rem .4rem .2rem rgba(0, 0, 0, .25));
 
@@ -68,7 +68,7 @@ export const MenuEntry = styled.li`
 /**
  * Styled component for door SVG wrapper.
  */
-export const DoorWrapper = styled.div`
+export const SvgWrapper = styled.div`
   margin-right: .2rem;
 
   &>svg {

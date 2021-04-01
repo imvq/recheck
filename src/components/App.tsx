@@ -20,25 +20,39 @@ export default () => (
     <Provider store={appStore}>
       <BrowserRouter>
         <Switch>
+
+          {/* Home page. */}
+          {/* Use StartupManager to do checkAuth request to LinkedIn. */}
+          {/* The result of the check is stored so that no check will be further. */}
           <Route path='/' exact>
             <StartupManager />
             <PageLockManager>
               <LandingPage />
             </PageLockManager>
           </Route>
+
+          {/* Authorization redirect page. */}
           <Route path='/auth/confirm/rollback/:rollbackTo' exact>
             <OAuthExchanger />
             <PageLockManager />
           </Route>
+
+          {/* Profile page. */}
+          {/* Use StartupManager to do checkAuth request to LinkedIn. */}
+          {/* Check is needed to determine if we can show the page to user. */}
+          {/* The result of the check is stored so that no check will be further. */}
           <Route path='/profile'>
             <StartupManager redirectHomeOnFail />
             <PageLockManager>
               <ProfilePage />
             </PageLockManager>
           </Route>
+
+          {/* 404 page. Used when proceed to invalid location. */}
           <Route>
             <NotFoundPage />
           </Route>
+
         </Switch>
       </BrowserRouter>
     </Provider>
