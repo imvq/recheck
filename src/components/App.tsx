@@ -5,6 +5,7 @@ import { store as appStore } from 'store';
 import OAuthExchanger from 'components/reusables/OAuthExchanger';
 import StartupManager from 'components/reusables/StartupManager';
 import PageLockManager from 'components/reusables/PageLockManager';
+import PageForceUnlocker from 'components/reusables/PageForceUnlocker';
 import GlobalStyle from 'components/reusables/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
 import ProfilePage from 'components/pages/ProfilePage';
@@ -25,6 +26,7 @@ export default () => (
           {/* Use StartupManager to do checkAuth request to LinkedIn. */}
           {/* The result of the check is stored so that no check will be further. */}
           <Route path='/' exact>
+            <PageForceUnlocker />
             <StartupManager />
             <PageLockManager>
               <LandingPage />

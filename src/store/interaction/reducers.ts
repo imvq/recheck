@@ -6,7 +6,7 @@ import {
 } from './types';
 
 const initialState: InteractionState = {
-  isPageLocked: false,
+  isPageLocked: true,
   isSearchPopupVisible: false
 };
 
