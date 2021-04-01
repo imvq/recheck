@@ -37,7 +37,6 @@ export default class AuthController {
   /**
    * Get user profile info form LinkedIn.
    */
-  @JwtCookieGuard(Cookies.BEARER)
   @Path('/profile')
   @GET
   public getProfile(@Context context: ServiceContext)

@@ -24,14 +24,14 @@ export type CorsMiddleware = (
 
 export type EmailDto = {
   elements: {
-    handle: {
+    ['handle~']: {
       emailAddress: string;
     }
   }[]
 };
 
 export type ExchangeAuthCodeResponseDto = {
-  accessToken: string;
+  'BEARER': string;
 };
 
 export type GetProfileResponseDto = {
@@ -51,8 +51,8 @@ export type PhotoDto = {
       elements: {
         identifiers: {
           identifier: string;
-        }
-      }
+        }[]
+      }[]
     }
   }
 };

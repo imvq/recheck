@@ -48,7 +48,7 @@ const LoginBadge: FunctionComponent<LoginBadgeStateProps & LoginBadgeDispatchPro
             ? (
               <MenuEntry onClick={() => {
                 props.lockPage();
-                cookieManager.remove('access_token');
+                cookieManager.remove('BEARER');
                 window.location.replace(process.env.REACT_APP_START_PAGE as string);
               }}
               >

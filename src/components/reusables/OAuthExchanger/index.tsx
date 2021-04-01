@@ -37,7 +37,7 @@ const OAuthExchanger: FunctionComponent<OAuthExchangerDispatchProps> = (props) =
 
   axios.post(`${process.env.REACT_APP_API}/auth/confirm`, postData)
     .then((response) => {
-      cookieManager.set('access_token', response.data['accessToken'], cookieData);
+      cookieManager.set('BEARER', response.data['BEARER'], cookieData);
       props.setIsAuthorized(true);
     }).catch(() => {
       props.setIsAuthorized(false);

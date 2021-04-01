@@ -18,7 +18,7 @@ export const setIsAuthorized = (isAuthorized: boolean)
 export const checkAuthorization = () => (
   dispatch: Dispatch<AppActionType>
 ) => {
-  if (cookieManager.get('access_token')) {
+  if (cookieManager.get('BEARER')) {
     axios.get(
       `${process.env.REACT_APP_API}/auth/check`,
       { withCredentials: true }

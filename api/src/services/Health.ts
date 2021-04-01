@@ -1,4 +1,4 @@
-import Constants from '@common/Constants';
+import * as Constants from '@common/Constants';
 import Types from '@types';
 
 /**
