@@ -13,7 +13,7 @@ import express, {
 } from 'express';
 
 import * as Constants from '@common/Constants';
-import Computed from '@common/Computed';
+import * as Computed from '@common/Computed';
 import Types from '@types';
 import Utils from '@utils';
 

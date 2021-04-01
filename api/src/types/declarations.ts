@@ -1,7 +1,4 @@
-import { UploadedFile } from 'express-fileupload';
 import cors from 'cors';
-
-// ==================== Utility types ====================
 
 export type Nullable<T> = T | null;
 
@@ -9,15 +6,9 @@ export type Optional<T> = T | undefined;
 
 export type Maybe<T> = Nullable<T> | Optional<T>;
 
-export interface Uploads {
-  [key: string]: Optional<UploadedFile>;
-}
-
-export interface AvatarUploads extends Uploads {
-  avatar: Optional<UploadedFile>
-}
-
-export type Gender = 'Male' | 'Female';
+export type CheckAuthResponseDto = {
+  success: boolean;
+};
 
 export type CorsResponse = {
   statusCode?: number | undefined;
@@ -28,25 +19,51 @@ export type CorsResponse = {
 export type CorsMiddleware = (
   req: cors.CorsRequest,
   res: CorsResponse,
-  next: (err?: any) => any) => void;
+  next: (err?: any) => any
+) => void;
 
-export type StringIndexable = {
-  [key: string]: string;
+export type EmailDto = {
+  elements: {
+    handle: {
+      emailAddress: string;
+    }
+  }[]
 };
-
-// ==================== Response DTOs ======================
 
 export type ExchangeAuthCodeResponseDto = {
   accessToken: string;
 };
 
-export type CheckAuthResponseDto = {
-  success: boolean;
+export type GetProfileResponseDto = {
+  name: string;
+  email: string;
+  photoUrl: string;
 };
 
 export type HealthResponseDTO = {
   message: string;
   version: string;
+};
+
+export type PhotoDto = {
+  profilePicture: {
+    'displayImage~': {
+      elements: {
+        identifiers: {
+          identifier: string;
+        }
+      }
+    }
+  }
+};
+
+export type ProfileDto = {
+  localizedFirstName: string;
+  localizedLastName: string;
+};
+
+export type StringIndexable = {
+  [key: string]: string;
 };
 
 export type UserResponseDto = {

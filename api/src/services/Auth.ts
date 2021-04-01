@@ -1,10 +1,12 @@
 import { Errors } from 'typescript-rest';
 import axios from 'axios';
 
+import * as Constants from '@common/Constants';
+import * as Cookies from '@common/Cookies';
 import Dtos from '@dto';
 import Types from '@types';
+import Utils from '@utils';
 import Logger from '@common/Logger';
-import * as Cookies from '@common/Cookies';
 
 /**
  * Service in charge of authorization stuff.
@@ -20,13 +22,9 @@ export default class AuthService {
       params.append('client_id', process.env.LINKEDIN_APP_CLIENT_ID as string);
       params.append('client_secret', process.env.LINKEDIN_APP_CLIENT_SECRET as string);
 
-      const { data } = await axios.post(
-        'https://www.linkedin.com/oauth/v2/accessToken',
-        params,
-        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
-      );
+      const { data } = await axios.post(Constants.AUTH_URL, params, Utils.createUrlEncodedConfig());
 
-      return { accessToken: data[Cookies.BEARER] };
+      return { accessToken: data['access_token'] };
     } catch (error) {
       Logger.ifdev()?.log(JSON.stringify(error));
       throw error instanceof Errors.UnauthorizedError ? error
@@ -37,16 +35,32 @@ export default class AuthService {
   public async checkAuth(cookies: Types.StringIndexable)
     : Promise<Types.CheckAuthResponseDto> {
     try {
-      const config = { headers: {
-        Authorization: `Bearer ${cookies[Cookies.BEARER]}`
-      } };
-      await axios.get('https://api.linkedin.com/v2/me', config);
-
+      const config = Utils.createAuthConfig(cookies[Cookies.BEARER]);
+      await axios.get(Constants.PROFILE_URL, config);
       return { success: true };
     } catch (error) {
       Logger.ifdev()?.log(JSON.stringify(error));
       throw error instanceof Errors.UnauthorizedError ? error
         : new Errors.InternalServerError('Internal database error.');
+    }
+  }
+
+  public async getProfile(cookies: Types.StringIndexable)
+    : Promise<Types.GetProfileResponseDto> {
+    try {
+      const config = Utils.createAuthConfig(cookies[Cookies.BEARER]);
+      const profile: Types.ProfileDto = await axios.get(Constants.PROFILE_URL, config);
+      const email: Types.EmailDto = await axios.get(Constants.EMAIL_URL, config);
+      const photo: Types.PhotoDto = await axios.get(Constants.PHOTO_URL, config);
+
+      return {
+        name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
+        email: `${email.elements[0].handle.emailAddress}`,
+        photoUrl: `${photo.profilePicture['displayImage~'].elements.identifiers.identifier}`
+      };
+    } catch (error) {
+      throw error instanceof Errors.UnauthorizedError ? error
+        : new Errors.InternalServerError('Unexpected error.');
     }
   }
 }

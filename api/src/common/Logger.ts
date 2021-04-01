@@ -1,7 +1,7 @@
 import { appendFile, writeFile } from 'fs';
 import chalk from 'chalk';
 
-import Computed from '@common/Computed';
+import * as Computed from '@common/Computed';
 import Types from '@types';
 import Utils from '@utils';
 
