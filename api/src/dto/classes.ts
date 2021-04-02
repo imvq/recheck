@@ -6,5 +6,12 @@ export class ExchangeAuthCodeDto {
 }
 
 export class IsRegisteredDto {
-  public constructor(public id: string) {}
+  public constructor(public profileId: string) {}
+}
+
+export class RegistrationDto {
+  public constructor(
+    public profileId: string,
+    public linkedIn: string
+  ) {}
 }

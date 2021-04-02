@@ -19,6 +19,16 @@ export default class UserController {
   @POST
   public checkIsRegistered(checkDto: Dtos.IsRegisteredDto)
     : Promise<boolean> {
-    return this.injectedService.isRegistered(checkDto);
+    return this.injectedService.isUserRegistered(checkDto);
+  }
+
+  /**
+   * Save user info.
+   */
+  @Path('/register')
+  @POST
+  public registerUser(registrationDto: Dtos.RegistrationDto)
+    : Promise<void> {
+    return this.injectedService.registerUser(registrationDto);
   }
 }
