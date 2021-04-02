@@ -1,20 +1,20 @@
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
 export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';
 
-export type InteractionState = {
+export interface InteractionState {
   isPageLocked: boolean;
   isSearchPopupVisible: boolean;
-};
+}
 
-export type SetIsPageLocked = {
+export interface SetIsPageLocked {
   type: typeof SET_IS_PAGE_LOCKED;
   payload: boolean;
-};
+}
 
-export type SetIsSearchPopupVisible = {
+export interface SetIsSearchPopupVisible {
   type: typeof SET_IS_SEARCH_POPUP_VISIBILE;
   payload: boolean;
-};
+}
 
 export type InteractionStateActionType =
   SetIsPageLocked
