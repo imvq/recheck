@@ -1,11 +1,9 @@
 import { Path, GET, POST, Context, ServiceContext } from 'typescript-rest';
-import { JwtCookieGuard } from 'typescript-rest-jwt-guard';
 import { Inject } from 'typescript-ioc';
 
 import Dtos from '@dto';
 import Types from '@types';
 import AuthService from '@services/Auth';
-import * as Cookies from '@common/Cookies';
 
 /**
  * Default controller in charge of checking the API.
