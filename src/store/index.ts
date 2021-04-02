@@ -5,6 +5,7 @@ import {
 
 import { authReducer } from './auth/reducers';
 import { interactionStateReducer } from './interaction/reducers';
+import { profileReducer } from './profile/reducers';
 import { AppActionType } from './types';
 
 /**
@@ -12,7 +13,8 @@ import { AppActionType } from './types';
  */
 const rootReducer = combineReducers({
   auth: authReducer,
-  interaction: interactionStateReducer
+  interaction: interactionStateReducer,
+  profile: profileReducer
 });
 
 /**
@@ -42,3 +44,4 @@ export const store = createStore(
 
 export * from './auth/actions';
 export * from './interaction/actions';
+export * from './profile/actions';

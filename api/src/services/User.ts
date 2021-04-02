@@ -50,7 +50,7 @@ export default class UserService {
       );
 
       return {
-        id: `${profile.id}`,
+        profileId: `${profile.profileId}`,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
         email: `${email.elements[0]['handle~'].emailAddress}`,
         photoUrl: `${photo.profilePicture['displayImage~'].elements[0].identifiers[0].identifier}`

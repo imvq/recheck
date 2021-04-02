@@ -2,8 +2,10 @@ import axios from 'axios';
 import { Dispatch } from 'redux';
 
 import { cookieManager } from 'utils/functions';
+import { ProfileInfo } from 'utils/types.common';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
+import { setCurrentProfileData } from '../profile/actions';
 
 // ============= Action creators =============
 
@@ -20,10 +22,13 @@ export const checkAuthorization = () => (
 ) => {
   if (cookieManager.get('BEARER')) {
     axios.get(
-      `${process.env.REACT_APP_API}/auth/check`,
+      `${process.env.REACT_APP_API}/user/profile`,
       { withCredentials: true }
     )
-      .then(() => dispatch(setIsAuthorized(true)))
+      .then((profileResponse) => {
+        setCurrentProfileData(profileResponse.data as ProfileInfo);
+        dispatch(setIsAuthorized(true));
+      })
       .catch(() => dispatch(setIsAuthorized(false)));
   } else {
     dispatch(setIsAuthorized(false));

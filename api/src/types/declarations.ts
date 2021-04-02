@@ -33,7 +33,7 @@ export interface ExchangeAuthCodeResponseDto {
 }
 
 export interface GetProfileResponseDto {
-  id: string;
+  profileId: string;
   name: string;
   email: string;
   photoUrl: string;
@@ -57,7 +57,7 @@ export interface PhotoDto {
 }
 
 export interface ProfileDto {
-  id: string;
+  profileId: string;
   localizedFirstName: string;
   localizedLastName: string;
 }

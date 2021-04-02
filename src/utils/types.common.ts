@@ -6,7 +6,7 @@ export type Maybe<T> = Nullable<T> | Optional<T>;
 
 // ======================= Own props =====================
 
-export type ReviewCardData = {
+export interface ReviewCardData {
   name: string;
   photoUrl: string;
   position: string;
@@ -14,4 +14,11 @@ export type ReviewCardData = {
   experience: string;
   review: string;
   nReviews: number;
-};
+}
+
+export interface ProfileInfo {
+  currentId: string;
+  currentName: string;
+  currentEmail: string;
+  currentPhotoUrl: string;
+}
