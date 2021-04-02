@@ -21,24 +21,4 @@ export default class AuthController {
     : Promise<Types.ExchangeAuthCodeResponseDto> {
     return this.injectedService.exchangeAuthCode(data);
   }
-
-  /**
-   * Check if the user is authorized with LinkedIn.
-   */
-  @Path('/check')
-  @GET
-  public checkIsAuthorized(@Context context: ServiceContext)
-    : Promise<Types.CheckAuthResponseDto> {
-    return this.injectedService.isAuthorized(context.request.cookies);
-  }
-
-  /**
-   * Get user profile info form LinkedIn.
-   */
-  @Path('/profile')
-  @GET
-  public getProfile(@Context context: ServiceContext)
-    : Promise<Types.GetProfileResponseDto> {
-    return this.injectedService.getProfile(context.request.cookies);
-  }
 }

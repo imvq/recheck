@@ -1,7 +1,8 @@
-import { Path, POST } from 'typescript-rest';
+import { GET, Path, POST, Context, ServiceContext } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import Dtos from '@dto';
+import Types from '@types';
 import UserService from '@services/User';
 
 /**
@@ -30,5 +31,15 @@ export default class UserController {
   public registerUser(registrationDto: Dtos.RegistrationDto)
     : Promise<void> {
     return this.injectedService.registerUser(registrationDto);
+  }
+
+  /**
+   * Get user profile info form LinkedIn.
+   */
+   @Path('/profile')
+   @GET
+  public getProfile(@Context context: ServiceContext)
+     : Promise<Types.GetProfileResponseDto> {
+    return this.injectedService.getProfile(context.request.cookies);
   }
 }

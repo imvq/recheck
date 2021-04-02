@@ -1,5 +1,5 @@
 import { Errors } from 'typescript-rest';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import * as Constants from '@common/Constants';
 import * as Cookies from '@common/Cookies';
@@ -29,53 +29,6 @@ export default class AuthService {
       Logger.ifdev()?.log(JSON.stringify(error));
       throw error instanceof Errors.UnauthorizedError ? error
         : new Errors.InternalServerError('Unexpected error.');
-    }
-  }
-
-  public async isAuthorized(cookies: Types.StringIndexable)
-    : Promise<Types.CheckAuthResponseDto> {
-    try {
-      if (!cookies[Cookies.BEARER]) {
-        throw new Errors.UnauthorizedError('No Bearer token provided');
-      }
-
-      const config = Utils.createAuthConfig(cookies[Cookies.BEARER]);
-      await axios.get(Constants.PROFILE_URL, config);
-      return { success: true };
-    } catch (error) {
-      Logger.ifdev()?.log(JSON.stringify(error));
-      throw error instanceof Errors.UnauthorizedError ? error
-        : new Errors.InternalServerError('LinkedIn error.');
-    }
-  }
-
-  public async getProfile(cookies: Types.StringIndexable)
-    : Promise<Types.GetProfileResponseDto> {
-    try {
-      if (!cookies[Cookies.BEARER]) {
-        throw new Errors.UnauthorizedError('No Bearer token provided');
-      }
-
-      const config = Utils.createAuthConfig(cookies[Cookies.BEARER]);
-      const { data: profile }: AxiosResponse<Types.ProfileDto> = await axios.get(
-        Constants.PROFILE_URL, config
-      );
-      const { data: email }: AxiosResponse<Types.EmailDto> = await axios.get(
-        Constants.EMAIL_URL, config
-      );
-      const { data: photo }: AxiosResponse<Types.PhotoDto> = await axios.get(
-        Constants.PHOTO_URL, config
-      );
-
-      return {
-        id: `${profile.id}`,
-        name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
-        email: `${email.elements[0]['handle~'].emailAddress}`,
-        photoUrl: `${photo.profilePicture['displayImage~'].elements[0].identifiers[0].identifier}`
-      };
-    } catch (error) {
-      throw error instanceof Errors.UnauthorizedError ? error
-        : new Errors.InternalServerError('Request limits breach.');
     }
   }
 }
