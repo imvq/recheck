@@ -4,12 +4,12 @@ import {
   ParagraphWrapper, ParagraphJustified, Toolbar, ReviewsLink,
   ButtonWrapper, DetailsButtonAdapted, FeedbackButtonSvgButtonAdapted
 } from './styled';
-import { ReviewCardProps } from './types';
+import { IProps } from './types';
 
 /**
  * Card with review info about a person.
  */
-export default (props: ReviewCardProps) => (
+export default (props: IProps) => (
   <Wrapper>
     <CardBody>
       <PhotoWrapper><Photo src={props.photoUrl} alt='' /></PhotoWrapper>

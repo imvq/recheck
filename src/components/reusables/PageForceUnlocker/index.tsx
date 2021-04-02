@@ -14,10 +14,10 @@ const mapDispatchToProps: PageForceUnlockerDispatchProps = {
  * Nevertheless, it is sometimes needed to force unlock page
  * as quick as possible. PageForceUnlocker is in charge of that stuff.
  */
-const Presentational: FC<PageForceUnlockerDispatchProps> = (props) => {
+const PageForceUnlocker: FC<PageForceUnlockerDispatchProps> = (props) => {
   useEffect(() => props.unlockPage(), []);
 
   return <></>;
 };
 
-export default connect(null, mapDispatchToProps)(Presentational);
+export default connect(null, mapDispatchToProps)(PageForceUnlocker);

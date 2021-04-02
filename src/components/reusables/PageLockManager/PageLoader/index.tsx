@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import { IProps } from './types';
 import { Wrapper, Loader } from './styled';
 
 /**
  * Loader coverage.
  */
-export default (props: { children: ReactNode }) => (
+export default (props: IProps) => (
   <>
     <Wrapper>
       <Loader />

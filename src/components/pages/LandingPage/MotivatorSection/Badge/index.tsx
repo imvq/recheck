@@ -2,12 +2,12 @@ import {
   Wrapper, TitleWrapper, LogoText, LogoTextColorpickMain,
   LogoTextColorpickAux1, ParagraphWrapper
 } from './styled';
-import { BadgeProps } from './types';
+import { IProps } from './types';
 
 /**
  * Badge with text. Part of motivator section.
  */
-export default ({ text }: BadgeProps) => (
+export default (props: IProps) => (
   <Wrapper>
     <TitleWrapper>
       <LogoText>
@@ -16,6 +16,6 @@ export default ({ text }: BadgeProps) => (
       </LogoText>
       <LogoText>now</LogoText>
     </TitleWrapper>
-    <ParagraphWrapper><p>{text}</p></ParagraphWrapper>
+    <ParagraphWrapper><p>{props.text}</p></ParagraphWrapper>
   </Wrapper>
 );

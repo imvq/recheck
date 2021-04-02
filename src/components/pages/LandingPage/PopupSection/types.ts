@@ -1,7 +1,9 @@
-export type PopupViewStateProps = {
+export interface IStateProps {
   isSearchPopupVisible: boolean;
-};
+}
 
-export type PopupViewDispatchProps = {
+export interface IDispatchProps {
   setIsSearchPopupVisible: (newValue: boolean) => void;
-};
+}
+
+export type IProps = IStateProps & IDispatchProps;

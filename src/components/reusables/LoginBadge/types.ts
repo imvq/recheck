@@ -1,9 +1,9 @@
 import { Nullable } from 'utils/types.common';
 
-export type LoginBadgeStateProps = {
+export type IStateProps = {
   isAuthorized: Nullable<boolean>;
 };
 
-export type LoginBadgeDispatchProps = {
+export type IDispatchProps = {
   lockPage: () => void;
 };

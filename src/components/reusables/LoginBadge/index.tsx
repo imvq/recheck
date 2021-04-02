@@ -8,25 +8,24 @@ import { cookieManager } from 'utils/functions';
 import { ReactComponent as DoorSvg } from 'assets/images/reusables/LoginBadge/Door.svg';
 import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
 import { AppState, setPageLocked } from 'store';
-import { LoginBadgeStateProps, LoginBadgeDispatchProps } from './types';
+import { IStateProps, IDispatchProps } from './types';
 import {
   Wrapper, LoginButton, Menu, MenuEntry, SvgWrapper
 } from './styled';
 
-const mapStateToProps = (store: AppState): LoginBadgeStateProps => ({
+const mapStateToProps = (store: AppState): IStateProps => ({
   isAuthorized: store.auth.isAuthorized
 });
 
-const mapDispatchToProps: LoginBadgeDispatchProps = {
+const mapDispatchToProps: IDispatchProps = {
   lockPage: setPageLocked
 };
 
 /**
  * Badge with login man picture.
  * Used to login/logout.
- * Container component.
  */
-const LoginBadge: FunctionComponent<LoginBadgeStateProps & LoginBadgeDispatchProps> = (props) => {
+const LoginBadge: FunctionComponent<IStateProps & IDispatchProps> = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const history = useHistory();
 

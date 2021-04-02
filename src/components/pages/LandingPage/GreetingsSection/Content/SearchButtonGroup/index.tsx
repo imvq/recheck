@@ -1,32 +1,24 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { setIsSearchPopupVisible } from 'store';
 import { Wrapper, SearchButton } from './styled';
 import RocketGroup from './RocketGroup';
-import { SearchButtonGroupProps, SearchButtonGroupDispatchProps } from './types';
+import { IProps, IDispatchProps } from './types';
 
-const mapDispatchToProps: SearchButtonGroupDispatchProps = {
+const mapDispatchToProps: IDispatchProps = {
   setIsSearchPopupVisible
 };
 
 /**
  * Group of Programmed SVG components representing a search button
  * and a decorated SVG rocket attached to.
- * Presentational component.
  */
-const View = ({ onClick }: SearchButtonGroupProps) => (
-  <Wrapper>
-    <SearchButton onClick={onClick} />
+const SearchButtonGroup: FunctionComponent<IProps> = (props) => (
+  <Wrapper onClick={() => props.setIsSearchPopupVisible(true)}>
+    <SearchButton onClick={props.onClick} />
     <RocketGroup />
   </Wrapper>
 );
 
-/**
- * Wrapper for search button group using search popup state.
- * Container component.
- */
-const Container = (props: SearchButtonGroupDispatchProps) => (
-  <View onClick={() => props.setIsSearchPopupVisible(true)} />
-);
-
-export default connect(null, mapDispatchToProps)(Container);
+export default connect(null, mapDispatchToProps)(SearchButtonGroup);

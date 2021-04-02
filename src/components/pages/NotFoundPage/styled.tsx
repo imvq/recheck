@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { cssVars } from 'utils/style.common';
 import { ReactComponent as MainImage } from 'assets/images/pages/NotFoundPage/MainImage.svg';
-import { StyledSpanProps } from './types';
+import { IStyledSpanProps } from './types';
 
 export const Wrapper = styled.div`
   display: grid;
@@ -39,7 +39,7 @@ export const Subtitle = styled(Title)`
   font-size: 2rem;
 `;
 
-export const Span = styled.span<StyledSpanProps>`
+export const Span = styled.span<IStyledSpanProps>`
   font-size: ${props => (props.increased ? '8rem' : props.reduced ? '1.8rem' : '5rem')};
   color: ${props => (props.pale ? '#bac5f4' : 'inherit')};
   font-weight: ${props => (props.thin ? '600' : 'inherit')};

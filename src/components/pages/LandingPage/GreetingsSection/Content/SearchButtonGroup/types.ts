@@ -1,7 +1,9 @@
-export type SearchButtonGroupProps = {
+export interface IOwnProps {
   onClick?: (...args: any[]) => void;
-};
+}
 
-export type SearchButtonGroupDispatchProps = {
+export interface IDispatchProps {
   setIsSearchPopupVisible: (newValue: boolean) => void;
-};
+}
+
+export type IProps = IOwnProps & IDispatchProps;

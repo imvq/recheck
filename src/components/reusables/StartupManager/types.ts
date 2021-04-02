@@ -1,14 +1,16 @@
 import { Nullable } from 'utils/types.common';
 
-export type StartupManagerOwnProps = {
+export interface IOwnProps {
   redirectHomeOnFail?: boolean;
-};
+}
 
-export type StartupManagerStateProps = {
+export interface IStateProps {
   isAuthorized: Nullable<boolean>;
-};
+}
 
-export type StartupManagerDispatchProps = {
+export interface IDispatchProps {
   checkAuthorization: () => void;
   unlockPage: () => void;
-};
+}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

@@ -2,30 +2,25 @@ import { FunctionComponent, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, checkAuthorization, setPageUnlocked } from 'store';
-import { StartupManagerStateProps, StartupManagerDispatchProps, StartupManagerOwnProps } from './types';
+import { IProps, IStateProps, IDispatchProps } from './types';
 
-const mapStateToProps = (store: AppState): StartupManagerStateProps => ({
+const mapStateToProps = (store: AppState): IStateProps => ({
   isAuthorized: store.auth.isAuthorized
 });
 
-const mapDispatchToProps: StartupManagerDispatchProps = {
+const mapDispatchToProps: IDispatchProps = {
   checkAuthorization,
   unlockPage: setPageUnlocked
 };
 
 /**
  * Wrapper checking user's authentication status.
- * Container component.
  */
-const StartupManager: FunctionComponent<
-  StartupManagerOwnProps
-  & StartupManagerStateProps
-  & StartupManagerDispatchProps
-> = (props) => {
+const StartupManager: FunctionComponent<IProps> = (props) => {
   useEffect(() => props.checkAuthorization(), []);
 
   useEffect(() => {
-    if (props.redirectHomeOnFail && props.isAuthorized != null && !props.isAuthorized) {
+    if (props.redirectHomeOnFail && props.isAuthorized !== null && !props.isAuthorized) {
       window.location.replace(process.env.REACT_APP_START_PAGE as string);
     }
 

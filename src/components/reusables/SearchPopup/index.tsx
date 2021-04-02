@@ -2,12 +2,12 @@ import {
   Wrapper, Frame, StagePictureWrapper, StagePicture, ContentWrapper,
   Header, Input, FindButtonDesktop, FindButtonMobile, ClickableBackground
 } from './styled';
-import { SearchPopupProps } from './types';
+import { IProps } from './types';
 
 /**
  * Popup activating on search button click.
  */
-export default ({ onClose }: SearchPopupProps) => (
+export default (props: IProps) => (
   <Wrapper>
     <Frame>
       <StagePictureWrapper><StagePicture /></StagePictureWrapper>
@@ -18,6 +18,6 @@ export default ({ onClose }: SearchPopupProps) => (
         <FindButtonMobile>Найти кандидата</FindButtonMobile>
       </ContentWrapper>
     </Frame>
-    <ClickableBackground onClick={onClose} />
+    <ClickableBackground onClick={props.onClose} />
   </Wrapper>
 );

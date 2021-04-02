@@ -1,22 +1,22 @@
+import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, setIsSearchPopupVisible } from 'store';
 import SearchPopup from 'components/reusables/SearchPopup';
-import { PopupViewDispatchProps, PopupViewStateProps } from './types';
+import { IProps, IStateProps, IDispatchProps } from './types';
 
-const mapStateToProps = (state: AppState): PopupViewStateProps => ({
+const mapStateToProps = (state: AppState): IStateProps => ({
   isSearchPopupVisible: state.interaction.isSearchPopupVisible
 });
 
-const mapDispatchToProps: PopupViewDispatchProps = {
+const mapDispatchToProps: IDispatchProps = {
   setIsSearchPopupVisible
 };
 
 /**
  * Wrapper for popups.
- * Container component.
  */
-const PopupContainer = (props: PopupViewStateProps & PopupViewDispatchProps) => (
+const PopupSection: FunctionComponent<IProps> = (props) => (
   <div style={{ position: 'absolute' }}>
     {props.isSearchPopupVisible
       ? <SearchPopup onClose={() => props.setIsSearchPopupVisible(false)} />
@@ -24,4 +24,4 @@ const PopupContainer = (props: PopupViewStateProps & PopupViewDispatchProps) => 
   </div>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(PopupContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PopupSection);
