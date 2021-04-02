@@ -45,7 +45,7 @@ export default () => (
           {/* The result of the check is stored so that no check will be further. */}
           <Route path='/profile'>
             <StartupManager redirectHomeOnFail />
-            <PageLockManager>
+            <PageLockManager hideContentOnLock>
               <ProfilePage />
             </PageLockManager>
           </Route>

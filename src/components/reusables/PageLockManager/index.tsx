@@ -15,7 +15,11 @@ const mapStateToProps = (store: AppState): IStateProps => ({
  */
 const PageLockManager: FunctionComponent<IProps> = (props) => {
   return props.isPageLocked
-    ? <PageLoader>{props.children}</PageLoader>
+    ? (
+      <PageLoader>
+        {props.hideContentOnLock ? null : props.children}
+      </PageLoader>
+    )
     : <>{props.children}</>;
 };
 
