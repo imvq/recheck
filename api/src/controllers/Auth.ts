@@ -33,17 +33,6 @@ export default class AuthController {
   }
 
   /**
-   * Check if the user is registered in the service
-   * or it has come first time.
-   */
-  @Path('/check/registered')
-  @POST
-  public checkIsRegistered(checkDto: Dtos.IsRegisteredDto)
-    : Promise<boolean> {
-    return this.injectedService.isRegistered(checkDto);
-  }
-
-  /**
    * Get user profile info form LinkedIn.
    */
   @Path('/profile')
