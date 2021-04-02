@@ -6,8 +6,8 @@ import { Entity, PrimaryColumn, Column, Index } from 'typeorm';
 @Entity({ name: 'users' })
 export default class User {
   @Index({ unique: true })
-  @PrimaryColumn('int', { nullable: false })
-  profileId: number = 0;
+  @PrimaryColumn('varchar', { length: 30, nullable: false })
+  profileId: string = '';
 
   @Index({ unique: true })
   @Column('varchar', { length: 30, nullable: false })
