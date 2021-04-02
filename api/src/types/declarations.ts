@@ -6,46 +6,45 @@ export type Optional<T> = T | undefined;
 
 export type Maybe<T> = Nullable<T> | Optional<T>;
 
-export type CheckAuthResponseDto = {
+export interface CheckAuthResponseDto {
   success: boolean;
-};
+}
 
-export type CorsResponse = {
+export interface CorsResponse {
   statusCode?: number | undefined;
   setHeader(key: string, value: string): any;
   end(): any;
-};
+}
 
-export type CorsMiddleware = (
-  req: cors.CorsRequest,
-  res: CorsResponse,
-  next: (err?: any) => any
-) => void;
+export interface CorsMiddleware {
+  (req: cors.CorsRequest, res: CorsResponse, next: (err?: any) => any): void;
+}
 
-export type EmailDto = {
+export interface EmailDto {
   elements: {
     ['handle~']: {
       emailAddress: string;
     }
   }[]
-};
+}
 
-export type ExchangeAuthCodeResponseDto = {
+export interface ExchangeAuthCodeResponseDto {
   'BEARER': string;
-};
+}
 
-export type GetProfileResponseDto = {
+export interface GetProfileResponseDto {
+  id: string;
   name: string;
   email: string;
   photoUrl: string;
-};
+}
 
-export type HealthResponseDTO = {
+export interface HealthResponseDTO {
   message: string;
   version: string;
-};
+}
 
-export type PhotoDto = {
+export interface PhotoDto {
   profilePicture: {
     'displayImage~': {
       elements: {
@@ -55,21 +54,22 @@ export type PhotoDto = {
       }[]
     }
   }
-};
+}
 
-export type ProfileDto = {
+export interface ProfileDto {
+  id: string;
   localizedFirstName: string;
   localizedLastName: string;
-};
+}
 
-export type StringIndexable = {
+export interface StringIndexable {
   [key: string]: string;
-};
+}
 
-export type UserResponseDto = {
+export interface UserResponseDto {
   email: string;
   name: string;
   photoUrl: string;
   searches: number;
   availableSearches: number;
-};
+}

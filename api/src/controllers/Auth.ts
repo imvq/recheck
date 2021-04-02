@@ -27,9 +27,20 @@ export default class AuthController {
    */
   @Path('/check')
   @GET
-  public checkAuth(@Context context: ServiceContext)
+  public checkIsAuthorized(@Context context: ServiceContext)
     : Promise<Types.CheckAuthResponseDto> {
-    return this.injectedService.checkAuth(context.request.cookies);
+    return this.injectedService.isAuthorized(context.request.cookies);
+  }
+
+  /**
+   * Check if the user is registered in the service
+   * or it has come first time.
+   */
+  @Path('/check/registered')
+  @POST
+  public checkIsRegistered(checkDto: Dtos.IsRegisteredDto)
+    : Promise<boolean> {
+    return this.injectedService.isRegistered(checkDto);
   }
 
   /**

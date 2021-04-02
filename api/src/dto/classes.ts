@@ -5,6 +5,6 @@ export class ExchangeAuthCodeDto {
   ) {}
 }
 
-export class UserDto {
-  public constructor(public email: string) {}
+export class IsRegisteredDto {
+  public constructor(public id: string) {}
 }

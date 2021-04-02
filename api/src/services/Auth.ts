@@ -7,6 +7,7 @@ import Dtos from '@dto';
 import Types from '@types';
 import Utils from '@utils';
 import Logger from '@common/Logger';
+import UserManager from '@database/managers/UserManager';
 
 /**
  * Service in charge of authorization stuff.
@@ -32,7 +33,7 @@ export default class AuthService {
     }
   }
 
-  public async checkAuth(cookies: Types.StringIndexable)
+  public async isAuthorized(cookies: Types.StringIndexable)
     : Promise<Types.CheckAuthResponseDto> {
     try {
       if (!cookies[Cookies.BEARER]) {
@@ -47,6 +48,11 @@ export default class AuthService {
       throw error instanceof Errors.UnauthorizedError ? error
         : new Errors.InternalServerError('LinkedIn error.');
     }
+  }
+
+  public async isRegistered(checkDto: Dtos.IsRegisteredDto)
+    : Promise<boolean> {
+    return UserManager.doesUserExist(checkDto.id);
   }
 
   public async getProfile(cookies: Types.StringIndexable)
@@ -68,6 +74,7 @@ export default class AuthService {
       );
 
       return {
+        id: `${profile.id}`,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
         email: `${email.elements[0]['handle~'].emailAddress}`,
         photoUrl: `${photo.profilePicture['displayImage~'].elements[0].identifiers[0].identifier}`
