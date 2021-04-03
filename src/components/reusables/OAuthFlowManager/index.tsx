@@ -1,6 +1,6 @@
 import { FunctionComponent, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { useLocation, useParams } from 'react-router';
+import { useLocation, useHistory, useParams } from 'react-router';
 import queryString from 'query-string';
 import axios from 'axios';
 import httpStatus from 'http-status-codes';
@@ -26,6 +26,7 @@ const mapDispatchToProps: IDispatchProps = {
  */
 const OAuthExchanger: FunctionComponent<IProps> = (props) => {
   const location = useLocation();
+  const history = useHistory();
   const queries = queryString.parse(location.search) as { code: string };
   const { rollbackTo } = useParams<{ rollbackTo: string; }>();
 
@@ -71,12 +72,15 @@ const OAuthExchanger: FunctionComponent<IProps> = (props) => {
             const profileId = normalizedProfileInfo.currentId;
             axios.post(apiCheckPath, { profileId })
               .then(() => {
+                // We don't set authorization stsatus at finally section
+                // because it must be set before the histiry is being updated.
                 props.setIsAuthorized(true);
-                window.location.replace(`${process.env.REACT_APP_START_PAGE}/${rollbackTo}`);
+                history.push(rollbackTo);
               })
               .catch((error) => {
+                props.setIsAuthorized(true);
                 if (error.response.status === httpStatus.EXPECTATION_FAILED) {
-                  // TODO: Redirect to profile LinkedIn link scraper.
+                  history.push('/scrape-linkedin');
                 } else {
                   redirectOnError();
                 }
