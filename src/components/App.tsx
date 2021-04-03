@@ -8,6 +8,7 @@ import PageLockManager from 'components/reusables/PageLockManager';
 import PageForceUnlocker from 'components/reusables/PageForceUnlocker';
 import GlobalStyle from 'components/reusables/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
+import LinkedInScraperPage from 'components/pages/LinkedInScraperPage';
 import ProfilePage from 'components/pages/ProfilePage';
 import NotFoundPage from 'components/pages/NotFoundPage';
 
@@ -37,6 +38,12 @@ export default () => (
           <Route path='/auth/confirm/rollback/:rollbackTo' exact>
             <OAuthFlowManager />
             <PageLockManager />
+          </Route>
+
+          {/* In case the user is authorzied first time */}
+          {/* we need to get its LinkedIn profile page URL. */}
+          <Route path='/scrape-linkedin' exact>
+            <LinkedInScraperPage />
           </Route>
 
           {/* Profile page. */}
