@@ -1,5 +1,7 @@
+import Footer from './Footer';
+import ProfileMenu from './ProfileMenu';
 import {
-  Wrapper, AdaptedHeader
+  Wrapper, AdaptedHeader, ContentWrapper
 } from './styled';
 
 /**
@@ -8,5 +10,9 @@ import {
 export default () => (
   <Wrapper>
     <AdaptedHeader />
+    <ContentWrapper>
+      <ProfileMenu />
+    </ContentWrapper>
+    <Footer />
   </Wrapper>
 );

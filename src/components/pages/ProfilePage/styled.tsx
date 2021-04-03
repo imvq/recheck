@@ -20,3 +20,9 @@ export const Wrapper = styled.div`
 export const AdaptedHeader = styled(Header)`
   grid-area: Header;
 `;
+
+export const ContentWrapper = styled.div`
+  min-height: calc(100vh - 8rem - 17.5rem);
+  display: flex;
+  flex-direction: column;
+`;
