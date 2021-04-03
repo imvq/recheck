@@ -51,7 +51,7 @@ export default () => (
           {/* Check is needed to determine if we can show the page to user. */}
           {/* The result of the check is stored so that no check will be further. */}
           <Route path='/profile' exact>
-            <PageStartupManager redirectHomeOnFail />
+            <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
             <PageLockManager hideContentOnLock>
               <ProfilePage />
             </PageLockManager>

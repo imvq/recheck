@@ -2,6 +2,7 @@ import { Nullable } from 'utils/types.common';
 
 export interface IOwnProps {
   redirectHomeOnFail?: boolean;
+  preventDefaultUnlock?: boolean;
 }
 
 export interface IStateProps {

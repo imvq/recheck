@@ -1,7 +1,7 @@
 import { ProfileInfo } from 'utils/types.common';
 
-export interface IOwnProps {
+export interface IStateProps {
   currentProfileInfo: ProfileInfo;
 }
 
-export type IProps = IOwnProps;
+export type IProps = IStateProps;

@@ -1,18 +1,10 @@
-import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
-
-import { AppState } from 'store';
-import { IProps, IStateProps } from './types';
+import { IProps } from './types';
 import {
   Wrapper, Menu, MenuBar, MenuContent, MenuContentTitle, MenuContentSpan,
   ProfilePictureWrapper, ProfilePicture
 } from './styled';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo
-});
-
-const ProfileMenu: FunctionComponent<IProps> = (props) => (
+export default (props: IProps) => (
   <Wrapper>
     <Menu>
       <MenuBar>Мои отзывы</MenuBar>
@@ -38,5 +30,3 @@ const ProfileMenu: FunctionComponent<IProps> = (props) => (
     </Menu>
   </Wrapper>
 );
-
-export default connect(mapStateToProps)(ProfileMenu);

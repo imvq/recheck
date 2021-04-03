@@ -33,7 +33,9 @@ const PageStartupManager: FunctionComponent<IProps> = (props) => {
       window.location.replace(process.env.REACT_APP_START_PAGE as string);
     }
 
-    props.unlockPage();
+    if (!props.preventDefaultUnlock || props.isAuthorized) {
+      props.unlockPage();
+    }
   }, [props.isAuthorized]);
 
   return <></>;
