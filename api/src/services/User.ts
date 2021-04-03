@@ -55,12 +55,15 @@ export default class UserService {
       const { data: photo }: AxiosResponse<Types.PhotoDto> = await axios.get(
         Constants.PHOTO_URL, config
       );
+      const highestQualityPicture = photo.profilePicture['displayImage~'].elements[
+        photo.profilePicture['displayImage~'].elements.length - 1
+      ];
 
       return {
         profileId: `${profile.id}`,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
         email: `${email.elements[0]['handle~'].emailAddress}`,
-        photoUrl: `${photo.profilePicture['displayImage~'].elements[0].identifiers[0].identifier}`
+        photoUrl: `${highestQualityPicture.identifiers[0].identifier}`
       };
     } catch (error) {
       throw error instanceof Errors.UnauthorizedError ? error
