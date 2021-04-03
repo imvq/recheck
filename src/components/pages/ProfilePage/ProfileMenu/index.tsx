@@ -1,14 +1,25 @@
+import { FunctionComponent } from 'react';
+import { connect } from 'react-redux';
+
+import { AppState } from 'store';
+import { IProps, IStateProps } from './types';
 import {
   Wrapper, Menu, MenuBar, MenuContent, MenuContentTitle, MenuContentSpan,
   ProfilePictureWrapper, ProfilePicture
 } from './styled';
 
-export default () => (
+const mapStateToProps = (store: AppState): IStateProps => ({
+  currentProfileInfo: store.profile.currentProfileInfo
+});
+
+const ProfileMenu: FunctionComponent<IProps> = (props) => (
   <Wrapper>
     <Menu>
       <MenuBar>Мои отзывы</MenuBar>
       <MenuContent>
-        <MenuContentTitle>Лада Клищенко</MenuContentTitle>
+        <MenuContentTitle>
+          {props.currentProfileInfo.currentName}
+        </MenuContentTitle>
         <MenuContentSpan dimmed>
           Запросов по моему профилю:&nbsp;&nbsp;
           <MenuContentSpan>0</MenuContentSpan>
@@ -19,7 +30,7 @@ export default () => (
         </MenuContentSpan>
         <ProfilePictureWrapper>
           <ProfilePicture
-            src='https://media-exp1.licdn.com/dms/image/C4E03AQHCQ5f05ekZcw/profile-displayphoto-shrink_100_100/0/1614266943813?e=1622678400&v=beta&t=4P5B61CQs7op9tMDJ0QT1mZx2H9k8GGZIe037rxOifA'
+            src={props.currentProfileInfo.currentPhotoUrl}
             draggable='false'
           />
         </ProfilePictureWrapper>
@@ -27,3 +38,5 @@ export default () => (
     </Menu>
   </Wrapper>
 );
+
+export default connect(mapStateToProps)(ProfileMenu);

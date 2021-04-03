@@ -6,7 +6,6 @@ import axios from 'axios';
 import httpStatus from 'http-status-codes';
 
 import * as constants from 'utils/constants';
-import { ProfileDto } from 'utils/types.common';
 import { cookieManager, cookiesList } from 'utils/cookies';
 import { mapProfileDtoToState } from 'utils/functions';
 import {
@@ -66,7 +65,7 @@ const OAuthExchanger: FunctionComponent<IProps> = (props) => {
             // because right now we need to use profile ID we've just get.
             // So it is necessary to have full control of profile data
             // info saving process.
-            const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data as ProfileDto);
+            const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
             props.setCurrentProfileInfo(normalizedProfileInfo);
 
             const profileId = normalizedProfileInfo.currentId;
