@@ -23,14 +23,6 @@ export const Menu = styled.div`
   filter: drop-shadow(.2rem .2rem .5rem rgba(0, 0, 0, .2));
 `;
 
-export const MenuBar = styled.div`
-  background-color: #f0f3ff;
-  display: flex;
-  justify-content: center;
-  font-size: 1.3rem;
-  padding: 1.7rem;
-`;
-
 export const MenuContent = styled.div`
   display: flex;
   flex-direction: column;

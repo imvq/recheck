@@ -1,13 +1,14 @@
 import { IProps } from './types';
+import MenuBar from './MenuBar';
 import {
-  Wrapper, Menu, MenuBar, MenuContent, MenuContentTitle, MenuContentSpan,
+  Wrapper, Menu, MenuContent, MenuContentTitle, MenuContentSpan,
   ProfilePictureWrapper, ProfilePicture
 } from './styled';
 
 export default (props: IProps) => (
   <Wrapper>
     <Menu>
-      <MenuBar>Мои отзывы</MenuBar>
+      <MenuBar />
       <MenuContent>
         <MenuContentTitle>
           {props.currentProfileInfo.currentName}

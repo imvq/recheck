@@ -12,3 +12,12 @@ export enum ScreenBreakpoint {
   XXD = '1600px',
   XXXD = '1728px'
 }
+
+/**
+ * Represents tabs in profile menu bar.
+ */
+export enum ProfileMenuEntry {
+  MY_REVIEWS,
+  HISTORY,
+  ABOUT_ME
+}
