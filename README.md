@@ -1,4 +1,4 @@
-# reCheck
+# <img src="public/favicon.ico" height='30'> reCheck
 Recheck platform for candidates validation.
 
 ## Developing frontend
