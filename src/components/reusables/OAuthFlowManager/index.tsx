@@ -71,8 +71,8 @@ const OAuthExchanger: FunctionComponent<IProps> = (props) => {
             const profileId = normalizedProfileInfo.currentId;
             axios.post(apiCheckPath, { profileId })
               .then(() => {
-                // We don't set authorization status at finally section
-                // because it must be set before the histiry is being updated.
+                // We don't set authorization status at 'finally' section
+                // because it must be set before the history is being updated.
                 props.setIsAuthorized(true);
                 history.push(rollbackTo);
               })
