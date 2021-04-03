@@ -1,4 +1,4 @@
-import { Path, GET, POST, Context, ServiceContext } from 'typescript-rest';
+import { Path, POST } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import Dtos from '@dto';
@@ -17,7 +17,7 @@ export default class AuthController {
    */
   @Path('/confirm')
   @POST
-  public exchangeAuthCode(data: Dtos.ExchangeAuthCodeDto)
+  public async exchangeAuthCode(data: Dtos.ExchangeAuthCodeDto)
     : Promise<Types.ExchangeAuthCodeResponseDto> {
     return this.injectedService.exchangeAuthCode(data);
   }

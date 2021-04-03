@@ -2,8 +2,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { store as appStore } from 'store';
-import OAuthExchanger from 'components/reusables/OAuthExchanger';
-import StartupManager from 'components/reusables/StartupManager';
+import OAuthFlowManager from 'components/reusables/OAuthFlowManager';
+import PageStartupManager from 'components/reusables/PageStartupManager';
 import PageLockManager from 'components/reusables/PageLockManager';
 import PageForceUnlocker from 'components/reusables/PageForceUnlocker';
 import GlobalStyle from 'components/reusables/GlobalStyle';
@@ -27,7 +27,7 @@ export default () => (
           {/* The result of the check is stored so that no check will be further. */}
           <Route path='/' exact>
             <PageForceUnlocker />
-            <StartupManager />
+            <PageStartupManager />
             <PageLockManager>
               <LandingPage />
             </PageLockManager>
@@ -35,7 +35,7 @@ export default () => (
 
           {/* Authorization redirect page. */}
           <Route path='/auth/confirm/rollback/:rollbackTo' exact>
-            <OAuthExchanger />
+            <OAuthFlowManager />
             <PageLockManager />
           </Route>
 
@@ -43,8 +43,8 @@ export default () => (
           {/* Use StartupManager to do checkAuth request to LinkedIn. */}
           {/* Check is needed to determine if we can show the page to user. */}
           {/* The result of the check is stored so that no check will be further. */}
-          <Route path='/profile'>
-            <StartupManager redirectHomeOnFail />
+          <Route path='/profile' exact>
+            <PageStartupManager redirectHomeOnFail />
             <PageLockManager hideContentOnLock>
               <ProfilePage />
             </PageLockManager>

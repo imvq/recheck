@@ -57,7 +57,7 @@ export interface PhotoDto {
 }
 
 export interface ProfileDto {
-  profileId: string;
+  id: string;
   localizedFirstName: string;
   localizedLastName: string;
 }

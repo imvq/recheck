@@ -1,9 +1,11 @@
 import { Nullable } from 'utils/types.common';
 
-export type IStateProps = {
+export interface IStateProps {
   isAuthorized: Nullable<boolean>;
-};
+}
 
-export type IDispatchProps = {
+export interface IDispatchProps {
   lockPage: () => void;
-};
+}
+
+export type IProps = IStateProps & IDispatchProps;

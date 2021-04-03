@@ -16,6 +16,13 @@ export interface ReviewCardData {
   nReviews: number;
 }
 
+export interface ProfileDto {
+  profileId: string;
+  name: string;
+  email: string;
+  photoUrl: string;
+}
+
 export interface ProfileInfo {
   currentId: string;
   currentName: string;

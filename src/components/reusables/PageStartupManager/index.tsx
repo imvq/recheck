@@ -16,10 +16,19 @@ const mapDispatchToProps: IDispatchProps = {
 /**
  * Wrapper checking user's authentication status.
  */
-const StartupManager: FunctionComponent<IProps> = (props) => {
-  useEffect(() => props.checkAuthorization(), []);
+const PageStartupManager: FunctionComponent<IProps> = (props) => {
+  useEffect(() => {
+    if (props.isAuthorized === null) {
+      // If the page we load is the first website page for current session.
+      // In that case we won't have isAuthorized flag set
+      // so we have to call the API to check user's authorization.
+      props.checkAuthorization();
+    }
+  }, []);
 
   useEffect(() => {
+    // If redirectHomeOnFail flag is set and the user is not authorized
+    // we must redirect the user to home page.
     if (props.redirectHomeOnFail && props.isAuthorized !== null && !props.isAuthorized) {
       window.location.replace(process.env.REACT_APP_START_PAGE as string);
     }
@@ -30,4 +39,4 @@ const StartupManager: FunctionComponent<IProps> = (props) => {
   return <></>;
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(StartupManager);
+export default connect(mapStateToProps, mapDispatchToProps)(PageStartupManager);

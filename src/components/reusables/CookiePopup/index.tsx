@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 import * as constants from 'utils/constants';
-import { cookieManager } from 'utils/functions';
+import { cookieManager } from 'utils/cookies';
 import CookieImage from 'assets/images/reusables/CookiePopup/Cookie.png';
 import {
   FixedJustifier, Wrapper, SubsectionWrapper, AdaptedImage, TextWrapper, StyledLink, LinkButton,

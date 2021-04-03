@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 import * as computed from 'utils/computed';
-import { cookieManager } from 'utils/functions';
+import { cookieManager } from 'utils/cookies';
 import { ReactComponent as DoorSvg } from 'assets/images/reusables/LoginBadge/Door.svg';
 import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
 import { AppState, setPageLocked } from 'store';
-import { IStateProps, IDispatchProps } from './types';
+import { IProps, IStateProps, IDispatchProps } from './types';
 import {
   Wrapper, LoginButton, Menu, MenuEntry, SvgWrapper
 } from './styled';
@@ -25,7 +25,7 @@ const mapDispatchToProps: IDispatchProps = {
  * Badge with login man picture.
  * Used to login/logout.
  */
-const LoginBadge: FunctionComponent<IStateProps & IDispatchProps> = (props) => {
+const LoginBadge: FunctionComponent<IProps> = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const history = useHistory();
 

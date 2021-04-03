@@ -18,8 +18,8 @@ export default class UserController {
    */
   @Path('/check/registered')
   @POST
-  public checkIsRegistered(checkDto: Dtos.IsRegisteredDto)
-    : Promise<boolean> {
+  public async checkIsRegistered(checkDto: Dtos.IsRegisteredDto)
+    : Promise<void> {
     return this.injectedService.isUserRegistered(checkDto);
   }
 
@@ -28,7 +28,7 @@ export default class UserController {
    */
   @Path('/register')
   @POST
-  public registerUser(registrationDto: Dtos.RegistrationDto)
+  public async registerUser(registrationDto: Dtos.RegistrationDto)
     : Promise<void> {
     return this.injectedService.registerUser(registrationDto);
   }
@@ -38,7 +38,7 @@ export default class UserController {
    */
    @Path('/profile')
    @GET
-  public getProfile(@Context context: ServiceContext)
+  public async getProfile(@Context context: ServiceContext)
      : Promise<Types.GetProfileResponseDto> {
     return this.injectedService.getProfile(context.request.cookies);
   }

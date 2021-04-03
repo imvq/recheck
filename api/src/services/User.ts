@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 
 import * as Constants from '@common/Constants';
 import * as Cookies from '@common/Cookies';
+import * as customErrors from '@common/errors';
 import Dtos from '@dto';
 import Types from '@types';
 import Utils from '@utils';
@@ -13,13 +14,19 @@ import UserManager from '@database/managers/UserManager';
  * Service in charge of registration and managing user data.
  */
 export default class UserService {
-  public async isUserRegistered(checkDto: Dtos.IsRegisteredDto)
-    : Promise<boolean> {
-    return UserManager.doesUserExist(checkDto.profileId);
+  public async isUserRegistered(checkDto: Dtos.IsRegisteredDto) : Promise<void> {
+    try {
+      if (!await UserManager.doesUserExist(checkDto.profileId)) {
+        throw new customErrors.ExpectationFailedError();
+      }
+    } catch (error) {
+      Logger.ifdev()?.err(error);
+      throw error instanceof customErrors.ExpectationFailedError ? error
+        : new Errors.InternalServerError('Internal database error.');
+    }
   }
 
-  public async registerUser(registrationDto: Dtos.RegistrationDto)
-    : Promise<void> {
+  public async registerUser(registrationDto: Dtos.RegistrationDto) : Promise<void> {
     try {
       UserManager.createUser(
         registrationDto.profileId,
@@ -50,7 +57,7 @@ export default class UserService {
       );
 
       return {
-        profileId: `${profile.profileId}`,
+        profileId: `${profile.id}`,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
         email: `${email.elements[0]['handle~'].emailAddress}`,
         photoUrl: `${photo.profilePicture['displayImage~'].elements[0].identifiers[0].identifier}`

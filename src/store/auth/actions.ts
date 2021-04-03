@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 
-import { cookieManager } from 'utils/functions';
+import { cookieManager } from 'utils/cookies';
 import { ProfileInfo } from 'utils/types.common';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
-import { setCurrentProfileData } from '../profile/actions';
+import { setCurrentProfileInfo } from '../profile/actions';
 
 // ============= Action creators =============
 
@@ -26,7 +26,7 @@ export const checkAuthorization = () => (
       { withCredentials: true }
     )
       .then((profileResponse) => {
-        setCurrentProfileData(profileResponse.data as ProfileInfo);
+        dispatch(setCurrentProfileInfo(profileResponse.data as ProfileInfo));
         dispatch(setIsAuthorized(true));
       })
       .catch(() => dispatch(setIsAuthorized(false)));
