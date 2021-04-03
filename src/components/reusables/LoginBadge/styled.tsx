@@ -12,6 +12,7 @@ const cssVarsLocal = {
  */
 export const Wrapper = styled.div`
   position: relative;
+  z-index: ${cssVars.zIndexLoginBadge};
 `;
 
 /**

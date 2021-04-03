@@ -21,6 +21,7 @@ export const cssVars = {
   sectionShadow: 'drop-shadow(1rem 1rem .6rem rgba(0, 0, 0, .1))',
   widthMotivatorBadge: '25rem',
   widthReviewCard: '67.38em',
+  zIndexLoginBadge: '50',
   zIndexPopupCookie: '100',
   zIndexScrollButton: '200',
   zIndexPopupSearch: '300',
