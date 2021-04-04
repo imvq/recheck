@@ -23,6 +23,13 @@ export interface ReviewCardDataFull extends ReviewCardData {
   status: ReviewStatus;
 }
 
+export interface PreviousSearchCardData {
+  name: string;
+  position: string;
+  company: string;
+  photoUrl: string;
+}
+
 export interface ProfileDto {
   profileId: string;
   name: string;

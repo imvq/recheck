@@ -7,12 +7,14 @@ import { IProps, IStateProps } from './types';
 import Footer from './Footer';
 import Menu from './Menu';
 import ReviewsArea from './ReviewsArea';
+import HistoryArea from './HistoryArea';
 import AboutArea from './AboutArea';
 import {
   Wrapper, TitleWrapper, AdaptedHeader, ContentWrapper
 } from './styled';
 
 import example from './exampleMyReview';
+import exampleHistory from './exampleHistory';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
@@ -32,6 +34,8 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
         switch (props.currentProfileMenuEntry) {
           case ProfileMenuEntry.ABOUT_ME:
             return <AboutArea reviewCardData={example} />;
+          case ProfileMenuEntry.HISTORY:
+            return <HistoryArea cardsData={exampleHistory} />;
           default:
             return <ReviewsArea reviewCardData={example} />;
         }
