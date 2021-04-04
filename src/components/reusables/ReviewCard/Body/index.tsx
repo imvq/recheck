@@ -21,7 +21,9 @@ export default (props: IProps) => (
     {questions.map((question, index) => (
       <EntryWrapper key={question}>
         <QuestionTitle>{question}</QuestionTitle>
-        <Answer>{props.reviewCardData.questions[index]}</Answer>
+        <Answer isHighlighted={index === questions.length - 1}>
+          {props.reviewCardData.questions[index]}
+        </Answer>
       </EntryWrapper>
     ))}
   </Wrapper>
