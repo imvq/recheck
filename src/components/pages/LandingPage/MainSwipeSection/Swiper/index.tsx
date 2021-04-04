@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ReviewCard from 'components/reusables/ReviewCard';
+import DemoReviewCard from 'components/reusables/DemoReviewCard';
 import {
   Wrapper, JustificationWrapper, CardWrapper, ArrowLeft, ArrowRight
 } from './styled';
@@ -14,7 +14,7 @@ export default () => {
   React.useEffect(() => {
     setCards(examples.map(example => {
       return (
-        <ReviewCard
+        <DemoReviewCard
           key={example.name}
           name={example.name}
           photoUrl={example.photoUrl}
