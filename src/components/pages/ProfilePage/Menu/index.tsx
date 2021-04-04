@@ -5,6 +5,9 @@ import {
   ProfilePictureWrapper, ProfilePicture
 } from './styled';
 
+/**
+ * Menu with tabs to control the page content area.
+ */
 export default (props: IProps) => (
   <Wrapper>
     <Menu>

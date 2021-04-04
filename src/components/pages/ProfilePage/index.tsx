@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { AppState } from 'store';
 import { IProps, IStateProps } from './types';
 import Footer from './Footer';
-import ProfileMenu from './ProfileMenu';
+import Menu from './Menu';
 import {
   Wrapper, AdaptedHeader, ContentWrapper
 } from './styled';
@@ -20,7 +20,7 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
   <Wrapper>
     <AdaptedHeader />
     <ContentWrapper>
-      <ProfileMenu currentProfileInfo={props.currentProfileInfo} />
+      <Menu currentProfileInfo={props.currentProfileInfo} />
     </ContentWrapper>
     <Footer />
   </Wrapper>
