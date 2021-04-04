@@ -21,7 +21,9 @@ export default () => {
   }, []);
 
   const hide = useCallback(() => {
-    cookieManager.set(constants.COOKIES_WARN_COOKIE_NAME, true);
+    const expires = new Date();
+    expires.setFullYear(expires.getFullYear() + 1);
+    cookieManager.set(constants.COOKIES_WARN_COOKIE_NAME, true, { expires });
     setIsVisible(false);
   }, []);
 
