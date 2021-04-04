@@ -2,15 +2,17 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState } from 'store';
+import { ProfileMenuEntry } from 'utils/enums';
 import { IProps, IStateProps } from './types';
 import Footer from './Footer';
 import Menu from './Menu';
 import ReviewsArea from './ReviewsArea';
+import AboutArea from './AboutArea';
 import {
   Wrapper, AdaptedHeader, ContentWrapper
 } from './styled';
 
-import example from './example';
+import example from './exampleMyReview';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
@@ -27,6 +29,8 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
       <Menu currentProfileInfo={props.currentProfileInfo} />
       {(() => {
         switch (props.currentProfileMenuEntry) {
+          case ProfileMenuEntry.ABOUT_ME:
+            return <AboutArea reviewCardData={example} />;
           default:
             return <ReviewsArea reviewCardData={example} />;
         }

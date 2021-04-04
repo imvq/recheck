@@ -8,7 +8,7 @@ import { Wrapper } from './styled';
  */
 export default (props: IProps) => (
   <Wrapper>
-    <Head reviewCardData={props.reviewCardData} />
+    <Head reviewCardData={props.reviewCardData} isAnonymous={props.isAnonymous} />
     <Body reviewCardData={props.reviewCardData} />
   </Wrapper>
 );

@@ -8,7 +8,7 @@ import {
 export default (props: IProps) => (
   <Wrapper>
     <Menu>
-      <Bar reviewCardData={props.reviewCardData} />
+      <Bar reviewCardData={props.reviewCardData} isAnonymous={props.isAnonymous} />
       <MenuContent>
         <MenuContentSpansWrapper>
           <MenuContentSpan dimmed>
@@ -25,10 +25,14 @@ export default (props: IProps) => (
           </MenuContentSpan>
         </MenuContentSpansWrapper>
         <ProfilePictureWrapper>
-          <ProfilePicture
-            src={props.reviewCardData.photoUrl}
-            draggable='false'
-          />
+          {!props.isAnonymous
+            ? (
+              <ProfilePicture
+                src={props.reviewCardData.photoUrl}
+                draggable='false'
+              />
+            )
+            : null}
         </ProfilePictureWrapper>
       </MenuContent>
     </Menu>
