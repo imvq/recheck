@@ -14,6 +14,14 @@ export const Wrapper = styled.div`
     'Footer';
 `;
 
+export const TitleWrapper = styled.div`
+  font-family: Open Sans;
+  font-size: 1.6rem;
+  font-weight: 700;
+  padding: 4rem 0;
+  text-align: center;
+`;
+
 /**
  * Header with grid applied to.
  */

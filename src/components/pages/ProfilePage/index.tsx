@@ -9,7 +9,7 @@ import Menu from './Menu';
 import ReviewsArea from './ReviewsArea';
 import AboutArea from './AboutArea';
 import {
-  Wrapper, AdaptedHeader, ContentWrapper
+  Wrapper, TitleWrapper, AdaptedHeader, ContentWrapper
 } from './styled';
 
 import example from './exampleMyReview';
@@ -26,6 +26,7 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
   <Wrapper>
     <AdaptedHeader />
     <ContentWrapper>
+      <TitleWrapper>Мой профиль</TitleWrapper>
       <Menu currentProfileInfo={props.currentProfileInfo} />
       {(() => {
         switch (props.currentProfileMenuEntry) {
