@@ -23,6 +23,7 @@ export const Form = styled.div`
   background-color: white;
   border-radius: 1rem;
   filter: drop-shadow(0 0 2rem rgba(0, 0, 0, .3));
+  font-size: 1.5rem;
   font-family: Open Sans;
 `;
 
@@ -35,6 +36,7 @@ export const InputLineWrapper = styled.div`
 
 export const Input = styled.input`
   width: 100%;
+  font-size: 1.5rem;
   padding: 1rem;
   border-radius: .5rem;
 `;
@@ -47,7 +49,9 @@ export const Button = styled.button`
   ${mixins.DefaultButton};
 
   height: 100%;
+  font-size: 1.5rem;
   background-color: #28a745;
+  border-radius: 1rem;
   color: white;
   border: none;
   outline: none;
