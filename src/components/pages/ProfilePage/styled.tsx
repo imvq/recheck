@@ -22,7 +22,10 @@ export const AdaptedHeader = styled(Header)`
 `;
 
 export const ContentWrapper = styled.div`
+  height: fit-content;
   min-height: calc(100vh - 8rem - 17.5rem);
+  box-sizing: border-box;
+  padding-bottom: 5rem;
   display: flex;
   flex-direction: column;
 `;

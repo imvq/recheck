@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.section`
+  height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   font-family: Open Sans;
 `;
 
 export const TitleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
   margin: 4rem 0 3rem;
 `;
 

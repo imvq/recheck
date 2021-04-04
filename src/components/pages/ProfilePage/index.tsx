@@ -10,6 +10,8 @@ import {
   Wrapper, AdaptedHeader, ContentWrapper
 } from './styled';
 
+import example from './example';
+
 const mapStateToProps = (store: AppState): IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
   currentProfileMenuEntry: store.interaction.currentProfileMenuEntry
@@ -26,7 +28,7 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
       {(() => {
         switch (props.currentProfileMenuEntry) {
           default:
-            return <ReviewsArea />;
+            return <ReviewsArea reviewCardData={example} />;
         }
       })()}
     </ContentWrapper>

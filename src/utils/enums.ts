@@ -21,3 +21,12 @@ export enum ProfileMenuEntry {
   HISTORY,
   ABOUT_ME
 }
+
+/**
+ * Status of the review.
+ */
+export enum ReviewStatus {
+  CONFIRMED,
+  REJECTED,
+  IDLE
+}

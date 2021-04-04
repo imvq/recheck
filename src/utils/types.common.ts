@@ -1,3 +1,5 @@
+import { ReviewStatus } from './enums';
+
 // ==================== Utility types ====================
 
 export type Nullable<T> = T | null;
@@ -14,6 +16,11 @@ export interface ReviewCardData {
   experience: string;
   review: string;
   nReviews: number;
+}
+
+export interface ReviewCardDataFull extends ReviewCardData {
+  questions: string[];
+  status: ReviewStatus;
 }
 
 export interface ProfileDto {
