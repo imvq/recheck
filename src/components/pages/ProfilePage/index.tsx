@@ -5,12 +5,14 @@ import { AppState } from 'store';
 import { IProps, IStateProps } from './types';
 import Footer from './Footer';
 import Menu from './Menu';
+import ReviewsArea from './ReviewsArea';
 import {
   Wrapper, AdaptedHeader, ContentWrapper
 } from './styled';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo
+  currentProfileInfo: store.profile.currentProfileInfo,
+  currentProfileMenuEntry: store.interaction.currentProfileMenuEntry
 });
 
 /**
@@ -21,6 +23,12 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
     <AdaptedHeader />
     <ContentWrapper>
       <Menu currentProfileInfo={props.currentProfileInfo} />
+      {(() => {
+        switch (props.currentProfileMenuEntry) {
+          default:
+            return <ReviewsArea />;
+        }
+      })()}
     </ContentWrapper>
     <Footer />
   </Wrapper>
