@@ -1,7 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 
 import Types from '@types';
-import Logger from '@common/Logger';
 import User from '../entities/User.entity';
 
 /**
@@ -21,5 +20,9 @@ export default class UserManager {
 
   public static createUser = async (profileId: string, linkedIn: string) => (
     UserManager.repo?.save(UserManager.repo.create({ profileId, linkedIn }))
+  )
+
+  public static getUser = async (profileId: string) => (
+    UserManager.repo?.findOne(profileId)
   )
 }

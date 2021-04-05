@@ -58,12 +58,14 @@ export default class UserService {
       const highestQualityPicture = photo.profilePicture['displayImage~'].elements[
         photo.profilePicture['displayImage~'].elements.length - 1
       ];
+      const dbProfileRecord = await UserManager.getUser(profile.id);
 
       return {
         profileId: `${profile.id}`,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
         email: `${email.elements[0]['handle~'].emailAddress}`,
-        photoUrl: `${highestQualityPicture.identifiers[0].identifier}`
+        photoUrl: `${highestQualityPicture.identifiers[0].identifier}`,
+        isRegistered: !!dbProfileRecord
       };
     } catch (error) {
       throw error instanceof Errors.UnauthorizedError ? error

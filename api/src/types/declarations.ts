@@ -37,6 +37,7 @@ export interface GetProfileResponseDto {
   name: string;
   email: string;
   photoUrl: string;
+  isRegistered: boolean;
 }
 
 export interface HealthResponseDTO {
