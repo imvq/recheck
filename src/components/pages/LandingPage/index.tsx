@@ -12,6 +12,7 @@ import HowToWorkSection from './HowToWorkSection';
 import InfoblockSection from './InfoblockSection';
 import MainSwipeSection from './MainSwipeSection';
 import MotivatorSection from './MotivatorSection';
+import RegistrationPopup from './RegistrationPopup';
 import Footer from './Footer';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
@@ -40,7 +41,7 @@ const LandingPage: FunctionComponent<IProps> = (props) => {
       <MotivatorSection />
       <Footer />
       {props.isRegistered !== false && <CookiePopup />}
-      {props.isRegistered === false && <div><p>TODO: scraper</p></div>}
+      {props.isRegistered === false && <RegistrationPopup />}
     </Wrapper>
   );
 };
