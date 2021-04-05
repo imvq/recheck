@@ -7,8 +7,6 @@ import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED, SET_IS_REGISTERED } from './types';
 import { setCurrentProfileInfo } from '../profile/actions';
 
-// ============= Action creators =============
-
 export const setIsAuthorized = (isAuthorized: boolean)
   : AuthActionType => ({
   type: SET_IS_AUTHORIZED,
@@ -21,11 +19,7 @@ export const setIsRegistered = (isRegistered: boolean)
   payload: isRegistered
 });
 
-// ============= Thunk creators ==============
-
-export const checkAuthorization = () => (
-  dispatch: Dispatch<AppActionType>
-) => {
+export const checkAuthorization = () => (dispatch: Dispatch<AppActionType>) => {
   if (cookieManager.get('BEARER')) {
     axios.get(
       `${process.env.REACT_APP_API}/user/profile`,
@@ -35,6 +29,7 @@ export const checkAuthorization = () => (
         const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
         dispatch(setCurrentProfileInfo(normalizedProfileInfo));
         dispatch(setIsAuthorized(true));
+        dispatch(setIsRegistered(profileResponse.data.isRegistered));
       })
       .catch(() => dispatch(setIsAuthorized(false)));
   } else {
