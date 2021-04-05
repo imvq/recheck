@@ -15,7 +15,7 @@ export default class UserManager {
   }
 
   public static doesUserExist = async (profileId: string) => (
-    !!await UserManager.repo?.findOne(profileId)
+    !!UserManager.repo?.findOne(profileId)
   )
 
   public static createUser = async (profileId: string, linkedIn: string) => (
