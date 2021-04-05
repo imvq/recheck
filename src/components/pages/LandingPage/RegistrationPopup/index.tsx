@@ -1,5 +1,7 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useState } from 'react';
 import { connect } from 'react-redux';
+
+import { ReactComponent as RocketLoader } from 'assets/images/common/RocketLoader.svg';
 
 import { setPageLocked } from 'store';
 import { cookieManager, cookiesList } from 'utils/cookies';
@@ -14,9 +16,11 @@ const mapDispatchToProps: IDispatchProps = {
   lockPage: setPageLocked
 };
 
-const RegistrationPopup: FunctionComponent<IProps> = (props) => (
-  <DimmingPopupWrapper>
-    <Frame>
+const RegistrationPopup: FunctionComponent<IProps> = (props) => {
+  const [isInProgress, setIsInProgress] = useState(false);
+
+  const defaultView = (
+    <>
       <TitleWrapper><Title>Привязка профиля</Title></TitleWrapper>
       <DescriptionWrapper>
         <Description>
@@ -40,10 +44,27 @@ const RegistrationPopup: FunctionComponent<IProps> = (props) => (
           window.location.replace(process.env.REACT_APP_START_PAGE as string);
         }}
         />
-        <ProceedButton />
+        <ProceedButton onClick={() => {
+          setIsInProgress(true);
+        }}
+        />
       </ButtonsWrapper>
-    </Frame>
-  </DimmingPopupWrapper>
-);
+    </>
+  );
+
+  const loadingView = (
+    <>
+      <RocketLoader style={{ width: '15rem' }} />
+    </>
+  );
+
+  return (
+    <DimmingPopupWrapper>
+      <Frame>
+        {!isInProgress ? defaultView : loadingView}
+      </Frame>
+    </DimmingPopupWrapper>
+  );
+};
 
 export default connect(null, mapDispatchToProps)(RegistrationPopup);

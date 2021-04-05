@@ -27,6 +27,7 @@ export const Frame = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 export const TitleWrapper = styled.div`
@@ -67,6 +68,7 @@ export const Input = styled.input`
 `;
 
 export const ButtonsWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   padding: 0 0 1rem;
