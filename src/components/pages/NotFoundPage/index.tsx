@@ -1,4 +1,4 @@
-import Header from 'components/reusables/Header';
+import Header from 'components/shared/Header';
 import {
   Wrapper, HeaderWrapper, InfoJustificationWrapper, InfoContentWrapper,
   ImageWrapper, AdaptedImage, AdaptedLink, Title, Subtitle, Span,

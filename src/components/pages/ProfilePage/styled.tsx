@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import Header from 'components/reusables/Header';
+import Header from 'components/shared/Header';
 
 /**
  * Styled component for main profile page wrapper.

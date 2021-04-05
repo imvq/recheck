@@ -1,4 +1,4 @@
-import Logo from 'components/reusables/Logo';
+import Logo from 'components/shared/Logo';
 import { Wrapper } from './styled';
 
 /**

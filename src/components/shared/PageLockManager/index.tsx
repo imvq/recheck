@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
-import PageLoader from 'components/reusables/PageLockManager/PageLoader';
+import PageLoader from 'components/shared/PageLockManager/PageLoader';
 import { AppState } from 'store';
 import { IProps, IStateProps } from './types';
 

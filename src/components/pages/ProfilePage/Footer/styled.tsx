@@ -3,7 +3,7 @@ import { Link as ScrollLink } from 'react-scroll';
 
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
-import Logo from 'components/reusables/Logo';
+import Logo from 'components/shared/Logo';
 import TelegramIconImage from 'assets/images/reusables/Footer/TelegramIcon.png';
 
 /**

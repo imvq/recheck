@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, setIsSearchPopupVisible } from 'store';
-import SearchPopup from 'components/reusables/SearchPopup';
+import SearchPopup from 'components/shared/SearchPopup';
 import { IProps, IStateProps, IDispatchProps } from './types';
 
 const mapStateToProps = (state: AppState): IStateProps => ({

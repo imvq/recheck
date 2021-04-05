@@ -1,4 +1,4 @@
-import ReviewCard from 'components/reusables/ReviewCard';
+import ReviewCard from 'components/shared/ReviewCard';
 import { IProps } from './types';
 import { Wrapper, TitleWrapper, Title } from './styled';
 

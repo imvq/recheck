@@ -1,4 +1,4 @@
-import CookiePopup from 'components/reusables/CookiePopup';
+import CookiePopup from 'components/shared/CookiePopup';
 import { Wrapper } from './styled';
 import PopupSection from './PopupSection';
 import GreetingsSection from './GreetingsSection';

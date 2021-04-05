@@ -2,11 +2,11 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { store as appStore } from 'store';
-import OAuthFlowManager from 'components/reusables/OAuthFlowManager';
-import PageStartupManager from 'components/reusables/PageStartupManager';
-import PageLockManager from 'components/reusables/PageLockManager';
-import PageForceUnlocker from 'components/reusables/PageForceUnlocker';
-import GlobalStyle from 'components/reusables/GlobalStyle';
+import OAuthFlowManager from 'components/shared/OAuthFlowManager';
+import PageStartupManager from 'components/shared/PageStartupManager';
+import PageLockManager from 'components/shared/PageLockManager';
+import PageForceUnlocker from 'components/shared/PageForceUnlocker';
+import GlobalStyle from 'components/shared/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
 import LinkedInScraperPage from 'components/pages/LinkedInScraperPage';
 import ProfilePage from 'components/pages/ProfilePage';

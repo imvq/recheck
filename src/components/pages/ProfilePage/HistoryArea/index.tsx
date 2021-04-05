@@ -1,4 +1,4 @@
-import PreviousSearchCard from 'components/reusables/PreviousSearchCard';
+import PreviousSearchCard from 'components/shared/PreviousSearchCard';
 import { IProps } from './types';
 import { Wrapper, TitleWrapper, Title } from './styled';
 
