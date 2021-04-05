@@ -13,17 +13,6 @@ export default class UserController {
   public constructor(@Inject private readonly injectedService: UserService) {}
 
   /**
-   * Check if the user is registered in the service
-   * or it has come first time.
-   */
-  @Path('/check/registered')
-  @POST
-  public async checkIsRegistered(checkDto: Dtos.IsRegisteredDto)
-    : Promise<void> {
-    return this.injectedService.isUserRegistered(checkDto);
-  }
-
-  /**
    * Save user info.
    */
   @Path('/register')

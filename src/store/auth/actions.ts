@@ -4,7 +4,7 @@ import { Dispatch } from 'redux';
 import { cookieManager } from 'utils/cookies';
 import { mapProfileDtoToState } from 'utils/functions';
 import { AppActionType } from '../types';
-import { AuthActionType, SET_IS_AUTHORIZED } from './types';
+import { AuthActionType, SET_IS_AUTHORIZED, SET_IS_REGISTERED } from './types';
 import { setCurrentProfileInfo } from '../profile/actions';
 
 // ============= Action creators =============
@@ -13,6 +13,12 @@ export const setIsAuthorized = (isAuthorized: boolean)
   : AuthActionType => ({
   type: SET_IS_AUTHORIZED,
   payload: isAuthorized
+});
+
+export const setIsRegistered = (isRegistered: boolean)
+  : AuthActionType => ({
+  type: SET_IS_REGISTERED,
+  payload: isRegistered
 });
 
 // ============= Thunk creators ==============

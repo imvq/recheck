@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { useLocation, useHistory, useParams } from 'react-router';
 import queryString from 'query-string';
 import axios from 'axios';
-import httpStatus from 'http-status-codes';
 
 import * as constants from 'utils/constants';
 import { cookieManager, cookiesList } from 'utils/cookies';
 import { mapProfileDtoToState } from 'utils/functions';
 import {
-  setPageLocked, setPageUnlocked, setIsAuthorized, setCurrentProfileInfo
+  setPageLocked, setPageUnlocked, setIsAuthorized, setIsRegistered,
+  setCurrentProfileInfo
 } from 'store';
 import { IProps, IDispatchProps } from './types';
 
@@ -17,6 +17,7 @@ const mapDispatchToProps: IDispatchProps = {
   lockPage: setPageLocked,
   unlockPage: setPageUnlocked,
   setIsAuthorized,
+  setIsRegistered,
   setCurrentProfileInfo
 };
 
@@ -35,7 +36,6 @@ const OAuthExchanger: FunctionComponent<IProps> = (props) => {
     const apiBase = process.env.REACT_APP_API;
     const apiConfirmPath = `${apiBase}/auth/confirm`;
     const apiProfilePath = `${apiBase}/user/profile`;
-    const apiCheckPath = `${apiBase}/user/check/registered`;
 
     // Last hope actions.
     const redirectOnError = () => {
@@ -65,25 +65,17 @@ const OAuthExchanger: FunctionComponent<IProps> = (props) => {
             // because right now we need to use profile ID we've just get.
             // So it is necessary to have full control of profile data
             // info saving process.
+            const isRegistered = profileResponse.data.isRegistered as boolean;
             const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
             props.setCurrentProfileInfo(normalizedProfileInfo);
+            props.setIsAuthorized(true);
+            props.setIsRegistered(isRegistered);
 
-            const profileId = normalizedProfileInfo.currentId;
-            axios.post(apiCheckPath, { profileId })
-              .then(() => {
-                // We don't set authorization status at 'finally' section
-                // because it must be set before the history is being updated.
-                props.setIsAuthorized(true);
-                history.push(rollbackTo);
-              })
-              .catch((error) => {
-                props.setIsAuthorized(true);
-                if (error.response.status === httpStatus.EXPECTATION_FAILED) {
-                  history.push('/scrape-linkedin');
-                } else {
-                  redirectOnError();
-                }
-              });
+            if (isRegistered) {
+              history.push(rollbackTo);
+            } else {
+              history.push({ pathname: '/', state: { rollbackTo } });
+            }
           })
           .catch(redirectOnError);
       })

@@ -35,6 +35,7 @@ export interface ProfileDto {
   name: string;
   email: string;
   photoUrl: string;
+  isRegistered: boolean;
 }
 
 export interface ProfileInfo {
