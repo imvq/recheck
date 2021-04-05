@@ -130,7 +130,6 @@ export const mixins = {
     }
   `,
   InfoblockSubsectionTitle: css`
-    font-family: Open Sans;
     font-weight: 600;
     font-size: 1.492rem;
     line-height: 2.014rem;
@@ -138,7 +137,6 @@ export const mixins = {
     user-select: none;
   `,
   LandingTitle: css`
-    font-family: Open Sans;
     font-weight: 600;
     font-size: 1.790rem;
     line-height: 2.387rem;
@@ -151,7 +149,6 @@ export const mixins = {
     }
   `,
   LandingBlockText: css`
-    font-family: Open Sans;
     font-size: 1.342rem;
     max-width: 35.808rem;
     line-height: 1.909rem;

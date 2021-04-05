@@ -40,8 +40,7 @@ export const TitleWrapper = styled.div`
  * Styled component for logo.
  */
 export const LogoText = styled.span`
-  font-family: Open Sans;
-    font-weight: 600;
+  font-weight: 600;
 `;
 
 /**
@@ -62,7 +61,6 @@ export const LogoTextColorpickAux1 = styled(LogoText)`
  * Styled component for badge main paragraph wrapper.
  */
 export const ParagraphWrapper = styled.div`
-  font-family: Open Sans;
   box-sizing: border-box;
   padding-left: ${cssVarsLocal.shiftDefault};
   padding-right: ${cssVarsLocal.shiftDefault};

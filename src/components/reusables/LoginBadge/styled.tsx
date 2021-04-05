@@ -46,7 +46,6 @@ export const Menu = styled.ul<{ isExpanded: boolean }>`
 export const MenuEntry = styled.li`
   cursor: pointer;
   width: 22rem;
-  font-family: Open Sans;
   font-weight: 600;
   font-size: 1.3rem;
   display: flex;

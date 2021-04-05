@@ -5,7 +5,6 @@ export const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Open Sans;
 `;
 
 export const TitleWrapper = styled.div`

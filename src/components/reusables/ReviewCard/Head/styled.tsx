@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Open Sans;
   border-bottom: 1px solid #c2c0c0;
 `;
 

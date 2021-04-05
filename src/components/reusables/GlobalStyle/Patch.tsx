@@ -10,7 +10,7 @@ export default createGlobalStyle`
   html, body, #root {
     height: 100%;
     font-size: 16px;
-    font-family: Sans-Serif;
+    font-family: Open Sans, Sans-Serif;
   }
 
   body {

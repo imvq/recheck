@@ -22,8 +22,7 @@ export const Wrapper = styled.div`
  */
 export const ActionGroup = styled.div`
   width: ${cssVars.greetingsViewContentActionGroupWidth};
-  font-family: Open Sans;
-    font-weight: 600;
+  font-weight: 600;
   font-size: 2.7rem;
   line-height: 3.5rem;
   text-align: center;

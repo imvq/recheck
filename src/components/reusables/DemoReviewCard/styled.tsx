@@ -95,8 +95,7 @@ export const TitleWrapper = styled.div`
   margin-bottom: 1.1em;
   display: flex;
   align-items: center;
-  font-family: Open Sans;
-    font-weight: 600;
+  font-weight: 600;
 `;
 
 /**
@@ -128,7 +127,6 @@ export const LogoWrapper = styled(LogoSvg)`
 export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: Open Sans;
   line-height: 1.3em;
 `;
 
@@ -171,8 +169,7 @@ export const Toolbar = styled.div`
 export const ReviewsLink = styled.a`
   margin-right: auto;
   padding-left: 5em;
-  font-family: Open Sans;
-    font-weight: 600;
+  font-weight: 600;
 `;
 
 /**

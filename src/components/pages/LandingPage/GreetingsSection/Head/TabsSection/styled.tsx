@@ -27,6 +27,5 @@ export const TabButton = styled.button`
   outline: none;
   cursor: pointer;
   user-select: none;
-  font-family: Open Sans;
   font-size: 1.3rem;
 `;

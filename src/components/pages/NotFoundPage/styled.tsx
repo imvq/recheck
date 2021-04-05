@@ -26,7 +26,6 @@ export const InfoContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: fit-content;
-  font-family: Open Sans;
   font-weight: 700;
   color: #555555;
 `;
@@ -57,7 +56,6 @@ export const LinksWrapper = styled.div`
 
 export const AdaptedLink = styled(Link)`
   color: ${cssVars.colorForegroundPickAux1};
-
   font-size: 1.2rem;
   line-height: 3rem;
 `;

@@ -72,7 +72,6 @@ export const TitleColorpickAux1 = styled.span`
  * Styled component for text block.
  */
 export const Text = styled.p`
-  font-family: Open Sans;
   font-size: 1.342rem;
   line-height: 1.939rem;
   max-width: 21.634rem;

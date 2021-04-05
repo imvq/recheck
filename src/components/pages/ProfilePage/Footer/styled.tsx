@@ -83,7 +83,7 @@ export const InnerLogo = styled(Logo)`
  */
 export const MenuEntryText = styled.span`
   cursor: pointer;
-  font-family: Open Sans;
+  
   font-size: 1.25rem;
   line-height: 2.4rem;
 
@@ -93,7 +93,6 @@ export const MenuEntryText = styled.span`
 
   ${respond(ScreenBreakpoint.XS)} {
     font-size: 1.5rem;
-    font-family: Open Sans;
     font-weight: 800;
   }
 `;
@@ -102,7 +101,6 @@ export const MenuEntryText = styled.span`
  * Styled component for footer menu entry text.
  */
 export const MenuEntryTextMarked = styled(MenuEntryText)`
-  font-family: Open Sans;
   font-weight: 800;
 
   &:hover {

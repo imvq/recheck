@@ -103,7 +103,6 @@ export const ContentWrapper = styled.div`
  * Styled component for popup main area header.
  */
 export const Header = styled.h1`
-  font-family: Open Sans;
   font-size: 1.8rem;
   text-align: center;
 `;
@@ -113,7 +112,6 @@ export const Header = styled.h1`
  */
 export const Input = styled.input`
   min-width: 43rem;
-  font-family: Open Sans;
   font-size: 1.45rem;
   padding: .7rem;
   padding-left: .5rem;

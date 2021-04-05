@@ -29,8 +29,7 @@ export const TextWrapper = styled.div`
  * Styled component for title text.
  */
 export const Text = styled.span`
-  font-family: Open Sans;
-    font-weight: 600;
+  font-weight: 600;
   font-size: 2.536rem;
 `;
 

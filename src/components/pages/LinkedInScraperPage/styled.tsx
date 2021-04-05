@@ -24,7 +24,6 @@ export const Form = styled.div`
   border-radius: 1rem;
   filter: drop-shadow(0 0 2rem rgba(0, 0, 0, .3));
   font-size: 1.5rem;
-  font-family: Open Sans;
 `;
 
 export const InputLineWrapper = styled.div`
