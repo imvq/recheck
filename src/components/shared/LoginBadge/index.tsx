@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 import * as computed from 'utils/computed';
-import { cookieManager } from 'utils/cookies';
+import { cookieManager, cookiesList } from 'utils/cookies';
 import { ReactComponent as DoorSvg } from 'assets/images/reusables/LoginBadge/Door.svg';
 import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
 import { AppState, setPageLocked } from 'store';
@@ -55,7 +55,7 @@ const LoginBadge: FunctionComponent<IProps> = (props) => {
                 </MenuEntry>
                 <MenuEntry onClick={() => {
                   props.lockPage();
-                  cookieManager.remove('BEARER');
+                  cookieManager.remove(cookiesList.bearer);
                   window.location.replace(process.env.REACT_APP_START_PAGE as string);
                 }}
                 >
