@@ -10,6 +10,7 @@ import GlobalStyle from 'components/shared/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
 import LinkedInScraperPage from 'components/pages/LinkedInScraperPage';
 import ProfilePage from 'components/pages/ProfilePage';
+import ReviewPage from 'components/pages/ReviewPage';
 import NotFoundPage from 'components/pages/NotFoundPage';
 
 /**
@@ -54,6 +55,14 @@ export default () => (
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
             <PageLockManager hideContentOnLock>
               <ProfilePage />
+            </PageLockManager>
+          </Route>
+
+          {/* Review page. Used to add new reviews. */}
+          <Route path='/review' exact>
+            <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
+            <PageLockManager hideContentOnLock>
+              <ReviewPage />
             </PageLockManager>
           </Route>
 

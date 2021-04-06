@@ -29,7 +29,7 @@ export const checkAuthorization = () => (dispatch: Dispatch<AppActionType>) => {
         const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
         dispatch(setCurrentProfileInfo(normalizedProfileInfo));
         dispatch(setIsAuthorized(true));
-        dispatch(setIsRegistered(profileResponse.data.isRegistered));
+        // dispatch(setIsRegistered(profileResponse.data.isRegistered));
       })
       .catch(() => dispatch(setIsAuthorized(false)));
   } else {
