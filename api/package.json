@@ -59,6 +59,7 @@
     "nodemailer": "^6.4.17",
     "pg": "^8.5.1",
     "rand-token": "^1.0.1",
+    "scrapedin": "^1.0.21",
     "source-map-support": "^0.5.19",
     "typeorm": "^0.2.29",
     "typescript-ioc": "^3.2.2",

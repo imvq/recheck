@@ -5,6 +5,10 @@ export class ExchangeAuthCodeDto {
   ) {}
 }
 
+export class CheckLinkedInLinkDto {
+  public constructor(public link: string) {}
+}
+
 export class IsRegisteredDto {
   public constructor(public profileId: string) {}
 }
