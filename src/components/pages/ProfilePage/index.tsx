@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import { AppState } from 'store';
 import { ProfileMenuEntry } from 'utils/enums';
+import Footer from 'components/shared/Footer';
 import { IProps, IStateProps } from './types';
-import Footer from './Footer';
 import Menu from './Menu';
 import ReviewsArea from './ReviewsArea';
 import HistoryArea from './HistoryArea';
