@@ -43,9 +43,3 @@ export const InputDescription = styled.span`
 export const Input = styled.input`
   ${mixins.DefaultInput};
 `;
-
-export const Option = styled.option`
-  ${mixins.DefaultInput};
-  
-  height: 2rem;
-`;

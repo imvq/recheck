@@ -6,6 +6,11 @@ export type Nullable<T> = T | null;
 export type Optional<T> = T | undefined;
 export type Maybe<T> = Nullable<T> | Optional<T>;
 
+export interface OptionType {
+  key: any;
+  text: string;
+}
+
 // ======================= Own props =====================
 
 export interface ReviewCardData {

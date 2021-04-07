@@ -15,3 +15,10 @@ export const mapProfileDtoToState = (profileDto: ProfileDto): ProfileInfo => ({
  * Get media query for max screen size.
  */
 export const respond = (screen: ScreenBreakpoint) => `@media (max-width: ${screen})`;
+
+/**
+ * Get short text with three periods after.
+ */
+export const trimText = (text: string, sliceTo: number) => (
+  text.length > sliceTo ? `${text.slice(0, sliceTo)} ...` : text
+);

@@ -14,6 +14,8 @@ export const cssVars = {
   greetingsViewContentActionGroupWidth: '38rem',
   greetingsViewHeadEdgeElemsWidthBase: '15rem',
   greetingsViewHeadPaddingHorizontal: '16rem',
+  inputBorderRadiusDefault: '.6rem',
+  inputHeightDefault: '3.072rem',
   logoRectHeightBase: '2.625rem',
   opacityButtonHover: '.8',
   opacityButtonActive: '.5',
@@ -76,10 +78,11 @@ export const mixins = {
   `,
   DefaultInput: css`
     width: 100%;
+    height: ${cssVars.inputHeightDefault};
     font-size: 1.3rem;
     line-height: normal;
     border: calc(${cssVars.thiknessDefault} * 2) solid #c7c7c7;
-    border-radius: .6rem;
+    border-radius: ${cssVars.inputBorderRadiusDefault};
     background-color: white;
     box-sizing: border-box;
     padding: .6rem;

@@ -1,20 +1,50 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import OutsideClickHandler from 'react-outside-click-handler';
 
+import { trimText } from 'utils/functions';
+import { Nullable, OptionType } from 'utils/types.common';
 import { IProps } from './types';
-import { Wrapper } from './styled';
+import CustomOption from './CustomOption';
+import {
+  Wrapper, SelectedItemWrapper, ArrowUp, ArrowDown, OptionsBadgesWrapper
+} from './styled';
 
-export const CustomSelect = (props: IProps) => {
-  const [isDimmed, setIsDimmed] = useState(false);
+const CustomSelect = (props: IProps) => {
+  const [isDimmed, setIsDimmed] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [currentValue, setCurrentValue] = useState<Nullable<OptionType>>(null);
 
-  useEffect(() => setIsDimmed(!props.children), []);
+  const callNewOptionHandler = (option: OptionType) => {
+    props.onNewOptionSelected(option);
+    setCurrentValue(option);
+    setIsDimmed(false);
+  };
+
+  const trimmedValue = currentValue ? trimText(currentValue.text, 32) : null;
 
   return (
-    <Wrapper isDimmed={isDimmed}>
-      {props.children || props.placeholder || 'Выбрать'}
-    </Wrapper>
+    <OutsideClickHandler onOutsideClick={() => setIsExpanded(false)}>
+      <Wrapper onClick={() => setIsExpanded(!isExpanded)}>
+        <SelectedItemWrapper isDimmed={isDimmed}>
+          {trimmedValue || props.placeholder || 'Выбрать'}
+        </SelectedItemWrapper>
+        {isExpanded && (
+        <OptionsBadgesWrapper>
+          {props.options.map(option => (
+            <CustomSelect.Option
+              key={option.key}
+              optionData={option}
+              onClick={() => callNewOptionHandler(option)}
+            />
+          ))}
+        </OptionsBadgesWrapper>
+        )}
+        {isExpanded ? <ArrowUp /> : <ArrowDown />}
+      </Wrapper>
+    </OutsideClickHandler>
   );
 };
 
-export const CustomOption = ({ children }: { children: string }) => (
-  <div>{children}</div>
-);
+CustomSelect.Option = CustomOption;
+
+export default CustomSelect;

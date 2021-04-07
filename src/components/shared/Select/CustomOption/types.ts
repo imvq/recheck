@@ -1,9 +1,8 @@
 import { OptionType } from 'utils/types.common';
 
 export interface IOwnProps {
-  placeholder?: string;
-  options: OptionType[];
-  onNewOptionSelected: (selectedOne: OptionType) => void;
+  optionData: OptionType;
+  onClick: (selectedValue: OptionType) => void;
 }
 
 export type IProps = IOwnProps;
