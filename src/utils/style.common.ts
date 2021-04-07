@@ -74,6 +74,25 @@ export const mixins = {
       filter: alpha(opacity=${cssVars.opacityButtonActive} * 100);
     }
   `,
+  DefaultInput: css`
+    width: 100%;
+    font-size: 1.3rem;
+    line-height: normal;
+    border: calc(${cssVars.thiknessDefault} * 2) solid #c7c7c7;
+    border-radius: .6rem;
+    background-color: white;
+    box-sizing: border-box;
+    padding: .6rem;
+    outline: none;
+
+    &:placeholder {
+      color: #979797;
+    }
+
+    &:focus {
+      border-color: #979797;
+    }
+  `,
   HTWBadge: css`
     background-color: ${cssVars.colorBackgroundBadge};
     box-sizing: border-box;

@@ -1,7 +1,8 @@
+import { CustomSelect, CustomOption } from 'components/shared/Select';
 import {
   Wrapper, TitleWrapper, Title, SubtitleWrapper, Subtitle,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input,
-  Select, Option
+  Option
 } from './styled';
 
 export default () => (
@@ -45,12 +46,7 @@ export default () => (
       <InputDescriptionWrapper>
         <InputDescription>Как вы связаны с сотрудником?</InputDescription>
       </InputDescriptionWrapper>
-      <Select>
-        <Option>Я был его непосредственным начальником</Option>
-        <Option>Мы работали в одном отделе</Option>
-        <Option>Мы работали в разных отделах, но часто сотрудничали</Option>
-        <Option>Я был его непосредственным подчинённым</Option>
-      </Select>
+      <CustomSelect />
     </InputGroupWrapper>
   </Wrapper>
 );
