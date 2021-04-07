@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ReactComponent as LoaderCircle } from 'assets/images/reusables/PageLoader/LoaderCircle.svg';
+import { ReactComponent as LoaderCircle } from 'assets/images/shared/PageLoader/LoaderCircle.svg';
 import { cssVars } from 'utils/style.common';
 
 /**

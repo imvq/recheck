@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { animations, cssVars } from 'utils/style.common';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
-import { ReactComponent as CloseSvg } from 'assets/images/reusables/CookiePopup/Close.svg';
+import { ReactComponent as CloseSvg } from 'assets/images/shared/CookiePopup/Close.svg';
 
 /**
  * Styled component justifiying the popup at center.

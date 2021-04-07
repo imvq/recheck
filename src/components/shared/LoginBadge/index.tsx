@@ -5,7 +5,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 import * as computed from 'utils/computed';
 import { cookieManager, cookiesList } from 'utils/cookies';
-import { ReactComponent as DoorSvg } from 'assets/images/reusables/LoginBadge/Door.svg';
+import { ReactComponent as DoorSvg } from 'assets/images/shared/LoginBadge/Door.svg';
 import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
 import { AppState, setPageLocked } from 'store';
 import { IProps, IStateProps, IDispatchProps } from './types';

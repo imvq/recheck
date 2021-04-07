@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { animations, mixins } from 'utils/style.common';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
-import SearchStage1Pic from 'assets/images/reusables/SearchPopup/SearchStage1Pic.png';
-import { ReactComponent as FindButtonSvg } from 'assets/images/reusables/SearchPopup/FindCandidate.svg';
+import SearchStage1Pic from 'assets/images/shared/SearchPopup/SearchStage1Pic.png';
+import { ReactComponent as FindButtonSvg } from 'assets/images/shared/SearchPopup/FindCandidate.svg';
 
 const cssVarsLocal = {
   background: '#f0f3ff',
