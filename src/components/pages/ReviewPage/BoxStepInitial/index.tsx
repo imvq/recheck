@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-import { Nullable, OptionType } from 'utils/types.common';
+import {
+  InputEvent, Nullable, OptionType, Setter
+} from 'utils/types.common';
 import CustomSelect from 'components/shared/Select';
 import {
   Wrapper, TitleWrapper, Title, SubtitleWrapper, Subtitle,
@@ -14,45 +16,45 @@ const options: OptionType[] = [
   { key: 3, text: 'Я был его непосредственным подчинённым' },
 ];
 
+const inputHandler = (event: InputEvent, setter: Setter<string>) => {
+  setter(event.target.value);
+};
+
 export default () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [company, setCompany] = useState('');
   const [bounds, setBounds] = useState<Nullable<OptionType>>(null);
+
+  const firstNameHandler = (event: InputEvent) => inputHandler(event, setFirstName);
+  const lastNameHandler = (event: InputEvent) => inputHandler(event, setLastName);
+  const companyHandler = (event: InputEvent) => inputHandler(event, setCompany);
 
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>
-          Оставьте отзыв о своем сотруднике и получите
-          один бесплатный обзор кандидата
-        </Title>
+        <Title>Оставьте отзыв о своем сотруднике и получите один бесплатный обзор кандидата</Title>
       </TitleWrapper>
       <SubtitleWrapper>
-        <Subtitle>
-          Ваш отзыв останется анонимным
-        </Subtitle>
+        <Subtitle>Ваш отзыв останется анонимным</Subtitle>
       </SubtitleWrapper>
       <InputGroupWrapper>
         <InputDescriptionWrapper>
           <InputDescription>Имя</InputDescription>
         </InputDescriptionWrapper>
-        <Input type='text' />
+        <Input type='text' onChange={firstNameHandler} />
       </InputGroupWrapper>
       <InputGroupWrapper>
         <InputDescriptionWrapper>
           <InputDescription>Фамилия</InputDescription>
         </InputDescriptionWrapper>
-        <Input type='text' />
-      </InputGroupWrapper>
-      <InputGroupWrapper>
-        <InputDescriptionWrapper>
-          <InputDescription>Ссылка на LinkedIn</InputDescription>
-        </InputDescriptionWrapper>
-        <Input type='text' />
+        <Input type='text' onChange={lastNameHandler} />
       </InputGroupWrapper>
       <InputGroupWrapper>
         <InputDescriptionWrapper>
           <InputDescription>Компания, в которой вы вместе работали/работаете</InputDescription>
         </InputDescriptionWrapper>
-        <Input type='text' />
+        <Input type='text' onChange={companyHandler} />
       </InputGroupWrapper>
       <InputGroupWrapper>
         <InputDescriptionWrapper>

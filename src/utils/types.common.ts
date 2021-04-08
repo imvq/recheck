@@ -1,3 +1,5 @@
+import { ChangeEvent } from 'react';
+
 import { ReviewStatus } from './enums';
 
 // ==================== Utility types ====================
@@ -10,6 +12,12 @@ export interface OptionType {
   key: any;
   text: string;
 }
+
+export interface Setter<TValue> {
+  (newValue: TValue): void;
+}
+
+export type InputEvent = ChangeEvent<HTMLInputElement>;
 
 // ======================= Own props =====================
 
