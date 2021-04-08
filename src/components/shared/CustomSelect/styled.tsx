@@ -56,4 +56,5 @@ export const OptionsBadgesWrapper = styled.div`
   border-bottom-right-radius: calc(${cssVars.inputBorderRadiusDefault} * 2);
   overflow: hidden;
   background-color: white;
+  z-index: ${cssVars.zIndexSelectMenu};
 `;

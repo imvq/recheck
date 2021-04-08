@@ -28,6 +28,7 @@ export const cssVars = {
   zIndexDimmingWrapper: '800',
   zIndexLoginBadge: '50',
   zIndexPopupCookie: '100',
+  zIndexSelectMenu: '150',
   zIndexScrollButton: '200',
   zIndexPopupSearch: '300',
   zIndexPageLoader: '900'
