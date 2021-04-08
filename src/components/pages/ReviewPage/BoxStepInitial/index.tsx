@@ -3,7 +3,7 @@ import { useState } from 'react';
 import {
   InputEvent, Nullable, OptionType, Setter
 } from 'utils/types.common';
-import CustomSelect from 'components/shared/Select';
+import CustomSelect from 'components/shared/CustomSelect';
 import {
   Wrapper, TitleWrapper, Title, SubtitleWrapper, Subtitle,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input
