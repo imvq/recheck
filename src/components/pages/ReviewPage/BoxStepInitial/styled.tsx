@@ -31,6 +31,13 @@ export const InputGroupWrapper = styled.div`
   padding: .8rem;
 `;
 
+export const ButtonGroupWrapper = styled.div`
+  width: 35rem;
+  display: flex;
+  justify-content: center;
+  padding: .8rem;
+`;
+
 export const InputDescriptionWrapper = styled.div`
   padding: 0 0 .5rem .8rem;
 `;

@@ -3,10 +3,12 @@ import { useState } from 'react';
 import {
   InputEvent, Nullable, OptionType, Setter
 } from 'utils/types.common';
+import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
 import {
   Wrapper, TitleWrapper, Title, SubtitleWrapper, Subtitle,
-  InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input
+  InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input,
+  ButtonGroupWrapper
 } from './styled';
 
 const options: OptionType[] = [
@@ -29,6 +31,8 @@ export default () => {
   const firstNameHandler = (event: InputEvent) => inputHandler(event, setFirstName);
   const lastNameHandler = (event: InputEvent) => inputHandler(event, setLastName);
   const companyHandler = (event: InputEvent) => inputHandler(event, setCompany);
+
+  const canProceed = () => !!firstName && !!lastName && !!company && !!bounds;
 
   return (
     <Wrapper>
@@ -62,6 +66,9 @@ export default () => {
         </InputDescriptionWrapper>
         <CustomSelect options={options} onNewOptionSelected={setBounds} />
       </InputGroupWrapper>
+      <ButtonGroupWrapper>
+        <CustomButton isDisabled={!canProceed()}>Продолжить</CustomButton>
+      </ButtonGroupWrapper>
     </Wrapper>
   );
 };
