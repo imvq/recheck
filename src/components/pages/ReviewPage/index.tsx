@@ -3,6 +3,7 @@ import { useState } from 'react';
 import ReviewStage2 from 'assets/images/pages/ReviewPage/ReviewStage2.png';
 import BoxStepInitial from './BoxStepInitial';
 import BoxStepA from './BoxStepA';
+import BoxStepB from './BoxStepB';
 import {
   Wrapper, AdaptedHeader, AdaptedFooter,
   ContentWrapper,
@@ -21,7 +22,8 @@ export default () => {
   const boxes = [
     <BoxStepInitial onNextStep={proceed} />,
     <BoxStepA onNextStep={proceed} onBack={comeback} />,
-    <div>Hello</div>
+    <BoxStepB onNextStep={proceed} onBack={comeback} />,
+    <div>End</div>
   ];
 
   return (

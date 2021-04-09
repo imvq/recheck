@@ -1,6 +1,8 @@
 import {
   ReviewActionType,
   CLEAR_INITIAL_DATA,
+  CLEAR_TASKS,
+  CLEAR_STRENGTHS,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -11,6 +13,14 @@ import {
 
 export const clearInitialData = (): ReviewActionType => ({
   type: CLEAR_INITIAL_DATA
+});
+
+export const clearTasks = (): ReviewActionType => ({
+  type: CLEAR_TASKS
+});
+
+export const clearStrengths = (): ReviewActionType => ({
+  type: CLEAR_STRENGTHS
 });
 
 export const setReviewFirstName = (payload: string): ReviewActionType => ({

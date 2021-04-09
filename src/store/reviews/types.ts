@@ -1,4 +1,6 @@
 export const CLEAR_INITIAL_DATA = 'CLEAR_INITIAL_DATA';
+export const CLEAR_TASKS = 'CLEAR_TASKS';
+export const CLEAR_STRENGTHS = 'CLEAR_STRENGTHS';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME';
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_COMPANY = 'SET_COMPANY';
@@ -17,6 +19,14 @@ export interface ReviewState {
 
 export interface ClearInitialData {
   type: typeof CLEAR_INITIAL_DATA;
+}
+
+export interface ClearTasks {
+  type: typeof CLEAR_TASKS;
+}
+
+export interface ClearStrengths {
+  type: typeof CLEAR_STRENGTHS;
 }
 
 export interface SetFirstName {
@@ -50,6 +60,8 @@ export interface SetStrengths {
 }
 
 export type ReviewActionType = ClearInitialData
+  | ClearTasks
+  | ClearStrengths
   | SetFirstName
   | SetLastName
   | SetCompany

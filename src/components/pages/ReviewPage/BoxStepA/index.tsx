@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 
-import { AppState, clearInitialData, setReviewTasks } from 'store';
+import {
+  AppState, clearInitialData, clearTasks, setReviewTasks
+} from 'store';
 import { TextAreaEvent } from 'utils/types.common';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
@@ -17,9 +19,13 @@ const mapStateToProps = (store: AppState): IStateProps => ({
 
 const mapDispatchToProps: IDispatchProps = {
   clearInitialData,
+  clearTasks,
   setTasks: setReviewTasks
 };
 
+/**
+ * Review box with question about what tasks the candidate solved.
+ */
 const BoxStepA = (props: IProps) => {
   const tasksHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setTasks);
 
@@ -27,7 +33,7 @@ const BoxStepA = (props: IProps) => {
 
   const returnHandler = () => {
     props.clearInitialData();
-    props.setTasks('');
+    props.clearTasks();
     props.onBack();
   };
 

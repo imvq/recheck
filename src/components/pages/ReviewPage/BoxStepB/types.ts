@@ -1,13 +1,13 @@
 import { IProps as IPropsBase } from '../BoxBase/types';
 
 export interface IStateProps {
-  tasks: string;
+  strengths: string;
 }
 
 export interface IDispatchProps {
-  setTasks(value: string): void;
-  clearInitialData(): void;
   clearTasks(): void;
+  clearStrengths(): void;
+  setStrengths(value: string): void;
 }
 
 export type IProps = IPropsBase

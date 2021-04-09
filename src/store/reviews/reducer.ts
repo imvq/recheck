@@ -2,6 +2,8 @@ import {
   ReviewState,
   ReviewActionType,
   CLEAR_INITIAL_DATA,
+  CLEAR_TASKS,
+  CLEAR_STRENGTHS,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -31,6 +33,16 @@ export const reviewsReducer = (
         lastName: '',
         company: '',
         bounds: ''
+      };
+    case CLEAR_TASKS:
+      return {
+        ...state,
+        tasks: ''
+      };
+    case CLEAR_STRENGTHS:
+      return {
+        ...state,
+        strengths: ''
       };
     case SET_FIRST_NAME:
       return {

@@ -1,24 +1,43 @@
-import { useState } from 'react';
+import { connect } from 'react-redux';
 
+import {
+  AppState, clearTasks, clearStrengths, setReviewStrengths
+} from 'store';
 import { TextAreaEvent } from 'utils/types.common';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
-import { IProps } from '../BoxBase/types';
+import { IProps, IStateProps, IDispatchProps } from './types';
 import {
   BoxBaseWrapper,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, TextArea,
   ButtonGroupWrapper
 } from '../BoxBase';
 
-export default (props: IProps) => {
-  const [tasks, setTasks] = useState('');
+const mapStateToProps = (store: AppState): IStateProps => ({
+  strengths: store.reviews.strengths
+});
 
-  const tasksHandler = (event: TextAreaEvent) => textAreaHandler(event, setTasks);
+const mapDispatchToProps: IDispatchProps = {
+  clearTasks,
+  clearStrengths,
+  setStrengths: setReviewStrengths
+};
 
-  const canProceed = !!tasks;
+/**
+ * Review box with question about candidate strengths.
+ */
+const BoxStepB = (props: IProps) => {
+  const tasksHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setStrengths);
+
+  const canProceed = !!props.strengths;
+
+  const returnHandler = () => {
+    props.clearTasks();
+    props.clearStrengths();
+    props.onBack();
+  };
 
   const proceedIfAllowed = () => {
-    // TODO: update the state.
     if (canProceed) {
       props.onNextStep();
     }
@@ -33,10 +52,15 @@ export default (props: IProps) => {
         <TextArea onChange={tasksHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
+        <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
+          Назад
+        </CustomButton>
         <CustomButton isDisabled={!canProceed} onClick={proceedIfAllowed}>
-          Продолжить
+          Далее
         </CustomButton>
       </ButtonGroupWrapper>
     </BoxBaseWrapper>
   );
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoxStepB);
