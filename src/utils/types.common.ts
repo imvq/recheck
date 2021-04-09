@@ -19,6 +19,8 @@ export interface Setter<TValue> {
 
 export type InputEvent = ChangeEvent<HTMLInputElement>;
 
+export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
+
 // ======================= Own props =====================
 
 export interface ReviewCardData {

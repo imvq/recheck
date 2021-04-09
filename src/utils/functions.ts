@@ -1,4 +1,6 @@
-import { ProfileDto, ProfileInfo } from './types.common';
+import {
+  ProfileDto, ProfileInfo, InputEvent, TextAreaEvent, Setter
+} from './types.common';
 import { ScreenBreakpoint } from './enums';
 
 /**
@@ -22,3 +24,17 @@ export const respond = (screen: ScreenBreakpoint) => `@media (max-width: ${scree
 export const trimText = (text: string, sliceTo: number) => (
   text.length > sliceTo ? `${text.slice(0, sliceTo)} ...` : text
 );
+
+/**
+ * Partially applied onChange input event.
+ */
+export const inputHandler = (event: InputEvent, setter: Setter<string>) => {
+  setter(event.target.value);
+};
+
+/**
+ * Partially applied onChange textarea event.
+ */
+export const textAreaHandler = (event: TextAreaEvent, setter: Setter<string>) => {
+  setter(event.target.value);
+};
