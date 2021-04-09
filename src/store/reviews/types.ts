@@ -7,6 +7,7 @@ export const CLEAR_LEVEL_DATA = 'CLEAR_LEVEL_DATA';
 export const CLEAR_ACTIVITY_DATA = 'CLEAR_ACTIVITY_DATA';
 export const CLEAR_OWN_HIRE_OPINION_DATA = 'CLEAR_OWN_HIRE_OPINION_DATA';
 export const CLEAR_QUALITY_DATA = 'CLEAR_QUALITY_DATA';
+export const CLEAR_LEADERSHIP_DATA = 'CLEAR_LEADERSHIP_DATA';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME';
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_COMPANY = 'SET_COMPANY';
@@ -23,6 +24,8 @@ export const SET_OWN_HIRE_OPINION_MARK = 'SET_OWN_HIRE_OPINION_MARK';
 export const SET_OWN_HIRE_OPINION_COMMENT = 'SET_OWN_HIRE_OPINION_COMMENT';
 export const SET_QUALITY_MARK = 'SET_QUALITY_MARK';
 export const SET_QUALITY_COMMENT = 'SET_QUALITY_COMMENT';
+export const SET_LEADERSHIP_MARK = 'SET_LEADERSHIP_MARK';
+export const SET_LEADERSHIP_COMMENT = 'SET_LEADERSHIP_COMMENT';
 
 export interface ReviewState {
   firstName: string;
@@ -41,6 +44,8 @@ export interface ReviewState {
   ownHireOpinionComment: string;
   qualityMark: number;
   qualityComment: string;
+  leadershipMark: number;
+  leadershipComment: string;
 }
 
 export interface ClearInitialData {
@@ -77,6 +82,10 @@ export interface ClearOwnHireOpinionData {
 
 export interface ClearQualityData {
   type: typeof CLEAR_QUALITY_DATA;
+}
+
+export interface ClearLeadershipData {
+  type: typeof CLEAR_LEADERSHIP_DATA;
 }
 
 export interface SetFirstName {
@@ -159,6 +168,16 @@ export interface SetQualityComment {
   payload: string;
 }
 
+export interface SetLeadershipMark {
+  type: typeof SET_LEADERSHIP_MARK;
+  payload: number;
+}
+
+export interface SetLeadershipComment {
+  type: typeof SET_LEADERSHIP_COMMENT;
+  payload: string;
+}
+
 export type ReviewActionType = ClearInitialData
   | ClearTasks
   | ClearStrengths
@@ -168,6 +187,7 @@ export type ReviewActionType = ClearInitialData
   | ClearActivityData
   | ClearOwnHireOpinionData
   | ClearQualityData
+  | ClearLeadershipData
   | SetFirstName
   | SetLastName
   | SetCompany
@@ -183,4 +203,6 @@ export type ReviewActionType = ClearInitialData
   | SetOwnHireOpinionMark
   | SetOwnHireOpinionComment
   | SetQualityMark
-  | SetQualityComment;
+  | SetQualityComment
+  | SetLeadershipMark
+  | SetLeadershipComment;
