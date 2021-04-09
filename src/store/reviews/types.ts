@@ -5,6 +5,7 @@ export const CLEAR_IMPROVEMENTS = 'CLEAR_IMPROVEMENTS';
 export const CLEAR_RESULTS = 'CLEAR_RESULTS';
 export const CLEAR_LEVEL_DATA = 'CLEAR_LEVEL_DATA';
 export const CLEAR_ACTIVITY_DATA = 'CLEAR_ACTIVITY_DATA';
+export const CLEAR_OWN_HIRE_OPINION_DATA = 'CLEAR_OWN_HIRE_OPINION_DATA';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME';
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_COMPANY = 'SET_COMPANY';
@@ -17,6 +18,8 @@ export const SET_LEVEL_MARK = 'SET_LEVEL_MARK';
 export const SET_LEVEL_COMMENT = 'SET_LEVEL_COMMENT';
 export const SET_ACTIVITY_MARK = 'SET_ACTIVITY_MARK';
 export const SET_ACTIVITY_COMMENT = 'SET_ACTIVITY_COMMENT';
+export const SET_OWN_HIRE_OPINION_MARK = 'SET_OWN_HIRE_OPINION_MARK';
+export const SET_OWN_HIRE_OPINION_COMMENT = 'SET_OWN_HIRE_OPINION_COMMENT';
 
 export interface ReviewState {
   firstName: string;
@@ -31,6 +34,8 @@ export interface ReviewState {
   levelComment: string;
   activityMark: number;
   activityComment: string;
+  ownHireOpinionMark: number;
+  ownHireOpinionComment: string;
 }
 
 export interface ClearInitialData {
@@ -59,6 +64,10 @@ export interface ClearLevelData {
 
 export interface ClearActivityData {
   type: typeof CLEAR_ACTIVITY_DATA;
+}
+
+export interface ClearOwnHireOpinionData {
+  type: typeof CLEAR_OWN_HIRE_OPINION_DATA;
 }
 
 export interface SetFirstName {
@@ -121,6 +130,16 @@ export interface SetActivityComment {
   payload: string;
 }
 
+export interface SetOwnHireOpinionMark {
+  type: typeof SET_OWN_HIRE_OPINION_MARK;
+  payload: number;
+}
+
+export interface SetOwnHireOpinionComment {
+  type: typeof SET_OWN_HIRE_OPINION_COMMENT;
+  payload: string;
+}
+
 export type ReviewActionType = ClearInitialData
   | ClearTasks
   | ClearStrengths
@@ -128,6 +147,7 @@ export type ReviewActionType = ClearInitialData
   | ClearResults
   | ClearLevelData
   | ClearActivityData
+  | ClearOwnHireOpinionData
   | SetFirstName
   | SetLastName
   | SetCompany
@@ -139,4 +159,6 @@ export type ReviewActionType = ClearInitialData
   | SetLevelMark
   | SetLevelComment
   | SetActivityMark
-  | SetActivityComment;
+  | SetActivityComment
+  | SetOwnHireOpinionMark
+  | SetOwnHireOpinionComment;

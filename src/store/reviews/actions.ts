@@ -7,6 +7,7 @@ import {
   CLEAR_RESULTS,
   CLEAR_LEVEL_DATA,
   CLEAR_ACTIVITY_DATA,
+  CLEAR_OWN_HIRE_OPINION_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -18,7 +19,9 @@ import {
   SET_LEVEL_MARK,
   SET_LEVEL_COMMENT,
   SET_ACTIVITY_MARK,
-  SET_ACTIVITY_COMMENT
+  SET_ACTIVITY_COMMENT,
+  SET_OWN_HIRE_OPINION_MARK,
+  SET_OWN_HIRE_OPINION_COMMENT
 } from './types';
 
 export const clearInitialData = (): ReviewActionType => ({
@@ -47,6 +50,10 @@ export const clearLevelData = (): ReviewActionType => ({
 
 export const clearActivityData = (): ReviewActionType => ({
   type: CLEAR_ACTIVITY_DATA
+});
+
+export const clearOwnHireOpinionData = (): ReviewActionType => ({
+  type: CLEAR_OWN_HIRE_OPINION_DATA
 });
 
 export const setReviewFirstName = (payload: string): ReviewActionType => ({
@@ -106,5 +113,15 @@ export const setReviewActivityMark = (payload: number): ReviewActionType => ({
 
 export const setReviewActivityComment = (payload: string): ReviewActionType => ({
   type: SET_ACTIVITY_COMMENT,
+  payload
+});
+
+export const setReviewOwnHireOpinionMark = (payload: number): ReviewActionType => ({
+  type: SET_OWN_HIRE_OPINION_MARK,
+  payload
+});
+
+export const setReviewOwnHireOpinionComment = (payload: string): ReviewActionType => ({
+  type: SET_OWN_HIRE_OPINION_COMMENT,
   payload
 });

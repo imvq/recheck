@@ -8,6 +8,7 @@ import {
   CLEAR_RESULTS,
   CLEAR_LEVEL_DATA,
   CLEAR_ACTIVITY_DATA,
+  CLEAR_OWN_HIRE_OPINION_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -19,7 +20,9 @@ import {
   SET_LEVEL_MARK,
   SET_LEVEL_COMMENT,
   SET_ACTIVITY_MARK,
-  SET_ACTIVITY_COMMENT
+  SET_ACTIVITY_COMMENT,
+  SET_OWN_HIRE_OPINION_MARK,
+  SET_OWN_HIRE_OPINION_COMMENT
 } from './types';
 
 const initialState: ReviewState = {
@@ -34,7 +37,9 @@ const initialState: ReviewState = {
   levelMark: 0,
   levelComment: '',
   activityMark: 0,
-  activityComment: ''
+  activityComment: '',
+  ownHireOpinionMark: 0,
+  ownHireOpinionComment: ''
 };
 
 export const reviewsReducer = (
@@ -81,6 +86,12 @@ export const reviewsReducer = (
         ...state,
         activityMark: initialState.activityMark,
         activityComment: initialState.activityComment
+      };
+    case CLEAR_OWN_HIRE_OPINION_DATA:
+      return {
+        ...state,
+        ownHireOpinionMark: initialState.ownHireOpinionMark,
+        ownHireOpinionComment: initialState.ownHireOpinionComment
       };
     case SET_FIRST_NAME:
       return {
@@ -141,6 +152,16 @@ export const reviewsReducer = (
       return {
         ...state,
         activityComment: action.payload
+      };
+    case SET_OWN_HIRE_OPINION_MARK:
+      return {
+        ...state,
+        ownHireOpinionMark: action.payload
+      };
+    case SET_OWN_HIRE_OPINION_COMMENT:
+      return {
+        ...state,
+        ownHireOpinionComment: action.payload
       };
     default:
       return state;

@@ -74,6 +74,7 @@ export const Label = styled.span<{ isEnlarged?: boolean; }>`
   width: ${props => (!props.isEnlarged ? cssVarsLocal.defaultWidth : '10rem')};
   text-align: center;
   font-size: 1.1rem;
+  line-height: 1.2rem;
 `;
 
 export const TitleWrapper = styled(LabelsWrapper)`

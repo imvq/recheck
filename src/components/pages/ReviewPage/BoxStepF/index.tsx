@@ -33,7 +33,7 @@ const labels = [
 ];
 
 /**
- * Review box with question about what results the andidate ahieved.
+ * Review box with question about the candidate's activity.
  */
 const BoxStepB = (props: IProps) => {
   const activityHandler = (event: TextAreaEvent) => textAreaHandler(

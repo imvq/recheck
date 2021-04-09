@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 
 import {
-  AppState, clearResults, clearLevelData, setReviewLevelMark, setReviewLevelComment
+  AppState, clearActivityData, clearOwnHireOpinionData,
+  setReviewOwnHireOpinionMark, setReviewOwnHireOpinionComment
 } from 'store';
 import { TextAreaEvent } from 'utils/types.common';
 import { textAreaHandler } from 'utils/functions';
@@ -15,34 +16,36 @@ import {
 } from '../BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
-  levelMark: store.reviews.levelMark,
-  levelComment: store.reviews.levelComment
+  ownHireOpinionMark: store.reviews.ownHireOpinionMark,
+  ownHireOpinionComment: store.reviews.ownHireOpinionComment
 });
 
 const mapDispatchToProps: IDispatchProps = {
-  clearResults,
-  clearLevelData,
-  setLevelMark: setReviewLevelMark,
-  setLevelComment: setReviewLevelComment,
+  clearActivityData,
+  clearOwnHireOpinionData,
+  setOwnHireOpinionMark: setReviewOwnHireOpinionMark,
+  setOwnHireOpinionComment: setReviewOwnHireOpinionComment,
 };
 
 const labels = [
-  'Недостаточно',
-  'Нормально',
-  'Выше ожиданий'
+  'Нет',
+  'Да, но есть вопросы',
+  'Точно да'
 ];
 
 /**
- * Review box with question about the candidate's level.
+ * Review box with question about what results the andidate ahieved.
  */
 const BoxStepB = (props: IProps) => {
-  const levelHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setLevelComment);
+  const ownHireOpinionHandler = (event: TextAreaEvent) => textAreaHandler(
+    event, props.setOwnHireOpinionComment
+  );
 
-  const canProceed = !!props.levelMark && !!props.levelComment;
+  const canProceed = !!props.ownHireOpinionMark && !!props.ownHireOpinionComment;
 
   const returnHandler = () => {
-    props.clearResults();
-    props.clearLevelData();
+    props.clearActivityData();
+    props.clearOwnHireOpinionData();
     props.onBack();
   };
 
@@ -57,13 +60,13 @@ const BoxStepB = (props: IProps) => {
       <MarkSelectorWrapper>
         <MarkSelectorDescriptionWrapper>
           <MarkSelectorDescription>
-            Оцените уровень знаний для должности, на которой был кандидат
+            Вы бы взяли/рекомендовали этого кандидата на аналогичную работу?
           </MarkSelectorDescription>
         </MarkSelectorDescriptionWrapper>
-        <MarkSelector labels={labels} setMark={props.setLevelMark} />
+        <MarkSelector hasEnlargedLabels labels={labels} setMark={props.setOwnHireOpinionMark} />
       </MarkSelectorWrapper>
       <InputGroupWrapper>
-        <CommentArea placeholder='Прокомментируйте свой ответ' onChange={levelHandler} />
+        <CommentArea placeholder='Прокомментируйте свой ответ' onChange={ownHireOpinionHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
