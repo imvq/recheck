@@ -9,9 +9,9 @@ import CustomButton from 'components/shared/CustomButton';
 import MarkSelector from '../MarkSelector';
 import { IProps, IStateProps, IDispatchProps } from './types';
 import {
-  BoxBaseWrapper, ButtonGroupWrapper, TextArea,
+  BoxBaseWrapper, ButtonGroupWrapper, CommentArea,
   MarkSelectorDescription, MarkSelectorDescriptionWrapper, MarkSelectorWrapper,
-  InputGroupWrapper, InputDescriptionWrapper, InputDescription
+  InputGroupWrapper
 } from '../BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
@@ -63,7 +63,7 @@ const BoxStepB = (props: IProps) => {
         <MarkSelector labels={labels} setMark={props.setLevelMark} />
       </MarkSelectorWrapper>
       <InputGroupWrapper>
-        <TextArea onChange={tasksHandler} />
+        <CommentArea placeholder='Прокомментируйте свой ответ' onChange={tasksHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>

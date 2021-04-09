@@ -87,3 +87,7 @@ export const TextArea = styled.textarea`
   min-height: 20rem;
   font-family: Open Sans;
 `;
+
+export const CommentArea = styled(TextArea)`
+  min-height: 12rem;
+`;
