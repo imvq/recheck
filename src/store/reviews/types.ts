@@ -1,12 +1,14 @@
 export const CLEAR_INITIAL_DATA = 'CLEAR_INITIAL_DATA';
 export const CLEAR_TASKS = 'CLEAR_TASKS';
 export const CLEAR_STRENGTHS = 'CLEAR_STRENGTHS';
+export const CLEAR_IMPROVEMENTS = 'CLEAR_IMPROVEMENTS';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME';
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_COMPANY = 'SET_COMPANY';
 export const SET_BOUNDS = 'SET_BOUNDS';
 export const SET_TASKS = 'SET_TASKS';
 export const SET_STRENGTHS = 'SET_STRENGTHS';
+export const SET_IMPROVEMENTS = 'SET_IMPROVEMENTS';
 
 export interface ReviewState {
   firstName: string;
@@ -15,6 +17,7 @@ export interface ReviewState {
   bounds: string;
   tasks: string;
   strengths: string;
+  improvements: string;
 }
 
 export interface ClearInitialData {
@@ -23,6 +26,10 @@ export interface ClearInitialData {
 
 export interface ClearTasks {
   type: typeof CLEAR_TASKS;
+}
+
+export interface ClearImprovements {
+  type: typeof CLEAR_IMPROVEMENTS;
 }
 
 export interface ClearStrengths {
@@ -59,12 +66,19 @@ export interface SetStrengths {
   payload: string;
 }
 
+export interface SetImprovements {
+  type: typeof SET_IMPROVEMENTS;
+  payload: string;
+}
+
 export type ReviewActionType = ClearInitialData
   | ClearTasks
   | ClearStrengths
+  | ClearImprovements
   | SetFirstName
   | SetLastName
   | SetCompany
   | SetBounds
   | SetTasks
-  | SetStrengths;
+  | SetStrengths
+  | SetImprovements;

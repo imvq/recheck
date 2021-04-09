@@ -4,12 +4,14 @@ import {
   CLEAR_INITIAL_DATA,
   CLEAR_TASKS,
   CLEAR_STRENGTHS,
+  CLEAR_IMPROVEMENTS,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
   SET_BOUNDS,
   SET_TASKS,
-  SET_STRENGTHS
+  SET_STRENGTHS,
+  SET_IMPROVEMENTS
 } from './types';
 
 const initialState: ReviewState = {
@@ -18,7 +20,8 @@ const initialState: ReviewState = {
   company: '',
   bounds: '',
   tasks: '',
-  strengths: ''
+  strengths: '',
+  improvements: ''
 };
 
 export const reviewsReducer = (
@@ -43,6 +46,11 @@ export const reviewsReducer = (
       return {
         ...state,
         strengths: ''
+      };
+    case CLEAR_IMPROVEMENTS:
+      return {
+        ...state,
+        improvements: ''
       };
     case SET_FIRST_NAME:
       return {
@@ -73,6 +81,11 @@ export const reviewsReducer = (
       return {
         ...state,
         strengths: action.payload
+      };
+    case SET_IMPROVEMENTS:
+      return {
+        ...state,
+        improvements: action.payload
       };
     default:
       return state;
