@@ -44,7 +44,7 @@ export const InputGroupWrapper = styled.div`
 export const ButtonGroupWrapper = styled.div`
   width: 35rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: .8rem;
 `;
 

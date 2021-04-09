@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   display: grid;
   grid-template:
     'Header'
-    'Content'
+    'Content' 1fr
     'Footer';
 `;
 
@@ -30,8 +30,8 @@ export const AdaptedFooter = styled(Footer)`
 `;
 
 export const ContentWrapper = styled.div`
+  grid-area: Content;
   height: fit-content;
-  min-height: calc(100vh - 8rem - 17.5rem);
   box-sizing: border-box;
   padding: 2rem 20rem 5rem;
   display: flex;

@@ -25,6 +25,7 @@ export default (props: IProps) => {
         height={props.height}
         color={props.color}
         backgroundColor={props.backgroundColor}
+        isHollow={props.isHollow}
         fontSize={props.fontSize}
         isHovered={isHovered}
         isActive={isActive}
@@ -33,11 +34,13 @@ export default (props: IProps) => {
         <RoundedAreaLeft
           height={props.height}
           backgroundColor={props.backgroundColor}
+          isHollow={props.isHollow}
         />
         {props.children}
         <RoundedAreaRight
           height={props.height}
           backgroundColor={props.backgroundColor}
+          isHollow={props.isHollow}
         />
       </ButtonContentArea>
     </Wrapper>

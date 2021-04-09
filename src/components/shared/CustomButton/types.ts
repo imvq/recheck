@@ -5,6 +5,7 @@ export interface IStyledOwnProps {
   color?: string;
   backgroundColor?: string;
   fontSize?: string;
+  isHollow?: boolean;
   isHovered: boolean;
   isActive: boolean;
   isDisabled: boolean;
