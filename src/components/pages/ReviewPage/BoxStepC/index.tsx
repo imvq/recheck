@@ -27,7 +27,9 @@ const mapDispatchToProps: IDispatchProps = {
  * Review box with question about what the candidate can improve.
  */
 const BoxStepB = (props: IProps) => {
-  const tasksHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setImprovements);
+  const improvementsHandler = (event: TextAreaEvent) => textAreaHandler(
+    event, props.setImprovements
+  );
 
   const canProceed = !!props.improvements;
 
@@ -51,7 +53,7 @@ const BoxStepB = (props: IProps) => {
             Какие знания и навыки можно улучшить кандидату, чтобы работать лучше?
           </InputDescription>
         </InputDescriptionWrapper>
-        <TextArea onChange={tasksHandler} />
+        <TextArea onChange={improvementsHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>

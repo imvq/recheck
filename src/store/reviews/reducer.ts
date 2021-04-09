@@ -7,6 +7,7 @@ import {
   CLEAR_IMPROVEMENTS,
   CLEAR_RESULTS,
   CLEAR_LEVEL_DATA,
+  CLEAR_ACTIVITY_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -16,7 +17,9 @@ import {
   SET_IMPROVEMENTS,
   SET_RESULTS,
   SET_LEVEL_MARK,
-  SET_LEVEL_COMMENT
+  SET_LEVEL_COMMENT,
+  SET_ACTIVITY_MARK,
+  SET_ACTIVITY_COMMENT
 } from './types';
 
 const initialState: ReviewState = {
@@ -29,7 +32,9 @@ const initialState: ReviewState = {
   improvements: '',
   results: '',
   levelMark: 0,
-  levelComment: ''
+  levelComment: '',
+  activityMark: 0,
+  activityComment: ''
 };
 
 export const reviewsReducer = (
@@ -70,6 +75,12 @@ export const reviewsReducer = (
         ...state,
         levelMark: initialState.levelMark,
         levelComment: initialState.levelComment
+      };
+    case CLEAR_ACTIVITY_DATA:
+      return {
+        ...state,
+        activityMark: initialState.activityMark,
+        activityComment: initialState.activityComment
       };
     case SET_FIRST_NAME:
       return {
@@ -120,6 +131,16 @@ export const reviewsReducer = (
       return {
         ...state,
         levelComment: action.payload
+      };
+    case SET_ACTIVITY_MARK:
+      return {
+        ...state,
+        activityMark: action.payload
+      };
+    case SET_ACTIVITY_COMMENT:
+      return {
+        ...state,
+        activityComment: action.payload
       };
     default:
       return state;

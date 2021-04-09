@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import {
-  AppState, clearResults, clearLevelData, setReviewLevelMark, setReviewLevelComment
+  AppState, clearLevelData, clearActivityData, setReviewActivityMark, setReviewActivityComment
 } from 'store';
 import { TextAreaEvent } from 'utils/types.common';
 import { textAreaHandler } from 'utils/functions';
@@ -15,34 +15,36 @@ import {
 } from '../BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
-  levelMark: store.reviews.levelMark,
-  levelComment: store.reviews.levelComment
+  activityMark: store.reviews.activityMark,
+  activityComment: store.reviews.activityComment
 });
 
 const mapDispatchToProps: IDispatchProps = {
-  clearResults,
   clearLevelData,
-  setLevelMark: setReviewLevelMark,
-  setLevelComment: setReviewLevelComment,
+  clearActivityData,
+  setActivityMark: setReviewActivityMark,
+  setActivityComment: setReviewActivityComment,
 };
 
 const labels = [
-  'Недостаточно',
-  'Нормально',
-  'Выше ожиданий'
+  'Недостаточная заинтересованность работой',
+  'Есть необходимая вовлечённость',
+  'Большая мотивация и проактивность'
 ];
 
 /**
  * Review box with question about what results the andidate ahieved.
  */
 const BoxStepB = (props: IProps) => {
-  const levelHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setLevelComment);
+  const activityHandler = (event: TextAreaEvent) => textAreaHandler(
+    event, props.setActivityComment
+  );
 
-  const canProceed = !!props.levelMark && !!props.levelComment;
+  const canProceed = !!props.activityMark && !!props.activityComment;
 
   const returnHandler = () => {
-    props.clearResults();
     props.clearLevelData();
+    props.clearActivityData();
     props.onBack();
   };
 
@@ -57,13 +59,13 @@ const BoxStepB = (props: IProps) => {
       <MarkSelectorWrapper>
         <MarkSelectorDescriptionWrapper>
           <MarkSelectorDescription>
-            Оцените уровень знаний для должности, на которой был кандидат
+            Оцените мотивированность и проктивность кандидата в работе
           </MarkSelectorDescription>
         </MarkSelectorDescriptionWrapper>
-        <MarkSelector labels={labels} setMark={props.setLevelMark} />
+        <MarkSelector labels={labels} setMark={props.setActivityMark} />
       </MarkSelectorWrapper>
       <InputGroupWrapper>
-        <CommentArea placeholder='Прокомментируйте свой ответ' onChange={levelHandler} />
+        <CommentArea placeholder='Прокомментируйте свой ответ' onChange={activityHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>

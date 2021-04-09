@@ -27,7 +27,7 @@ const mapDispatchToProps: IDispatchProps = {
  * Review box with question about what results the andidate ahieved.
  */
 const BoxStepB = (props: IProps) => {
-  const tasksHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setResults);
+  const resultsHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setResults);
 
   const canProceed = !!props.results;
 
@@ -51,7 +51,7 @@ const BoxStepB = (props: IProps) => {
             Расскажите про результаты работы, которых достиг кандидат
           </InputDescription>
         </InputDescriptionWrapper>
-        <TextArea onChange={tasksHandler} />
+        <TextArea onChange={resultsHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>

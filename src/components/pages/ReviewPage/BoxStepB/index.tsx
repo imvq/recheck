@@ -27,7 +27,7 @@ const mapDispatchToProps: IDispatchProps = {
  * Review box with question about candidate strengths.
  */
 const BoxStepB = (props: IProps) => {
-  const tasksHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setStrengths);
+  const strengthsHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setStrengths);
 
   const canProceed = !!props.strengths;
 
@@ -49,7 +49,7 @@ const BoxStepB = (props: IProps) => {
         <InputDescriptionWrapper>
           <InputDescription>Опишите сильные стороны кандидата в работе</InputDescription>
         </InputDescriptionWrapper>
-        <TextArea onChange={tasksHandler} />
+        <TextArea onChange={strengthsHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>

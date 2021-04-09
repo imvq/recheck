@@ -4,6 +4,7 @@ export const CLEAR_STRENGTHS = 'CLEAR_STRENGTHS';
 export const CLEAR_IMPROVEMENTS = 'CLEAR_IMPROVEMENTS';
 export const CLEAR_RESULTS = 'CLEAR_RESULTS';
 export const CLEAR_LEVEL_DATA = 'CLEAR_LEVEL_DATA';
+export const CLEAR_ACTIVITY_DATA = 'CLEAR_ACTIVITY_DATA';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME';
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_COMPANY = 'SET_COMPANY';
@@ -14,6 +15,8 @@ export const SET_IMPROVEMENTS = 'SET_IMPROVEMENTS';
 export const SET_RESULTS = 'SET_RESULTS';
 export const SET_LEVEL_MARK = 'SET_LEVEL_MARK';
 export const SET_LEVEL_COMMENT = 'SET_LEVEL_COMMENT';
+export const SET_ACTIVITY_MARK = 'SET_ACTIVITY_MARK';
+export const SET_ACTIVITY_COMMENT = 'SET_ACTIVITY_COMMENT';
 
 export interface ReviewState {
   firstName: string;
@@ -26,6 +29,8 @@ export interface ReviewState {
   results: string;
   levelMark: number;
   levelComment: string;
+  activityMark: number;
+  activityComment: string;
 }
 
 export interface ClearInitialData {
@@ -50,6 +55,10 @@ export interface ClearResults {
 
 export interface ClearLevelData {
   type: typeof CLEAR_LEVEL_DATA;
+}
+
+export interface ClearActivityData {
+  type: typeof CLEAR_ACTIVITY_DATA;
 }
 
 export interface SetFirstName {
@@ -92,14 +101,24 @@ export interface SetResults {
   payload: string;
 }
 
+export interface SetLevelMark {
+  type: typeof SET_LEVEL_MARK;
+  payload: number;
+}
+
 export interface SetLevelComment {
   type: typeof SET_LEVEL_COMMENT;
   payload: string;
 }
 
-export interface SetLevelMark {
-  type: typeof SET_LEVEL_MARK;
+export interface SetActivityMark {
+  type: typeof SET_ACTIVITY_MARK;
   payload: number;
+}
+
+export interface SetActivityComment {
+  type: typeof SET_ACTIVITY_COMMENT;
+  payload: string;
 }
 
 export type ReviewActionType = ClearInitialData
@@ -108,6 +127,7 @@ export type ReviewActionType = ClearInitialData
   | ClearImprovements
   | ClearResults
   | ClearLevelData
+  | ClearActivityData
   | SetFirstName
   | SetLastName
   | SetCompany
@@ -117,4 +137,6 @@ export type ReviewActionType = ClearInitialData
   | SetImprovements
   | SetResults
   | SetLevelMark
-  | SetLevelComment;
+  | SetLevelComment
+  | SetActivityMark
+  | SetActivityComment;
