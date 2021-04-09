@@ -1,24 +1,37 @@
-import { useState } from 'react';
+import { connect } from 'react-redux';
 
+import { AppState, clearInitialData, setReviewTasks } from 'store';
 import { TextAreaEvent } from 'utils/types.common';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
-import { IProps } from './types';
+import { IProps, IStateProps, IDispatchProps } from './types';
 import {
   BoxBaseWrapper,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, TextArea,
   ButtonGroupWrapper
 } from '../BoxBase';
 
-export default (props: IProps) => {
-  const [tasks, setTasks] = useState('');
+const mapStateToProps = (store: AppState): IStateProps => ({
+  tasks: store.reviews.tasks
+});
 
-  const tasksHandler = (event: TextAreaEvent) => textAreaHandler(event, setTasks);
+const mapDispatchToProps: IDispatchProps = {
+  clearInitialData,
+  setTasks: setReviewTasks
+};
 
-  const canProceed = !!tasks;
+const BoxStepA = (props: IProps) => {
+  const tasksHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setTasks);
+
+  const canProceed = !!props.tasks;
+
+  const returnHandler = () => {
+    props.clearInitialData();
+    props.setTasks('');
+    props.onBack();
+  };
 
   const proceedIfAllowed = () => {
-    // TODO: update the state.
     if (canProceed) {
       props.onNextStep();
     }
@@ -33,7 +46,7 @@ export default (props: IProps) => {
         <TextArea onChange={tasksHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
-        <CustomButton isHollow isDisabled={false} onClick={props.onBack}>
+        <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
           Назад
         </CustomButton>
         <CustomButton isDisabled={!canProceed} onClick={proceedIfAllowed}>
@@ -43,3 +56,5 @@ export default (props: IProps) => {
     </BoxBaseWrapper>
   );
 };
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoxStepA);

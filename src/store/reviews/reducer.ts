@@ -1,6 +1,7 @@
 import {
   ReviewState,
   ReviewActionType,
+  CLEAR_INITIAL_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -23,6 +24,14 @@ export const reviewsReducer = (
   action: ReviewActionType
 ): ReviewState => {
   switch (action.type) {
+    case CLEAR_INITIAL_DATA:
+      return {
+        ...state,
+        firstName: '',
+        lastName: '',
+        company: '',
+        bounds: ''
+      };
     case SET_FIRST_NAME:
       return {
         ...state,
