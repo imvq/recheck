@@ -20,6 +20,7 @@ export default (props: IProps & { hasEnlargedLabels?: boolean; }) => {
       <PipelineWrapper>
         {[...Array(10).keys()].map(key => (
           <StyledPoint
+            key={key}
             onClick={() => {
               setSelected(key + 1);
               props.setMark(key + 1);
@@ -30,11 +31,11 @@ export default (props: IProps & { hasEnlargedLabels?: boolean; }) => {
             {key + 1}
           </StyledPoint>
         ))}
-        {[...Array(9).keys()].map(key => (<Pipe isFilled={selected > key + 1} />))}
+        {[...Array(9).keys()].map(key => (<Pipe key={key} isFilled={selected > key + 1} />))}
       </PipelineWrapper>
       <LabelsWrapper>
         {props.labels.map(label => (
-          <Label isEnlarged={props.hasEnlargedLabels}>{label}</Label>
+          <Label key={label} isEnlarged={props.hasEnlargedLabels}>{label}</Label>
         ))}
       </LabelsWrapper>
     </Wrapper>
