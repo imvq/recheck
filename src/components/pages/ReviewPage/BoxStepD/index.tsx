@@ -26,7 +26,7 @@ const mapDispatchToProps: IDispatchProps = {
 /**
  * Review box with question about what results the andidate ahieved.
  */
-const BoxStepB = (props: IProps) => {
+const BoxStepD = (props: IProps) => {
   const resultsHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setResults);
 
   const canProceed = !!props.results;
@@ -65,4 +65,4 @@ const BoxStepB = (props: IProps) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoxStepB);
+export default connect(mapStateToProps, mapDispatchToProps)(BoxStepD);

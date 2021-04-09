@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 
 import {
-  AppState, clearResults, clearLevelData, setReviewLevelMark, setReviewLevelComment
+  AppState, clearOwnHireOpinionData, clearQualityData,
+  setReviewQualityMark, setReviewQualityComment
 } from 'store';
 import { TextAreaEvent } from 'utils/types.common';
 import { textAreaHandler } from 'utils/functions';
@@ -15,34 +16,36 @@ import {
 } from '../BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
-  levelMark: store.reviews.levelMark,
-  levelComment: store.reviews.levelComment
+  qualityMark: store.reviews.qualityMark,
+  qualityComment: store.reviews.qualityComment
 });
 
 const mapDispatchToProps: IDispatchProps = {
-  clearResults,
-  clearLevelData,
-  setLevelMark: setReviewLevelMark,
-  setLevelComment: setReviewLevelComment,
+  clearOwnHireOpinionData,
+  clearQualityData,
+  setQualityMark: setReviewQualityMark,
+  setQualityComment: setReviewQualityComment,
 };
 
 const labels = [
-  'Недостаточно',
-  'Нормально',
-  'Выше ожиданий'
+  'Часто возникают ошибки',
+  'Ошибки возможны',
+  'Очень качественная работа'
 ];
 
 /**
- * Review box with question about the candidate's level.
+ * Review box with question about what the candidate's work quality.
  */
-const BoxStepE = (props: IProps) => {
-  const levelHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setLevelComment);
+const BoxStepH = (props: IProps) => {
+  const qualityHandler = (event: TextAreaEvent) => textAreaHandler(
+    event, props.setQualityComment
+  );
 
-  const canProceed = !!props.levelMark && !!props.levelComment;
+  const canProceed = !!props.qualityMark && !!props.qualityComment;
 
   const returnHandler = () => {
-    props.clearResults();
-    props.clearLevelData();
+    props.clearOwnHireOpinionData();
+    props.clearQualityData();
     props.onBack();
   };
 
@@ -57,13 +60,13 @@ const BoxStepE = (props: IProps) => {
       <MarkSelectorWrapper>
         <MarkSelectorDescriptionWrapper>
           <MarkSelectorDescription>
-            Оцените уровень знаний для должности, на которой был кандидат
+            Насколько качественно кандидат выполняет свою работу?
           </MarkSelectorDescription>
         </MarkSelectorDescriptionWrapper>
-        <MarkSelector labels={labels} setMark={props.setLevelMark} />
+        <MarkSelector hasEnlargedLabels labels={labels} setMark={props.setQualityMark} />
       </MarkSelectorWrapper>
       <InputGroupWrapper>
-        <CommentArea placeholder='Прокомментируйте свой ответ' onChange={levelHandler} />
+        <CommentArea placeholder='Прокомментируйте свой ответ' onChange={qualityHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
@@ -77,4 +80,4 @@ const BoxStepE = (props: IProps) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoxStepE);
+export default connect(mapStateToProps, mapDispatchToProps)(BoxStepH);

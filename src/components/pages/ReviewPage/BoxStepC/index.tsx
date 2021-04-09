@@ -26,7 +26,7 @@ const mapDispatchToProps: IDispatchProps = {
 /**
  * Review box with question about what the candidate can improve.
  */
-const BoxStepB = (props: IProps) => {
+const BoxStepC = (props: IProps) => {
   const improvementsHandler = (event: TextAreaEvent) => textAreaHandler(
     event, props.setImprovements
   );
@@ -67,4 +67,4 @@ const BoxStepB = (props: IProps) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoxStepB);
+export default connect(mapStateToProps, mapDispatchToProps)(BoxStepC);

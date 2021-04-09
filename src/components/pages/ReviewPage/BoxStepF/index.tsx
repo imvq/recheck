@@ -35,7 +35,7 @@ const labels = [
 /**
  * Review box with question about the candidate's activity.
  */
-const BoxStepB = (props: IProps) => {
+const BoxStepF = (props: IProps) => {
   const activityHandler = (event: TextAreaEvent) => textAreaHandler(
     event, props.setActivityComment
   );
@@ -79,4 +79,4 @@ const BoxStepB = (props: IProps) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoxStepB);
+export default connect(mapStateToProps, mapDispatchToProps)(BoxStepF);

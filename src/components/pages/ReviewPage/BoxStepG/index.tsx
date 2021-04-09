@@ -34,9 +34,9 @@ const labels = [
 ];
 
 /**
- * Review box with question about what results the andidate ahieved.
+ * Review box with question about hiring of the candidate.
  */
-const BoxStepB = (props: IProps) => {
+const BoxStepG = (props: IProps) => {
   const ownHireOpinionHandler = (event: TextAreaEvent) => textAreaHandler(
     event, props.setOwnHireOpinionComment
   );
@@ -80,4 +80,4 @@ const BoxStepB = (props: IProps) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoxStepB);
+export default connect(mapStateToProps, mapDispatchToProps)(BoxStepG);
