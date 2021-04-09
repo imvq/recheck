@@ -27,7 +27,8 @@
     "allowJs": true, /* Allow javascript files to be compiled. */
     "strict": true, /* Enable all strict type-checking options. */
     "noEmit": true, /* Do not emit output. */
-    "jsx": "react-jsx" /* JSX code generation. */
+    "jsx": "react-jsx", /* JSX code generation. */
+    "downlevelIteration": true
   },
   "include": [
     "src"

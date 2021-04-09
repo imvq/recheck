@@ -6,6 +6,7 @@ import {
   CLEAR_STRENGTHS,
   CLEAR_IMPROVEMENTS,
   CLEAR_RESULTS,
+  CLEAR_LEVEL_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -13,7 +14,9 @@ import {
   SET_TASKS,
   SET_STRENGTHS,
   SET_IMPROVEMENTS,
-  SET_RESULTS
+  SET_RESULTS,
+  SET_LEVEL_MARK,
+  SET_LEVEL_COMMENT
 } from './types';
 
 const initialState: ReviewState = {
@@ -24,7 +27,9 @@ const initialState: ReviewState = {
   tasks: '',
   strengths: '',
   improvements: '',
-  results: ''
+  results: '',
+  levelMark: 0,
+  levelComment: ''
 };
 
 export const reviewsReducer = (
@@ -35,30 +40,36 @@ export const reviewsReducer = (
     case CLEAR_INITIAL_DATA:
       return {
         ...state,
-        firstName: '',
-        lastName: '',
-        company: '',
-        bounds: ''
+        firstName: initialState.firstName,
+        lastName: initialState.lastName,
+        company: initialState.company,
+        bounds: initialState.bounds
       };
     case CLEAR_TASKS:
       return {
         ...state,
-        tasks: ''
+        tasks: initialState.tasks
       };
     case CLEAR_STRENGTHS:
       return {
         ...state,
-        strengths: ''
+        strengths: initialState.strengths
       };
     case CLEAR_IMPROVEMENTS:
       return {
         ...state,
-        improvements: ''
+        improvements: initialState.improvements
       };
     case CLEAR_RESULTS:
       return {
         ...state,
-        results: ''
+        results: initialState.results
+      };
+    case CLEAR_LEVEL_DATA:
+      return {
+        ...state,
+        levelMark: initialState.levelMark,
+        levelComment: initialState.levelComment
       };
     case SET_FIRST_NAME:
       return {
@@ -99,6 +110,16 @@ export const reviewsReducer = (
       return {
         ...state,
         results: action.payload
+      };
+    case SET_LEVEL_MARK:
+      return {
+        ...state,
+        levelMark: action.payload
+      };
+    case SET_LEVEL_COMMENT:
+      return {
+        ...state,
+        levelComment: action.payload
       };
     default:
       return state;

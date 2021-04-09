@@ -5,6 +5,7 @@ import {
   CLEAR_STRENGTHS,
   CLEAR_IMPROVEMENTS,
   CLEAR_RESULTS,
+  CLEAR_LEVEL_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -12,7 +13,9 @@ import {
   SET_TASKS,
   SET_STRENGTHS,
   SET_IMPROVEMENTS,
-  SET_RESULTS
+  SET_RESULTS,
+  SET_LEVEL_MARK,
+  SET_LEVEL_COMMENT
 } from './types';
 
 export const clearInitialData = (): ReviewActionType => ({
@@ -33,6 +36,10 @@ export const clearStrengths = (): ReviewActionType => ({
 
 export const clearResults = (): ReviewActionType => ({
   type: CLEAR_RESULTS
+});
+
+export const clearLevelData = (): ReviewActionType => ({
+  type: CLEAR_LEVEL_DATA
 });
 
 export const setReviewFirstName = (payload: string): ReviewActionType => ({
@@ -72,5 +79,15 @@ export const setReviewImprovements = (payload: string): ReviewActionType => ({
 
 export const setReviewResults = (payload: string): ReviewActionType => ({
   type: SET_RESULTS,
+  payload
+});
+
+export const setReviewLevelMark = (payload: number): ReviewActionType => ({
+  type: SET_LEVEL_MARK,
+  payload
+});
+
+export const setReviewLevelComment = (payload: string): ReviewActionType => ({
+  type: SET_LEVEL_COMMENT,
   payload
 });

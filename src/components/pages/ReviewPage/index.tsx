@@ -6,6 +6,7 @@ import BoxStepA from './BoxStepA';
 import BoxStepB from './BoxStepB';
 import BoxStepC from './BoxStepC';
 import BoxStepD from './BoxStepD';
+import BoxStepE from './BoxStepE';
 import {
   Wrapper, AdaptedHeader, AdaptedFooter,
   ContentWrapper,
@@ -27,6 +28,7 @@ export default () => {
     <BoxStepB onNextStep={proceed} onBack={comeback} />,
     <BoxStepC onNextStep={proceed} onBack={comeback} />,
     <BoxStepD onNextStep={proceed} onBack={comeback} />,
+    <BoxStepE onNextStep={proceed} onBack={comeback} />,
     <div>End</div>
   ];
 

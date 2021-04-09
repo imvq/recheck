@@ -3,6 +3,7 @@ export const CLEAR_TASKS = 'CLEAR_TASKS';
 export const CLEAR_STRENGTHS = 'CLEAR_STRENGTHS';
 export const CLEAR_IMPROVEMENTS = 'CLEAR_IMPROVEMENTS';
 export const CLEAR_RESULTS = 'CLEAR_RESULTS';
+export const CLEAR_LEVEL_DATA = 'CLEAR_LEVEL_DATA';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME';
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_COMPANY = 'SET_COMPANY';
@@ -11,6 +12,8 @@ export const SET_TASKS = 'SET_TASKS';
 export const SET_STRENGTHS = 'SET_STRENGTHS';
 export const SET_IMPROVEMENTS = 'SET_IMPROVEMENTS';
 export const SET_RESULTS = 'SET_RESULTS';
+export const SET_LEVEL_MARK = 'SET_LEVEL_MARK';
+export const SET_LEVEL_COMMENT = 'SET_LEVEL_COMMENT';
 
 export interface ReviewState {
   firstName: string;
@@ -21,6 +24,8 @@ export interface ReviewState {
   strengths: string;
   improvements: string;
   results: string;
+  levelMark: number;
+  levelComment: string;
 }
 
 export interface ClearInitialData {
@@ -41,6 +46,10 @@ export interface ClearStrengths {
 
 export interface ClearResults {
   type: typeof CLEAR_RESULTS;
+}
+
+export interface ClearLevelData {
+  type: typeof CLEAR_LEVEL_DATA;
 }
 
 export interface SetFirstName {
@@ -83,11 +92,22 @@ export interface SetResults {
   payload: string;
 }
 
+export interface SetLevelComment {
+  type: typeof SET_LEVEL_COMMENT;
+  payload: string;
+}
+
+export interface SetLevelMark {
+  type: typeof SET_LEVEL_MARK;
+  payload: number;
+}
+
 export type ReviewActionType = ClearInitialData
   | ClearTasks
   | ClearStrengths
   | ClearImprovements
   | ClearResults
+  | ClearLevelData
   | SetFirstName
   | SetLastName
   | SetCompany
@@ -95,4 +115,6 @@ export type ReviewActionType = ClearInitialData
   | SetTasks
   | SetStrengths
   | SetImprovements
-  | SetResults;
+  | SetResults
+  | SetLevelMark
+  | SetLevelComment;

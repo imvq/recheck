@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { mixins } from 'utils/style.common';
 
 export const BoxBaseWrapper = styled.div`
-  width: 50rem;
+  width: 60rem;
   height: fit-content;
   background-color: #f0f3ff;
   border-radius: 1.4rem;
@@ -35,10 +35,10 @@ export const Subtitle = styled.h2`
 `;
 
 export const InputGroupWrapper = styled.div`
-  width: 35rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  padding: .8rem;
+  padding: .8rem 2.8rem .8rem 2.8rem;
 `;
 
 export const ButtonGroupWrapper = styled.div`
@@ -46,6 +46,24 @@ export const ButtonGroupWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   padding: .8rem;
+`;
+
+export const MarkSelectorDescriptionWrapper = styled.div`
+  width: 100%;
+  padding: 0 0 2rem 3.8rem;
+`;
+
+export const MarkSelectorDescription = styled.span`
+  font-size: 1.25rem;
+  font-weight: 600;
+`;
+
+export const MarkSelectorWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0 2rem;
 `;
 
 export const InputDescriptionWrapper = styled.div`
