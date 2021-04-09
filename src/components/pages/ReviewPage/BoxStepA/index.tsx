@@ -33,7 +33,7 @@ export default (props: IProps) => {
         <TextArea onChange={tasksHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
-        <CustomButton isDisabled={false} onClick={props.comeback}>
+        <CustomButton isDisabled={false} onClick={props.onBack}>
           Назад
         </CustomButton>
         <CustomButton isDisabled={!canProceed} onClick={proceedIfAllowed}>

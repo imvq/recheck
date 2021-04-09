@@ -20,7 +20,7 @@ export default () => {
 
   const boxes = [
     <BoxStepInitial onNextStep={proceed} />,
-    <BoxStepA onNextStep={proceed} />,
+    <BoxStepA onNextStep={proceed} onBack={comeback} />,
     <div>Hello</div>
   ];
 

@@ -1,3 +1,3 @@
 import { IProps as IPropsBase } from '../BoxBase/types';
 
-export type IProps = IPropsBase & { comeback(): void; }
+export type IProps = IPropsBase & { onBack(): void; }
