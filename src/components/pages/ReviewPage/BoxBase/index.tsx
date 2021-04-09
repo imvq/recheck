@@ -38,7 +38,8 @@ export const InputGroupWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: .8rem 2.8rem .8rem 2.8rem;
+  box-sizing: border-box;
+  padding: .8rem 1.9rem .8rem 1.9rem;
 `;
 
 export const ButtonGroupWrapper = styled.div`

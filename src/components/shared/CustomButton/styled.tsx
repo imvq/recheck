@@ -5,7 +5,7 @@ import { IStyledProps } from './types';
 
 const cssVarsLocal = {
   defaultBackgroundColor: '#33c7ba',
-  defaultHeight: '3.437rem'
+  defaultHeight: '3rem'
 };
 
 type WrapperProps = Pick<IStyledProps, 'isDisabled'>;
