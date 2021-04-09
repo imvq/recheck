@@ -70,8 +70,8 @@ export const LabelsWrapper = styled.div`
   padding-top: 1.5rem;
 `;
 
-export const Label = styled.span`
-  width: ${cssVarsLocal.defaultWidth};
+export const Label = styled.span<{ isEnlarged?: boolean; }>`
+  width: ${props => (!props.isEnlarged ? cssVarsLocal.defaultWidth : '10rem')};
   text-align: center;
   font-size: 1.1rem;
 `;

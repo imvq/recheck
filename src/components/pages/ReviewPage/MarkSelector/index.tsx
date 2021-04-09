@@ -9,7 +9,7 @@ import {
 /**
  * A panel with 10 marks available for selection.
  */
-export default (props: IProps) => {
+export default (props: IProps & { hasEnlargedLabels?: boolean; }) => {
   const [selected, setSelected] = useState(0);
 
   return (
@@ -33,7 +33,9 @@ export default (props: IProps) => {
         {[...Array(9).keys()].map(key => (<Pipe isFilled={selected > key + 1} />))}
       </PipelineWrapper>
       <LabelsWrapper>
-        {props.labels.map(label => <Label>{label}</Label>)}
+        {props.labels.map(label => (
+          <Label isEnlarged={props.hasEnlargedLabels}>{label}</Label>
+        ))}
       </LabelsWrapper>
     </Wrapper>
   );

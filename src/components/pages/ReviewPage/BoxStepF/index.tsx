@@ -62,7 +62,7 @@ const BoxStepB = (props: IProps) => {
             Оцените мотивированность и проктивность кандидата в работе
           </MarkSelectorDescription>
         </MarkSelectorDescriptionWrapper>
-        <MarkSelector labels={labels} setMark={props.setActivityMark} />
+        <MarkSelector hasEnlargedLabels labels={labels} setMark={props.setActivityMark} />
       </MarkSelectorWrapper>
       <InputGroupWrapper>
         <CommentArea placeholder='Прокомментируйте свой ответ' onChange={activityHandler} />
