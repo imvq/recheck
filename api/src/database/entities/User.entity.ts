@@ -9,13 +9,9 @@ export default class User {
   @PrimaryColumn('varchar', { length: 30, nullable: false })
   profileId: string = '';
 
-  @Index({ unique: true })
-  @Column('varchar', { length: 30, nullable: false })
-  linkedIn: string = '';
-
-  @Column('int', { nullable: false })
+  @Column('int', { nullable: false, default: 0 })
   reviewsAvailable: number = 0;
 
-  @Column({ type: 'timestamptz' })
+  @Column({ type: 'timestamptz', default: 'NOW()' })
   lastUpdatedAt: Date = new Date();
 }

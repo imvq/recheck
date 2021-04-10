@@ -16,10 +16,7 @@ import UserManager from '@database/managers/UserManager';
 export default class UserService {
   public async registerUser(registrationDto: Dtos.RegistrationDto) : Promise<void> {
     try {
-      UserManager.createUser(
-        registrationDto.profileId,
-        registrationDto.linkedIn
-      );
+      UserManager.createUser(registrationDto.profileId);
     } catch (error) {
       Logger.ifdev()?.err(error.message);
       throw new Errors.InternalServerError('Internal database error.');

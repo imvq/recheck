@@ -3,9 +3,11 @@ import { getConnection, createConnection, Connection } from 'typeorm';
 import Logger from '@common/Logger';
 import config from './config';
 import UserManager from './managers/UserManager';
+import ReviewManager from './managers/ReviewManager';
 
 function loadRepositories() {
   UserManager.loadRepository();
+  ReviewManager.loadRepository();
 }
 
 /**

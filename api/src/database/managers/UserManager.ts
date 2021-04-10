@@ -14,8 +14,8 @@ export default class UserManager {
     UserManager.repo = getRepository(User);
   }
 
-  public static createUser = async (profileId: string, linkedIn: string) => (
-    UserManager.repo?.save(UserManager.repo.create({ profileId, linkedIn }))
+  public static createUser = async (profileId: string) => (
+    UserManager.repo?.save(UserManager.repo.create({ profileId }))
   )
 
   public static getUser = async (profileId: string) => (

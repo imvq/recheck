@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm';
 
 import User from './User.entity';
 import Workplace from './Workplace.entity';
@@ -14,11 +14,11 @@ export default class Review {
   @OneToOne(_ => User, { nullable: false }) @JoinColumn()
   author: User = new User();
 
-  @OneToOne(_ => User, { nullable: true }) @JoinColumn()
-  target: User = new User();
+  @Column('varchar', { length: 30, nullable: true })
+  targetId: string = '';
 
-  @OneToOne(_ => Workplace, { nullable: true }) @JoinColumn()
-  workplace: Workplace = new Workplace();
+  @Column('text', { nullable: true })
+  workplace: string = '';
 
   @Column('varchar', { length: 50, nullable: false })
   bounds: string = '';
