@@ -1,14 +1,13 @@
 import { Provider } from 'react-redux';
+import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { store as appStore } from 'store';
-import OAuthFlowManager from 'components/shared/OAuthFlowManager';
 import PageStartupManager from 'components/shared/PageStartupManager';
 import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
 import GlobalStyle from 'components/shared/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
-import LinkedInScraperPage from 'components/pages/LinkedInScraperPage';
 import ProfilePage from 'components/pages/ProfilePage';
 import ReviewPage from 'components/pages/ReviewPage';
 import NotFoundPage from 'components/pages/NotFoundPage';
@@ -27,7 +26,7 @@ export default () => (
           {/* Home page. */}
           {/* Use StartupManager to do checkAuth request to LinkedIn. */}
           {/* The result of the check is stored so that no check will be further. */}
-          <Route path='/' exact>
+          <Route exact path='/'>
             <PageForceUnlocker />
             <PageStartupManager />
             <PageLockManager>
@@ -35,23 +34,11 @@ export default () => (
             </PageLockManager>
           </Route>
 
-          {/* Authorization redirect page. */}
-          <Route path='/auth/confirm/rollback/:rollbackTo' exact>
-            <OAuthFlowManager />
-            <PageLockManager />
-          </Route>
-
-          {/* In case the user is authorzied first time */}
-          {/* we need to get its LinkedIn profile page URL. */}
-          <Route path='/scrape-linkedin' exact>
-            <LinkedInScraperPage />
-          </Route>
-
           {/* Profile page. */}
           {/* Use StartupManager to do checkAuth request to LinkedIn. */}
           {/* Check is needed to determine if we can show the page to user. */}
           {/* The result of the check is stored so that no check will be further. */}
-          <Route path='/profile' exact>
+          <Route exact path='/profile'>
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
             <PageLockManager hideContentOnLock>
               <ProfilePage />
@@ -59,11 +46,16 @@ export default () => (
           </Route>
 
           {/* Review page. Used to add new reviews. */}
-          <Route path='/review' exact>
+          <Route exact path='/review'>
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
             <PageLockManager hideContentOnLock>
               <ReviewPage />
             </PageLockManager>
+          </Route>
+
+          {/* LinkedIn's OAuth2 window. */}
+          <Route exact path='/linkedin'>
+            <LinkedInPopUp />
           </Route>
 
           {/* 404 page. Used when proceed to invalid location. */}

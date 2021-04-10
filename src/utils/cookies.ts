@@ -10,5 +10,6 @@ export const cookieManager = new Cookies();
  */
 
 export const cookiesList = {
-  bearer: 'BEARER' as const
+  accessTokenLinkedIn: 'li_at' as const,
+  accessTokenFacebook: 'fa_at' as const
 };

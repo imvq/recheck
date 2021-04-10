@@ -1,10 +1,7 @@
-import {
-  AuthState, AuthActionType, SET_IS_AUTHORIZED, SET_IS_REGISTERED
-} from './types';
+import { AuthState, AuthActionType, SET_IS_AUTHORIZED } from './types';
 
 const initialState: AuthState = {
-  isAuthorized: null,
-  isRegistered: null
+  isAuthorized: null
 };
 
 export function authReducer(
@@ -16,11 +13,6 @@ export function authReducer(
       return {
         ...state,
         isAuthorized: action.payload
-      };
-    case SET_IS_REGISTERED:
-      return {
-        ...state,
-        isRegistered: action.payload
       };
     default:
       return state;

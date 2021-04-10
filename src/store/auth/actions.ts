@@ -4,19 +4,13 @@ import { Dispatch } from 'redux';
 import { cookieManager } from 'utils/cookies';
 import { mapProfileDtoToState } from 'utils/functions';
 import { AppActionType } from '../types';
-import { AuthActionType, SET_IS_AUTHORIZED, SET_IS_REGISTERED } from './types';
+import { AuthActionType, SET_IS_AUTHORIZED } from './types';
 import { setCurrentProfileInfo } from '../profile/actions';
 
 export const setIsAuthorized = (isAuthorized: boolean)
   : AuthActionType => ({
   type: SET_IS_AUTHORIZED,
   payload: isAuthorized
-});
-
-export const setIsRegistered = (isRegistered: boolean)
-  : AuthActionType => ({
-  type: SET_IS_REGISTERED,
-  payload: isRegistered
 });
 
 export const checkAuthorization = () => (dispatch: Dispatch<AppActionType>) => {
@@ -27,9 +21,17 @@ export const checkAuthorization = () => (dispatch: Dispatch<AppActionType>) => {
     )
       .then((profileResponse) => {
         const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
+        const isRegistered = profileResponse.data.isRegistered as boolean;
         dispatch(setCurrentProfileInfo(normalizedProfileInfo));
         dispatch(setIsAuthorized(true));
-        // dispatch(setIsRegistered(profileResponse.data.isRegistered));
+
+        const apiBase = process.env.REACT_APP_API;
+        const apiNewUserPath = `${apiBase}/auth/register`;
+
+        // Register the user if it is not registered in our app yet.
+        if (isRegistered) {
+          axios.post(apiNewUserPath, { profileId: normalizedProfileInfo.currentId });
+        }
       })
       .catch(() => dispatch(setIsAuthorized(false)));
   } else {
