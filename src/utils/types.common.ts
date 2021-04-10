@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { AxiosResponse } from 'axios';
 
 import { ReviewStatus } from './enums';
 
@@ -7,6 +8,7 @@ import { ReviewStatus } from './enums';
 export type Nullable<T> = T | null;
 export type Optional<T> = T | undefined;
 export type Maybe<T> = Nullable<T> | Optional<T>;
+export type APIResponse<TDto = any> = Promise<AxiosResponse<TDto>>;
 
 export interface OptionType {
   key: any;

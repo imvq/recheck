@@ -5,35 +5,21 @@ import { LinkedIn, LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import linkedinImage from 'react-linkedin-login-oauth2/assets/linkedin.png';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-import { cookieManager, cookiesList } from 'utils/cookies';
 import { ReactComponent as DoorSvg } from 'assets/images/shared/LoginBadge/Door.svg';
 import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
-import { AppState, setPageLocked } from 'store';
+import { AppState, setPageLocked, setIsAuthorized, setCurrentProfileInfo } from 'store';
 import { IProps, IStateProps, IDispatchProps } from './types';
-import {
-  Wrapper, LoginButton, Menu, MenuEntry, SvgWrapper
-} from './styled';
+import { Wrapper, LoginButton, Menu, MenuEntry, SvgWrapper } from './styled';
+import { onExit, onError, onSuccessLinkedIn } from '../functions';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   isAuthorized: store.auth.isAuthorized
 });
 
 const mapDispatchToProps: IDispatchProps = {
-  lockPage: setPageLocked
-};
-
-const onExit = (lockPageCallback: () => void) => {
-  lockPageCallback();
-  cookieManager.remove(cookiesList.accessTokenLinkedIn);
-  cookieManager.remove(cookiesList.accessTokenFacebook);
-  window.location.replace(window.location.origin);
-};
-
-const onSuccessLinkedIn = (code: string) => {
-  const apiBase = process.env.REACT_APP_API;
-  const apiConfirmPath = `${apiBase}/auth/confirm`;
-  const apiProfilePath = `${apiBase}/user/profile`;
-  const redirectedPath = `${window.location.origin}/linkedin`;
+  lockPage: setPageLocked,
+  setIsAuthorized,
+  setCurrentProfileInfo
 };
 
 /**
@@ -78,8 +64,12 @@ const LoginBadge: FunctionComponent<IProps> = (props) => {
               <LinkedIn
                 clientId={process.env.REACT_APP_LINKEDIN_APP_CLIENT_ID}
                 redirectUri={`${window.location.origin}/linkedin`}
+                onFailure={onError}
+                onSuccess={(data: { code: string }) => {
+                  onSuccessLinkedIn(data.code, props.setIsAuthorized, props.setCurrentProfileInfo);
+                }}
               >
-                <img src={linkedinImage} alt='Войти через LinkedIn' style={{ maxWidth: '180px' }} />
+                <img src={linkedinImage} alt='Войти через LinkedIn' style={{ maxWidth: '15rem' }} />
               </LinkedIn>
             )}
         </Menu>

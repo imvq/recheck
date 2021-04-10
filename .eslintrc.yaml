@@ -26,30 +26,32 @@ parserOptions:
     jsx: true
 
 rules:
-  '@typescript-eslint/no-shadow': error
-  react/jsx-props-no-spreading: 0
-  react/require-default-props: 0
-  react/destructuring-assignment: 0
-  react/jsx-filename-extension: [2, extensions: ['.js', '.jsx', '.ts', 'tsx']]
-  react/react-in-jsx-scope: 0
-  jsx-quotes: ['error', 'prefer-single']
-  dot-notation: 0
-  comma-dangle: 0
-  arrow-parens: 0
   arrow-body-style: 0
-  max-classes-per-file: 0
-  prefer-destructuring: 0
-  no-bitwise: 0
-  no-use-before-define: 0
-  no-useless-constructor: 0
-  no-nested-ternary: 0
-  no-empty-function: 0
-  no-unused-vars: 0
-  no-plusplus: 0
-  no-shadow: 0
-  react/prop-types: 0
+  arrow-parens: 0
+  comma-dangle: 0
+  dot-notation: 0
   import/extensions: 0
-  import/prefer-default-export: 0
   import/no-absolute-path: 0
   import/no-extraneous-dependencies: 0
   import/no-named-as-default: 0
+  import/prefer-default-export: 0
+  jsx-quotes: ['error', 'prefer-single']
+  max-classes-per-file: 0
+  no-bitwise: 0
+  no-empty-function: 0
+  no-nested-ternary: 0
+  no-plusplus: 0
+  no-shadow: 0
+  no-unused-vars: 0
+  no-use-before-define: 0
+  no-useless-constructor: 0
+  object-curly-newline:
+    ['error', { 'ImportDeclaration': 'never', 'ExportDeclaration': 'never' }]
+  prefer-destructuring: 0
+  react/destructuring-assignment: 0
+  react/jsx-filename-extension: [2, extensions: ['.js', '.jsx', '.ts', 'tsx']]
+  react/jsx-props-no-spreading: 0
+  react/prop-types: 0
+  react/react-in-jsx-scope: 0
+  react/require-default-props: 0
+  '@typescript-eslint/no-shadow': error
