@@ -1,8 +1,6 @@
 import InfoEasementBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoEasementBoard.svg';
 import { Wrapper } from './styled';
-import {
-  BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title, Text
-} from '../BaseSubsection/styled';
+import { BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title, Text } from '../BaseSubsection/styled';
 
 export default () => (
   <Wrapper>

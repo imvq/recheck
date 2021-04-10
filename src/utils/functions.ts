@@ -1,6 +1,4 @@
-import {
-  ProfileDto, ProfileInfo, InputEvent, TextAreaEvent, Setter
-} from './types.common';
+import { ProfileDto, ProfileInfo, InputEvent, TextAreaEvent, Setter } from './types.common';
 import { ScreenBreakpoint } from './enums';
 
 /**

@@ -5,9 +5,7 @@ import { trimText } from 'utils/functions';
 import { Nullable, OptionType } from 'utils/types.common';
 import { IProps } from './types';
 import CustomOption from './CustomOption';
-import {
-  Wrapper, SelectedItemWrapper, ArrowUp, ArrowDown, OptionsBadgesWrapper
-} from './styled';
+import { Wrapper, SelectedItemWrapper, ArrowUp, ArrowDown, OptionsBadgesWrapper } from './styled';
 
 const CustomSelect = (props: IProps) => {
   const [isDimmed, setIsDimmed] = useState(true);

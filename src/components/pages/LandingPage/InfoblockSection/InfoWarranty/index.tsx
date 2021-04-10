@@ -1,8 +1,6 @@
 import InfoWarrantyBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoWarrantyBoard.svg';
 import { Wrapper } from './styled';
-import {
-  BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title, Text
-} from '../BaseSubsection/styled';
+import { BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title, Text } from '../BaseSubsection/styled';
 
 /**
  * Warranty info subsection.

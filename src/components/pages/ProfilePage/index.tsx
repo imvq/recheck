@@ -9,9 +9,7 @@ import Menu from './Menu';
 import ReviewsArea from './ReviewsArea';
 import HistoryArea from './HistoryArea';
 import AboutArea from './AboutArea';
-import {
-  Wrapper, TitleWrapper, AdaptedHeader, ContentWrapper
-} from './styled';
+import { Wrapper, TitleWrapper, AdaptedHeader, ContentWrapper } from './styled';
 
 import example from './exampleMyReview';
 import exampleHistory from './exampleHistory';

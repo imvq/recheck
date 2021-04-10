@@ -1,7 +1,5 @@
 import { IProps } from './types';
-import {
-  Wrapper, EntryWrapper, QuestionTitle, Answer
-} from './styled';
+import { Wrapper, EntryWrapper, QuestionTitle, Answer } from './styled';
 
 const questions = [
   'Какие задачи выполнял кандидат?',

@@ -1,5 +1,4 @@
 import { Link as RouterLink } from 'react-router-dom';
-import { Link as ScrollLink } from 'react-scroll';
 
 import {
   Wrapper, SectionWrapper, EmptyWrapper, InnerLogo, MenuEntryText,

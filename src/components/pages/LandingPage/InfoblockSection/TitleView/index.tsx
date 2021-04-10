@@ -1,6 +1,4 @@
-import {
-  Wrapper, TextWrapper, Text, TextColorpickMain, TextColorpickAux1
-} from './styled';
+import { Wrapper, TextWrapper, Text, TextColorpickMain, TextColorpickAux1 } from './styled';
 
 /**
  * Title of infoblock.

@@ -1,9 +1,7 @@
 import React from 'react';
 
 import DemoReviewCard from 'components/shared/DemoReviewCard';
-import {
-  Wrapper, JustificationWrapper, CardWrapper, ArrowLeft, ArrowRight
-} from './styled';
+import { Wrapper, JustificationWrapper, CardWrapper, ArrowLeft, ArrowRight } from './styled';
 import examples from './examples';
 
 /**

@@ -1,7 +1,5 @@
 import { IProps } from './types';
-import {
-  Wrapper, PhotoWrapper, Photo, ContentWrapper, Title, Entry
-} from './styled';
+import { Wrapper, PhotoWrapper, Photo, ContentWrapper, Title, Entry } from './styled';
 
 export default (props: IProps) => (
   <Wrapper>

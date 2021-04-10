@@ -1,9 +1,7 @@
 import { useState } from 'react';
 
 import { IProps } from './types';
-import {
-  Wrapper, RoundedAreaLeft, RoundedAreaRight, ButtonContentArea
-} from './styled';
+import { Wrapper, RoundedAreaLeft, RoundedAreaRight, ButtonContentArea } from './styled';
 
 /**
  * Custom button with website-wide styles.

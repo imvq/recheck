@@ -46,7 +46,13 @@ rules:
   no-use-before-define: 0
   no-useless-constructor: 0
   object-curly-newline:
-    ['error', { 'ImportDeclaration': 'never', 'ExportDeclaration': 'never' }]
+    [
+      'error',
+      {
+        'ImportDeclaration': { 'multiline': true },
+        'ExportDeclaration': { 'multiline': true },
+      },
+    ]
   prefer-destructuring: 0
   react/destructuring-assignment: 0
   react/jsx-filename-extension: [2, extensions: ['.js', '.jsx', '.ts', 'tsx']]

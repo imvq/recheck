@@ -1,8 +1,6 @@
 import { connect } from 'react-redux';
 
-import {
-  AppState, clearLeadershipData, clearAdviceData, setReviewAdviceComment
-} from 'store';
+import { AppState, clearLeadershipData, clearAdviceData, setReviewAdviceComment } from 'store';
 import { TextAreaEvent } from 'utils/types.common';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';

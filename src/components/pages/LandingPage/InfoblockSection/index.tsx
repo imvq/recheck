@@ -1,6 +1,4 @@
-import {
-  Wrapper, SubsectionsWrapper, InfoBlockDesktopOnlyWrapper
-} from './styled';
+import { Wrapper, SubsectionsWrapper, InfoBlockDesktopOnlyWrapper } from './styled';
 import TitleView from './TitleView';
 import InfoTimeSave from './InfoTimeSave';
 import InfoEasement from './InfoEasement';

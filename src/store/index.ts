@@ -1,7 +1,5 @@
 import thunkMiddlware, { ThunkMiddleware } from 'redux-thunk';
-import {
-  combineReducers, createStore, applyMiddleware, compose
-} from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 
 import { authReducer } from './auth/reducers';
 import { interactionStateReducer } from './interaction/reducers';
