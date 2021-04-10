@@ -11,6 +11,7 @@ import {
   CLEAR_OWN_HIRE_OPINION_DATA,
   CLEAR_QUALITY_DATA,
   CLEAR_LEADERSHIP_DATA,
+  CLEAR_ADVICE_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -28,7 +29,8 @@ import {
   SET_QUALITY_MARK,
   SET_QUALITY_COMMENT,
   SET_LEADERSHIP_MARK,
-  SET_LEADERSHIP_COMMENT
+  SET_LEADERSHIP_COMMENT,
+  SET_ADVICE_COMMENT
 } from './types';
 
 const initialState: ReviewState = {
@@ -49,7 +51,8 @@ const initialState: ReviewState = {
   qualityMark: 0,
   qualityComment: '',
   leadershipMark: 0,
-  leadershipComment: ''
+  leadershipComment: '',
+  adviceComment: ''
 };
 
 export const reviewsReducer = (
@@ -114,6 +117,11 @@ export const reviewsReducer = (
         ...state,
         leadershipMark: initialState.leadershipMark,
         leadershipComment: initialState.leadershipComment
+      };
+    case CLEAR_ADVICE_DATA:
+      return {
+        ...state,
+        adviceComment: initialState.adviceComment
       };
     case SET_FIRST_NAME:
       return {
@@ -204,6 +212,11 @@ export const reviewsReducer = (
       return {
         ...state,
         leadershipComment: action.payload
+      };
+    case SET_ADVICE_COMMENT:
+      return {
+        ...state,
+        adviceComment: action.payload
       };
     default:
       return state;

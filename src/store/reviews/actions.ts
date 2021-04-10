@@ -10,6 +10,7 @@ import {
   CLEAR_OWN_HIRE_OPINION_DATA,
   CLEAR_QUALITY_DATA,
   CLEAR_LEADERSHIP_DATA,
+  CLEAR_ADVICE_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -27,7 +28,8 @@ import {
   SET_QUALITY_MARK,
   SET_QUALITY_COMMENT,
   SET_LEADERSHIP_MARK,
-  SET_LEADERSHIP_COMMENT
+  SET_LEADERSHIP_COMMENT,
+  SET_ADVICE_COMMENT
 } from './types';
 
 export const clearInitialData = (): ReviewActionType => ({
@@ -68,6 +70,10 @@ export const clearQualityData = (): ReviewActionType => ({
 
 export const clearLeadershipData = (): ReviewActionType => ({
   type: CLEAR_LEADERSHIP_DATA
+});
+
+export const clearAdviceData = (): ReviewActionType => ({
+  type: CLEAR_ADVICE_DATA
 });
 
 export const setReviewFirstName = (payload: string): ReviewActionType => ({
@@ -157,5 +163,10 @@ export const setReviewLeadershipMark = (payload: number): ReviewActionType => ({
 
 export const setReviewLeadershipComment = (payload: string): ReviewActionType => ({
   type: SET_LEADERSHIP_COMMENT,
+  payload
+});
+
+export const setReviewAdviceComment = (payload: string): ReviewActionType => ({
+  type: SET_ADVICE_COMMENT,
   payload
 });

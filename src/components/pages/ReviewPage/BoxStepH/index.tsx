@@ -24,7 +24,7 @@ const mapDispatchToProps: IDispatchProps = {
   clearOwnHireOpinionData,
   clearQualityData,
   setQualityMark: setReviewQualityMark,
-  setQualityComment: setReviewQualityComment,
+  setQualityComment: setReviewQualityComment
 };
 
 const labels = [

@@ -8,6 +8,7 @@ export const CLEAR_ACTIVITY_DATA = 'CLEAR_ACTIVITY_DATA';
 export const CLEAR_OWN_HIRE_OPINION_DATA = 'CLEAR_OWN_HIRE_OPINION_DATA';
 export const CLEAR_QUALITY_DATA = 'CLEAR_QUALITY_DATA';
 export const CLEAR_LEADERSHIP_DATA = 'CLEAR_LEADERSHIP_DATA';
+export const CLEAR_ADVICE_DATA = 'CLEAR_ADVICE_DATA';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME';
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_COMPANY = 'SET_COMPANY';
@@ -26,6 +27,7 @@ export const SET_QUALITY_MARK = 'SET_QUALITY_MARK';
 export const SET_QUALITY_COMMENT = 'SET_QUALITY_COMMENT';
 export const SET_LEADERSHIP_MARK = 'SET_LEADERSHIP_MARK';
 export const SET_LEADERSHIP_COMMENT = 'SET_LEADERSHIP_COMMENT';
+export const SET_ADVICE_COMMENT = 'SET_ADVICE_COMMENT';
 
 export interface ReviewState {
   firstName: string;
@@ -46,6 +48,7 @@ export interface ReviewState {
   qualityComment: string;
   leadershipMark: number;
   leadershipComment: string;
+  adviceComment: string;
 }
 
 export interface ClearInitialData {
@@ -86,6 +89,10 @@ export interface ClearQualityData {
 
 export interface ClearLeadershipData {
   type: typeof CLEAR_LEADERSHIP_DATA;
+}
+
+export interface ClearAdviceData {
+  type: typeof CLEAR_ADVICE_DATA;
 }
 
 export interface SetFirstName {
@@ -178,6 +185,11 @@ export interface SetLeadershipComment {
   payload: string;
 }
 
+export interface SetAdviceComment {
+  type: typeof SET_ADVICE_COMMENT;
+  payload: string;
+}
+
 export type ReviewActionType = ClearInitialData
   | ClearTasks
   | ClearStrengths
@@ -188,6 +200,7 @@ export type ReviewActionType = ClearInitialData
   | ClearOwnHireOpinionData
   | ClearQualityData
   | ClearLeadershipData
+  | ClearAdviceData
   | SetFirstName
   | SetLastName
   | SetCompany
@@ -205,4 +218,5 @@ export type ReviewActionType = ClearInitialData
   | SetQualityMark
   | SetQualityComment
   | SetLeadershipMark
-  | SetLeadershipComment;
+  | SetLeadershipComment
+  | SetAdviceComment;

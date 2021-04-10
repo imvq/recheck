@@ -1,51 +1,41 @@
 import { connect } from 'react-redux';
 
 import {
-  AppState, clearQualityData, clearLeadershipData,
-  setReviewLeadershipMark, setReviewLeadershipComment
+  AppState, clearLeadershipData, clearAdviceData, setReviewAdviceComment
 } from 'store';
 import { TextAreaEvent } from 'utils/types.common';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
-import MarkSelector from '../MarkSelector';
 import { IProps, IStateProps, IDispatchProps } from './types';
 import {
   BoxBaseWrapper, ButtonGroupWrapper, CommentArea,
-  MarkSelectorDescription, MarkSelectorDescriptionWrapper, MarkSelectorWrapper,
+  InputDescription, InputDescriptionWrapper, Input,
   InputGroupWrapper
 } from '../BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
-  leadershipMark: store.reviews.leadershipMark,
-  leadershipComment: store.reviews.leadershipComment
+  adviceComment: store.reviews.adviceComment
 });
 
 const mapDispatchToProps: IDispatchProps = {
-  clearQualityData,
   clearLeadershipData,
-  setLeadershipMark: setReviewLeadershipMark,
-  setLeadershipComment: setReviewLeadershipComment
+  clearAdviceData,
+  setAdviceComment: setReviewAdviceComment
 };
 
-const labels = [
-  'Нет',
-  'Если улучшит свои качества',
-  'Да'
-];
-
 /**
- * Review box with question about what the candidate's leadership.
+ * Review box with an advice to the candidate.
  */
-const BoxStepI = (props: IProps) => {
+const BoxStepJ = (props: IProps) => {
   const leadershipHandler = (event: TextAreaEvent) => textAreaHandler(
-    event, props.setLeadershipComment
+    event, props.setAdviceComment
   );
 
-  const canProceed = !!props.leadershipMark && !!props.leadershipComment;
+  const canProceed = !!props.adviceComment;
 
   const returnHandler = () => {
-    props.clearQualityData();
     props.clearLeadershipData();
+    props.clearAdviceData();
     props.onBack();
   };
 
@@ -57,15 +47,12 @@ const BoxStepI = (props: IProps) => {
 
   return (
     <BoxBaseWrapper>
-      <MarkSelectorWrapper>
-        <MarkSelectorDescriptionWrapper>
-          <MarkSelectorDescription>
-            Может ли кандидат занимать руководящие должности?
-          </MarkSelectorDescription>
-        </MarkSelectorDescriptionWrapper>
-        <MarkSelector hasEnlargedLabels labels={labels} setMark={props.setLeadershipMark} />
-      </MarkSelectorWrapper>
       <InputGroupWrapper>
+        <InputDescriptionWrapper>
+          <InputDescription>
+            Какой совет вы можете дать будущему работодателю кандидата?
+          </InputDescription>
+        </InputDescriptionWrapper>
         <CommentArea placeholder='Прокомментируйте свой ответ' onChange={leadershipHandler} />
       </InputGroupWrapper>
       <ButtonGroupWrapper>
@@ -80,4 +67,4 @@ const BoxStepI = (props: IProps) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoxStepI);
+export default connect(mapStateToProps, mapDispatchToProps)(BoxStepJ);

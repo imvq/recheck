@@ -24,7 +24,7 @@ const mapDispatchToProps: IDispatchProps = {
   clearActivityData,
   clearOwnHireOpinionData,
   setOwnHireOpinionMark: setReviewOwnHireOpinionMark,
-  setOwnHireOpinionComment: setReviewOwnHireOpinionComment,
+  setOwnHireOpinionComment: setReviewOwnHireOpinionComment
 };
 
 const labels = [

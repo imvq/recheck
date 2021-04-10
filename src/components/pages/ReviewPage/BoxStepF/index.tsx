@@ -23,7 +23,7 @@ const mapDispatchToProps: IDispatchProps = {
   clearLevelData,
   clearActivityData,
   setActivityMark: setReviewActivityMark,
-  setActivityComment: setReviewActivityComment,
+  setActivityComment: setReviewActivityComment
 };
 
 const labels = [
