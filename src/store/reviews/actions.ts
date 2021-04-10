@@ -1,3 +1,8 @@
+import axios from 'axios';
+import { Dispatch } from 'redux';
+
+import { ReviewData } from 'utils/types.common';
+import { AppActionType } from '../types';
 import {
   ReviewActionType,
   CLEAR_INITIAL_DATA,
@@ -170,3 +175,24 @@ export const setReviewAdviceComment = (payload: string): ReviewActionType => ({
   type: SET_ADVICE_COMMENT,
   payload
 });
+
+export const createReview = (reviewData: ReviewData) => (
+  dispatch: Dispatch<AppActionType>
+) => {
+  axios.post(
+    `${process.env.REACT_APP_API}/review/create`,
+    { ...reviewData },
+    { withCredentials: true }
+  );
+  dispatch(clearInitialData());
+  dispatch(clearTasks());
+  dispatch(clearImprovements());
+  dispatch(clearStrengths());
+  dispatch(clearResults());
+  dispatch(clearLevelData());
+  dispatch(clearActivityData());
+  dispatch(clearOwnHireOpinionData());
+  dispatch(clearQualityData());
+  dispatch(clearLeadershipData());
+  dispatch(clearAdviceData());
+};
