@@ -14,14 +14,59 @@ export default class Review {
   @OneToOne(_ => User, { nullable: false }) @JoinColumn()
   author: User = new User();
 
-  @OneToOne(_ => User, { nullable: false }) @JoinColumn()
+  @OneToOne(_ => User, { nullable: true }) @JoinColumn()
   target: User = new User();
 
-  @OneToOne(_ => Workplace, { nullable: false }) @JoinColumn()
+  @OneToOne(_ => Workplace, { nullable: true }) @JoinColumn()
   workplace: Workplace = new Workplace();
 
-  @Column('varchar', { length: 200, nullable: false })
-  question1: string = '';
+  @Column('varchar', { length: 50, nullable: false })
+  bounds: string = '';
+
+  @Column('text', { nullable: false })
+  tasks: string = '';
+
+  @Column('text', { nullable: false })
+  strengths: string = '';
+
+  @Column('text', { nullable: false })
+  improvements: string = '';
+
+  @Column('text', { nullable: false })
+  results: string = '';
+
+  @Column('int', { nullable: false })
+  levelMark: number = 0;
+
+  @Column('text', { nullable: false })
+  levelComment: string = '';
+
+  @Column('int', { nullable: false })
+  activityMark: number = 0;
+
+  @Column('text', { nullable: false })
+  activityComment: string = '';
+
+  @Column('int', { nullable: false })
+  ownHireOpinionMark: number = 0;
+
+  @Column('text', { nullable: false })
+  ownHireOpinionComment: string = '';
+
+  @Column('int', { nullable: false })
+  qualityMark: number = 0;
+
+  @Column('text', { nullable: false })
+  qualityComment: string = '';
+
+  @Column('int', { nullable: false })
+  leadershipMark: number = 0;
+
+  @Column('text', { nullable: false })
+  leadershipComment: string = '';
+
+  @Column('text', { nullable: false })
+  adviceComment: string = '';
 
   /**
    * In progress: 0
