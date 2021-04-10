@@ -38,7 +38,18 @@ export function onSuccessLinkedIn(
           setCurrentProfileInfoCallback(normalizedProfileInfo);
           setIsAuthorizedCallback(true);
 
-          // TODO: register LinkedIn user.
+          // Register the user if it is not registered in our app yet.
+          if (!isRegistered) {
+            Api.registerProfile(normalizedProfileInfo.currentId)
+              .then(() => {
+                setCurrentProfileInfoCallback(normalizedProfileInfo);
+                setIsAuthorizedCallback(true);
+              })
+              .catch(() => setIsAuthorizedCallback(false));
+          } else {
+            setCurrentProfileInfoCallback(normalizedProfileInfo);
+            setIsAuthorizedCallback(true);
+          }
         }).catch(() => onError(setIsAuthorizedCallback));
     }).catch(() => onError(setIsAuthorizedCallback));
 }
