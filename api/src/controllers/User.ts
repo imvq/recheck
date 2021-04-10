@@ -25,10 +25,10 @@ export default class UserController {
   /**
    * Get user profile info form LinkedIn.
    */
-   @Path('/profile')
+   @Path('/profile/linkedin')
    @GET
-  public async getProfile(@Context context: ServiceContext)
+  public async getLinkedInProfile(@Context context: ServiceContext)
      : Promise<Types.GetProfileResponseDto> {
-    return this.injectedService.getProfile(context.request.cookies);
+    return this.injectedService.getLinkedInProfile(context.request.cookies);
   }
 }

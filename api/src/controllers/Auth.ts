@@ -15,10 +15,10 @@ export default class AuthController {
   /**
    * Exchange LinkedIn authorization code for an access token.
    */
-  @Path('/confirm')
+  @Path('/confirm/linkedin')
   @POST
-  public async exchangeAuthCode(data: Dtos.ExchangeAuthCodeDto)
-    : Promise<Types.ExchangeAuthCodeResponseDto> {
-    return this.injectedService.exchangeAuthCode(data);
+  public async exchangeLinkedInAuthCode(data: Dtos.ExchangeAuthCodeDto)
+    : Promise<Types.ExchangeLinkedInAuthCodeResponseDto> {
+    return this.injectedService.exchangeLinkedInAuthCode(data);
   }
 }

@@ -3,7 +3,6 @@ import axios, { AxiosResponse } from 'axios';
 
 import * as Constants from '@common/Constants';
 import * as Cookies from '@common/Cookies';
-import * as customErrors from '@common/errors';
 import Dtos from '@dto';
 import Types from '@types';
 import Utils from '@utils';
@@ -23,14 +22,14 @@ export default class UserService {
     }
   }
 
-  public async getProfile(cookies: Types.StringIndexable)
+  public async getLinkedInProfile(cookies: Types.StringIndexable)
     : Promise<Types.GetProfileResponseDto> {
     try {
-      if (!cookies[Cookies.BEARER]) {
+      if (!cookies[Cookies.LI_AT]) {
         throw new Errors.UnauthorizedError('No Bearer token provided');
       }
 
-      const config = Utils.createAuthConfig(cookies[Cookies.BEARER]);
+      const config = Utils.createAuthConfig(cookies[Cookies.LI_AT]);
       const { data: profile }: AxiosResponse<Types.ProfileDto> = await axios.get(
         Constants.PROFILE_URL, config
       );
@@ -53,6 +52,7 @@ export default class UserService {
         isRegistered: !!dbProfileRecord
       };
     } catch (error) {
+      Logger.ifdev()?.err(error);
       throw error instanceof Errors.UnauthorizedError ? error
         : new Errors.InternalServerError('Request limits breach.');
     }

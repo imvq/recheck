@@ -14,11 +14,17 @@ export default class Api {
     baseURL: process.env.REACT_APP_API
   });
 
+  public static getProfileLinkedIn(): APIResponse {
+    return Api.instance.get('/user/profile/linkedin', { withCredentials: true });
+  }
+
   public static confirmAuthLinkedIn(code: string): APIResponse {
     const redirectPath = `${window.location.origin}/linkedin`;
     const body = { code, redirectPath };
-    return Api.instance.post('/auth/confirm', body);
+    return Api.instance.post('/auth/confirm/linkedin', body);
   }
 
-  public static getProfile = () => Api.instance.get('/user/profile', { withCredentials: true });
+  public static registerProfile(profileId: string): APIResponse {
+    return Api.instance.post('/user/register', { profileId });
+  }
 }

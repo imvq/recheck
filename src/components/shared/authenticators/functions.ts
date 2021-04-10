@@ -27,11 +27,11 @@ export function onSuccessLinkedIn(
       const tokenExpiration = new Date(Date.now() + constants.MONTH_MS * 2);
       cookieManager.set(
         cookiesList.accessTokenLinkedIn,
-        confirmationResponse.data['BEARER'],
+        confirmationResponse.data[cookiesList.accessTokenLinkedIn],
         { path: '/', expires: tokenExpiration }
       );
 
-      Api.getProfile()
+      Api.getProfileLinkedIn()
         .then(profileResponse => {
           const isRegistered = profileResponse.data.isRegistered as boolean;
           const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);

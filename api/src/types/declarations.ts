@@ -28,8 +28,8 @@ export interface EmailDto {
   }[]
 }
 
-export interface ExchangeAuthCodeResponseDto {
-  'BEARER': string;
+export interface ExchangeLinkedInAuthCodeResponseDto {
+  'li_at': string;
 }
 
 export interface GetProfileResponseDto {

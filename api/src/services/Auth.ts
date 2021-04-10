@@ -12,8 +12,8 @@ import Logger from '@common/Logger';
  * Service in charge of authorization stuff.
  */
 export default class AuthService {
-  public async exchangeAuthCode(exchangeDto: Dtos.ExchangeAuthCodeDto)
-    : Promise<Types.ExchangeAuthCodeResponseDto> {
+  public async exchangeLinkedInAuthCode(exchangeDto: Dtos.ExchangeAuthCodeDto)
+    : Promise<Types.ExchangeLinkedInAuthCodeResponseDto> {
     try {
       const params = new URLSearchParams();
       params.append('grant_type', 'authorization_code');
@@ -24,7 +24,7 @@ export default class AuthService {
 
       const { data } = await axios.post(Constants.AUTH_URL, params, Utils.createUrlEncodedConfig());
 
-      return { [Cookies.BEARER]: data['access_token'] };
+      return { [Cookies.LI_AT]: data['access_token'] };
     } catch (error) {
       Logger.ifdev()?.log(JSON.stringify(error));
       throw error instanceof Errors.UnauthorizedError ? error

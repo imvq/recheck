@@ -64,6 +64,7 @@ const LoginBadge: FunctionComponent<IProps> = (props) => {
               <LinkedIn
                 clientId={process.env.REACT_APP_LINKEDIN_APP_CLIENT_ID}
                 redirectUri={`${window.location.origin}/linkedin`}
+                scope='r_emailaddress r_liteprofile'
                 onFailure={onError}
                 onSuccess={(data: { code: string }) => {
                   onSuccessLinkedIn(data.code, props.setIsAuthorized, props.setCurrentProfileInfo);
