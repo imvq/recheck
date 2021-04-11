@@ -80,10 +80,9 @@ const LoginBadge: FunctionComponent<IProps> = (props) => {
                 </LinkedIn>
                 <FacebookLogin
                   appId='754659201904610'
-                  autoLoad
                   fields='name,email,picture'
                   onClick={() => { alert('component clicked'); }}
-                  callback={() => { alert('callback'); }}
+                  callback={(result) => { alert(JSON.stringify(result)); }}
                 />
               </>
             )}
