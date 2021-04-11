@@ -1,6 +1,8 @@
+import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
+
 import Api from 'utils/api';
 import * as constants from 'utils/constants';
-import { ProfileInfo } from 'utils/types.common';
+import { Optional, ProfileInfo } from 'utils/types.common';
 import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
 
@@ -52,4 +54,29 @@ export function onSuccessLinkedIn(
           }
         }).catch(() => onError(setIsAuthorizedCallback));
     }).catch(() => onError(setIsAuthorizedCallback));
+}
+
+function isFacebookFailureResponse(result: ReactFacebookLoginInfo | ReactFacebookFailureResponse)
+  : result is ReactFacebookFailureResponse {
+  // 'status' is a field of ReactFacebookFailureResponse type.
+  return !!((result as ReactFacebookFailureResponse).status as Optional<string>);
+}
+
+export function onSuccessFacebook(
+  result: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
+  setIsAuthorizedCallback: (flag: boolean) => void,
+  setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
+) {
+  if (!isFacebookFailureResponse(result)) {
+    const oauthData = result as ReactFacebookLoginInfo;
+    const profileInfo: ProfileInfo = {
+      currentId: oauthData.userID,
+      currentName: oauthData.name || '',
+      currentEmail: oauthData.email || '',
+      currentPhotoUrl: oauthData.picture?.data.url || ''
+    };
+
+    setCurrentProfileInfoCallback(profileInfo);
+    setIsAuthorizedCallback(true);
+  }
 }

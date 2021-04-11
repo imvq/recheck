@@ -11,7 +11,7 @@ import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/Gr
 import { AppState, setPageLocked, setIsAuthorized, setCurrentProfileInfo } from 'store';
 import { IProps, IStateProps, IDispatchProps } from './types';
 import { Wrapper, LoginButton, Menu, MenuEntry, SvgWrapper } from './styled';
-import { onExit, onError, onSuccessLinkedIn } from '../functions';
+import { onExit, onError, onSuccessLinkedIn, onSuccessFacebook } from '../functions';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   isAuthorized: store.auth.isAuthorized
@@ -79,10 +79,13 @@ const LoginBadge: FunctionComponent<IProps> = (props) => {
                   <img src={linkedinImage} alt='Войти через LinkedIn' style={{ maxWidth: '15rem' }} />
                 </LinkedIn>
                 <FacebookLogin
-                  appId='754659201904610'
+                  appId={process.env.REACT_APP_FACEBOOK_APP_CLIENT_ID as string}
                   fields='name,email,picture'
-                  onClick={() => { alert('component clicked'); }}
-                  callback={(result) => { alert(JSON.stringify(result)); }}
+                  callback={(result) => onSuccessFacebook(
+                    result,
+                    props.setIsAuthorized,
+                    props.setCurrentProfileInfo
+                  )}
                 />
               </>
             )}
