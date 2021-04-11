@@ -4,6 +4,8 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import cors from 'cors';
 import http from 'http';
+import https from 'https';
+import fs from 'fs';
 import express, {
   Application,
   Handler,
@@ -28,7 +30,7 @@ export default class App {
 
   private port: number = Constants.DEFAULT_PORT;
 
-  private server: Types.Nullable<http.Server> = null;
+  private server: Types.Nullable<https.Server | http.Server> = null;
 
   public constructor(private readonly app: Application = express()) {
     this.resolveHost();
@@ -49,6 +51,23 @@ export default class App {
   public async start(): Promise<void> {
     return new Promise<void>((resolve) => {
       this.server = this.app.listen(this.port, this.host, () => {
+        Logger.ifdev()?.log(`Listening to ${this.host}:${this.port}`);
+        return resolve();
+      });
+    });
+  }
+
+  /**
+   * Start the application over self-signed SSL certificate.
+   */
+  public async dev(): Promise<void> {
+    return new Promise<void>((resolve) => {
+      this.server = https.createServer({
+        key: fs.readFileSync(process.env.SSL_KEY_PATH as string),
+        cert: fs.readFileSync(process.env.SSL_CRT_PATH as string)
+      }, this.app);
+
+      this.server.listen(this.port, this.host, () => {
         Logger.ifdev()?.log(`Listening to ${this.host}:${this.port}`);
         return resolve();
       });
