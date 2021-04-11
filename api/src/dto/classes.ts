@@ -37,6 +37,9 @@ export class ReviewDto {
     public qualityComment: string,
     public leadershipMark: string,
     public leadershipComment: string,
-    public adviceComment: string
+    public adviceComment: string,
+    public recommenderLink1: string,
+    public recommenderLink2: string,
+    public recommenderLink3: string
   ) {}
 }

@@ -67,9 +67,13 @@ export const MarkSelectorWrapper = styled.div`
   padding: 2rem 0 2rem;
 `;
 
-export const InputDescriptionWrapper = styled.div`
+const InputElementWrapper = styled.div`
   padding: 0 0 .5rem .8rem;
 `;
+
+export const InputDescriptionWrapper = styled(InputElementWrapper)``;
+
+export const InputWrapper = styled(InputElementWrapper)``;
 
 export const InputDescription = styled.span`
   font-size: 1.25rem;

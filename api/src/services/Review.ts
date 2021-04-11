@@ -14,7 +14,6 @@ export default class ReviewService {
       await ReviewManager.createReview(reviewData);
     } catch (error) {
       Logger.ifdev()?.err(error.message);
-      Logger.ifdev()?.log('Test');
       throw new Errors.InternalServerError('Internal database error.');
     }
   }

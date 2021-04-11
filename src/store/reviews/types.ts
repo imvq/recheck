@@ -9,6 +9,7 @@ export const CLEAR_OWN_HIRE_OPINION_DATA = 'CLEAR_OWN_HIRE_OPINION_DATA';
 export const CLEAR_QUALITY_DATA = 'CLEAR_QUALITY_DATA';
 export const CLEAR_LEADERSHIP_DATA = 'CLEAR_LEADERSHIP_DATA';
 export const CLEAR_ADVICE_DATA = 'CLEAR_ADVICE_DATA';
+export const CLEAR_RECOMMENDERS_DATA = 'CLEAR_RECOMMENDERS_DATA';
 export const SET_FIRST_NAME = 'SET_FIRST_NAME';
 export const SET_LAST_NAME = 'SET_LAST_NAME';
 export const SET_COMPANY = 'SET_COMPANY';
@@ -28,6 +29,9 @@ export const SET_QUALITY_COMMENT = 'SET_QUALITY_COMMENT';
 export const SET_LEADERSHIP_MARK = 'SET_LEADERSHIP_MARK';
 export const SET_LEADERSHIP_COMMENT = 'SET_LEADERSHIP_COMMENT';
 export const SET_ADVICE_COMMENT = 'SET_ADVICE_COMMENT';
+export const SET_RECOMMENDER_LINK1 = 'SET_RECOMMENDER_LINK1';
+export const SET_RECOMMENDER_LINK2 = 'SET_RECOMMENDER_LINK2';
+export const SET_RECOMMENDER_LINK3 = 'SET_RECOMMENDER_LINK3';
 
 export interface ReviewState {
   firstName: string;
@@ -49,6 +53,9 @@ export interface ReviewState {
   leadershipMark: number;
   leadershipComment: string;
   adviceComment: string;
+  recommenderLink1: string;
+  recommenderLink2: string;
+  recommenderLink3: string;
 }
 
 export interface ClearInitialData {
@@ -89,6 +96,10 @@ export interface ClearQualityData {
 
 export interface ClearLeadershipData {
   type: typeof CLEAR_LEADERSHIP_DATA;
+}
+
+export interface ClearRecommendersData {
+  type: typeof CLEAR_RECOMMENDERS_DATA;
 }
 
 export interface ClearAdviceData {
@@ -190,6 +201,21 @@ export interface SetAdviceComment {
   payload: string;
 }
 
+export interface SetRecommenderLink1 {
+  type: typeof SET_RECOMMENDER_LINK1;
+  payload: string;
+}
+
+export interface SetRecommenderLink2 {
+  type: typeof SET_RECOMMENDER_LINK2;
+  payload: string;
+}
+
+export interface SetRecommenderLink3 {
+  type: typeof SET_RECOMMENDER_LINK3;
+  payload: string;
+}
+
 export type ReviewActionType = ClearInitialData
   | ClearTasks
   | ClearStrengths
@@ -201,6 +227,7 @@ export type ReviewActionType = ClearInitialData
   | ClearQualityData
   | ClearLeadershipData
   | ClearAdviceData
+  | ClearRecommendersData
   | SetFirstName
   | SetLastName
   | SetCompany
@@ -219,4 +246,7 @@ export type ReviewActionType = ClearInitialData
   | SetQualityComment
   | SetLeadershipMark
   | SetLeadershipComment
-  | SetAdviceComment;
+  | SetAdviceComment
+  | SetRecommenderLink1
+  | SetRecommenderLink2
+  | SetRecommenderLink3;

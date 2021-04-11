@@ -12,6 +12,7 @@ import {
   CLEAR_QUALITY_DATA,
   CLEAR_LEADERSHIP_DATA,
   CLEAR_ADVICE_DATA,
+  CLEAR_RECOMMENDERS_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -30,7 +31,10 @@ import {
   SET_QUALITY_COMMENT,
   SET_LEADERSHIP_MARK,
   SET_LEADERSHIP_COMMENT,
-  SET_ADVICE_COMMENT
+  SET_ADVICE_COMMENT,
+  SET_RECOMMENDER_LINK1,
+  SET_RECOMMENDER_LINK2,
+  SET_RECOMMENDER_LINK3
 } from './types';
 
 const initialState: ReviewState = {
@@ -52,7 +56,10 @@ const initialState: ReviewState = {
   qualityComment: '',
   leadershipMark: 0,
   leadershipComment: '',
-  adviceComment: ''
+  adviceComment: '',
+  recommenderLink1: '',
+  recommenderLink2: '',
+  recommenderLink3: '',
 };
 
 export const reviewsReducer = (
@@ -122,6 +129,13 @@ export const reviewsReducer = (
       return {
         ...state,
         adviceComment: initialState.adviceComment
+      };
+    case CLEAR_RECOMMENDERS_DATA:
+      return {
+        ...state,
+        recommenderLink1: initialState.recommenderLink1,
+        recommenderLink2: initialState.recommenderLink2,
+        recommenderLink3: initialState.recommenderLink3,
       };
     case SET_FIRST_NAME:
       return {
@@ -217,6 +231,21 @@ export const reviewsReducer = (
       return {
         ...state,
         adviceComment: action.payload
+      };
+    case SET_RECOMMENDER_LINK1:
+      return {
+        ...state,
+        recommenderLink1: action.payload
+      };
+    case SET_RECOMMENDER_LINK2:
+      return {
+        ...state,
+        recommenderLink2: action.payload
+      };
+    case SET_RECOMMENDER_LINK3:
+      return {
+        ...state,
+        recommenderLink3: action.payload
       };
     default:
       return state;

@@ -15,6 +15,7 @@ import BoxStepG from './BoxStepG';
 import BoxStepH from './BoxStepH';
 import BoxStepI from './BoxStepI';
 import BoxStepJ from './BoxStepJ';
+import BoxStepK from './BoxStepK';
 import {
   Wrapper, AdaptedHeader, AdaptedFooter,
   ContentWrapper,
@@ -41,7 +42,10 @@ const mapSateToProps = (store: AppState): IStateProps => ({
     qualityComment: store.reviews.qualityComment,
     leadershipMark: store.reviews.leadershipMark,
     leadershipComment: store.reviews.leadershipComment,
-    adviceComment: store.reviews.adviceComment
+    adviceComment: store.reviews.adviceComment,
+    recommenderLink1: store.reviews.recommenderLink1,
+    recommenderLink2: store.reviews.recommenderLink2,
+    recommenderLink3: store.reviews.recommenderLink3,
   }
 });
 
@@ -70,8 +74,8 @@ const ReviewPage = (props: IProps) => {
     <BoxStepG onNextStep={proceed} onBack={comeback} />,
     <BoxStepH onNextStep={proceed} onBack={comeback} />,
     <BoxStepI onNextStep={proceed} onBack={comeback} />,
-    <BoxStepJ onNextStep={finalize} onBack={comeback} />,
-    <div>End</div>
+    <BoxStepJ onNextStep={proceed} onBack={comeback} />,
+    <BoxStepK onNextStep={finalize} onBack={comeback} />
   ];
 
   return (

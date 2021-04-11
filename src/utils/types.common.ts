@@ -55,6 +55,9 @@ export interface ReviewData {
   leadershipMark: number;
   leadershipComment: string;
   adviceComment: string;
+  recommenderLink1: string;
+  recommenderLink2: string;
+  recommenderLink3: string;
 }
 
 export interface ReviewCardDataFull extends ReviewCardData {

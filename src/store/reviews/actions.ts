@@ -16,6 +16,7 @@ import {
   CLEAR_QUALITY_DATA,
   CLEAR_LEADERSHIP_DATA,
   CLEAR_ADVICE_DATA,
+  CLEAR_RECOMMENDERS_DATA,
   SET_FIRST_NAME,
   SET_LAST_NAME,
   SET_COMPANY,
@@ -34,7 +35,10 @@ import {
   SET_QUALITY_COMMENT,
   SET_LEADERSHIP_MARK,
   SET_LEADERSHIP_COMMENT,
-  SET_ADVICE_COMMENT
+  SET_ADVICE_COMMENT,
+  SET_RECOMMENDER_LINK1,
+  SET_RECOMMENDER_LINK2,
+  SET_RECOMMENDER_LINK3
 } from './types';
 
 export const clearInitialData = (): ReviewActionType => ({
@@ -79,6 +83,10 @@ export const clearLeadershipData = (): ReviewActionType => ({
 
 export const clearAdviceData = (): ReviewActionType => ({
   type: CLEAR_ADVICE_DATA
+});
+
+export const clearRecommendersData = (): ReviewActionType => ({
+  type: CLEAR_RECOMMENDERS_DATA
 });
 
 export const setReviewFirstName = (payload: string): ReviewActionType => ({
@@ -173,6 +181,21 @@ export const setReviewLeadershipComment = (payload: string): ReviewActionType =>
 
 export const setReviewAdviceComment = (payload: string): ReviewActionType => ({
   type: SET_ADVICE_COMMENT,
+  payload
+});
+
+export const setReviewRecommenderLink1 = (payload: string): ReviewActionType => ({
+  type: SET_RECOMMENDER_LINK1,
+  payload
+});
+
+export const setReviewRecommenderLink2 = (payload: string): ReviewActionType => ({
+  type: SET_RECOMMENDER_LINK2,
+  payload
+});
+
+export const setReviewRecommenderLink3 = (payload: string): ReviewActionType => ({
+  type: SET_RECOMMENDER_LINK3,
   payload
 });
 

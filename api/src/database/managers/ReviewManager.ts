@@ -35,7 +35,10 @@ export default class ReviewManager {
       qualityComment: reviewDto.qualityComment,
       leadershipMark: parseInt(reviewDto.leadershipMark),
       leadershipComment: reviewDto.leadershipComment,
-      adviceComment: reviewDto.adviceComment
+      adviceComment: reviewDto.adviceComment,
+      recommenderLink1: reviewDto.recommenderLink1,
+      recommenderLink2: reviewDto.recommenderLink2,
+      recommenderLink3: reviewDto.recommenderLink3
     }));
   }
 }

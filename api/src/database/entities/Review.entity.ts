@@ -20,7 +20,7 @@ export default class Review {
   @Column('text', { nullable: true })
   workplace: string = '';
 
-  @Column('varchar', { length: 50, nullable: false })
+  @Column('text', { nullable: false })
   bounds: string = '';
 
   @Column('text', { nullable: false })
