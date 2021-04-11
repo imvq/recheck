@@ -68,6 +68,15 @@ export default class Review {
   @Column('text', { nullable: false })
   adviceComment: string = '';
 
+  @Column('text', { nullable: false })
+  recommenderLink1: string = '';
+
+  @Column('text', { nullable: false })
+  recommenderLink2: string = '';
+
+  @Column('text', { nullable: false })
+  recommenderLink3: string = '';
+
   /**
    * In progress: 0
    * Approved:    1
