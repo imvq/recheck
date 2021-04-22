@@ -13,7 +13,7 @@ import {
   BoxBaseWrapper, TitleWrapper, Title, SubtitleWrapper, Subtitle,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input,
   ButtonGroupWrapper
-} from '../BoxBase';
+} from '../../../shared/BoxBase';
 
 const options: OptionType[] = [
   { key: 0, text: 'Я был его непосредственным руководителем' },

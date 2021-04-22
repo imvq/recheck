@@ -10,7 +10,7 @@ import {
   BoxBaseWrapper, ButtonGroupWrapper, CommentArea,
   MarkSelectorDescription, MarkSelectorDescriptionWrapper, MarkSelectorWrapper,
   InputGroupWrapper
-} from '../BoxBase';
+} from '../../../shared/BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   levelMark: store.reviews.levelMark,

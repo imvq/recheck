@@ -12,7 +12,7 @@ import {
   BoxBaseWrapper, ButtonGroupWrapper, InputWrapper,
   InputDescription, InputDescriptionWrapper, Input,
   InputGroupWrapper
-} from '../BoxBase';
+} from '../../../shared/BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   recommenderLink1: store.reviews.recommenderLink1,

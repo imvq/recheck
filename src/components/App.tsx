@@ -10,6 +10,7 @@ import GlobalStyle from 'components/shared/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
 import ProfilePage from 'components/pages/ProfilePage';
 import ReviewPage from 'components/pages/ReviewPage';
+import RegistrationPage from 'components/pages/RegistrationPage';
 import NotFoundPage from 'components/pages/NotFoundPage';
 
 /**
@@ -51,6 +52,11 @@ export default () => (
             <PageLockManager hideContentOnLock>
               <ReviewPage />
             </PageLockManager>
+          </Route>
+
+          {/* Search page. Provide steps for searching candidates. */}
+          <Route exact path='/register'>
+            <RegistrationPage />
           </Route>
 
           {/* LinkedIn's OAuth2 window. */}

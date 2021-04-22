@@ -9,7 +9,7 @@ import {
   BoxBaseWrapper,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, TextArea,
   ButtonGroupWrapper
-} from '../BoxBase';
+} from '../../../shared/BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   tasks: store.reviews.tasks

@@ -1,4 +1,4 @@
-import { IProps as IPropsBase } from '../BoxBase/types';
+import { IProps as IPropsBase } from '../../../shared/BoxBase/types';
 
 export interface IStateProps {
   leadershipMark: number;
