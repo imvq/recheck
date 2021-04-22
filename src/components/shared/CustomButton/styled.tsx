@@ -25,7 +25,6 @@ export const Wrapper = styled.button<WrapperProps>`
 export const ButtonContentArea = styled.div<IStyledProps>`
   position: relative;
   height: ${props => props.height || cssVarsLocal.defaultHeight};
-  min-width: 4.273rem;
   padding: 0 calc(${cssVars.thiknessDefault} * 3) 0;
   font-size: ${props => props.fontSize || '1.1rem'};
   color: ${props => (props.isHollow ? props.backgroundColor || cssVarsLocal.defaultBackgroundColor : props.color || 'white')};
