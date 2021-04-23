@@ -12,7 +12,7 @@ export default () => (
       <StageBreadcrumpWrapper>
         <StageBreadcrumpImage src={ScaleStage2} draggable='false' />
       </StageBreadcrumpWrapper>
-      <RegistrationBox />
+      <RegistrationBox onProceed={() => {}} />
     </ContentWrapper>
     <AdaptedFooter />
   </Wrapper>

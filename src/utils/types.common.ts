@@ -23,8 +23,6 @@ export type InputEvent = ChangeEvent<HTMLInputElement>;
 
 export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
 
-// ======================= Own props =====================
-
 export interface ReviewCardData {
   name: string;
   photoUrl: string;
@@ -85,4 +83,13 @@ export interface ProfileInfo {
   currentName: string;
   currentEmail: string;
   currentPhotoUrl: string;
+}
+
+export interface RegistrationDto {
+  email: string;
+  companySite: string;
+  companyName: string;
+  position: string;
+  workStartMonth: number;
+  workStartYear: number;
 }
