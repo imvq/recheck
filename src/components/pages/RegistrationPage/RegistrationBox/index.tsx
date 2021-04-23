@@ -1,4 +1,5 @@
 import { OptionType } from 'utils/types.common';
+import { getNValuesDown } from 'utils/functions';
 import CustomSelect from 'components/shared/CustomSelect';
 import {
   BoxBaseWrapper, InputRowWrapper,
@@ -19,6 +20,9 @@ const months: OptionType[] = [
   { key: 10, text: 'Ноябрь' },
   { key: 11, text: 'Декабрь' },
 ];
+
+const years = getNValuesDown(new Date().getFullYear(), 50)
+  .map((value, index) => ({ key: index, text: value.toString() }));
 
 export default () => (
   <BoxBaseWrapper>
@@ -52,7 +56,7 @@ export default () => (
       </InputDescriptionWrapper>
       <InputRowWrapper>
         <CustomSelect width='49%' options={months} placeholder='Месяц' onNewOptionSelected={() => {}} />
-        <CustomSelect width='49%' options={months} placeholder='Год' onNewOptionSelected={() => {}} />
+        <CustomSelect width='49%' options={years} placeholder='Год' onNewOptionSelected={() => {}} />
       </InputRowWrapper>
     </InputGroupWrapper>
   </BoxBaseWrapper>

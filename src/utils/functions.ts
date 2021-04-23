@@ -36,3 +36,10 @@ export const inputHandler = (event: InputEvent, setter: Setter<string>) => {
 export const textAreaHandler = (event: TextAreaEvent, setter: Setter<string>) => {
   setter(event.target.value);
 };
+
+/**
+ * Generate list with n values down starting from a certain value.
+ */
+export const getNValuesDown = (from : number, n: number) => (
+  Array.from({ length: n }, (_, i) => from - i)
+);
