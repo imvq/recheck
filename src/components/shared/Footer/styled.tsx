@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Link as ScrollLink } from 'react-scroll';
 
 import { ScreenBreakpoint } from 'utils/enums';
+import { cssVars } from 'utils/style.common';
 import { respond } from 'utils/functions';
 import Logo from 'components/shared/Logo';
 import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
@@ -11,7 +12,7 @@ import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
  */
 export const Wrapper = styled.div`
   grid-area: Footer;
-  height: 17.5rem;
+  height: ${cssVars.footerHeight};
   display: flex;
   justify-content: center;
   align-items: center;

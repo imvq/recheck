@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
+import BackgroundSvgPath from 'assets/images/pages/RegistrationPage/Background.svg';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 
 export const Wrapper = styled.div`
-  height: 100%;
+  background-image: url(${BackgroundSvgPath});
+  background-size: cover;
+  min-height: 100%;
   display: grid;
   grid-template:
     'Header'

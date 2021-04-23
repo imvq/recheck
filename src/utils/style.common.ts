@@ -11,6 +11,7 @@ export const cssVars = {
   colorBackgroundRect: '#e9edfb',
   colorForegroundPickMain: '#4f69ca',
   colorForegroundPickAux1: '#33c7ba',
+  footerHeight: '17.5rem',
   greetingsViewContentActionGroupWidth: '38rem',
   greetingsViewHeadEdgeElemsWidthBase: '15rem',
   greetingsViewHeadPaddingHorizontal: '16rem',
