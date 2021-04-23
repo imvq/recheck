@@ -21,8 +21,8 @@ const CustomSelect = (props: IProps) => {
   const trimmedValue = currentValue ? trimText(currentValue.text, 32) : null;
 
   return (
-    <OutsideClickHandler onOutsideClick={() => setIsExpanded(false)}>
-      <Wrapper onClick={() => setIsExpanded(!isExpanded)}>
+    <OutsideClickHandler display='contents' onOutsideClick={() => setIsExpanded(false)}>
+      <Wrapper style={{ width: props.width }} onClick={() => setIsExpanded(!isExpanded)}>
         <SelectedItemWrapper isDimmed={isDimmed}>
           {trimmedValue || props.placeholder || 'Выбрать'}
         </SelectedItemWrapper>

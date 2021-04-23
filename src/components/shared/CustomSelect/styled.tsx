@@ -16,7 +16,6 @@ export const Wrapper = styled.div`
   position: relative;
   cursor: pointer;
   user-select: none;
-
   display: flex;
   align-items: center;
 `;
@@ -47,6 +46,7 @@ export const ArrowDown = styled(ArrowDownSvg)`
 
 export const OptionsBadgesWrapper = styled.div`
   width: 100%;
+  max-height: calc(${cssVars.inputHeightDefault} * 5);
   position: absolute;
   top: ${cssVars.inputHeightDefault};
   left: 0;
@@ -55,6 +55,7 @@ export const OptionsBadgesWrapper = styled.div`
   border-bottom-left-radius: calc(${cssVars.inputBorderRadiusDefault} * 2);
   border-bottom-right-radius: calc(${cssVars.inputBorderRadiusDefault} * 2);
   overflow: hidden;
+  overflow-y: auto;
   background-color: white;
   z-index: ${cssVars.zIndexSelectMenu};
 `;

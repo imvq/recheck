@@ -42,6 +42,12 @@ export const InputGroupWrapper = styled.div`
   padding: .8rem 11rem .8rem 11rem;
 `;
 
+export const InputRowWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const ButtonGroupWrapper = styled.div`
   width: 35rem;
   display: flex;
