@@ -13,6 +13,17 @@ export class IsRegisteredDto {
   public constructor(public profileId: string) {}
 }
 
+export class ProfileDto {
+  public constructor(
+    public email: string,
+    public companySite: string,
+    public companuName: string,
+    public position: string,
+    public workStartMonth: string,
+    public workStartYear: string
+  ) {}
+}
+
 export class RegistrationDto {
   public constructor(public profileId: string) {}
 }

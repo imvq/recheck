@@ -4,7 +4,7 @@
 
 import axios from 'axios';
 
-import { APIResponse } from './types.common';
+import { APIResponse, RegistrationDto } from './types.common';
 
 /**
  * The API to communicate with the server.
@@ -22,6 +22,10 @@ export default class Api {
     const redirectPath = `${window.location.origin}/linkedin`;
     const body = { code, redirectPath };
     return Api.instance.post('/auth/confirm/linkedin', body);
+  }
+
+  public static prepareProfile(profileInfoDto: RegistrationDto): APIResponse {
+    return Api.instance.post('/user/prepare', profileInfoDto);
   }
 
   public static registerProfile(profileId: string): APIResponse {

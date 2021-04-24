@@ -15,6 +15,16 @@ export default class UserController {
   /**
    * Save user info.
    */
+  @Path('/prepare')
+  @POST
+  public async prepareUser(profileInfoDto: Dtos.ProfileDto)
+    : Promise<void> {
+    return this.injectedService.prepareUser(profileInfoDto);
+  }
+
+  /**
+   * Save confirmed user id.
+   */
   @Path('/register')
   @POST
   public async registerUser(registrationDto: Dtos.RegistrationDto)
@@ -25,10 +35,10 @@ export default class UserController {
   /**
    * Get user profile info form LinkedIn.
    */
-   @Path('/profile/linkedin')
-   @GET
+  @Path('/profile/linkedin')
+  @GET
   public async getLinkedInProfile(@Context context: ServiceContext)
-     : Promise<Types.GetProfileResponseDto> {
+    : Promise<Types.GetProfileResponseDto> {
     return this.injectedService.getLinkedInProfile(context.request.cookies);
   }
 }

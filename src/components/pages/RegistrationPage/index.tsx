@@ -1,3 +1,4 @@
+import Api from 'utils/api';
 import ScaleStage2 from 'assets/images/pages/RegistrationPage/ScaleStage2.png';
 import {
   Wrapper, AdaptedHeader, AdaptedFooter,
@@ -12,7 +13,7 @@ export default () => (
       <StageBreadcrumpWrapper>
         <StageBreadcrumpImage src={ScaleStage2} draggable='false' />
       </StageBreadcrumpWrapper>
-      <RegistrationBox onProceed={() => {}} />
+      <RegistrationBox onProceed={(profileInfo) => Api.prepareProfile(profileInfo)} />
     </ContentWrapper>
     <AdaptedFooter />
   </Wrapper>
