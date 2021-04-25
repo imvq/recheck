@@ -7,8 +7,12 @@ import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
 import { FacebookLoginResponse } from './types';
 
-export function onError(setIsAuthorizedCallback: (flag: boolean) => void) {
-  setIsAuthorizedCallback(false);
+function setCookie(name: string, value: string) {
+  const tokenExpiration = new Date(Date.now() + constants.MONTH_MS * 2);
+  cookieManager.set(name, value, { path: '/', expires: tokenExpiration });
+}
+
+export function onError() {
   window.location.replace(window.location.origin);
 }
 
@@ -24,14 +28,9 @@ export function onSuccessLinkedIn(
 
   Api.confirmAuthLinkedIn(code)
     // If the code is valid and correct.
-    .then(confirmationResponse => {
+    .then(response => {
       // 1. Save OAuth bearer token to cookies.
-      const tokenExpiration = new Date(Date.now() + constants.MONTH_MS * 2);
-      cookieManager.set(
-        cookiesList.accessTokenLinkedIn,
-        confirmationResponse.data[cookiesList.accessTokenLinkedIn],
-        { path: '/', expires: tokenExpiration }
-      );
+      setCookie(cookiesList.accessTokenLinkedIn, response.data[cookiesList.accessTokenLinkedIn]);
 
       // 2. Time to get basic profile info from LinkedIn.
       Api.getProfileLinkedIn()
@@ -54,8 +53,8 @@ export function onSuccessLinkedIn(
             setIsAuthorizedCallback(true);
             setIsLoginPopupVisibleCallback(false);
           }
-        }).catch(() => onError(setIsAuthorizedCallback));
-    }).catch(() => onError(setIsAuthorizedCallback))
+        }).catch(onError);
+    }).catch(onError)
     // Unlock the page in the end.
     .finally(() => setPageLockedCallback(false));
 }
@@ -73,6 +72,8 @@ export function onSuccessFacebook(
   setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
 ) {
   if (!isFacebookFailureResponse(result)) {
+    setCookie(cookiesList.accessTokenFacebook, result.accessToken);
+
     const oauthData = result as ReactFacebookLoginInfo;
     const profileInfo: ProfileInfo = {
       currentId: oauthData.userID,
@@ -84,5 +85,7 @@ export function onSuccessFacebook(
     setCurrentProfileInfoCallback(profileInfo);
     setIsLoginPopupVisibleCallback(false);
     setIsAuthorizedCallback(true);
+  } else {
+    onError();
   }
 }
