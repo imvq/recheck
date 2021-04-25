@@ -1,3 +1,5 @@
+import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
+
 import { ProfileInfo } from 'utils/types.common';
 
 export interface IDispatchProps {
@@ -8,3 +10,5 @@ export interface IDispatchProps {
 }
 
 export type IProps = IDispatchProps;
+
+export type FacebookLoginResponse = ReactFacebookLoginInfo | ReactFacebookFailureResponse;

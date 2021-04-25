@@ -5,6 +5,7 @@ import * as constants from 'utils/constants';
 import { Optional, ProfileInfo } from 'utils/types.common';
 import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
+import { FacebookLoginResponse } from './types';
 
 export function onError(setIsAuthorizedCallback: (flag: boolean) => void) {
   setIsAuthorizedCallback(false);
@@ -59,14 +60,14 @@ export function onSuccessLinkedIn(
     .finally(() => setPageLockedCallback(false));
 }
 
-function isFacebookFailureResponse(result: ReactFacebookLoginInfo | ReactFacebookFailureResponse)
+function isFacebookFailureResponse(result: FacebookLoginResponse)
   : result is ReactFacebookFailureResponse {
   // 'status' is a field of ReactFacebookFailureResponse type.
   return !!((result as ReactFacebookFailureResponse).status as Optional<string>);
 }
 
 export function onSuccessFacebook(
-  result: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
+  result: FacebookLoginResponse,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
   setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
