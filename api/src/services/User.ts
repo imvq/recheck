@@ -33,40 +33,4 @@ export default class UserService {
       throw new Errors.InternalServerError('Internal database error.');
     }
   }
-
-  public async getLinkedInProfile(cookies: Types.StringIndexable)
-    : Promise<Types.GetProfileResponseDto> {
-    try {
-      if (!cookies[Cookies.LI_AT]) {
-        throw new Errors.UnauthorizedError('No Bearer token provided');
-      }
-
-      const config = Utils.createAuthConfig(cookies[Cookies.LI_AT]);
-      const { data: profile }: AxiosResponse<Types.ProfileDto> = await axios.get(
-        Constants.PROFILE_URL, config
-      );
-      const { data: email }: AxiosResponse<Types.EmailDto> = await axios.get(
-        Constants.EMAIL_URL, config
-      );
-      const { data: photo }: AxiosResponse<Types.PhotoDto> = await axios.get(
-        Constants.PHOTO_URL, config
-      );
-      const highestQualityPicture = photo.profilePicture['displayImage~'].elements[
-        photo.profilePicture['displayImage~'].elements.length - 1
-      ];
-      const dbProfileRecord = await UserManager.getUser(profile.id);
-
-      return {
-        profileId: `${profile.id}`,
-        name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
-        email: `${email.elements[0]['handle~'].emailAddress}`,
-        photoUrl: `${highestQualityPicture.identifiers[0].identifier}`,
-        isRegistered: !!dbProfileRecord
-      };
-    } catch (error) {
-      Logger.ifdev()?.err(error);
-      throw error instanceof Errors.UnauthorizedError ? error
-        : new Errors.InternalServerError('Request limits breach.');
-    }
-  }
 }

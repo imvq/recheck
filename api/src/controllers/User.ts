@@ -32,16 +32,6 @@ export default class UserController {
     return this.injectedService.registerUser(registrationDto);
   }
 
-  /**
-   * Get user profile info form LinkedIn.
-   */
-  @Path('/profile/linkedin')
-  @GET
-  public async getLinkedInProfile(@Context context: ServiceContext)
-    : Promise<Types.GetProfileResponseDto> {
-    return this.injectedService.getLinkedInProfile(context.request.cookies);
-  }
-
   // /**
   //  * Check if the user is registered in the app.
   //  */

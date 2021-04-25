@@ -8,7 +8,7 @@ import ReviewManager from '@database/managers/ReviewManager';
  * Service in charge of reviews stuff.
  */
 export default class ReviewService {
-  public async createReview(reviewData: Dtos.ReviewDto)
+  public async createReview(reviewData: Dtos.CreateReviewDto)
     : Promise<void> {
     try {
       await ReviewManager.createReview(reviewData);

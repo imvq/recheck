@@ -5,22 +5,7 @@ export class ExchangeLinkedInAuthCodeDto {
   ) {}
 }
 
-export class ProfileDto {
-  public constructor(
-    public email: string,
-    public companySite: string,
-    public companuName: string,
-    public position: string,
-    public workStartMonth: string,
-    public workStartYear: string
-  ) {}
-}
-
-export class RegistrationDto {
-  public constructor(public profileId: string) {}
-}
-
-export class ReviewDto {
+export class CreateReviewDto {
   public constructor(
     public authorId: string,
     public targetFirstName: string,
@@ -45,4 +30,19 @@ export class ReviewDto {
     public recommenderLink2: string,
     public recommenderLink3: string
   ) {}
+}
+
+export class ProfileDto {
+  public constructor(
+    public email: string,
+    public companySite: string,
+    public companuName: string,
+    public position: string,
+    public workStartMonth: string,
+    public workStartYear: string
+  ) {}
+}
+
+export class RegistrationDto {
+  public constructor(public profileId: string) {}
 }

@@ -16,7 +16,7 @@ export default class ReviewManager {
     ReviewManager.repo = getRepository(Review);
   }
 
-  public static createReview = async (reviewDto: Dtos.ReviewDto) => {
+  public static createReview = async (reviewDto: Dtos.CreateReviewDto) => {
     const author = await UserManager.getUser(reviewDto.authorId);
     await ReviewManager.repo?.save(ReviewManager.repo.create({
       author,

@@ -69,11 +69,3 @@ export interface ProfileDto {
 export interface StringIndexable {
   [key: string]: string;
 }
-
-export interface UserResponseDto {
-  email: string;
-  name: string;
-  photoUrl: string;
-  searches: number;
-  availableSearches: number;
-}
