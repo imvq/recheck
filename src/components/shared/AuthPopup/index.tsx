@@ -3,12 +3,13 @@ import { LinkedIn, LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import FacebookLogin from 'react-facebook-login';
 import linkedinImage from 'react-linkedin-login-oauth2/assets/linkedin.png';
 
-import { setIsLoginPopupVisible, setIsAuthorized, setCurrentProfileInfo } from 'store';
+import { setPageLocked, setIsLoginPopupVisible, setIsAuthorized, setCurrentProfileInfo } from 'store';
 import { IProps, IDispatchProps } from './types';
 import { onError, onSuccessLinkedIn, onSuccessFacebook } from './functions';
 import { Wrapper, Frame, ClickableBackground } from './styled';
 
 const mapDispatchToProps: IDispatchProps = {
+  lockPage: setPageLocked,
   setIsLoginPopupVisible,
   setIsAuthorized,
   setCurrentProfileInfo

@@ -18,8 +18,9 @@ export function onSuccessLinkedIn(
   setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
 ) {
   Api.confirmAuthLinkedIn(code)
+    // If the code is valid and correct.
     .then(confirmationResponse => {
-      // Save OAuth bearer token to cookies.
+      // 1. Save OAuth bearer token to cookies.
       const tokenExpiration = new Date(Date.now() + constants.MONTH_MS * 2);
       cookieManager.set(
         cookiesList.accessTokenLinkedIn,
@@ -27,13 +28,14 @@ export function onSuccessLinkedIn(
         { path: '/', expires: tokenExpiration }
       );
 
+      // 2. Time to get basic profile info from LinkedIn.
       Api.getProfileLinkedIn()
         .then(profileResponse => {
           const isRegistered = profileResponse.data.isRegistered as boolean;
           const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
           setCurrentProfileInfoCallback(normalizedProfileInfo);
 
-          // Register the user if it is not registered in our app yet.
+          // 2.1 Register the user if it is not registered in our app yet.
           if (!isRegistered) {
             Api.registerProfile(normalizedProfileInfo.currentId)
               .then(() => {
