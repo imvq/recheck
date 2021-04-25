@@ -13,10 +13,14 @@ export function onError(setIsAuthorizedCallback: (flag: boolean) => void) {
 
 export function onSuccessLinkedIn(
   code: string,
+  setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
   setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
 ) {
+  // Lock page to prevent user actions while retrieving profile data.
+  setPageLockedCallback(true);
+
   Api.confirmAuthLinkedIn(code)
     // If the code is valid and correct.
     .then(confirmationResponse => {
@@ -50,7 +54,9 @@ export function onSuccessLinkedIn(
             setIsLoginPopupVisibleCallback(false);
           }
         }).catch(() => onError(setIsAuthorizedCallback));
-    }).catch(() => onError(setIsAuthorizedCallback));
+    }).catch(() => onError(setIsAuthorizedCallback))
+    // Unlock the page in the end.
+    .finally(() => setPageLockedCallback(false));
 }
 
 function isFacebookFailureResponse(result: ReactFacebookLoginInfo | ReactFacebookFailureResponse)

@@ -9,7 +9,7 @@ import { onError, onSuccessLinkedIn, onSuccessFacebook } from './functions';
 import { Wrapper, Frame, ClickableBackground } from './styled';
 
 const mapDispatchToProps: IDispatchProps = {
-  lockPage: setPageLocked,
+  setPageLocked,
   setIsLoginPopupVisible,
   setIsAuthorized,
   setCurrentProfileInfo
@@ -27,6 +27,7 @@ const AuthPopup = (props: IProps) => (
         onSuccess={(data: { code: string }) => {
           onSuccessLinkedIn(
             data.code,
+            props.setPageLocked,
             props.setIsLoginPopupVisible,
             props.setIsAuthorized,
             props.setCurrentProfileInfo
