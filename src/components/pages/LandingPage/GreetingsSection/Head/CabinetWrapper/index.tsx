@@ -1,4 +1,4 @@
-import LoginBadge from 'components/shared/authenticators/PopupAuthenticator';
+import LoginBadge from 'components/shared/LoginBadge';
 import { Wrapper } from './styled';
 
 /**

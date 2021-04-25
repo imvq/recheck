@@ -6,7 +6,7 @@ export interface IStateProps {
 
 export interface IDispatchProps {
   lockPage(): void;
-  setIsAuthorized(flag: boolean): void;
+  setIsLoginPopupVisible(flag: boolean): void;
   setCurrentProfileInfo(profileInfo: ProfileInfo): void;
 }
 

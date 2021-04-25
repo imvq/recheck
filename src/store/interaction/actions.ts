@@ -3,6 +3,7 @@ import {
   InteractionStateActionType,
   SET_IS_PAGE_LOCKED,
   SET_IS_SEARCH_POPUP_VISIBILE,
+  SET_IS_LOGIN_POPUP_VISIBILE,
   SET_CURRENT_PROFILE_MENU_ENTRY
 } from './types';
 
@@ -18,6 +19,12 @@ export const setPageUnlocked = () => setIsPageLocked(false);
 export const setIsSearchPopupVisible = (value: boolean)
   : InteractionStateActionType => ({
   type: SET_IS_SEARCH_POPUP_VISIBILE,
+  payload: value
+});
+
+export const setIsLoginPopupVisible = (value: boolean)
+  : InteractionStateActionType => ({
+  type: SET_IS_LOGIN_POPUP_VISIBILE,
   payload: value
 });
 

@@ -6,13 +6,6 @@ import { Optional, ProfileInfo } from 'utils/types.common';
 import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
 
-export function onExit(lockPageCallback: () => void) {
-  lockPageCallback();
-  cookieManager.remove(cookiesList.accessTokenLinkedIn);
-  cookieManager.remove(cookiesList.accessTokenFacebook);
-  window.location.replace(window.location.origin);
-}
-
 export function onError(setIsAuthorizedCallback: (flag: boolean) => void) {
   setIsAuthorizedCallback(false);
   window.location.replace(window.location.origin);
@@ -20,6 +13,7 @@ export function onError(setIsAuthorizedCallback: (flag: boolean) => void) {
 
 export function onSuccessLinkedIn(
   code: string,
+  setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
   setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
 ) {
@@ -38,7 +32,6 @@ export function onSuccessLinkedIn(
           const isRegistered = profileResponse.data.isRegistered as boolean;
           const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
           setCurrentProfileInfoCallback(normalizedProfileInfo);
-          setIsAuthorizedCallback(true);
 
           // Register the user if it is not registered in our app yet.
           if (!isRegistered) {
@@ -46,11 +39,13 @@ export function onSuccessLinkedIn(
               .then(() => {
                 setCurrentProfileInfoCallback(normalizedProfileInfo);
                 setIsAuthorizedCallback(true);
+                setIsLoginPopupVisibleCallback(false);
               })
               .catch(() => setIsAuthorizedCallback(false));
           } else {
             setCurrentProfileInfoCallback(normalizedProfileInfo);
             setIsAuthorizedCallback(true);
+            setIsLoginPopupVisibleCallback(false);
           }
         }).catch(() => onError(setIsAuthorizedCallback));
     }).catch(() => onError(setIsAuthorizedCallback));
@@ -64,6 +59,7 @@ function isFacebookFailureResponse(result: ReactFacebookLoginInfo | ReactFaceboo
 
 export function onSuccessFacebook(
   result: ReactFacebookLoginInfo | ReactFacebookFailureResponse,
+  setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
   setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
 ) {
@@ -77,6 +73,7 @@ export function onSuccessFacebook(
     };
 
     setCurrentProfileInfoCallback(profileInfo);
+    setIsLoginPopupVisibleCallback(false);
     setIsAuthorizedCallback(true);
   }
 }

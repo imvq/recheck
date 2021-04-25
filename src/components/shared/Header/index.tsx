@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import Logo from 'components/shared/Logo';
-import LoginBadge from 'components/shared/authenticators/PopupAuthenticator';
+import LoginBadge from 'components/shared/LoginBadge';
 import { Wrapper, LogoWrapper, LoginBadgeWrapper } from './styled';
 
 /**
