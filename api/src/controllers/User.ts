@@ -41,4 +41,12 @@ export default class UserController {
     : Promise<Types.GetProfileResponseDto> {
     return this.injectedService.getLinkedInProfile(context.request.cookies);
   }
+
+  // /**
+  //  * Check if the user is registered in the app.
+  //  */
+  // @Path('/is-registered')
+  // @GET
+  // public async checkIsRegistered(data: Dtos.CheckIsRegisteredDto)
+  //   : Promise<>
 }

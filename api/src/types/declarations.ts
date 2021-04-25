@@ -20,6 +20,10 @@ export interface CorsMiddleware {
   (req: cors.CorsRequest, res: CorsResponse, next: (err?: any) => any): void;
 }
 
+export interface CheckIsRegisteredDto {
+  profileId: string;
+}
+
 export interface EmailDto {
   elements: {
     ['handle~']: {
@@ -32,12 +36,11 @@ export interface ExchangeLinkedInAuthCodeResponseDto {
   'li_at': string;
 }
 
-export interface GetProfileResponseDto {
+export interface RetrieveLinkedInProfileInfoResponseDto {
   profileId: string;
   name: string;
   email: string;
   photoUrl: string;
-  isRegistered: boolean;
 }
 
 export interface HealthResponseDTO {

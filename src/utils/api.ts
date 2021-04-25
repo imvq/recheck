@@ -15,7 +15,7 @@ export default class Api {
   });
 
   public static getProfileLinkedIn(): APIResponse {
-    return Api.instance.get('/user/profile/linkedin', { withCredentials: true });
+    return Api.instance.get('/linkedin/oauth/retrieve', { withCredentials: true });
   }
 
   public static confirmAuthLinkedIn(code: string): APIResponse {

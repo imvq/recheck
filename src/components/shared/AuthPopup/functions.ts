@@ -72,8 +72,10 @@ export function onSuccessFacebook(
   setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
 ) {
   if (!isFacebookFailureResponse(result)) {
+    // 1. Save OAuth bearer token to cookies.
     setCookie(cookiesList.accessTokenFacebook, result.accessToken);
 
+    // 2. Time to retrieve basic profile info from Facebook response.
     const oauthData = result as ReactFacebookLoginInfo;
     const profileInfo: ProfileInfo = {
       currentId: oauthData.userID,
