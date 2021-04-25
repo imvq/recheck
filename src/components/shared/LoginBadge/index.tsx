@@ -27,25 +27,17 @@ const LoginBadge: FunctionComponent<IProps> = (props) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const history = useHistory();
 
-  const toggleMenu = () => {
-    if (!isExpanded) {
-      if (props.isAuthorized === null) {
-        props.lockPage();
-      } else {
-        setIsExpanded(true);
-      }
-    } else {
-      setIsExpanded(false);
-    }
-  };
-
   return (
     <OutsideClickHandler onOutsideClick={() => setIsExpanded(false)}>
       <Wrapper>
         <LoginButton onClick={
-          props.isAuthorized
-            ? toggleMenu
-            : () => props.setIsLoginPopupVisible(true)
+          // true       | false          | null
+          // authorized | not authorized | check is pending
+          props.isAuthorized === null
+            ? props.lockPage
+            : props.isAuthorized
+              ? () => setIsExpanded(true)
+              : () => props.setIsLoginPopupVisible(true)
         }
         />
         <Menu isExpanded={isExpanded}>
