@@ -68,7 +68,6 @@ export function onProfileDataRetrieved(
         dispatch(setIsAuthorized(true));
       } else {
         // Register the user if it is not registered in our app yet.
-        window.location.replace(`${window.location.origin}/register`);
       }
     });
 }

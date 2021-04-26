@@ -16,7 +16,7 @@ export default class FacebookController {
    */
   @Path('/retrieve')
   @GET
-  public async getLinkedInProfile(@Context context: ServiceContext)
+  public async getFacebookProfile(@Context context: ServiceContext)
     : Promise<Types.RetrieveFacebookProfileInfoResponseDto> {
     return this.injectedService.retrieveProfileInfo(context.request.cookies);
   }

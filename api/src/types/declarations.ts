@@ -62,8 +62,9 @@ export interface RetrieveProfileInfoResponseDto {
   photoUrl: string;
 }
 
-export type RetrieveLinkedInProfileInfoResponseDto = RetrieveProfileInfoResponseDto;
-export type RetrieveFacebookProfileInfoResponseDto = RetrieveProfileInfoResponseDto;
+export interface RetrieveLinkedInProfileInfoResponseDto extends RetrieveProfileInfoResponseDto {}
+
+export interface RetrieveFacebookProfileInfoResponseDto extends RetrieveProfileInfoResponseDto {}
 
 export interface HealthResponseDTO {
   message: string;

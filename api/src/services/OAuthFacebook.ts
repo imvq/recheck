@@ -18,7 +18,13 @@ export default class FacebookOAuthService {
       }
 
       const { data: profile }: AxiosResponse<Types.FacebookBasicProfileDto> = await axios.get(
-        Constants.FA_PROFILE_URL
+        Constants.FA_PROFILE_URL,
+        {
+          params: {
+            fields: 'id,name,picture',
+            access_token: cookies[Cookies.FA_AT]
+          }
+        }
       );
 
       return {
@@ -29,7 +35,7 @@ export default class FacebookOAuthService {
     } catch (error) {
       Logger.ifdev()?.err(error);
       throw error instanceof Errors.UnauthorizedError ? error
-        : new Errors.InternalServerError('Request limits breach.');
+        : new Errors.InternalServerError();
     }
   }
 }
