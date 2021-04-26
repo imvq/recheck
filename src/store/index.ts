@@ -42,6 +42,7 @@ export const store = createStore(
   ))
 );
 
+export * from './types';
 export * from './auth/actions';
 export * from './interaction/actions';
 export * from './profile/actions';
