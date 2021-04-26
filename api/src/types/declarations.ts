@@ -39,7 +39,6 @@ export interface ExchangeLinkedInAuthCodeResponseDto {
 export interface RetrieveLinkedInProfileInfoResponseDto {
   profileId: string;
   name: string;
-  email: string;
   photoUrl: string;
 }
 

@@ -36,7 +36,7 @@ const AuthPopup = (props: IProps) => (
           <LinkedIn
             clientId={process.env.REACT_APP_LINKEDIN_APP_CLIENT_ID}
             redirectUri={`${window.location.origin}/linkedin`}
-            scope='r_emailaddress r_liteprofile'
+            scope='r_liteprofile'
             onFailure={onError}
             onSuccess={(data: { code: string }) => {
               onSuccessLinkedIn(
@@ -56,7 +56,7 @@ const AuthPopup = (props: IProps) => (
           {/* Facebook login button. */}
           <FacebookLogin
             appId={process.env.REACT_APP_FACEBOOK_APP_CLIENT_ID as string}
-            fields='id,name,email,picture'
+            fields='id,name,picture'
             callback={(result: FacebookLoginResponse) => onSuccessFacebook(
               result,
               props.setIsLoginPopupVisible,

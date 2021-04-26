@@ -84,7 +84,6 @@ export interface PreviousSearchCardData {
 export interface ProfileInfo {
   currentId: string;
   currentName: string;
-  currentEmail: string;
   currentPhotoUrl: string;
 }
 

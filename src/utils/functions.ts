@@ -7,7 +7,6 @@ import { ScreenBreakpoint } from './enums';
 export const mapLinkedInProfileDtoToState = (profileDto: LinkedInProfileDto): ProfileInfo => ({
   currentId: profileDto.profileId,
   currentName: profileDto.name,
-  currentEmail: profileDto.email,
   currentPhotoUrl: profileDto.photoUrl
 });
 

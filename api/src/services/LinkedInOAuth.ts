@@ -43,9 +43,6 @@ export default class LinkedInService {
       const { data: profile }: AxiosResponse<Types.ProfileDto> = await axios.get(
         Constants.PROFILE_URL, config
       );
-      const { data: email }: AxiosResponse<Types.EmailDto> = await axios.get(
-        Constants.EMAIL_URL, config
-      );
       const { data: photo }: AxiosResponse<Types.PhotoDto> = await axios.get(
         Constants.PHOTO_URL, config
       );
@@ -56,7 +53,6 @@ export default class LinkedInService {
       return {
         profileId: `${profile.id}`,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
-        email: `${email.elements[0]['handle~'].emailAddress}`,
         photoUrl: `${highestQualityPicture.identifiers[0].identifier}`
       };
     } catch (error) {

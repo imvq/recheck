@@ -82,7 +82,6 @@ export function onSuccessFacebook(
     const profileInfo: ProfileInfo = {
       currentId: oauthData.userID,
       currentName: oauthData.name || '',
-      currentEmail: oauthData.email || '',
       currentPhotoUrl: oauthData.picture?.data.url || ''
     };
 
