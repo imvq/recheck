@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import { AxiosResponse } from 'axios';
 
 import Api from 'utils/api';
+import controlledHistory from 'utils/routing';
 import { AppActionType, setIsAuthorized, setCurrentProfileInfo } from 'store';
 import {
   LinkedInProfileDto, FacebookProfileDto, AppProfileInfo, InputEvent,
@@ -68,6 +69,7 @@ export function onProfileDataRetrieved(
         dispatch(setIsAuthorized(true));
       } else {
         // Register the user if it is not registered in our app yet.
+        controlledHistory.push('/register');
       }
     });
 }

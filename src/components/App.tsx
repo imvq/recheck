@@ -1,8 +1,9 @@
 import { Provider } from 'react-redux';
 import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 
 import { store as appStore } from 'store';
+import controlledHistory from 'utils/routing';
 import PageStartupManager from 'components/shared/PageStartupManager';
 import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
@@ -21,7 +22,7 @@ export default () => (
   <>
     <GlobalStyle />
     <Provider store={appStore}>
-      <BrowserRouter>
+      <Router history={controlledHistory}>
         <Switch>
 
           {/* Home page. */}
@@ -70,7 +71,7 @@ export default () => (
           </Route>
 
         </Switch>
-      </BrowserRouter>
+      </Router>
     </Provider>
   </>
 );
