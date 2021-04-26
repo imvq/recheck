@@ -2,7 +2,7 @@ import { GET, POST, Path, Context, ServiceContext } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import Types from '@types';
-import LinkedInOAuthService from '@services/LinkedInOAuth';
+import LinkedInOAuthService from '@services/OAuthLinkedIn';
 import DTOs from '@dto';
 
 /**

@@ -34,7 +34,7 @@ export default class Api {
   }
 
   public static getProfileFacebook(): APIResponse {
-    return Api.instance.post('https://graph.facebook.com/v10.0/{person-id}/');
+    return Api.instance.get('/facebook/oauth/retrieve', { withCredentials: true });
   }
 
   public static prepareProfile(profileInfoDto: RegistrationDto): APIResponse {
