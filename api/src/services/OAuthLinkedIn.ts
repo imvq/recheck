@@ -11,7 +11,7 @@ import Logger from '@common/Logger';
 /**
  * Service in charge of LinkedIn OAuth.
  */
-export default class LinkedInService {
+export default class LinkedInOAuthService {
   public async exchangeLinkedInAuthCode(exchangeDto: Dtos.ExchangeLinkedInAuthCodeDto)
     : Promise<Types.ExchangeLinkedInAuthCodeResponseDto> {
     try {
@@ -40,10 +40,10 @@ export default class LinkedInService {
       }
 
       const config = Utils.createAuthConfig(cookies[Cookies.LI_AT]);
-      const { data: profile }: AxiosResponse<Types.ProfileDto> = await axios.get(
-        Constants.PROFILE_URL, config
+      const { data: profile }: AxiosResponse<Types.LinkedInBasicProfileDto> = await axios.get(
+        Constants.LI_PROFILE_URL, config
       );
-      const { data: photo }: AxiosResponse<Types.PhotoDto> = await axios.get(
+      const { data: photo }: AxiosResponse<Types.LinkedInPhotoDto> = await axios.get(
         Constants.PHOTO_URL, config
       );
       const highestQualityPicture = photo.profilePicture['displayImage~'].elements[
@@ -51,7 +51,7 @@ export default class LinkedInService {
       ];
 
       return {
-        profileId: `${profile.id}`,
+        profileId: profile.id,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
         photoUrl: `${highestQualityPicture.identifiers[0].identifier}`
       };

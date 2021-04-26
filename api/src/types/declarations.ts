@@ -24,30 +24,27 @@ export interface CheckIsUserRegisteredResponseDto {
   isRegistered: boolean;
 }
 
-export interface EmailDto {
-  elements: {
-    ['handle~']: {
-      emailAddress: string;
-    }
-  }[]
-}
-
 export interface ExchangeLinkedInAuthCodeResponseDto {
   'li_at': string;
 }
 
-export interface RetrieveLinkedInProfileInfoResponseDto {
-  profileId: string;
+export interface FacebookBasicProfileDto {
+  id: string;
   name: string;
-  photoUrl: string;
+  picture: {
+    data: {
+      url: string;
+    }
+  };
 }
 
-export interface HealthResponseDTO {
-  message: string;
-  version: string;
+export interface LinkedInBasicProfileDto {
+  id: string;
+  localizedFirstName: string;
+  localizedLastName: string;
 }
 
-export interface PhotoDto {
+export interface LinkedInPhotoDto {
   profilePicture: {
     'displayImage~': {
       elements: {
@@ -59,10 +56,18 @@ export interface PhotoDto {
   }
 }
 
-export interface ProfileDto {
-  id: string;
-  localizedFirstName: string;
-  localizedLastName: string;
+export interface RetrieveProfileInfoResponseDto {
+  profileId: string;
+  name: string;
+  photoUrl: string;
+}
+
+export type RetrieveLinkedInProfileInfoResponseDto = RetrieveProfileInfoResponseDto;
+export type RetrieveFacebookProfileInfoResponseDto = RetrieveProfileInfoResponseDto;
+
+export interface HealthResponseDTO {
+  message: string;
+  version: string;
 }
 
 export interface StringIndexable {
