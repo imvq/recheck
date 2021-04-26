@@ -16,7 +16,7 @@ export const checkAuthorization = () => (dispatch: Dispatch<AppActionType>) => {
     Api.getProfileLinkedIn()
       .then(profileResponse => onProfileDataRetrieved(dispatch, profileResponse))
       .catch(() => dispatch(setIsAuthorized(false)));
-  } if (cookieManager.get(cookiesList.accessTokenFacebook)) {
+  } else if (cookieManager.get(cookiesList.accessTokenFacebook)) {
     Api.getProfileFacebook()
       .then(profileResponse => onProfileDataRetrieved(dispatch, profileResponse))
       .catch(() => dispatch(setIsAuthorized(false)));
