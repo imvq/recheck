@@ -1,9 +1,3 @@
-import { Dispatch } from 'redux';
-import { AxiosResponse } from 'axios';
-
-import Api from 'utils/api';
-import controlledHistory from 'utils/routing';
-import { AppActionType, setIsAuthorized, setCurrentProfileInfo } from 'store';
 import {
   LinkedInProfileDto, FacebookProfileDto, AppProfileInfo, InputEvent,
   TextAreaEvent, Setter
@@ -52,24 +46,3 @@ export const textAreaHandler = (event: TextAreaEvent, setter: Setter<string>) =>
 export const trimText = (text: string, sliceTo: number) => (
   text.length > sliceTo ? `${text.slice(0, sliceTo)} ...` : text
 );
-
-/**
- * Do stuff on LinkedIn or Facebook profile info got through the API.
- */
-export function onProfileDataRetrieved(
-  dispatch: Dispatch<AppActionType>,
-  profileResponse: AxiosResponse<LinkedInProfileDto | FacebookProfileDto>
-) {
-  const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
-
-  Api.checkIsRegistered(normalizedProfileInfo.currentId)
-    .then((checkResponse) => {
-      if (checkResponse.data.flag) {
-        dispatch(setCurrentProfileInfo(normalizedProfileInfo));
-        dispatch(setIsAuthorized(true));
-      } else {
-        // Register the user if it is not registered in our app yet.
-        controlledHistory.push('/register');
-      }
-    });
-}

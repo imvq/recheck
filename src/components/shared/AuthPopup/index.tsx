@@ -59,6 +59,7 @@ const AuthPopup = (props: IProps) => (
             fields='id,name,picture'
             callback={(result: FacebookLoginResponse) => onSuccessFacebook(
               result,
+              props.setPageLocked,
               props.setIsLoginPopupVisible,
               props.setIsAuthorized,
               props.setCurrentProfileInfo

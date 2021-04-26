@@ -1,8 +1,12 @@
 import { Dispatch } from 'redux';
+import { AxiosResponse } from 'axios';
 
 import Api from 'utils/api';
-import { onProfileDataRetrieved } from 'utils/functions';
+import controlledHistory from 'utils/routing';
+import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
+import { LinkedInProfileDto, FacebookProfileDto } from 'utils/types.common';
+import { setCurrentProfileInfo } from '../profile/actions';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
 
@@ -10,6 +14,28 @@ export const setIsAuthorized = (isAuthorized: boolean): AuthActionType => ({
   type: SET_IS_AUTHORIZED,
   payload: isAuthorized
 });
+
+/**
+ * Do stuff on LinkedIn or Facebook profile info got through the API.
+ */
+function onProfileDataRetrieved(
+  dispatch: Dispatch<AppActionType>,
+  profileResponse: AxiosResponse<LinkedInProfileDto | FacebookProfileDto>
+) {
+  const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
+
+  Api.checkIsRegistered(normalizedProfileInfo.currentId)
+    .then((checkResponse) => {
+      if (checkResponse.data.flag) {
+        dispatch(setCurrentProfileInfo(normalizedProfileInfo));
+        dispatch(setIsAuthorized(true));
+      } else {
+        // Register the user if it is not registered in our app yet.
+        controlledHistory.push('/register');
+      }
+    })
+    .catch(() => dispatch(setIsAuthorized(false)));
+}
 
 export const checkAuthorization = () => (dispatch: Dispatch<AppActionType>) => {
   if (cookieManager.get(cookiesList.accessTokenLinkedIn)) {
