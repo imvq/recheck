@@ -2,8 +2,8 @@ import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-face
 
 import Api from 'utils/api';
 import * as constants from 'utils/constants';
-import { Optional, ProfileInfo } from 'utils/types.common';
-import { mapLinkedInProfileDtoToState } from 'utils/functions';
+import { Optional, AppProfileInfo } from 'utils/types.common';
+import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
 import { FacebookLoginResponse } from './types';
 
@@ -21,7 +21,7 @@ export function onSuccessLinkedIn(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
+  setCurrentProfileInfoCallback: (profileInfo: AppProfileInfo) => void
 ) {
   // Lock page to prevent user actions while retrieving profile data.
   setPageLockedCallback(true);
@@ -35,26 +35,12 @@ export function onSuccessLinkedIn(
       // 2. Time to get basic profile info from LinkedIn.
       Api.getProfileLinkedIn()
         .then(profileResponse => {
-          const normalizedProfileInfo = mapLinkedInProfileDtoToState(profileResponse.data);
+          const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
           setCurrentProfileInfoCallback(normalizedProfileInfo);
 
           Api.checkIsRegistered(normalizedProfileInfo.currentId)
+            // TODO: Call registration popup.
             .then(() => {});
-
-          // 2.1 Register the user if it is not registered in our app yet.
-          // if (!isRegistered) {
-          //   Api.registerProfile(normalizedProfileInfo.currentId)
-          //     .then(() => {
-          //       setCurrentProfileInfoCallback(normalizedProfileInfo);
-          //       setIsAuthorizedCallback(true);
-          //       setIsLoginPopupVisibleCallback(false);
-          //     })
-          //     .catch(() => setIsAuthorizedCallback(false));
-          // } else {
-          //   setCurrentProfileInfoCallback(normalizedProfileInfo);
-          //   setIsAuthorizedCallback(true);
-          //   setIsLoginPopupVisibleCallback(false);
-          // }
         }).catch(onError);
     }).catch(onError)
     // Unlock the page in the end.
@@ -71,7 +57,7 @@ export function onSuccessFacebook(
   result: FacebookLoginResponse,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: ProfileInfo) => void
+  setCurrentProfileInfoCallback: (profileInfo: AppProfileInfo) => void
 ) {
   if (!isFacebookFailureResponse(result)) {
     // 1. Save OAuth bearer token to cookies.
@@ -79,7 +65,7 @@ export function onSuccessFacebook(
 
     // 2. Time to retrieve basic profile info from Facebook response.
     const oauthData = result as ReactFacebookLoginInfo;
-    const profileInfo: ProfileInfo = {
+    const profileInfo: AppProfileInfo = {
       currentId: oauthData.userID,
       currentName: oauthData.name || '',
       currentPhotoUrl: oauthData.picture?.data.url || ''

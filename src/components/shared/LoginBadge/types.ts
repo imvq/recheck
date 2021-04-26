@@ -1,4 +1,4 @@
-import { Nullable, ProfileInfo } from 'utils/types.common';
+import { Nullable, AppProfileInfo } from 'utils/types.common';
 
 export interface IStateProps {
   isAuthorized: Nullable<boolean>;
@@ -7,7 +7,7 @@ export interface IStateProps {
 export interface IDispatchProps {
   lockPage(): void;
   setIsLoginPopupVisible(flag: boolean): void;
-  setCurrentProfileInfo(profileInfo: ProfileInfo): void;
+  setCurrentProfileInfo(profileInfo: AppProfileInfo): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

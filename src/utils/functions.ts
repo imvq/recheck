@@ -1,10 +1,14 @@
-import { LinkedInProfileDto, ProfileInfo, InputEvent, TextAreaEvent, Setter } from './types.common';
+import {
+  LinkedInProfileDto, FacebookProfileDto, AppProfileInfo, InputEvent,
+  TextAreaEvent, Setter
+} from './types.common';
 import { ScreenBreakpoint } from './enums';
 
 /**
- * Transform profile DTO to store profile state object.
+ * Transform external profile DTO to store profile state object.
  */
-export const mapLinkedInProfileDtoToState = (profileDto: LinkedInProfileDto): ProfileInfo => ({
+export const mapProfileDtoToState = (profileDto: LinkedInProfileDto | FacebookProfileDto)
+  : AppProfileInfo => ({
   currentId: profileDto.profileId,
   currentName: profileDto.name,
   currentPhotoUrl: profileDto.photoUrl

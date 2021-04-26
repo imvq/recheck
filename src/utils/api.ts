@@ -6,7 +6,7 @@ import axios from 'axios';
 
 import {
   APIResponse,
-  CheckIsRegisteredResponseDto,
+  CheckIsRegisteredResponseDto, LinkedInProfileDto, FacebookProfileDto,
   RegistrationDto
 } from './types.common';
 
@@ -29,11 +29,11 @@ export default class Api {
     return Api.instance.post('/linkedin/oauth/exchange', body);
   }
 
-  public static getProfileLinkedIn(): APIResponse {
+  public static getProfileLinkedIn(): APIResponse<LinkedInProfileDto> {
     return Api.instance.get('/linkedin/oauth/retrieve', { withCredentials: true });
   }
 
-  public static getProfileFacebook(): APIResponse {
+  public static getProfileFacebook(): APIResponse<FacebookProfileDto> {
     return Api.instance.get('/facebook/oauth/retrieve', { withCredentials: true });
   }
 

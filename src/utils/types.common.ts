@@ -10,6 +10,12 @@ export type Optional<T> = T | undefined;
 export type Maybe<T> = Nullable<T> | Optional<T>;
 export type APIResponse<TDto = any> = Promise<AxiosResponse<TDto>>;
 
+export interface AppProfileInfo {
+  currentId: string;
+  currentName: string;
+  currentPhotoUrl: string;
+}
+
 export interface OptionType {
   key: any;
   text: string;
@@ -27,12 +33,14 @@ export interface CheckIsRegisteredResponseDto {
   flag: boolean;
 }
 
-export interface LinkedInProfileDto {
+interface ProfileDto {
   profileId: string;
   name: string;
-  email: string;
   photoUrl: string;
 }
+
+export type LinkedInProfileDto = ProfileDto;
+export type FacebookProfileDto = ProfileDto;
 
 export interface ReviewCardData {
   name: string;
@@ -79,12 +87,6 @@ export interface PreviousSearchCardData {
   position: string;
   company: string;
   photoUrl: string;
-}
-
-export interface ProfileInfo {
-  currentId: string;
-  currentName: string;
-  currentPhotoUrl: string;
 }
 
 export interface RegistrationDto {
