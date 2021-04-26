@@ -1,4 +1,5 @@
-import { GET, Path, POST, Context, ServiceContext } from 'typescript-rest';
+import { Path, POST } from 'typescript-rest';
+import { BodyGuard } from 'typescript-rest-body-guard';
 import { Inject } from 'typescript-ioc';
 
 import Dtos from '@dto';
@@ -13,30 +14,13 @@ export default class UserController {
   public constructor(@Inject private readonly injectedService: UserService) {}
 
   /**
-   * Save user info.
+   * Check if the user is registered in the app.
    */
-  @Path('/prepare')
+  @Path('/is-registered')
+  @BodyGuard
   @POST
-  public async prepareUser(profileInfoDto: Dtos.ProfileDto)
-    : Promise<void> {
-    return this.injectedService.prepareUser(profileInfoDto);
+  public async checkIsUserRegistered(bodyData: Dtos.CheckIsUserRegisteredDto)
+    : Promise<Types.CheckIsUserRegisteredResponseDto> {
+    return this.injectedService.checkIsUserRegistered(bodyData);
   }
-
-  /**
-   * Save confirmed user id.
-   */
-  @Path('/register')
-  @POST
-  public async registerUser(registrationDto: Dtos.RegistrationDto)
-    : Promise<void> {
-    return this.injectedService.registerUser(registrationDto);
-  }
-
-  // /**
-  //  * Check if the user is registered in the app.
-  //  */
-  // @Path('/is-registered')
-  // @GET
-  // public async checkIsRegistered(data: Dtos.CheckIsRegisteredDto)
-  //   : Promise<>
 }

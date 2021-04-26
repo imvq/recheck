@@ -3,7 +3,7 @@ import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-face
 import Api from 'utils/api';
 import * as constants from 'utils/constants';
 import { Optional, ProfileInfo } from 'utils/types.common';
-import { mapProfileDtoToState } from 'utils/functions';
+import { mapLinkedInProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
 import { FacebookLoginResponse } from './types';
 
@@ -26,7 +26,7 @@ export function onSuccessLinkedIn(
   // Lock page to prevent user actions while retrieving profile data.
   setPageLockedCallback(true);
 
-  Api.confirmAuthLinkedIn(code)
+  Api.exchangeLinkedInCode(code)
     // If the code is valid and correct.
     .then(response => {
       // 1. Save OAuth bearer token to cookies.
@@ -35,24 +35,26 @@ export function onSuccessLinkedIn(
       // 2. Time to get basic profile info from LinkedIn.
       Api.getProfileLinkedIn()
         .then(profileResponse => {
-          const isRegistered = profileResponse.data.isRegistered as boolean;
-          const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
+          const normalizedProfileInfo = mapLinkedInProfileDtoToState(profileResponse.data);
           setCurrentProfileInfoCallback(normalizedProfileInfo);
 
+          Api.checkIsRegistered(normalizedProfileInfo.currentId)
+            .then(() => {});
+
           // 2.1 Register the user if it is not registered in our app yet.
-          if (!isRegistered) {
-            Api.registerProfile(normalizedProfileInfo.currentId)
-              .then(() => {
-                setCurrentProfileInfoCallback(normalizedProfileInfo);
-                setIsAuthorizedCallback(true);
-                setIsLoginPopupVisibleCallback(false);
-              })
-              .catch(() => setIsAuthorizedCallback(false));
-          } else {
-            setCurrentProfileInfoCallback(normalizedProfileInfo);
-            setIsAuthorizedCallback(true);
-            setIsLoginPopupVisibleCallback(false);
-          }
+          // if (!isRegistered) {
+          //   Api.registerProfile(normalizedProfileInfo.currentId)
+          //     .then(() => {
+          //       setCurrentProfileInfoCallback(normalizedProfileInfo);
+          //       setIsAuthorizedCallback(true);
+          //       setIsLoginPopupVisibleCallback(false);
+          //     })
+          //     .catch(() => setIsAuthorizedCallback(false));
+          // } else {
+          //   setCurrentProfileInfoCallback(normalizedProfileInfo);
+          //   setIsAuthorizedCallback(true);
+          //   setIsLoginPopupVisibleCallback(false);
+          // }
         }).catch(onError);
     }).catch(onError)
     // Unlock the page in the end.

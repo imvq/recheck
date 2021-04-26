@@ -30,7 +30,7 @@ const PageStartupManager: FunctionComponent<IProps> = (props) => {
     // If redirectHomeOnFail flag is set and the user is not authorized
     // we must redirect the user to home page.
     if (props.redirectHomeOnFail && props.isAuthorized !== null && !props.isAuthorized) {
-      window.location.replace(process.env.REACT_APP_START_PAGE as string);
+      window.location.replace(window.location.origin);
     }
 
     if (!props.preventDefaultUnlock || props.isAuthorized) {

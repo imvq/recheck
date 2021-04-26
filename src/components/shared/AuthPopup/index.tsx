@@ -56,7 +56,7 @@ const AuthPopup = (props: IProps) => (
           {/* Facebook login button. */}
           <FacebookLogin
             appId={process.env.REACT_APP_FACEBOOK_APP_CLIENT_ID as string}
-            fields='name,email,picture'
+            fields='id,name,email,picture'
             callback={(result: FacebookLoginResponse) => onSuccessFacebook(
               result,
               props.setIsLoginPopupVisible,

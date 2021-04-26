@@ -23,6 +23,17 @@ export type InputEvent = ChangeEvent<HTMLInputElement>;
 
 export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
 
+export interface CheckIsRegisteredResponseDto {
+  flag: boolean;
+}
+
+export interface LinkedInProfileDto {
+  profileId: string;
+  name: string;
+  email: string;
+  photoUrl: string;
+}
+
 export interface ReviewCardData {
   name: string;
   photoUrl: string;
@@ -68,14 +79,6 @@ export interface PreviousSearchCardData {
   position: string;
   company: string;
   photoUrl: string;
-}
-
-export interface ProfileDto {
-  profileId: string;
-  name: string;
-  email: string;
-  photoUrl: string;
-  isRegistered: boolean;
 }
 
 export interface ProfileInfo {

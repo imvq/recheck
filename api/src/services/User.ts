@@ -15,6 +15,11 @@ import UserManager from '@database/managers/UserManager';
  * Service in charge of registration and managing user data.
  */
 export default class UserService {
+  public async checkIsUserRegistered(profileIdDto: Dtos.CheckIsUserRegisteredDto)
+    : Promise<Types.CheckIsUserRegisteredResponseDto> {
+    return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
+  }
+
   public async prepareUser(profileDto: Dtos.ProfileDto): Promise<void> {
     const options: SendMailOptions = {
       from: process.env.MAIL_USERNAME as string,

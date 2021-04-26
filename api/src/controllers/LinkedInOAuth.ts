@@ -1,4 +1,4 @@
-import { GET, Path, Context, ServiceContext } from 'typescript-rest';
+import { GET, POST, Path, Context, ServiceContext } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import Types from '@types';
@@ -12,6 +12,11 @@ import DTOs from '@dto';
 export default class LinkedInController {
   public constructor(@Inject private readonly injectedService: LinkedInOAuthService) {}
 
+  /**
+   * Exchange confirmation code to LinkedIn access token.
+   */
+  @Path('/exchange')
+  @POST
   public async exchangeLinkedInAuthCode(bodyDta: DTOs.ExchangeLinkedInAuthCodeDto)
     : Promise<Types.ExchangeLinkedInAuthCodeResponseDto> {
     return this.injectedService.exchangeLinkedInAuthCode(bodyDta);

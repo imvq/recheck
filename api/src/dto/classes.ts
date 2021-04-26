@@ -32,6 +32,10 @@ export class CreateReviewDto {
   ) {}
 }
 
+export class CheckIsUserRegisteredDto {
+  public constructor(public profileId: string) {}
+}
+
 export class ProfileDto {
   public constructor(
     public email: string,

@@ -20,8 +20,8 @@ export interface CorsMiddleware {
   (req: cors.CorsRequest, res: CorsResponse, next: (err?: any) => any): void;
 }
 
-export interface CheckIsRegisteredDto {
-  profileId: string;
+export interface CheckIsUserRegisteredResponseDto {
+  isRegistered: boolean;
 }
 
 export interface EmailDto {

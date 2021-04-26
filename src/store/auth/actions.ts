@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 
 import Api from 'utils/api';
 import { cookieManager, cookiesList } from 'utils/cookies';
-import { mapProfileDtoToState } from 'utils/functions';
+import { mapLinkedInProfileDtoToState } from 'utils/functions';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
 import { setCurrentProfileInfo } from '../profile/actions';
@@ -22,21 +22,18 @@ export const checkAuthorization = () => (dispatch: Dispatch<AppActionType>) => {
   if (userFor) {
     Api.getProfileLinkedIn()
       .then(profileResponse => {
-        const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
-        const isRegistered = profileResponse.data.isRegistered as boolean;
+        const normalizedProfileInfo = mapLinkedInProfileDtoToState(profileResponse.data);
 
-        // Register the user if it is not registered in our app yet.
-        if (!isRegistered) {
-          Api.registerProfile(normalizedProfileInfo.currentId)
-            .then(() => {
+        Api.checkIsRegistered(normalizedProfileInfo.currentId)
+          .then((checkResponse) => {
+            if (checkResponse.data.flag) {
               dispatch(setCurrentProfileInfo(normalizedProfileInfo));
               dispatch(setIsAuthorized(true));
-            })
-            .catch(() => dispatch(setIsAuthorized(false)));
-        } else {
-          dispatch(setCurrentProfileInfo(normalizedProfileInfo));
-          dispatch(setIsAuthorized(true));
-        }
+            } else {
+              // Register the user if it is not registered in our app yet.
+              window.location.replace(`${window.location.origin}/register`);
+            }
+          });
       }).catch(() => dispatch(setIsAuthorized(false)));
   } else {
     dispatch(setIsAuthorized(false));
