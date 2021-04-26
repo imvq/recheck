@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { InputEvent, OptionType } from 'utils/types.common';
-import { inputHandler, getNValuesDown } from 'utils/functions';
+import { inputHandler, isValidEmail, isValidUrl, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
 import { IProps } from './types';
 import {
-  BoxBaseWrapper, ButtonGroupWrapper, InputRowWrapper,
+  BoxBaseWrapper, ButtonGroupWrapper, InputRowWrapper, TextDescription,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input
 } from '../../../shared/BoxBase';
 
@@ -36,25 +36,40 @@ export default (props: IProps) => {
   const [workStartMonth, setWorkStartMonth] = useState(-1);
   const [workStartYear, setWorkStartYear] = useState(-1);
 
-  const emailHandler = (event: InputEvent) => inputHandler(event, setEmail);
-  const companySiteHandler = (event: InputEvent) => inputHandler(event, setCompanySite);
+  const [isEmailErrorVisible, setIsEmailErrorVisible] = useState(false);
+  const recalculateEmailErrorVisibility = () => {
+    setIsEmailErrorVisible(!isValidEmail(email));
+  };
+
+  const [isSiteErrorVisible, setIsSiteErrorVisible] = useState(false);
+  const recalculateSiteErrorVisibility = () => {
+    setIsSiteErrorVisible(!isValidUrl(companySite));
+  };
+
+  const emailHandler = (event: InputEvent) => {
+    setIsEmailErrorVisible(false);
+    setEmail(event.target.value);
+  };
+
+  const companySiteHandler = (event: InputEvent) => {
+    setIsSiteErrorVisible(false);
+    setCompanySite(event.target.value);
+  };
+
   const companyNameHandler = (event: InputEvent) => inputHandler(event, setCompanyName);
   const positionHandler = (event: InputEvent) => inputHandler(event, setPosition);
   const monthHandler = (option: OptionType) => setWorkStartMonth(option.key);
   const yearHandler = (option: OptionType) => setWorkStartYear(Number.parseInt(option.text, 10));
 
-  const canProceed = () => !!email && !!companySite && !!companyName
-    && !!position && workStartMonth > -1 && workStartYear > -1;
+  const canProceed = () => isValidEmail(email) && !!companySite
+    && !!companyName && !!position
+    && workStartMonth > -1 && workStartYear > -1;
 
-  const proceedIfAllowed = () => {
+  function proceedIfAllowed() {
     if (canProceed()) {
       props.onProceed({ email, companySite, companyName, position, workStartMonth, workStartYear });
     }
-  };
-
-  useEffect(() => {
-
-  }, []);
+  }
 
   return (
     <BoxBaseWrapper>
@@ -62,14 +77,20 @@ export default (props: IProps) => {
         <InputDescriptionWrapper>
           <InputDescription>Рабочий email:</InputDescription>
         </InputDescriptionWrapper>
-        <Input type='text' onChange={emailHandler} />
+        <Input type='text' onBlur={recalculateEmailErrorVisibility} onChange={emailHandler} />
+        {isEmailErrorVisible
+          ? <TextDescription isHighlighted>Некорректный почтовый адрес</TextDescription>
+          : null}
       </InputGroupWrapper>
 
       <InputGroupWrapper>
         <InputDescriptionWrapper>
           <InputDescription>Сайт компании, где вы работаете:</InputDescription>
         </InputDescriptionWrapper>
-        <Input type='text' onChange={companySiteHandler} />
+        <Input type='text' onBlur={recalculateSiteErrorVisibility} onChange={companySiteHandler} />
+        {isSiteErrorVisible
+          ? <TextDescription isHighlighted>Некорректный URL страницы</TextDescription>
+          : null}
       </InputGroupWrapper>
 
       <InputGroupWrapper>
@@ -81,7 +102,7 @@ export default (props: IProps) => {
 
       <InputGroupWrapper>
         <InputDescriptionWrapper>
-          <InputDescription>Ваша позиция:</InputDescription>
+          <InputDescription>Ваша должность:</InputDescription>
         </InputDescriptionWrapper>
         <Input type='text' onChange={positionHandler} />
       </InputGroupWrapper>
@@ -105,6 +126,8 @@ export default (props: IProps) => {
           />
         </InputRowWrapper>
       </InputGroupWrapper>
+
+      <TextDescription>Все поля обязательны к заполнению</TextDescription>
 
       <ButtonGroupWrapper>
         <CustomButton isDisabled={!canProceed()} onClick={proceedIfAllowed}>

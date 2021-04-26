@@ -101,3 +101,9 @@ export const TextArea = styled.textarea`
 export const CommentArea = styled(TextArea)`
   min-height: 12rem;
 `;
+
+export const TextDescription = styled.span<{ isHighlighted?: boolean; }>`
+  ${props => (props.isHighlighted ? 'color: red;' : '')}
+  font-size: 1.25rem;
+  padding: 1rem 0 1rem;
+`;

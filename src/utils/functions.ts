@@ -19,6 +19,28 @@ export const inputHandler = (event: InputEvent, setter: Setter<string>) => {
 };
 
 /**
+ * Validate email.
+ */
+export const isValidEmail = (text: string) => (
+  /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
+    .test(text.toLowerCase())
+);
+
+/**
+ * Validate URL.
+ */
+export const isValidUrl = (text: string) => (
+  new RegExp([
+    '^(https?:\\/\\/)?', // Proocol.
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|', // Domain name.
+    '((\\d{1,3}\\.){3}\\d{1,3}))', // IPv4 address.
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*', // Port and path.
+    '(\\?[;&a-z\\d%_.~+=-]*)?', // Query string.
+    '(\\#[-a-z\\d_]*)?$' // Fragment locator.
+  ].join('')).test(text.toLowerCase())
+);
+
+/**
  * Transform external profile DTO to store profile state object.
  */
 export const mapProfileDtoToState = (profileDto: LinkedInProfileDto | FacebookProfileDto)
