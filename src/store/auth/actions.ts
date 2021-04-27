@@ -23,11 +23,11 @@ function onProfileDataRetrieved(
   profileResponse: AxiosResponse<LinkedInProfileDto | FacebookProfileDto>
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
+  dispatch(setCurrentProfileInfo(normalizedProfileInfo));
 
   Api.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       if (checkResponse.data.flag) {
-        dispatch(setCurrentProfileInfo(normalizedProfileInfo));
         dispatch(setIsAuthorized(true));
       } else {
         // Register the user if it is not registered in our app yet.
