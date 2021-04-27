@@ -32,3 +32,8 @@ export function createAuthConfig(accessToken: string) {
 export function createUrlEncodedConfig() {
   return { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } };
 }
+
+/**
+ * Get random n-digit code.
+ */
+export const getRandomCode = (length: number) => Math.floor(Math.random() * 10 ** length);
