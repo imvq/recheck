@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 
+import { AppState } from 'store';
 import { InputEvent, OptionType } from 'utils/types.common';
 import { inputHandler, isValidEmail, isValidUrl, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
-import { IProps } from './types';
+import { IProps, IStateProps } from './types';
 import {
   BoxBaseWrapper, ButtonGroupWrapper, InputRowWrapper, TextDescription,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input
@@ -28,7 +30,11 @@ const months: OptionType[] = [
 const years = getNValuesDown(new Date().getFullYear(), 50)
   .map((value, index) => ({ key: index, text: value.toString() }));
 
-export default (props: IProps) => {
+const mapStateToProps = (store: AppState): IStateProps => ({
+  currentProfileInfo: store.profile.currentProfileInfo
+});
+
+const RegistrationBox = (props: IProps) => {
   const [email, setEmail] = useState('');
   const [companySite, setCompanySite] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -67,7 +73,16 @@ export default (props: IProps) => {
 
   function proceedIfAllowed() {
     if (canProceed()) {
-      props.onProceed({ email, companySite, companyName, position, workStartMonth, workStartYear });
+      props.onProceed({
+        name: props.currentProfileInfo.currentName,
+        photoUrl: props.currentProfileInfo.currentPhotoUrl,
+        email,
+        companySite,
+        companyName,
+        position,
+        workStartMonth,
+        workStartYear
+      });
     }
   }
 
@@ -137,3 +152,5 @@ export default (props: IProps) => {
     </BoxBaseWrapper>
   );
 };
+
+export default connect(mapStateToProps)(RegistrationBox);
