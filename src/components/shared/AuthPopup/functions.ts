@@ -28,11 +28,11 @@ function onProfileDataRetrieved(
   profileResponse: LinkedInProfileDto | FacebookProfileDto
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
+  setCurrentProfileInfoCallback(normalizedProfileInfo);
 
   Api.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       if (checkResponse.data.flag) {
-        setCurrentProfileInfoCallback(normalizedProfileInfo);
         setIsAuthorizedCallback(true);
         setIsLoginPopupVisibleCallback(false);
       } else {
