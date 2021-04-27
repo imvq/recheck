@@ -36,11 +36,13 @@ export class CheckIsUserRegisteredDto {
   public constructor(public profileId: string) {}
 }
 
-export class ProfileDto {
+export class PrepareUserDto {
   public constructor(
+    public name: string,
     public email: string,
+    public photoUrl: string,
     public companySite: string,
-    public companuName: string,
+    public companyName: string,
     public position: string,
     public workStartMonth: string,
     public workStartYear: string

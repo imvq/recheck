@@ -56,6 +56,10 @@ export interface LinkedInPhotoDto {
   }
 }
 
+export interface PrepareUserResponseDto {
+  success: boolean;
+}
+
 export interface RetrieveProfileInfoResponseDto {
   profileId: string;
   name: string;
