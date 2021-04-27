@@ -90,6 +90,7 @@ export interface PreviousSearchCardData {
 }
 
 export interface RegistrationDto {
+  profileId: string;
   name: string;
   email: string;
   photoUrl: string;

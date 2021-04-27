@@ -74,6 +74,7 @@ const RegistrationBox = (props: IProps) => {
   function proceedIfAllowed() {
     if (canProceed()) {
       props.onProceed({
+        profileId: props.currentProfileInfo.currentId,
         name: props.currentProfileInfo.currentName,
         photoUrl: props.currentProfileInfo.currentPhotoUrl,
         email,
