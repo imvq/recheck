@@ -32,7 +32,7 @@ function onProfileDataRetrieved(
 
   Api.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
-      if (checkResponse.data.flag) {
+      if (checkResponse.data.isRegistered) {
         setIsAuthorizedCallback(true);
         setIsLoginPopupVisibleCallback(false);
       } else {

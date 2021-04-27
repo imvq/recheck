@@ -27,7 +27,7 @@ function onProfileDataRetrieved(
 
   Api.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
-      if (checkResponse.data.flag) {
+      if (checkResponse.data.isRegistered) {
         dispatch(setIsAuthorized(true));
       } else {
         // Register the user if it is not registered in our app yet.

@@ -30,7 +30,7 @@ export type InputEvent = ChangeEvent<HTMLInputElement>;
 export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
 
 export interface CheckIsRegisteredResponseDto {
-  flag: boolean;
+  isRegistered: boolean;
 }
 
 interface ProfileDto {
