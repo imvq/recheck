@@ -15,7 +15,9 @@ export default class UserManager {
   }
 
   public static createUser = async (userData: Types.UserData) => (
-    UserManager.repo?.save(UserManager.repo.create({ ...userData }))
+    // Cast the result to User, ignoring that on error it can be undefined.
+    // Any errors produce exceptions that are to be handled outside.
+    UserManager.repo?.save(UserManager.repo.create({ ...userData })) as Promise<User>
   )
 
   public static getUser = async (profileId: string) => (

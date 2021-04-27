@@ -23,4 +23,15 @@ export default class UserController {
     : Promise<Types.CheckIsUserRegisteredResponseDto> {
     return this.injectedService.checkIsUserRegistered(bodyData);
   }
+
+  /**
+   * Prepare user to be registered.
+   */
+  @Path('/prepare')
+  @BodyGuard
+  @POST
+  public async prepareUser(bodyData: Dtos.PrepareUserDto)
+    : Promise<Types.PrepareUserResponseDto> {
+    return this.injectedService.prepareUser(bodyData);
+  }
 }

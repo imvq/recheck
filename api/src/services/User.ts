@@ -18,7 +18,8 @@ export default class UserService {
     : Promise<Types.CheckIsUserRegisteredResponseDto> {
     try {
       return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
-    } catch {
+    } catch (error) {
+      Logger.ifdev()?.err(error.message);
       throw new Errors.InternalServerError('Server-side database error');
     }
   }
@@ -30,14 +31,23 @@ export default class UserService {
     : Promise<Types.PrepareUserResponseDto> {
     const code = Utils.getRandomCode(Constants.CONFIRMATION_CODE_LENGTH);
 
-    const options: SendMailOptions = {
-      from: process.env.MAIL_USERNAME as string,
-      to: profileDto.email,
-      subject: 'Подтверждение регистрации в reCheck',
-      text: `Код подтверждения: ${code}`
-    };
-
+    // Save the user.
     try {
+      const user = await UserManager.createUser(profileDto);
+      await ConfirmationManager.createConfirmation(user, code);
+    } catch (error) {
+      Logger.ifdev()?.err(error.message);
+      throw new Errors.InternalServerError('Server-side database error');
+    }
+
+    // Send the confirmation code.
+    try {
+      const options: SendMailOptions = {
+        from: process.env.MAIL_USERNAME as string,
+        to: profileDto.email,
+        subject: 'Подтверждение регистрации в reCheck',
+        text: `Код подтверждения: ${code}`
+      };
       await Mailer.getInstance().sendMail(options);
     } catch (error) {
       Logger.ifdev()?.err(error.message);
