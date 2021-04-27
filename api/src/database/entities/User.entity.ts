@@ -9,6 +9,15 @@ export default class User {
   @PrimaryColumn('varchar', { length: 30, nullable: false })
   profileId: string = '';
 
+  @Column('text', { nullable: false })
+  name: string = '';
+
+  @Column('text', { nullable: false })
+  email: string = '';
+
+  @Column('text', { nullable: false })
+  photoUrl: string = '';
+
   @Column('int', { nullable: false })
   reviewsAvailable: number = 0;
 
