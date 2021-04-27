@@ -32,3 +32,12 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const TitleWrapper = styled.div`
+  padding: 4rem 0 2rem;
+`;
+
+export const Title = styled.h2`
+  font-size: 1.3rem;
+  font-weight: 600;
+`;
