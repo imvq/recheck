@@ -40,8 +40,4 @@ export default class Api {
   public static prepareProfile(profileInfoDto: RegistrationDto): APIResponse {
     return Api.instance.post('/user/prepare', profileInfoDto);
   }
-
-  public static registerProfile(profileId: string): APIResponse {
-    return Api.instance.post('/user/register', { profileId });
-  }
 }
