@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import CookiePopup from 'components/shared/CookiePopup';
 import AuthPopupManager from 'components/shared/AuthPopupManager';
 import { Wrapper } from './styled';
-import PopupSection from './PopupSection';
 import GreetingsSection from './GreetingsSection';
 import HowToWorkSection from './HowToWorkSection';
 import InfoblockSection from './InfoblockSection';
@@ -20,7 +19,6 @@ export default () => {
 
   return (
     <Wrapper>
-      <PopupSection />
       <GreetingsSection />
       <HowToWorkSection />
       <InfoblockSection />

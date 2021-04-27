@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import controlledHostory from 'utils/routing';
-import { AppState, setPageLocked, setIsLoginPopupVisible, setIsSearchPopupVisible } from 'store';
+import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 import { Wrapper, SearchButton } from './styled';
 import RocketGroup from './RocketGroup';
 import { IProps, IStateProps, IDispatchProps } from './types';
