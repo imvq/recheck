@@ -1,4 +1,5 @@
 export interface IDispatchProps {
+  lockPage(): void;
   unlockPage(): void;
 }
 

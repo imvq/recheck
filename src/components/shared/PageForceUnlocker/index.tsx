@@ -1,10 +1,11 @@
-import { FC, useEffect } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { setPageUnlocked } from 'store';
-import { PageForceUnlockerDispatchProps } from './types';
+import { IProps, IDispatchProps } from './types';
 
-const mapDispatchToProps: PageForceUnlockerDispatchProps = {
+const mapDispatchToProps: IDispatchProps = {
   unlockPage: setPageUnlocked
 };
 
@@ -14,10 +15,10 @@ const mapDispatchToProps: PageForceUnlockerDispatchProps = {
  * Nevertheless, it is sometimes needed to force unlock page
  * as quick as possible. PageForceUnlocker is in charge of that stuff.
  */
-const PageForceUnlocker: FC<PageForceUnlockerDispatchProps> = (props) => {
-  useEffect(() => props.unlockPage(), []);
+const PageForceUnlocker = (props: IProps) => {
+  useEffect(() => props.unlockPage());
 
-  return <></>;
+  return null;
 };
 
-export default connect(null, mapDispatchToProps)(PageForceUnlocker);
+export default withRouter(connect(null, mapDispatchToProps)(PageForceUnlocker));

@@ -58,7 +58,10 @@ export default () => (
 
           {/* Search page. Provide steps for searching candidates. */}
           <Route exact path='/register'>
-            <RegistrationPage />
+            <PageForceUnlocker />
+            <PageLockManager>
+              <RegistrationPage />
+            </PageLockManager>
           </Route>
 
           <Route exact path='/search'>
