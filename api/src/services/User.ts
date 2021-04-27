@@ -16,7 +16,11 @@ import ConfirmationManager from '@database/managers/ConfirmationManager';
 export default class UserService {
   public async checkIsUserRegistered(profileIdDto: Dtos.CheckIsUserRegisteredDto)
     : Promise<Types.CheckIsUserRegisteredResponseDto> {
-    return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
+    try {
+      return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
+    } catch {
+      throw new Errors.InternalServerError('Server-side database error');
+    }
   }
 
   /**
