@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
+import controlledHostory from 'utils/routing';
 import { AppState, setPageLocked, setIsLoginPopupVisible, setIsSearchPopupVisible } from 'store';
 import { Wrapper, SearchButton } from './styled';
 import RocketGroup from './RocketGroup';
@@ -12,8 +13,7 @@ const mapStateToProps = (store: AppState): IStateProps => ({
 
 const mapDispatchToProps: IDispatchProps = {
   lockPage: setPageLocked,
-  setIsLoginPopupVisible,
-  setIsSearchPopupVisible
+  setIsLoginPopupVisible
 };
 
 /**
@@ -25,7 +25,7 @@ const SearchButtonGroup: FunctionComponent<IProps> = (props) => (
     props.isAuthorized === null
       ? props.lockPage
       : props.isAuthorized
-        ? () => props.setIsSearchPopupVisible(true)
+        ? () => controlledHostory.replace('/search')
         : () => props.setIsLoginPopupVisible(true)
   }
   >

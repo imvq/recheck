@@ -11,7 +11,6 @@ export interface IStateProps {
 export interface IDispatchProps {
   lockPage(): void;
   setIsLoginPopupVisible(flag: boolean): void;
-  setIsSearchPopupVisible: (newValue: boolean) => void;
 }
 
 export type IProps = IOwnProps & IStateProps & IDispatchProps;
