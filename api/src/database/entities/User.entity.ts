@@ -9,9 +9,9 @@ export default class User {
   @PrimaryColumn('varchar', { length: 30, nullable: false })
   profileId: string = '';
 
-  @Column('int', { nullable: false, default: 0 })
+  @Column('int', { nullable: false })
   reviewsAvailable: number = 0;
 
-  @Column({ type: 'timestamptz', default: 'NOW()' })
+  @Column({ type: 'timestamptz' })
   lastUpdatedAt: Date = new Date();
 }

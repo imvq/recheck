@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, JoinColumn, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from 'typeorm';
 
 import User from './User.entity';
 
@@ -15,4 +15,7 @@ export default class Confirmation {
   @OneToOne(type => User, { onDelete: 'CASCADE' })
   @JoinColumn()
   user: User = new User();
+
+  @Column('int', { nullable: false })
+  code: number = 0;
 }
