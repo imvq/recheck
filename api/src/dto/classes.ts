@@ -44,8 +44,8 @@ export class PrepareUserDto {
     public companySite: string,
     public companyName: string,
     public position: string,
-    public workStartMonth: string,
-    public workStartYear: string
+    public workStartMonth: number,
+    public workStartYear: number
   ) {}
 }
 

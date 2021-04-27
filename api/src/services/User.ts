@@ -42,13 +42,4 @@ export default class UserService {
 
     return { success: true };
   }
-
-  public async registerUser(registrationDto: Dtos.RegistrationDto): Promise<void> {
-    try {
-      UserManager.createUser(registrationDto.profileId);
-    } catch (error) {
-      Logger.ifdev()?.err(error.message);
-      throw new Errors.InternalServerError('Internal database error.');
-    }
-  }
 }

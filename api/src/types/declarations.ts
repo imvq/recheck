@@ -1,5 +1,7 @@
 import cors from 'cors';
 
+import Dtos from '@dto';
+
 export type Nullable<T> = T | null;
 
 export type Optional<T> = T | undefined;
@@ -78,3 +80,5 @@ export interface HealthResponseDTO {
 export interface StringIndexable {
   [key: string]: string;
 }
+
+export type UserData = Dtos.PrepareUserDto;

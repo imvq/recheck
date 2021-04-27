@@ -18,6 +18,21 @@ export default class User {
   @Column('text', { nullable: false })
   photoUrl: string = '';
 
+  @Column('text', { nullable: false })
+  companySite: string = '';
+
+  @Column('text', { nullable: false })
+  companyName: string = '';
+
+  @Column('text', { nullable: false })
+  position: string = '';
+
+  @Column('int', { nullable: false })
+  workStartMonth: number = 0;
+
+  @Column('int', { nullable: false })
+  workStartYear: number = 0;
+
   @Column('int', { nullable: false })
   reviewsAvailable: number = 0;
 
