@@ -34,7 +34,7 @@ export default class FacebookOAuthService {
       };
     } catch (error) {
       Logger.ifdev()?.err(error);
-      throw error instanceof Errors.UnauthorizedError ? error
+      throw error instanceof Errors.BadRequestError ? error
         : new Errors.InternalServerError();
     }
   }
