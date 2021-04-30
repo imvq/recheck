@@ -34,8 +34,7 @@ export default class FacebookOAuthService {
       };
     } catch (error) {
       Logger.ifdev()?.err(error);
-      throw error instanceof Errors.BadRequestError ? error
-        : new Errors.InternalServerError();
+      throw new Errors.UnauthorizedError('Invalid token.');
     }
   }
 }
