@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+
+import User from './User.entity';
 
 /**
  * Company model.
@@ -16,4 +18,7 @@ export default class Company {
 
   @Column('text')
   logoUrl: string = '';
+
+  @OneToMany(() => User, user => user.company)
+  members: User[] = [];
 }

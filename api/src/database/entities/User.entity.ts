@@ -1,4 +1,6 @@
-import { Entity, PrimaryColumn, Column, Index } from 'typeorm';
+import { Entity, PrimaryColumn, Column, Index, ManyToOne } from 'typeorm';
+
+import Company from './Company.entity';
 
 /**
  * User model.
@@ -19,12 +21,6 @@ export default class User {
   photoUrl: string = '';
 
   @Column('text', { nullable: false })
-  companySite: string = '';
-
-  @Column('text', { nullable: false })
-  companyName: string = '';
-
-  @Column('text', { nullable: false })
   position: string = '';
 
   @Column('int', { nullable: false })
@@ -38,4 +34,7 @@ export default class User {
 
   @Column({ type: 'timestamptz' })
   lastUpdatedAt: Date = new Date();
+
+  @ManyToOne(() => Company, company => company.members)
+  company: Company = new Company();
 }
