@@ -9,17 +9,17 @@ import User from './User.entity';
 @Entity({ name: 'companies' })
 export default class Company {
   @PrimaryGeneratedColumn()
-  id: number = 0;
-
-  @Column('text', { nullable: false })
-  name: string = '';
-
-  @Column('text', { nullable: false })
-  site: string = '';
+  id!: number;
 
   @Column('text')
-  logoUrl: Types.Nullable<string> = null;
+  name!: string;
+
+  @Column('text')
+  site!: string;
+
+  @Column('text', { nullable: true })
+  logoUrl!: Types.Nullable<string>;
 
   @OneToMany(() => User, user => user.company)
-  members: User[] = [];
+  members!: User[];
 }

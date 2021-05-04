@@ -4,10 +4,12 @@ import Logger from '@common/Logger';
 import config from './config';
 import UserManager from './managers/UserManager';
 import ReviewManager from './managers/ReviewManager';
+import CompanyManager from './managers/CompanyManager';
 
 function loadRepositories() {
   UserManager.loadRepository();
   ReviewManager.loadRepository();
+  CompanyManager.loadRepository();
 }
 
 /**
