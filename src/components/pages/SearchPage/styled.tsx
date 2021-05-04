@@ -41,3 +41,9 @@ export const Title = styled.h2`
   font-size: 1.3rem;
   font-weight: 600;
 `;
+
+export const ResultsWrapper = styled.div`
+  margin: 1rem 0 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
+`;
