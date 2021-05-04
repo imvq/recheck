@@ -8,6 +8,7 @@ import Mailer from '@common/Mailer';
 import Logger from '@common/Logger';
 import * as Constants from '@common/Constants';
 import UserManager from '@database/managers/UserManager';
+import CompanyManager from '@database/managers/CompanyManager';
 import ConfirmationManager from '@database/managers/ConfirmationManager';
 
 /**
@@ -33,7 +34,8 @@ export default class UserService {
 
     // Save the user.
     try {
-      const user = await UserManager.createUser(profileDto);
+      const company = await this.prepareCompany(profileDto.companyName, profileDto.companySite);
+      const user = await UserManager.createUser(profileDto, company);
       await ConfirmationManager.createConfirmation(user, code);
     } catch (error) {
       Logger.ifdev()?.err(error.message);
@@ -55,5 +57,14 @@ export default class UserService {
     }
 
     return { success: true };
+  }
+
+  /**
+   * Get the company from the database with corresponding name and website
+   * otherwise create a company with provided data and return it.
+   */
+  private async prepareCompany(name: string, site: string) {
+    return await CompanyManager.getCompanyByFullPublicInfo(name, site)
+      || CompanyManager.createCompany({ name, site, logoUrl: null });
   }
 }

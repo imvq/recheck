@@ -1,6 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import Types from '@types';
+import Company from '../entities/Company.entity';
 import User from '../entities/User.entity';
 
 /**
@@ -14,10 +15,10 @@ export default class UserManager {
     UserManager.repo = getRepository(User);
   }
 
-  public static createUser = async (userData: Types.UserData) => (
+  public static createUser = async (userData: Types.UserData, company: Company) => (
     // Cast the result to User, ignoring that on error it can be undefined.
     // Any errors produce exceptions that are to be handled outside.
-    UserManager.repo?.save(UserManager.repo.create({ ...userData })) as Promise<User>
+    UserManager.repo?.save(UserManager.repo.create({ ...userData, company })) as Promise<User>
   )
 
   public static getUser = async (profileId: string) => (

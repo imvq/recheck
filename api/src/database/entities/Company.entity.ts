@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
+import Types from '@types';
 import User from './User.entity';
 
 /**
@@ -17,7 +18,7 @@ export default class Company {
   site: string = '';
 
   @Column('text')
-  logoUrl: string = '';
+  logoUrl: Types.Nullable<string> = null;
 
   @OneToMany(() => User, user => user.company)
   members: User[] = [];

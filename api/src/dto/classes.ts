@@ -1,3 +1,5 @@
+import Types from '@types';
+
 export class ExchangeLinkedInAuthCodeDto {
   public constructor(
     public code: string,
@@ -34,6 +36,14 @@ export class CreateReviewDto {
 
 export class CheckIsUserRegisteredDto {
   public constructor(public profileId: string) {}
+}
+
+export class CreateCompanyDto {
+  public constructor(
+    public name: string,
+    public site: string,
+    public logoUrl: Types.Nullable<string>
+  ) {}
 }
 
 export class PrepareUserDto {

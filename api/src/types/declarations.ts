@@ -81,4 +81,5 @@ export interface StringIndexable {
   [key: string]: string;
 }
 
+export type CompanyData = Dtos.CreateCompanyDto;
 export type UserData = Dtos.PrepareUserDto;
