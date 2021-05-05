@@ -4,7 +4,7 @@ import BodyGuard from 'typescript-rest-body-guard';
 
 import Dtos from '@dto';
 import ReviewService from '@services/Review';
-import Types from '@types';
+import * as ApiResponses from '@typing/apiResponses';
 
 /**
  * Default controller in charge of checking the API.
@@ -22,7 +22,7 @@ export default class ReviewController {
   @BodyGuard
   @POST
   public async prepareReview(reviewDto: Dtos.CreateReviewDto)
-    : Promise<Types.PrepareReviewResponseDto> {
+    : Promise<ApiResponses.IPrepareReviewResponseDto> {
     return this.injectedService.prepareReview(reviewDto);
   }
 
@@ -33,7 +33,7 @@ export default class ReviewController {
   @BodyGuard
   @POST
   public async bindReviewTarget(targetDto: Dtos.BindReviewTargetDto)
-    : Promise<Types.BindReviewTargetResponseDto> {
+    : Promise<ApiResponses.IBindReviewTargetResponseDto> {
     return this.injectedService.bindReviewTarget(targetDto);
   }
 }

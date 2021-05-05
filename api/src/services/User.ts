@@ -2,11 +2,11 @@ import { Errors } from 'typescript-rest';
 import { SendMailOptions } from 'nodemailer';
 
 import Dtos from '@dto';
-import Types from '@types';
 import Utils from '@utils';
 import Mailer from '@common/Mailer';
 import Logger from '@common/Logger';
 import * as Constants from '@common/Constants';
+import * as ApiResponses from '@typing/apiResponses';
 import UserManager from '@database/managers/UserManager';
 import CompanyManager from '@database/managers/CompanyManager';
 import ConfirmationManager from '@database/managers/ConfirmationManager';
@@ -16,7 +16,7 @@ import ConfirmationManager from '@database/managers/ConfirmationManager';
  */
 export default class UserService {
   public async checkIsUserRegistered(profileIdDto: Dtos.CheckIsUserRegisteredDto)
-    : Promise<Types.CheckIsUserRegisteredResponseDto> {
+    : Promise<ApiResponses.ICheckIsUserRegisteredResponseDto> {
     try {
       return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
     } catch (error) {
@@ -29,7 +29,7 @@ export default class UserService {
    * Save user info and send email to confirm.
    */
   public async prepareUser(profileDto: Dtos.PrepareUserDto)
-    : Promise<Types.PrepareUserResponseDto> {
+    : Promise<ApiResponses.IPrepareUserResponseDto> {
     const code = Utils.getRandomCode(Constants.CONFIRMATION_CODE_LENGTH);
 
     // Save the user.

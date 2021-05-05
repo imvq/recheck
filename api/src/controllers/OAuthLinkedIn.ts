@@ -2,7 +2,7 @@ import { GET, POST, Path, Context, ServiceContext } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 import BodyGuard from 'typescript-rest-body-guard';
 
-import Types from '@types';
+import * as ApiResponses from '@typing/apiResponses';
 import LinkedInOAuthService from '@services/OAuthLinkedIn';
 import DTOs from '@dto';
 
@@ -19,18 +19,18 @@ export default class LinkedInController {
   @Path('/retrieve')
   @GET
   public async getLinkedInProfile(@Context context: ServiceContext)
-    : Promise<Types.RetrieveLinkedInProfileInfoResponseDto> {
+    : Promise<ApiResponses.IRetrieveLinkedInProfileInfoResponseDto> {
     return this.injectedService.retrieveProfileInfo(context.request.cookies);
   }
 
   /**
    * Exchange confirmation code to LinkedIn access token.
    */
-   @Path('/exchange')
-   @BodyGuard
-   @POST
+  @Path('/exchange')
+  @BodyGuard
+  @POST
   public async exchangeLinkedInAuthCode(bodyDta: DTOs.ExchangeLinkedInAuthCodeDto)
-    : Promise<Types.ExchangeLinkedInAuthCodeResponseDto> {
+    : Promise<ApiResponses.IExchangeLinkedInAuthCodeResponseDto> {
     return this.injectedService.exchangeLinkedInAuthCode(bodyDta);
   }
 }

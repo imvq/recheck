@@ -46,8 +46,8 @@
       "@utils": [
         "src/utils"
       ],
-      "@types": [
-        "src/types"
+      "@typing/*": [
+        "src/typing/*"
       ]
     }
   },

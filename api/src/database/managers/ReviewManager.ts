@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
 import Dtos from '@dto';
-import Types from '@types';
+import * as UtilityTypes from '@typing/utility';
 import Review from '../entities/Review.entity';
 import UserManager from './UserManager';
 
@@ -9,7 +9,7 @@ import UserManager from './UserManager';
  * Class providing operations with Review entity.
  */
 export default class ReviewManager {
-  private static repo: Types.Nullable<Repository<Review>> = null;
+  private static repo: UtilityTypes.Nullable<Repository<Review>> = null;
 
   // Must be invoked after connection being established.
   public static loadRepository() {

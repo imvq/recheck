@@ -3,8 +3,8 @@ import { BodyGuard } from 'typescript-rest-body-guard';
 import { Inject } from 'typescript-ioc';
 
 import Dtos from '@dto';
-import Types from '@types';
 import UserService from '@services/User';
+import * as ApiResponses from '@typing/apiResponses';
 
 /**
  * Default controller in charge of checking the API.
@@ -20,7 +20,7 @@ export default class UserController {
   @BodyGuard
   @POST
   public async checkIsUserRegistered(bodyData: Dtos.CheckIsUserRegisteredDto)
-    : Promise<Types.CheckIsUserRegisteredResponseDto> {
+    : Promise<ApiResponses.ICheckIsUserRegisteredResponseDto> {
     return this.injectedService.checkIsUserRegistered(bodyData);
   }
 
@@ -31,7 +31,7 @@ export default class UserController {
   @BodyGuard
   @POST
   public async prepareUser(bodyData: Dtos.PrepareUserDto)
-    : Promise<Types.PrepareUserResponseDto> {
+    : Promise<ApiResponses.IPrepareUserResponseDto> {
     return this.injectedService.prepareUser(bodyData);
   }
 }

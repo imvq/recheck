@@ -1,4 +1,4 @@
-import Types from '@types';
+import * as UtilityTypes from '@typing/utility';
 
 export class BindReviewTargetDto {
   public constructor(
@@ -50,7 +50,7 @@ export class CreateCompanyDto {
   public constructor(
     public name: string,
     public site: string,
-    public logoUrl: Types.Nullable<string>
+    public logoUrl: UtilityTypes.Nullable<string>
   ) {}
 }
 

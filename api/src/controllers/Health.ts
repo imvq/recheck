@@ -1,7 +1,7 @@
 import { Path, GET } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
-import Types from '@types';
+import * as ApiResponses from '@typing/apiResponses';
 import HealthService from '@services/Health';
 
 /**
@@ -16,7 +16,7 @@ export default class HealthController {
    * with a simple GET request.
    */
   @GET
-  public getHealthStatus(): Types.HealthResponseDTO {
+  public async getHealthStatus(): Promise<ApiResponses.IHealthResponseDTO> {
     return this.injectedService.getHealthStatus();
   }
 }

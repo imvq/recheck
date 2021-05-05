@@ -16,7 +16,8 @@ import express, {
 
 import * as Constants from '@common/Constants';
 import * as Computed from '@common/Computed';
-import Types from '@types';
+import * as GeneralTypes from '@typing/general';
+import * as UtilityTypes from '@typing/utility';
 import Utils from '@utils';
 
 import Logger from '@common/Logger';
@@ -30,7 +31,7 @@ export default class App {
 
   private port: number = Constants.DEFAULT_PORT;
 
-  private server: Types.Nullable<https.Server | http.Server> = null;
+  private server: UtilityTypes.Nullable<https.Server | http.Server> = null;
 
   public constructor(private readonly app: Application = express()) {
     this.resolveHost();
@@ -114,7 +115,7 @@ export default class App {
     this.app.use(cors({
       credentials: true,
       origin: process.env.ORIGIN as string
-    }) as Types.CorsMiddleware);
+    }) as GeneralTypes.ICorsMiddleware);
 
     // Provide functionality to read POST data.
     this.app.use(bodyParser.json());

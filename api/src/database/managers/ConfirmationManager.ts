@@ -1,6 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 
-import Types from '@types';
+import * as UtilityTypes from '@typing/utility';
 import User from '../entities/User.entity';
 import Confirmation from '../entities/Confirmation.entity';
 
@@ -8,7 +8,7 @@ import Confirmation from '../entities/Confirmation.entity';
  * Class providing operations with Confirmation entity.
  */
 export default class ConfirmationManager {
-  private static repo: Types.Nullable<Repository<Confirmation>> = null;
+  private static repo: UtilityTypes.Nullable<Repository<Confirmation>> = null;
 
   // Must be invoked after connection being established.
   public static loadRepository() {

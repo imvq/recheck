@@ -18,7 +18,7 @@
     "@database": "dist/database",
     "@dto": "dist/dto",
     "@services": "dist/services",
-    "@types": "dist/types",
+    "@typing": "dist/typing",
     "@utils": "dist/utils"
   },
   "keywords": [],

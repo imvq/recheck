@@ -1,8 +1,8 @@
 import { Errors } from 'typescript-rest';
 
 import Dtos from '@dto';
-import Types from '@types';
 import Logger from '@common/Logger';
+import * as ApiResponses from '@typing/apiResponses';
 import ReviewManager from '@database/managers/ReviewManager';
 
 /**
@@ -10,7 +10,7 @@ import ReviewManager from '@database/managers/ReviewManager';
  */
 export default class ReviewService {
   public async prepareReview(reviewData: Dtos.CreateReviewDto)
-    : Promise<Types.PrepareReviewResponseDto> {
+    : Promise<ApiResponses.IPrepareReviewResponseDto> {
     try {
       await ReviewManager.prepareReview(reviewData);
       return { success: true };
@@ -21,7 +21,7 @@ export default class ReviewService {
   }
 
   public async bindReviewTarget(targetData: Dtos.BindReviewTargetDto)
-    : Promise<Types.BindReviewTargetResponseDto> {
+    : Promise<ApiResponses.IBindReviewTargetResponseDto> {
     try {
       await ReviewManager.bindReviewTarget(targetData);
       return { success: true };

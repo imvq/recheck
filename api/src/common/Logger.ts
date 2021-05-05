@@ -2,7 +2,7 @@ import { appendFile, writeFile } from 'fs';
 import chalk from 'chalk';
 
 import * as Computed from '@common/Computed';
-import Types from '@types';
+import * as UtilityTypes from '@typing/utility';
 import Utils from '@utils';
 
 /**
@@ -34,7 +34,7 @@ export default class Logger {
    *
    * @returns {Logger|null} The logger instance or null
    */
-  public static ifdev(): Types.Nullable<Logger> {
+  public static ifdev(): UtilityTypes.Nullable<Logger> {
     return process.env.NODE_ENV === 'development' ? Logger.instance : null;
   }
 
