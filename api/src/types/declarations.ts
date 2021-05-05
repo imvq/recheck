@@ -54,10 +54,6 @@ export interface LinkedInPhotoDto {
   }
 }
 
-export interface PrepareUserResponseDto {
-  success: boolean;
-}
-
 interface RetrieveProfileInfoResponseDto {
   profileId: string;
   name: string;
@@ -76,7 +72,9 @@ export interface BindReviewTargetResponseDto extends SimpleActionResponse {}
 
 export interface CheckAuthResponseDto extends SimpleActionResponse {}
 
-export interface PrepareReviewDto extends SimpleActionResponse {}
+export interface PrepareUserResponseDto extends SimpleActionResponse {}
+
+export interface PrepareReviewResponseDto extends SimpleActionResponse {}
 
 export interface HealthResponseDTO {
   message: string;

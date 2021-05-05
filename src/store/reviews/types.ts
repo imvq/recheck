@@ -36,7 +36,7 @@ export const SET_RECOMMENDER_LINK3 = 'SET_RECOMMENDER_LINK3';
 export interface ReviewState {
   firstName: string;
   lastName: string;
-  company: string;
+  companyName: string;
   bounds: string;
   tasks: string;
   strengths: string;

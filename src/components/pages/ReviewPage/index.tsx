@@ -18,30 +18,7 @@ import BoxStepK from './BoxStepK';
 import { Wrapper, AdaptedHeader, AdaptedFooter, ContentWrapper } from './styled';
 
 const mapSateToProps = (store: AppState): IStateProps => ({
-  reviewData: {
-    firstName: store.reviews.firstName,
-    lastName: store.reviews.lastName,
-    company: store.reviews.company,
-    bounds: store.reviews.bounds,
-    tasks: store.reviews.tasks,
-    strengths: store.reviews.strengths,
-    improvements: store.reviews.improvements,
-    results: store.reviews.results,
-    levelMark: store.reviews.levelMark,
-    levelComment: store.reviews.levelComment,
-    activityMark: store.reviews.activityMark,
-    activityComment: store.reviews.activityComment,
-    ownHireOpinionMark: store.reviews.ownHireOpinionMark,
-    ownHireOpinionComment: store.reviews.ownHireOpinionComment,
-    qualityMark: store.reviews.qualityMark,
-    qualityComment: store.reviews.qualityComment,
-    leadershipMark: store.reviews.leadershipMark,
-    leadershipComment: store.reviews.leadershipComment,
-    adviceComment: store.reviews.adviceComment,
-    recommenderLink1: store.reviews.recommenderLink1,
-    recommenderLink2: store.reviews.recommenderLink2,
-    recommenderLink3: store.reviews.recommenderLink3,
-  }
+  reviewData: { ...store.reviews }
 });
 
 const mapDispatchToProps: IDispatchProps = {

@@ -22,7 +22,7 @@ export default class ReviewController {
   @BodyGuard
   @POST
   public async prepareReview(reviewDto: Dtos.CreateReviewDto)
-    : Promise<Types.PrepareReviewDto> {
+    : Promise<Types.PrepareReviewResponseDto> {
     return this.injectedService.prepareReview(reviewDto);
   }
 

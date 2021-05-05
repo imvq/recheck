@@ -10,7 +10,7 @@ import ReviewManager from '@database/managers/ReviewManager';
  */
 export default class ReviewService {
   public async prepareReview(reviewData: Dtos.CreateReviewDto)
-    : Promise<Types.PrepareReviewDto> {
+    : Promise<Types.PrepareReviewResponseDto> {
     try {
       await ReviewManager.prepareReview(reviewData);
       return { success: true };

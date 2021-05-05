@@ -25,12 +25,20 @@ export interface Setter<TValue> {
   (newValue: TValue): void;
 }
 
+interface SimpleActionResponse {
+  success: boolean;
+}
+
 export type InputEvent = ChangeEvent<HTMLInputElement>;
 
 export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
 
 export interface CheckIsRegisteredResponseDto {
   isRegistered: boolean;
+}
+
+export interface ExchangeLinkedInCodeResposneDto {
+  'li_at': string;
 }
 
 interface ProfileDto {
@@ -55,7 +63,7 @@ export interface ReviewCardData {
 export interface ReviewData {
   firstName: string;
   lastName: string;
-  company: string;
+  companyName: string;
   bounds: string;
   tasks: string;
   strengths: string;
@@ -81,6 +89,10 @@ export interface ReviewCardDataFull extends ReviewCardData {
   questions: string[];
   status: ReviewStatus;
 }
+
+export type PrepareUserResponseDto = SimpleActionResponse;
+
+export type PrepareReviewResponseDto = SimpleActionResponse;
 
 export interface PreviousSearchCardData {
   name: string;
