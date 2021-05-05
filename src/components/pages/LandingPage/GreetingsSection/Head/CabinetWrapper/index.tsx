@@ -1,4 +1,4 @@
-import LoginBadge from 'components/shared/LoginBadge';
+import ProfileMenuBadge from 'components/shared/ProfileMenuBadge';
 import { Wrapper } from './styled';
 
 /**
@@ -6,6 +6,6 @@ import { Wrapper } from './styled';
  */
 export default () => (
   <Wrapper>
-    <LoginBadge />
+    <ProfileMenuBadge />
   </Wrapper>
 );

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import Logo from 'components/shared/Logo';
-import LoginBadge from 'components/shared/LoginBadge';
+import ProfileMenuBadge from 'components/shared/ProfileMenuBadge';
 import { Wrapper, LogoWrapper, LoginBadgeWrapper } from './styled';
 
 /**
@@ -10,6 +10,6 @@ import { Wrapper, LogoWrapper, LoginBadgeWrapper } from './styled';
 export default () => (
   <Wrapper>
     <LogoWrapper><Link to='/'><Logo /></Link></LogoWrapper>
-    <LoginBadgeWrapper><LoginBadge /></LoginBadgeWrapper>
+    <LoginBadgeWrapper><ProfileMenuBadge /></LoginBadgeWrapper>
   </Wrapper>
 );

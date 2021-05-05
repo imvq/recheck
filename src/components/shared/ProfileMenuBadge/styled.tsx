@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { cssVars, mixins } from 'utils/style.common';
-import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
+import { ReactComponent as CabinetSvg } from 'assets/images/shared/ProfileMenuBadge/Cabinet.svg';
 
 const cssVarsLocal = {
   widthOffset: '12rem'

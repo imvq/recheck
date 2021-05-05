@@ -3,8 +3,9 @@ import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-import { ReactComponent as DoorSvg } from 'assets/images/shared/LoginBadge/Door.svg';
-import { ReactComponent as CabinetSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Head/CabinetIcon.svg';
+import { ReactComponent as DoorSvg } from 'assets/images/shared/ProfileMenuBadge/Door.svg';
+import { ReactComponent as CabinetSvg } from 'assets/images/shared/ProfileMenuBadge/Cabinet.svg';
+import { ReactComponent as ReviewSvg } from 'assets/images/shared/ProfileMenuBadge/Review.svg';
 import { AppState, setPageLocked, setIsLoginPopupVisible, setCurrentProfileInfo } from 'store';
 import { IProps, IStateProps, IDispatchProps } from './types';
 import { Wrapper, LoginButton, Menu, MenuEntry, SvgWrapper } from './styled';
@@ -44,6 +45,10 @@ const LoginBadge: FunctionComponent<IProps> = (props) => {
           <MenuEntry onClick={() => history.push('/profile')}>
             <SvgWrapper><CabinetSvg /></SvgWrapper>
             <span>Профиль</span>
+          </MenuEntry>
+          <MenuEntry onClick={() => history.push('/review')}>
+            <SvgWrapper><ReviewSvg /></SvgWrapper>
+            <span>Создать отзыв</span>
           </MenuEntry>
           <MenuEntry onClick={() => onExit(props.lockPage)}>
             <SvgWrapper><DoorSvg /></SvgWrapper>
