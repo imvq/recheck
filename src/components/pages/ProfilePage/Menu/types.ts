@@ -1,7 +1,7 @@
-import { AppProfileInfo } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 
 export interface IOwnProps {
-  currentProfileInfo: AppProfileInfo;
+  currentProfileInfo: GeneralTypes.AppProfileInfo;
 }
 
 export type IProps = IOwnProps;

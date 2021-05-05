@@ -4,7 +4,7 @@ import {
   AppState, clearAdviceData, clearRecommendersData,
   setReviewRecommenderLink1, setReviewRecommenderLink2, setReviewRecommenderLink3
 } from 'store';
-import { InputEvent } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { inputHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import { IProps, IStateProps, IDispatchProps } from './types';
@@ -32,9 +32,18 @@ const mapDispatchToProps: IDispatchProps = {
  * Review box with an advice to the candidate.
  */
 const BoxStepJ = (props: IProps) => {
-  const link1Handler = (event: InputEvent) => inputHandler(event, props.setRecommenderLink1);
-  const link2Handler = (event: InputEvent) => inputHandler(event, props.setRecommenderLink2);
-  const link3Handler = (event: InputEvent) => inputHandler(event, props.setRecommenderLink3);
+  const link1Handler = (event: GeneralTypes.InputEvent) => inputHandler(
+    event,
+    props.setRecommenderLink1
+  );
+  const link2Handler = (event: GeneralTypes.InputEvent) => inputHandler(
+    event,
+    props.setRecommenderLink2
+  );
+  const link3Handler = (event: GeneralTypes.InputEvent) => inputHandler(
+    event,
+    props.setRecommenderLink3
+  );
 
   const canProceed = !!props.recommenderLink1
     || !!props.recommenderLink2

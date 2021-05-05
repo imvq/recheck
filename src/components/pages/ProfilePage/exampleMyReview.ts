@@ -1,4 +1,4 @@
-import { ReviewCardDataFull } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { ReviewStatus } from 'utils/enums';
 
 export default {
@@ -20,4 +20,4 @@ export default {
     'https://www.linkedin.com/in/hanna-shokhina-b9b799124'
   ],
   status: ReviewStatus.CONFIRMED
-} as ReviewCardDataFull;
+} as GeneralTypes.ReviewCardDataFull;

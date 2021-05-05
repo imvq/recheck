@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 
-import { ReviewData } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { AppActionType } from '../types';
 import {
   ReviewActionType,
@@ -199,7 +199,7 @@ export const setReviewRecommenderLink3 = (payload: string): ReviewActionType => 
   payload
 });
 
-export const createReview = (reviewData: ReviewData) => (
+export const createReview = (reviewData: GeneralTypes.ReviewData) => (
   dispatch: Dispatch<AppActionType>
 ) => {
   axios.post(

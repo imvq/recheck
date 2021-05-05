@@ -4,7 +4,7 @@ import {
   AppState, clearActivityData, clearOwnHireOpinionData,
   setReviewOwnHireOpinionMark, setReviewOwnHireOpinionComment
 } from 'store';
-import { TextAreaEvent } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import MarkSelector from '../MarkSelector';
@@ -37,7 +37,7 @@ const labels = [
  * Review box with question about hiring of the candidate.
  */
 const BoxStepG = (props: IProps) => {
-  const ownHireOpinionHandler = (event: TextAreaEvent) => textAreaHandler(
+  const ownHireOpinionHandler = (event: GeneralTypes.TextAreaEvent) => textAreaHandler(
     event, props.setOwnHireOpinionComment
   );
 

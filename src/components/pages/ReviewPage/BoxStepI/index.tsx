@@ -4,7 +4,7 @@ import {
   AppState, clearQualityData, clearLeadershipData,
   setReviewLeadershipMark, setReviewLeadershipComment
 } from 'store';
-import { TextAreaEvent } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import MarkSelector from '../MarkSelector';
@@ -37,7 +37,7 @@ const labels = [
  * Review box with question about what the candidate's leadership.
  */
 const BoxStepI = (props: IProps) => {
-  const leadershipHandler = (event: TextAreaEvent) => textAreaHandler(
+  const leadershipHandler = (event: GeneralTypes.TextAreaEvent) => textAreaHandler(
     event, props.setLeadershipComment
   );
 

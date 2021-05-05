@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { AppState, clearLeadershipData, clearAdviceData, setReviewAdviceComment } from 'store';
-import { TextAreaEvent } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import { IProps, IStateProps, IDispatchProps } from './types';
@@ -25,7 +25,7 @@ const mapDispatchToProps: IDispatchProps = {
  * Review box with an advice to the candidate.
  */
 const BoxStepJ = (props: IProps) => {
-  const leadershipHandler = (event: TextAreaEvent) => textAreaHandler(
+  const leadershipHandler = (event: GeneralTypes.TextAreaEvent) => textAreaHandler(
     event, props.setAdviceComment
   );
 

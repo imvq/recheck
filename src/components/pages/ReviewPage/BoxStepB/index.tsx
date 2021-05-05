@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { AppState, clearTasks, clearStrengths, setReviewStrengths } from 'store';
-import { TextAreaEvent } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import { IProps, IStateProps, IDispatchProps } from './types';
@@ -25,7 +25,10 @@ const mapDispatchToProps: IDispatchProps = {
  * Review box with question about candidate strengths.
  */
 const BoxStepB = (props: IProps) => {
-  const strengthsHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setStrengths);
+  const strengthsHandler = (event: GeneralTypes.TextAreaEvent) => textAreaHandler(
+    event,
+    props.setStrengths
+  );
 
   const canProceed = !!props.strengths;
 

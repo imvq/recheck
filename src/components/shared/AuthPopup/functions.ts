@@ -3,7 +3,9 @@ import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-face
 import Api from 'utils/api';
 import * as constants from 'utils/constants';
 import controlledHistory from 'utils/routing';
-import { Optional, AppProfileInfo, LinkedInProfileDto, FacebookProfileDto } from 'utils/types.common';
+import * as ApiResponse from 'utils/typing/apiResponses';
+import * as UtilityTypes from 'utils/typing/utility';
+import * as GeneralTypes from 'utils/typing/general';
 import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
 import { FacebookLoginResponse } from './types';
@@ -24,8 +26,8 @@ function onProfileDataRetrieved(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: AppProfileInfo) => void,
-  profileResponse: LinkedInProfileDto | FacebookProfileDto
+  setCurrentProfileInfoCallback: (profileInfo: GeneralTypes.AppProfileInfo) => void,
+  profileResponse: ApiResponse.LinkedInProfileDto | ApiResponse.FacebookProfileDto
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
   setCurrentProfileInfoCallback(normalizedProfileInfo);
@@ -50,7 +52,7 @@ export function onSuccessLinkedIn(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: AppProfileInfo) => void
+  setCurrentProfileInfoCallback: (profileInfo: GeneralTypes.AppProfileInfo) => void
 ) {
   // Lock page to prevent user actions while retrieving and processing profile data.
   setPageLockedCallback(true);
@@ -80,7 +82,7 @@ export function onSuccessLinkedIn(
 function isFacebookFailureResponse(result: FacebookLoginResponse)
   : result is ReactFacebookFailureResponse {
   // 'status' is a field of ReactFacebookFailureResponse type.
-  return !!((result as ReactFacebookFailureResponse).status as Optional<string>);
+  return !!((result as ReactFacebookFailureResponse).status as UtilityTypes.Optional<string>);
 }
 
 export function onSuccessFacebook(
@@ -88,7 +90,7 @@ export function onSuccessFacebook(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: AppProfileInfo) => void
+  setCurrentProfileInfoCallback: (profileInfo: GeneralTypes.AppProfileInfo) => void
 ) {
   // Lock page to prevent user actions while processing profile data.
   setPageLockedCallback(true);
@@ -99,7 +101,7 @@ export function onSuccessFacebook(
 
     // 2. Time to retrieve basic profile info from Facebook response.
     const oauthData = result as ReactFacebookLoginInfo;
-    const profileInfo: FacebookProfileDto = {
+    const profileInfo: ApiResponse.FacebookProfileDto = {
       profileId: oauthData.userID,
       name: oauthData.name || '',
       photoUrl: oauthData.picture?.data.url || ''

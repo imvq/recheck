@@ -1,11 +1,12 @@
-import { AppProfileInfo, RegistrationDto } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
+import * as ApiResponses from 'utils/typing/apiResponses';
 
 export interface IStateProps {
-  currentProfileInfo: AppProfileInfo;
+  currentProfileInfo: GeneralTypes.AppProfileInfo;
 }
 
 export interface IOwnProps {
-  onProceed(collectedInfo: RegistrationDto): void;
+  onProceed(collectedInfo: ApiResponses.RegistrationDto): void;
 }
 
 export type IProps = IStateProps & IOwnProps;

@@ -5,7 +5,7 @@ import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
 import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
-import { LinkedInProfileDto, FacebookProfileDto } from 'utils/types.common';
+import * as ApiResponses from 'utils/typing/apiResponses';
 import { setCurrentProfileInfo } from '../profile/actions';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
@@ -20,7 +20,7 @@ export const setIsAuthorized = (isAuthorized: boolean): AuthActionType => ({
  */
 function onProfileDataRetrieved(
   dispatch: Dispatch<AppActionType>,
-  profileResponse: AxiosResponse<LinkedInProfileDto | FacebookProfileDto>
+  profileResponse: AxiosResponse<ApiResponses.LinkedInProfileDto | ApiResponses.FacebookProfileDto>
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
   dispatch(setCurrentProfileInfo(normalizedProfileInfo));

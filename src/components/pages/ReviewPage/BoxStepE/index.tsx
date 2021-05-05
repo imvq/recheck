@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { AppState, clearResults, clearLevelData, setReviewLevelMark, setReviewLevelComment } from 'store';
-import { TextAreaEvent } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import MarkSelector from '../MarkSelector';
@@ -34,7 +34,10 @@ const labels = [
  * Review box with question about the candidate's level.
  */
 const BoxStepE = (props: IProps) => {
-  const levelHandler = (event: TextAreaEvent) => textAreaHandler(event, props.setLevelComment);
+  const levelHandler = (event: GeneralTypes.TextAreaEvent) => textAreaHandler(
+    event,
+    props.setLevelComment
+  );
 
   const canProceed = !!props.levelMark && !!props.levelComment;
 

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { AppState, clearLevelData, clearActivityData, setReviewActivityMark, setReviewActivityComment } from 'store';
-import { TextAreaEvent } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import MarkSelector from '../MarkSelector';
@@ -34,7 +34,7 @@ const labels = [
  * Review box with question about the candidate's activity.
  */
 const BoxStepF = (props: IProps) => {
-  const activityHandler = (event: TextAreaEvent) => textAreaHandler(
+  const activityHandler = (event: GeneralTypes.TextAreaEvent) => textAreaHandler(
     event, props.setActivityComment
   );
 

@@ -1,8 +1,8 @@
-import { OptionType } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 
 export interface IOwnProps {
-  optionData: OptionType;
-  onClick: (selectedValue: OptionType) => void;
+  optionData: GeneralTypes.OptionType;
+  onClick: (selectedValue: GeneralTypes.OptionType) => void;
 }
 
 export type IProps = IOwnProps;

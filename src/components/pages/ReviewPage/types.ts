@@ -1,11 +1,11 @@
-import { ReviewData } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 
 export interface IStateProps {
-  reviewData: ReviewData
+  reviewData: GeneralTypes.ReviewData
 }
 
 export interface IDispatchProps {
-  createReview(reviewData: ReviewData): void;
+  createReview(reviewData: GeneralTypes.ReviewData): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

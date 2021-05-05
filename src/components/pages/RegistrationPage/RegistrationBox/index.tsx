@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState } from 'store';
-import { InputEvent, OptionType } from 'utils/types.common';
+import * as GeneralTypes from 'utils/typing/general';
 import { inputHandler, isValidEmail, isValidUrl, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
@@ -12,7 +12,7 @@ import {
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input
 } from '../../../shared/BoxBase';
 
-const months: OptionType[] = [
+const months: GeneralTypes.OptionType[] = [
   { key: 0, text: 'Январь' },
   { key: 1, text: 'Февраль' },
   { key: 2, text: 'Март' },
@@ -52,20 +52,28 @@ const RegistrationBox = (props: IProps) => {
     setIsSiteErrorVisible(!isValidUrl(companySite));
   };
 
-  const emailHandler = (event: InputEvent) => {
+  const emailHandler = (event: GeneralTypes.InputEvent) => {
     setIsEmailErrorVisible(false);
     setEmail(event.target.value);
   };
 
-  const companySiteHandler = (event: InputEvent) => {
+  const companySiteHandler = (event: GeneralTypes.InputEvent) => {
     setIsSiteErrorVisible(false);
     setCompanySite(event.target.value);
   };
 
-  const companyNameHandler = (event: InputEvent) => inputHandler(event, setCompanyName);
-  const positionHandler = (event: InputEvent) => inputHandler(event, setPosition);
-  const monthHandler = (option: OptionType) => setWorkStartMonth(option.key);
-  const yearHandler = (option: OptionType) => setWorkStartYear(Number.parseInt(option.text, 10));
+  const companyNameHandler = (event: GeneralTypes.InputEvent) => inputHandler(
+    event,
+    setCompanyName
+  );
+  const positionHandler = (event: GeneralTypes.InputEvent) => inputHandler(
+    event,
+    setPosition
+  );
+  const monthHandler = (option: GeneralTypes.OptionType) => setWorkStartMonth(option.key);
+  const yearHandler = (option: GeneralTypes.OptionType) => setWorkStartYear(
+    Number.parseInt(option.text, 10)
+  );
 
   const canProceed = () => isValidEmail(email) && !!companySite
     && !!companyName && !!position

@@ -4,7 +4,8 @@
 
 import axios from 'axios';
 
-import * as Types from './types.common';
+import * as ApiResponses from './typing/apiResponses';
+import * as GeneralTypes from './typing/general';
 
 /**
  * The API to communicate with the server.
@@ -15,34 +16,34 @@ export default class Api {
   });
 
   public static checkIsRegistered(profileId: string)
-    : Types.APIResponse<Types.CheckIsRegisteredResponseDto> {
+    : GeneralTypes.APIResponse<ApiResponses.CheckIsRegisteredResponseDto> {
     return Api.instance.post('/user/is-registered', { profileId });
   }
 
   public static exchangeLinkedInCode(code: string)
-    : Types.APIResponse<Types.ExchangeLinkedInCodeResposneDto> {
+    : GeneralTypes.APIResponse<ApiResponses.ExchangeLinkedInCodeResposneDto> {
     const redirectPath = `${window.location.origin}/linkedin`;
     const body = { code, redirectPath };
     return Api.instance.post('/linkedin/oauth/exchange', body);
   }
 
   public static getProfileLinkedIn()
-    : Types.APIResponse<Types.LinkedInProfileDto> {
+    : GeneralTypes.APIResponse<ApiResponses.LinkedInProfileDto> {
     return Api.instance.get('/linkedin/oauth/retrieve', { withCredentials: true });
   }
 
   public static getProfileFacebook()
-    : Types.APIResponse<Types.FacebookProfileDto> {
+    : GeneralTypes.APIResponse<ApiResponses.FacebookProfileDto> {
     return Api.instance.get('/facebook/oauth/retrieve', { withCredentials: true });
   }
 
-  public static prepareProfile(profileInfoDto: Types.RegistrationDto)
-    : Types.APIResponse<Types.PrepareUserResponseDto> {
+  public static prepareProfile(profileInfoDto: ApiResponses.RegistrationDto)
+    : GeneralTypes.APIResponse<ApiResponses.PrepareUserResponseDto> {
     return Api.instance.post('/user/prepare', profileInfoDto);
   }
 
-  public static prepareReview(reviewData: Types.ReviewData)
-    : Types.APIResponse<Types.PrepareReviewResponseDto> {
+  public static prepareReview(reviewData: GeneralTypes.ReviewData)
+    : GeneralTypes.APIResponse<ApiResponses.PrepareReviewResponseDto> {
     return Api.instance.post('/review/prepare', reviewData);
   }
 }
