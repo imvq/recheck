@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from 'typeorm';
 
 import User from './User.entity';
 
@@ -8,13 +8,15 @@ import User from './User.entity';
 @Entity({ name: 'reviews' })
 export default class Review {
   @PrimaryGeneratedColumn()
-  id: number = 0;
+  id!: number;
 
-  @OneToOne(() => User) @JoinColumn()
-  author: User = new User();
+  @ManyToOne(() => User, user => user.reviewsLeft)
+  @JoinColumn()
+  author!: User;
 
-  @Column('varchar', { length: 30, nullable: true })
-  targetId!: string;
+  @ManyToOne(() => User, user => user.reviewsGot, { nullable: true })
+  @JoinColumn()
+  target!: User;
 
   @Column('text', { nullable: true })
   workplace!: string;

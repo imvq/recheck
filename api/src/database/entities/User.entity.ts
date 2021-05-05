@@ -1,6 +1,7 @@
-import { Entity, PrimaryColumn, Column, Index, ManyToOne } from 'typeorm';
+import { Entity, PrimaryColumn, Column, Index, OneToMany, ManyToOne } from 'typeorm';
 
 import Company from './Company.entity';
+import Review from './Review.entity';
 
 /**
  * User model.
@@ -15,6 +16,14 @@ export default class User {
   // Foreign key. Every user belongs to one company.
   @ManyToOne(() => Company, company => company.members)
   company!: Company;
+
+  // Reviews left by the user.
+  @OneToMany(() => Review, review => review.author)
+  reviewsLeft!: Review[];
+
+  // Reviews of the user.
+  @OneToMany(() => Review, review => review.target)
+  reviewsGot!: Review[];
 
   // Full name.
   @Column('text')
