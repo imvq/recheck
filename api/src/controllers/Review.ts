@@ -1,5 +1,6 @@
 import { Path, POST } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
+import BodyGuard from 'typescript-rest-body-guard';
 
 import Dtos from '@dto';
 import ReviewService from '@services/Review';
@@ -18,6 +19,7 @@ export default class ReviewController {
    * after the target user approve the review.
    */
   @Path('/prepare')
+  @BodyGuard
   @POST
   public async prepareReview(reviewDto: Dtos.CreateReviewDto)
     : Promise<Types.PrepareReviewDto> {
@@ -28,6 +30,7 @@ export default class ReviewController {
    * Specify review's target.
    */
   @Path('/bind-target')
+  @BodyGuard
   @POST
   public async bindReviewTarget(targetDto: Dtos.BindReviewTargetDto)
     : Promise<Types.BindReviewTargetResponseDto> {
