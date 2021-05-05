@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import BackgroundSvgPath from 'assets/images/pages/ReviewPage/Background.svg';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 
@@ -7,7 +8,9 @@ import Footer from 'components/shared/Footer';
  * Styled component for main profile page wrapper.
  */
 export const Wrapper = styled.div`
-  height: 100%;
+  background-image: url(${BackgroundSvgPath});
+  background-size: cover;
+  min-height: 100%;
   display: grid;
   grid-template:
     'Header'
@@ -37,13 +40,4 @@ export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const StageBreadcrumpWrapper = styled.div`
-  width: 55rem;
-  margin-bottom: 5rem;
-`;
-
-export const StageBreadcrumpImage = styled.img`
-  width: 100%;
 `;

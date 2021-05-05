@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, createReview } from 'store';
-import ReviewStage2 from 'assets/images/pages/ReviewPage/ReviewStage2.png';
 import { IProps, IStateProps, IDispatchProps } from './types';
 import BoxStepInitial from './BoxStepInitial';
 import BoxStepA from './BoxStepA';
@@ -16,11 +15,7 @@ import BoxStepH from './BoxStepH';
 import BoxStepI from './BoxStepI';
 import BoxStepJ from './BoxStepJ';
 import BoxStepK from './BoxStepK';
-import {
-  Wrapper, AdaptedHeader, AdaptedFooter,
-  ContentWrapper,
-  StageBreadcrumpWrapper, StageBreadcrumpImage
-} from './styled';
+import { Wrapper, AdaptedHeader, AdaptedFooter, ContentWrapper } from './styled';
 
 const mapSateToProps = (store: AppState): IStateProps => ({
   reviewData: {
@@ -82,9 +77,6 @@ const ReviewPage = (props: IProps) => {
     <Wrapper>
       <AdaptedHeader />
       <ContentWrapper>
-        <StageBreadcrumpWrapper>
-          <StageBreadcrumpImage src={ReviewStage2} draggable='false' />
-        </StageBreadcrumpWrapper>
         {boxes[step]}
       </ContentWrapper>
       <AdaptedFooter />
