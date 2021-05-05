@@ -25,7 +25,7 @@ const options: OptionType[] = [
 const mapStateToProps = (store: AppState): IStateProps => ({
   firstName: store.reviews.firstName,
   lastName: store.reviews.lastName,
-  company: store.reviews.company,
+  company: store.reviews.companyName,
   bounds: store.reviews.bounds
 });
 

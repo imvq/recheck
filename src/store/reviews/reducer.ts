@@ -40,7 +40,7 @@ import {
 const initialState: ReviewState = {
   firstName: '',
   lastName: '',
-  company: '',
+  companyName: '',
   bounds: '',
   tasks: '',
   strengths: '',
@@ -72,7 +72,7 @@ export const reviewsReducer = (
         ...state,
         firstName: initialState.firstName,
         lastName: initialState.lastName,
-        company: initialState.company,
+        companyName: initialState.companyName,
         bounds: initialState.bounds
       };
     case CLEAR_TASKS:
@@ -150,7 +150,7 @@ export const reviewsReducer = (
     case SET_COMPANY:
       return {
         ...state,
-        company: action.payload
+        companyName: action.payload
       };
     case SET_BOUNDS:
       return {
