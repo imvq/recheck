@@ -1,5 +1,6 @@
 import { GET, POST, Path, Context, ServiceContext } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
+import BodyGuard from 'typescript-rest-body-guard';
 
 import Types from '@types';
 import LinkedInOAuthService from '@services/OAuthLinkedIn';
@@ -26,9 +27,10 @@ export default class LinkedInController {
    * Exchange confirmation code to LinkedIn access token.
    */
    @Path('/exchange')
+   @BodyGuard
    @POST
   public async exchangeLinkedInAuthCode(bodyDta: DTOs.ExchangeLinkedInAuthCodeDto)
-     : Promise<Types.ExchangeLinkedInAuthCodeResponseDto> {
+    : Promise<Types.ExchangeLinkedInAuthCodeResponseDto> {
     return this.injectedService.exchangeLinkedInAuthCode(bodyDta);
   }
 }
