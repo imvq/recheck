@@ -18,7 +18,7 @@ export default class Review {
   @JoinColumn()
   target!: User;
 
-  @Column('text', { nullable: true })
+  @Column('text')
   workplace!: string;
 
   @Column('text')
