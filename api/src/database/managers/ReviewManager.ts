@@ -16,7 +16,7 @@ export default class ReviewManager {
     ReviewManager.repo = getRepository(Review);
   }
 
-  public static createReview = async (reviewDto: Dtos.CreateReviewDto) => {
+  public static async prepareReview(reviewDto: Dtos.CreateReviewDto) {
     const author = await UserManager.getUser(reviewDto.authorId);
     await ReviewManager.repo?.save(ReviewManager.repo.create({
       author,
@@ -40,5 +40,11 @@ export default class ReviewManager {
       recommenderLink2: reviewDto.recommenderLink2,
       recommenderLink3: reviewDto.recommenderLink3
     }));
+  }
+
+  public static async bindReviewTarget(targetDto: Dtos.BindReviewTargetDto) {
+    const target = await UserManager.getUser(targetDto.profileId);
+    const review = await ReviewManager.repo?.findOne(targetDto.reviewId);
+    await ReviewManager.repo?.save({ id: review?.id, target });
   }
 }

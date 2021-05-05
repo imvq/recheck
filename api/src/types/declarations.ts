@@ -8,10 +8,6 @@ export type Optional<T> = T | undefined;
 
 export type Maybe<T> = Nullable<T> | Optional<T>;
 
-export interface CheckAuthResponseDto {
-  success: boolean;
-}
-
 export interface CorsResponse {
   statusCode?: number | undefined;
   setHeader(key: string, value: string): any;
@@ -62,7 +58,7 @@ export interface PrepareUserResponseDto {
   success: boolean;
 }
 
-export interface RetrieveProfileInfoResponseDto {
+interface RetrieveProfileInfoResponseDto {
   profileId: string;
   name: string;
   photoUrl: string;
@@ -71,6 +67,16 @@ export interface RetrieveProfileInfoResponseDto {
 export interface RetrieveLinkedInProfileInfoResponseDto extends RetrieveProfileInfoResponseDto {}
 
 export interface RetrieveFacebookProfileInfoResponseDto extends RetrieveProfileInfoResponseDto {}
+
+interface SimpleActionResponse {
+  success: boolean;
+}
+
+export interface BindReviewTargetResponseDto extends SimpleActionResponse {}
+
+export interface CheckAuthResponseDto extends SimpleActionResponse {}
+
+export interface PrepareReviewDto extends SimpleActionResponse {}
 
 export interface HealthResponseDTO {
   message: string;

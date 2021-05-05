@@ -1,5 +1,12 @@
 import Types from '@types';
 
+export class BindReviewTargetDto {
+  public constructor(
+    public reviewId: string,
+    public profileId: string
+  ) {}
+}
+
 export class ExchangeLinkedInAuthCodeDto {
   public constructor(
     public code: string,

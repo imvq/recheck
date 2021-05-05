@@ -16,7 +16,7 @@ export default class ReviewController {
    */
   @Path('/create')
   @POST
-  public async createReview(reviewDto: Dtos.CreateReviewDto): Promise<void> {
-    return this.injectedService.createReview(reviewDto);
+  public async prepareReview(reviewDto: Dtos.CreateReviewDto): Promise<void> {
+    return this.injectedService.prepareReview(reviewDto);
   }
 }

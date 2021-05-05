@@ -7,8 +7,8 @@ import User from './User.entity';
  */
 @Entity({ name: 'reviews' })
 export default class Review {
-  @PrimaryGeneratedColumn()
-  id!: number;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
 
   @ManyToOne(() => User, user => user.reviewsLeft)
   @JoinColumn()
