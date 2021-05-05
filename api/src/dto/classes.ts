@@ -19,6 +19,7 @@ export class CreateReviewDto {
     public authorId: string,
     public targetFirstName: string,
     public targetLastName: string,
+    public workplace: string,
     public bounds: string,
     public tasks: string,
     public strengths: string,

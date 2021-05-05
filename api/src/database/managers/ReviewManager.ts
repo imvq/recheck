@@ -20,6 +20,7 @@ export default class ReviewManager {
     const author = await UserManager.getUser(reviewDto.authorId);
     await ReviewManager.repo?.save(ReviewManager.repo.create({
       author,
+      workplace: reviewDto.workplace,
       bounds: reviewDto.bounds,
       tasks: reviewDto.tasks,
       strengths: reviewDto.strengths,
