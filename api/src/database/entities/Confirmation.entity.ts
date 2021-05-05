@@ -9,13 +9,15 @@ import User from './User.entity';
  */
 @Entity({ name: 'confirmations' })
 export default class Confirmation {
+  // Primary key.
   @PrimaryGeneratedColumn()
-  id: number = 0;
+  id!: number;
 
-  @OneToOne(type => User, { onDelete: 'CASCADE' })
+  // Foreign key. Each user can have only one confiramtion code at the same moment.
+  @OneToOne(() => User, { onDelete: 'CASCADE' })
   @JoinColumn()
-  user: User = new User();
+  user!: User;
 
-  @Column('int', { nullable: false })
-  code: number = 0;
+  @Column('int')
+  code!: number;
 }
