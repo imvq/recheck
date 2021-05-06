@@ -4,6 +4,7 @@ import {
   InteractionStateActionType,
   SET_IS_PAGE_LOCKED,
   SET_IS_LOGIN_POPUP_VISIBILE,
+  SET_IS_LOGIN_BADGE_VISIBILE,
   SET_CURRENT_PROFILE_MENU_ENTRY
 } from './types';
 
@@ -28,6 +29,11 @@ export const interactionStateReducer = (
       return {
         ...state,
         isLoginPopupVisible: action.payload
+      };
+    case SET_IS_LOGIN_BADGE_VISIBILE:
+      return {
+        ...state,
+        isLoginBadgeVisible: action.payload
       };
     case SET_CURRENT_PROFILE_MENU_ENTRY:
       return {

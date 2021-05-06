@@ -7,6 +7,7 @@ import controlledHistory from 'utils/routing';
 import PageStartupManager from 'components/shared/PageStartupManager';
 import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
+import ConfirmationPage from 'components/pages/ConfirmationPage';
 import GlobalStyle from 'components/shared/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
 import ProfilePage from 'components/pages/ProfilePage';
@@ -53,6 +54,14 @@ export default () => (
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
             <PageLockManager hideContentOnLock>
               <ReviewPage />
+            </PageLockManager>
+          </Route>
+
+          {/* Confirmation page. Used to  bind review with the user. */}
+          <Route exact path='/confirmation'>
+            <PageStartupManager />
+            <PageLockManager hideContentOnLock>
+              <ConfirmationPage />
             </PageLockManager>
           </Route>
 
