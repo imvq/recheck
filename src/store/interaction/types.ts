@@ -2,7 +2,6 @@ import { ProfileMenuEntry } from 'utils/enums';
 
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
 export const SET_IS_LOGIN_POPUP_VISIBILE = 'SET_IS_LOGIN_POPUP_VISIBILE';
-export const SET_IS_LOGIN_BADGE_VISIBILE = 'SET_IS_LOGIN_BADGE_VISIBILE';
 export const SET_CURRENT_PROFILE_MENU_ENTRY = 'SET_CURRENT_PROFILE_MENU_ENTRY';
 
 export interface InteractionState {
@@ -22,11 +21,6 @@ export interface SetIsLoginPopupVisible {
   payload: boolean;
 }
 
-export interface SetIsLoginBadgeVisible {
-  type: typeof SET_IS_LOGIN_BADGE_VISIBILE;
-  payload: boolean;
-}
-
 export interface SetCurrentMenuProfileEntry {
   type: typeof SET_CURRENT_PROFILE_MENU_ENTRY;
   payload: ProfileMenuEntry;
@@ -35,5 +29,4 @@ export interface SetCurrentMenuProfileEntry {
 export type InteractionStateActionType =
   SetIsPageLocked
   | SetIsLoginPopupVisible
-  | SetIsLoginBadgeVisible
   | SetCurrentMenuProfileEntry;
