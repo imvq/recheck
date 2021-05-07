@@ -51,7 +51,7 @@ export default class User {
   workStartYear!: number;
 
   // How many users can be viewed by the user (excluding also viewed).
-  @Column('int')
+  @Column('int', { default: 0 })
   reviewsAvailable!: number;
 
   @Column({ type: 'timestamptz' })
