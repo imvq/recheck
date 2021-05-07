@@ -16,13 +16,13 @@ export default class UserManager {
     UserManager.repo = getRepository(User);
   }
 
-  public static createUser = async (userData: GeneralTypes.UserData, company: Company) => (
-    // Cast the result to User, ignoring that on error it can be undefined.
-    // Any errors produce exceptions that are to be handled outside.
-    UserManager.repo?.save(UserManager.repo.create({ ...userData, company })) as Promise<User>
-  )
+  public static async createUser(
+    userData: GeneralTypes.UserData,
+    company: Company,
+    confirmationCode: string
+  ) {
+    UserManager.repo?.save(UserManager.repo.create({ ...userData, company, confirmationCode }));
+  }
 
-  public static getUser = async (profileId: string) => (
-    UserManager.repo?.findOne(profileId)
-  )
+  public static getUser = async (profileId: string) => UserManager.repo?.findOne(profileId);
 }

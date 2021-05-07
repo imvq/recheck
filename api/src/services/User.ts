@@ -1,5 +1,6 @@
 import { Errors } from 'typescript-rest';
 import { SendMailOptions } from 'nodemailer';
+import { v1 as uuidv1 } from 'uuid';
 
 import Dtos from '@dto';
 import Utils from '@utils';
@@ -9,7 +10,6 @@ import * as Constants from '@common/Constants';
 import * as ApiResponses from '@typing/apiResponses';
 import UserManager from '@database/managers/UserManager';
 import CompanyManager from '@database/managers/CompanyManager';
-import ConfirmationManager from '@database/managers/ConfirmationManager';
 
 /**
  * Service in charge of registration and managing user data.
@@ -30,13 +30,12 @@ export default class UserService {
    */
   public async prepareUser(profileDto: Dtos.PrepareUserDto)
     : Promise<ApiResponses.IPrepareUserResponseDto> {
-    const code = Utils.getRandomCode(Constants.CONFIRMATION_CODE_LENGTH);
+    const confirmationCode = uuidv1();
 
     // Save the user.
     try {
       const company = await this.prepareCompany(profileDto.companyName, profileDto.companySite);
-      const user = await UserManager.createUser(profileDto, company);
-      await ConfirmationManager.createConfirmation(user, code);
+      await UserManager.createUser(profileDto, company, confirmationCode);
     } catch (error) {
       Logger.ifdev()?.err(error.message);
       throw new Errors.InternalServerError('Server-side database error');
@@ -48,7 +47,7 @@ export default class UserService {
         from: process.env.MAIL_USERNAME as string,
         to: profileDto.email,
         subject: 'Подтверждение регистрации в reCheck',
-        text: `Код подтверждения: ${code}`
+        text: `Код подтверждения: ${confirmationCode}`
       };
       await Mailer.getInstance().sendMail(options);
     } catch (error) {
