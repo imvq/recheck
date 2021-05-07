@@ -54,6 +54,6 @@ export default class User {
   @Column('int', { default: 0 })
   reviewsAvailable!: number;
 
-  @Column({ type: 'timestamptz' })
-  lastUpdatedAt!: Date;
+  @Column('timestamptz')
+  lastUpdatedAt: Date = new Date();
 }
