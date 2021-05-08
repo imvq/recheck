@@ -56,6 +56,7 @@ export class CreateCompanyDto {
 
 export class PrepareUserDto {
   public constructor(
+    public profileId: string,
     public name: string,
     public email: string,
     public photoUrl: string,
@@ -65,8 +66,4 @@ export class PrepareUserDto {
     public workStartMonth: number,
     public workStartYear: number
   ) {}
-}
-
-export class RegistrationDto {
-  public constructor(public profileId: string) {}
 }
