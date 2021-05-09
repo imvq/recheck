@@ -23,6 +23,19 @@ export default class UserService {
     }
   }
 
+  public async checkIsUserConfirmed(profileIdDto: Dtos.CheckIsUserConfirmaedDto)
+    : Promise<ApiResponses.ICheckIsUserConfirmedResponseDto> {
+    try {
+      // Making confirmation code null is to be considered the user is registered.
+      return {
+        isConfirmed: (await UserManager.getUser(profileIdDto.profileId))?.confirmationCode === null
+      };
+    } catch (error) {
+      Logger.ifdev()?.err(error.message);
+      throw new Errors.InternalServerError('Server-side database error');
+    }
+  }
+
   /**
    * Save user info and send email to confirm.
    */

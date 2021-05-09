@@ -42,6 +42,10 @@ export class CreateReviewDto {
   ) {}
 }
 
+export class CheckIsUserConfirmaedDto {
+  public constructor(public profileId: string) {}
+}
+
 export class CheckIsUserRegisteredDto {
   public constructor(public profileId: string) {}
 }

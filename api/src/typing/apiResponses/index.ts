@@ -2,6 +2,10 @@ import { IRetrieveProfileInfoResponseDto, ISimpleActionResponse } from './basic'
 
 export interface IBindReviewTargetResponseDto extends ISimpleActionResponse {}
 
+export interface ICheckIsUserConfirmedResponseDto {
+  isConfirmed: boolean;
+}
+
 export interface ICheckIsUserRegisteredResponseDto {
   isRegistered: boolean;
 }
