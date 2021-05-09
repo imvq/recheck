@@ -20,6 +20,11 @@ export default class Api {
     return Api.instance.post('/user/is-registered', { profileId });
   }
 
+  public static checkIsConfirmed(profileId: string)
+    : GeneralTypes.APIResponse<ApiResponses.CheckIsConfirmedResponseDto> {
+    return Api.instance.post('/user/is-confirmed', { profileId });
+  }
+
   public static exchangeLinkedInCode(code: string)
     : GeneralTypes.APIResponse<ApiResponses.ExchangeLinkedInCodeResposneDto> {
     const redirectPath = `${window.location.origin}/linkedin`;

@@ -23,7 +23,7 @@ export default class UserService {
     }
   }
 
-  public async checkIsUserConfirmed(profileIdDto: Dtos.CheckIsUserConfirmaedDto)
+  public async checkIsUserConfirmed(profileIdDto: Dtos.CheckIsUserConfirmedDto)
     : Promise<ApiResponses.ICheckIsUserConfirmedResponseDto> {
     try {
       // Making confirmation code null is to be considered the user is registered.

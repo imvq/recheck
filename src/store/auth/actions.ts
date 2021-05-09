@@ -25,10 +25,20 @@ function onProfileDataRetrieved(
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
   dispatch(setCurrentProfileInfo(normalizedProfileInfo));
 
+  // Check user existence.
   Api.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       if (checkResponse.data.isRegistered) {
-        dispatch(setIsAuthorized(true));
+        // If the user exists, check if it is confirmed.
+        Api.checkIsConfirmed(normalizedProfileInfo.currentId)
+          .then((confirmationResponse) => {
+            if (confirmationResponse.data.isConfirmed) {
+              dispatch(setIsAuthorized(true));
+            } else {
+              controlledHistory.push('/await-user-confirmation');
+            }
+          })
+          .catch(() => dispatch(setIsAuthorized(false)));
       } else {
         // Register the user if it is not registered in our app yet.
         controlledHistory.push('/register');

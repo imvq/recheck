@@ -4,6 +4,10 @@ export interface CheckIsRegisteredResponseDto {
   isRegistered: boolean;
 }
 
+export interface CheckIsConfirmedResponseDto {
+  isConfirmed: boolean;
+}
+
 export interface ExchangeLinkedInCodeResposneDto {
   'li_at': string;
 }

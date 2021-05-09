@@ -25,6 +25,17 @@ export default class UserController {
   }
 
   /**
+   * Check if registered user is confirmed.
+   */
+  @Path('/is-confirmed')
+  @BodyGuard
+  @POST
+  public async checkIsUserConfirmed(bodyData: Dtos.CheckIsUserConfirmedDto)
+    : Promise<ApiResponses.ICheckIsUserConfirmedResponseDto> {
+    return this.injectedService.checkIsUserConfirmed(bodyData);
+  }
+
+  /**
    * Prepare user to be registered.
    */
   @Path('/prepare')

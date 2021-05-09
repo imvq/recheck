@@ -42,7 +42,7 @@ export class CreateReviewDto {
   ) {}
 }
 
-export class CheckIsUserConfirmaedDto {
+export class CheckIsUserConfirmedDto {
   public constructor(public profileId: string) {}
 }
 

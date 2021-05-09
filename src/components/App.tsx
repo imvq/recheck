@@ -4,6 +4,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 
 import { store as appStore } from 'store';
 import controlledHistory from 'utils/routing';
+import UserConfirmationAwaiterPage from 'components/pages/UserConfirmationAwaiterPage';
 import PageStartupManager from 'components/shared/PageStartupManager';
 import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
@@ -71,6 +72,10 @@ export default () => (
             <PageLockManager>
               <RegistrationPage />
             </PageLockManager>
+          </Route>
+
+          <Route exact path='/await-user-confirmation'>
+            <UserConfirmationAwaiterPage />
           </Route>
 
           <Route exact path='/search'>
