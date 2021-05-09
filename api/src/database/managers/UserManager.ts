@@ -24,5 +24,12 @@ export default class UserManager {
     UserManager.repo?.save(UserManager.repo.create({ ...userData, company, confirmationCode }));
   }
 
+  /**
+   * Making confirmation code null is to be considered the user is registered.
+   */
+  public static async setUserRegistered(profileId: string) {
+    UserManager.repo?.save({ profileId, confirmationCode: null });
+  }
+
   public static getUser = async (profileId: string) => UserManager.repo?.findOne(profileId);
 }

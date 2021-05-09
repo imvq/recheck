@@ -55,7 +55,23 @@ export default class UserService {
    * otherwise create a company with provided data and return it.
    */
   private async prepareCompany(name: string, site: string) {
-    return await CompanyManager.getCompanyByFullPublicInfo(name, site)
+    try {
+      return await CompanyManager.getCompanyByFullPublicInfo(name, site)
       || CompanyManager.createCompany({ name, site, logoUrl: null });
+    } catch (error) {
+      Logger.ifdev()?.err(error.message);
+      throw new Errors.InternalServerError('Server-side database error');
+    }
+  }
+
+  public async completeRegistration(profileId: string)
+    : Promise<ApiResponses.ICompleteRegistration> {
+    try {
+      await UserManager.setUserRegistered(profileId);
+      return { success: true };
+    } catch (error) {
+      Logger.ifdev()?.err(error.message);
+      throw new Errors.InternalServerError('Server-side database error');
+    }
   }
 }

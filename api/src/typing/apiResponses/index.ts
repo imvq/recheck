@@ -8,6 +8,8 @@ export interface ICheckIsUserRegisteredResponseDto {
 
 export interface ICheckAuthResponseDto extends ISimpleActionResponse {}
 
+export interface ICompleteRegistration extends ISimpleActionResponse {}
+
 export interface IExchangeLinkedInAuthCodeResponseDto {
   'li_at': string;
 }
