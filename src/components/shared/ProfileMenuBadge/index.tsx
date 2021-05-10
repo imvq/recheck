@@ -7,9 +7,9 @@ import { ReactComponent as DoorSvg } from 'assets/images/shared/ProfileMenuBadge
 import { ReactComponent as CabinetSvg } from 'assets/images/shared/ProfileMenuBadge/Cabinet.svg';
 import { ReactComponent as ReviewSvg } from 'assets/images/shared/ProfileMenuBadge/Review.svg';
 import { AppState, setPageLocked, setIsLoginPopupVisible, setCurrentProfileInfo } from 'store';
+import { onExit } from 'utils/functions';
 import { IProps, IStateProps, IDispatchProps } from './types';
 import { Wrapper, LoginButton, Menu, MenuEntry, SvgWrapper } from './styled';
-import { onExit } from './functions';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   isAuthorized: store.auth.isAuthorized

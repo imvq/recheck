@@ -1,6 +1,7 @@
 import * as ApiResponses from 'utils/typing/apiResponses';
 import * as UtilityTypes from 'utils/typing/utility';
 import * as GeneralTypes from 'utils/typing/general';
+import { cookieManager, cookiesList } from 'utils/cookies';
 import { ScreenBreakpoint } from './enums';
 
 /**
@@ -52,6 +53,16 @@ export const mapProfileDtoToState = (profileDto: ProfileDto): GeneralTypes.AppPr
   currentName: profileDto.name,
   currentPhotoUrl: profileDto.photoUrl
 });
+
+/**
+ * Stuff to do when user presses exit button.
+ */
+export const onExit = (lockPageCallback: () => void) => {
+  lockPageCallback();
+  cookieManager.remove(cookiesList.accessTokenLinkedIn);
+  cookieManager.remove(cookiesList.accessTokenFacebook);
+  window.location.replace(window.location.origin);
+};
 
 /**
  * Get media query for max screen size.
