@@ -75,7 +75,10 @@ export default () => (
           </Route>
 
           <Route exact path='/await-user-confirmation'>
-            <UserConfirmationAwaiterPage />
+            <PageForceUnlocker />
+            <PageLockManager>
+              <UserConfirmationAwaiterPage />
+            </PageLockManager>
           </Route>
 
           <Route exact path='/search'>
