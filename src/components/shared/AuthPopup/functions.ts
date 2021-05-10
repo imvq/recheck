@@ -35,8 +35,17 @@ function onProfileDataRetrieved(
   Api.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       if (checkResponse.data.isRegistered) {
-        setIsAuthorizedCallback(true);
-        setIsLoginPopupVisibleCallback(false);
+        Api.checkIsConfirmed(normalizedProfileInfo.currentId)
+          .then((confirmationResponse) => {
+            setIsLoginPopupVisibleCallback(false);
+
+            if (confirmationResponse.data.isConfirmed) {
+              setIsAuthorizedCallback(true);
+            } else {
+              controlledHistory.push('/await-user-confirmation');
+            }
+          })
+          .catch(() => setIsAuthorizedCallback(false));
       } else {
         // Unlock the page and forward the user to
         // registration page if it is not registered in our app yet.
