@@ -50,6 +50,13 @@ export class CheckIsUserRegisteredDto {
   public constructor(public profileId: string) {}
 }
 
+export class CompleteRegistrationDto {
+  public constructor(
+    public profileId: string,
+    public confirmationCode: string
+  ) {}
+}
+
 export class CreateCompanyDto {
   public constructor(
     public name: string,

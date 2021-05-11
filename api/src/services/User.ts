@@ -77,11 +77,16 @@ export default class UserService {
     }
   }
 
-  public async completeRegistration(profileId: string)
+  public async completeRegistration(completionDto: Dtos.CompleteRegistrationDto)
     : Promise<ApiResponses.ICompleteRegistration> {
     try {
-      await UserManager.setUserRegistered(profileId);
-      return { success: true };
+      const targetUser = await UserManager.getUser(completionDto.profileId);
+      if (targetUser && targetUser.confirmationCode === completionDto.confirmationCode) {
+        await UserManager.setUserRegistered(completionDto.profileId);
+        return { success: true };
+      }
+
+      throw new Errors.BadRequestError('Invalid code or user.');
     } catch (error) {
       Logger.ifdev()?.err(error.message);
       throw new Errors.InternalServerError('Server-side database error');

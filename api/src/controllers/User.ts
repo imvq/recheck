@@ -45,4 +45,15 @@ export default class UserController {
     : Promise<ApiResponses.IPrepareUserResponseDto> {
     return this.injectedService.prepareUser(bodyData);
   }
+
+  /**
+   * Complete user registration.
+   */
+  @Path('/confirm')
+  @BodyGuard
+  @POST
+  public async completeRegistration(bodyData: Dtos.CompleteRegistrationDto)
+    : Promise<ApiResponses.ICompleteRegistration> {
+    return this.injectedService.completeRegistration(bodyData);
+  }
 }
