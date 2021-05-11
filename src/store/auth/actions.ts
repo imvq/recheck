@@ -20,7 +20,8 @@ export const setIsAuthorized = (isAuthorized: boolean): AuthActionType => ({
  */
 function onProfileDataRetrieved(
   dispatch: Dispatch<AppActionType>,
-  profileResponse: AxiosResponse<ApiResponses.LinkedInProfileDto | ApiResponses.FacebookProfileDto>
+  profileResponse: AxiosResponse<ApiResponses.LinkedInProfileDto | ApiResponses.FacebookProfileDto>,
+  isConfirmationCheckNeeded: boolean
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
   dispatch(setCurrentProfileInfo(normalizedProfileInfo));
@@ -29,16 +30,22 @@ function onProfileDataRetrieved(
   Api.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       if (checkResponse.data.isRegistered) {
-        // If the user exists, check if it is confirmed.
-        Api.checkIsConfirmed(normalizedProfileInfo.currentId)
-          .then((confirmationResponse) => {
-            if (confirmationResponse.data.isConfirmed) {
-              dispatch(setIsAuthorized(true));
-            } else {
-              controlledHistory.push('/await-user-confirmation');
-            }
-          })
-          .catch(() => dispatch(setIsAuthorized(false)));
+        // Provide confirmation check only if it is supposed to be.
+        if (isConfirmationCheckNeeded) {
+          // If the user exists, check if it is confirmed.
+          Api.checkIsConfirmed(normalizedProfileInfo.currentId)
+            .then((confirmationResponse) => {
+              if (confirmationResponse.data.isConfirmed) {
+                dispatch(setIsAuthorized(true));
+              } else {
+                controlledHistory.push('/await-user-confirmation');
+              }
+            })
+            .catch(() => dispatch(setIsAuthorized(false)));
+        } else {
+          // If no confirmation needed, then mark user as authorized immediately.
+          dispatch(setIsAuthorized(true));
+        }
       } else {
         // Register the user if it is not registered in our app yet.
         controlledHistory.push('/register');
@@ -47,14 +54,24 @@ function onProfileDataRetrieved(
     .catch(() => dispatch(setIsAuthorized(false)));
 }
 
-export const checkAuthorization = () => (dispatch: Dispatch<AppActionType>) => {
+export const checkAuthorization = (isConfirmationCheckNeeded: boolean) => (
+  dispatch: Dispatch<AppActionType>
+) => {
   if (cookieManager.get(cookiesList.accessTokenLinkedIn)) {
     Api.getProfileLinkedIn()
-      .then(profileResponse => onProfileDataRetrieved(dispatch, profileResponse))
+      .then(profileResponse => onProfileDataRetrieved(
+        dispatch,
+        profileResponse,
+        isConfirmationCheckNeeded
+      ))
       .catch(() => dispatch(setIsAuthorized(false)));
   } else if (cookieManager.get(cookiesList.accessTokenFacebook)) {
     Api.getProfileFacebook()
-      .then(profileResponse => onProfileDataRetrieved(dispatch, profileResponse))
+      .then(profileResponse => onProfileDataRetrieved(
+        dispatch,
+        profileResponse,
+        isConfirmationCheckNeeded
+      ))
       .catch(() => dispatch(setIsAuthorized(false)));
   } else {
     dispatch(setIsAuthorized(false));

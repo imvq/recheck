@@ -3,6 +3,7 @@ import * as UtilityTypes from 'utils/typing/utility';
 export interface IOwnProps {
   redirectHomeOnFail?: boolean;
   preventDefaultUnlock?: boolean;
+  noConfirmationCheckNeeded?: boolean;
 }
 
 export interface IStateProps {
@@ -10,7 +11,7 @@ export interface IStateProps {
 }
 
 export interface IDispatchProps {
-  checkAuthorization: () => void;
+  checkAuthorization: (isConfirmationCheckNeeded: boolean) => void;
   unlockPage: () => void;
 }
 

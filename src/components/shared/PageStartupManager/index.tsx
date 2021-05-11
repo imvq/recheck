@@ -22,7 +22,7 @@ const PageStartupManager: FunctionComponent<IProps> = (props) => {
       // If the page we load is the first website page for current session.
       // In that case we won't have isAuthorized flag set
       // so we have to call the API to check user's authorization.
-      props.checkAuthorization();
+      props.checkAuthorization(!props.noConfirmationCheckNeeded);
     }
   }, []);
 
@@ -38,7 +38,7 @@ const PageStartupManager: FunctionComponent<IProps> = (props) => {
     }
   }, [props.isAuthorized]);
 
-  return <></>;
+  return null;
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageStartupManager);

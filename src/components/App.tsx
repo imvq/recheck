@@ -5,6 +5,7 @@ import { Router, Switch, Route } from 'react-router-dom';
 import { store as appStore } from 'store';
 import controlledHistory from 'utils/routing';
 import UserConfirmationAwaiterPage from 'components/pages/UserConfirmationAwaiterPage';
+import UserConfirmationPage from 'components/pages/UserConfirmationPage';
 import PageStartupManager from 'components/shared/PageStartupManager';
 import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
@@ -71,6 +72,13 @@ export default () => (
             <PageForceUnlocker />
             <PageLockManager>
               <RegistrationPage />
+            </PageLockManager>
+          </Route>
+
+          <Route exact path='/register/complete/:uuid'>
+            <PageStartupManager noConfirmationCheckNeeded />
+            <PageLockManager>
+              <UserConfirmationPage />
             </PageLockManager>
           </Route>
 
