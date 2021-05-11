@@ -8,6 +8,8 @@ export interface CheckIsConfirmedResponseDto {
   isConfirmed: boolean;
 }
 
+export interface CompleteRegistartionResponseDto extends ISimpleActionResponse {}
+
 export interface ExchangeLinkedInCodeResposneDto {
   'li_at': string;
 }

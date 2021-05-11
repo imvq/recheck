@@ -33,7 +33,7 @@ const PageStartupManager: FunctionComponent<IProps> = (props) => {
       window.location.replace(window.location.origin);
     }
 
-    if (!props.preventDefaultUnlock || props.isAuthorized) {
+    if (!props.preventUnlockStrictly && (!props.preventDefaultUnlock || props.isAuthorized)) {
       props.unlockPage();
     }
   }, [props.isAuthorized]);

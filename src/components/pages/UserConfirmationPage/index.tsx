@@ -2,12 +2,14 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
 import { AppState, setIsLoginPopupVisible } from 'store';
 import { IProps, IStateProps, IDispatchProps } from './types';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
-  isAuthorized: store.auth.isAuthorized
+  isAuthorized: store.auth.isAuthorized,
+  currentProfileInfo: store.profile.currentProfileInfo
 });
 
 const mapDispatchToProps: IDispatchProps = {
@@ -15,7 +17,7 @@ const mapDispatchToProps: IDispatchProps = {
 };
 
 const UserConfirmationPage = (props: IProps) => {
-  const { uuid } = useParams<{ uuid: string }>();
+  const { uuid: pageUuid } = useParams<{ uuid: string }>();
 
   useEffect(() => {
     // true       | false          | null
@@ -25,7 +27,9 @@ const UserConfirmationPage = (props: IProps) => {
     }
 
     if (props.isAuthorized) {
-      // TODO: Confirm.
+      Api.completeRegistration(props.currentProfileInfo.currentId, pageUuid)
+        .then(() => controlledHistory.replace('/'))
+        .catch(() => controlledHistory.replace('/404'));
       return;
     }
 

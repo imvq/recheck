@@ -3,6 +3,7 @@ import * as UtilityTypes from 'utils/typing/utility';
 export interface IOwnProps {
   redirectHomeOnFail?: boolean;
   preventDefaultUnlock?: boolean;
+  preventUnlockStrictly?: boolean;
   noConfirmationCheckNeeded?: boolean;
 }
 

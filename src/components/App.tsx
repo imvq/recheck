@@ -76,7 +76,7 @@ export default () => (
           </Route>
 
           <Route exact path='/register/complete/:uuid'>
-            <PageStartupManager noConfirmationCheckNeeded />
+            <PageStartupManager preventUnlockStrictly noConfirmationCheckNeeded />
             <PageLockManager>
               <UserConfirmationPage />
             </PageLockManager>
