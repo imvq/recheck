@@ -15,6 +15,6 @@ export function searchReducer(
         userSearchResults: action.payload
       };
     default:
-      return initialState;
+      return state;
   }
 }

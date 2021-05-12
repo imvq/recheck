@@ -6,7 +6,7 @@ export interface SearchState {
   userSearchResults: GeneralTypes.SearchProfileInfo[];
 }
 
-interface SetCurrentUserSearchResults {
+export interface SetCurrentUserSearchResults {
   type: typeof SET_CURRENT_USER_SEARCH_RESULTS;
   payload: GeneralTypes.SearchProfileInfo[];
 }
