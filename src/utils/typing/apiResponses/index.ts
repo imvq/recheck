@@ -1,3 +1,4 @@
+import * as GenearalTypes from '../general';
 import { IProfileDto, ISimpleActionResponse } from './basic';
 
 export interface BindReviewtargetResponseDto extends ISimpleActionResponse {}
@@ -23,3 +24,5 @@ export type FacebookProfileDto = IProfileDto;
 export type PrepareReviewResponseDto = ISimpleActionResponse;
 
 export type PrepareProfileResponseDto = ISimpleActionResponse;
+
+export type SearchUserDto = GenearalTypes.SearchProfileInfo;
