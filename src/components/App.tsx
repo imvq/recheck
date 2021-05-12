@@ -90,7 +90,10 @@ export default () => (
           </Route>
 
           <Route exact path='/search'>
-            <SearchPage />
+            <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
+            <PageLockManager>
+              <SearchPage />
+            </PageLockManager>
           </Route>
 
           {/* LinkedIn's OAuth2 window. */}

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { AppState, searchUser, setPageLocked, setPageUnlocked } from 'store';
+import { AppState, searchUser, setPageLocked } from 'store';
 import PersonCard from 'components/shared/PersonCard';
 import SearchField from './SearchField';
 import { IProps, IStateProps, IDispatchProps } from './types';
@@ -15,15 +15,14 @@ const mapStateToProps = (store: AppState): IStateProps => ({
 
 const mapDispatchToProps: IDispatchProps = {
   searchUser,
-  lockPage: setPageLocked,
-  unlockPage: setPageUnlocked
+  lockPage: setPageLocked
 };
 
 const SearchPage = (props: IProps) => (
   <Wrapper>
     <AdaptedHeader />
     <ContentWrapper>
-      <SearchField />
+      <SearchField lockPageCallback={props.lockPage} searchUserCallback={props.searchUser} />
       <TitleWrapper><Title>Результат поиска:</Title></TitleWrapper>
       <ResultsWrapper>
         {props.userSearchResults.length

@@ -6,7 +6,6 @@ export interface IStateProps {
 
 export interface IDispatchProps {
   lockPage(): void;
-  unlockPage(): void;
   searchUser(name: string): void;
 }
 

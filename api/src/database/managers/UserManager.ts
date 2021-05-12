@@ -43,6 +43,7 @@ export default class UserManager {
         'workStartMonth',
         'workStartYear'
       ],
+      relations: ['company'],
       where: { name }
     })
   );
