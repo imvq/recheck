@@ -56,4 +56,15 @@ export default class UserController {
     : Promise<ApiResponses.ICompleteRegistration> {
     return this.injectedService.completeRegistration(bodyData);
   }
+
+  /**
+   * Search user by name.
+   */
+  @Path('/search')
+  @BodyGuard
+  @POST
+  public async search(bodyData: Dtos.SearchUserDto)
+    : Promise<ApiResponses.ISearchUserResponseDto> {
+    return this.injectedService.searchUser(bodyData);
+  }
 }

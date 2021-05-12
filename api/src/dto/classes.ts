@@ -65,7 +65,7 @@ export class CreateCompanyDto {
   ) {}
 }
 
-export class PrepareUserDto {
+export class UserDto {
   public constructor(
     public profileId: string,
     public name: string,
@@ -77,4 +77,10 @@ export class PrepareUserDto {
     public workStartMonth: number,
     public workStartYear: number
   ) {}
+}
+
+export class PrepareUserDto extends UserDto {}
+
+export class SearchUserDto {
+  public constructor(public name: string) {}
 }

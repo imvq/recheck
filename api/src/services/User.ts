@@ -92,4 +92,14 @@ export default class UserService {
       throw new Errors.InternalServerError('Server-side database error');
     }
   }
+
+  public async searchUser(searchDto: Dtos.SearchUserDto)
+    : Promise<ApiResponses.ISearchUserResponseDto> {
+    try {
+      return await UserManager.getUserByName(searchDto.name) || [];
+    } catch (error) {
+      Logger.ifdev()?.err(error.message);
+      throw new Errors.InternalServerError('Server-side database error');
+    }
+  }
 }

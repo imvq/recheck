@@ -1,3 +1,5 @@
+import Dtos from '@dto';
+import Company from '@database/entities/Company.entity';
 import { IRetrieveProfileInfoResponseDto, ISimpleActionResponse } from './basic';
 
 export interface IBindReviewTargetResponseDto extends ISimpleActionResponse {}
@@ -43,10 +45,20 @@ export interface ILinkedInPhotoDto {
   }
 }
 
+export interface IPrepareReviewResponseDto extends ISimpleActionResponse {}
+
+export interface IPrepareUserResponseDto extends ISimpleActionResponse {}
+
 export interface IRetrieveFacebookProfileInfoResponseDto extends IRetrieveProfileInfoResponseDto {}
 
 export interface IRetrieveLinkedInProfileInfoResponseDto extends IRetrieveProfileInfoResponseDto {}
 
-export interface IPrepareReviewResponseDto extends ISimpleActionResponse {}
-
-export interface IPrepareUserResponseDto extends ISimpleActionResponse {}
+export type ISearchUserResponseDto = (
+  Omit<
+    Dtos.UserDto,
+    'companyName'
+    | 'companySite'
+    | 'confirmationCode'
+    | 'email'>
+  & { company: Company }
+)[];

@@ -32,4 +32,18 @@ export default class UserManager {
   }
 
   public static getUser = async (profileId: string) => UserManager.repo?.findOne(profileId);
+
+  public static getUserByName = async (name: string) => (
+    UserManager.repo?.find({
+      select: [
+        'profileId',
+        'name',
+        'photoUrl',
+        'position',
+        'workStartMonth',
+        'workStartYear'
+      ],
+      where: { name }
+    })
+  );
 }

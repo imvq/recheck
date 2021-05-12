@@ -27,4 +27,4 @@ export interface IStringIndexable {
 
 export type CompanyData = Dtos.CreateCompanyDto;
 
-export type UserData = Dtos.PrepareUserDto;
+export type UserData = Dtos.UserDto;
