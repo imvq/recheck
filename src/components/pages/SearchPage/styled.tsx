@@ -47,3 +47,12 @@ export const ResultsWrapper = styled.div`
   padding: 1rem;
   box-sizing: border-box;
 `;
+
+export const SpanWrapper = styled.div`
+  padding: 4rem 0 2rem;
+`;
+
+export const Span = styled.span`
+  font-size: 1.2rem;
+  font-weight: 400;
+`;

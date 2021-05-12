@@ -6,7 +6,7 @@ import { AppActionType } from '../types';
 import { setPageUnlocked as unlockPage } from '../interaction/actions';
 import { SearchActionType, SET_CURRENT_USER_SEARCH_RESULTS } from './types';
 
-export const setSearchUserResults = (results: GeneralTypes.SearchProfileInfo[])
+export const setUserSearchResults = (results: GeneralTypes.SearchProfileInfo[])
   : SearchActionType => ({
   type: SET_CURRENT_USER_SEARCH_RESULTS,
   payload: results
@@ -14,6 +14,6 @@ export const setSearchUserResults = (results: GeneralTypes.SearchProfileInfo[])
 
 export const searchUser = (name: string) => (dispatch: Dispatch<AppActionType>) => {
   Api.searchUser(name)
-    .then((searchResults) => dispatch(setSearchUserResults(searchResults.data)))
+    .then((searchResults) => dispatch(setUserSearchResults(searchResults.data)))
     .finally(() => unlockPage());
 };

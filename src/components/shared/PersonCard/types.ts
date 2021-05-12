@@ -1,10 +1,7 @@
-import * as UtilityTypes from 'utils/typing/utility';
+import * as GeneralTypes from 'utils/typing/general';
 
 export interface IOwnProps {
-  name: string;
-  position: string;
-  company: string;
-  photoUrl: UtilityTypes.Nullable<string>;
+  userData: GeneralTypes.SearchProfileInfo;
 }
 
 export type IProps = IOwnProps;

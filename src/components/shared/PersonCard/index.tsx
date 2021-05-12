@@ -5,9 +5,9 @@ export default (props: IProps) => (
   <Wrapper>
     <TopBar />
     <BodyWrapper>
-      <PhotoWrapper src={props.photoUrl || ''} />
-      <Span isEnlarged>{props.name}</Span>
-      <Span isDimmed>{`${props.position} — ${props.company}`}</Span>
+      <PhotoWrapper src={props.userData.photoUrl || ''} />
+      <Span isEnlarged>{props.userData.name}</Span>
+      <Span isDimmed>{`${props.userData.position} — ${props.userData.company.name}`}</Span>
     </BodyWrapper>
   </Wrapper>
 );

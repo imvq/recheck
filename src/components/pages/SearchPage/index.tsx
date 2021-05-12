@@ -1,28 +1,38 @@
+import { connect } from 'react-redux';
+
+import { AppState, searchUser, setPageLocked, setPageUnlocked } from 'store';
 import PersonCard from 'components/shared/PersonCard';
-import TestPhoto from 'assets/images/common/TestPhoto.png';
 import SearchField from './SearchField';
+import { IProps, IStateProps, IDispatchProps } from './types';
 import {
   Wrapper, AdaptedHeader, AdaptedFooter, ContentWrapper,
-  TitleWrapper, Title, ResultsWrapper
+  TitleWrapper, Title, ResultsWrapper, SpanWrapper, Span
 } from './styled';
 
-const testPerson = {
-  name: 'Екатерина Мазур',
-  position: 'Head of Support',
-  company: 'Kyivstar',
-  photoUrl: TestPhoto
+const mapStateToProps = (store: AppState): IStateProps => ({
+  userSearchResults: store.search.userSearchResults
+});
+
+const mapDispatchToProps: IDispatchProps = {
+  searchUser,
+  lockPage: setPageLocked,
+  unlockPage: setPageUnlocked
 };
 
-export default () => (
+const SearchPage = (props: IProps) => (
   <Wrapper>
     <AdaptedHeader />
     <ContentWrapper>
       <SearchField />
       <TitleWrapper><Title>Результат поиска:</Title></TitleWrapper>
       <ResultsWrapper>
-        <PersonCard {...testPerson} />
+        {props.userSearchResults.length
+          ? props.userSearchResults.map(userData => <PersonCard userData={userData} />)
+          : <SpanWrapper><Span>Результатов нет</Span></SpanWrapper>}
       </ResultsWrapper>
     </ContentWrapper>
     <AdaptedFooter />
   </Wrapper>
 );
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
