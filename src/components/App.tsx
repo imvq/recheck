@@ -69,7 +69,7 @@ export default () => (
 
           {/* Registration page. Users are supposed to be authorized. */}
           <Route exact path='/register'>
-            <PageForceUnlocker />
+            <PageStartupManager preventDefaultUnlock redirectHomeOnFail redirectHomeOnRegistered />
             <PageLockManager>
               <RegistrationPage />
             </PageLockManager>

@@ -54,24 +54,41 @@ function onProfileDataRetrieved(
     .catch(() => dispatch(setIsAuthorized(false)));
 }
 
-export const checkAuthorization = (isConfirmationCheckNeeded: boolean) => (
+export const checkAuthorization = (
+  isRedirectOnRegistered: boolean,
+  isConfirmationCheckNeeded: boolean
+) => (
   dispatch: Dispatch<AppActionType>
 ) => {
   if (cookieManager.get(cookiesList.accessTokenLinkedIn)) {
     Api.getProfileLinkedIn()
-      .then(profileResponse => onProfileDataRetrieved(
-        dispatch,
-        profileResponse,
-        isConfirmationCheckNeeded
-      ))
+      .then(profileResponse => {
+        if (isRedirectOnRegistered) {
+          controlledHistory.replace('/');
+          return;
+        }
+
+        onProfileDataRetrieved(
+          dispatch,
+          profileResponse,
+          isConfirmationCheckNeeded
+        );
+      })
       .catch(() => dispatch(setIsAuthorized(false)));
   } else if (cookieManager.get(cookiesList.accessTokenFacebook)) {
     Api.getProfileFacebook()
-      .then(profileResponse => onProfileDataRetrieved(
-        dispatch,
-        profileResponse,
-        isConfirmationCheckNeeded
-      ))
+      .then(profileResponse => {
+        if (isRedirectOnRegistered) {
+          controlledHistory.replace('/');
+          return;
+        }
+
+        onProfileDataRetrieved(
+          dispatch,
+          profileResponse,
+          isConfirmationCheckNeeded
+        );
+      })
       .catch(() => dispatch(setIsAuthorized(false)));
   } else {
     dispatch(setIsAuthorized(false));
