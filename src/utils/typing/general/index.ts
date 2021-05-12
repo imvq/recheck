@@ -83,6 +83,16 @@ export interface ReviewData {
   recommenderLink3: string;
 }
 
+export interface SearchProfileInfo {
+  name: string;
+  photoUrl: string;
+  company: {
+    name: string;
+    site: string;
+  },
+  position: string;
+}
+
 export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
 
 export interface OptionType {

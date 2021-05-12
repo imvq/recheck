@@ -5,6 +5,7 @@ import { authReducer } from './auth/reducers';
 import { interactionStateReducer } from './interaction/reducers';
 import { profileReducer } from './profile/reducers';
 import { reviewsReducer } from './reviews/reducer';
+import { searchReducer } from './search/reducers';
 import { AppActionType } from './types';
 
 /**
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   auth: authReducer,
   interaction: interactionStateReducer,
   profile: profileReducer,
-  reviews: reviewsReducer
+  reviews: reviewsReducer,
+  search: searchReducer
 });
 
 /**
@@ -47,3 +49,4 @@ export * from './auth/actions';
 export * from './interaction/actions';
 export * from './profile/actions';
 export * from './reviews/actions';
+export * from './search/actions';
