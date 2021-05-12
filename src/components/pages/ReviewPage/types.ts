@@ -1,7 +1,8 @@
 import * as GeneralTypes from 'utils/typing/general';
 
 export interface IStateProps {
-  reviewData: GeneralTypes.ReviewData
+  currentProfileInfo: GeneralTypes.AppProfileInfo;
+  reviewData: Omit<GeneralTypes.ReviewData, 'authorId'>;
 }
 
 export interface IDispatchProps {

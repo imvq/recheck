@@ -38,9 +38,9 @@ import {
 } from './types';
 
 const initialState: ReviewState = {
-  firstName: '',
-  lastName: '',
-  companyName: '',
+  targetFirstName: '',
+  targetLastName: '',
+  workplace: '',
   bounds: '',
   tasks: '',
   strengths: '',
@@ -70,9 +70,9 @@ export const reviewsReducer = (
     case CLEAR_INITIAL_DATA:
       return {
         ...state,
-        firstName: initialState.firstName,
-        lastName: initialState.lastName,
-        companyName: initialState.companyName,
+        targetFirstName: initialState.targetFirstName,
+        targetLastName: initialState.targetLastName,
+        workplace: initialState.workplace,
         bounds: initialState.bounds
       };
     case CLEAR_TASKS:
@@ -140,17 +140,17 @@ export const reviewsReducer = (
     case SET_FIRST_NAME:
       return {
         ...state,
-        firstName: action.payload
+        targetFirstName: action.payload
       };
     case SET_LAST_NAME:
       return {
         ...state,
-        lastName: action.payload
+        targetLastName: action.payload
       };
     case SET_COMPANY:
       return {
         ...state,
-        companyName: action.payload
+        workplace: action.payload
       };
     case SET_BOUNDS:
       return {

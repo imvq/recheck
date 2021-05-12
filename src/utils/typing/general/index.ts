@@ -58,9 +58,10 @@ export interface ReviewCardDataFull extends ReviewCardData {
 }
 
 export interface ReviewData {
-  firstName: string;
-  lastName: string;
-  companyName: string;
+  authorId: string;
+  targetFirstName: string;
+  targetLastName: string;
+  workplace: string;
   bounds: string;
   tasks: string;
   strengths: string;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 
+import Api from 'utils/api';
 import * as GeneralTypes from 'utils/typing/general';
 import { AppActionType } from '../types';
 import {
@@ -202,11 +203,7 @@ export const setReviewRecommenderLink3 = (payload: string): ReviewActionType => 
 export const createReview = (reviewData: GeneralTypes.ReviewData) => (
   dispatch: Dispatch<AppActionType>
 ) => {
-  axios.post(
-    `${process.env.REACT_APP_API}/review/create`,
-    { ...reviewData },
-    { withCredentials: true }
-  );
+  Api.prepareReview({ ...reviewData });
   dispatch(clearInitialData());
   dispatch(clearTasks());
   dispatch(clearImprovements());

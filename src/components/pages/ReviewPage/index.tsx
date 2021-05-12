@@ -18,6 +18,7 @@ import BoxStepK from './BoxStepK';
 import { Wrapper, AdaptedHeader, AdaptedFooter, ContentWrapper } from './styled';
 
 const mapSateToProps = (store: AppState): IStateProps => ({
+  currentProfileInfo: store.profile.currentProfileInfo,
   reviewData: { ...store.reviews }
 });
 
@@ -33,7 +34,10 @@ const ReviewPage = (props: IProps) => {
 
   const proceed = () => setStep(step + 1);
   const comeback = () => setStep(step - 1);
-  const finalize = () => props.createReview(props.reviewData);
+  const finalize = () => props.createReview({
+    authorId: props.currentProfileInfo.currentId,
+    ...props.reviewData
+  });
 
   const boxes = [
     <BoxStepInitial onNextStep={proceed} />,
