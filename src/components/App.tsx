@@ -62,7 +62,7 @@ export default () => (
           {/* Confirmation page. Used to  bind review with the user. */}
           <Route exact path='/review/connect/:uuid'>
             <PageStartupManager preventUnlockStrictly />
-            <PageLockManager hideContentOnLock>
+            <PageLockManager>
               <ReviewConfirmationPage />
             </PageLockManager>
           </Route>

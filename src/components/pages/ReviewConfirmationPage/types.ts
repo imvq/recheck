@@ -7,6 +7,7 @@ export interface IStateProps {
 }
 
 export interface IDispatchProps {
+  unlockPage(): void;
   setIsLoginPopupVisible(flag: boolean): void;
 }
 
