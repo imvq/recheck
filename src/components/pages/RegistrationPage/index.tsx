@@ -26,7 +26,7 @@ const RegistrationPage = (props: IProps) => (
       <RegistrationBox onProceed={(profileInfo) => {
         props.lockPage();
         Api.prepareProfile(profileInfo)
-          .then(() => controlledHistory.replace('/search'))
+          .then(() => controlledHistory.replace('/await-user-confirmation'))
           .finally(() => props.unlockPage());
       }}
       />
