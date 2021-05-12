@@ -59,7 +59,7 @@ export default () => (
             </PageLockManager>
           </Route>
 
-          {/* Confirmation page. Used to  bind review with the user. */}
+          {/* Confirmation page. Used to bind review with the user. Review UUID needed. */}
           <Route exact path='/review/connect/:uuid'>
             <PageStartupManager preventUnlockStrictly />
             <PageLockManager>
@@ -67,7 +67,7 @@ export default () => (
             </PageLockManager>
           </Route>
 
-          {/* Search page. Provide steps for searching candidates. */}
+          {/* Registration page. Users are supposed to be authorized. */}
           <Route exact path='/register'>
             <PageForceUnlocker />
             <PageLockManager>
@@ -75,6 +75,8 @@ export default () => (
             </PageLockManager>
           </Route>
 
+          {/* Page to help complete user's registration. User UUID needed. */}
+          {/* The user must be logged in as well. */}
           <Route exact path='/register/complete/:uuid'>
             <PageStartupManager preventUnlockStrictly noConfirmationCheckNeeded />
             <PageLockManager>
@@ -82,6 +84,7 @@ export default () => (
             </PageLockManager>
           </Route>
 
+          {/* Page with message persuading to check user's email. */}
           <Route exact path='/await-user-confirmation'>
             <PageForceUnlocker />
             <PageLockManager>
@@ -89,6 +92,7 @@ export default () => (
             </PageLockManager>
           </Route>
 
+          {/* Search page. Used to search users and companies. */}
           <Route exact path='/search'>
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
             <PageLockManager>
