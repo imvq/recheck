@@ -21,7 +21,7 @@ export default class MailService {
 
   public static async sendConfirmationMail(to: string, confirmationCode: string): Promise<void> {
     const templatesPath = `${__dirname}/templates/confirmation.handlebars`;
-    const replacements = { uuid: confirmationCode };
+    const replacements = { origin: process.env.ORIGIN as string, uuid: confirmationCode };
     await MailService.sendMail(to, templatesPath, replacements);
   }
 
