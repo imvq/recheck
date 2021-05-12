@@ -11,7 +11,29 @@ export interface AppProfileInfo {
   currentPhotoUrl: string;
 }
 
+export interface BindReviewTargetDto {
+  reviewId: string;
+  profileId: string;
+}
+
+export interface CompleteRegistrationDto {
+  profileId: string;
+  confirmationCode: string;
+}
+
 export type InputEvent = ChangeEvent<HTMLInputElement>;
+
+export interface PrepareProfileDto {
+  profileId: string;
+  name: string;
+  email: string;
+  photoUrl: string;
+  companySite: string;
+  companyName: string;
+  position: string;
+  workStartMonth: number;
+  workStartYear: number;
+}
 
 export interface PreviousSearchCardData {
   name: string;

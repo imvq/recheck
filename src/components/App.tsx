@@ -6,10 +6,10 @@ import { store as appStore } from 'store';
 import controlledHistory from 'utils/routing';
 import UserConfirmationAwaiterPage from 'components/pages/UserConfirmationAwaiterPage';
 import UserConfirmationPage from 'components/pages/UserConfirmationPage';
+import ReviewConfirmationPage from 'components/pages/ReviewConfirmationPage';
 import PageStartupManager from 'components/shared/PageStartupManager';
 import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
-import ConfirmationPage from 'components/pages/ConfirmationPage';
 import GlobalStyle from 'components/shared/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
 import ProfilePage from 'components/pages/ProfilePage';
@@ -60,10 +60,10 @@ export default () => (
           </Route>
 
           {/* Confirmation page. Used to  bind review with the user. */}
-          <Route exact path='/confirmation'>
-            <PageStartupManager />
+          <Route exact path='/review/connect/:uuid'>
+            <PageStartupManager preventUnlockStrictly />
             <PageLockManager hideContentOnLock>
-              <ConfirmationPage />
+              <ReviewConfirmationPage />
             </PageLockManager>
           </Route>
 

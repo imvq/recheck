@@ -6,6 +6,7 @@ import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
 import { AppState, setIsLoginPopupVisible } from 'store';
 import { IProps, IStateProps, IDispatchProps } from './types';
+import { Wrapper, AdaptedHeader, AdaptedFooter, ContentWrapper } from './styled';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   isAuthorized: store.auth.isAuthorized,
@@ -16,7 +17,7 @@ const mapDispatchToProps: IDispatchProps = {
   setIsLoginPopupVisible
 };
 
-const UserConfirmationPage = (props: IProps) => {
+const ConfirmationPage = (props: IProps) => {
   const { uuid: pageUuid } = useParams<{ uuid: string }>();
 
   useEffect(() => {
@@ -27,11 +28,11 @@ const UserConfirmationPage = (props: IProps) => {
     }
 
     if (props.isAuthorized) {
-      Api.completeRegistration({
+      Api.bindReviewTarget({
         profileId: props.currentProfileInfo.currentId,
-        confirmationCode: pageUuid
+        reviewId: pageUuid
       })
-        .then(() => controlledHistory.replace('/'))
+        .then(() => controlledHistory.replace('/profile'))
         .catch(() => controlledHistory.replace('/404'));
       return;
     }
@@ -42,7 +43,15 @@ const UserConfirmationPage = (props: IProps) => {
     }
   }, [props.isAuthorized]);
 
-  return null;
+  return (
+    <Wrapper>
+      <AdaptedHeader />
+      <ContentWrapper>
+        Login, please
+      </ContentWrapper>
+      <AdaptedFooter />
+    </Wrapper>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserConfirmationPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmationPage);

@@ -25,9 +25,9 @@ export default class Api {
     return Api.instance.post('/user/is-confirmed', { profileId });
   }
 
-  public static completeRegistration(profileId: string, confirmationCode: string)
+  public static completeRegistration(completionDto: GeneralTypes.CompleteRegistrationDto)
     : GeneralTypes.APIResponse<ApiResponses.CompleteRegistartionResponseDto> {
-    return Api.instance.post('/user/confirm', { profileId, confirmationCode });
+    return Api.instance.post('/user/confirm', completionDto);
   }
 
   public static exchangeLinkedInCode(code: string)
@@ -47,13 +47,18 @@ export default class Api {
     return Api.instance.get('/facebook/oauth/retrieve', { withCredentials: true });
   }
 
-  public static prepareProfile(profileInfoDto: ApiResponses.RegistrationDto)
-    : GeneralTypes.APIResponse<ApiResponses.PrepareUserResponseDto> {
+  public static prepareProfile(profileInfoDto: GeneralTypes.PrepareProfileDto)
+    : GeneralTypes.APIResponse<ApiResponses.PrepareProfileResponseDto> {
     return Api.instance.post('/user/prepare', profileInfoDto);
   }
 
   public static prepareReview(reviewData: GeneralTypes.ReviewData)
     : GeneralTypes.APIResponse<ApiResponses.PrepareReviewResponseDto> {
     return Api.instance.post('/review/prepare', reviewData);
+  }
+
+  public static bindReviewTarget(bindingData: GeneralTypes.BindReviewTargetDto)
+    : GeneralTypes.APIResponse<ApiResponses.BindReviewtargetResponseDto> {
+    return Api.instance.post('/review/bind-target', bindingData);
   }
 }
