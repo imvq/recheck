@@ -27,9 +27,9 @@ export const ButtonContentArea = styled.div<IStyledProps>`
   height: ${props => props.height || cssVarsLocal.defaultHeight};
   padding: 0 calc(${cssVars.thiknessDefault} * 3) 0;
   font-size: ${props => props.fontSize || '1.1rem'};
-  color: ${props => (props.isHollow ? props.backgroundColor || cssVarsLocal.defaultBackgroundColor : props.color || 'white')};
+  color: ${props => (props.color || (props.isHollow ? props.backgroundColor || cssVarsLocal.defaultBackgroundColor : 'white'))};
   background-color: ${props => (
-    props.isHollow ? 'none'
+    props.isHollow ? 'unset'
       : props.backgroundColor || cssVarsLocal.defaultBackgroundColor
   )};
   display: flex;
@@ -55,7 +55,7 @@ const RoundedArea = styled.div<RoundedAreaProps>`
   width: ${props => props.height || cssVarsLocal.defaultHeight};
   height: ${props => props.height || cssVarsLocal.defaultHeight};
   background-color: ${props => (
-    props.isHollow ? 'none'
+    props.isHollow ? 'unset'
       : props.backgroundColor || cssVarsLocal.defaultBackgroundColor
   )};
   border: calc(${cssVars.thiknessDefault} * 3) solid ${props => props.backgroundColor || cssVarsLocal.defaultBackgroundColor};

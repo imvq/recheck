@@ -46,7 +46,12 @@ export const Span = styled.div<{ isEnlarged?: boolean; isDimmed?: boolean; }>`
 
 export const PhotoWrapper = styled.img`
   object-fit: cover;
-  width: 3rem;
-  height: 3rem;
+  width: 7.5rem;
+  height: 7.5rem;
   border-radius: 50%;
+  margin-top: -2.5rem;
+`;
+
+export const ButtonWrapper = styled.div`
+  padding: 1rem 0 1rem;
 `;

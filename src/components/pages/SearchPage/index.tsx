@@ -6,7 +6,8 @@ import SearchField from './SearchField';
 import { IProps, IStateProps, IDispatchProps } from './types';
 import {
   Wrapper, AdaptedHeader, AdaptedFooter, ContentWrapper,
-  TitleWrapper, Title, ResultsWrapper, SpanWrapper, Span
+  TitleWrapper, Title, ResultsWrapper, PersonCardWrapper,
+  SpanWrapper, Span
 } from './styled';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
@@ -26,7 +27,8 @@ const SearchPage = (props: IProps) => (
       <TitleWrapper><Title>Результат поиска:</Title></TitleWrapper>
       <ResultsWrapper>
         {props.userSearchResults.length
-          ? props.userSearchResults.map(userData => <PersonCard userData={userData} />)
+          ? props.userSearchResults.map(userData => (
+            <PersonCardWrapper><PersonCard userData={userData} /></PersonCardWrapper>))
           : <SpanWrapper><Span>Результатов нет</Span></SpanWrapper>}
       </ResultsWrapper>
     </ContentWrapper>

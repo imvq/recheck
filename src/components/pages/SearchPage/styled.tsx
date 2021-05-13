@@ -46,6 +46,12 @@ export const ResultsWrapper = styled.div`
   margin: 1rem 0 1rem;
   padding: 1rem;
   box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+export const PersonCardWrapper = styled.div`
+  padding: 1rem;
 `;
 
 export const SpanWrapper = styled.div`
