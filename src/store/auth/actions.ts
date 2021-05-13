@@ -21,6 +21,7 @@ export const setIsAuthorized = (isAuthorized: boolean): AuthActionType => ({
 function onProfileDataRetrieved(
   dispatch: Dispatch<AppActionType>,
   profileResponse: AxiosResponse<ApiResponses.LinkedInProfileDto | ApiResponses.FacebookProfileDto>,
+  isRedirectOnRegistered: boolean,
   isConfirmationCheckNeeded: boolean
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse.data);
@@ -30,6 +31,12 @@ function onProfileDataRetrieved(
   Api.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       if (checkResponse.data.isRegistered) {
+        // No need for registered users to be at registration page.
+        if (isRedirectOnRegistered) {
+          controlledHistory.replace('/');
+          return;
+        }
+
         // Provide confirmation check only if it is supposed to be.
         if (isConfirmationCheckNeeded) {
           // If the user exists, check if it is confirmed.
@@ -48,6 +55,7 @@ function onProfileDataRetrieved(
         }
       } else {
         // Register the user if it is not registered in our app yet.
+        dispatch(setIsAuthorized(true));
         controlledHistory.push('/register');
       }
     })
@@ -62,33 +70,21 @@ export const checkAuthorization = (
 ) => {
   if (cookieManager.get(cookiesList.accessTokenLinkedIn)) {
     Api.getProfileLinkedIn()
-      .then(profileResponse => {
-        if (isRedirectOnRegistered) {
-          controlledHistory.replace('/');
-          return;
-        }
-
-        onProfileDataRetrieved(
-          dispatch,
-          profileResponse,
-          isConfirmationCheckNeeded
-        );
-      })
+      .then(profileResponse => onProfileDataRetrieved(
+        dispatch,
+        profileResponse,
+        isRedirectOnRegistered,
+        isConfirmationCheckNeeded
+      ))
       .catch(() => dispatch(setIsAuthorized(false)));
   } else if (cookieManager.get(cookiesList.accessTokenFacebook)) {
     Api.getProfileFacebook()
-      .then(profileResponse => {
-        if (isRedirectOnRegistered) {
-          controlledHistory.replace('/');
-          return;
-        }
-
-        onProfileDataRetrieved(
-          dispatch,
-          profileResponse,
-          isConfirmationCheckNeeded
-        );
-      })
+      .then(profileResponse => onProfileDataRetrieved(
+        dispatch,
+        profileResponse,
+        isRedirectOnRegistered,
+        isConfirmationCheckNeeded
+      ))
       .catch(() => dispatch(setIsAuthorized(false)));
   } else {
     dispatch(setIsAuthorized(false));
