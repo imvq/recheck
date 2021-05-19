@@ -13,6 +13,7 @@ export const TitleWrapper = styled.div`
   margin: 4rem 0 3rem;
 `;
 
-export const Title = styled.h2`
+export const Title = styled.h2<{ isHighlighted?: boolean; }>`
   font-size: 1.5rem;
+  font-weight: ${props => (props.isHighlighted ? '600' : '400')};
 `;

@@ -33,7 +33,7 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
           case ProfileMenuEntry.ABOUT_ME:
             return <AboutArea reviewCardData={example} />;
           case ProfileMenuEntry.HISTORY:
-            return <HistoryArea cardsData={exampleHistory} />;
+            return <HistoryArea cardsData={[]} />;
           default:
             return <ReviewsArea reviewCardData={example} />;
         }

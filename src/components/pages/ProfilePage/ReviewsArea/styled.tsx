@@ -7,12 +7,13 @@ export const Wrapper = styled.section`
   align-items: center;
 `;
 
-export const TitleWrapper = styled.div`
+export const TitleWrapper = styled.div<{ isReduced?: boolean; }>`
   display: flex;
   justify-content: center;
-  margin: 4rem 0 3rem;
+  margin: ${props => (props.isReduced ? '2rem' : '4rem')} 0 3rem;
 `;
 
-export const Title = styled.h2`
-  font-size: 1.5rem;
+export const Title = styled.h2<{ isHighlighted?: boolean; isReduced?: boolean; }>`
+  font-size: ${props => (props.isReduced ? '1rem' : '1.5rem')};
+  font-weight: ${props => (props.isHighlighted ? '600' : '400')};
 `;

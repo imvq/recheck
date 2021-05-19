@@ -8,8 +8,7 @@ import { Wrapper, TitleWrapper, Title } from './styled';
 export default (props: IProps) => (
   <Wrapper>
     <TitleWrapper>
-      <Title>Отзывы обо мне:</Title>
+      <Title isHighlighted>Никто ещё не оставил о вас отзыв :(</Title>
     </TitleWrapper>
-    <ReviewCard reviewCardData={props.reviewCardData} isAnonymous />
   </Wrapper>
 );
