@@ -67,4 +67,15 @@ export default class UserController {
     : Promise<ApiResponses.ISearchUserResponseDto> {
     return this.injectedService.searchUser(bodyData);
   }
+
+  /**
+   * Get the amount of reviews left by the user.
+   */
+  @Path('/amount/reviews-of')
+  @BodyGuard
+  @POST
+  public async getNReviewsOf(bodyData: Dtos.GetNReviewsOfDto)
+    : Promise<ApiResponses.IGetNReviewsOfAmountResponseDto> {
+    return this.injectedService.getNReviewsOf(bodyData);
+  }
 }

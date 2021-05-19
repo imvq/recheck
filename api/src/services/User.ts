@@ -102,4 +102,15 @@ export default class UserService {
       throw new Errors.InternalServerError('Server-side database error');
     }
   }
+
+  public async getNReviewsOf(bodyData: Dtos.GetNReviewsOfDto)
+    : Promise<ApiResponses.IGetNReviewsOfAmountResponseDto> {
+    try {
+      const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
+      return { amount: targetData?.reviewsLeft.length || 0 };
+    } catch (error) {
+      Logger.ifdev()?.err(error.message);
+      throw new Errors.InternalServerError('Server-side database error');
+    }
+  }
 }

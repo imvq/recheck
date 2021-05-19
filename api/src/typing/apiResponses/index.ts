@@ -26,6 +26,10 @@ export interface IFacebookBasicProfileDto {
   picture: { data: { url: string; } };
 }
 
+export interface IGetNReviewsOfAmountResponseDto {
+  amount: number;
+}
+
 export interface IHealthResponseDTO {
   message: string;
   version: string;

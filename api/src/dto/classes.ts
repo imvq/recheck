@@ -65,6 +65,10 @@ export class CreateCompanyDto {
   ) {}
 }
 
+export class GetNReviewsOfDto {
+  public constructor(public profileId: string) {}
+}
+
 export class UserDto {
   public constructor(
     public profileId: string,
