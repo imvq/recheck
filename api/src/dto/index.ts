@@ -1,3 +1,3 @@
-import * as DTOs from './classes';
+import * as dto from './classes';
 
-export default DTOs;
+export default dto;

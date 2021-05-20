@@ -1,5 +1,9 @@
-import Dtos from '@dto';
-import Company from '@database/entities/Company.entity';
+// This module contains types for Swagger docs auto-generating.
+// There are some restrictions for types here:
+// 1) no generics
+// 2) no classes
+// 3) no array/functional interfaces.
+
 import { IRetrieveProfileInfoResponseDto, ISimpleActionResponse } from './basic';
 
 export interface IBindReviewTargetResponseDto extends ISimpleActionResponse {}
@@ -57,12 +61,18 @@ export interface IRetrieveFacebookProfileInfoResponseDto extends IRetrieveProfil
 
 export interface IRetrieveLinkedInProfileInfoResponseDto extends IRetrieveProfileInfoResponseDto {}
 
-export type ISearchUserResponseDto = (
-  Omit<
-    Dtos.UserDto,
-    'companyName'
-    | 'companySite'
-    | 'confirmationCode'
-    | 'email'>
-  & { company: Company }
-)[];
+export interface ISearchUserResponseDto {
+  results: {
+    name: string,
+    photoUrl: string,
+    position: string,
+    workStartMonth: number,
+    workStartYear: number,
+    company: {
+      id: number;
+      name: string;
+      site: string;
+      logoUrl: string | null;
+    }
+  }[]
+}

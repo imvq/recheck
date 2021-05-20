@@ -1,6 +1,6 @@
 import cors from 'cors';
 
-import Dtos from '@dto';
+import dto from '@dto';
 
 export interface IConfirmationMailOptions {
   destination: string;
@@ -25,6 +25,6 @@ export interface IStringIndexable {
   [key: string]: string;
 }
 
-export type CompanyData = Dtos.CreateCompanyDto;
+export type CompanyData = dto.CreateCompanyDto;
 
-export type UserData = Dtos.UserDto;
+export type UserData = dto.UserDto;

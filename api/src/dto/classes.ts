@@ -1,4 +1,4 @@
-import * as UtilityTypes from '@typing/utility';
+import * as utilityTypes from '@typing/utility';
 
 export class BindReviewTargetDto {
   public constructor(
@@ -61,7 +61,7 @@ export class CreateCompanyDto {
   public constructor(
     public name: string,
     public site: string,
-    public logoUrl: UtilityTypes.Nullable<string>
+    public logoUrl: utilityTypes.Nullable<string>
   ) {}
 }
 

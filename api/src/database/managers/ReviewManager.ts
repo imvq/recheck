@@ -1,7 +1,7 @@
 import { getRepository, Repository } from 'typeorm';
 
-import Dtos from '@dto';
-import * as UtilityTypes from '@typing/utility';
+import dto from '@dto';
+import * as utilityTypes from '@typing/utility';
 import Review from '../entities/Review.entity';
 import UserManager from './UserManager';
 
@@ -9,14 +9,15 @@ import UserManager from './UserManager';
  * Class providing operations with Review entity.
  */
 export default class ReviewManager {
-  private static repo: UtilityTypes.Nullable<Repository<Review>> = null;
+  private static repo: utilityTypes.Nullable<Repository<Review>> = null;
 
   // Must be invoked after connection being established.
   public static loadRepository() {
     ReviewManager.repo = getRepository(Review);
   }
 
-  public static async prepareReview(reviewDto: Dtos.CreateReviewDto) {
+  public static async prepareReview(reviewDto: dto.CreateReviewDto)
+    : Promise<void> {
     const author = await UserManager.getUser(reviewDto.authorId);
     await ReviewManager.repo?.save(ReviewManager.repo.create({
       author,
@@ -43,7 +44,8 @@ export default class ReviewManager {
     }));
   }
 
-  public static async bindReviewTarget(targetDto: Dtos.BindReviewTargetDto) {
+  public static async bindReviewTarget(targetDto: dto.BindReviewTargetDto)
+    : Promise<void> {
     const target = await UserManager.getUser(targetDto.profileId);
     const review = await ReviewManager.repo?.findOne(targetDto.reviewId);
     await ReviewManager.repo?.save({ id: review?.id, target });

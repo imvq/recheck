@@ -1,7 +1,7 @@
 import { createTransport, Transporter } from 'nodemailer';
 
-import * as GeneralTypes from '@typing/general';
-import Utils from '@utils';
+import * as generalTypes from '@typing/general';
+import utils from '@utils';
 
 import TemplatesService from './Templates';
 
@@ -11,7 +11,7 @@ import TemplatesService from './Templates';
 export default class MailService {
   private static readonly instance: Transporter = createTransport({
     port: parseInt(process.env.MAIL_PORT as string, 10),
-    secure: Utils.parseBoolean(process.env.MAIL_SECURED as string),
+    secure: utils.parseBoolean(process.env.MAIL_SECURED as string),
     host: process.env.MAIL_HOST as string,
     auth: {
       user: process.env.MAIL_USERNAME as string,
@@ -28,7 +28,7 @@ export default class MailService {
   private static async sendMail(
     destination: string,
     templatesPath: string,
-    replacements: GeneralTypes.IReplacements
+    replacements: generalTypes.IReplacements
   ): Promise<void> {
     const html = TemplatesService.getCompiledTemplate(templatesPath, replacements);
     const options = {

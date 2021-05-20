@@ -1,56 +1,46 @@
 import { Errors } from 'typescript-rest';
 import { v1 as uuidv1 } from 'uuid';
 
-import Dtos from '@dto';
-import Logger from '@common/Logger';
-import * as ApiResponses from '@typing/apiResponses';
+import dto from '@dto';
+import utils from '@utils';
+import * as apiResponses from '@typing/apiResponses';
+
+import Company from '@database/entities/Company.entity';
+
 import UserManager from '@database/managers/UserManager';
 import CompanyManager from '@database/managers/CompanyManager';
 
+import Logger from '@common/Logger';
 import MailService from './Mail';
 
 /**
  * Service in charge of registration and managing user data.
  */
 export default class UserService {
-  public async checkIsUserRegistered(profileIdDto: Dtos.CheckIsUserRegisteredDto)
-    : Promise<ApiResponses.ICheckIsUserRegisteredResponseDto> {
-    try {
-      return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
-    } catch (error) {
-      Logger.ifdev()?.err(error.message);
-      throw new Errors.InternalServerError('Server-side database error');
-    }
+  @utils.dbErrorDefaultReactor
+  public async checkIsUserRegistered(profileIdDto: dto.CheckIsUserRegisteredDto)
+    : Promise<apiResponses.ICheckIsUserRegisteredResponseDto> {
+    return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
   }
 
-  public async checkIsUserConfirmed(profileIdDto: Dtos.CheckIsUserConfirmedDto)
-    : Promise<ApiResponses.ICheckIsUserConfirmedResponseDto> {
-    try {
-      // Making confirmation code null is to be considered the user is registered.
-      return {
-        isConfirmed: (await UserManager.getUser(profileIdDto.profileId))?.confirmationCode === null
-      };
-    } catch (error) {
-      Logger.ifdev()?.err(error.message);
-      throw new Errors.InternalServerError('Server-side database error');
-    }
+  @utils.dbErrorDefaultReactor
+  public async checkIsUserConfirmed(profileIdDto: dto.CheckIsUserConfirmedDto)
+    : Promise<apiResponses.ICheckIsUserConfirmedResponseDto> {
+    // Making confirmation code null is to be considered the user is registered.
+    return {
+      isConfirmed: (await UserManager.getUser(profileIdDto.profileId))?.confirmationCode === null
+    };
   }
 
   /**
    * Save user info and send email to confirm.
    */
-  public async prepareUser(profileDto: Dtos.PrepareUserDto)
-    : Promise<ApiResponses.IPrepareUserResponseDto> {
+  public async prepareUser(profileDto: dto.PrepareUserDto)
+    : Promise<apiResponses.IPrepareUserResponseDto> {
     const confirmationCode = uuidv1();
 
     // Save the user.
-    try {
-      const company = await this.prepareCompany(profileDto.companyName, profileDto.companySite);
-      await UserManager.createUser(profileDto, company, confirmationCode);
-    } catch (error) {
-      Logger.ifdev()?.err(error.message);
-      throw new Errors.InternalServerError('Server-side database error');
-    }
+    await this.saveUser(profileDto, confirmationCode);
 
     // Send the confirmation code.
     try {
@@ -63,54 +53,44 @@ export default class UserService {
     return { success: true };
   }
 
+  @utils.dbErrorDefaultReactor
+  private async saveUser(profileDto: dto.PrepareUserDto, confirmationCode: string): Promise<void> {
+    const company = await this.prepareCompany(profileDto.companyName, profileDto.companySite);
+    await UserManager.createUser(profileDto, company, confirmationCode);
+  }
+
   /**
    * Get the company from the database with corresponding name and website
    * otherwise create a company with provided data and return it.
    */
-  private async prepareCompany(name: string, site: string) {
-    try {
-      return await CompanyManager.getCompanyByFullPublicInfo(name, site)
+  @utils.dbErrorDefaultReactor
+  private async prepareCompany(name: string, site: string): Promise<Company> {
+    return await CompanyManager.getCompanyByFullPublicInfo(name, site)
       || CompanyManager.createCompany({ name, site, logoUrl: null });
-    } catch (error) {
-      Logger.ifdev()?.err(error.message);
-      throw new Errors.InternalServerError('Server-side database error');
-    }
   }
 
-  public async completeRegistration(completionDto: Dtos.CompleteRegistrationDto)
-    : Promise<ApiResponses.ICompleteRegistration> {
-    try {
-      const targetUser = await UserManager.getUser(completionDto.profileId);
-      if (targetUser && targetUser.confirmationCode === completionDto.confirmationCode) {
-        await UserManager.setUserRegistered(completionDto.profileId);
-        return { success: true };
-      }
-
-      throw new Errors.BadRequestError('Invalid code or user.');
-    } catch (error) {
-      Logger.ifdev()?.err(error.message);
-      throw new Errors.InternalServerError('Server-side database error');
+  @utils.dbErrorDefaultReactor
+  public async completeRegistration(completionDto: dto.CompleteRegistrationDto)
+    : Promise<apiResponses.ICompleteRegistration> {
+    const targetUser = await UserManager.getUser(completionDto.profileId);
+    if (targetUser && targetUser.confirmationCode === completionDto.confirmationCode) {
+      await UserManager.setUserRegistered(completionDto.profileId);
+      return { success: true };
     }
+
+    throw new Errors.BadRequestError('Invalid code or user.');
   }
 
-  public async searchUser(searchDto: Dtos.SearchUserDto)
-    : Promise<ApiResponses.ISearchUserResponseDto> {
-    try {
-      return await UserManager.getUserByName(searchDto.name) || [];
-    } catch (error) {
-      Logger.ifdev()?.err(error.message);
-      throw new Errors.InternalServerError('Server-side database error');
-    }
+  @utils.dbErrorDefaultReactor
+  public async searchUser(searchDto: dto.SearchUserDto)
+    : Promise<apiResponses.ISearchUserResponseDto> {
+    return { results: await UserManager.getUserBasicInfoByName(searchDto.name) || [] };
   }
 
-  public async getNReviewsOf(bodyData: Dtos.GetNReviewsOfDto)
-    : Promise<ApiResponses.IGetNReviewsOfAmountResponseDto> {
-    try {
-      const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
-      return { amount: targetData?.reviewsLeft.length || 0 };
-    } catch (error) {
-      Logger.ifdev()?.err(error.message);
-      throw new Errors.InternalServerError('Server-side database error');
-    }
+  @utils.dbErrorDefaultReactor
+  public async getNReviewsOf(bodyData: dto.GetNReviewsOfDto)
+    : Promise<apiResponses.IGetNReviewsOfAmountResponseDto> {
+    const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
+    return { amount: targetData?.reviewsLeft.length || 0 };
   }
 }

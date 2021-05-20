@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
-import * as UtilityTypes from '@typing/utility';
+import * as utilityTypes from '@typing/utility';
 import User from './User.entity';
 
 /**
@@ -23,5 +23,5 @@ export default class Company {
   site!: string;
 
   @Column('text', { nullable: true })
-  logoUrl!: UtilityTypes.Nullable<string>;
+  logoUrl!: utilityTypes.Nullable<string>;
 }

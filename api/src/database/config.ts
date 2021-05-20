@@ -1,6 +1,6 @@
 import { ConnectionOptions } from 'typeorm';
 
-import Utils from '@utils';
+import utils from '@utils';
 
 /**
  * Typeorm PostgreSQL connection configuration.
@@ -12,8 +12,8 @@ const config: ConnectionOptions = {
   username: process.env.DB_USERNAME as string,
   password: process.env.DB_PASSWORD as string,
   database: process.env.DB_NAME as string,
-  synchronize: Utils.parseBoolean(process.env.DB_SYNC as string),
-  logging: Utils.parseBoolean(process.env.DB_LOGS as string),
+  synchronize: utils.parseBoolean(process.env.DB_SYNC as string),
+  logging: utils.parseBoolean(process.env.DB_LOGS as string),
   entities: ['dist/database/entities/**/*.entity.js'],
   migrations: ['dist/database/migrations/**/*.js'],
   cli: {

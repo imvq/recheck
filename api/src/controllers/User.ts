@@ -2,9 +2,9 @@ import { Path, POST } from 'typescript-rest';
 import { BodyGuard } from 'typescript-rest-body-guard';
 import { Inject } from 'typescript-ioc';
 
-import Dtos from '@dto';
+import dto from '@dto';
 import UserService from '@services/User';
-import * as ApiResponses from '@typing/apiResponses';
+import * as apiResponses from '@typing/apiResponses';
 
 /**
  * Default controller in charge of checking the API.
@@ -19,8 +19,8 @@ export default class UserController {
   @Path('/is-registered')
   @BodyGuard
   @POST
-  public async checkIsUserRegistered(bodyData: Dtos.CheckIsUserRegisteredDto)
-    : Promise<ApiResponses.ICheckIsUserRegisteredResponseDto> {
+  public async checkIsUserRegistered(bodyData: dto.CheckIsUserRegisteredDto)
+    : Promise<apiResponses.ICheckIsUserRegisteredResponseDto> {
     return this.injectedService.checkIsUserRegistered(bodyData);
   }
 
@@ -30,8 +30,8 @@ export default class UserController {
   @Path('/is-confirmed')
   @BodyGuard
   @POST
-  public async checkIsUserConfirmed(bodyData: Dtos.CheckIsUserConfirmedDto)
-    : Promise<ApiResponses.ICheckIsUserConfirmedResponseDto> {
+  public async checkIsUserConfirmed(bodyData: dto.CheckIsUserConfirmedDto)
+    : Promise<apiResponses.ICheckIsUserConfirmedResponseDto> {
     return this.injectedService.checkIsUserConfirmed(bodyData);
   }
 
@@ -41,8 +41,8 @@ export default class UserController {
   @Path('/prepare')
   @BodyGuard
   @POST
-  public async prepareUser(bodyData: Dtos.PrepareUserDto)
-    : Promise<ApiResponses.IPrepareUserResponseDto> {
+  public async prepareUser(bodyData: dto.PrepareUserDto)
+    : Promise<apiResponses.IPrepareUserResponseDto> {
     return this.injectedService.prepareUser(bodyData);
   }
 
@@ -52,8 +52,8 @@ export default class UserController {
   @Path('/confirm')
   @BodyGuard
   @POST
-  public async completeRegistration(bodyData: Dtos.CompleteRegistrationDto)
-    : Promise<ApiResponses.ICompleteRegistration> {
+  public async completeRegistration(bodyData: dto.CompleteRegistrationDto)
+    : Promise<apiResponses.ICompleteRegistration> {
     return this.injectedService.completeRegistration(bodyData);
   }
 
@@ -63,8 +63,8 @@ export default class UserController {
   @Path('/search')
   @BodyGuard
   @POST
-  public async search(bodyData: Dtos.SearchUserDto)
-    : Promise<ApiResponses.ISearchUserResponseDto> {
+  public async search(bodyData: dto.SearchUserDto)
+    : Promise<apiResponses.ISearchUserResponseDto> {
     return this.injectedService.searchUser(bodyData);
   }
 
@@ -74,8 +74,8 @@ export default class UserController {
   @Path('/amount/reviews-of')
   @BodyGuard
   @POST
-  public async getNReviewsOf(bodyData: Dtos.GetNReviewsOfDto)
-    : Promise<ApiResponses.IGetNReviewsOfAmountResponseDto> {
+  public async getNReviewsOf(bodyData: dto.GetNReviewsOfDto)
+    : Promise<apiResponses.IGetNReviewsOfAmountResponseDto> {
     return this.injectedService.getNReviewsOf(bodyData);
   }
 }

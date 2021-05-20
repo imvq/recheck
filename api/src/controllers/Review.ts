@@ -2,9 +2,9 @@ import { Path, POST } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 import BodyGuard from 'typescript-rest-body-guard';
 
-import Dtos from '@dto';
+import dto from '@dto';
 import ReviewService from '@services/Review';
-import * as ApiResponses from '@typing/apiResponses';
+import * as apiResponses from '@typing/apiResponses';
 
 /**
  * Default controller in charge of checking the API.
@@ -21,8 +21,8 @@ export default class ReviewController {
   @Path('/prepare')
   @BodyGuard
   @POST
-  public async prepareReview(reviewDto: Dtos.CreateReviewDto)
-    : Promise<ApiResponses.IPrepareReviewResponseDto> {
+  public async prepareReview(reviewDto: dto.CreateReviewDto)
+    : Promise<apiResponses.IPrepareReviewResponseDto> {
     return this.injectedService.prepareReview(reviewDto);
   }
 
@@ -32,8 +32,8 @@ export default class ReviewController {
   @Path('/bind-target')
   @BodyGuard
   @POST
-  public async bindReviewTarget(targetDto: Dtos.BindReviewTargetDto)
-    : Promise<ApiResponses.IBindReviewTargetResponseDto> {
+  public async bindReviewTarget(targetDto: dto.BindReviewTargetDto)
+    : Promise<apiResponses.IBindReviewTargetResponseDto> {
     return this.injectedService.bindReviewTarget(targetDto);
   }
 }

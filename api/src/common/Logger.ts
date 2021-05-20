@@ -1,9 +1,9 @@
 import { appendFile, writeFile } from 'fs';
 import chalk from 'chalk';
 
-import * as Computed from '@common/Computed';
-import * as UtilityTypes from '@typing/utility';
-import Utils from '@utils';
+import * as computed from '@common/computed';
+import * as utilityTypes from '@typing/utility';
+import utils from '@utils';
 
 /**
  * Simple logger class to output info to log file.
@@ -11,7 +11,7 @@ import Utils from '@utils';
 export default class Logger {
   private static readonly instance: Logger = new Logger();
 
-  private static readonly logfileMode = Utils.parseBoolean(
+  private static readonly logfileMode = utils.parseBoolean(
     process.env.LOGFILE_MODE as string
   );
 
@@ -22,26 +22,23 @@ export default class Logger {
    */
   private constructor() {
     if (Logger.logfileMode) {
-      writeFile(Computed.DEFAULT_LOGS_LOCATION, '', Utils.getDummy);
-    } else {
-      console.log(chalk.yellow('Logger activated'));
+      writeFile(computed.DEFAULT_LOGS_LOCATION, '', utils.getDummy);
+      return;
     }
+
+    console.log(chalk.yellow('Logger activated'));
   }
 
   /**
    * Precondition returning the logger instance
    * if the app is running in the development mode.
-   *
-   * @returns {Logger|null} The logger instance or null
    */
-  public static ifdev(): UtilityTypes.Nullable<Logger> {
+  public static ifdev(): utilityTypes.Nullable<Logger> {
     return process.env.NODE_ENV === 'development' ? Logger.instance : null;
   }
 
   /**
    * Log simple message.
-   *
-   * @param {string} message Message
    */
   public log(message: string): void {
     this.print(message, '[LOG]', chalk.yellow);
@@ -49,8 +46,6 @@ export default class Logger {
 
   /**
    * Log error message.
-   *
-   * @param {string} message Message
    */
   public err(message: string): void {
     this.print(message, '[ERR]', chalk.red);
@@ -58,15 +53,13 @@ export default class Logger {
 
   /**
    * Log message.
-   *
-   * @param {string} message Message
-   * @param {string} tag Message tag
    */
   private print(message: string, tag: string, color: (text: string) => string): void {
     if (Logger.logfileMode) {
-      appendFile(Computed.DEFAULT_LOGS_LOCATION, `${tag}: ${message}\n`, Utils.getDummy);
-    } else {
-      console.log(color(`${tag}: ${message}`));
+      appendFile(computed.DEFAULT_LOGS_LOCATION, `${tag}: ${message}\n`, utils.getDummy);
+      return;
     }
+
+    console.log(color(`${tag}: ${message}`));
   }
 }

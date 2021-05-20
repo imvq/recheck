@@ -1,6 +1,6 @@
 import { Entity, PrimaryColumn, Column, Index, OneToMany, ManyToOne } from 'typeorm';
 
-import * as UtilityTypes from '@typing/utility';
+import * as utilityTypes from '@typing/utility';
 import Company from './Company.entity';
 import Review from './Review.entity';
 
@@ -27,7 +27,7 @@ export default class User {
   reviewsGot!: Review[];
 
   @Column('varchar', { length: 36, nullable: true })
-  confirmationCode!: UtilityTypes.Nullable<string>;
+  confirmationCode!: utilityTypes.Nullable<string>;
 
   // Full name.
   @Column('text')

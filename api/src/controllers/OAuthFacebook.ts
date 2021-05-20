@@ -1,7 +1,7 @@
 import { GET, Path, Context, ServiceContext } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
-import * as ApiResponses from '@typing/apiResponses';
+import * as apiResponses from '@typing/apiResponses';
 import FacebookOAuthService from '@services/OAuthFacebook';
 
 /**
@@ -17,7 +17,7 @@ export default class FacebookController {
   @Path('/retrieve')
   @GET
   public async getFacebookProfile(@Context context: ServiceContext)
-    : Promise<ApiResponses.IRetrieveFacebookProfileInfoResponseDto> {
+    : Promise<apiResponses.IRetrieveFacebookProfileInfoResponseDto> {
     return this.injectedService.retrieveProfileInfo(context.request.cookies);
   }
 }

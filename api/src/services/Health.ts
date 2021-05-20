@@ -1,5 +1,5 @@
-import * as Constants from '@common/Constants';
-import * as ApiResponses from '@typing/apiResponses';
+import * as constants from '@common/constants';
+import * as apiResponses from '@typing/apiResponses';
 
 /**
   * Service for getting basic health status and current
@@ -9,8 +9,8 @@ export default class HealthService {
   /**
    * Get current API vesion.
    */
-  public getHealthStatus = (): ApiResponses.IHealthResponseDTO => ({
+  public getHealthStatus = (): apiResponses.IHealthResponseDTO => ({
     message: 'Server is running',
-    version: Constants.VERSION
+    version: constants.VERSION
   })
 }

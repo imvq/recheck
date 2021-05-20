@@ -14,11 +14,11 @@ import express, {
   NextFunction
 } from 'express';
 
-import * as Constants from '@common/Constants';
-import * as Computed from '@common/Computed';
-import * as GeneralTypes from '@typing/general';
-import * as UtilityTypes from '@typing/utility';
-import Utils from '@utils';
+import * as constants from '@common/constants';
+import * as computed from '@common/computed';
+import * as generalTypes from '@typing/general';
+import * as utilityTypes from '@typing/utility';
+import utils from '@utils';
 
 import Logger from '@common/Logger';
 import connect from '@database/connect';
@@ -27,11 +27,11 @@ import connect from '@database/connect';
  * Main server application class.
  */
 export default class App {
-  private host: string = Constants.DEFAULT_HOST;
+  private host: string = constants.DEFAULT_HOST;
 
-  private port: number = Constants.DEFAULT_PORT;
+  private port: number = constants.DEFAULT_PORT;
 
-  private server: UtilityTypes.Nullable<https.Server | http.Server> = null;
+  private server: utilityTypes.Nullable<https.Server | http.Server> = null;
 
   public constructor(private readonly app: Application = express()) {
     this.resolveHost();
@@ -101,8 +101,8 @@ export default class App {
    */
   private resolvePort(): void {
     const maybePort = process.env.PORT;
-    if (Utils.isString(maybePort)
-      && Utils.isValidNumber(maybePort as string)) {
+    if (utils.isString(maybePort)
+      && utils.isValidNumber(maybePort as string)) {
       this.port = parseInt(maybePort as string, 10);
     }
   }
@@ -115,7 +115,7 @@ export default class App {
     this.app.use(cors({
       credentials: true,
       origin: process.env.ORIGIN as string
-    }) as GeneralTypes.ICorsMiddleware);
+    }) as generalTypes.ICorsMiddleware);
 
     // Provide functionality to read POST data.
     this.app.use(bodyParser.json());
@@ -136,7 +136,7 @@ export default class App {
    * Apply IoC REST controllers.
    */
   private applyControllers(): void {
-    const controllersDir = `${Computed.ROOT_DIR}/controllers`;
+    const controllersDir = `${computed.ROOT_DIR}/controllers`;
     const apiRouter = express.Router();
     Server.loadControllers(apiRouter, `${controllersDir}/**/*.js`, __dirname);
     this.app.use('/api/v1', apiRouter);
@@ -167,7 +167,7 @@ export default class App {
    * Provide resolving of static files.
    */
   private applyStaticsResolver(): void {
-    this.app.use('/media', express.static(`${Computed.ROOT_DIR}/media`));
+    this.app.use('/media', express.static(`${computed.ROOT_DIR}/media`));
   }
 
   /**
@@ -178,6 +178,6 @@ export default class App {
     this.app.use(morgan('dev') as Handler);
 
     // Interactive API documenting.
-    Server.swagger(this.app, { filePath: `${Computed.ROOT_DIR}/swagger.yaml` });
+    Server.swagger(this.app, { filePath: `${computed.ROOT_DIR}/swagger.yaml` });
   }
 }
