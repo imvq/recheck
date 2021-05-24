@@ -69,7 +69,7 @@ export default class UserService {
       || CompanyManager.createCompany({ name, site, logoUrl: null });
   }
 
-  @utils.dbErrorDefaultReactor({ except: [] })
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
   public async completeRegistration(completionDto: dto.CompleteRegistrationDto)
     : Promise<apiResponses.ICompleteRegistration> {
     const targetUser = await UserManager.getUser(completionDto.profileId);
