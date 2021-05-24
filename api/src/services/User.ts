@@ -87,13 +87,14 @@ export default class UserService {
     return { results: await UserManager.getUserBasicInfoByName(searchDto.name) || [] };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
+  @utils.dbErrorDefaultReactor({ except: [] })
   public async getNReviewsOf(bodyData: dto.GetNReviewsOfDto)
     : Promise<apiResponses.IGetNReviewsOfAmountResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     return { amount: targetData?.reviewsLeft.length || 0 };
   }
 
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
   public async getNthReviewOf(bodyData: dto.GetNthReviewOfDto)
     : Promise<apiResponses.IGetNthReviewOfResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
