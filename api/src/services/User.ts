@@ -17,13 +17,13 @@ import MailService from './Mail';
  * Service in charge of registration and managing user data.
  */
 export default class UserService {
-  @utils.dbErrorDefaultReactor
+  @utils.dbErrorDefaultReactor({ except: [] })
   public async checkIsUserRegistered(profileIdDto: dto.CheckIsUserRegisteredDto)
     : Promise<apiResponses.ICheckIsUserRegisteredResponseDto> {
     return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
   }
 
-  @utils.dbErrorDefaultReactor
+  @utils.dbErrorDefaultReactor({ except: [] })
   public async checkIsUserConfirmed(profileIdDto: dto.CheckIsUserConfirmedDto)
     : Promise<apiResponses.ICheckIsUserConfirmedResponseDto> {
     // Making confirmation code null is to be considered the user is registered.
@@ -53,7 +53,7 @@ export default class UserService {
     return { success: true };
   }
 
-  @utils.dbErrorDefaultReactor
+  @utils.dbErrorDefaultReactor({ except: [] })
   private async saveUser(profileDto: dto.PrepareUserDto, confirmationCode: string): Promise<void> {
     const company = await this.prepareCompany(profileDto.companyName, profileDto.companySite);
     await UserManager.createUser(profileDto, company, confirmationCode);
@@ -63,13 +63,13 @@ export default class UserService {
    * Get the company from the database with corresponding name and website
    * otherwise create a company with provided data and return it.
    */
-  @utils.dbErrorDefaultReactor
+  @utils.dbErrorDefaultReactor({ except: [] })
   private async prepareCompany(name: string, site: string): Promise<Company> {
     return await CompanyManager.getCompanyByFullPublicInfo(name, site)
       || CompanyManager.createCompany({ name, site, logoUrl: null });
   }
 
-  @utils.dbErrorDefaultReactor
+  @utils.dbErrorDefaultReactor({ except: [] })
   public async completeRegistration(completionDto: dto.CompleteRegistrationDto)
     : Promise<apiResponses.ICompleteRegistration> {
     const targetUser = await UserManager.getUser(completionDto.profileId);
@@ -81,20 +81,19 @@ export default class UserService {
     throw new Errors.BadRequestError('Invalid code or user.');
   }
 
-  @utils.dbErrorDefaultReactor
+  @utils.dbErrorDefaultReactor({ except: [] })
   public async searchUser(searchDto: dto.SearchUserDto)
     : Promise<apiResponses.ISearchUserResponseDto> {
     return { results: await UserManager.getUserBasicInfoByName(searchDto.name) || [] };
   }
 
-  @utils.dbErrorDefaultReactor
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
   public async getNReviewsOf(bodyData: dto.GetNReviewsOfDto)
     : Promise<apiResponses.IGetNReviewsOfAmountResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     return { amount: targetData?.reviewsLeft.length || 0 };
   }
 
-  @utils.dbErrorDefaultReactor
   public async getNthReviewOf(bodyData: dto.GetNthReviewOfDto)
     : Promise<apiResponses.IGetNthReviewOfResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);

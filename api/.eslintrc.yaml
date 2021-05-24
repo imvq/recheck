@@ -35,6 +35,7 @@ rules:
   no-useless-constructor: 0
   no-nested-ternary: 0
   no-empty-function: 0
+  no-shadow: 0
   no-unused-vars: 0
   no-console: 0
   import/extensions: 0
@@ -42,3 +43,4 @@ rules:
   import/no-absolute-path: 0
   import/no-extraneous-dependencies: 0
   import/no-named-as-default: 0
+  '@typescript-eslint/no-shadow': error
