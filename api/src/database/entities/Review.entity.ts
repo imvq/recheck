@@ -84,5 +84,5 @@ export default class Review {
    * Rejected:   -1
    */
   @Column('int', { default: 0 })
-  approved!: number;
+  approved!: 0 | 1 | -1;
 }

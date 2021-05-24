@@ -69,6 +69,13 @@ export class GetNReviewsOfDto {
   public constructor(public profileId: string) {}
 }
 
+export class GetNthReviewOfDto {
+  public constructor(
+    public profileId: string,
+    public nthReview: number
+  ) {}
+}
+
 export class UserDto {
   public constructor(
     public profileId: string,

@@ -93,4 +93,15 @@ export default class UserService {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     return { amount: targetData?.reviewsLeft.length || 0 };
   }
+
+  @utils.dbErrorDefaultReactor
+  public async getNthReviewOf(bodyData: dto.GetNthReviewOfDto)
+    : Promise<apiResponses.IGetNthReviewOfResponseDto> {
+    const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
+    if (!targetData?.reviewsLeft || targetData?.reviewsLeft.length <= bodyData.nthReview) {
+      throw new Errors.BadRequestError('No review with the index.');
+    }
+
+    return targetData?.reviewsLeft[bodyData.nthReview];
+  }
 }

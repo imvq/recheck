@@ -69,7 +69,7 @@ export default class UserController {
   }
 
   /**
-   * Get the amount of reviews left by the user.
+   * Get the amount of reviews left by user.
    */
   @Path('/amount/reviews-of')
   @BodyGuard
@@ -77,5 +77,16 @@ export default class UserController {
   public async getNReviewsOf(bodyData: dto.GetNReviewsOfDto)
     : Promise<apiResponses.IGetNReviewsOfAmountResponseDto> {
     return this.injectedService.getNReviewsOf(bodyData);
+  }
+
+  /**
+   * Get n-th review of user.
+   */
+  @Path('/get/nth-review-of')
+  @BodyGuard
+  @POST
+  public async getNthReviewOf(bodyData: dto.GetNthReviewOfDto)
+    : Promise<apiResponses.IGetNthReviewOfResponseDto> {
+    return this.injectedService.getNthReviewOf(bodyData);
   }
 }
