@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { cssVars } from 'utils/style.common';
 
-export const Wrapper = styled.div<{ isCurrent?: boolean; }>`
+export const Wrapper = styled.button<{ isCurrent?: boolean; }>`
   background-color: ${props => (props.isCurrent ? cssVars.colorForegroundPickMain : 'white')};
   color: ${props => (props.isCurrent ? 'white' : cssVars.colorForegroundPickMain)};
   border: ${cssVars.thiknessDefault} ${cssVars.colorForegroundPickMain} solid;
