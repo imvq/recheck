@@ -3,7 +3,7 @@ import * as GeneralTypes from 'utils/typing/general';
 export const SET_CURRENT_PROFILE_DATA = 'SET_CURRENT_PROFILE_DATA';
 
 export interface ProfileState {
-  currentProfileInfo: GeneralTypes.AppProfileInfo
+  currentProfileInfo: GeneralTypes.AppProfileInfo;
 }
 
 interface SetCurrentProfileData {
