@@ -25,16 +25,16 @@ export enum PaginationDirection {
  * Represents tabs in profile menu bar.
  */
 export enum ProfileMenuEntry {
-  MY_REVIEWS,
-  HISTORY,
-  ABOUT_ME
+  MyReviews,
+  History,
+  AboutMe
 }
 
 /**
  * Status of the review.
  */
 export enum ReviewStatus {
-  CONFIRMED,
-  REJECTED,
-  IDLE
+  Confirmed,
+  Rejected,
+  Idle
 }

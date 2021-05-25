@@ -17,9 +17,9 @@ export default (props: IProps) => (
             <MenuEntry>
               {(() => {
                 switch (props.reviewCardData.status) {
-                  case ReviewStatus.CONFIRMED:
+                  case ReviewStatus.Confirmed:
                     return 'Ваш отзыв одобрен!';
-                  case ReviewStatus.REJECTED:
+                  case ReviewStatus.Rejected:
                     return 'Ваш отзыв не одобрен';
                   default:
                     return 'Ваш отзыв на модерации';

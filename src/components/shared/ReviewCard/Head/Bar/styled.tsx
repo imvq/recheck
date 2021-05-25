@@ -5,8 +5,8 @@ import { ReviewStatus } from 'utils/enums';
 export const Wrapper = styled.div<{ status: ReviewStatus; isAnonymous?: boolean; }>`
   background-color: ${
   props => (props.isAnonymous ? '#f0f3ff'
-    : props.status === ReviewStatus.CONFIRMED ? '#e0f7f6'
-      : props.status === ReviewStatus.REJECTED ? '#fab6b6'
+    : props.status === ReviewStatus.Confirmed ? '#e0f7f6'
+      : props.status === ReviewStatus.Rejected ? '#fab6b6'
         : '#fdecc5')
 };
   display: flex;

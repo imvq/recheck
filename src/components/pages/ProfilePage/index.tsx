@@ -30,9 +30,9 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
       <Menu currentProfileInfo={props.currentProfileInfo} />
       {(() => {
         switch (props.currentProfileMenuEntry) {
-          case ProfileMenuEntry.ABOUT_ME:
+          case ProfileMenuEntry.AboutMe:
             return <AboutArea reviewCardData={example} />;
-          case ProfileMenuEntry.HISTORY:
+          case ProfileMenuEntry.History:
             return <HistoryArea cardsData={[]} />;
           default:
             return <ReviewsArea reviewCardData={example} />;

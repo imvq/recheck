@@ -22,9 +22,9 @@ const MenuBar: FunctionComponent<IProps> = (props) => (
     <MenuEntryWrapper>
       <MenuEntry
         isSelected={
-          props.currentMenuProfileEntry === ProfileMenuEntry.MY_REVIEWS
+          props.currentMenuProfileEntry === ProfileMenuEntry.MyReviews
         }
-        onClick={() => props.setCurrentMenuProfileEntry(ProfileMenuEntry.MY_REVIEWS)}
+        onClick={() => props.setCurrentMenuProfileEntry(ProfileMenuEntry.MyReviews)}
       >
         Мои отзывы
       </MenuEntry>
@@ -32,9 +32,9 @@ const MenuBar: FunctionComponent<IProps> = (props) => (
     <MenuEntryWrapper>
       <MenuEntry
         isSelected={
-          props.currentMenuProfileEntry === ProfileMenuEntry.HISTORY
+          props.currentMenuProfileEntry === ProfileMenuEntry.History
         }
-        onClick={() => props.setCurrentMenuProfileEntry(ProfileMenuEntry.HISTORY)}
+        onClick={() => props.setCurrentMenuProfileEntry(ProfileMenuEntry.History)}
       >
         История поиска
       </MenuEntry>
@@ -42,9 +42,9 @@ const MenuBar: FunctionComponent<IProps> = (props) => (
     <MenuEntryWrapper>
       <MenuEntry
         isSelected={
-          props.currentMenuProfileEntry === ProfileMenuEntry.ABOUT_ME
+          props.currentMenuProfileEntry === ProfileMenuEntry.AboutMe
         }
-        onClick={() => props.setCurrentMenuProfileEntry(ProfileMenuEntry.ABOUT_ME)}
+        onClick={() => props.setCurrentMenuProfileEntry(ProfileMenuEntry.AboutMe)}
       >
         Обо мне
       </MenuEntry>

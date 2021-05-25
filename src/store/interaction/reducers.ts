@@ -17,7 +17,7 @@ const initialState: InteractionState = {
   isPageLocked: true,
   isSearchPopupVisible: false,
   isLoginPopupVisible: false,
-  currentProfileMenuEntry: ProfileMenuEntry.MY_REVIEWS,
+  currentProfileMenuEntry: ProfileMenuEntry.MyReviews,
   reviewsGotChunksAmount: 0,
   reviewsLeftChunksAmount: 0,
   currentReviewGotIndex: 1,
