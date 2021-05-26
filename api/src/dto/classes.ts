@@ -65,11 +65,22 @@ export class CreateCompanyDto {
   ) {}
 }
 
-export class GetNReviewsOfDto {
+export class GetNReviewsGotDto {
   public constructor(public profileId: string) {}
 }
 
-export class GetNthReviewOfDto {
+export class GetNReviewsLeftDto {
+  public constructor(public profileId: string) {}
+}
+
+export class GetNthReviewGotDto {
+  public constructor(
+    public profileId: string,
+    public nthReview: number
+  ) {}
+}
+
+export class GetNthReviewLeftDto {
   public constructor(
     public profileId: string,
     public nthReview: number

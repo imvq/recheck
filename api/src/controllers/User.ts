@@ -69,24 +69,46 @@ export default class UserController {
   }
 
   /**
+   * Get the amount of reviews of user.
+   */
+  @Path('/amount/reviews-got')
+  @BodyGuard
+  @POST
+  public async getNReviewsGot(bodyData: dto.GetNReviewsGotDto)
+    : Promise<apiResponses.IGetNReviewsGotAmountResponseDto> {
+    return this.injectedService.getNReviewsGot(bodyData);
+  }
+
+  /**
+   * Get n-th review left by user.
+   */
+  @Path('/get/nth-review-got')
+  @BodyGuard
+  @POST
+  public async getNthReviewGot(bodyData: dto.GetNthReviewGotDto)
+    : Promise<apiResponses.IGetNthReviewGotResponseDto> {
+    return this.injectedService.getNthReviewGot(bodyData);
+  }
+
+  /**
    * Get the amount of reviews left by user.
    */
   @Path('/amount/reviews-left')
   @BodyGuard
   @POST
-  public async getNReviewsOf(bodyData: dto.GetNReviewsOfDto)
-    : Promise<apiResponses.IGetNReviewsOfAmountResponseDto> {
+  public async getNReviewsOf(bodyData: dto.GetNReviewsLeftDto)
+    : Promise<apiResponses.IGetNReviewsLeftAmountResponseDto> {
     return this.injectedService.getNReviewsLeft(bodyData);
   }
 
   /**
-   * Get n-th review of user.
+   * Get n-th review left by user.
    */
   @Path('/get/nth-review-left')
   @BodyGuard
   @POST
-  public async getNthReviewOf(bodyData: dto.GetNthReviewOfDto)
-    : Promise<apiResponses.IGetNthReviewOfResponseDto> {
+  public async getNthReviewOf(bodyData: dto.GetNthReviewLeftDto)
+    : Promise<apiResponses.IGetNthReviewLeftResponseDto> {
     return this.injectedService.getNthReviewLeft(bodyData);
   }
 }

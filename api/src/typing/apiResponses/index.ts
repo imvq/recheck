@@ -4,7 +4,12 @@
 // 2) no classes
 // 3) no array/functional interfaces.
 
-import { IRetrieveProfileInfoResponseDto, ISimpleActionResponse } from './basic';
+import {
+  IGetNReviewsAmountResponseDto,
+  IGetNthReviewResponseDto,
+  IRetrieveProfileInfoResponseDto,
+  ISimpleActionResponse
+} from './basic';
 
 export interface IBindReviewTargetResponseDto extends ISimpleActionResponse {}
 
@@ -30,30 +35,13 @@ export interface IFacebookBasicProfileDto {
   picture: { data: { url: string; } };
 }
 
-export interface IGetNReviewsOfAmountResponseDto {
-  amount: number;
-}
+export interface IGetNReviewsGotAmountResponseDto extends IGetNReviewsAmountResponseDto {}
 
-export interface IGetNthReviewOfResponseDto {
-  workplace: string;
-  bounds: string;
-  tasks: string;
-  strengths: string;
-  improvements: string;
-  results: string;
-  levelMark: number;
-  levelComment: string;
-  activityMark: number;
-  activityComment: string;
-  ownHireOpinionMark: number;
-  ownHireOpinionComment: string;
-  qualityMark: number;
-  qualityComment: string;
-  leadershipMark: number;
-  leadershipComment: string;
-  adviceComment: string;
-  approved: 0 | 1 | -1;
-}
+export interface IGetNReviewsLeftAmountResponseDto extends IGetNReviewsAmountResponseDto {}
+
+export interface IGetNthReviewGotResponseDto extends IGetNthReviewResponseDto {}
+
+export interface IGetNthReviewLeftResponseDto extends IGetNthReviewResponseDto {}
 
 export interface IHealthResponseDTO {
   message: string;

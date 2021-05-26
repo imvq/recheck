@@ -36,6 +36,11 @@ export default class UserManager {
     return UserManager.repo?.findOne(profileId);
   }
 
+  public static async getUserWithReviewsGot(profileId: string)
+    : Promise<utilityTypes.Optional<User>> {
+    return UserManager.repo?.findOne({ relations: ['reviewsGot'], where: { profileId } });
+  }
+
   public static async getUserWithReviewsLeft(profileId: string)
     : Promise<utilityTypes.Optional<User>> {
     return UserManager.repo?.findOne({ relations: ['reviewsLeft'], where: { profileId } });

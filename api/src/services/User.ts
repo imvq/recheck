@@ -88,15 +88,33 @@ export default class UserService {
   }
 
   @utils.dbErrorDefaultReactor({ except: [] })
-  public async getNReviewsLeft(bodyData: dto.GetNReviewsOfDto)
-    : Promise<apiResponses.IGetNReviewsOfAmountResponseDto> {
+  public async getNReviewsGot(bodyData: dto.GetNReviewsGotDto)
+    : Promise<apiResponses.IGetNReviewsGotAmountResponseDto> {
+    const targetData = await UserManager.getUserWithReviewsGot(bodyData.profileId);
+    return { amount: targetData?.reviewsGot.length || 0 };
+  }
+
+  @utils.dbErrorDefaultReactor({ except: [] })
+  public async getNReviewsLeft(bodyData: dto.GetNReviewsLeftDto)
+    : Promise<apiResponses.IGetNReviewsLeftAmountResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     return { amount: targetData?.reviewsLeft.length || 0 };
   }
 
   @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
-  public async getNthReviewLeft(bodyData: dto.GetNthReviewOfDto)
-    : Promise<apiResponses.IGetNthReviewOfResponseDto> {
+  public async getNthReviewGot(bodyData: dto.GetNthReviewGotDto)
+    : Promise<apiResponses.IGetNthReviewGotResponseDto> {
+    const targetData = await UserManager.getUserWithReviewsGot(bodyData.profileId);
+    if (!targetData?.reviewsGot || targetData?.reviewsGot.length <= bodyData.nthReview) {
+      throw new Errors.BadRequestError('No review with the index.');
+    }
+
+    return targetData?.reviewsGot[bodyData.nthReview];
+  }
+
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
+  public async getNthReviewLeft(bodyData: dto.GetNthReviewLeftDto)
+    : Promise<apiResponses.IGetNthReviewLeftResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     if (!targetData?.reviewsLeft || targetData?.reviewsLeft.length <= bodyData.nthReview) {
       throw new Errors.BadRequestError('No review with the index.');
