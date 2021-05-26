@@ -1,6 +1,9 @@
+import { Dispatch } from 'redux';
+
 import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
 import { ProfileMenuEntry } from 'utils/enums';
+import { AppActionType } from '../types';
 import {
   InteractionStateActionType,
   SET_IS_PAGE_LOCKED,
@@ -91,3 +94,7 @@ export const setCurrentReviewLeft = (review: utilityTypes.Nullable<generalTypes.
   type: SET_CURRENT_REVIEW_LEFT,
   payload: review
 });
+
+export const loadAboutTabData = (dispatch: Dispatch<AppActionType>) => {
+  // TODO: API stuff
+};

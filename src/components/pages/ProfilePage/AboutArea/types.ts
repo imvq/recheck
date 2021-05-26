@@ -4,4 +4,8 @@ export interface IOwnProps {
   reviewCardData: GeneralTypes.ReviewCardDataFull;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {
+  isLoading: boolean;
+}
+
+export type IProps = IOwnProps & IStateProps;
