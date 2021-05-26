@@ -88,14 +88,14 @@ export default class UserService {
   }
 
   @utils.dbErrorDefaultReactor({ except: [] })
-  public async getNReviewsOf(bodyData: dto.GetNReviewsOfDto)
+  public async getNReviewsLeft(bodyData: dto.GetNReviewsOfDto)
     : Promise<apiResponses.IGetNReviewsOfAmountResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     return { amount: targetData?.reviewsLeft.length || 0 };
   }
 
   @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
-  public async getNthReviewOf(bodyData: dto.GetNthReviewOfDto)
+  public async getNthReviewLeft(bodyData: dto.GetNthReviewOfDto)
     : Promise<apiResponses.IGetNthReviewOfResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     if (!targetData?.reviewsLeft || targetData?.reviewsLeft.length <= bodyData.nthReview) {
