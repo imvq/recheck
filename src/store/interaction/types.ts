@@ -5,6 +5,9 @@ import { ProfileMenuEntry } from 'utils/enums';
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
 export const SET_IS_LOGIN_POPUP_VISIBILE = 'SET_IS_LOGIN_POPUP_VISIBILE';
 export const SET_CURRENT_PROFILE_MENU_ENTRY = 'SET_CURRENT_PROFILE_MENU_ENTRY';
+export const SET_IS_PROFILE_ABOUT_TAB_LOADING = 'SET_IS_PROFILE_ABOUT_TAB_LOADING';
+export const SET_IS_PROFILE_HISTORY_TAB_LOADING = 'SET_IS_PROFILE_HISTORY_TAB_LOADING';
+export const SET_IS_PROFILE_REVIEWS_TAB_LOADING = 'SET_IS_PROFILE_REVIEWS_TAB_LOADING';
 export const SET_REVIEWS_GOT_CHUNKS_AMOUNT = 'SET_REVIEWS_GOT_CHUNKS_AMOUNT';
 export const SET_REVIEWS_LEFT_CHUNKS_AMOUNT = 'SET_REVIEWS_LEFT_CHUNKS_AMOUNT';
 export const SET_CURRENT_REVIEW_GOT_INDEX = 'SET_CURRENT_REVIEW_GOT_INDEX';
@@ -17,6 +20,9 @@ export interface InteractionState {
   isSearchPopupVisible: boolean;
   isLoginPopupVisible: boolean;
   currentProfileMenuEntry: ProfileMenuEntry;
+  isProfileAboutTabLoading: boolean;
+  isProfileHistoryTabLoading: boolean;
+  isProfileReviewsTabLoading: boolean;
   reviewsGotChunksAmount: number;
   reviewsLeftChunksAmount: number;
   currentReviewGotIndex: number;
@@ -38,6 +44,21 @@ export interface SetIsLoginPopupVisible {
 export interface SetCurrentMenuProfileEntry {
   type: typeof SET_CURRENT_PROFILE_MENU_ENTRY;
   payload: ProfileMenuEntry;
+}
+
+export interface SetIsProfileAboutTabLoading {
+  type: typeof SET_IS_PROFILE_ABOUT_TAB_LOADING;
+  payload: boolean;
+}
+
+export interface SetIsProfileHistoryTabLoading {
+  type: typeof SET_IS_PROFILE_HISTORY_TAB_LOADING;
+  payload: boolean;
+}
+
+export interface SetIsProfileReviewsTabLoading {
+  type: typeof SET_IS_PROFILE_REVIEWS_TAB_LOADING;
+  payload: boolean;
 }
 
 export interface SetReviewsGotChunksAmount {
@@ -74,6 +95,9 @@ export type InteractionStateActionType =
   SetIsPageLocked
   | SetIsLoginPopupVisible
   | SetCurrentMenuProfileEntry
+  | SetIsProfileAboutTabLoading
+  | SetIsProfileHistoryTabLoading
+  | SetIsProfileReviewsTabLoading
   | SetReviewsGotChunksAmount
   | SetReviewsLeftChunksAmount
   | SetCurrentReviewGotIndex

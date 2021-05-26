@@ -6,6 +6,9 @@ import {
   SET_IS_PAGE_LOCKED,
   SET_IS_LOGIN_POPUP_VISIBILE,
   SET_CURRENT_PROFILE_MENU_ENTRY,
+  SET_IS_PROFILE_ABOUT_TAB_LOADING,
+  SET_IS_PROFILE_HISTORY_TAB_LOADING,
+  SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
   SET_CURRENT_REVIEW_GOT_INDEX,
@@ -33,6 +36,24 @@ export const setCurrentMenuProfileEntry = (entry: ProfileMenuEntry)
   : InteractionStateActionType => ({
   type: SET_CURRENT_PROFILE_MENU_ENTRY,
   payload: entry
+});
+
+export const setIsProfileAboutTabLoading = (flag: boolean)
+  : InteractionStateActionType => ({
+  type: SET_IS_PROFILE_ABOUT_TAB_LOADING,
+  payload: flag
+});
+
+export const setIsProfileHistoryTabLoading = (flag: boolean)
+  : InteractionStateActionType => ({
+  type: SET_IS_PROFILE_HISTORY_TAB_LOADING,
+  payload: flag
+});
+
+export const setIsProfileReviewsTabLoading = (flag: boolean)
+  : InteractionStateActionType => ({
+  type: SET_IS_PROFILE_REVIEWS_TAB_LOADING,
+  payload: flag
 });
 
 export const setReviewsGotChunksAmount = (amount: number)

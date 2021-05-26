@@ -5,6 +5,9 @@ import {
   SET_IS_PAGE_LOCKED,
   SET_IS_LOGIN_POPUP_VISIBILE,
   SET_CURRENT_PROFILE_MENU_ENTRY,
+  SET_IS_PROFILE_ABOUT_TAB_LOADING,
+  SET_IS_PROFILE_HISTORY_TAB_LOADING,
+  SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
   SET_CURRENT_REVIEW_GOT_INDEX,
@@ -18,6 +21,9 @@ const initialState: InteractionState = {
   isSearchPopupVisible: false,
   isLoginPopupVisible: false,
   currentProfileMenuEntry: ProfileMenuEntry.MyReviews,
+  isProfileAboutTabLoading: true,
+  isProfileHistoryTabLoading: true,
+  isProfileReviewsTabLoading: true,
   reviewsGotChunksAmount: 0,
   reviewsLeftChunksAmount: 0,
   currentReviewGotIndex: 1,
@@ -45,6 +51,21 @@ export const interactionStateReducer = (
       return {
         ...state,
         currentProfileMenuEntry: action.payload
+      };
+    case SET_IS_PROFILE_ABOUT_TAB_LOADING:
+      return {
+        ...state,
+        isProfileAboutTabLoading: action.payload
+      };
+    case SET_IS_PROFILE_HISTORY_TAB_LOADING:
+      return {
+        ...state,
+        isProfileHistoryTabLoading: action.payload
+      };
+    case SET_IS_PROFILE_REVIEWS_TAB_LOADING:
+      return {
+        ...state,
+        isProfileReviewsTabLoading: action.payload
       };
     case SET_REVIEWS_GOT_CHUNKS_AMOUNT:
       return {
