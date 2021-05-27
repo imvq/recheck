@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-import { ReviewStatus } from 'utils/enums';
+import { ReviewApprovementStatus } from 'utils/enums';
 
-export const Wrapper = styled.div<{ status: ReviewStatus; isAnonymous?: boolean; }>`
+export const Wrapper = styled.div<{ status: ReviewApprovementStatus; isAnonymous?: boolean; }>`
   background-color: ${
   props => (props.isAnonymous ? '#f0f3ff'
-    : props.status === ReviewStatus.Confirmed ? '#e0f7f6'
-      : props.status === ReviewStatus.Rejected ? '#fab6b6'
+    : props.status === ReviewApprovementStatus.Confirmed ? '#e0f7f6'
+      : props.status === ReviewApprovementStatus.Rejected ? '#fab6b6'
         : '#fdecc5')
 };
   display: flex;

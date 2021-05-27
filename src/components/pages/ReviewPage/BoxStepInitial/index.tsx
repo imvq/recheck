@@ -4,7 +4,7 @@ import {
   AppState, setReviewFirstName, setReviewLastName, setReviewCompany,
   setReviewBounds
 } from 'store';
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 import { inputHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
@@ -15,7 +15,7 @@ import {
   ButtonGroupWrapper
 } from '../../../shared/BoxBase';
 
-const options: GeneralTypes.OptionType[] = [
+const options: generalTypes.OptionType[] = [
   { key: 0, text: 'Я был его непосредственным руководителем' },
   { key: 1, text: 'Мы работали в одном отделе' },
   { key: 2, text: 'Мы работали в разных отделах, но часто сотрудничали' },
@@ -40,16 +40,16 @@ const mapDispatchToProps: IDispatchProps = {
  * Review box with initial information.
  */
 const BoxStepInitial = (props: IProps) => {
-  const firstNameHandler = (event: GeneralTypes.InputEvent) => inputHandler(
+  const firstNameHandler = (event: generalTypes.InputEvent) => inputHandler(
     event,
     props.setFirstName
   );
-  const lastNameHandler = (event: GeneralTypes.InputEvent) => inputHandler(
+  const lastNameHandler = (event: generalTypes.InputEvent) => inputHandler(
     event,
     props.setLastName
   );
-  const companyHandler = (event: GeneralTypes.InputEvent) => inputHandler(event, props.setCompany);
-  const boundsHandler = (option: GeneralTypes.OptionType) => props.setBounds(option.text);
+  const companyHandler = (event: generalTypes.InputEvent) => inputHandler(event, props.setCompany);
+  const boundsHandler = (option: generalTypes.OptionType) => props.setBounds(option.text);
 
   const canProceed = !!props.firstName && !!props.lastName && !!props.company && !!props.bounds;
 

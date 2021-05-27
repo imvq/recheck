@@ -1,8 +1,6 @@
-export interface IGetNReviewsResponseDto {
-  amount: number;
-}
+import { ReviewApprovementStatus } from 'utils/enums';
 
-export interface IGetNthReviewResponseDto {
+export interface IReviewCardCommonData {
   workplace: string;
   bounds: string;
   tasks: string;
@@ -20,15 +18,5 @@ export interface IGetNthReviewResponseDto {
   leadershipMark: number;
   leadershipComment: string;
   adviceComment: string;
-  approved: 0 | 1 | -1;
-}
-
-export interface IProfileDto {
-  profileId: string;
-  name: string;
-  photoUrl: string;
-}
-
-export interface ISimpleActionResponse {
-  success: boolean;
+  approved: ReviewApprovementStatus;
 }

@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
 import Api from 'utils/api';
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 import { AppActionType } from '../types';
 import {
   ReviewActionType,
@@ -199,7 +199,7 @@ export const setReviewRecommenderLink3 = (payload: string): ReviewActionType => 
   payload
 });
 
-export const createReview = (reviewData: GeneralTypes.ReviewData) => (
+export const createReview = (reviewData: generalTypes.ReviewData) => (
   dispatch: Dispatch<AppActionType>
 ) => {
   Api.prepareReview({ ...reviewData });

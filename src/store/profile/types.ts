@@ -1,14 +1,14 @@
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 
 export const SET_CURRENT_PROFILE_DATA = 'SET_CURRENT_PROFILE_DATA';
 
 export interface ProfileState {
-  currentProfileInfo: GeneralTypes.AppProfileInfo;
+  currentProfileInfo: generalTypes.AppProfileInfo;
 }
 
 interface SetCurrentProfileData {
   type: typeof SET_CURRENT_PROFILE_DATA;
-  payload: GeneralTypes.AppProfileInfo;
+  payload: generalTypes.AppProfileInfo;
 }
 
 export type ProfileActionType = SetCurrentProfileData;

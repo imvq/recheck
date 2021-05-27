@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { AppState, clearStrengths, clearImprovements, setReviewImprovements } from 'store';
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import { IProps, IStateProps, IDispatchProps } from './types';
@@ -25,7 +25,7 @@ const mapDispatchToProps: IDispatchProps = {
  * Review box with question about what the candidate can improve.
  */
 const BoxStepC = (props: IProps) => {
-  const improvementsHandler = (event: GeneralTypes.TextAreaEvent) => textAreaHandler(
+  const improvementsHandler = (event: generalTypes.TextAreaEvent) => textAreaHandler(
     event, props.setImprovements
   );
 

@@ -5,7 +5,7 @@ import * as constants from 'utils/constants';
 import controlledHistory from 'utils/routing';
 import * as ApiResponse from 'utils/typing/apiResponses';
 import * as UtilityTypes from 'utils/typing/utility';
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
 import { FacebookLoginResponse } from './types';
@@ -26,7 +26,7 @@ function onProfileDataRetrieved(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: GeneralTypes.AppProfileInfo) => void,
+  setCurrentProfileInfoCallback: (profileInfo: generalTypes.AppProfileInfo) => void,
   profileResponse: ApiResponse.LinkedInProfileDto | ApiResponse.FacebookProfileDto
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
@@ -61,7 +61,7 @@ export function onSuccessLinkedIn(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: GeneralTypes.AppProfileInfo) => void
+  setCurrentProfileInfoCallback: (profileInfo: generalTypes.AppProfileInfo) => void
 ) {
   // Lock page to prevent user actions while retrieving and processing profile data.
   setPageLockedCallback(true);
@@ -99,7 +99,7 @@ export function onSuccessFacebook(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: GeneralTypes.AppProfileInfo) => void
+  setCurrentProfileInfoCallback: (profileInfo: generalTypes.AppProfileInfo) => void
 ) {
   // Lock page to prevent user actions while processing profile data.
   setPageLockedCallback(true);

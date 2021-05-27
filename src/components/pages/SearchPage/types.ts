@@ -1,7 +1,7 @@
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
-  userSearchResults: GeneralTypes.SearchProfileInfo[];
+  userSearchResults: generalTypes.SearchProfileInfo[];
 }
 
 export interface IDispatchProps {

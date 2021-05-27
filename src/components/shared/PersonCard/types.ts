@@ -1,7 +1,7 @@
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 
 export interface IOwnProps {
-  userData: GeneralTypes.SearchProfileInfo;
+  userData: generalTypes.SearchProfileInfo;
 }
 
 export type IProps = IOwnProps;

@@ -1,4 +1,4 @@
-import { ReviewStatus } from 'utils/enums';
+import { ReviewApprovementStatus } from 'utils/enums';
 import { IProps } from './types';
 import { Wrapper, MenuEntryWrapper, MenuEntry } from './styled';
 
@@ -6,7 +6,7 @@ import { Wrapper, MenuEntryWrapper, MenuEntry } from './styled';
  * Head element of the review card.
  */
 export default (props: IProps) => (
-  <Wrapper status={props.reviewCardData.status} isAnonymous={props.isAnonymous}>
+  <Wrapper status={props.reviewCardData.approved} isAnonymous={props.isAnonymous}>
     {!props.isAnonymous
       ? (
         <>
@@ -16,10 +16,10 @@ export default (props: IProps) => (
           <MenuEntryWrapper>
             <MenuEntry>
               {(() => {
-                switch (props.reviewCardData.status) {
-                  case ReviewStatus.Confirmed:
+                switch (props.reviewCardData.approved) {
+                  case ReviewApprovementStatus.Confirmed:
                     return 'Ваш отзыв одобрен!';
-                  case ReviewStatus.Rejected:
+                  case ReviewApprovementStatus.Rejected:
                     return 'Ваш отзыв не одобрен';
                   default:
                     return 'Ваш отзыв на модерации';

@@ -1,5 +1,5 @@
 import * as GenearalTypes from '../general';
-import { IProfileDto, ISimpleActionResponse } from './basic';
+import { IGetNReviewsResponseDto, IGetNthReviewResponseDto, IProfileDto, ISimpleActionResponse } from './basic';
 
 export interface BindReviewtargetResponseDto extends ISimpleActionResponse {}
 
@@ -16,6 +16,14 @@ export interface CompleteRegistartionResponseDto extends ISimpleActionResponse {
 export interface ExchangeLinkedInCodeResposneDto {
   'li_at': string;
 }
+
+export type GetNReviewsGotResponseDto = IGetNReviewsResponseDto;
+
+export type GetNReviewsLeftResponseDto = IGetNReviewsResponseDto;
+
+export type GetNthReviewGotResponseDto = IGetNthReviewResponseDto;
+
+export type GetNthReviewLeftResponseDto = IGetNthReviewResponseDto;
 
 export type LinkedInProfileDto = IProfileDto;
 

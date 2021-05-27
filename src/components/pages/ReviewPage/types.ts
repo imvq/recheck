@@ -1,12 +1,12 @@
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
-  currentProfileInfo: GeneralTypes.AppProfileInfo;
-  reviewData: Omit<GeneralTypes.ReviewData, 'authorId'>;
+  currentProfileInfo: generalTypes.AppProfileInfo;
+  reviewData: Omit<generalTypes.ReviewData, 'authorId'>;
 }
 
 export interface IDispatchProps {
-  createReview(reviewData: GeneralTypes.ReviewData): void;
+  createReview(reviewData: generalTypes.ReviewData): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

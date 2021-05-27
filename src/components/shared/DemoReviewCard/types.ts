@@ -1,3 +1,3 @@
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 
-export type IProps = GeneralTypes.ReviewCardData;
+export type IProps = generalTypes.DemoReviewCardData;

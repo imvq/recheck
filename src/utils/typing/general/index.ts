@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios';
 import { ChangeEvent } from 'react';
 
-import { ReviewStatus } from 'utils/enums';
+import { ReviewApprovementStatus } from 'utils/enums';
+import { IReviewCardCommonData } from './basic';
 
 export type APIResponse<TDto = any> = Promise<AxiosResponse<TDto>>;
 
@@ -21,7 +22,35 @@ export interface CompleteRegistrationDto {
   confirmationCode: string;
 }
 
+export interface DemoReviewCardData {
+  name: string;
+  photoUrl: string;
+  position: string;
+  company: string;
+  experience: string;
+  review: string;
+  nReviews: number;
+}
+
 export type InputEvent = ChangeEvent<HTMLInputElement>;
+
+export interface GetNReviewsGotDto {
+  profileId: string;
+}
+
+export interface GetNReviewsLeftDto {
+  profileId: string;
+}
+
+export interface GetNthReviewGotDto {
+  profileId: string;
+  nthReview: number;
+}
+
+export interface GetNthReviewLeftDto {
+  profileId: string;
+  nthReview: number;
+}
 
 export interface PrepareProfileDto {
   profileId: string;
@@ -42,7 +71,9 @@ export interface PreviousSearchCardData {
   photoUrl: string;
 }
 
-export interface ReviewCardData {
+export interface ReviewCardGotData extends IReviewCardCommonData {}
+
+export interface ReviewCardDataFull {
   name: string;
   photoUrl: string;
   position: string;
@@ -50,11 +81,8 @@ export interface ReviewCardData {
   experience: string;
   review: string;
   nReviews: number;
-}
-
-export interface ReviewCardDataFull extends ReviewCardData {
   questions: string[];
-  status: ReviewStatus;
+  approved: ReviewApprovementStatus;
 }
 
 export interface ReviewData {

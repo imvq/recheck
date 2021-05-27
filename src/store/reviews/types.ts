@@ -1,4 +1,4 @@
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 
 export const CLEAR_INITIAL_DATA = 'CLEAR_INITIAL_DATA';
 export const CLEAR_TASKS = 'CLEAR_TASKS';
@@ -35,7 +35,7 @@ export const SET_RECOMMENDER_LINK1 = 'SET_RECOMMENDER_LINK1';
 export const SET_RECOMMENDER_LINK2 = 'SET_RECOMMENDER_LINK2';
 export const SET_RECOMMENDER_LINK3 = 'SET_RECOMMENDER_LINK3';
 
-export type ReviewState = Omit<GeneralTypes.ReviewData, 'authorId'>;
+export type ReviewState = Omit<generalTypes.ReviewData, 'authorId'>;
 
 export interface ClearInitialData {
   type: typeof CLEAR_INITIAL_DATA;

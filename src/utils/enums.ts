@@ -33,8 +33,8 @@ export enum ProfileMenuEntry {
 /**
  * Status of the review.
  */
-export enum ReviewStatus {
-  Confirmed,
-  Rejected,
-  Idle
+export enum ReviewApprovementStatus {
+  Confirmed = 1,
+  Rejected = -1,
+  Idle = 0
 }

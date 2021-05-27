@@ -1,5 +1,5 @@
-import * as GeneralTypes from 'utils/typing/general';
-import { ReviewStatus } from 'utils/enums';
+import * as generalTypes from 'utils/typing/general';
+import { ReviewApprovementStatus } from 'utils/enums';
 
 export default {
   name: 'Cirill Usachov',
@@ -19,5 +19,5 @@ export default {
     'Оценка: 7/10\nSed rhoncus purus et diam rhoncus congue. Praesent condimentum lectus vitae dictum tincidunt.',
     'https://www.linkedin.com/in/hanna-shokhina-b9b799124'
   ],
-  status: ReviewStatus.Confirmed
-} as GeneralTypes.ReviewCardDataFull;
+  status: ReviewApprovementStatus.Confirmed
+} as generalTypes.ReviewCardDataFull;

@@ -1,11 +1,11 @@
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
-  currentProfileInfo: GeneralTypes.AppProfileInfo;
+  currentProfileInfo: generalTypes.AppProfileInfo;
 }
 
 export interface IOwnProps {
-  onProceed(collectedInfo: GeneralTypes.PrepareProfileDto): void;
+  onProceed(collectedInfo: generalTypes.PrepareProfileDto): void;
 }
 
 export type IProps = IStateProps & IOwnProps;

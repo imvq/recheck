@@ -3,19 +3,19 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 import { trimText } from 'utils/functions';
 import * as UtilityTypes from 'utils/typing/utility';
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 import { IProps } from './types';
 import CustomOption from './CustomOption';
 import { Wrapper, SelectedItemWrapper, ArrowUp, ArrowDown, OptionsBadgesWrapper } from './styled';
 
-type TCurrentValue = UtilityTypes.Nullable<GeneralTypes.OptionType>;
+type TCurrentValue = UtilityTypes.Nullable<generalTypes.OptionType>;
 
 const CustomSelect = (props: IProps) => {
   const [isDimmed, setIsDimmed] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentValue, setCurrentValue] = useState<TCurrentValue>(null);
 
-  const callNewOptionHandler = (option: GeneralTypes.OptionType) => {
+  const callNewOptionHandler = (option: generalTypes.OptionType) => {
     props.onNewOptionSelected(option);
     setCurrentValue(option);
     setIsDimmed(false);

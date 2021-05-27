@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 
 import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
+import Api from 'utils/api';
 import { ProfileMenuEntry } from 'utils/enums';
 import { AppActionType } from '../types';
 import {
@@ -83,7 +84,7 @@ export const setCurrentReviewLefIndex = (amount: number)
   payload: amount
 });
 
-export const setCurrentReviewGot = (review: utilityTypes.Nullable<generalTypes.ReviewCardDataFull>)
+export const setCurrentReviewGot = (review: utilityTypes.Nullable<generalTypes.ReviewCardGotData>)
   : InteractionStateActionType => ({
   type: SET_CURRENT_REVIEW_GOT,
   payload: review
@@ -95,6 +96,19 @@ export const setCurrentReviewLeft = (review: utilityTypes.Nullable<generalTypes.
   payload: review
 });
 
-export const loadAboutTabData = (dispatch: Dispatch<AppActionType>) => {
-  // TODO: API stuff
+export const loadAboutTabData = (profileId: string) => (
+  dispatch: Dispatch<AppActionType>
+) => {
+  Api.getNReviewsGot({ profileId })
+    .then(amountDto => {
+      dispatch(setReviewsGotChunksAmount(amountDto.data.amount));
+
+      Api.getNthReviewGot({ profileId, nthReview: 0 })
+        .then(reviewDto => dispatch(setCurrentReviewGot(reviewDto.data)))
+        .finally(() => dispatch(setIsProfileAboutTabLoading(false)));
+    })
+    .catch(() => {
+      dispatch(setReviewsGotChunksAmount(0));
+      dispatch(setIsProfileAboutTabLoading(false));
+    });
 };

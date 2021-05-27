@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 
 import DemoReviewCard from 'components/shared/DemoReviewCard';
 import { Wrapper, JustificationWrapper, CardWrapper, ArrowLeft, ArrowRight } from './styled';
@@ -8,8 +8,9 @@ import examples from './examples';
  * Swipe area with review examples.
  */
 export default () => {
-  const [cards, setCards] = React.useState<JSX.Element[]>([]);
-  React.useEffect(() => {
+  const [cards, setCards] = useState<JSX.Element[]>([]);
+
+  useEffect(() => {
     setCards(examples.map(example => {
       return (
         <DemoReviewCard
@@ -26,17 +27,17 @@ export default () => {
     }));
   }, []);
 
-  const onPrevClicked = React.useCallback(() => {
+  const onPrevClicked = () => {
     const [last] = cards.splice(2, 1);
     cards.unshift(last);
     setCards(cards.slice());
-  }, [cards]);
+  };
 
-  const onNextClicked = React.useCallback(() => {
+  const onNextClicked = () => {
     const [first] = cards.splice(0, 1);
     cards.push(first);
     setCards(cards.slice());
-  }, [cards]);
+  };
 
   return (
     <Wrapper key={Math.random()}>

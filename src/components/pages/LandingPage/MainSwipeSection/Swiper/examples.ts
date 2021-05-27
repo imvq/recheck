@@ -1,10 +1,10 @@
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 
 import Lada from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Lada.png';
 import Kate from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Kate.png';
 import Ciri from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Ciri.png';
 
-const examples: GeneralTypes.ReviewCardData[] = [
+const examples: generalTypes.DemoReviewCardData[] = [
   {
     name: 'Екатерина Мазур',
     photoUrl: Kate,

@@ -27,7 +27,7 @@ export interface InteractionState {
   reviewsLeftChunksAmount: number;
   currentReviewGotIndex: number;
   currentReviewLeftIndex: number;
-  currentReviewGot: utilityTypes.Nullable<generalTypes.ReviewCardDataFull>;
+  currentReviewGot: utilityTypes.Nullable<generalTypes.ReviewCardGotData>;
   currentReviewLeft: utilityTypes.Nullable<generalTypes.ReviewCardDataFull>;
 }
 
@@ -83,7 +83,7 @@ export interface SetCurrentReviewLeftIndex {
 
 export interface SetCurrentReviewGot {
   type: typeof SET_CURRENT_REVIEW_GOT;
-  payload: utilityTypes.Nullable<generalTypes.ReviewCardDataFull>;
+  payload: utilityTypes.Nullable<generalTypes.ReviewCardGotData>;
 }
 
 export interface SetCurrentReviewLeft {

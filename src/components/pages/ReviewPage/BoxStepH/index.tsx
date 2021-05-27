@@ -4,7 +4,7 @@ import {
   AppState, clearOwnHireOpinionData, clearQualityData,
   setReviewQualityMark, setReviewQualityComment
 } from 'store';
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import MarkSelector from '../MarkSelector';
@@ -37,7 +37,7 @@ const labels = [
  * Review box with question about what the candidate's work quality.
  */
 const BoxStepH = (props: IProps) => {
-  const qualityHandler = (event: GeneralTypes.TextAreaEvent) => textAreaHandler(
+  const qualityHandler = (event: generalTypes.TextAreaEvent) => textAreaHandler(
     event, props.setQualityComment
   );
 

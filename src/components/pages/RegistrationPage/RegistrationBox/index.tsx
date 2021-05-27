@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState } from 'store';
-import * as GeneralTypes from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 import { inputHandler, isValidEmail, isValidUrl, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
@@ -12,7 +12,7 @@ import {
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input
 } from '../../../shared/BoxBase';
 
-const months: GeneralTypes.OptionType[] = [
+const months: generalTypes.OptionType[] = [
   { key: 0, text: 'Январь' },
   { key: 1, text: 'Февраль' },
   { key: 2, text: 'Март' },
@@ -52,26 +52,26 @@ const RegistrationBox = (props: IProps) => {
     setIsSiteErrorVisible(!isValidUrl(companySite));
   };
 
-  const emailHandler = (event: GeneralTypes.InputEvent) => {
+  const emailHandler = (event: generalTypes.InputEvent) => {
     setIsEmailErrorVisible(false);
     setEmail(event.target.value);
   };
 
-  const companySiteHandler = (event: GeneralTypes.InputEvent) => {
+  const companySiteHandler = (event: generalTypes.InputEvent) => {
     setIsSiteErrorVisible(false);
     setCompanySite(event.target.value);
   };
 
-  const companyNameHandler = (event: GeneralTypes.InputEvent) => inputHandler(
+  const companyNameHandler = (event: generalTypes.InputEvent) => inputHandler(
     event,
     setCompanyName
   );
-  const positionHandler = (event: GeneralTypes.InputEvent) => inputHandler(
+  const positionHandler = (event: generalTypes.InputEvent) => inputHandler(
     event,
     setPosition
   );
-  const monthHandler = (option: GeneralTypes.OptionType) => setWorkStartMonth(option.key);
-  const yearHandler = (option: GeneralTypes.OptionType) => setWorkStartYear(
+  const monthHandler = (option: generalTypes.OptionType) => setWorkStartMonth(option.key);
+  const yearHandler = (option: generalTypes.OptionType) => setWorkStartYear(
     Number.parseInt(option.text, 10)
   );
 
