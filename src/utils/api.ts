@@ -74,7 +74,7 @@ export default class Api {
 
   public static getNthReviewGot(targetData: generalTypes.GetNthReviewGotDto)
     : generalTypes.APIResponse<apiResponses.GetNthReviewGotResponseDto> {
-    return Api.instance.post('/user/amount/reviews-got', targetData);
+    return Api.instance.post('/user/get/nth-review-got', targetData);
   }
 
   public static getNReviewsLeft(targetData: generalTypes.GetNReviewsLeftDto)
@@ -84,6 +84,6 @@ export default class Api {
 
   public static getNthReviewLeft(targetData: generalTypes.GetNthReviewLeftDto)
     : generalTypes.APIResponse<apiResponses.GetNthReviewLeftResponseDto> {
-    return Api.instance.post('/user/amount/reviews-left', targetData);
+    return Api.instance.post('/user/get/nth-review-left', targetData);
   }
 }

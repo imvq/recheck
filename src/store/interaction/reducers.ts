@@ -26,8 +26,8 @@ const initialState: InteractionState = {
   isProfileReviewsTabLoading: true,
   reviewsGotChunksAmount: 0,
   reviewsLeftChunksAmount: 0,
-  currentReviewGotIndex: 1,
-  currentReviewLeftIndex: 1,
+  currentReviewGotIndex: 0,
+  currentReviewLeftIndex: 0,
   currentReviewGot: null,
   currentReviewLeft: null
 };

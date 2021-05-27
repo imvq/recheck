@@ -72,7 +72,7 @@
     "typeorm": "^0.2.29",
     "typescript-ioc": "^3.2.2",
     "typescript-rest": "^3.0.2",
-    "typescript-rest-body-guard": "^2.0.0",
+    "typescript-rest-body-guard": "^2.0.1",
     "typescript-rest-ioc": "^1.0.0",
     "typescript-rest-jwt-guard": "^1.1.3",
     "uuid": "^8.3.2"
