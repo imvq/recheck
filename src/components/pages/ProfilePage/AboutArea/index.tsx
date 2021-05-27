@@ -6,7 +6,8 @@ import { IProps, IStateProps } from './types';
 import { Wrapper, TitleWrapper, Title } from './styled';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
-  isLoading: store.interaction.isProfileAboutTabLoading
+  isLoading: store.interaction.isProfileAboutTabLoading,
+  currentReviewCardData: store.interaction.currentReviewGot
 });
 
 /**
@@ -17,7 +18,9 @@ const AboutArea = (props: IProps) => (
     <TitleWrapper>
       {props.isLoading
         ? <Title isHighlighted>Загрузка...</Title>
-        : <Title isHighlighted>Никто ещё не оставил о вас отзыв :(</Title>}
+        : props.currentReviewCardData
+          ? <ReviewCard reviewCardData={props.currentReviewCardData} />
+          : <Title isHighlighted>Никто ещё не оставил о вас отзыв :(</Title>}
     </TitleWrapper>
   </Wrapper>
 );

@@ -1,11 +1,9 @@
+import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
-
-export interface IOwnProps {
-  reviewCardData: generalTypes.ReviewCardDataFull;
-}
 
 export interface IStateProps {
   isLoading: boolean;
+  currentReviewCardData: utilityTypes.Nullable<generalTypes.ReviewCardGotData>;
 }
 
-export type IProps = IOwnProps & IStateProps;
+export type IProps = IStateProps;

@@ -31,7 +31,7 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
       {(() => {
         switch (props.currentProfileMenuEntry) {
           case ProfileMenuEntry.AboutMe:
-            return <AboutArea reviewCardData={example} />;
+            return <AboutArea />;
           case ProfileMenuEntry.History:
             return <HistoryArea cardsData={[]} />;
           default:

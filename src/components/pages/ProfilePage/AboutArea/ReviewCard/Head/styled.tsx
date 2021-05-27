@@ -38,24 +38,3 @@ export const MenuContentSpan = styled.span<{ dimmed?: boolean; }>`
   line-height: 2rem;
   color: ${props => (props.dimmed ? '#979797' : 'black')};
 `;
-
-export const ProfilePictureWrapper = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: ${cssVarsLocal.photoWrapperWidth};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ProfilePicture = styled.img`
-  position: absolute;
-  right: 0;
-  object-fit: cover;
-  height: 50%;
-  max-width: 100%;
-  max-height: 100%;
-  border-radius: 50%;
-`;
