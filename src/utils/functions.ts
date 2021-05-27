@@ -1,6 +1,7 @@
 import * as apiResponses from 'utils/typing/apiResponses';
-import * as UtilityTypes from 'utils/typing/utility';
+import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
+import { IReviewCardCommonData } from 'utils/typing/general/basic';
 import { cookieManager, cookiesList } from 'utils/cookies';
 import { ScreenBreakpoint } from './enums';
 
@@ -14,7 +15,7 @@ export function getNValuesDown(from : number, n: number): number[] {
 /**
  * Partially applied onChange input event.
  */
-export function inputHandler(event: generalTypes.InputEvent, setter: UtilityTypes.Setter<string>) {
+export function inputHandler(event: generalTypes.InputEvent, setter: utilityTypes.Setter<string>) {
   setter(event.target.value);
 }
 
@@ -73,7 +74,7 @@ export const respond = (screen: ScreenBreakpoint) => `@media (max-width: ${scree
  */
 export function textAreaHandler(
   event: generalTypes.TextAreaEvent,
-  setter: UtilityTypes.Setter<string>
+  setter: utilityTypes.Setter<string>
 ) {
   setter(event.target.value);
 }
@@ -83,4 +84,21 @@ export function textAreaHandler(
  */
 export function trimText(text: string, sliceTo: number) {
   return text.length > sliceTo ? `${text.slice(0, sliceTo)} ...` : text;
+}
+
+/**
+ * Transform review fields to array.
+ */
+export function mapReviewToArray(from: IReviewCardCommonData) {
+  return [
+    from.tasks,
+    from.strengths,
+    from.improvements,
+    from.results,
+    from.levelMark,
+    from.activityMark,
+    from.ownHireOpinionMark,
+    from.qualityMark,
+    from.leadershipMark
+  ];
 }

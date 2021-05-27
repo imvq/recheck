@@ -11,7 +11,6 @@ import HistoryArea from './HistoryArea';
 import AboutArea from './AboutArea';
 import { Wrapper, TitleWrapper, AdaptedHeader, ContentWrapper } from './styled';
 
-import example from './exampleMyReview';
 import exampleHistory from './exampleHistory';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
@@ -35,7 +34,7 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
           case ProfileMenuEntry.History:
             return <HistoryArea cardsData={[]} />;
           default:
-            return <ReviewsArea reviewCardData={example} />;
+            return <ReviewsArea />;
         }
       })()}
     </ContentWrapper>

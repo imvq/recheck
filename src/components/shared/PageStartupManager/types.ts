@@ -1,4 +1,4 @@
-import * as UtilityTypes from 'utils/typing/utility';
+import * as utilityTypes from 'utils/typing/utility';
 
 export interface IOwnProps {
   redirectHomeOnFail?: boolean;
@@ -9,7 +9,7 @@ export interface IOwnProps {
 }
 
 export interface IStateProps {
-  isAuthorized: UtilityTypes.Nullable<boolean>;
+  isAuthorized: utilityTypes.Nullable<boolean>;
 }
 
 export interface IDispatchProps {

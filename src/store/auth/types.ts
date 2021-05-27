@@ -1,9 +1,9 @@
-import * as UtilityTypes from 'utils/typing/utility';
+import * as utilityTypes from 'utils/typing/utility';
 
 export const SET_IS_AUTHORIZED = 'SET_IS_LOGGED_IN';
 
 export interface AuthState {
-  isAuthorized: UtilityTypes.Nullable<boolean>;
+  isAuthorized: utilityTypes.Nullable<boolean>;
 }
 
 export interface SetIsAuthorized {

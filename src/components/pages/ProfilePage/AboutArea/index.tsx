@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import ReviewCard from 'components/shared/ReviewCard';
 import { AppState } from 'store';
+import ReviewCard from './ReviewCard';
 import { IProps, IStateProps } from './types';
 import { Wrapper, TitleWrapper, Title } from './styled';
 

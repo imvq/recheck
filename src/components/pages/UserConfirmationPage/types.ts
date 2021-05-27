@@ -1,8 +1,8 @@
-import * as UtilityTypes from 'utils/typing/utility';
+import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
-  isAuthorized: UtilityTypes.Nullable<boolean>;
+  isAuthorized: utilityTypes.Nullable<boolean>;
   currentProfileInfo: generalTypes.AppProfileInfo;
 }
 
