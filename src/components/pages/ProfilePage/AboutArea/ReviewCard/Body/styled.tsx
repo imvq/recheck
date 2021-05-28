@@ -16,9 +16,7 @@ export const QuestionTitle = styled.h3`
   line-height: 2rem;
 `;
 
-export const Answer = styled.p<{ isHighlighted?: boolean; }>`
-  color: ${props => (props.isHighlighted ? 'blue' : '#555555')};
-  text-decoration: ${props => (props.isHighlighted ? 'underline' : 'none')};
-  cursor: ${props => (props.isHighlighted ? 'pointer' : 'default')};
+export const Answer = styled.p`
+  color: #555555;
   line-height: 1.7rem;
 `;

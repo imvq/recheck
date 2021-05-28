@@ -11,9 +11,7 @@ export default (props: IProps) => {
       {constants.REVIEW_QESTIONS.map((question, index) => (
         <EntryWrapper key={question}>
           <QuestionTitle>{question}</QuestionTitle>
-          <Answer isHighlighted={index === answers.length - 1}>
-            {answers[index]}
-          </Answer>
+          <Answer>{answers[index]}</Answer>
         </EntryWrapper>
       ))}
     </Wrapper>
