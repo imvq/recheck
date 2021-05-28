@@ -112,3 +112,12 @@ export const loadAboutTabData = (profileId: string) => (
       dispatch(setIsProfileAboutTabLoading(false));
     });
 };
+
+export const loadNthReviewGot = (profileId: string, nthReview: number) => (
+  dispatch: Dispatch<AppActionType>
+) => {
+  dispatch(setIsProfileAboutTabLoading(true));
+  Api.getNthReviewGot({ profileId, nthReview })
+    .then(nthReviewResponse => dispatch(setCurrentReviewGot(nthReviewResponse.data)))
+    .finally(() => dispatch(setIsProfileAboutTabLoading(false)));
+};

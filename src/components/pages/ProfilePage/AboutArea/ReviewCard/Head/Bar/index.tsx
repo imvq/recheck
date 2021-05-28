@@ -12,9 +12,9 @@ export default (props: IProps) => (
         {(() => {
           switch (props.reviewCardData.approved) {
             case ReviewApprovementStatus.Confirmed:
-              return 'Отзыв одобрен!';
+              return 'Одобренный отзыв';
             case ReviewApprovementStatus.Rejected:
-              return 'Отзыв не одобрен';
+              return 'Отзыв отклонён при модерации';
             default:
               return 'Отзыв на модерации';
           }

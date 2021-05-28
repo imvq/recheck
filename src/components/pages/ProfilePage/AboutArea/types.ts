@@ -10,6 +10,7 @@ export interface IStateProps {
 
 export interface IDispatchProps {
   loadTabData: (profileId: string) => void;
+  loadNthReview: (profileId: string, nthReview: number) => void;
 }
 
 export type IProps = IStateProps & IDispatchProps;
