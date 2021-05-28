@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { AppState } from 'store';
 import * as generalTypes from 'utils/typing/general';
-import { inputHandler, isValidEmail, isValidUrl, getNValuesDown } from 'utils/functions';
+import { inputHandler, isValidEmail, isValidUrl, getNValuesDown, doesEmailContainUrl } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
 import { IProps, IStateProps } from './types';
@@ -49,7 +49,7 @@ const RegistrationBox = (props: IProps) => {
 
   const [isSiteErrorVisible, setIsSiteErrorVisible] = useState(false);
   const recalculateSiteErrorVisibility = () => {
-    setIsSiteErrorVisible(!isValidUrl(companySite));
+    setIsSiteErrorVisible(!isValidUrl(companySite) || !doesEmailContainUrl(email, companySite));
   };
 
   const emailHandler = (event: generalTypes.InputEvent) => {
@@ -113,7 +113,13 @@ const RegistrationBox = (props: IProps) => {
         </InputDescriptionWrapper>
         <Input type='text' onBlur={recalculateSiteErrorVisibility} onChange={companySiteHandler} />
         {isSiteErrorVisible
-          ? <TextDescription isHighlighted>Некорректный URL страницы</TextDescription>
+          ? (
+            <TextDescription isHighlighted>
+              Некорректный URL страницы.
+              Адрес сайта должен быть вида https://example.com или example.com.
+              Почтовый домен должен совпадать с адресом сайта компании
+            </TextDescription>
+          )
           : null}
       </InputGroupWrapper>
 

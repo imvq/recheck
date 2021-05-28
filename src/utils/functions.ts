@@ -1,3 +1,5 @@
+import psl from 'psl';
+
 import * as apiResponses from 'utils/typing/apiResponses';
 import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
@@ -25,6 +27,23 @@ export function inputHandler(event: generalTypes.InputEvent, setter: utilityType
 export function isValidEmail(text: string): boolean {
   return /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
     .test(text.toLowerCase());
+}
+
+function extractHostname(url: string) {
+  let hostname = url.indexOf('//') > -1 ? url.split('/')[2] : url.split('/')[0];
+  // find & remove port number
+  hostname = hostname.split(':')[0];
+  // find & remove "?"
+  hostname = hostname.split('?')[0];
+
+  return hostname;
+}
+
+export function doesEmailContainUrl(email: string, fullDomain: string): boolean {
+  const emailDomain = email.substring(email.lastIndexOf('@') + 1);
+  const urlDomain = psl.get(extractHostname(fullDomain));
+
+  return emailDomain === urlDomain;
 }
 
 /**
