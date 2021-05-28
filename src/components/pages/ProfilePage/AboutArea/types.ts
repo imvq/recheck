@@ -4,6 +4,7 @@ import * as generalTypes from 'utils/typing/general';
 export interface IStateProps {
   currentPorfileId: string;
   isLoading: boolean;
+  reviewsGotChunksAmount: number;
   currentReviewCardData: utilityTypes.Nullable<generalTypes.ReviewCardGotData>;
 }
 

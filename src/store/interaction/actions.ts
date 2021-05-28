@@ -78,7 +78,7 @@ export const setCurrentReviewGotIndex = (amount: number)
   payload: amount
 });
 
-export const setCurrentReviewLefIndex = (amount: number)
+export const setCurrentReviewLeftIndex = (amount: number)
   : InteractionStateActionType => ({
   type: SET_CURRENT_REVIEW_LEFT_INDEX,
   payload: amount

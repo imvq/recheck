@@ -17,8 +17,8 @@ export enum ScreenBreakpoint {
  * Placeholders for pagination page buttons.
  */
 export enum PaginationDirection {
-  Prev = '<',
-  Next = '>'
+  Prev = '🡸',
+  Next = '🡺'
 }
 
 /**
