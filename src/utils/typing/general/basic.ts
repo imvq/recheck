@@ -1,6 +1,7 @@
 import { ReviewApprovementStatus } from 'utils/enums';
 
 export interface IReviewCardCommonData {
+  targetPredefinedName: string;
   workplace: string;
   bounds: string;
   tasks: string;

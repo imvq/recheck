@@ -24,7 +24,7 @@ export interface InteractionState {
   reviewsGotChunksAmount: number;
   reviewsLeftChunksAmount: number;
   currentReviewGot: utilityTypes.Nullable<generalTypes.ReviewCardGotData>;
-  currentReviewLeft: utilityTypes.Nullable<generalTypes.ReviewCardDataFull>;
+  currentReviewLeft: utilityTypes.Nullable<generalTypes.ReviewCardLeftData>;
 }
 
 export interface SetIsPageLocked {
@@ -74,7 +74,7 @@ export interface SetCurrentReviewGot {
 
 export interface SetCurrentReviewLeft {
   type: typeof SET_CURRENT_REVIEW_LEFT;
-  payload: utilityTypes.Nullable<generalTypes.ReviewCardDataFull>;
+  payload: utilityTypes.Nullable<generalTypes.ReviewCardLeftData>;
 }
 
 export type InteractionStateActionType =

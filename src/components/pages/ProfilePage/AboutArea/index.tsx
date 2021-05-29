@@ -38,6 +38,7 @@ const AboutArea = (props: IProps) => {
             ? <ReviewCard reviewCardData={props.currentReviewCardData} />
             : <Title isHighlighted>Никто ещё не оставил о вас отзыв :(</Title>}
       </TitleWrapper>
+
       <Pagination
         nPages={props.reviewsGotChunksAmount}
         onNextClick={() => {

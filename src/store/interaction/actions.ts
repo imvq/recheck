@@ -76,7 +76,7 @@ export const setCurrentReviewGot = (review: utilityTypes.Nullable<generalTypes.R
   payload: review
 });
 
-export const setCurrentReviewLeft = (review: utilityTypes.Nullable<generalTypes.ReviewCardDataFull>)
+export const setCurrentReviewLeft = (review: utilityTypes.Nullable<generalTypes.ReviewCardLeftData>)
   : InteractionStateActionType => ({
   type: SET_CURRENT_REVIEW_LEFT,
   payload: review
@@ -99,6 +99,23 @@ export const loadAboutTabData = (profileId: string) => (
     });
 };
 
+export const loadReviewsTabData = (profileId: string) => (
+  dispatch: Dispatch<AppActionType>
+) => {
+  Api.getNReviewsLeft({ profileId })
+    .then(amountDto => {
+      dispatch(setReviewsLeftChunksAmount(amountDto.data.amount));
+
+      Api.getNthReviewLeft({ profileId, nthReview: 0 })
+        .then(reviewDto => dispatch(setCurrentReviewLeft(reviewDto.data)))
+        .finally(() => dispatch(setIsProfileReviewsTabLoading(false)));
+    })
+    .catch(() => {
+      dispatch(setReviewsLeftChunksAmount(0));
+      dispatch(setIsProfileReviewsTabLoading(false));
+    });
+};
+
 export const loadNthReviewGot = (profileId: string, nthReview: number) => (
   dispatch: Dispatch<AppActionType>
 ) => {
@@ -106,4 +123,13 @@ export const loadNthReviewGot = (profileId: string, nthReview: number) => (
   Api.getNthReviewGot({ profileId, nthReview })
     .then(nthReviewResponse => dispatch(setCurrentReviewGot(nthReviewResponse.data)))
     .finally(() => dispatch(setIsProfileAboutTabLoading(false)));
+};
+
+export const loadNthReviewLeft = (profileId: string, nthReview: number) => (
+  dispatch: Dispatch<AppActionType>
+) => {
+  dispatch(setIsProfileReviewsTabLoading(true));
+  Api.getNthReviewLeft({ profileId, nthReview })
+    .then(nthReviewResponse => dispatch(setCurrentReviewLeft(nthReviewResponse.data)))
+    .finally(() => dispatch(setIsProfileReviewsTabLoading(false)));
 };

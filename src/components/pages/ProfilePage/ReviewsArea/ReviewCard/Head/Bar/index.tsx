@@ -8,6 +8,9 @@ import { Wrapper, MenuEntryWrapper, MenuEntry } from './styled';
 export default (props: IProps) => (
   <Wrapper status={props.reviewCardData.approved}>
     <MenuEntryWrapper>
+      <MenuEntry>{props.reviewCardData.targetPredefinedName}</MenuEntry>
+    </MenuEntryWrapper>
+    <MenuEntryWrapper>
       <MenuEntry>
         {(() => {
           switch (props.reviewCardData.approved) {

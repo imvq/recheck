@@ -29,7 +29,7 @@ const initialState: InteractionState = {
 };
 
 export const interactionStateReducer = (
-  state: InteractionState = initialState,
+  state = initialState,
   action: InteractionStateActionType
 ) => {
   switch (action.type) {
