@@ -10,8 +10,6 @@ import {
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
-  SET_CURRENT_REVIEW_GOT_INDEX,
-  SET_CURRENT_REVIEW_LEFT_INDEX,
   SET_CURRENT_REVIEW_GOT,
   SET_CURRENT_REVIEW_LEFT
 } from './types';
@@ -26,8 +24,6 @@ const initialState: InteractionState = {
   isProfileReviewsTabLoading: true,
   reviewsGotChunksAmount: 0,
   reviewsLeftChunksAmount: 0,
-  currentReviewGotIndex: 0,
-  currentReviewLeftIndex: 0,
   currentReviewGot: null,
   currentReviewLeft: null
 };
@@ -76,16 +72,6 @@ export const interactionStateReducer = (
       return {
         ...state,
         reviewsLeftChunksAmount: action.payload
-      };
-    case SET_CURRENT_REVIEW_GOT_INDEX:
-      return {
-        ...state,
-        currentReviewGotIndex: action.payload
-      };
-    case SET_CURRENT_REVIEW_LEFT_INDEX:
-      return {
-        ...state,
-        currentReviewLeftIndex: action.payload
       };
     case SET_CURRENT_REVIEW_GOT:
       return {

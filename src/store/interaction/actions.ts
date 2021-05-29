@@ -15,8 +15,6 @@ import {
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
-  SET_CURRENT_REVIEW_GOT_INDEX,
-  SET_CURRENT_REVIEW_LEFT_INDEX,
   SET_CURRENT_REVIEW_GOT,
   SET_CURRENT_REVIEW_LEFT
 } from './types';
@@ -69,18 +67,6 @@ export const setReviewsGotChunksAmount = (amount: number)
 export const setReviewsLeftChunksAmount = (amount: number)
   : InteractionStateActionType => ({
   type: SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
-  payload: amount
-});
-
-export const setCurrentReviewGotIndex = (amount: number)
-  : InteractionStateActionType => ({
-  type: SET_CURRENT_REVIEW_GOT_INDEX,
-  payload: amount
-});
-
-export const setCurrentReviewLeftIndex = (amount: number)
-  : InteractionStateActionType => ({
-  type: SET_CURRENT_REVIEW_LEFT_INDEX,
   payload: amount
 });
 

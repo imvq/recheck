@@ -73,6 +73,10 @@ export interface PreviousSearchCardData {
 
 export interface ReviewCardGotData extends IReviewCardCommonData {}
 
+export interface ReviewCardLeftData extends IReviewCardCommonData {
+  name: string;
+}
+
 export interface ReviewCardDataFull {
   name: string;
   photoUrl: string;
