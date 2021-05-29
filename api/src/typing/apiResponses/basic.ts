@@ -3,6 +3,7 @@ export interface IGetNReviewsAmountResponseDto {
 }
 
 export interface IGetNthReviewResponseDto {
+  targetPredefinedName: string;
   workplace: string;
   bounds: string;
   tasks: string;

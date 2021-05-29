@@ -1,7 +1,5 @@
 import { Errors } from 'typescript-rest';
 
-import Logger from '@common/Logger';
-
 export function dbErrorDefaultReactor({ except }: { except?: any[] } = {}) {
   return (
     _target: Object,
@@ -15,8 +13,6 @@ export function dbErrorDefaultReactor({ except }: { except?: any[] } = {}) {
       try {
         return await originalMethod.apply(this, args);
       } catch (error) {
-        Logger.ifdev()?.err(error.message);
-
         except?.forEach(errorType => {
           if (error instanceof errorType) throw error;
         });

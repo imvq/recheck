@@ -19,6 +19,9 @@ export default class Review {
   target!: User;
 
   @Column('text')
+  targetPredefinedName!: string;
+
+  @Column('text')
   workplace!: string;
 
   @Column('text')
