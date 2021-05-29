@@ -3,6 +3,7 @@ import * as generalTypes from 'utils/typing/general';
 import { ProfileMenuEntry } from 'utils/enums';
 
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
+export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';
 export const SET_IS_LOGIN_POPUP_VISIBILE = 'SET_IS_LOGIN_POPUP_VISIBILE';
 export const SET_CURRENT_PROFILE_MENU_ENTRY = 'SET_CURRENT_PROFILE_MENU_ENTRY';
 export const SET_IS_PROFILE_ABOUT_TAB_LOADING = 'SET_IS_PROFILE_ABOUT_TAB_LOADING';
@@ -29,6 +30,11 @@ export interface InteractionState {
 
 export interface SetIsPageLocked {
   type: typeof SET_IS_PAGE_LOCKED;
+  payload: boolean;
+}
+
+export interface SetIsSearchPopupVisible {
+  type: typeof SET_IS_SEARCH_POPUP_VISIBILE;
   payload: boolean;
 }
 
@@ -79,6 +85,7 @@ export interface SetCurrentReviewLeft {
 
 export type InteractionStateActionType =
   SetIsPageLocked
+  | SetIsSearchPopupVisible
   | SetIsLoginPopupVisible
   | SetCurrentMenuProfileEntry
   | SetIsProfileAboutTabLoading

@@ -1,8 +1,6 @@
-import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
-import controlledHostory from 'utils/routing';
-import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
+import { AppState, setPageLocked, setIsSearchPopupVisible, setIsLoginPopupVisible } from 'store';
 import { Wrapper, SearchButton } from './styled';
 import RocketGroup from './RocketGroup';
 import { IProps, IStateProps, IDispatchProps } from './types';
@@ -13,6 +11,7 @@ const mapStateToProps = (store: AppState): IStateProps => ({
 
 const mapDispatchToProps: IDispatchProps = {
   lockPage: setPageLocked,
+  setIsSearchPopupVisible,
   setIsLoginPopupVisible
 };
 
@@ -20,12 +19,12 @@ const mapDispatchToProps: IDispatchProps = {
  * Group of Programmed SVG components representing a search button
  * and a decorated SVG rocket attached to.
  */
-const SearchButtonGroup: FunctionComponent<IProps> = (props) => (
+const SearchButtonGroup = (props: IProps) => (
   <Wrapper onClick={
     props.isAuthorized === null
       ? props.lockPage
       : props.isAuthorized
-        ? () => controlledHostory.replace('/search')
+        ? () => props.setIsSearchPopupVisible(true)
         : () => props.setIsLoginPopupVisible(true)
   }
   >

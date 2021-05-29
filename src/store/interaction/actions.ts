@@ -8,6 +8,7 @@ import { AppActionType } from '../types';
 import {
   InteractionStateActionType,
   SET_IS_PAGE_LOCKED,
+  SET_IS_SEARCH_POPUP_VISIBILE,
   SET_IS_LOGIN_POPUP_VISIBILE,
   SET_CURRENT_PROFILE_MENU_ENTRY,
   SET_IS_PROFILE_ABOUT_TAB_LOADING,
@@ -27,6 +28,12 @@ export const setIsPageLocked = (value: boolean)
 
 export const setPageLocked = () => setIsPageLocked(true);
 export const setPageUnlocked = () => setIsPageLocked(false);
+
+export const setIsSearchPopupVisible = (flag: boolean)
+  : InteractionStateActionType => ({
+  type: SET_IS_SEARCH_POPUP_VISIBILE,
+  payload: flag
+});
 
 export const setIsLoginPopupVisible = (value: boolean)
   : InteractionStateActionType => ({
