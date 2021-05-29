@@ -8,7 +8,7 @@ import { IProps, IStateProps, IDispatchProps } from './types';
 import {
   BoxBaseWrapper,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, TextArea,
-  ButtonGroupWrapper
+  ButtonGroupWrapper, StepWrapper
 } from '../../../shared/BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
@@ -53,6 +53,7 @@ const BoxStepC = (props: IProps) => {
         </InputDescriptionWrapper>
         <TextArea onChange={improvementsHandler} />
       </InputGroupWrapper>
+      <StepWrapper><span>4 / 12</span></StepWrapper>
       <ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
           Назад

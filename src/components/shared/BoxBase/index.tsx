@@ -48,6 +48,11 @@ export const InputRowWrapper = styled.div`
   justify-content: space-between;
 `;
 
+export const StepWrapper = styled.div`
+  padding: 2rem 0;
+  font-size: 1.2rem;
+`;
+
 export const ButtonGroupWrapper = styled.div`
   width: 35rem;
   display: flex;

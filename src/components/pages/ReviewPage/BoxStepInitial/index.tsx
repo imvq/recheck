@@ -12,7 +12,7 @@ import { IProps, IStateProps, IDispatchProps } from './types';
 import {
   BoxBaseWrapper, TitleWrapper, Title, SubtitleWrapper, Subtitle,
   InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input,
-  ButtonGroupWrapper
+  ButtonGroupWrapper, StepWrapper
 } from '../../../shared/BoxBase';
 
 const options: generalTypes.OptionType[] = [
@@ -91,6 +91,7 @@ const BoxStepInitial = (props: IProps) => {
         </InputDescriptionWrapper>
         <CustomSelect options={options} onNewOptionSelected={boundsHandler} />
       </InputGroupWrapper>
+      <StepWrapper><span>1 / 12</span></StepWrapper>
       <ButtonGroupWrapper>
         <CustomButton isDisabled={!canProceed} onClick={proceedIfAllowed}>
           Продолжить

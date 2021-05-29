@@ -11,7 +11,7 @@ import { IProps, IStateProps, IDispatchProps } from './types';
 import {
   BoxBaseWrapper, ButtonGroupWrapper, InputWrapper,
   InputDescription, InputDescriptionWrapper, Input,
-  InputGroupWrapper
+  InputGroupWrapper, StepWrapper
 } from '../../../shared/BoxBase';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
@@ -77,6 +77,7 @@ const BoxStepJ = (props: IProps) => {
           <Input type='text' placeholder='Ссылка на LinkedIn/Email/Telegram' onChange={link3Handler} />
         </InputWrapper>
       </InputGroupWrapper>
+      <StepWrapper><span>12 / 12</span></StepWrapper>
       <ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
           Назад
