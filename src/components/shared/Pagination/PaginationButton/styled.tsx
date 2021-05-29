@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { cssVars } from 'utils/style.common';
 
 export const Wrapper = styled.button<{ isCurrent?: boolean; }>`
-  background-color: ${props => (props.isCurrent ? 'white' : cssVars.colorForegroundPickMain)};
-  color: ${props => (props.isCurrent ? cssVars.colorForegroundPickMain : 'white')};
-  border: ${cssVars.thiknessDefault} ${cssVars.colorForegroundPickMain} solid;
+  background-color: ${props => (props.isCurrent ? 'white' : cssVars.colorForegroundPickAux1)};
+  color: ${props => (props.isCurrent ? cssVars.colorForegroundPickAux1 : 'white')};
+  border: ${cssVars.thiknessDefault} ${cssVars.colorForegroundPickAux1} solid;
   border-radius: 100%;
   width: 2rem;
   height: 2rem;
