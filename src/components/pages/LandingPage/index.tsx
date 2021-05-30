@@ -1,7 +1,6 @@
-import { useLocation } from 'react-router-dom';
-
 import CookiePopup from 'components/shared/CookiePopup';
 import AuthPopupManager from 'components/shared/AuthPopupManager';
+import SearchPopupManager from 'components/shared/SearchPopupManager';
 import { Wrapper } from './styled';
 import GreetingsSection from './GreetingsSection';
 import HowToWorkSection from './HowToWorkSection';
@@ -13,20 +12,16 @@ import Footer from './Footer';
 /**
  * Landing page parts wrapper.
  */
-export default () => {
-  const location = useLocation<{ rollbackTo?: string; }>();
-  const rollbackTo = location.state?.rollbackTo;
-
-  return (
-    <Wrapper>
-      <GreetingsSection />
-      <HowToWorkSection />
-      <InfoblockSection />
-      <MainSwipeSection />
-      <MotivatorSection />
-      <Footer />
-      <CookiePopup />
-      <AuthPopupManager />
-    </Wrapper>
-  );
-};
+export default () => (
+  <Wrapper>
+    <GreetingsSection />
+    <HowToWorkSection />
+    <InfoblockSection />
+    <MainSwipeSection />
+    <MotivatorSection />
+    <Footer />
+    <CookiePopup />
+    <AuthPopupManager />
+    <SearchPopupManager />
+  </Wrapper>
+);

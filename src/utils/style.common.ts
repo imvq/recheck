@@ -30,9 +30,9 @@ export const cssVars = {
   zIndexLoginBadge: '50',
   zIndexPopupCookie: '100',
   zIndexPopupLogin: '100',
+  zIndexPopupSearch: '100',
   zIndexSelectMenu: '150',
   zIndexScrollButton: '200',
-  zIndexPopupSearch: '300',
   zIndexPageLoader: '900'
 };
 
