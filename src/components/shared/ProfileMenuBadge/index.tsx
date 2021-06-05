@@ -46,10 +46,6 @@ const LoginBadge: FunctionComponent<IProps> = (props) => {
             <SvgWrapper><CabinetSvg /></SvgWrapper>
             <span>Профиль</span>
           </MenuEntry>
-          <MenuEntry onClick={() => history.push('/review')}>
-            <SvgWrapper><ReviewSvg /></SvgWrapper>
-            <span>Создать отзыв</span>
-          </MenuEntry>
           <MenuEntry onClick={() => onExit(props.lockPage)}>
             <SvgWrapper><DoorSvg /></SvgWrapper>
             <span>Выйти</span>
