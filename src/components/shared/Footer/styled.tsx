@@ -125,15 +125,6 @@ export const MenuEntryTextDisabled = styled(MenuEntryText)`
 `;
 
 /**
- * Styled component for footer scroll link.
- */
-export const AdaptingScrollLink = styled(ScrollLink)`
-  ${respond(ScreenBreakpoint.XS)} {
-    display: none;
-  }
-`;
-
-/**
  * Styled component for footer social link.
  */
 export const SocialLink = styled.a`

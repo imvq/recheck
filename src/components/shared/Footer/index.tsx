@@ -2,8 +2,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import {
   Wrapper, SectionWrapper, EmptyWrapper, InnerLogo, MenuEntryText,
-  MenuEntryTextMarked, MenuEntryTextDisabled, AdaptingScrollLink,
-  SocialLink, TelegramIconWrapper
+  MenuEntryTextMarked, MenuEntryTextDisabled, SocialLink, TelegramIconWrapper
 } from './styled';
 
 /**
@@ -14,10 +13,10 @@ export default () => (
     <SectionWrapper><InnerLogo /></SectionWrapper>
     <SectionWrapper>
       <MenuEntryTextMarked>Меню:</MenuEntryTextMarked>
-      <RouterLink to='/#HowToWorkTitle'>
+      <RouterLink style={{ textDecoration: 'none', color: 'black' }} to='/#HowToWorkTitle'>
         <MenuEntryText>О платформе</MenuEntryText>
       </RouterLink>
-      <RouterLink to='/#InfoblockTitle'>
+      <RouterLink style={{ textDecoration: 'none', color: 'black' }} to='/#InfoblockTitle'>
         <MenuEntryText>Преимущества</MenuEntryText>
       </RouterLink>
     </SectionWrapper>
