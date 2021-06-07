@@ -20,7 +20,7 @@ const BuyMainBadge = (
     <BadgeTitleWrapper>
       <BadgeTitle>Оплатить получение отзыва</BadgeTitle>
     </BadgeTitleWrapper>
-    <BadgeText isEnlarged>$19.89</BadgeText>
+    <BadgeText>$19.89</BadgeText>
   </>
 );
 
@@ -43,15 +43,16 @@ const BuyHiddenBadge = (
 const FreeMainBadge = (
   <>
     <BadgeTitleWrapper>
-      <BadgeTitle>Написать отзыв о ком-то из своей команды</BadgeTitle>
+      <BadgeTitle>Бесплатно</BadgeTitle>
     </BadgeTitleWrapper>
+    <BadgeText>Написать отзыв о ком-то из своей команды</BadgeText>
   </>
 );
 
 const FreeHiddenBadge = (
   <>
     <BadgeTitleWrapper>
-      <BadgeTitle>Написать отзыв о ком-то из своей команды</BadgeTitle>
+      <BadgeTitle>Бесплатно</BadgeTitle>
     </BadgeTitleWrapper>
 
     <BuyHiddenBadgeWrapper>
@@ -80,7 +81,6 @@ const SearchPopup = (props: IProps) => (
           <OptionBadge
             mainView={BuyMainBadge}
             hiddenView={BuyHiddenBadge}
-            isExpanded
           />
           <ButtonWrapper>
             <CustomButton isDisabled={false}>Купить отзыв</CustomButton>

@@ -15,7 +15,7 @@ export default (props: IProps) => {
   );
 
   return (
-    <Wrapper>
+    <Wrapper adjustExpansionHeight={isExpanded}>
       {isExpanded ? props.hiddenView : props.mainView}
       {!isExpanded ? expansion : null}
     </Wrapper>

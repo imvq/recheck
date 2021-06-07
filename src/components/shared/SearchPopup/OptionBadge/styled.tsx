@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ adjustExpansionHeight?: boolean; }>`
   width: 22rem;
   height: fit-content;
+  min-height: ${props => (props.adjustExpansionHeight ? '20rem' : '12.5rem')};
   box-sizing: border-box;
   padding: 1.2rem;
-  border-radius: .9rem;
+  border-radius: 3rem;
   border: none;
   background-color: #c1eeed;
   
