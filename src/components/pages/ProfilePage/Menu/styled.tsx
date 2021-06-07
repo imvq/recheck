@@ -60,3 +60,9 @@ export const ProfilePicture = styled.img`
   max-height: 100%;
   border-radius: 50%;
 `;
+
+export const ButtonWrapper = styled.div`
+  position: absolute;
+  right: 4rem;
+  bottom: 2rem;
+`;

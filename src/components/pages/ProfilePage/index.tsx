@@ -4,14 +4,13 @@ import { connect } from 'react-redux';
 import { AppState } from 'store';
 import { ProfileMenuEntry } from 'utils/enums';
 import Footer from 'components/shared/Footer';
+import SearchPopupManager from 'components/shared/SearchPopupManager';
 import { IProps, IStateProps } from './types';
 import Menu from './Menu';
 import ReviewsArea from './ReviewsArea';
 import HistoryArea from './HistoryArea';
 import AboutArea from './AboutArea';
 import { Wrapper, TitleWrapper, AdaptedHeader, ContentWrapper } from './styled';
-
-import exampleHistory from './exampleHistory';
 
 const mapStateToProps = (store: AppState): IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
@@ -39,6 +38,7 @@ const ProfilePage: FunctionComponent<IProps> = (props) => (
       })()}
     </ContentWrapper>
     <Footer />
+    <SearchPopupManager />
   </Wrapper>
 );
 
