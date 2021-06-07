@@ -1,7 +1,7 @@
 import { SearchState, SearchActionType, SET_CURRENT_USER_SEARCH_RESULTS } from './types';
 
 const initialState: SearchState = {
-  userSearchResults: []
+  userSearchResults: { results: [] }
 };
 
 export function searchReducer(
@@ -12,7 +12,7 @@ export function searchReducer(
     case SET_CURRENT_USER_SEARCH_RESULTS:
       return {
         ...state,
-        userSearchResults: action.payload
+        userSearchResults: { results: action.payload }
       };
     default:
       return state;

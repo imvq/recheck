@@ -26,7 +26,7 @@ export default class Api {
   }
 
   public static searchUser(name: string)
-    : generalTypes.APIResponse<apiResponses.SearchUserDto[]> {
+    : generalTypes.APIResponse<{ results: apiResponses.SearchUserDto[]; }> {
     return Api.instance.post('/user/search', { name });
   }
 

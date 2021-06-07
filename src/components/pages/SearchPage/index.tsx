@@ -17,7 +17,7 @@ const mapDispatchToProps: IDispatchProps = {
 
 const SearchPage = (props: IProps) => (
   <styled.Wrapper>
-    <styled.Sidebar>sidebar</styled.Sidebar>
+    <styled.Sidebar />
 
     <styled.AdaptedHeader withoutLogo />
 
@@ -25,8 +25,8 @@ const SearchPage = (props: IProps) => (
       <SearchField lockPageCallback={props.lockPage} searchUserCallback={props.searchUser} />
       <styled.TitleWrapper><styled.Title>Результат поиска:</styled.Title></styled.TitleWrapper>
       <styled.ResultsWrapper>
-        {props.userSearchResults.length
-          ? props.userSearchResults.map(userData => (
+        {props.userSearchResults.results.length
+          ? props.userSearchResults.results.map(userData => (
             <styled.PersonCardWrapper>
               <PersonCard userData={userData} />
             </styled.PersonCardWrapper>

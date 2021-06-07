@@ -14,6 +14,6 @@ export const setUserSearchResults = (results: generalTypes.SearchProfileInfo[])
 
 export const searchUser = (name: string) => (dispatch: Dispatch<AppActionType>) => {
   Api.searchUser(name)
-    .then((searchResults) => dispatch(setUserSearchResults(searchResults.data)))
+    .then((searchResults) => dispatch(setUserSearchResults(searchResults.data.results)))
     .finally(() => dispatch(unlockPage()));
 };
