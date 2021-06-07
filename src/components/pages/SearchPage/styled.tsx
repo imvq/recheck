@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import BackgroundSvgPath from 'assets/images/pages/RegistrationPage/Background.svg';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
+import MainToolbar from 'components/shared/MainToolbar';
 
 export const Wrapper = styled.div`
   background-image: url(${BackgroundSvgPath});
@@ -10,12 +11,12 @@ export const Wrapper = styled.div`
   min-height: 100%;
   display: grid;
   grid-template:
-    'Header'
-    'Content' 1fr
-    'Footer';
+    'Sidebar Header'  auto
+    'Sidebar Content' 1fr
+    'Footer Footer'   auto / 20rem 1fr;
 `;
 
-export const AdaptedHeader = styled(Header)`
+export const AdaptedHeader = styled(Header)<{ withoutLogo?: boolean; }>`
   grid-area: Header;
 `;
 
@@ -27,7 +28,7 @@ export const ContentWrapper = styled.div`
   grid-area: Content;
   height: fit-content;
   box-sizing: border-box;
-  padding: 2rem 20rem 5rem;
+  padding: 2rem 0 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,4 +62,8 @@ export const SpanWrapper = styled.div`
 export const Span = styled.span`
   font-size: 1.2rem;
   font-weight: 400;
+`;
+
+export const Sidebar = styled(MainToolbar)`
+  grid-area: Sidebar;
 `;
