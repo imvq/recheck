@@ -6,7 +6,7 @@ import { cssVars } from 'utils/style.common';
 /**
  * Styled component for page loader wrapper.
  */
-export const Wrapper = styled.div`
+export const DimmedSpace = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
