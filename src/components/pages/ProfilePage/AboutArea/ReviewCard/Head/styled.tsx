@@ -38,3 +38,14 @@ export const MenuContentSpan = styled.span<{ dimmed?: boolean; }>`
   line-height: 2rem;
   color: ${props => (props.dimmed ? '#979797' : 'black')};
 `;
+
+export const TopBar = styled.div`
+  background-color: #f0f3ff;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  font-weight: 600;
+  box-sizing: border-box;
+  padding: 1.7rem;
+  padding-left: 13rem;
+`;

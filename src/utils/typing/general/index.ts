@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { ChangeEvent } from 'react';
 
-import { ReviewApprovementStatus } from 'utils/enums';
 import { IReviewCardCommonData } from './basic';
 
 export type APIResponse<TDto = any> = Promise<AxiosResponse<TDto>>;
@@ -84,7 +83,6 @@ export interface ReviewCardDataFull {
   review: string;
   nReviews: number;
   questions: string[];
-  approved: ReviewApprovementStatus;
 }
 
 export interface ReviewData {

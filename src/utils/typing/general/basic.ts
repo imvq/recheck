@@ -1,5 +1,3 @@
-import { ReviewApprovementStatus } from 'utils/enums';
-
 export interface IReviewCardCommonData {
   targetPredefinedName: string;
   workplace: string;
@@ -19,5 +17,4 @@ export interface IReviewCardCommonData {
   leadershipMark: number;
   leadershipComment: string;
   adviceComment: string;
-  approved: ReviewApprovementStatus;
 }

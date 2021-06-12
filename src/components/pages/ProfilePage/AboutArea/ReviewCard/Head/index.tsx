@@ -1,19 +1,20 @@
 import { IProps } from './types';
-import Bar from './Bar';
-import { Wrapper, Menu, MenuContent, MenuContentSpansWrapper, MenuContentSpan } from './styled';
+import * as styled from './styled';
 
 export default (props: IProps) => (
-  <Wrapper>
-    <Menu>
-      <Bar reviewCardData={props.reviewCardData} />
-      <MenuContent>
-        <MenuContentSpansWrapper>
-          <MenuContentSpan dimmed>
+  <styled.Wrapper>
+    <styled.Menu>
+      <styled.TopBar />
+      <styled.MenuContent>
+        <styled.MenuContentSpansWrapper>
+          <styled.MenuContentSpan dimmed>
             Место работы:&nbsp;&nbsp;
-            <MenuContentSpan>{props.reviewCardData.workplace}</MenuContentSpan>
-          </MenuContentSpan>
-        </MenuContentSpansWrapper>
-      </MenuContent>
-    </Menu>
-  </Wrapper>
+            <styled.MenuContentSpan>
+              {props.reviewCardData.workplace}
+            </styled.MenuContentSpan>
+          </styled.MenuContentSpan>
+        </styled.MenuContentSpansWrapper>
+      </styled.MenuContent>
+    </styled.Menu>
+  </styled.Wrapper>
 );

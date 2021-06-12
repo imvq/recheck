@@ -21,7 +21,6 @@ export interface IGetNthReviewResponseDto {
   leadershipMark: number;
   leadershipComment: string;
   adviceComment: string;
-  approved: 0 | 1 | -1;
 }
 
 export interface IRetrieveProfileInfoResponseDto {

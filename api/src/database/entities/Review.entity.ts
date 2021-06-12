@@ -80,12 +80,4 @@ export default class Review {
 
   @Column('text')
   recommenderLink3!: string;
-
-  /**
-   * In progress: 0
-   * Approved:    1
-   * Rejected:   -1
-   */
-  @Column('int', { default: 0 })
-  approved!: 0 | 1 | -1;
 }
