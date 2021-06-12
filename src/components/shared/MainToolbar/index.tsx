@@ -10,12 +10,20 @@ export default (props: types.IProps) => (
   <styled.Wrapper className={props.className}>
     <styled.LogoWrapper><Link to='/'><Logo /></Link></styled.LogoWrapper>
 
-    <MenuEntry text='Мои отзывы' isPressed={false} />
-    <MenuEntry text='История поиска' isPressed={false} />
-    <MenuEntry text='Обо мне' isPressed={false} />
-    <MenuEntry text='Пополнить счёт' isPressed={false} />
-    <MenuEntry text='Добавить место работы' isPressed={false} />
-    <MenuEntry text='Новый поиск' isPressed={false} />
-    <MenuEntry text='Выйти' isPressed={false} />
+    <styled.ButtonsWrapper>
+      <styled.ButtonWrapper><MenuEntry text='Мои отзывы' isPressed={false} /></styled.ButtonWrapper>
+
+      <styled.ButtonWrapper><MenuEntry text='История поиска' isPressed={false} /></styled.ButtonWrapper>
+
+      <styled.ButtonWrapper><MenuEntry text='Обо мне' isPressed={false} /></styled.ButtonWrapper>
+
+      <styled.ButtonWrapper><MenuEntry text='Пополнить счёт' isPressed={false} /></styled.ButtonWrapper>
+
+      <styled.ButtonWrapper><MenuEntry text='Добавить место работы' isPressed={false} /></styled.ButtonWrapper>
+
+      <styled.ButtonWrapper><MenuEntry text='Новый поиск' isPressed /></styled.ButtonWrapper>
+
+      <styled.ButtonWrapper><MenuEntry text='Выйти' isPressed={false} /></styled.ButtonWrapper>
+    </styled.ButtonsWrapper>
   </styled.Wrapper>
 );

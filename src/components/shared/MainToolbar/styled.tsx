@@ -7,7 +7,7 @@ export const Wrapper = styled.aside`
 
   display: grid;
   grid-template:
-    'LogoWrapper'    5rem
+    'LogoWrapper'    10rem
     'ButtonsWrapper' 1fr;
 `;
 
@@ -20,4 +20,17 @@ export const LogoWrapper = styled.div`
   padding: 5rem 0 2.5rem;
   background-color: rgb(240, 243, 255);
   border-bottom: 1px solid rgb(196, 196, 196);
+`;
+
+export const ButtonsWrapper = styled.div`
+  grid-area: ButtonsWrapper;
+
+  display: flex;
+  flex-direction: column;
+  padding-top: 5rem;
+`;
+
+export const ButtonWrapper = styled.div`
+  padding: .8rem 0 0 1rem;
+  display: flex;
 `;
