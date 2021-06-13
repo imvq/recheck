@@ -13,7 +13,7 @@ import ComponentBoxWithMark from './CommentBoxWithMark';
 import * as boxWithMarkMapping from './CommentBoxWithMark/mapping';
 import * as boxWithMarkLabels from './CommentBoxWithMark/labels';
 
-import { Wrapper, AdaptedHeader, AdaptedFooter, ContentWrapper } from './styled';
+import * as styled from './styled';
 
 const mapSateToProps = (store: AppState): IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
@@ -123,13 +123,13 @@ const ReviewPage = (props: IProps) => {
   ];
 
   return (
-    <Wrapper>
-      <AdaptedHeader />
-      <ContentWrapper>
+    <styled.Wrapper>
+      <styled.AdaptedHeader />
+      <styled.ContentWrapper>
         {boxes[step]}
-      </ContentWrapper>
-      <AdaptedFooter />
-    </Wrapper>
+      </styled.ContentWrapper>
+      <styled.AdaptedFooter />
+    </styled.Wrapper>
   );
 };
 
