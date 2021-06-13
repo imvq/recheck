@@ -2,14 +2,14 @@ import styled, { css } from 'styled-components';
 
 import { cssVars } from 'utils/style.common';
 
-export const Wrapper = styled.button<{ isCurrent?: boolean; }>`
+export const NumberWrapper = styled.button<{ isCurrent?: boolean; }>`
   background: none;
   border: none;
   color: ${props => (props.isCurrent ? cssVars.colorForegroundPickAux1 : 'black')};
   width: 2rem;
   height: 2rem;
   padding: 1.2rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 500;
   user-select: none;
   outline: none;
@@ -32,9 +32,7 @@ export const Wrapper = styled.button<{ isCurrent?: boolean; }>`
   }
 
   &:disabled {
-    color: white;
-    border-color: #b6b6b6;
-    background-color: #b6b6b6;
+    color: ${cssVars.colorForegroundPickAux1};
     cursor: default;
   }
 `;
@@ -43,6 +41,7 @@ export const Arrow = ({ isEnabled }: { isEnabled?: boolean }) => css`
   width: 1rem;
   height: 2.2rem;
   cursor: ${isEnabled ? 'pointer' : 'default'};
+  pointer-events: ${isEnabled ? 'all' : 'none'};
 
   display: flex;
   align-items: center;

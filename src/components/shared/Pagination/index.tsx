@@ -1,14 +1,15 @@
 import { useState } from 'react';
 
 import { PaginationDirection } from 'utils/enums';
-import { IProps } from './types';
-import { Wrapper, ButtonWrapper } from './styled';
 import PaginationButton from './PaginationButton';
+
+import * as types from './types';
+import * as styled from './styled';
 
 /**
  * Pagination.
  */
-export default (props: IProps) => {
+export default (props: types.IProps) => {
   const pageButtons = [] as JSX.Element[];
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -28,39 +29,39 @@ export default (props: IProps) => {
   };
 
   pageButtons.push(
-    <ButtonWrapper key={PaginationDirection.Prev}>
+    <styled.ButtonWrapper key={PaginationDirection.Prev}>
       <PaginationButton
         page={PaginationDirection.Prev}
         callback={onPrevExtended}
         isEnabled={currentPage > 1}
         isCurrent={false}
       />
-    </ButtonWrapper>
+    </styled.ButtonWrapper>
   );
 
   for (let i = 1; i <= props.nPages; ++i) {
     pageButtons.push(
-      <ButtonWrapper key={i}>
+      <styled.ButtonWrapper key={i}>
         <PaginationButton
           page={i}
           callback={onPageExtended}
           isCurrent={i === currentPage}
-          isEnabled
+          isEnabled={i !== currentPage}
         />
-      </ButtonWrapper>
+      </styled.ButtonWrapper>
     );
   }
 
   pageButtons.push(
-    <ButtonWrapper key={PaginationDirection.Next}>
+    <styled.ButtonWrapper key={PaginationDirection.Next}>
       <PaginationButton
         page={PaginationDirection.Next}
         callback={onNextExtended}
         isEnabled={currentPage < props.nPages}
         isCurrent={false}
       />
-    </ButtonWrapper>
+    </styled.ButtonWrapper>
   );
 
-  return <Wrapper>{pageButtons}</Wrapper>;
+  return <styled.Wrapper>{pageButtons}</styled.Wrapper>;
 };
