@@ -4,10 +4,10 @@ import { connect } from 'react-redux';
 import { AppState, createReview } from 'store';
 import { IProps, IStateProps, IDispatchProps } from './types';
 import BoxStepInitial from './BoxStepInitial';
-import BoxStepA from './BoxStepA';
-import BoxStepB from './BoxStepB';
-import BoxStepC from './BoxStepC';
-import BoxStepD from './BoxStepD';
+
+import CommentBoxSimple from './CommentBoxSimple';
+import * as boxSimpleMapping from './CommentBoxSimple/mapping';
+
 import BoxStepE from './BoxStepE';
 import BoxStepF from './BoxStepF';
 import BoxStepG from './BoxStepG';
@@ -26,6 +26,26 @@ const mapDispatchToProps: IDispatchProps = {
   createReview
 };
 
+const BoxStepA = CommentBoxSimple(
+  boxSimpleMapping.mapStepAStateToProps,
+  boxSimpleMapping.mapStepADispatchToProps
+);
+
+const BoxStepB = CommentBoxSimple(
+  boxSimpleMapping.mapStepBStateToProps,
+  boxSimpleMapping.mapStepBDispatchToProps
+);
+
+const BoxStepC = CommentBoxSimple(
+  boxSimpleMapping.mapStepCStateToProps,
+  boxSimpleMapping.mapStepCDispatchToProps
+);
+
+const BoxStepD = CommentBoxSimple(
+  boxSimpleMapping.mapStepDStateToProps,
+  boxSimpleMapping.mapStepDDispatchToProps
+);
+
 /**
  * Page in charge of adding a review.
  */
@@ -41,10 +61,10 @@ const ReviewPage = (props: IProps) => {
 
   const boxes = [
     <BoxStepInitial onNextStep={proceed} />,
-    <BoxStepA onNextStep={proceed} onBack={comeback} />,
-    <BoxStepB onNextStep={proceed} onBack={comeback} />,
-    <BoxStepC onNextStep={proceed} onBack={comeback} />,
-    <BoxStepD onNextStep={proceed} onBack={comeback} />,
+    <BoxStepA page={1} onNextStep={proceed} onBack={comeback} />,
+    <BoxStepB page={2} onNextStep={proceed} onBack={comeback} />,
+    <BoxStepC page={3} onNextStep={proceed} onBack={comeback} />,
+    <BoxStepD page={4} onNextStep={proceed} onBack={comeback} />,
     <BoxStepE onNextStep={proceed} onBack={comeback} />,
     <BoxStepF onNextStep={proceed} onBack={comeback} />,
     <BoxStepG onNextStep={proceed} onBack={comeback} />,
