@@ -4,17 +4,18 @@ import { connect } from 'react-redux';
 import { AppState, loadAboutTabData, loadNthReviewGot } from 'store';
 import Pagination from 'components/shared/Pagination';
 import ReviewCard from './ReviewCard';
-import { IProps, IStateProps, IDispatchProps } from './types';
-import { Wrapper, TitleWrapper, Title } from './styled';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+import * as styled from './styled';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentPorfileId: store.profile.currentProfileInfo.currentId,
   isLoading: store.interaction.isProfileAboutTabLoading,
   reviewsGotChunksAmount: store.interaction.reviewsGotChunksAmount,
   currentReviewCardData: store.interaction.currentReviewGot
 });
 
-const mapDispatchToProps: IDispatchProps = {
+const mapDispatchToProps: types.IDispatchProps = {
   loadTabData: loadAboutTabData,
   loadNthReview: loadNthReviewGot
 };
@@ -22,22 +23,40 @@ const mapDispatchToProps: IDispatchProps = {
 /**
  * Section with user's reviews.
  */
-const AboutArea = (props: IProps) => {
+const AboutArea = (props: types.IProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     props.loadTabData(props.currentPorfileId);
   }, []);
 
+  const NoContent = () => (
+    <styled.Title isHighlighted>Загрузка...</styled.Title>
+  );
+
+  const ContentEmpty = () => (
+    <styled.Title isHighlighted>Никто ещё не оставил о вас отзыв :(</styled.Title>
+  );
+
+  const ContentAvailable = () => (
+    <>
+      <styled.TitleWrapper>
+        <styled.Title isHighlighted>Отзывы обо мне:</styled.Title>
+      </styled.TitleWrapper>
+
+      {/* @ts-ignore: Used only in case the data is not null. */}
+      <ReviewCard reviewCardData={props.currentReviewCardData} />
+    </>
+  );
+
   return (
-    <Wrapper>
-      <TitleWrapper>
-        {props.isLoading
-          ? <Title isHighlighted>Загрузка...</Title>
+    <styled.Wrapper>
+      <styled.ReviewSectionWrapper>
+        {props.isLoading ? <NoContent />
           : props.currentReviewCardData
-            ? <ReviewCard reviewCardData={props.currentReviewCardData} />
-            : <Title isHighlighted>Никто ещё не оставил о вас отзыв :(</Title>}
-      </TitleWrapper>
+            ? <ContentAvailable />
+            : <ContentEmpty />}
+      </styled.ReviewSectionWrapper>
 
       <Pagination
         nPages={props.reviewsGotChunksAmount}
@@ -54,7 +73,7 @@ const AboutArea = (props: IProps) => {
           setCurrentIndex(currentIndex - 1);
         }}
       />
-    </Wrapper>
+    </styled.Wrapper>
   );
 };
 

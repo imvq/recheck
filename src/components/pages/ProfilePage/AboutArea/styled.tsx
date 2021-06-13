@@ -7,10 +7,16 @@ export const Wrapper = styled.section`
   align-items: center;
 `;
 
-export const TitleWrapper = styled.div`
+export const ReviewSectionWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   margin: 4rem 0 3rem;
+`;
+
+export const TitleWrapper = styled.div`
+  box-sizing: border-box;
+  padding: 0 0 3rem;
 `;
 
 export const Title = styled.h2<{ isHighlighted?: boolean; }>`
