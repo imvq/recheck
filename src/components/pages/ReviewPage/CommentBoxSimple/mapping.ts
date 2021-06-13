@@ -41,3 +41,13 @@ export const mapStepDDispatchToProps: types.IDispatchProps = {
   clearCurrent: dispatchers.clearResults,
   setCurrent: dispatchers.setReviewResults
 };
+
+export const mapStepJStateToProps = (store: AppState): types.IStateProps => ({
+  comment: store.reviews.adviceComment
+});
+
+export const mapStepJDispatchToProps: types.IDispatchProps = {
+  clearPrevious: dispatchers.clearLeadershipData,
+  clearCurrent: dispatchers.clearAdviceData,
+  setCurrent: dispatchers.setReviewAdviceComment
+};

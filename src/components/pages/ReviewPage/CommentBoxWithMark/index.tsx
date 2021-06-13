@@ -3,27 +3,28 @@ import { connect } from 'react-redux';
 import * as generalTypes from 'utils/typing/general';
 import { textAreaHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
+import MarkSelector from '../MarkSelector';
 
 import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
 
 /**
- * Higher order component for generating simple comment review box.
+ * Higher order component for generating comment review box with mark selector.
  *
  * @param mapStateToProps State mapper function
  * @param mapDispatchToProps Dispatch mapper object
  * @returns Redux-connected component
  */
-export default function CommentBoxSimple(
+export default function CommentBoxWithMark(
   mapStateToProps: types.IStatePropsMapped,
   mapDispatchToProps: types.IDispatchProps
 ) {
   const Wrapped = (props: types.IProps) => {
     function valueHandler(event: generalTypes.TextAreaEvent) {
-      textAreaHandler(event, props.setCurrent);
+      textAreaHandler(event, props.setCurrentComment);
     }
 
-    const canProceed = !!props.comment;
+    const canProceed = !!props.mark;
 
     function returnHandler() {
       props.clearPrevious();
@@ -40,16 +41,19 @@ export default function CommentBoxSimple(
     return (
       <styled.BoxBaseWrapper>
 
-        <styled.InputGroupWrapper>
-          <styled.InputDescriptionWrapper>
-            <styled.InputDescription>
-              {props.children}
-            </styled.InputDescription>
-          </styled.InputDescriptionWrapper>
-          <styled.TextArea onChange={valueHandler} />
-        </styled.InputGroupWrapper>
+        <styled.MarkSelectorWrapper>
+          <styled.MarkSelectorDescriptionWrapper>
+            <styled.MarkSelectorDescription>
+              Оцените уровень знаний для должности, на которой был кандидат
+            </styled.MarkSelectorDescription>
+          </styled.MarkSelectorDescriptionWrapper>
+          <MarkSelector labels={props.labels} setMark={props.setCurrentMark} />
+        </styled.MarkSelectorWrapper>
 
-        <styled.StepWrapper><span>{`${props.page} / 12`}</span></styled.StepWrapper>
+        <styled.InputGroupWrapper>
+          <styled.CommentArea placeholder='Прокомментируйте свой ответ' onChange={valueHandler} />
+        </styled.InputGroupWrapper>
+        <styled.StepWrapper><span>6 / 12</span></styled.StepWrapper>
 
         <styled.ButtonGroupWrapper>
           <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
@@ -60,7 +64,6 @@ export default function CommentBoxSimple(
             Далее
           </CustomButton>
         </styled.ButtonGroupWrapper>
-
       </styled.BoxBaseWrapper>
     );
   };
