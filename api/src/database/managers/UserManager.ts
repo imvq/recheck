@@ -43,7 +43,13 @@ export default class UserManager {
 
   public static async getUserWithReviewsLeft(profileId: string)
     : Promise<utilityTypes.Optional<User>> {
-    return UserManager.repo?.findOne({ relations: ['reviewsLeft'], where: { profileId } });
+    return UserManager.repo?.createQueryBuilder('users')
+      .where({ profileId })
+      .innerJoinAndSelect('users.reviewsLeft', 'reviewsLeft')
+      .innerJoin('reviewsLeft.target', 'target')
+      .innerJoinAndSelect('target.name', 'targetName')
+      .innerJoinAndSelect('target.photoUrl', 'targetPhotoUrl')
+      .getOne();
   }
 
   public static async getUserBasicInfoByName(name: string)
