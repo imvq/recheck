@@ -38,21 +38,12 @@ export default class UserManager {
 
   public static async getUserWithReviewsGot(profileId: string)
     : Promise<utilityTypes.Optional<User>> {
-    return UserManager.repo?.findOne({ relations: ['reviewsGot'], where: { profileId } });
+    return UserManager.repo?.findOne({ relations: ['reviewsGot, reviewsGot.target'], where: { profileId } });
   }
 
   public static async getUserWithReviewsLeft(profileId: string)
     : Promise<utilityTypes.Optional<User>> {
-    return UserManager.repo?.createQueryBuilder('users')
-      .where({ profileId })
-      .innerJoinAndSelect('users.reviewsLeft', 'reviewsLeft')
-      .innerJoinAndSelect('reviewsLeft.target', 'target')
-      .select([
-        'reviewsLeft',
-        'target.name',
-        'target.photoUrl'
-      ])
-      .getRawOne();
+    return UserManager.repo?.findOne({ relations: ['reviewsLeft', 'reviewsLeft.target'], where: { profileId } });
   }
 
   public static async getUserBasicInfoByName(name: string)

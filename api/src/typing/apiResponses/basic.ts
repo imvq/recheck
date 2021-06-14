@@ -4,6 +4,8 @@ export interface IGetNReviewsAmountResponseDto {
 
 export interface IGetNthReviewResponseDto {
   targetPredefinedName: string;
+  targetName: string;
+  targetPhotoUrl: string;
   workplace: string;
   bounds: string;
   tasks: string;

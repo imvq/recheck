@@ -11,7 +11,7 @@ import Review from './Review.entity';
 export default class User {
   // Primary key.
   @Index({ unique: true })
-  @PrimaryColumn('varchar', { length: 30, select: false })
+  @PrimaryColumn('varchar', { length: 30 })
   profileId!: string;
 
   // Foreign key. Every user belongs to one company.

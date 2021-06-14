@@ -5,6 +5,7 @@ import dto from '@dto';
 import utils from '@utils';
 import * as apiResponses from '@typing/apiResponses';
 
+import Review from '@database/entities/Review.entity';
 import Company from '@database/entities/Company.entity';
 
 import UserManager from '@database/managers/UserManager';
@@ -104,23 +105,52 @@ export default class UserService {
   @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
   public async getNthReviewGot(bodyData: dto.GetNthReviewGotDto)
     : Promise<apiResponses.IGetNthReviewGotResponseDto> {
-    const targetData = await UserManager.getUserWithReviewsGot(bodyData.profileId);
-    if (!targetData?.reviewsGot || targetData?.reviewsGot.length <= bodyData.nthReview) {
+    const target = await UserManager.getUserWithReviewsGot(bodyData.profileId);
+
+    if (!target?.reviewsGot || target?.reviewsGot.length <= bodyData.nthReview) {
       throw new Errors.BadRequestError('No review with the index.');
     }
 
-    return targetData?.reviewsGot[bodyData.nthReview];
+    const review = target.reviewsGot[bodyData.nthReview];
+    return this.mapReviewToReducedReview(review);
   }
 
   @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
   public async getNthReviewLeft(bodyData: dto.GetNthReviewLeftDto)
     : Promise<apiResponses.IGetNthReviewLeftResponseDto> {
-    const auhor = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
-    logger.log(JSON.stringify(auhor));
-    if (!auhor?.reviewsLeft || auhor?.reviewsLeft.length <= bodyData.nthReview) {
+    const author = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
+
+    if (!author?.reviewsLeft || author?.reviewsLeft.length <= bodyData.nthReview) {
       throw new Errors.BadRequestError('No review with the index.');
     }
 
-    return auhor?.reviewsLeft[bodyData.nthReview];
+    const review = author.reviewsLeft[bodyData.nthReview];
+    return this.mapReviewToReducedReview(review);
+  }
+
+  private mapReviewToReducedReview(review: Review)
+    : apiResponses.IGetNthReviewLeftResponseDto {
+    return {
+      activityComment: review.activityComment,
+      activityMark: review.activityMark,
+      adviceComment: review.adviceComment,
+      bounds: review.bounds,
+      improvements: review.improvements,
+      leadershipComment: review.leadershipComment,
+      leadershipMark: review.leadershipMark,
+      levelComment: review.leadershipComment,
+      levelMark: review.levelMark,
+      ownHireOpinionComment: review.ownHireOpinionComment,
+      ownHireOpinionMark: review.ownHireOpinionMark,
+      qualityComment: review.qualityComment,
+      qualityMark: review.qualityMark,
+      results: review.results,
+      strengths: review.strengths,
+      targetName: review.target.name,
+      targetPhotoUrl: review.target.photoUrl,
+      targetPredefinedName: review.targetPredefinedName,
+      tasks: review.tasks,
+      workplace: review.workplace,
+    };
   }
 }
