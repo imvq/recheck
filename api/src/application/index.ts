@@ -1,4 +1,4 @@
-import Logger from '@common/Logger';
+import logger from '@logging/Logger';
 import App from './App';
 
 /**
@@ -15,12 +15,12 @@ export default async function startServer(): Promise<void> {
       await apiServer.dev();
       break;
     default:
-      Logger.ifdev()?.err('Invalid NODE_ENV provided');
+      logger.err('Invalid NODE_ENV provided');
       process.exit(0);
   }
 
   const graceful = async () => {
-    Logger.ifdev()?.log('Server terminated manually');
+    logger.log('Server terminated manually');
     await apiServer.stop();
     process.exit(0);
   };

@@ -7,7 +7,7 @@ import * as generalTypes from '@typing/general';
 import * as apiResponses from '@typing/apiResponses';
 import dto from '@dto';
 import utils from '@utils';
-import Logger from '@common/Logger';
+import logger from '@logging/Logger';
 
 /**
  * Service in charge of LinkedIn OAuth.
@@ -27,7 +27,7 @@ export default class LinkedInOAuthService {
 
       return { [cookiesList.LI_AT]: data['access_token'] };
     } catch (error) {
-      Logger.ifdev()?.log(JSON.stringify(error));
+      logger.log(JSON.stringify(error));
       throw error instanceof Errors.UnauthorizedError ? error
         : new Errors.InternalServerError('Unexpected error.');
     }
@@ -57,7 +57,7 @@ export default class LinkedInOAuthService {
         photoUrl: `${highestQualityPicture.identifiers[0].identifier}`
       };
     } catch (error) {
-      Logger.ifdev()?.err(error);
+      logger.err(error);
       throw error instanceof Errors.UnauthorizedError ? error
         : new Errors.InternalServerError('Request limits breach.');
     }

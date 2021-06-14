@@ -1,6 +1,10 @@
 import { Errors } from 'typescript-rest';
 
-export function dbErrorDefaultReactor({ except }: { except?: any[] } = {}) {
+import ILogger from '@logging/ILogger';
+
+export function dbErrorDefaultReactor(
+  { except, logger }: { except?: any[], logger?: ILogger } = {}
+) {
   return (
     _target: Object,
     _propKey: string,
@@ -16,6 +20,8 @@ export function dbErrorDefaultReactor({ except }: { except?: any[] } = {}) {
         except?.forEach(errorType => {
           if (error instanceof errorType) throw error;
         });
+
+        logger?.err(error);
 
         throw new Errors.InternalServerError('Inner server-side error');
       }

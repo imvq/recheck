@@ -1,6 +1,6 @@
 import { getConnection, createConnection, Connection } from 'typeorm';
 
-import Logger from '@common/Logger';
+import logger from '@logging/Logger';
 import config from './config';
 import UserManager from './managers/UserManager';
 import ReviewManager from './managers/ReviewManager';
@@ -22,15 +22,15 @@ async function connect(): Promise<void> {
       connection = getConnection();
       if (!connection.isConnected) {
         await connection.connect();
-        Logger.ifdev()?.log('Database connection re-established');
+        logger.log('Database connection re-established');
       }
     } catch {
       await createConnection(config);
       loadRepositories();
-      Logger.ifdev()?.log('Database connection established');
+      logger.log('Database connection established');
     }
   } catch (exception) {
-    Logger.ifdev()?.err(exception?.message || 'Database connection error.');
+    logger.err(exception?.message || 'Database connection error.');
   }
 }
 

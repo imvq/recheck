@@ -1,7 +1,7 @@
 import { Errors } from 'typescript-rest';
 
 import dto from '@dto';
-import Logger from '@common/Logger';
+import logger from '@logging/Logger';
 import * as apiResponses from '@typing/apiResponses';
 import ReviewManager from '@database/managers/ReviewManager';
 
@@ -15,7 +15,7 @@ export default class ReviewService {
       await ReviewManager.prepareReview(reviewData);
       return { success: true };
     } catch (error) {
-      Logger.ifdev()?.err(error.message);
+      logger.err(error.message);
       throw new Errors.InternalServerError('Internal database error.');
     }
   }
@@ -26,7 +26,7 @@ export default class ReviewService {
       await ReviewManager.bindReviewTarget(targetData);
       return { success: true };
     } catch (error) {
-      Logger.ifdev()?.err(error.message);
+      logger.err(error.message);
       throw new Errors.InternalServerError('Internal database error.');
     }
   }

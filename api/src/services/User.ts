@@ -10,20 +10,20 @@ import Company from '@database/entities/Company.entity';
 import UserManager from '@database/managers/UserManager';
 import CompanyManager from '@database/managers/CompanyManager';
 
-import Logger from '@common/Logger';
+import logger from '@logging/Logger';
 import MailService from './Mail';
 
 /**
  * Service in charge of registration and managing user data.
  */
 export default class UserService {
-  @utils.dbErrorDefaultReactor({ except: [] })
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   public async checkIsUserRegistered(profileIdDto: dto.CheckIsUserRegisteredDto)
     : Promise<apiResponses.ICheckIsUserRegisteredResponseDto> {
     return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [] })
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   public async checkIsUserConfirmed(profileIdDto: dto.CheckIsUserConfirmedDto)
     : Promise<apiResponses.ICheckIsUserConfirmedResponseDto> {
     // Making confirmation code null is to be considered the user is registered.
@@ -46,14 +46,14 @@ export default class UserService {
     try {
       await MailService.sendConfirmationMail(profileDto.email, confirmationCode);
     } catch (error) {
-      Logger.ifdev()?.err(error.message);
+      logger.err(error.message);
       return { success: false };
     }
 
     return { success: true };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [] })
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   private async saveUser(profileDto: dto.PrepareUserDto, confirmationCode: string): Promise<void> {
     const company = await this.prepareCompany(profileDto.companyName, profileDto.companySite);
     await UserManager.createUser(profileDto, company, confirmationCode);
@@ -63,13 +63,13 @@ export default class UserService {
    * Get the company from the database with corresponding name and website
    * otherwise create a company with provided data and return it.
    */
-  @utils.dbErrorDefaultReactor({ except: [] })
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   private async prepareCompany(name: string, site: string): Promise<Company> {
     return await CompanyManager.getCompanyByFullPublicInfo(name, site)
       || CompanyManager.createCompany({ name, site, logoUrl: null });
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
   public async completeRegistration(completionDto: dto.CompleteRegistrationDto)
     : Promise<apiResponses.ICompleteRegistration> {
     const targetUser = await UserManager.getUser(completionDto.profileId);
@@ -81,27 +81,27 @@ export default class UserService {
     throw new Errors.BadRequestError('Invalid code or user.');
   }
 
-  @utils.dbErrorDefaultReactor({ except: [] })
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   public async searchUser(searchDto: dto.SearchUserDto)
     : Promise<apiResponses.ISearchUserResponseDto> {
     return { results: await UserManager.getUserBasicInfoByName(searchDto.name) || [] };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [] })
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   public async getNReviewsGot(bodyData: dto.GetNReviewsGotDto)
     : Promise<apiResponses.IGetNReviewsGotAmountResponseDto> {
     const targetData = await UserManager.getUserWithReviewsGot(bodyData.profileId);
     return { amount: targetData?.reviewsGot.length || 0 };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [] })
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   public async getNReviewsLeft(bodyData: dto.GetNReviewsLeftDto)
     : Promise<apiResponses.IGetNReviewsLeftAmountResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     return { amount: targetData?.reviewsLeft.length || 0 };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
   public async getNthReviewGot(bodyData: dto.GetNthReviewGotDto)
     : Promise<apiResponses.IGetNthReviewGotResponseDto> {
     const targetData = await UserManager.getUserWithReviewsGot(bodyData.profileId);
@@ -112,14 +112,15 @@ export default class UserService {
     return targetData?.reviewsGot[bodyData.nthReview];
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError] })
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
   public async getNthReviewLeft(bodyData: dto.GetNthReviewLeftDto)
     : Promise<apiResponses.IGetNthReviewLeftResponseDto> {
-    const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
-    if (!targetData?.reviewsLeft || targetData?.reviewsLeft.length <= bodyData.nthReview) {
+    const auhor = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
+    logger.log(JSON.stringify(auhor));
+    if (!auhor?.reviewsLeft || auhor?.reviewsLeft.length <= bodyData.nthReview) {
       throw new Errors.BadRequestError('No review with the index.');
     }
 
-    return targetData?.reviewsLeft[bodyData.nthReview];
+    return auhor?.reviewsLeft[bodyData.nthReview];
   }
 }

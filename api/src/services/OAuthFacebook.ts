@@ -5,7 +5,7 @@ import * as constants from '@common/constants';
 import * as cookiesList from '@common/cookies';
 import * as generalTypes from '@typing/general';
 import * as apiResponses from '@typing/apiResponses';
-import Logger from '@common/Logger';
+import logger from '@logging/Logger';
 
 /**
  * Service in charge of Facebook OAuth.
@@ -34,7 +34,7 @@ export default class FacebookOAuthService {
         photoUrl: profile.picture.data.url
       };
     } catch (error) {
-      Logger.ifdev()?.err(error);
+      logger.err(error);
       throw new Errors.UnauthorizedError('Invalid token.');
     }
   }

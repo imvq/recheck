@@ -46,10 +46,13 @@ export default class UserManager {
     return UserManager.repo?.createQueryBuilder('users')
       .where({ profileId })
       .innerJoinAndSelect('users.reviewsLeft', 'reviewsLeft')
-      .innerJoin('reviewsLeft.target', 'target')
-      .innerJoinAndSelect('target.name', 'targetName')
-      .innerJoinAndSelect('target.photoUrl', 'targetPhotoUrl')
-      .getOne();
+      .innerJoinAndSelect('reviewsLeft.target', 'target')
+      .select([
+        'reviewsLeft',
+        'target.name',
+        'target.photoUrl'
+      ])
+      .getRawOne();
   }
 
   public static async getUserBasicInfoByName(name: string)

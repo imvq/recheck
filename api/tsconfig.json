@@ -40,6 +40,9 @@
       "@dto": [
         "src/dto"
       ],
+      "@logging/*": [
+        "src/logging/*"
+      ],
       "@services/*": [
         "src/services/*"
       ],

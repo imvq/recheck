@@ -21,6 +21,7 @@
     "@controllers": "dist/controllers",
     "@database": "dist/database",
     "@dto": "dist/dto",
+    "@logging": "dist/logging",
     "@services": "dist/services",
     "@typing": "dist/typing",
     "@utils": "dist/utils"

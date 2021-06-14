@@ -20,7 +20,7 @@ import * as generalTypes from '@typing/general';
 import * as utilityTypes from '@typing/utility';
 import utils from '@utils';
 
-import Logger from '@common/Logger';
+import logger from '@logging/Logger';
 import connect from '@database/connect';
 
 /**
@@ -52,7 +52,7 @@ export default class App {
   public async start(): Promise<void> {
     return new Promise<void>((resolve) => {
       this.server = this.app.listen(this.port, this.host, () => {
-        Logger.ifdev()?.log(`Listening to ${this.host}:${this.port}`);
+        logger.log(`Listening to ${this.host}:${this.port}`);
         return resolve();
       });
     });
@@ -69,7 +69,7 @@ export default class App {
       }, this.app);
 
       this.server.listen(this.port, this.host, () => {
-        Logger.ifdev()?.log(`Listening to ${this.host}:${this.port}`);
+        logger.log(`Listening to ${this.host}:${this.port}`);
         return resolve();
       });
     });
