@@ -110,14 +110,14 @@ export function trimText(text: string, sliceTo: number) {
  */
 export function mapReviewToArray(from: IReviewCardCommonData) {
   return [
-    from.tasks,
-    from.strengths,
-    from.improvements,
-    from.results,
-    from.levelMark,
-    from.activityMark,
-    from.ownHireOpinionMark,
-    from.qualityMark,
-    from.leadershipMark
+    ['', from.tasks],
+    ['', from.strengths],
+    ['', from.improvements],
+    ['', from.results],
+    [`Оценка: ${from.levelMark}`, from.levelComment],
+    [`Оценка: ${from.activityMark}`, from.activityComment],
+    [`Оценка: ${from.ownHireOpinionMark}`, from.ownHireOpinionComment],
+    [`Оценка: ${from.qualityMark}`, from.qualityComment],
+    [`Оценка: ${from.leadershipMark}`, from.leadershipComment]
   ];
 }

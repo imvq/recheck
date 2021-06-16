@@ -1,11 +1,11 @@
-import { IProps } from './types';
+import * as types from './types';
 import * as styled from './styled';
 
-export default (props: IProps) => (
+export default (props: types.IProps) => (
   <styled.Wrapper>
     <styled.Menu>
       <styled.TopBar />
-      <styled.MenuContent>
+      <styled.MenuContent showTarget={props.showTarget}>
         <styled.MenuContentSpansWrapper>
           <styled.MenuContentSpan dimmed>
             Место работы:&nbsp;&nbsp;

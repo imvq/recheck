@@ -1,5 +1,7 @@
 export interface IReviewCardCommonData {
   targetPredefinedName: string;
+  targetName: string;
+  targetPhotoUrl: string;
   workplace: string;
   bounds: string;
   tasks: string;

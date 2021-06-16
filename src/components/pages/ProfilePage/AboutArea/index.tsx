@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { AppState, loadAboutTabData, loadNthReviewGot } from 'store';
 import Pagination from 'components/shared/Pagination';
-import ReviewCard from './ReviewCard';
+import ReviewCard from 'components/shared/ReviewCard';
 
 import * as types from './types';
 import * as styled from './styled';

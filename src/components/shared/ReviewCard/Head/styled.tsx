@@ -20,10 +20,14 @@ export const Menu = styled.div`
   flex-direction: column;
 `;
 
-export const MenuContent = styled.div`
+export const MenuContent = styled.div<{ showTarget?: boolean; }>`
   display: flex;
   flex-direction: column;
-  padding-left: calc(${cssVarsLocal.photoWrapperWidth} + 2rem);
+  padding-left: ${
+  props => (props.showTarget
+    ? `calc(${cssVarsLocal.photoWrapperWidth} + 2rem)`
+    : '5rem')
+};
   padding-bottom: 2rem;
 `;
 

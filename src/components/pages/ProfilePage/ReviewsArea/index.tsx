@@ -4,18 +4,19 @@ import { connect } from 'react-redux';
 import { AppState, loadReviewsTabData, loadNthReviewLeft } from 'store';
 import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';
-import ReviewCard from './ReviewCard';
-import { IProps, IStateProps, IDispatchProps } from './types';
-import { Wrapper, TitleWrapper, Title } from './styled';
+import ReviewCard from 'components/shared/ReviewCard';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+import * as styled from './styled';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentPorfileId: store.profile.currentProfileInfo.currentId,
   isLoading: store.interaction.isProfileReviewsTabLoading,
   reviewsLeftChunksAmount: store.interaction.reviewsLeftChunksAmount,
   currentReviewCardData: store.interaction.currentReviewLeft
 });
 
-const mapDispatchToProps: IDispatchProps = {
+const mapDispatchToProps: types.IDispatchProps = {
   loadTabData: loadReviewsTabData,
   loadNthReview: loadNthReviewLeft
 };
@@ -23,7 +24,7 @@ const mapDispatchToProps: IDispatchProps = {
 /**
  * Section with user's reviews.
  */
-const ReviewsArea = (props: IProps) => {
+const ReviewsArea = (props: types.IProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -31,24 +32,24 @@ const ReviewsArea = (props: IProps) => {
   }, []);
 
   return (
-    <Wrapper>
-      <TitleWrapper>
+    <styled.Wrapper>
+      <styled.TitleWrapper>
         {props.isLoading
-          ? <Title isHighlighted>Загрузка...</Title>
+          ? <styled.Title isHighlighted>Загрузка...</styled.Title>
           : props.currentReviewCardData
-            ? <ReviewCard reviewCardData={props.currentReviewCardData} />
-            : <Title isHighlighted>Оставьте свой первый отзыв!</Title>}
-      </TitleWrapper>
+            ? <ReviewCard showTarget reviewCardData={props.currentReviewCardData} />
+            : <styled.Title isHighlighted>Оставьте свой первый отзыв!</styled.Title>}
+      </styled.TitleWrapper>
 
       {!props.currentReviewCardData
         ? (
           <>
             <CustomButton isDisabled={false}>Написать отзыв</CustomButton>
-            <TitleWrapper isReduced>
-              <Title isReduced>
+            <styled.TitleWrapper isReduced>
+              <styled.Title isReduced>
                 *За каждый оставленный вами отзыв вы получаете +1 поиск отзыва бесплатно
-              </Title>
-            </TitleWrapper>
+              </styled.Title>
+            </styled.TitleWrapper>
           </>
         )
         : null}
@@ -68,7 +69,7 @@ const ReviewsArea = (props: IProps) => {
           setCurrentIndex(currentIndex - 1);
         }}
       />
-    </Wrapper>
+    </styled.Wrapper>
   );
 };
 
