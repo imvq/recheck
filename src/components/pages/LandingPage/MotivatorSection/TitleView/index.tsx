@@ -1,12 +1,12 @@
-import { Wrapper, TextWrapper, Text } from './styled';
+import * as styled from './styled';
 
 /**
  * Title of motivator section.
  */
 export default () => (
-  <Wrapper>
-    <TextWrapper>
-      <Text>Нанимайте проще, быстрее, точнее!</Text>
-    </TextWrapper>
-  </Wrapper>
+  <styled.Wrapper>
+    <styled.TextWrapper>
+      <styled.Text>Нанимайте проще, быстрее, точнее!</styled.Text>
+    </styled.TextWrapper>
+  </styled.Wrapper>
 );

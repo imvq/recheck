@@ -6,9 +6,8 @@ import { respond } from 'utils/functions';
 import { ReactComponent as RocketLineSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/RocketLine.svg';
 import { ReactComponent as RocketSvg } from 'assets/images/pages//LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/Rocket.svg';
 
-/**
- * Styled component for rocket line SVG.
- */
+export const Wrapper = styled.div``;
+
 export const Line = styled(RocketLineSvg)`
   position: absolute;
   height: 45rem;
@@ -20,9 +19,6 @@ export const Line = styled(RocketLineSvg)`
   }
 `;
 
-/**
- * Styled component for Rocket SVG.
- */
 export const Rocket = styled(RocketSvg)`
   position: absolute;
   top: 16.5rem;

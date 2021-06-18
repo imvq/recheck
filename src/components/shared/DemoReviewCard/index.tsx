@@ -1,47 +1,54 @@
-import {
-  Wrapper, CardBody, PhotoWrapper, TextWrapper, TextContent,
-  Photo, TitleWrapper, CardHeading, CardSpan, LogoWrapper,
-  ParagraphWrapper, ParagraphJustified, Toolbar, ReviewsLink,
-  ButtonWrapper, DetailsButtonAdapted, FeedbackButtonSvgButtonAdapted
-} from './styled';
-import { IProps } from './types';
+import * as types from './types';
+import * as styled from './styled';
 
 /**
  * Card with review info about a person.
  */
-export default (props: IProps) => (
-  <Wrapper>
-    <CardBody>
-      <PhotoWrapper><Photo src={props.photoUrl} alt='' /></PhotoWrapper>
-      <TextWrapper>
-        <TitleWrapper>
-          <CardHeading enlarged>{props.name}</CardHeading>
-          <LogoWrapper />
-        </TitleWrapper>
-        <TextContent>
-          <ParagraphWrapper>
-            <CardSpan lightened>Должность:&nbsp;&nbsp;&nbsp;&nbsp;</CardSpan>
-            <CardSpan>{props.position}</CardSpan>
-          </ParagraphWrapper>
-          <ParagraphWrapper>
-            <CardSpan lightened>Место работы:&nbsp;&nbsp;&nbsp;&nbsp;</CardSpan>
-            <CardSpan>{props.company}</CardSpan>
-          </ParagraphWrapper>
-          <ParagraphWrapper scale={2}>
-            <CardSpan lightened>Опыт работы:&nbsp;&nbsp;&nbsp;&nbsp;</CardSpan>
-            <CardSpan>{props.experience}</CardSpan>
-          </ParagraphWrapper>
-          <ParagraphWrapper scale={0.5}>
-            <CardSpan lightened>Отзыв с предыдущего места работы:</CardSpan>
-          </ParagraphWrapper>
-          <ParagraphJustified>{props.review}</ParagraphJustified>
-        </TextContent>
-      </TextWrapper>
-    </CardBody>
-    <Toolbar>
-      <ReviewsLink href='/'>{`${props.nReviews} отзывов`}</ReviewsLink>
-      <ButtonWrapper><DetailsButtonAdapted /></ButtonWrapper>
-      <ButtonWrapper><FeedbackButtonSvgButtonAdapted /></ButtonWrapper>
-    </Toolbar>
-  </Wrapper>
+export default (props: types.IProps) => (
+  <styled.Wrapper>
+    <styled.CardBody>
+      <styled.PhotoWrapper>
+        <styled.Photo src={props.photoUrl} alt='' />
+      </styled.PhotoWrapper>
+      <styled.TextWrapper>
+        <styled.TitleWrapper>
+          <styled.CardHeading enlarged>{props.name}</styled.CardHeading>
+          <styled.LogoWrapper />
+        </styled.TitleWrapper>
+
+        <styled.TextContent>
+          <styled.ParagraphWrapper>
+            <styled.CardSpan lightened>Должность:&nbsp;&nbsp;&nbsp;&nbsp;</styled.CardSpan>
+            <styled.CardSpan>{props.position}</styled.CardSpan>
+          </styled.ParagraphWrapper>
+
+          <styled.ParagraphWrapper>
+            <styled.CardSpan lightened>Место работы:&nbsp;&nbsp;&nbsp;&nbsp;</styled.CardSpan>
+            <styled.CardSpan>{props.company}</styled.CardSpan>
+          </styled.ParagraphWrapper>
+
+          <styled.ParagraphWrapper scale={2}>
+            <styled.CardSpan lightened>Опыт работы:&nbsp;&nbsp;&nbsp;&nbsp;</styled.CardSpan>
+            <styled.CardSpan>{props.experience}</styled.CardSpan>
+          </styled.ParagraphWrapper>
+
+          <styled.ParagraphWrapper scale={0.5}>
+            <styled.CardSpan lightened>Отзыв с предыдущего места работы:</styled.CardSpan>
+          </styled.ParagraphWrapper>
+
+          <styled.ParagraphJustified>{props.review}</styled.ParagraphJustified>
+        </styled.TextContent>
+      </styled.TextWrapper>
+    </styled.CardBody>
+
+    <styled.Toolbar>
+      <styled.ReviewsLink href='/'>{`${props.nReviews} отзывов`}</styled.ReviewsLink>
+      <styled.ButtonWrapper>
+        <styled.DetailsButtonAdapted />
+      </styled.ButtonWrapper>
+      <styled.ButtonWrapper>
+        <styled.FeedbackButtonSvgButtonAdapted />
+      </styled.ButtonWrapper>
+    </styled.Toolbar>
+  </styled.Wrapper>
 );

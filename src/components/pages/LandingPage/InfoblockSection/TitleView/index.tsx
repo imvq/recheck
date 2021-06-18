@@ -1,17 +1,17 @@
-import { Wrapper, TextWrapper, Text, TextColorpickMain, TextColorpickAux1 } from './styled';
+import * as styled from './styled';
 
 /**
  * Title of infoblock.
  */
 export default () => (
-  <Wrapper id='InfoblockTitle'>
-    <TextWrapper>
-      <Text>
-        <Text>Дополнительный </Text>
-        <TextColorpickMain>re</TextColorpickMain>
-        <TextColorpickAux1>Check </TextColorpickAux1>
-        <Text>кандидатов</Text>
-      </Text>
-    </TextWrapper>
-  </Wrapper>
+  <styled.Wrapper id='InfoblockTitle'>
+    <styled.TextWrapper>
+      <styled.Text>
+        <styled.Text>Дополнительный </styled.Text>
+        <styled.TextColorpickMain>re</styled.TextColorpickMain>
+        <styled.TextColorpickAux1>Check </styled.TextColorpickAux1>
+        <styled.Text>кандидатов</styled.Text>
+      </styled.Text>
+    </styled.TextWrapper>
+  </styled.Wrapper>
 );

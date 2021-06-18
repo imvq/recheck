@@ -5,19 +5,20 @@ import { useParams } from 'react-router-dom';
 import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
 import { AppState, setPageUnlocked, setIsLoginPopupVisible } from 'store';
-import { IProps, IStateProps, IDispatchProps } from './types';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.auth.isAuthorized,
   currentProfileInfo: store.profile.currentProfileInfo
 });
 
-const mapDispatchToProps: IDispatchProps = {
+const mapDispatchToProps: types.IDispatchProps = {
   unlockPage: setPageUnlocked,
   setIsLoginPopupVisible
 };
 
-const ConfirmationPage = (props: IProps) => {
+const ConfirmationPage = (props: types.IProps) => {
   const { uuid: pageUuid } = useParams<{ uuid: string }>();
 
   useEffect(() => {

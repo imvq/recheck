@@ -1,12 +1,13 @@
 import CustomButton from 'components/shared/CustomButton';
-import { IProps } from './types';
 import MenuBar from './MenuBar';
+
+import * as types from './types';
 import * as styled from './styled';
 
 /**
  * Menu with tabs to control the page content area.
  */
-export default (props: IProps) => {
+export default (props: types.IProps) => {
   const MenuContent = () => (
     <styled.MenuContent>
       <styled.MenuContentTitle>

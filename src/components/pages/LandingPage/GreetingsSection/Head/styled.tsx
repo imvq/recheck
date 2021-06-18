@@ -3,10 +3,7 @@ import styled from 'styled-components';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for Head.
- */
-export default styled.div`
+export const Wrapper = styled.div`
   grid-area: Head;
   display: grid;
   grid-template:

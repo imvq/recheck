@@ -1,7 +1,8 @@
 import Logo from 'components/shared/Logo';
-import { Wrapper } from './styled';
+
+import * as styled from './styled';
 
 /**
  * Head logo section.
  */
-export default () => <Wrapper><Logo /></Wrapper>;
+export default () => <styled.Wrapper><Logo /></styled.Wrapper>;

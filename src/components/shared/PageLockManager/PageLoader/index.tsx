@@ -1,12 +1,12 @@
-import { IProps } from './types';
-import { DimmedSpace, Loader } from './styled';
+import * as types from './types';
+import * as styled from './styled';
 
 /**
  * Loader coverage.
  */
-export default (props: IProps) => (
+export default (props: types.IProps) => (
   <>
-    <DimmedSpace />
+    <styled.DimmedSpace />
     {props.children}
   </>
 );

@@ -4,25 +4,23 @@ import controlledHistory from 'utils/routing';
 import { setPageLocked, setPageUnlocked } from 'store';
 import Api from 'utils/api';
 import ScaleStage2 from 'assets/images/pages/RegistrationPage/ScaleStage2.png';
-import { IProps, IDispatchProps } from './types';
-import {
-  Wrapper, AdaptedHeader, AdaptedFooter,
-  ContentWrapper, StageBreadcrumpWrapper, StageBreadcrumpImage
-} from './styled';
 import RegistrationBox from './RegistrationBox';
 
-const mapDispatchToProps: IDispatchProps = {
+import * as types from './types';
+import * as styled from './styled';
+
+const mapDispatchToProps: types.IDispatchProps = {
   lockPage: setPageLocked,
   unlockPage: setPageUnlocked
 };
 
-const RegistrationPage = (props: IProps) => (
-  <Wrapper>
-    <AdaptedHeader />
-    <ContentWrapper>
-      <StageBreadcrumpWrapper>
-        <StageBreadcrumpImage src={ScaleStage2} draggable='false' />
-      </StageBreadcrumpWrapper>
+const RegistrationPage = (props: types.IProps) => (
+  <styled.Wrapper>
+    <styled.AdaptedHeader />
+    <styled.ContentWrapper>
+      <styled.StageBreadcrumpWrapper>
+        <styled.StageBreadcrumpImage src={ScaleStage2} draggable='false' />
+      </styled.StageBreadcrumpWrapper>
       <RegistrationBox onProceed={(profileInfo) => {
         props.lockPage();
         Api.prepareProfile(profileInfo)
@@ -30,9 +28,9 @@ const RegistrationPage = (props: IProps) => (
           .finally(() => props.unlockPage());
       }}
       />
-    </ContentWrapper>
-    <AdaptedFooter />
-  </Wrapper>
+    </styled.ContentWrapper>
+    <styled.AdaptedFooter />
+  </styled.Wrapper>
 );
 
 export default connect(null, mapDispatchToProps)(RegistrationPage);

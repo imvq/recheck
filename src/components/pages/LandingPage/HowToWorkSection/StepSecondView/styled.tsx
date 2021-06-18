@@ -4,9 +4,6 @@ import { cssVars, mixins } from 'utils/style.common';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for second step section wrapper.
- */
 export const Wrapper = styled.div`
   grid-area: StepSecondView;
   display: grid;
@@ -20,9 +17,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for wrapper making section content be centrazlized.
- */
 export const CentralizingBox = styled.div`
   &:first-child {
     position: relative;
@@ -47,9 +41,6 @@ export const CentralizingBox = styled.div`
   }
 `;
 
-/**
- * Styled componenet for paragraph wrapper.
- */
 export const ParagraphWrapper = styled.div`
   ${mixins.HTWParagraphWrapper}
 
@@ -57,9 +48,6 @@ export const ParagraphWrapper = styled.div`
   top: 12.383rem;
 `;
 
-/**
- * Styled component for paragraph background.
- */
 export const ParagraphBackground = styled.img`
   ${mixins.HTWparagraphBackground}
 
@@ -69,40 +57,25 @@ export const ParagraphBackground = styled.img`
   height: 24.618rem;
 `;
 
-/**
- * Styled component for title wrapper.
- */
 export const TitleWrapper = styled.div`
   margin-bottom: .373rem;
   z-index: 1;
 `;
 
-/**
- * Styled component for title.
- */
 export const Title = styled.h1`
   ${mixins.LandingTitle}
 `;
 
-/**
- * Styled component for section text.
- */
 export const Text = styled.p`
   ${mixins.LandingBlockText}
 `;
 
-/**
- * Styled component for section image wrapper.
- */
 export const ImageWrapper = styled.div`
   display: flex;
   padding-top: .298rem;
   padding-left: 20.888rem;
 `;
 
-/**
- * Styled component for section image.
- */
 export const Image = styled.img`
   width: 29.84rem;
   height: 33.663rem;

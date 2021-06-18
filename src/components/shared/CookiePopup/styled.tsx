@@ -6,9 +6,6 @@ import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 import { ReactComponent as CloseSvg } from 'assets/images/shared/CookiePopup/Close.svg';
 
-/**
- * Styled component justifiying the popup at center.
- */
 export const FixedJustifier = styled.div`
   position: fixed;
   z-index: ${cssVars.zIndexPopupCookie};
@@ -19,9 +16,6 @@ export const FixedJustifier = styled.div`
   align-items: center;
 `;
 
-/**
- * Styled component for main wrapper of cookie popup.
- */
 export const Wrapper = styled.div`
   width: 100%;
   height: 9rem;
@@ -49,9 +43,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for cookie popup subsection wrapper.
- */
 export const SubsectionWrapper = styled.section`
   height: 100%;
   display: flex;
@@ -62,9 +53,6 @@ export const SubsectionWrapper = styled.section`
   }
 `;
 
-/**
- * Styled component for the main popup image.
- */
 export const AdaptedImage = styled.img`
   height: 80%;
 
@@ -73,9 +61,6 @@ export const AdaptedImage = styled.img`
   }
 `;
 
-/**
- * Styled component for info subsection text wrapper.
- */
 export const TextWrapper = styled.div`
   margin-left: 2rem;
   font-size: 1.3rem;
@@ -86,16 +71,10 @@ export const TextWrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for React-router link with custom styles.
- */
 export const StyledLink = styled(Link)`
   color: ${cssVars.colorForegroundPickAux1};
 `;
 
-/**
- * Styled component for accept button (as a link).
- */
 export const LinkButton = styled.button`
   cursor: pointer;
   border: none;
@@ -112,9 +91,6 @@ export const LinkButton = styled.button`
   }
 `;
 
-/**
- * Styled component for close button wrapper which uses margins.
- */
 export const CloseButtonWrapper = styled.div`
   display: none;
   margin-left: 1rem;
@@ -125,9 +101,6 @@ export const CloseButtonWrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for accept button (as a button).
- */
 export const CloseButton = styled(CloseSvg)`
   height: 100%;
 

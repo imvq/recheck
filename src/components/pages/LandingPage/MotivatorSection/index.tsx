@@ -1,31 +1,33 @@
 import PhoneImage from 'assets/images/pages/LandingPage/MotivatorSection/Phone.png';
-import {
-  Wrapper, FocusView, Anchor, AnchorSticky, MotivatorBadgeWrapper,
-  Image, ButtonWrapper
-} from './styled';
 import TitleView from './TitleView';
 import FindButton from './FindButton';
 import Badge from './Badge';
 
+import * as styled from './styled';
+
 export default () => (
-  <Wrapper>
+  <styled.Wrapper>
     <TitleView />
-    <FocusView>
-      <Anchor>
-        <MotivatorBadgeWrapper>
+
+    <styled.FocusView>
+      <styled.Anchor>
+        <styled.MotivatorBadgeWrapper>
           <Badge text='Проверяйте отзывы о кандидате с прошлого места работы.' />
-        </MotivatorBadgeWrapper>
-        <MotivatorBadgeWrapper>
+        </styled.MotivatorBadgeWrapper>
+
+        <styled.MotivatorBadgeWrapper>
           <Badge text='Нанимайте подходящих кандидатов.' />
-        </MotivatorBadgeWrapper>
-        <MotivatorBadgeWrapper>
+        </styled.MotivatorBadgeWrapper>
+
+        <styled.MotivatorBadgeWrapper>
           <Badge text='Обменивайтесь отзывами о своих сотрудниках.' />
-        </MotivatorBadgeWrapper>
-      </Anchor>
-      <AnchorSticky>
-        <Image src={PhoneImage} alt='' />
-        <ButtonWrapper><FindButton /></ButtonWrapper>
-      </AnchorSticky>
-    </FocusView>
-  </Wrapper>
+        </styled.MotivatorBadgeWrapper>
+      </styled.Anchor>
+
+      <styled.AnchorSticky>
+        <styled.Image src={PhoneImage} alt='' />
+        <styled.ButtonWrapper><FindButton /></styled.ButtonWrapper>
+      </styled.AnchorSticky>
+    </styled.FocusView>
+  </styled.Wrapper>
 );

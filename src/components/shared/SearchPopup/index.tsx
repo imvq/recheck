@@ -3,102 +3,99 @@ import { connect } from 'react-redux';
 import { setIsSearchPopupVisible } from 'store';
 import CustomButton from 'components/shared/CustomButton';
 import OptionBadge from './OptionBadge';
-import {
-  Wrapper, TopWrapper, BodyWrapper, AdaptedCloseCross, Frame,
-  ClickableBackground, Title, OptionsWrapper, OptionGroupWrapper,
-  BuyHiddenBadgeWrapper, BadgeTitleWrapper, BadgeTitle, BadgeText,
-  ButtonWrapper
-} from './styled';
-import { IProps, IDispatchProps } from './types';
 
-const mapDispatchToProps: IDispatchProps = {
+import * as types from './types';
+import * as styled from './styled';
+
+const mapDispatchToProps: types.IDispatchProps = {
   setIsVisible: setIsSearchPopupVisible
 };
 
 const BuyMainBadge = (
   <>
-    <BadgeTitleWrapper>
-      <BadgeTitle>Оплатить получение отзыва</BadgeTitle>
-    </BadgeTitleWrapper>
-    <BadgeText>$19.89</BadgeText>
+    <styled.BadgeTitleWrapper>
+      <styled.BadgeTitle>Оплатить получение отзыва</styled.BadgeTitle>
+    </styled.BadgeTitleWrapper>
+    <styled.BadgeText>$19.89</styled.BadgeText>
   </>
 );
 
 const BuyHiddenBadge = (
   <>
-    <BadgeTitleWrapper>
-      <BadgeTitle>Оплатить получение отзыва</BadgeTitle>
-    </BadgeTitleWrapper>
+    <styled.BadgeTitleWrapper>
+      <styled.BadgeTitle>Оплатить получение отзыва</styled.BadgeTitle>
+    </styled.BadgeTitleWrapper>
 
-    <BuyHiddenBadgeWrapper>
-      <BadgeText isEnlarged>$19.89</BadgeText>
-      <BadgeText>
+    <styled.BuyHiddenBadgeWrapper>
+      <styled.BadgeText isEnlarged>$19.89</styled.BadgeText>
+      <styled.BadgeText>
         При оплате вы получите возможность просматривать отзывы о выбраном кандидате
         с прошлых мест работы.
-      </BadgeText>
-    </BuyHiddenBadgeWrapper>
+      </styled.BadgeText>
+    </styled.BuyHiddenBadgeWrapper>
   </>
 );
 
 const FreeMainBadge = (
   <>
-    <BadgeTitleWrapper>
-      <BadgeTitle>Бесплатно</BadgeTitle>
-    </BadgeTitleWrapper>
-    <BadgeText>Написать отзыв о ком-то из своей команды</BadgeText>
+    <styled.BadgeTitleWrapper>
+      <styled.BadgeTitle>Бесплатно</styled.BadgeTitle>
+    </styled.BadgeTitleWrapper>
+    <styled.BadgeText>Написать отзыв о ком-то из своей команды</styled.BadgeText>
   </>
 );
 
 const FreeHiddenBadge = (
   <>
-    <BadgeTitleWrapper>
-      <BadgeTitle>Бесплатно</BadgeTitle>
-    </BadgeTitleWrapper>
+    <styled.BadgeTitleWrapper>
+      <styled.BadgeTitle>Бесплатно</styled.BadgeTitle>
+    </styled.BadgeTitleWrapper>
 
-    <BuyHiddenBadgeWrapper>
-      <BadgeText>
+    <styled.BuyHiddenBadgeWrapper>
+      <styled.BadgeText>
         Вы можете оставить отзыв
         об одном из своих  подчиненных либо коллег, с которыми хорошо знакомы и взамен увидеть отзыв
         о выбраном кандидате бесплатно.
-      </BadgeText>
-    </BuyHiddenBadgeWrapper>
+      </styled.BadgeText>
+    </styled.BuyHiddenBadgeWrapper>
   </>
 );
 
-const SearchPopup = (props: IProps) => (
-  <Wrapper>
-    <Frame>
-      <TopWrapper>
-        <AdaptedCloseCross onClick={() => props.setIsVisible(false)} />
-      </TopWrapper>
+const SearchPopup = (props: types.IProps) => (
+  <styled.Wrapper>
+    <styled.Frame>
+      <styled.TopWrapper>
+        <styled.AdaptedCloseCross onClick={() => props.setIsVisible(false)} />
+      </styled.TopWrapper>
 
-      <BodyWrapper>
-        <Title>Вы можете получить отзыв о кандидате двумя способами:</Title>
-      </BodyWrapper>
+      <styled.BodyWrapper>
+        <styled.Title>Вы можете получить отзыв о кандидате двумя способами:</styled.Title>
+      </styled.BodyWrapper>
 
-      <OptionsWrapper>
-        <OptionGroupWrapper>
+      <styled.OptionsWrapper>
+        <styled.OptionGroupWrapper>
           <OptionBadge
             mainView={BuyMainBadge}
             hiddenView={BuyHiddenBadge}
           />
-          <ButtonWrapper>
+          <styled.ButtonWrapper>
             <CustomButton isDisabled={false}>Купить отзыв</CustomButton>
-          </ButtonWrapper>
-        </OptionGroupWrapper>
-        <OptionGroupWrapper>
+          </styled.ButtonWrapper>
+        </styled.OptionGroupWrapper>
+
+        <styled.OptionGroupWrapper>
           <OptionBadge
             mainView={FreeMainBadge}
             hiddenView={FreeHiddenBadge}
           />
-          <ButtonWrapper>
+          <styled.ButtonWrapper>
             <CustomButton isDisabled={false}>Оставить отзыв</CustomButton>
-          </ButtonWrapper>
-        </OptionGroupWrapper>
-      </OptionsWrapper>
-    </Frame>
-    <ClickableBackground onClick={() => props.setIsVisible(false)} />
-  </Wrapper>
+          </styled.ButtonWrapper>
+        </styled.OptionGroupWrapper>
+      </styled.OptionsWrapper>
+    </styled.Frame>
+    <styled.ClickableBackground onClick={() => props.setIsVisible(false)} />
+  </styled.Wrapper>
 );
 
 export default connect(null, mapDispatchToProps)(SearchPopup);

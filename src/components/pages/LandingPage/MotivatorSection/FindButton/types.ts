@@ -1,11 +1,9 @@
-import * as utilityTypes from 'utils/typing/utility';
-
 export interface IOwnProps {
   onClick?: (...args: any[]) => void;
 }
 
 export interface IStateProps {
-  isAuthorized: utilityTypes.Nullable<boolean>;
+  isAuthorized: boolean | null;
 }
 
 export interface IDispatchProps {

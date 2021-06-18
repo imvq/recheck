@@ -26,9 +26,6 @@ const mixinsLocal = {
   `
 };
 
-/**
- * Styled component for review card outer wrapper.
- */
 export const Wrapper = styled.div`
   width: ${cssVars.widthReviewCard};
   height: fit-content;
@@ -42,9 +39,6 @@ export const Wrapper = styled.div`
   filter: drop-shadow(.5rem .3125rem .5rem rgba(0, 0, 0, .25));
 `;
 
-/**
- * Styled component for card body.
- */
 export const CardBody = styled.div`
   width: 100%;
   min-height: 25.5em;
@@ -52,9 +46,6 @@ export const CardBody = styled.div`
   flex-wrap: nowrap;
 `;
 
-/**
- * Styled component for photo wrapper.
- */
 export const PhotoWrapper = styled.div`
   width: ${cssVarsLocal.widthWrapperPhoto};
   margin-top: ${cssVarsLocal.marginTopWrapperBasic};
@@ -64,17 +55,11 @@ export const PhotoWrapper = styled.div`
   align-items: flex-start;
 `;
 
-/**
- * Styled component for photo.
- */
 export const Photo = styled.img`
   width: 75%;
   object-fit: contain;
 `;
 
-/**
- * Styled component for text wrapper.
- */
 export const TextWrapper = styled.div`
   width: calc(100% - ${cssVarsLocal.widthWrapperPhoto});
   margin-top: ${cssVarsLocal.marginTopWrapperBasic};
@@ -85,9 +70,6 @@ export const TextWrapper = styled.div`
   flex-direction: column;
 `;
 
-/**
- * Styled component for title wrapper.
- */
 export const TitleWrapper = styled.div`
   width: 100%;
   height: 2.625em;
@@ -98,41 +80,26 @@ export const TitleWrapper = styled.div`
   font-weight: 600;
 `;
 
-/**
- * Styled component for card heading.
- */
 export const CardHeading = styled.h1`
   ${mixinsLocal.Text}
 `;
 
-/**
- * Styled component for card span.
- */
 export const CardSpan = styled.span`
   ${mixinsLocal.Text}
 `;
 
-/**
- * Styled component for logo within the card.
- */
 export const LogoWrapper = styled(LogoSvg)`
   margin-left: auto;
   width: 4em;
   height: $height-title;
 `;
 
-/**
- * Styled component for card text content.
- */
 export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
   line-height: 1.3em;
 `;
 
-/**
- * Styled component for card paragraph wrapper.
- */
 export const ParagraphWrapper = styled.div<{scale?: number}>`
   margin-bottom: ${props => (
     `calc(${cssVarsLocal.marginBottomBase} * ${props.scale})`
@@ -143,17 +110,11 @@ ParagraphWrapper.defaultProps = {
   scale: 1
 };
 
-/**
- * Styled component for card paragraph justification wrapper.
- */
 export const ParagraphJustified = styled.div`
   text-align: justify;
   text-justify: inter-word;
 `;
 
-/**
- * Styled component for card toolbar.
- */
 export const Toolbar = styled.div`
   width: 100%;
   height: 6em;
@@ -163,18 +124,12 @@ export const Toolbar = styled.div`
   border-top: 0.078vw solid #b8b8b8;
 `;
 
-/**
- * Styled component for card reviews link.
- */
 export const ReviewsLink = styled.a`
   margin-right: auto;
   padding-left: 5em;
   font-weight: 600;
 `;
 
-/**
- * Styled component for card toolbar button.
- */
 export const ButtonWrapper = styled.div`
   margin-right: 2.8em;
 
@@ -183,16 +138,10 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for details button.
- */
 export const DetailsButtonAdapted = styled(DetailsButtonSvg)`
   ${mixinsLocal.ButtonAdapted}
 `;
 
-/**
- * Styled component for feedback button.
- */
 export const FeedbackButtonSvgButtonAdapted = styled(FeedbackButtonSvg)`
   ${mixinsLocal.ButtonAdapted}
 `;

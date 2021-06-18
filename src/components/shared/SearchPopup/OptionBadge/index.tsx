@@ -1,23 +1,23 @@
 import { useState } from 'react';
 
-import { IProps } from './types';
-import { Wrapper, LabelWrapper, ExpandLabel } from './styled';
+import * as types from './types';
+import * as styled from './styled';
 
-export default (props: IProps) => {
+export default (props: types.IProps) => {
   const [isExpanded, setIsExpanded] = useState(props.isExpanded);
 
   const expansion = (
-    <LabelWrapper>
-      <ExpandLabel onClick={() => setIsExpanded(!isExpanded)}>
+    <styled.LabelWrapper>
+      <styled.ExpandLabel onClick={() => setIsExpanded(!isExpanded)}>
         Детальнее
-      </ExpandLabel>
-    </LabelWrapper>
+      </styled.ExpandLabel>
+    </styled.LabelWrapper>
   );
 
   return (
-    <Wrapper adjustExpansionHeight={isExpanded}>
+    <styled.Wrapper adjustExpansionHeight={isExpanded}>
       {isExpanded ? props.hiddenView : props.mainView}
       {!isExpanded ? expansion : null}
-    </Wrapper>
+    </styled.Wrapper>
   );
 };

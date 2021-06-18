@@ -1,25 +1,22 @@
 import { useState } from 'react';
 
-import { IProps } from './types';
-import {
-  Wrapper, TitleWrapper, Title, PipelineWrapper, Pipe,
-  StyledPoint, LabelsWrapper, Label
-} from './styled';
+import * as types from './types';
+import * as styled from './styled';
 
 /**
  * A panel with 10 marks available for selection.
  */
-export default (props: IProps & { hasEnlargedLabels?: boolean; }) => {
+export default (props: types.IProps & { hasEnlargedLabels?: boolean; }) => {
   const [selected, setSelected] = useState(0);
 
   return (
-    <Wrapper>
-      <TitleWrapper>
-        <Title>Нажмите на цифру, чтобы поставить оценку</Title>
-      </TitleWrapper>
-      <PipelineWrapper>
+    <styled.Wrapper>
+      <styled.TitleWrapper>
+        <styled.Title>Нажмите на цифру, чтобы поставить оценку</styled.Title>
+      </styled.TitleWrapper>
+      <styled.PipelineWrapper>
         {[...Array(10).keys()].map(key => (
-          <StyledPoint
+          <styled.StyledPoint
             key={key}
             onClick={() => {
               setSelected(key + 1);
@@ -29,15 +26,15 @@ export default (props: IProps & { hasEnlargedLabels?: boolean; }) => {
             isFilled={selected >= key + 1}
           >
             {key + 1}
-          </StyledPoint>
+          </styled.StyledPoint>
         ))}
-        {[...Array(9).keys()].map(key => (<Pipe key={key} isFilled={selected > key + 1} />))}
-      </PipelineWrapper>
-      <LabelsWrapper>
+        {[...Array(9).keys()].map(key => (<styled.Pipe key={key} isFilled={selected > key + 1} />))}
+      </styled.PipelineWrapper>
+      <styled.LabelsWrapper>
         {props.labels.map(label => (
-          <Label key={label} isEnlarged={props.hasEnlargedLabels}>{label}</Label>
+          <styled.Label key={label} isEnlarged={props.hasEnlargedLabels}>{label}</styled.Label>
         ))}
-      </LabelsWrapper>
-    </Wrapper>
+      </styled.LabelsWrapper>
+    </styled.Wrapper>
   );
 };

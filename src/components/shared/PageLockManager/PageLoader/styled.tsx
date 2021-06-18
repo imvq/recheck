@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 
-import { ReactComponent as LoaderCircle } from 'assets/images/shared/PageLoader/LoaderCircle.svg';
 import { cssVars } from 'utils/style.common';
 
-/**
- * Styled component for page loader wrapper.
- */
 export const DimmedSpace = styled.div`
   position: fixed;
   width: 100%;
@@ -16,12 +12,4 @@ export const DimmedSpace = styled.div`
   z-index: ${cssVars.zIndexPageLoader};
   background-color: #fff;
   opacity: .8;
-`;
-
-/**
- * Styled component for loader circle.
- */
-export const Loader = styled(LoaderCircle)`
-  width: 50%;
-  height: fit-content;
 `;

@@ -1,20 +1,22 @@
 import { Link as ScrollLink } from 'react-scroll';
 
-import { Wrapper, TabButton } from './styled';
+import * as styled from './styled';
 
 /**
  * Head buttons section.
  */
 export default () => (
-  <Wrapper>
+  <styled.Wrapper>
     <ScrollLink to='HowToWorkTitle' smooth duration={300}>
-      <TabButton>О платформе</TabButton>
+      <styled.TabButton>О платформе</styled.TabButton>
     </ScrollLink>
+
     <ScrollLink to='InfoblockTitle' smooth duration={600}>
-      <TabButton>Преимущества</TabButton>
+      <styled.TabButton>Преимущества</styled.TabButton>
     </ScrollLink>
+
     <ScrollLink to='MainSwipeViewTitle' smooth duration={900}>
-      <TabButton>Отзывы</TabButton>
+      <styled.TabButton>Отзывы</styled.TabButton>
     </ScrollLink>
-  </Wrapper>
+  </styled.Wrapper>
 );

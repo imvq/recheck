@@ -1,17 +1,17 @@
 import { useState } from 'react';
 
-import { IProps } from './types';
-import { Wrapper, RoundedAreaLeft, RoundedAreaRight, ButtonContentArea } from './styled';
+import * as types from './types';
+import * as styled from './styled';
 
 /**
  * Custom button with website-wide styles.
  */
-export default (props: IProps) => {
+export default (props: types.IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <Wrapper
+    <styled.Wrapper
       isDisabled={props.isDisabled}
       onClick={props.onClick}
       onMouseEnter={() => setIsHovered(true)}
@@ -19,7 +19,7 @@ export default (props: IProps) => {
       onMouseDown={() => setIsActive(true)}
       onMouseUp={() => setIsActive(false)}
     >
-      <ButtonContentArea
+      <styled.ButtonContentArea
         height={props.height}
         color={props.color}
         backgroundColor={props.backgroundColor}
@@ -29,18 +29,18 @@ export default (props: IProps) => {
         isActive={isActive}
         isDisabled={props.isDisabled}
       >
-        <RoundedAreaLeft
+        <styled.RoundedAreaLeft
           height={props.height}
           backgroundColor={props.backgroundColor}
           isHollow={props.isHollow}
         />
         {props.children}
-        <RoundedAreaRight
+        <styled.RoundedAreaRight
           height={props.height}
           backgroundColor={props.backgroundColor}
           isHollow={props.isHollow}
         />
-      </ButtonContentArea>
-    </Wrapper>
+      </styled.ButtonContentArea>
+    </styled.Wrapper>
   );
 };

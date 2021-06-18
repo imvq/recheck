@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link as ScrollLink } from 'react-scroll';
 
 import { ScreenBreakpoint } from 'utils/enums';
 import { cssVars } from 'utils/style.common';
@@ -7,9 +6,6 @@ import { respond } from 'utils/functions';
 import Logo from 'components/shared/Logo';
 import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
 
-/**
- * Styled component for footer wrapper.
- */
 export const Wrapper = styled.div`
   grid-area: Footer;
   height: ${cssVars.footerHeight};
@@ -25,9 +21,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for footer section wrapper.
- */
 export const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,9 +52,6 @@ export const SectionWrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for empty wrapper.
- */
 export const EmptyWrapper = styled.div`
   width: 6rem;
 
@@ -70,18 +60,12 @@ export const EmptyWrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for logo within footer.
- */
 export const InnerLogo = styled(Logo)`
   ${respond(ScreenBreakpoint.XS)} {
     display: none;
   }
 `;
 
-/**
- * Styled component for footer menu entry text.
- */
 export const MenuEntryText = styled.span`
   cursor: pointer;
   
@@ -98,9 +82,6 @@ export const MenuEntryText = styled.span`
   }
 `;
 
-/**
- * Styled component for footer menu entry text.
- */
 export const MenuEntryTextMarked = styled(MenuEntryText)`
   font-weight: 800;
 
@@ -114,9 +95,6 @@ export const MenuEntryTextMarked = styled(MenuEntryText)`
   }
 `;
 
-/**
- * Styled component for footer menu entry text.
- */
 export const MenuEntryTextDisabled = styled(MenuEntryText)`
   &:hover {
     text-decoration: none;
@@ -124,23 +102,14 @@ export const MenuEntryTextDisabled = styled(MenuEntryText)`
   }
 `;
 
-/**
- * Styled component for footer social link.
- */
 export const SocialLink = styled.a`
   width: fit-content;
 `;
 
-/**
- * Styled component for footer telegram icon.
- */
 const TelegramIcon = styled.img`
   width: 2.5em;
 `;
 
-/**
- * Wrapper for footer telegram icon.
- */
 export const TelegramIconWrapper = () => (
   <TelegramIcon src={TelegramIconImage} alt='' />
 );

@@ -22,3 +22,5 @@ export const Wrapper = styled.div`
     border-bottom: none;
   }
 `;
+
+export const SelectTitle = styled.span``;

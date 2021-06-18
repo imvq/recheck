@@ -1,30 +1,34 @@
 import InfoWarrantyBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoWarrantyBoard.svg';
-import { Wrapper } from './styled';
-import { BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title, Text } from '../BaseSubsection/styled';
+
+import * as styledLocal from './styled';
+import * as styledBase from '../BaseSubsection/styled';
+
+const styled = { ...styledLocal, ...styledBase };
 
 /**
  * Warranty info subsection.
  */
 export default () => (
-  <Wrapper>
-    <BoardWrapper>
-      <Board backgroundSource={InfoWarrantyBoardSvg}>
-        <ParagraphWrapper>
-          <TitleWrapper>
-            <Title>
-              <span>
+  <styled.Wrapper>
+    <styled.BoardWrapper>
+      <styled.Board backgroundSource={InfoWarrantyBoardSvg}>
+        <styled.ParagraphWrapper>
+          <styled.TitleWrapper>
+            <styled.Title>
+              <styled.TitleText>
                 Будьте уверены, что отзыв
                 был оставлен человеком с
                 прошлого места работы.
-              </span>
-            </Title>
-          </TitleWrapper>
-          <Text>
+              </styled.TitleText>
+            </styled.Title>
+          </styled.TitleWrapper>
+
+          <styled.Text>
             Кандидат не сможет дать
             неправильный контакт.
-          </Text>
-        </ParagraphWrapper>
-      </Board>
-    </BoardWrapper>
-  </Wrapper>
+          </styled.Text>
+        </styled.ParagraphWrapper>
+      </styled.Board>
+    </styled.BoardWrapper>
+  </styled.Wrapper>
 );

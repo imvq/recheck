@@ -6,11 +6,9 @@ import * as generalTypes from 'utils/typing/general';
 import { inputHandler, isValidEmail, isValidUrl, getNValuesDown, doesEmailContainUrl } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
-import { IProps, IStateProps } from './types';
-import {
-  BoxBaseWrapper, ButtonGroupWrapper, InputRowWrapper, TextDescription,
-  InputGroupWrapper, InputDescriptionWrapper, InputDescription, Input
-} from '../../../shared/BoxBase';
+
+import * as types from './types';
+import * as styled from '../../../shared/BoxBase';
 
 const months: generalTypes.OptionType[] = [
   { key: 0, text: 'Январь' },
@@ -30,11 +28,11 @@ const months: generalTypes.OptionType[] = [
 const years = getNValuesDown(new Date().getFullYear(), 50)
   .map((value, index) => ({ key: index, text: value.toString() }));
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo
 });
 
-const RegistrationBox = (props: IProps) => {
+const RegistrationBox = (props: types.IProps) => {
   const [email, setEmail] = useState('');
   const [companySite, setCompanySite] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -96,52 +94,56 @@ const RegistrationBox = (props: IProps) => {
   }
 
   return (
-    <BoxBaseWrapper>
-      <InputGroupWrapper>
-        <InputDescriptionWrapper>
-          <InputDescription>Рабочий email:</InputDescription>
-        </InputDescriptionWrapper>
-        <Input type='text' onBlur={recalculateEmailErrorVisibility} onChange={emailHandler} />
+    <styled.BoxBaseWrapper>
+      <styled.InputGroupWrapper>
+        <styled.InputDescriptionWrapper>
+          <styled.InputDescription>Рабочий email:</styled.InputDescription>
+        </styled.InputDescriptionWrapper>
+        <styled.Input type='text' onBlur={recalculateEmailErrorVisibility} onChange={emailHandler} />
         {isEmailErrorVisible
-          ? <TextDescription isHighlighted>Некорректный почтовый адрес</TextDescription>
+          ? (
+            <styled.TextDescription isHighlighted>
+              Некорректный почтовый адрес
+            </styled.TextDescription>
+          )
           : null}
-      </InputGroupWrapper>
+      </styled.InputGroupWrapper>
 
-      <InputGroupWrapper>
-        <InputDescriptionWrapper>
-          <InputDescription>Сайт компании, где вы работаете:</InputDescription>
-        </InputDescriptionWrapper>
-        <Input type='text' onBlur={recalculateSiteErrorVisibility} onChange={companySiteHandler} />
+      <styled.InputGroupWrapper>
+        <styled.InputDescriptionWrapper>
+          <styled.InputDescription>Сайт компании, где вы работаете:</styled.InputDescription>
+        </styled.InputDescriptionWrapper>
+        <styled.Input type='text' onBlur={recalculateSiteErrorVisibility} onChange={companySiteHandler} />
         {isSiteErrorVisible
           ? (
-            <TextDescription isHighlighted>
+            <styled.TextDescription isHighlighted>
               Некорректный URL страницы.
               Адрес сайта должен быть вида https://example.com или example.com.
               Почтовый домен должен совпадать с адресом сайта компании
-            </TextDescription>
+            </styled.TextDescription>
           )
           : null}
-      </InputGroupWrapper>
+      </styled.InputGroupWrapper>
 
-      <InputGroupWrapper>
-        <InputDescriptionWrapper>
-          <InputDescription>Название компании, где вы работаете:</InputDescription>
-        </InputDescriptionWrapper>
-        <Input type='text' onChange={companyNameHandler} />
-      </InputGroupWrapper>
+      <styled.InputGroupWrapper>
+        <styled.InputDescriptionWrapper>
+          <styled.InputDescription>Название компании, где вы работаете:</styled.InputDescription>
+        </styled.InputDescriptionWrapper>
+        <styled.Input type='text' onChange={companyNameHandler} />
+      </styled.InputGroupWrapper>
 
-      <InputGroupWrapper>
-        <InputDescriptionWrapper>
-          <InputDescription>Ваша должность:</InputDescription>
-        </InputDescriptionWrapper>
-        <Input type='text' onChange={positionHandler} />
-      </InputGroupWrapper>
+      <styled.InputGroupWrapper>
+        <styled.InputDescriptionWrapper>
+          <styled.InputDescription>Ваша должность:</styled.InputDescription>
+        </styled.InputDescriptionWrapper>
+        <styled.Input type='text' onChange={positionHandler} />
+      </styled.InputGroupWrapper>
 
-      <InputGroupWrapper>
-        <InputDescriptionWrapper>
-          <InputDescription>Дата начала работы:</InputDescription>
-        </InputDescriptionWrapper>
-        <InputRowWrapper>
+      <styled.InputGroupWrapper>
+        <styled.InputDescriptionWrapper>
+          <styled.InputDescription>Дата начала работы:</styled.InputDescription>
+        </styled.InputDescriptionWrapper>
+        <styled.InputRowWrapper>
           <CustomSelect
             width='49%'
             options={months}
@@ -154,17 +156,17 @@ const RegistrationBox = (props: IProps) => {
             placeholder='Год'
             onNewOptionSelected={yearHandler}
           />
-        </InputRowWrapper>
-      </InputGroupWrapper>
+        </styled.InputRowWrapper>
+      </styled.InputGroupWrapper>
 
-      <TextDescription>Все поля обязательны к заполнению</TextDescription>
+      <styled.TextDescription>Все поля обязательны к заполнению</styled.TextDescription>
 
-      <ButtonGroupWrapper>
+      <styled.ButtonGroupWrapper>
         <CustomButton isDisabled={!canProceed()} onClick={proceedIfAllowed}>
           Продолжить
         </CustomButton>
-      </ButtonGroupWrapper>
-    </BoxBaseWrapper>
+      </styled.ButtonGroupWrapper>
+    </styled.BoxBaseWrapper>
   );
 };
 

@@ -4,9 +4,6 @@ import { cssVars } from 'utils/style.common';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for main content wrapper.
- */
 export const Wrapper = styled.div`
   grid-area: Content;
   display: flex;
@@ -17,9 +14,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for content action group.
- */
 export const ActionGroup = styled.div`
   width: ${cssVars.greetingsViewContentActionGroupWidth};
   font-weight: 600;
@@ -29,9 +23,8 @@ export const ActionGroup = styled.div`
   user-select: none;
 `;
 
-/**
- * Styled component for content picture wrapper.
- */
+export const ActionGroupText = styled.span``;
+
 export const PictureWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -43,18 +36,12 @@ export const PictureWrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for content picture.
- */
 export const Picture = styled.img`
   width: 60rem;
   height: 40rem;
   user-select: none;
 `;
 
-/**
- * Styled component for content text wrapper.
- */
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;

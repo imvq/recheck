@@ -24,9 +24,6 @@ const mixinsLocal = {
   `
 };
 
-/**
- * Styled component for swiper.
- */
 export const Wrapper = styled.div`
   grid-area: CardsView;
   display: flex;
@@ -38,9 +35,6 @@ export const Wrapper = styled.div`
   animation: ${animations.fadeDefault} 1.4s;
 `;
 
-/**
- * Styled component for justification wrapper.
- */
 export const JustificationWrapper = styled.div`
   height: 100%;
   position: relative;
@@ -76,18 +70,12 @@ export const CardWrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for left arrow.
- */
 export const ArrowLeft = styled(ArrowLeftSvg)`
   ${mixinsLocal.Arrow}
 
   margin-right: calc(-${cssVarsLocal.shiftInverting} / 2);
 `;
 
-/**
- * Styled component for right arrow.
- */
 export const ArrowRight = styled(ArrowRightSvg)`
   ${mixinsLocal.Arrow}
 

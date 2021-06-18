@@ -1,15 +1,15 @@
-import Wrapper from './styled';
 import LogoWrapper from './LogoSection';
 import CabinetWrapper from './CabinetWrapper';
 import TabsSection from './TabsSection';
 
+import * as styled from './styled';
 /**
  * Head of landing page.
  */
 export default () => (
-  <Wrapper>
+  <styled.Wrapper>
     <LogoWrapper />
     <TabsSection />
     <CabinetWrapper />
-  </Wrapper>
+  </styled.Wrapper>
 );

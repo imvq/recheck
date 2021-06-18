@@ -2,15 +2,15 @@ import { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 import { trimText } from 'utils/functions';
-import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
-import { IProps } from './types';
 import CustomOption from './CustomOption';
-import { Wrapper, SelectedItemWrapper, ArrowUp, ArrowDown, OptionsBadgesWrapper } from './styled';
 
-type TCurrentValue = utilityTypes.Nullable<generalTypes.OptionType>;
+import * as types from './types';
+import * as styled from './styled';
 
-const CustomSelect = (props: IProps) => {
+type TCurrentValue = generalTypes.OptionType | null;
+
+const CustomSelect = (props: types.IProps) => {
   const [isDimmed, setIsDimmed] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentValue, setCurrentValue] = useState<TCurrentValue>(null);
@@ -25,12 +25,12 @@ const CustomSelect = (props: IProps) => {
 
   return (
     <OutsideClickHandler display='contents' onOutsideClick={() => setIsExpanded(false)}>
-      <Wrapper style={{ width: props.width }} onClick={() => setIsExpanded(!isExpanded)}>
-        <SelectedItemWrapper isDimmed={isDimmed}>
+      <styled.Wrapper style={{ width: props.width }} onClick={() => setIsExpanded(!isExpanded)}>
+        <styled.SelectedItemWrapper isDimmed={isDimmed}>
           {trimmedValue || props.placeholder || 'Выбрать'}
-        </SelectedItemWrapper>
+        </styled.SelectedItemWrapper>
         {isExpanded && (
-        <OptionsBadgesWrapper>
+        <styled.OptionsBadgesWrapper>
           {props.options.map(option => (
             <CustomSelect.Option
               key={option.key}
@@ -38,10 +38,10 @@ const CustomSelect = (props: IProps) => {
               onClick={() => callNewOptionHandler(option)}
             />
           ))}
-        </OptionsBadgesWrapper>
+        </styled.OptionsBadgesWrapper>
         )}
-        {isExpanded ? <ArrowUp /> : <ArrowDown />}
-      </Wrapper>
+        {isExpanded ? <styled.ArrowUp /> : <styled.ArrowDown />}
+      </styled.Wrapper>
     </OutsideClickHandler>
   );
 };

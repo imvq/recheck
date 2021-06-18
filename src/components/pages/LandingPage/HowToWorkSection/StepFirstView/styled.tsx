@@ -4,9 +4,6 @@ import { cssVars, mixins } from 'utils/style.common';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for first step section wrapper.
- */
 export const Wrapper = styled.div`
   ${mixins.HTWLeftOrientedSectionWrapper}
 
@@ -17,16 +14,10 @@ export const Wrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for wrapper making section content be centrazlized.
- */
 export const CentralizingBox = styled.div`
   ${mixins.HTWLeftOrientedCentralizingBox}
 `;
 
-/**
- * Styled componenet for paragraph wrapper.
- */
 export const ParagraphWrapper = styled.div`
   ${mixins.HTWParagraphWrapper}
 
@@ -34,9 +25,6 @@ export const ParagraphWrapper = styled.div`
   top: 12.3836rem;
 `;
 
-/**
- * Styled component for paragraph background.
- */
 export const ParagraphBackground = styled.img`
   ${mixins.HTWparagraphBackground}
 
@@ -46,40 +34,25 @@ export const ParagraphBackground = styled.img`
   height: 24.618rem;
 `;
 
-/**
- * Styled component for title wrapper.
- */
 export const TitleWrapper = styled.div`
   margin-bottom: .373rem;
   z-index: 1;
 `;
 
-/**
- * Styled component for title.
- */
 export const Title = styled.h1`
   ${mixins.LandingTitle}
 `;
 
-/**
- * Styled component for section text.
- */
 export const Text = styled.p`
   ${mixins.LandingBlockText}
 `;
 
-/**
- * Styled component for section image wrapper.
- */
 export const ImageWrapper = styled.div`
   display: flex;
   padding-top: 4.058rem;
   padding-right: 18.65rem;
 `;
 
-/**
- * Styled component for section image.
- */
 export const Image = styled.img`
   width: 29.84rem;
   height: 29.84rem;

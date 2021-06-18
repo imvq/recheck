@@ -3,10 +3,8 @@ import { useState, useEffect, useCallback } from 'react';
 import * as constants from 'utils/constants';
 import { cookieManager } from 'utils/cookies';
 import CookieImage from 'assets/images/shared/CookiePopup/Cookie.png';
-import {
-  FixedJustifier, Wrapper, SubsectionWrapper, AdaptedImage, TextWrapper, StyledLink, LinkButton,
-  CloseButtonWrapper, CloseButton
-} from './styled';
+
+import * as styled from './styled';
 
 /**
  * Popup with warning about cookies.
@@ -28,28 +26,28 @@ export default () => {
   }, []);
 
   return isVisible ? (
-    <FixedJustifier>
-      <Wrapper>
-        <SubsectionWrapper>
-          <AdaptedImage src={CookieImage} draggable={false} />
-          <TextWrapper>
+    <styled.FixedJustifier>
+      <styled.Wrapper>
+        <styled.SubsectionWrapper>
+          <styled.AdaptedImage src={CookieImage} draggable={false} />
+          <styled.TextWrapper>
             <span>
               Этот сайт использует cookies. Вы можете изменить настройки cookies в
               своём браузере.&nbsp;&nbsp;
             </span>
-            <StyledLink to='/about'>Узнать больше</StyledLink>
-          </TextWrapper>
-        </SubsectionWrapper>
-        <SubsectionWrapper>
-          <LinkButton onClick={hide}>
+            <styled.StyledLink to='/about'>Узнать больше</styled.StyledLink>
+          </styled.TextWrapper>
+        </styled.SubsectionWrapper>
+        <styled.SubsectionWrapper>
+          <styled.LinkButton onClick={hide}>
             Принять и закрыть
-          </LinkButton>
+          </styled.LinkButton>
           {/* Mobile only. */}
-          <CloseButtonWrapper>
-            <CloseButton onClick={hide} />
-          </CloseButtonWrapper>
-        </SubsectionWrapper>
-      </Wrapper>
-    </FixedJustifier>
+          <styled.CloseButtonWrapper>
+            <styled.CloseButton onClick={hide} />
+          </styled.CloseButtonWrapper>
+        </styled.SubsectionWrapper>
+      </styled.Wrapper>
+    </styled.FixedJustifier>
   ) : null;
 };

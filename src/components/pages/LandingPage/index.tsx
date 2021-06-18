@@ -1,7 +1,6 @@
 import CookiePopup from 'components/shared/CookiePopup';
 import AuthPopupManager from 'components/shared/AuthPopupManager';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
-import { Wrapper } from './styled';
 import GreetingsSection from './GreetingsSection';
 import HowToWorkSection from './HowToWorkSection';
 import InfoblockSection from './InfoblockSection';
@@ -9,11 +8,13 @@ import MainSwipeSection from './MainSwipeSection';
 import MotivatorSection from './MotivatorSection';
 import Footer from './Footer';
 
+import * as styled from './styled';
+
 /**
  * Landing page parts wrapper.
  */
 export default () => (
-  <Wrapper>
+  <styled.Wrapper>
     <GreetingsSection />
     <HowToWorkSection />
     <InfoblockSection />
@@ -23,5 +24,5 @@ export default () => (
     <CookiePopup />
     <AuthPopupManager />
     <SearchPopupManager />
-  </Wrapper>
+  </styled.Wrapper>
 );

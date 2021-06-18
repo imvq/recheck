@@ -1,11 +1,11 @@
-import { Line, Rocket } from './styled';
+import * as styled from './styled';
 
 /**
  * Rocket and its path (represented as a separate object).
  */
 export default () => (
-  <div>
-    <Line />
-    <Rocket />
-  </div>
+  <styled.Wrapper>
+    <styled.Line />
+    <styled.Rocket />
+  </styled.Wrapper>
 );

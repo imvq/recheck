@@ -1,6 +1,5 @@
 import { Dispatch } from 'redux';
 
-import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
 import Api from 'utils/api';
 import { MainToolbarEntry, ProfileMenuEntry } from 'utils/enums';
@@ -84,13 +83,13 @@ export const setReviewsLeftChunksAmount = (amount: number)
   payload: amount
 });
 
-export const setCurrentReviewGot = (review: utilityTypes.Nullable<generalTypes.ReviewCardGotData>)
+export const setCurrentReviewGot = (review: generalTypes.ReviewCardGotData | null)
   : InteractionStateActionType => ({
   type: SET_CURRENT_REVIEW_GOT,
   payload: review
 });
 
-export const setCurrentReviewLeft = (review: utilityTypes.Nullable<generalTypes.ReviewCardLeftData>)
+export const setCurrentReviewLeft = (review: generalTypes.ReviewCardLeftData | null)
   : InteractionStateActionType => ({
   type: SET_CURRENT_REVIEW_LEFT,
   payload: review

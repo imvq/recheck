@@ -1,4 +1,5 @@
 import ProfileMenuBadge from 'components/shared/ProfileMenuBadge';
+
 import * as styled from './styled';
 
 /**

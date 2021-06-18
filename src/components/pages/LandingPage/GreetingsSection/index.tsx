@@ -1,13 +1,14 @@
-import { Wrapper } from './styled';
 import Head from './Head';
 import Content from './Content';
+
+import * as styled from './styled';
 
 /**
  * Styled component for greetings section.
  */
 export default () => (
-  <Wrapper>
+  <styled.Wrapper>
     <Head />
     <Content />
-  </Wrapper>
+  </styled.Wrapper>
 );

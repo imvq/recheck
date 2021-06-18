@@ -1,21 +1,24 @@
-import { IProps } from './types';
-import { Wrapper, PhotoWrapper, Photo, ContentWrapper, Title, Entry } from './styled';
+import * as types from './types';
+import * as styled from './styled';
 
-export default (props: IProps) => (
-  <Wrapper>
-    <PhotoWrapper>
-      <Photo src={props.cardData.photoUrl} />
-    </PhotoWrapper>
-    <ContentWrapper>
-      <Title>{props.cardData.name}</Title>
-      <Entry>
-        <Entry isDimmed>Должность:&nbsp;&nbsp;</Entry>
-        <Entry>{props.cardData.position}</Entry>
-      </Entry>
-      <Entry>
-        <Entry isDimmed>Место работы:&nbsp;&nbsp;</Entry>
-        <Entry>{props.cardData.company}</Entry>
-      </Entry>
-    </ContentWrapper>
-  </Wrapper>
+export default (props: types.IProps) => (
+  <styled.Wrapper>
+    <styled.PhotoWrapper>
+      <styled.Photo src={props.cardData.photoUrl} />
+    </styled.PhotoWrapper>
+
+    <styled.ContentWrapper>
+      <styled.Title>{props.cardData.name}</styled.Title>
+
+      <styled.Entry>
+        <styled.Entry isDimmed>Должность:&nbsp;&nbsp;</styled.Entry>
+        <styled.Entry>{props.cardData.position}</styled.Entry>
+      </styled.Entry>
+
+      <styled.Entry>
+        <styled.Entry isDimmed>Место работы:&nbsp;&nbsp;</styled.Entry>
+        <styled.Entry>{props.cardData.company}</styled.Entry>
+      </styled.Entry>
+    </styled.ContentWrapper>
+  </styled.Wrapper>
 );

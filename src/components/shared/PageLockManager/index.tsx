@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 
 import PageLoader from 'components/shared/PageLockManager/PageLoader';
 import { AppState } from 'store';
-import { IProps, IStateProps } from './types';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   isPageLocked: store.interaction.isPageLocked
 });
 
@@ -13,7 +14,7 @@ const mapStateToProps = (store: AppState): IStateProps => ({
  * Component for checking page lock status and preventing
  * users from doing stuff that might be inaccessible to them.
  */
-const PageLockManager: FunctionComponent<IProps> = (props) => {
+const PageLockManager: FunctionComponent<types.IProps> = (props) => {
   return props.isPageLocked
     ? (
       <PageLoader>

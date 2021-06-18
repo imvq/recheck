@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 
 import SearchPopup from 'components/shared/SearchPopup';
 import { AppState } from 'store';
-import { IStateProps, IProps } from './types';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   isSearchPopupVisible: store.interaction.isSearchPopupVisible
 });
 
@@ -12,7 +13,7 @@ const mapStateToProps = (store: AppState): IStateProps => ({
  * Component controlling search popup appearing/disappearing.
  * Non-presentational component.
  */
-const SearchPopupManager = (props: IProps) => {
+const SearchPopupManager = (props: types.IProps) => {
   return props.isSearchPopupVisible ? <SearchPopup /> : null;
 };
 

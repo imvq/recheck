@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for infoblock section main wrapper.
- */
 export const Wrapper = styled.div`
   display: grid;
   grid-template:
@@ -19,9 +16,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for all the subsections wrapper.
- */
 export const SubsectionsWrapper = styled.div`
   display: none;
 
@@ -34,9 +28,6 @@ export const SubsectionsWrapper = styled.div`
   }
 `;
 
-/**
- * Wrapper disappearing when it's not desktop layout.
- */
 export const InfoBlockDesktopOnlyWrapper = styled.div`
   ${respond(ScreenBreakpoint.XS)} {
     display: none;

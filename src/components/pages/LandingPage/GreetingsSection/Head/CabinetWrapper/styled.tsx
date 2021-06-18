@@ -8,9 +8,6 @@ const cssVarsLocal = {
   widthOffset: '12rem'
 };
 
-/**
- * Wrapper for cabinet button.
- */
 export const Wrapper = styled.div`
   grid-area: TelegramWrapper;
   display: flex;

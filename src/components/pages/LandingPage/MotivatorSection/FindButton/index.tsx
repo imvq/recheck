@@ -2,13 +2,14 @@ import { connect } from 'react-redux';
 
 import { AppState, setPageLocked, setIsSearchPopupVisible, setIsLoginPopupVisible } from 'store';
 import FindCandidateBtn from 'assets/images/pages/LandingPage/MotivatorSection/FindCandidateBtn.svg';
-import { IProps, IStateProps, IDispatchProps } from './types';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.auth.isAuthorized
 });
 
-const mapDispatchToProps: IDispatchProps = {
+const mapDispatchToProps: types.IDispatchProps = {
   lockPage: setPageLocked,
   setIsSearchPopupVisible,
   setIsLoginPopupVisible
@@ -17,7 +18,7 @@ const mapDispatchToProps: IDispatchProps = {
 /**
  * Button to redirect to search page from the bottom landing page section.
  */
-const FindButton = (props: IProps) => (
+const FindButton = (props: types.IProps) => (
   <img
     role='none'
     src={FindCandidateBtn}

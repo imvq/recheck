@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for 'How to work' section main wrapper.
- */
 export const Wrapper = styled.div`
   display: grid;
   grid-template:

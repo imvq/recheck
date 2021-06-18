@@ -4,9 +4,6 @@ import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 import RectUpper from 'assets/images/pages/LandingPage/GreetingsSection/RectUpper.svg';
 
-/**
- * Styled component for Greetings section.
- */
 export const Wrapper = styled.div`
   width: 100%;
   height: fit-content;

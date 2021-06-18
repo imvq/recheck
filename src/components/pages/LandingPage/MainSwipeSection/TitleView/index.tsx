@@ -1,12 +1,12 @@
-import { Wrapper, TitleWrapper, Text } from './styled';
+import * as styled from './styled';
 
 /**
  * Title of swipe section.
  */
 export default () => (
-  <Wrapper id='MainSwipeViewTitle'>
-    <TitleWrapper>
-      <Text>Примеры отзывов о кандидатах</Text>
-    </TitleWrapper>
-  </Wrapper>
+  <styled.Wrapper id='MainSwipeViewTitle'>
+    <styled.TitleWrapper>
+      <styled.Text>Примеры отзывов о кандидатах</styled.Text>
+    </styled.TitleWrapper>
+  </styled.Wrapper>
 );

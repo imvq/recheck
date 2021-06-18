@@ -53,6 +53,8 @@ export const StepWrapper = styled.div`
   font-size: 1.2rem;
 `;
 
+export const StepText = styled.span``;
+
 export const ButtonGroupWrapper = styled.div`
   width: 35rem;
   display: flex;

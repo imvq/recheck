@@ -3,19 +3,20 @@ import { connect } from 'react-redux';
 import { AppState, searchUser, setPageLocked } from 'store';
 import PersonCard from 'components/shared/PersonCard';
 import SearchField from './SearchField';
-import { IProps, IStateProps, IDispatchProps } from './types';
+
+import * as types from './types';
 import * as styled from './styled';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   userSearchResults: store.search.userSearchResults
 });
 
-const mapDispatchToProps: IDispatchProps = {
+const mapDispatchToProps: types.IDispatchProps = {
   searchUser,
   lockPage: setPageLocked
 };
 
-const SearchPage = (props: IProps) => (
+const SearchPage = (props: types.IProps) => (
   <styled.Wrapper>
     <styled.Sidebar />
 

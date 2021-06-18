@@ -14,9 +14,6 @@ const mixinsLocal = {
   `
 };
 
-/**
- * Styled component for motivator section wrapper
- */
 export const Wrapper = styled.div`
   grid-area: MotivatorView;
   height: 70rem;
@@ -34,9 +31,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for main focus view.
- */
 export const FocusView = styled.div`
   position: relative;
   grid-area: FocusView;
@@ -44,17 +38,11 @@ export const FocusView = styled.div`
   justify-content: center;
 `;
 
-/**
- * Styled component for anchor.
- */
 export const Anchor = styled.div`
   position: relative;
   width: 0;
 `;
 
-/**
- * Styled component for anchor.
- */
 export const AnchorSticky = styled(Anchor)`
   position: absolute;
   bottom: 0;
@@ -68,9 +56,6 @@ export const AnchorSticky = styled(Anchor)`
   }
 `;
 
-/**
- * Styled component for motivator badge wrapper.
- */
 export const MotivatorBadgeWrapper = styled.div`
   position: absolute;
 
@@ -100,9 +85,6 @@ export const MotivatorBadgeWrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for central image.
- */
 export const Image = styled.img`
   width: 42rem;
   padding-left: 10rem;
@@ -113,9 +95,6 @@ export const Image = styled.img`
   }
 `;
 
-/**
- * Styled component for motivator section search button wrapper.
- */
 export const ButtonWrapper = styled.div`
   ${mixins.DefaultButton}
 

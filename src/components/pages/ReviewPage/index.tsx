@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, createReview } from 'store';
-import { IProps, IStateProps, IDispatchProps } from './types';
 import BoxStepInitial from './BoxStepInitial';
 import BoxStepFinal from './BoxStepFinal';
 
@@ -13,14 +12,15 @@ import ComponentBoxWithMark from './CommentBoxWithMark';
 import * as boxWithMarkMapping from './CommentBoxWithMark/mapping';
 import * as boxWithMarkLabels from './CommentBoxWithMark/labels';
 
+import * as types from './types';
 import * as styled from './styled';
 
-const mapSateToProps = (store: AppState): IStateProps => ({
+const mapSateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
   reviewData: { ...store.reviews }
 });
 
-const mapDispatchToProps: IDispatchProps = {
+const mapDispatchToProps: types.IDispatchProps = {
   createReview
 };
 
@@ -77,7 +77,7 @@ const BoxStepJ = CommentBoxSimple(
 /**
  * Page in charge of adding a review.
  */
-const ReviewPage = (props: IProps) => {
+const ReviewPage = (props: types.IProps) => {
   const [step, setStep] = useState(0);
 
   const proceed = () => setStep(step + 1);

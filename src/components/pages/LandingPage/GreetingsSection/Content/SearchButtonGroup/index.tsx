@@ -1,15 +1,16 @@
 import { connect } from 'react-redux';
 
 import { AppState, setPageLocked, setIsSearchPopupVisible, setIsLoginPopupVisible } from 'store';
-import { Wrapper, SearchButton } from './styled';
 import RocketGroup from './RocketGroup';
-import { IProps, IStateProps, IDispatchProps } from './types';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+import * as styled from './styled';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.auth.isAuthorized
 });
 
-const mapDispatchToProps: IDispatchProps = {
+const mapDispatchToProps: types.IDispatchProps = {
   lockPage: setPageLocked,
   setIsSearchPopupVisible,
   setIsLoginPopupVisible
@@ -19,8 +20,8 @@ const mapDispatchToProps: IDispatchProps = {
  * Group of Programmed SVG components representing a search button
  * and a decorated SVG rocket attached to.
  */
-const SearchButtonGroup = (props: IProps) => (
-  <Wrapper onClick={
+const SearchButtonGroup = (props: types.IProps) => (
+  <styled.Wrapper onClick={
     props.isAuthorized === null
       ? props.lockPage
       : props.isAuthorized
@@ -28,9 +29,9 @@ const SearchButtonGroup = (props: IProps) => (
         : () => props.setIsLoginPopupVisible(true)
   }
   >
-    <SearchButton onClick={props.onClick} />
+    <styled.SearchButton onClick={props.onClick} />
     <RocketGroup />
-  </Wrapper>
+  </styled.Wrapper>
 );
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchButtonGroup);

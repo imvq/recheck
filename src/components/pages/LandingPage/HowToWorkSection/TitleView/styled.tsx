@@ -4,9 +4,6 @@ import { cssVars } from 'utils/style.common';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for title outer wrapper.
- */
 export const Wrapper = styled.div`
   grid-area: TitleView;
   display: flex;
@@ -14,9 +11,6 @@ export const Wrapper = styled.div`
   text-align: center;
 `;
 
-/**
- * Styled component for title text wrapper.
- */
 export const TextWrapper = styled.div`
   margin-top: 15rem;
 
@@ -25,24 +19,15 @@ export const TextWrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for title text.
- */
 export const Text = styled.span`
   font-weight: 600;
   font-size: 2.536rem;
 `;
 
-/**
- * Styled component for title text.
- */
 export const TextColorpickMain = styled(Text)`
   color: ${cssVars.colorForegroundPickMain};
 `;
 
-/**
- * Styled component for title text.
- */
 export const TextColorpickAux1 = styled(Text)`
  color: ${cssVars.colorForegroundPickAux1};
 `;

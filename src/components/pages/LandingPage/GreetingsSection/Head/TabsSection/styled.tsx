@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for tabs section main wrapper.
- */
 export const Wrapper = styled.div`
   grid-area: TabSection;
   display: flex;
@@ -18,9 +15,6 @@ export const Wrapper = styled.div`
   }
 `;
 
-/**
- * Styled component for tab button.
- */
 export const TabButton = styled.button`
   border: none;
   background: none;

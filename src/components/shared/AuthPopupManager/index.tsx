@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 
 import AuthPopup from 'components/shared/AuthPopup';
 import { AppState } from 'store';
-import { IStateProps, IProps } from './types';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   isLoginPopupVisible: store.interaction.isLoginPopupVisible
 });
 
@@ -12,7 +13,7 @@ const mapStateToProps = (store: AppState): IStateProps => ({
  * Component controlling login popup appearing/disappearing.
  * Non-presentational component.
  */
-const AuthPopupManager = (props: IProps) => {
+const AuthPopupManager = (props: types.IProps) => {
   return props.isLoginPopupVisible ? <AuthPopup /> : null;
 };
 

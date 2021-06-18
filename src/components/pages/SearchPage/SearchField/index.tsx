@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { IProps } from './types';
-import { Wrapper, Input, AdapdetMagnifier } from './styled';
+import * as types from './types';
+import * as styled from './styled';
 
-export default (props: IProps) => {
+export default (props: types.IProps) => {
   const [searchText, setSearchText] = useState('');
 
   const doSearch = () => {
@@ -12,14 +12,14 @@ export default (props: IProps) => {
   };
 
   return (
-    <Wrapper>
-      <Input
+    <styled.Wrapper>
+      <styled.Input
         type='text'
         placeholder='Введите название компании или имя и фамилию сотрудника, который работал с вами:'
         onChange={(event) => setSearchText(event.target.value)}
         onBlur={doSearch}
       />
-      <AdapdetMagnifier onClick={doSearch} />
-    </Wrapper>
+      <styled.AdapdetMagnifier onClick={doSearch} />
+    </styled.Wrapper>
   );
 };

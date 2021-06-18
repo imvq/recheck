@@ -1,32 +1,31 @@
 import Header from 'components/shared/Header';
-import {
-  Wrapper, HeaderWrapper, InfoJustificationWrapper, InfoContentWrapper,
-  ImageWrapper, AdaptedImage, AdaptedLink, Title, Subtitle, Span,
-  ErrorSpanWrapper, LinksWrapper
-} from './styled';
+
+import * as styled from './styled';
 
 export default () => (
-  <Wrapper>
-    <HeaderWrapper><Header /></HeaderWrapper>
-    <InfoJustificationWrapper>
-      <InfoContentWrapper>
-        <Title>Ой!</Title>
-        <Subtitle>Похоже, мы не можем найти</Subtitle>
-        <Subtitle>нужную вам страницу</Subtitle>
-        <ErrorSpanWrapper>
-          <Span pale>
-            <Span>Код ошибки&nbsp;&nbsp;</Span>
-            <Span increased>404</Span>
-          </Span>
-        </ErrorSpanWrapper>
-        <Span thin reduced>Вот несколько полезных ссылок:</Span>
-        <LinksWrapper>
-          <AdaptedLink to='/'>На главную</AdaptedLink>
-          <AdaptedLink to='/'>Новый поиск</AdaptedLink>
-          <AdaptedLink to='/'>Личный кабинет</AdaptedLink>
-        </LinksWrapper>
-      </InfoContentWrapper>
-    </InfoJustificationWrapper>
-    <ImageWrapper><AdaptedImage /></ImageWrapper>
-  </Wrapper>
+  <styled.Wrapper>
+    <styled.HeaderWrapper><Header /></styled.HeaderWrapper>
+    <styled.InfoJustificationWrapper>
+      <styled.InfoContentWrapper>
+        <styled.Title>Ой!</styled.Title>
+        <styled.Subtitle>Похоже, мы не можем найти</styled.Subtitle>
+        <styled.Subtitle>нужную вам страницу</styled.Subtitle>
+
+        <styled.ErrorSpanWrapper>
+          <styled.Span pale>
+            <styled.Span>Код ошибки&nbsp;&nbsp;</styled.Span>
+            <styled.Span increased>404</styled.Span>
+          </styled.Span>
+        </styled.ErrorSpanWrapper>
+
+        <styled.Span thin reduced>Вот несколько полезных ссылок:</styled.Span>
+        <styled.LinksWrapper>
+          <styled.AdaptedLink to='/'>На главную</styled.AdaptedLink>
+          <styled.AdaptedLink to='/'>Новый поиск</styled.AdaptedLink>
+          <styled.AdaptedLink to='/'>Личный кабинет</styled.AdaptedLink>
+        </styled.LinksWrapper>
+      </styled.InfoContentWrapper>
+    </styled.InfoJustificationWrapper>
+    <styled.ImageWrapper><styled.AdaptedImage /></styled.ImageWrapper>
+  </styled.Wrapper>
 );

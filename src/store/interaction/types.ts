@@ -1,4 +1,3 @@
-import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
 import { MainToolbarEntry, ProfileMenuEntry } from 'utils/enums';
 
@@ -26,8 +25,8 @@ export interface InteractionState {
   isProfileReviewsTabLoading: boolean;
   reviewsGotChunksAmount: number;
   reviewsLeftChunksAmount: number;
-  currentReviewGot: utilityTypes.Nullable<generalTypes.ReviewCardGotData>;
-  currentReviewLeft: utilityTypes.Nullable<generalTypes.ReviewCardLeftData>;
+  currentReviewGot: generalTypes.ReviewCardGotData | null;
+  currentReviewLeft: generalTypes.ReviewCardLeftData | null;
 }
 
 export interface SetIsPageLocked {
@@ -82,12 +81,12 @@ export interface SetReviewsLeftChunksAmount {
 
 export interface SetCurrentReviewGot {
   type: typeof SET_CURRENT_REVIEW_GOT;
-  payload: utilityTypes.Nullable<generalTypes.ReviewCardGotData>;
+  payload: generalTypes.ReviewCardGotData | null;
 }
 
 export interface SetCurrentReviewLeft {
   type: typeof SET_CURRENT_REVIEW_LEFT;
-  payload: utilityTypes.Nullable<generalTypes.ReviewCardLeftData>;
+  payload: generalTypes.ReviewCardLeftData | null;
 }
 
 export type InteractionStateActionType =

@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import { setPageUnlocked } from 'store';
-import { IProps, IDispatchProps } from './types';
 
-const mapDispatchToProps: IDispatchProps = {
+import * as types from './types';
+
+const mapDispatchToProps: types.IDispatchProps = {
   unlockPage: setPageUnlocked
 };
 
@@ -15,7 +16,7 @@ const mapDispatchToProps: IDispatchProps = {
  * Nevertheless, it is sometimes needed to force unlock page
  * as quick as possible. PageForceUnlocker is in charge of that stuff.
  */
-const PageForceUnlocker = (props: IProps) => {
+const PageForceUnlocker = (props: types.IProps) => {
   useEffect(() => props.unlockPage());
 
   return null;

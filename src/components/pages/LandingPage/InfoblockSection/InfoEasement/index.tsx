@@ -1,28 +1,32 @@
 import InfoEasementBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoEasementBoard.svg';
-import { Wrapper } from './styled';
-import { BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title, Text } from '../BaseSubsection/styled';
+
+import * as styledLocal from './styled';
+import * as styledBase from '../BaseSubsection/styled';
+
+const styled = { ...styledLocal, ...styledBase };
 
 export default () => (
-  <Wrapper>
-    <BoardWrapper>
-      <Board backgroundSource={InfoEasementBoardSvg}>
-        <ParagraphWrapper>
-          <TitleWrapper>
-            <Title>
-              <span>
+  <styled.Wrapper>
+    <styled.BoardWrapper>
+      <styled.Board backgroundSource={InfoEasementBoardSvg}>
+        <styled.ParagraphWrapper>
+          <styled.TitleWrapper>
+            <styled.Title>
+              <styled.TitleText>
                 Можно проверять кадидата
                 ещё до того, как он придёт
                 на собеседование.
-              </span>
-            </Title>
-          </TitleWrapper>
-          <Text>
+              </styled.TitleText>
+            </styled.Title>
+          </styled.TitleWrapper>
+
+          <styled.Text>
             Теперь не обязательно ждать
             финальное собеседование,
             чтобы получить рекомендацию.
-          </Text>
-        </ParagraphWrapper>
-      </Board>
-    </BoardWrapper>
-  </Wrapper>
+          </styled.Text>
+        </styled.ParagraphWrapper>
+      </styled.Board>
+    </styled.BoardWrapper>
+  </styled.Wrapper>
 );

@@ -7,20 +7,17 @@ import {
 import * as generalTypes from 'utils/typing/general';
 import { inputHandler } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
-import { IProps, IStateProps, IDispatchProps } from './types';
-import {
-  BoxBaseWrapper, ButtonGroupWrapper, InputWrapper,
-  InputDescription, InputDescriptionWrapper, Input,
-  InputGroupWrapper, StepWrapper
-} from '../../../shared/BoxBase';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+import * as styled from '../../../shared/BoxBase';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   recommenderLink1: store.reviews.recommenderLink1,
   recommenderLink2: store.reviews.recommenderLink2,
   recommenderLink3: store.reviews.recommenderLink3,
 });
 
-const mapDispatchToProps: IDispatchProps = {
+const mapDispatchToProps: types.IDispatchProps = {
   clearAdviceData,
   clearRecommendersData,
   setRecommenderLink1: setReviewRecommenderLink1,
@@ -31,7 +28,7 @@ const mapDispatchToProps: IDispatchProps = {
 /**
  * Review box with an advice to the candidate.
  */
-const BoxStepJ = (props: IProps) => {
+const BoxStepJ = (props: types.IProps) => {
   const link1Handler = (event: generalTypes.InputEvent) => inputHandler(
     event,
     props.setRecommenderLink1
@@ -62,31 +59,40 @@ const BoxStepJ = (props: IProps) => {
   };
 
   return (
-    <BoxBaseWrapper>
-      <InputGroupWrapper>
-        <InputDescriptionWrapper>
-          <InputDescription>Кто ещё может дать отзыв о работе кандидата?</InputDescription>
-        </InputDescriptionWrapper>
-        <InputWrapper>
-          <Input type='text' placeholder='Ссылка на LinkedIn/Email/Telegram' onChange={link1Handler} />
-        </InputWrapper>
-        <InputWrapper>
-          <Input type='text' placeholder='Ссылка на LinkedIn/Email/Telegram' onChange={link2Handler} />
-        </InputWrapper>
-        <InputWrapper>
-          <Input type='text' placeholder='Ссылка на LinkedIn/Email/Telegram' onChange={link3Handler} />
-        </InputWrapper>
-      </InputGroupWrapper>
-      <StepWrapper><span>12 / 12</span></StepWrapper>
-      <ButtonGroupWrapper>
+    <styled.BoxBaseWrapper>
+      <styled.InputGroupWrapper>
+        <styled.InputDescriptionWrapper>
+          <styled.InputDescription>
+            Кто ещё может дать отзыв о работе кандидата?
+          </styled.InputDescription>
+        </styled.InputDescriptionWrapper>
+
+        <styled.InputWrapper>
+          <styled.Input type='text' placeholder='Ссылка на LinkedIn/Email/Telegram' onChange={link1Handler} />
+        </styled.InputWrapper>
+
+        <styled.InputWrapper>
+          <styled.Input type='text' placeholder='Ссылка на LinkedIn/Email/Telegram' onChange={link2Handler} />
+        </styled.InputWrapper>
+
+        <styled.InputWrapper>
+          <styled.Input type='text' placeholder='Ссылка на LinkedIn/Email/Telegram' onChange={link3Handler} />
+        </styled.InputWrapper>
+      </styled.InputGroupWrapper>
+
+      <styled.StepWrapper>
+        <styled.StepText>12 / 12</styled.StepText>
+      </styled.StepWrapper>
+
+      <styled.ButtonGroupWrapper>
         <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
           Назад
         </CustomButton>
         <CustomButton isDisabled={!canProceed} onClick={proceedIfAllowed}>
           Сохранить оценку
         </CustomButton>
-      </ButtonGroupWrapper>
-    </BoxBaseWrapper>
+      </styled.ButtonGroupWrapper>
+    </styled.BoxBaseWrapper>
   );
 };
 

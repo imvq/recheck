@@ -4,7 +4,6 @@ import Api from 'utils/api';
 import * as constants from 'utils/constants';
 import controlledHistory from 'utils/routing';
 import * as ApiResponse from 'utils/typing/apiResponses';
-import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
 import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
@@ -91,7 +90,7 @@ export function onSuccessLinkedIn(
 function isFacebookFailureResponse(result: FacebookLoginResponse)
   : result is ReactFacebookFailureResponse {
   // 'status' is a field of ReactFacebookFailureResponse type.
-  return !!((result as ReactFacebookFailureResponse).status as utilityTypes.Optional<string>);
+  return !!((result as ReactFacebookFailureResponse).status as string | undefined);
 }
 
 export function onSuccessFacebook(

@@ -1,7 +1,6 @@
 import psl from 'psl';
 
 import * as apiResponses from 'utils/typing/apiResponses';
-import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
 import { IReviewCardCommonData } from 'utils/typing/general/basic';
 import { cookieManager, cookiesList } from 'utils/cookies';
@@ -17,7 +16,7 @@ export function getNValuesDown(from : number, n: number): number[] {
 /**
  * Partially applied onChange input event.
  */
-export function inputHandler(event: generalTypes.InputEvent, setter: utilityTypes.Setter<string>) {
+export function inputHandler(event: generalTypes.InputEvent, setter: (value: string) => void) {
   setter(event.target.value);
 }
 
@@ -93,7 +92,7 @@ export const respond = (screen: ScreenBreakpoint) => `@media (max-width: ${scree
  */
 export function textAreaHandler(
   event: generalTypes.TextAreaEvent,
-  setter: utilityTypes.Setter<string>
+  setter: (value: string) => void
 ) {
   setter(event.target.value);
 }

@@ -1,35 +1,37 @@
 import { Link as RouterLink } from 'react-router-dom';
 
-import {
-  Wrapper, SectionWrapper, EmptyWrapper, InnerLogo, MenuEntryText,
-  MenuEntryTextMarked, MenuEntryTextDisabled, SocialLink, TelegramIconWrapper
-} from './styled';
+import * as styled from './styled';
 
 /**
  * The footer.
  */
 export default () => (
-  <Wrapper>
-    <SectionWrapper><InnerLogo /></SectionWrapper>
-    <SectionWrapper>
-      <MenuEntryTextMarked>Меню:</MenuEntryTextMarked>
+  <styled.Wrapper>
+    <styled.SectionWrapper>
+      <styled.InnerLogo />
+    </styled.SectionWrapper>
+
+    <styled.SectionWrapper>
+      <styled.MenuEntryTextMarked>Меню:</styled.MenuEntryTextMarked>
       <RouterLink style={{ textDecoration: 'none', color: 'black' }} to='/#HowToWorkTitle'>
-        <MenuEntryText>О платформе</MenuEntryText>
+        <styled.MenuEntryText>О платформе</styled.MenuEntryText>
       </RouterLink>
       <RouterLink style={{ textDecoration: 'none', color: 'black' }} to='/#InfoblockTitle'>
-        <MenuEntryText>Преимущества</MenuEntryText>
+        <styled.MenuEntryText>Преимущества</styled.MenuEntryText>
       </RouterLink>
-    </SectionWrapper>
-    <SectionWrapper>
-      <MenuEntryTextMarked>Почта:</MenuEntryTextMarked>
-      <MenuEntryTextDisabled>info@recheck-candidate.com</MenuEntryTextDisabled>
-    </SectionWrapper>
-    <SectionWrapper>
-      <MenuEntryTextMarked>Соц. сети:</MenuEntryTextMarked>
-      <SocialLink href='/'>
-        <TelegramIconWrapper />
-      </SocialLink>
-    </SectionWrapper>
-    <EmptyWrapper />
-  </Wrapper>
+    </styled.SectionWrapper>
+
+    <styled.SectionWrapper>
+      <styled.MenuEntryTextMarked>Почта:</styled.MenuEntryTextMarked>
+      <styled.MenuEntryTextDisabled>info@recheck-candidate.com</styled.MenuEntryTextDisabled>
+    </styled.SectionWrapper>
+
+    <styled.SectionWrapper>
+      <styled.MenuEntryTextMarked>Соц. сети:</styled.MenuEntryTextMarked>
+      <styled.SocialLink href='/'>
+        <styled.TelegramIconWrapper />
+      </styled.SocialLink>
+    </styled.SectionWrapper>
+    <styled.EmptyWrapper />
+  </styled.Wrapper>
 );

@@ -1,13 +1,13 @@
-import { IProps } from './types';
-import { Wrapper, ClickableBackground } from './styled';
+import * as types from './types';
+import * as styled from './styled';
 
 /**
  * Popup wrapper with dim effect around.
  * Provides callbacks to be triggered on background click.
  */
-export default (props: IProps) => (
-  <Wrapper>
+export default (props: types.IProps) => (
+  <styled.Wrapper>
     {props.children}
-    <ClickableBackground onClick={props.onClickedOutside} />
-  </Wrapper>
+    <styled.ClickableBackground onClick={props.onClickedOutside} />
+  </styled.Wrapper>
 );

@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for Header.
- */
 export const Wrapper = styled.div`
   height: 8rem;
   display: flex;

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 
 import DemoReviewCard from 'components/shared/DemoReviewCard';
-import { Wrapper, JustificationWrapper, CardWrapper, ArrowLeft, ArrowRight } from './styled';
 import examples from './examples';
+
+import * as styled from './styled';
 
 /**
  * Swipe area with review examples.
@@ -40,12 +41,12 @@ export default () => {
   };
 
   return (
-    <Wrapper key={Math.random()}>
-      <ArrowLeft onClick={onPrevClicked} />
-      <JustificationWrapper>
-        {cards.map(card => <CardWrapper key={card.key}>{card}</CardWrapper>)}
-      </JustificationWrapper>
-      <ArrowRight onClick={onNextClicked} />
-    </Wrapper>
+    <styled.Wrapper key={Math.random()}>
+      <styled.ArrowLeft onClick={onPrevClicked} />
+      <styled.JustificationWrapper>
+        {cards.map(card => <styled.CardWrapper key={card.key}>{card}</styled.CardWrapper>)}
+      </styled.JustificationWrapper>
+      <styled.ArrowRight onClick={onNextClicked} />
+    </styled.Wrapper>
   );
 };

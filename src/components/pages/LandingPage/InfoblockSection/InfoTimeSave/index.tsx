@@ -1,32 +1,33 @@
 import InfoTimeSaveBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoTimeSaveBoard.svg';
-import { Wrapper } from './styled';
-import {
-  BoardWrapper, Board, ParagraphWrapper, TitleWrapper, Title,
-  TitleColorpickMain, TitleColorpickAux1, Text
-} from '../BaseSubsection/styled';
+
+import * as styledLocal from './styled';
+import * as styledBase from '../BaseSubsection/styled';
+
+const styled = { ...styledLocal, ...styledBase };
 
 export default () => (
-  <Wrapper>
-    <BoardWrapper>
-      <Board backgroundSource={InfoTimeSaveBoardSvg}>
-        <ParagraphWrapper>
-          <TitleWrapper>
-            <Title>
-              <span>Экономьте время с </span>
-              <TitleColorpickMain>re</TitleColorpickMain>
-              <TitleColorpickAux1>Check</TitleColorpickAux1>
-              <span>.</span>
-            </Title>
-          </TitleWrapper>
-          <Text>
+  <styled.Wrapper>
+    <styled.BoardWrapper>
+      <styled.Board backgroundSource={InfoTimeSaveBoardSvg}>
+        <styled.ParagraphWrapper>
+          <styled.TitleWrapper>
+            <styled.Title>
+              <styled.TitleText>Экономьте время с </styled.TitleText>
+              <styled.TitleColorpickMain>re</styled.TitleColorpickMain>
+              <styled.TitleColorpickAux1>Check</styled.TitleColorpickAux1>
+              <styled.TitleText>.</styled.TitleText>
+            </styled.Title>
+          </styled.TitleWrapper>
+
+          <styled.Text>
             Больше не нужно искать
             прошлых начальников
             кандидата, связываться с ними
             и спрашивать отзыв. Мы уже
             сделали это за вас.
-          </Text>
-        </ParagraphWrapper>
-      </Board>
-    </BoardWrapper>
-  </Wrapper>
+          </styled.Text>
+        </styled.ParagraphWrapper>
+      </styled.Board>
+    </styled.BoardWrapper>
+  </styled.Wrapper>
 );

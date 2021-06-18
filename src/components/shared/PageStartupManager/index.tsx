@@ -2,13 +2,14 @@ import { FunctionComponent, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, checkAuthorization, setPageUnlocked } from 'store';
-import { IProps, IStateProps, IDispatchProps } from './types';
 
-const mapStateToProps = (store: AppState): IStateProps => ({
+import * as types from './types';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.auth.isAuthorized
 });
 
-const mapDispatchToProps: IDispatchProps = {
+const mapDispatchToProps: types.IDispatchProps = {
   checkAuthorization,
   unlockPage: setPageUnlocked
 };
@@ -16,7 +17,7 @@ const mapDispatchToProps: IDispatchProps = {
 /**
  * Wrapper checking user's authentication status.
  */
-const PageStartupManager: FunctionComponent<IProps> = (props) => {
+const PageStartupManager: FunctionComponent<types.IProps> = (props) => {
   useEffect(() => {
     if (props.isAuthorized === null) {
       // If the page we load is the first website page for current session.

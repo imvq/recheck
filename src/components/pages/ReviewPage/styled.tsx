@@ -4,9 +4,6 @@ import BackgroundSvgPath from 'assets/images/pages/ReviewPage/Background.svg';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 
-/**
- * Styled component for main profile page wrapper.
- */
 export const Wrapper = styled.div`
   background-image: url(${BackgroundSvgPath});
   background-size: cover;
@@ -18,16 +15,10 @@ export const Wrapper = styled.div`
     'Footer';
 `;
 
-/**
- * Header with grid-area applied to.
- */
 export const AdaptedHeader = styled(Header)`
   grid-area: Header;
 `;
 
-/**
- * Header with grid-area applied to.
- */
 export const AdaptedFooter = styled(Footer)`
   grid-area: Footer;
 `;

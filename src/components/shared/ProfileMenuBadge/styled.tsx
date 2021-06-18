@@ -7,17 +7,11 @@ const cssVarsLocal = {
   widthOffset: '12rem'
 };
 
-/**
- * Styled component for badge outer wrapper.
- */
 export const Wrapper = styled.div`
   position: relative;
   z-index: ${cssVars.zIndexLoginBadge};
 `;
 
-/**
- * Styled component for login button.
- */
 export const LoginButton = styled(CabinetSvg)`
   ${mixins.DefaultButton}
 
@@ -29,9 +23,6 @@ export const LoginButton = styled(CabinetSvg)`
   filter: alpha(opacity=${cssVars.opacityButtonIdleInversed} * 100);
 `;
 
-/**
- * Styled component for badge menu.
- */
 export const Menu = styled.ul<{ isExpanded: boolean }>`
   display: ${props => (props.isExpanded ? 'block' : 'none')};
   position: absolute;
@@ -40,9 +31,6 @@ export const Menu = styled.ul<{ isExpanded: boolean }>`
   border-radius: .4rem;
 `;
 
-/**
- * Styled component for clickable menu entry.
- */
 export const MenuEntry = styled.li`
   cursor: pointer;
   width: 22rem;
@@ -65,9 +53,6 @@ export const MenuEntry = styled.li`
   }
 `;
 
-/**
- * Styled component for door SVG wrapper.
- */
 export const SvgWrapper = styled.div`
   margin-right: .2rem;
 

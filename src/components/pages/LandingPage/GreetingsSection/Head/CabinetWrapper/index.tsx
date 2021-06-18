@@ -1,11 +1,12 @@
 import ProfileMenuBadge from 'components/shared/ProfileMenuBadge';
-import { Wrapper } from './styled';
+
+import * as styled from './styled';
 
 /**
  * Cabinet wrapper.
  */
 export default () => (
-  <Wrapper>
+  <styled.Wrapper>
     <ProfileMenuBadge />
-  </Wrapper>
+  </styled.Wrapper>
 );

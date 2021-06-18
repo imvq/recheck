@@ -1,11 +1,10 @@
-import * as utilityTypes from 'utils/typing/utility';
 import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
   currentPorfileId: string;
   isLoading: boolean;
   reviewsGotChunksAmount: number;
-  currentReviewCardData: utilityTypes.Nullable<generalTypes.ReviewCardGotData>;
+  currentReviewCardData: generalTypes.ReviewCardGotData | null;
 }
 
 export interface IDispatchProps {

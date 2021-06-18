@@ -1,13 +1,14 @@
-import { Wrapper } from './styled';
 import Swiper from './Swiper';
 import TitleView from './TitleView';
+
+import * as styled from './styled';
 
 /**
  * Section with examples swiper.
  */
 export default () => (
-  <Wrapper>
+  <styled.Wrapper>
     <TitleView />
     <Swiper />
-  </Wrapper>
+  </styled.Wrapper>
 );

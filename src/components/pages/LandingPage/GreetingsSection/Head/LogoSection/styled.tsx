@@ -4,9 +4,6 @@ import { cssVars } from 'utils/style.common';
 import { ScreenBreakpoint } from 'utils/enums';
 import { respond } from 'utils/functions';
 
-/**
- * Styled component for logo image wrapper.
- */
 export const Wrapper = styled.div`
   grid-area: LogoWrapper;
   display: flex;

@@ -1,4 +1,3 @@
-import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState } from 'store';
@@ -21,7 +20,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 /**
  * Profile page. Used to view reviews.
  */
-const ProfilePage: FunctionComponent<types.IProps> = (props) => (
+const ProfilePage = (props: types.IProps) => (
   <styled.Wrapper>
     <styled.Sidebar />
 
