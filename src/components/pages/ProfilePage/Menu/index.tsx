@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import CustomButton from 'components/shared/CustomButton';
 import MenuBar from './MenuBar';
 
@@ -7,7 +9,7 @@ import * as styled from './styled';
 /**
  * Menu with tabs to control the page content area.
  */
-export default (props: types.IProps) => {
+export default memo((props: types.IProps) => {
   const MenuContent = () => (
     <styled.MenuContent>
       <styled.MenuContentSpan dimmed>
@@ -39,4 +41,4 @@ export default (props: types.IProps) => {
       </styled.Menu>
     </styled.Wrapper>
   );
-};
+});
