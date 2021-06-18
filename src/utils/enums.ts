@@ -29,3 +29,15 @@ export enum ProfileMenuEntry {
   History,
   AboutMe
 }
+
+/**
+ * Represents sidebar entries.
+ */
+export enum MainToolbarEntry {
+  ProfilePageMyReviews,
+  ProfilePageHistory,
+  ProfilePageAboutMe,
+  TopUpAnAccount,
+  AddWorkplace,
+  NewSearch
+}

@@ -1,5 +1,6 @@
 export interface IOwnProps {
-  text: string;
+  children: string;
+  onClick(): void;
   isPressed: boolean;
 }
 
