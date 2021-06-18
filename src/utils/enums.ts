@@ -22,15 +22,6 @@ export enum PaginationDirection {
 }
 
 /**
- * Represents tabs in profile menu bar.
- */
-export enum ProfileMenuEntry {
-  MyReviews,
-  History,
-  AboutMe
-}
-
-/**
  * Represents sidebar entries.
  */
 export enum MainToolbarEntry {

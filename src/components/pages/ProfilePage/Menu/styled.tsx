@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
-const cssVarsLocal = {
-  photoWrapperWidth: '20rem'
-};
+import { cssVars } from 'utils/style.common';
 
 export const Wrapper = styled.div`
   grid-area: MenuWrapper;
@@ -23,17 +21,11 @@ export const Menu = styled.div`
 `;
 
 export const MenuContent = styled.div`
+  min-height: 8rem;
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding-left: calc(${cssVarsLocal.photoWrapperWidth} + 2rem);
-  padding-bottom: 2rem;
-`;
-
-export const MenuContentTitle = styled.div`
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 4rem;
+  padding: 1rem 0 2rem calc(${cssVars.profilePhotoWrapperWidth});
 `;
 
 export const MenuContentSpan = styled.span<{ dimmed?: boolean; }>`
@@ -47,7 +39,7 @@ export const ProfilePictureWrapper = styled.div`
   left: 0;
   top: 0;
   height: 100%;
-  width: ${cssVarsLocal.photoWrapperWidth};
+  width: ${cssVars.profilePhotoWrapperWidth};
   display: flex;
   justify-content: center;
   align-items: center;

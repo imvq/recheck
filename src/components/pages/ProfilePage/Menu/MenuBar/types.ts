@@ -1,11 +1,7 @@
-import { ProfileMenuEntry } from 'utils/enums';
+import { AppProfileInfo } from 'utils/typing/general';
 
-export interface IStateProps {
-  currentMenuProfileEntry: ProfileMenuEntry;
+export interface IOwnProps {
+  currentProfileInfo: AppProfileInfo;
 }
 
-export interface IDispatchProps {
-  setCurrentMenuProfileEntry: (entry: ProfileMenuEntry) => void;
-}
-
-export type IProps = IStateProps & IDispatchProps;
+export type IProps = IOwnProps;

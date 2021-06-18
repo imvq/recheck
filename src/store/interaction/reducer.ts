@@ -1,11 +1,10 @@
-import { MainToolbarEntry, ProfileMenuEntry } from 'utils/enums';
+import { MainToolbarEntry } from 'utils/enums';
 import {
   InteractionState,
   InteractionStateActionType,
   SET_IS_PAGE_LOCKED,
   SET_IS_SEARCH_POPUP_VISIBILE,
   SET_IS_LOGIN_POPUP_VISIBILE,
-  SET_CURRENT_PROFILE_MENU_ENTRY,
   SET_CURRENT_MAIN_TOOLBAR_ENTRY,
   SET_IS_PROFILE_ABOUT_TAB_LOADING,
   SET_IS_PROFILE_HISTORY_TAB_LOADING,
@@ -20,7 +19,6 @@ const initialState: InteractionState = {
   isPageLocked: true,
   isSearchPopupVisible: false,
   isLoginPopupVisible: false,
-  currentProfileMenuEntry: ProfileMenuEntry.MyReviews,
   currentMainToolbarEntry: MainToolbarEntry.ProfilePageMyReviews,
   isProfileAboutTabLoading: true,
   isProfileHistoryTabLoading: true,
@@ -50,11 +48,6 @@ export const interactionStateReducer = (
       return {
         ...state,
         isLoginPopupVisible: action.payload
-      };
-    case SET_CURRENT_PROFILE_MENU_ENTRY:
-      return {
-        ...state,
-        currentProfileMenuEntry: action.payload
       };
     case SET_CURRENT_MAIN_TOOLBAR_ENTRY:
       return {

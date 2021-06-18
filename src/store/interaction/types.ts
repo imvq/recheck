@@ -1,10 +1,9 @@
 import * as generalTypes from 'utils/typing/general';
-import { MainToolbarEntry, ProfileMenuEntry } from 'utils/enums';
+import { MainToolbarEntry } from 'utils/enums';
 
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
 export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';
 export const SET_IS_LOGIN_POPUP_VISIBILE = 'SET_IS_LOGIN_POPUP_VISIBILE';
-export const SET_CURRENT_PROFILE_MENU_ENTRY = 'SET_CURRENT_PROFILE_MENU_ENTRY';
 export const SET_CURRENT_MAIN_TOOLBAR_ENTRY = 'SET_CURRENT_MAIN_TOOLBAR_ENTRY';
 export const SET_IS_PROFILE_ABOUT_TAB_LOADING = 'SET_IS_PROFILE_ABOUT_TAB_LOADING';
 export const SET_IS_PROFILE_HISTORY_TAB_LOADING = 'SET_IS_PROFILE_HISTORY_TAB_LOADING';
@@ -18,7 +17,6 @@ export interface InteractionState {
   isPageLocked: boolean;
   isSearchPopupVisible: boolean;
   isLoginPopupVisible: boolean;
-  currentProfileMenuEntry: ProfileMenuEntry;
   currentMainToolbarEntry: MainToolbarEntry;
   isProfileAboutTabLoading: boolean;
   isProfileHistoryTabLoading: boolean;
@@ -42,11 +40,6 @@ export interface SetIsSearchPopupVisible {
 export interface SetIsLoginPopupVisible {
   type: typeof SET_IS_LOGIN_POPUP_VISIBILE;
   payload: boolean;
-}
-
-export interface SetCurrentMenuProfileEntry {
-  type: typeof SET_CURRENT_PROFILE_MENU_ENTRY;
-  payload: ProfileMenuEntry;
 }
 
 export interface SetCurrentMainToolbarEntry {
@@ -93,7 +86,6 @@ export type InteractionStateActionType =
   SetIsPageLocked
   | SetIsSearchPopupVisible
   | SetIsLoginPopupVisible
-  | SetCurrentMenuProfileEntry
   | SetCurrentMainToolbarEntry
   | SetIsProfileAboutTabLoading
   | SetIsProfileHistoryTabLoading

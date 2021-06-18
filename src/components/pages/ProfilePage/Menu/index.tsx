@@ -10,10 +10,6 @@ import * as styled from './styled';
 export default (props: types.IProps) => {
   const MenuContent = () => (
     <styled.MenuContent>
-      <styled.MenuContentTitle>
-        {props.currentProfileInfo.currentName}
-      </styled.MenuContentTitle>
-
       <styled.MenuContentSpan dimmed>
         Запросов по моему профилю:&nbsp;&nbsp;
         <styled.MenuContentSpan>0</styled.MenuContentSpan>
@@ -35,7 +31,7 @@ export default (props: types.IProps) => {
   return (
     <styled.Wrapper>
       <styled.Menu>
-        <MenuBar />
+        <MenuBar currentProfileInfo={props.currentProfileInfo} />
         <MenuContent />
         <styled.ButtonWrapper>
           <CustomButton height='2.3rem' isDisabled={false}>Новый поиск</CustomButton>

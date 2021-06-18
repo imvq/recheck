@@ -2,14 +2,13 @@ import { Dispatch } from 'redux';
 
 import * as generalTypes from 'utils/typing/general';
 import Api from 'utils/api';
-import { MainToolbarEntry, ProfileMenuEntry } from 'utils/enums';
+import { MainToolbarEntry } from 'utils/enums';
 import { AppActionType } from '../types';
 import {
   InteractionStateActionType,
   SET_IS_PAGE_LOCKED,
   SET_IS_SEARCH_POPUP_VISIBILE,
   SET_IS_LOGIN_POPUP_VISIBILE,
-  SET_CURRENT_PROFILE_MENU_ENTRY,
   SET_CURRENT_MAIN_TOOLBAR_ENTRY,
   SET_IS_PROFILE_ABOUT_TAB_LOADING,
   SET_IS_PROFILE_HISTORY_TAB_LOADING,
@@ -39,12 +38,6 @@ export const setIsLoginPopupVisible = (value: boolean)
   : InteractionStateActionType => ({
   type: SET_IS_LOGIN_POPUP_VISIBILE,
   payload: value
-});
-
-export const setCurrentMenuProfileEntry = (entry: ProfileMenuEntry)
-  : InteractionStateActionType => ({
-  type: SET_CURRENT_PROFILE_MENU_ENTRY,
-  payload: entry
 });
 
 export const setCurrentMainToolbarEntry = (entry: MainToolbarEntry)

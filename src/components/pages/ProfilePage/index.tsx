@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { AppState } from 'store';
-import { ProfileMenuEntry } from 'utils/enums';
+import { MainToolbarEntry } from 'utils/enums';
 import Footer from 'components/shared/Footer';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
 import Menu from './Menu';
@@ -14,7 +14,7 @@ import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
-  currentProfileMenuEntry: store.interaction.currentProfileMenuEntry
+  currentMainToolbarEntry: store.interaction.currentMainToolbarEntry
 });
 
 /**
@@ -30,10 +30,10 @@ const ProfilePage = (props: types.IProps) => (
       <styled.TitleWrapper>Мой профиль</styled.TitleWrapper>
       <Menu currentProfileInfo={props.currentProfileInfo} />
       {(() => {
-        switch (props.currentProfileMenuEntry) {
-          case ProfileMenuEntry.AboutMe:
+        switch (props.currentMainToolbarEntry) {
+          case MainToolbarEntry.ProfilePageAboutMe:
             return <AboutArea />;
-          case ProfileMenuEntry.History:
+          case MainToolbarEntry.ProfilePageHistory:
             return <HistoryArea cardsData={[]} />;
           default:
             return <ReviewsArea />;

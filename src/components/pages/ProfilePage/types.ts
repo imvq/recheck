@@ -1,9 +1,9 @@
 import * as generalTypes from 'utils/typing/general';
-import { ProfileMenuEntry } from 'utils/enums';
+import { MainToolbarEntry } from 'utils/enums';
 
 export interface IStateProps {
   currentProfileInfo: generalTypes.AppProfileInfo;
-  currentProfileMenuEntry: ProfileMenuEntry;
+  currentMainToolbarEntry: MainToolbarEntry;
 }
 
 export type IProps = IStateProps;
