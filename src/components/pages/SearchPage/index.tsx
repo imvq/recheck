@@ -19,7 +19,7 @@ const SearchPage = (props: IProps) => (
   <styled.Wrapper>
     <styled.Sidebar />
 
-    <styled.AdaptedHeader withoutLogo />
+    <styled.AdaptedHeader />
 
     <styled.ContentWrapper>
       <SearchField lockPageCallback={props.lockPage} searchUserCallback={props.searchUser} />

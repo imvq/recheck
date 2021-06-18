@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
     'Footer  Footer'  auto / 20rem 1fr;
 `;
 
-export const AdaptedHeader = styled(Header)<{ withoutLogo?: boolean; }>`
+export const AdaptedHeader = styled(Header)`
   grid-area: Header;
 `;
 

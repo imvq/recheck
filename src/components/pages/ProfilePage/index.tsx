@@ -25,7 +25,7 @@ const ProfilePage: FunctionComponent<types.IProps> = (props) => (
   <styled.Wrapper>
     <styled.Sidebar />
 
-    <styled.AdaptedHeader withoutLogo />
+    <styled.AdaptedHeader />
 
     <styled.ContentWrapper>
       <styled.TitleWrapper>Мой профиль</styled.TitleWrapper>
