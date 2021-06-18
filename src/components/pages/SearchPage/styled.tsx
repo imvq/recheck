@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
   grid-template:
     'Sidebar Header'  auto
     'Sidebar Content' 1fr
-    'Footer Footer'   auto / 20rem 1fr;
+    'Footer  Footer'  auto / 20rem 1fr;
 `;
 
 export const AdaptedHeader = styled(Header)<{ withoutLogo?: boolean; }>`

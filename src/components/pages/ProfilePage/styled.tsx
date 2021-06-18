@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import Header from 'components/shared/Header';
+import MainToolbar from 'components/shared/MainToolbar';
 
 /**
  * Styled component for main profile page wrapper.
@@ -9,9 +10,9 @@ export const Wrapper = styled.div`
   height: 100%;
   display: grid;
   grid-template:
-    'Header'
-    'Content'
-    'Footer';
+    'Sidebar Header'  auto
+    'Sidebar Content' 1fr
+    'Footer  Footer'  auto / 20rem 1fr;
 `;
 
 export const TitleWrapper = styled.div`
@@ -35,4 +36,8 @@ export const ContentWrapper = styled.div`
   padding-bottom: 5rem;
   display: flex;
   flex-direction: column;
+`;
+
+export const Sidebar = styled(MainToolbar)`
+  grid-area: Sidebar;
 `;
