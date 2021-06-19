@@ -64,6 +64,10 @@ export class CreateCompanyDto {
   ) {}
 }
 
+export class GetMatchedCompaniesDto {
+  public constructor(public sequence: string) {}
+}
+
 export class GetNReviewsGotDto {
   public constructor(public profileId: string) {}
 }

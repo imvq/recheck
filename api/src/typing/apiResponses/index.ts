@@ -35,6 +35,14 @@ export interface IFacebookBasicProfileDto {
   picture: { data: { url: string; } };
 }
 
+export interface IGetMatchedCompanies {
+  results: {
+    id: number;
+    name: string;
+    logoUrl: string | null;
+  }[]
+}
+
 export interface IGetRecommendations {
   results: {
     id: number;

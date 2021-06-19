@@ -30,4 +30,12 @@ export default class CompanyManager {
     : Promise<Company[]> {
     return CompanyManager.repo?.find({ relations: ['members'], where: { logoUrl: Not(IsNull()) } }) || [];
   }
+
+  public static async getMatched(sequence: string)
+    : Promise<Company[]> {
+    return CompanyManager.repo?.createQueryBuilder('companies')
+      .where('companies.name LIKE :name', { name: `${sequence}%` })
+      .getMany()
+      || [];
+  }
 }
