@@ -1,6 +1,7 @@
 import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
+  recommendations: generalTypes.Company[];
   userSearchResults: { results : generalTypes.SearchProfileInfo[]; };
 }
 

@@ -48,10 +48,11 @@ export const ResultsWrapper = styled.div`
   padding: 1rem;
   box-sizing: border-box;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 `;
 
-export const PersonCardWrapper = styled.div`
+export const CardWrapper = styled.div`
   padding: 1rem;
 `;
 
