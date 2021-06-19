@@ -7,7 +7,7 @@ import ReviewService from '@services/Review';
 import * as apiResponses from '@typing/apiResponses';
 
 /**
- * Default controller in charge of checking the API.
+ * Default controller in charge of reviews.
  */
 @Path('/review')
 export default class ReviewController {

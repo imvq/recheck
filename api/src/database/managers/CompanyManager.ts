@@ -1,4 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Repository, Not, IsNull } from 'typeorm';
 
 import * as utilityTypes from '@typing/utility';
 import * as generalTypes from '@typing/general';
@@ -24,5 +24,10 @@ export default class CompanyManager {
   public static async getCompanyByFullPublicInfo(name: string)
     : Promise<utilityTypes.Optional<Company>> {
     return CompanyManager.repo?.findOne({ where: { name } });
+  }
+
+  public static async getPredefinedCompanies()
+    : Promise<Company[]> {
+    return CompanyManager.repo?.find({ relations: ['members'], where: { logoUrl: Not(IsNull()) } }) || [];
   }
 }

@@ -1,4 +1,4 @@
-import { Path, POST } from 'typescript-rest';
+import { Path, POST, GET } from 'typescript-rest';
 import { BodyGuard } from 'typescript-rest-body-guard';
 import { Inject } from 'typescript-ioc';
 
@@ -7,7 +7,7 @@ import UserService from '@services/User';
 import * as apiResponses from '@typing/apiResponses';
 
 /**
- * Default controller in charge of checking the API.
+ * Default controller in charge of users.
  */
 @Path('/user')
 export default class UserController {

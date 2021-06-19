@@ -35,6 +35,19 @@ export interface IFacebookBasicProfileDto {
   picture: { data: { url: string; } };
 }
 
+export interface IGetRecommendations {
+  results: {
+    id: number;
+    name: string;
+    logoUrl: string;
+    members: {
+      name: string;
+      photoUrl: string;
+      position: string;
+    }[];
+  }[];
+}
+
 export interface IGetNReviewsGotAmountResponseDto extends IGetNReviewsAmountResponseDto {}
 
 export interface IGetNReviewsLeftAmountResponseDto extends IGetNReviewsAmountResponseDto {}
