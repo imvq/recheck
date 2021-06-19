@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { respondUp } from 'utils/functions';
 import BackgroundSvgPath from 'assets/images/pages/RegistrationPage/Background.svg';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
@@ -16,7 +17,7 @@ export const Wrapper = styled.div`
     'Footer  Footer'  auto / 20rem 1fr;
 `;
 
-export const AdaptedHeader = styled(Header)`
+export const AdaptedHeader = styled(Header)<{ id?: string; }>`
   grid-area: Header;
 `;
 
@@ -67,4 +68,25 @@ export const Span = styled.span`
 
 export const Sidebar = styled(MainToolbar)`
   grid-area: Sidebar;
+`;
+
+export const ExpandLabelWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  padding: 0 2rem 0;
+
+  ${respondUp('2400px')} {
+    padding: initial;
+    justify-content: center;
+  }
+`;
+
+export const ExpandLabel = styled.span`
+  cursor: pointer;
+  text-decoration: underline;
+  color: gray;
+  font-size: 1.3rem;
+  font-weight: 600;
 `;

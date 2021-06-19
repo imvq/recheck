@@ -85,7 +85,12 @@ export function onExit(lockPageCallback: () => void) {
 /**
  * Get media query for max screen size.
  */
-export const respond = (screen: ScreenBreakpoint) => `@media (max-width: ${screen})`;
+export const respond = (screen: string) => `@media (max-width: ${screen})`;
+
+/**
+ * Get media query for min screen size.
+ */
+export const respondUp = (screen: string) => `@media (min-width: ${screen})`;
 
 /**
  * Partially applied onChange textarea event.

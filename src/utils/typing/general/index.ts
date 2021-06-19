@@ -62,6 +62,11 @@ export interface GetNthReviewLeftDto {
   nthReview: number;
 }
 
+export interface OptionType {
+  key: any;
+  text: string;
+}
+
 export interface PrepareProfileDto {
   profileId: string;
   name: string;
@@ -133,7 +138,8 @@ export interface SearchProfileInfo {
 
 export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
 
-export interface OptionType {
-  key: any;
-  text: string;
+export interface UserCardData {
+  name: string;
+  photoUrl: string;
+  email: string;
 }
