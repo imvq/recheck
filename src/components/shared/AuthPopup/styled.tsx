@@ -31,7 +31,7 @@ export const ClickableBackground = styled.div`
 `;
 
 export const Frame = styled.div`
-  animation: ${animations.fadeDefault} .4ms;
+  animation: ${animations.fadeDefault} .4s;
 
   min-width: 55rem;
   height: 24rem;
