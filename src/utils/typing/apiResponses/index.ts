@@ -1,4 +1,4 @@
-import * as GenearalTypes from '../general';
+import * as genearalTypes from '../general';
 import { IGetNReviewsResponseDto, IGetNthReviewResponseDto, IProfileDto, ISimpleActionResponse } from './basic';
 
 export interface BindReviewtargetResponseDto extends ISimpleActionResponse {}
@@ -17,6 +17,10 @@ export interface ExchangeLinkedInCodeResposneDto {
   'li_at': string;
 }
 
+export interface GetRecommendationsDto {
+  results: genearalTypes.Company[];
+}
+
 export type GetNReviewsGotResponseDto = IGetNReviewsResponseDto;
 
 export type GetNReviewsLeftResponseDto = IGetNReviewsResponseDto;
@@ -33,4 +37,4 @@ export type PrepareReviewResponseDto = ISimpleActionResponse;
 
 export type PrepareProfileResponseDto = ISimpleActionResponse;
 
-export type SearchUserDto = GenearalTypes.SearchProfileInfo;
+export type SearchUserDto = genearalTypes.SearchProfileInfo;

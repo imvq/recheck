@@ -1,6 +1,7 @@
-import { SearchState, SearchActionType, SET_CURRENT_USER_SEARCH_RESULTS } from './types';
+import { SearchState, SearchActionType, SET_RECOMMENDATIONS, SET_CURRENT_USER_SEARCH_RESULTS } from './types';
 
 const initialState: SearchState = {
+  recommendations: [],
   userSearchResults: { results: [] }
 };
 
@@ -9,6 +10,11 @@ export function searchReducer(
   action: SearchActionType
 ): SearchState {
   switch (action.type) {
+    case SET_RECOMMENDATIONS:
+      return {
+        ...state,
+        recommendations: action.payload
+      };
     case SET_CURRENT_USER_SEARCH_RESULTS:
       return {
         ...state,

@@ -25,6 +25,11 @@ export default class Api {
     return Api.instance.post('/user/is-confirmed', { profileId });
   }
 
+  public static getRecommendations()
+    : generalTypes.APIResponse<apiResponses.GetRecommendationsDto> {
+    return Api.instance.get('/companies/recommendations');
+  }
+
   public static searchUser(name: string)
     : generalTypes.APIResponse<{ results: apiResponses.SearchUserDto[]; }> {
     return Api.instance.post('/user/search', { name });

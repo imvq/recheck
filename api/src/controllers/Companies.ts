@@ -14,7 +14,7 @@ export default class CompaniesController {
   /**
    * Get recommended predefined companies.
    */
-  @Path('/recommended')
+  @Path('/recommendations')
   @GET
   public async getRecommendations()
     : Promise<apiResponses.IGetRecommendations> {

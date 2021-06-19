@@ -16,6 +16,17 @@ export interface BindReviewTargetDto {
   profileId: string;
 }
 
+export interface Company {
+  id: string;
+  name: string;
+  logoUrl: string;
+  members: {
+    name: string;
+    eamil: string;
+    photoUrl: string;
+  }[];
+}
+
 export interface CompleteRegistrationDto {
   profileId: string;
   confirmationCode: string;
