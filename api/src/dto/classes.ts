@@ -60,7 +60,6 @@ export class CompleteRegistrationDto {
 export class CreateCompanyDto {
   public constructor(
     public name: string,
-    public site: string,
     public logoUrl: utilityTypes.Nullable<string>
   ) {}
 }
@@ -93,7 +92,6 @@ export class UserDto {
     public name: string,
     public email: string,
     public photoUrl: string,
-    public companySite: string,
     public companyName: string,
     public position: string,
     public workStartMonth: number,

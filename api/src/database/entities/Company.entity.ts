@@ -19,9 +19,6 @@ export default class Company {
   @Column('text')
   name!: string;
 
-  @Column('text')
-  site!: string;
-
   @Column('text', { nullable: true })
   logoUrl!: utilityTypes.Nullable<string>;
 }

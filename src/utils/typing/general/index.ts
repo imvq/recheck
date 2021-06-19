@@ -56,7 +56,6 @@ export interface PrepareProfileDto {
   name: string;
   email: string;
   photoUrl: string;
-  companySite: string;
   companyName: string;
   position: string;
   workStartMonth: number;

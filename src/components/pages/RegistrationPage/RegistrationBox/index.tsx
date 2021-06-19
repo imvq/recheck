@@ -34,7 +34,6 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 
 const RegistrationBox = (props: types.IProps) => {
   const [email, setEmail] = useState('');
-  const [companySite, setCompanySite] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [position, setPosition] = useState('');
   const [workStartMonth, setWorkStartMonth] = useState(-1);
@@ -45,35 +44,27 @@ const RegistrationBox = (props: types.IProps) => {
     setIsEmailErrorVisible(!isValidEmail(email));
   };
 
-  const [isSiteErrorVisible, setIsSiteErrorVisible] = useState(false);
-  const recalculateSiteErrorVisibility = () => {
-    setIsSiteErrorVisible(!isValidUrl(companySite) || !doesEmailContainUrl(email, companySite));
-  };
-
   const emailHandler = (event: generalTypes.InputEvent) => {
     setIsEmailErrorVisible(false);
     setEmail(event.target.value);
-  };
-
-  const companySiteHandler = (event: generalTypes.InputEvent) => {
-    setIsSiteErrorVisible(false);
-    setCompanySite(event.target.value);
   };
 
   const companyNameHandler = (event: generalTypes.InputEvent) => inputHandler(
     event,
     setCompanyName
   );
+
   const positionHandler = (event: generalTypes.InputEvent) => inputHandler(
     event,
     setPosition
   );
+
   const monthHandler = (option: generalTypes.OptionType) => setWorkStartMonth(option.key);
   const yearHandler = (option: generalTypes.OptionType) => setWorkStartYear(
     Number.parseInt(option.text, 10)
   );
 
-  const canProceed = () => isValidEmail(email) && !!companySite
+  const canProceed = () => isValidEmail(email)
     && !!companyName && !!position
     && workStartMonth > -1 && workStartYear > -1;
 
@@ -84,7 +75,6 @@ const RegistrationBox = (props: types.IProps) => {
         name: props.currentProfileInfo.currentName,
         photoUrl: props.currentProfileInfo.currentPhotoUrl,
         email,
-        companySite,
         companyName,
         position,
         workStartMonth,
@@ -104,22 +94,6 @@ const RegistrationBox = (props: types.IProps) => {
           ? (
             <styled.TextDescription isHighlighted>
               Некорректный почтовый адрес
-            </styled.TextDescription>
-          )
-          : null}
-      </styled.InputGroupWrapper>
-
-      <styled.InputGroupWrapper>
-        <styled.InputDescriptionWrapper>
-          <styled.InputDescription>Сайт компании, где вы работаете:</styled.InputDescription>
-        </styled.InputDescriptionWrapper>
-        <styled.Input type='text' onBlur={recalculateSiteErrorVisibility} onChange={companySiteHandler} />
-        {isSiteErrorVisible
-          ? (
-            <styled.TextDescription isHighlighted>
-              Некорректный URL страницы.
-              Адрес сайта должен быть вида https://example.com или example.com.
-              Почтовый домен должен совпадать с адресом сайта компании
             </styled.TextDescription>
           )
           : null}

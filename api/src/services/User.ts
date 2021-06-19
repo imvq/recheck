@@ -56,18 +56,18 @@ export default class UserService {
 
   @utils.dbErrorDefaultReactor({ except: [], logger })
   private async saveUser(profileDto: dto.PrepareUserDto, confirmationCode: string): Promise<void> {
-    const company = await this.prepareCompany(profileDto.companyName, profileDto.companySite);
+    const company = await this.prepareCompany(profileDto.companyName);
     await UserManager.createUser(profileDto, company, confirmationCode);
   }
 
   /**
-   * Get the company from the database with corresponding name and website
+   * Get the company from the database with corresponding name
    * otherwise create a company with provided data and return it.
    */
   @utils.dbErrorDefaultReactor({ except: [], logger })
-  private async prepareCompany(name: string, site: string): Promise<Company> {
-    return await CompanyManager.getCompanyByFullPublicInfo(name, site)
-      || CompanyManager.createCompany({ name, site, logoUrl: null });
+  private async prepareCompany(name: string): Promise<Company> {
+    return await CompanyManager.getCompanyByFullPublicInfo(name)
+      || CompanyManager.createCompany({ name, logoUrl: null });
   }
 
   @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })

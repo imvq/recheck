@@ -80,7 +80,6 @@ export interface ISearchUserResponseDto {
     company: {
       id: number;
       name: string;
-      site: string;
       logoUrl: string | null;
     }
   }[]
