@@ -122,6 +122,8 @@ const RegistrationBox = (props: types.IProps) => {
               companyNameHandler(event);
               findCompanyMatches(event.target.value);
             }}
+            autoComplete='on'
+            value={company.name}
           />
 
           {/* Companies with matched names. */}
