@@ -120,7 +120,11 @@ const RegistrationBox = (props: types.IProps) => {
             type='text'
             onChange={(event: generalTypes.InputEvent) => {
               companyNameHandler(event);
-              findCompanyMatches(event.target.value);
+              if (event.target.value) {
+                findCompanyMatches(event.target.value);
+              } else {
+                props.clearMatchedCompanies();
+              }
             }}
             autoComplete='on'
             value={company.name}

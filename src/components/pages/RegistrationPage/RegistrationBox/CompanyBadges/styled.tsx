@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-import { cssVars } from 'utils/style.common';
+import { animations, cssVars } from 'utils/style.common';
 
 export const Wrapper = styled.div`
+  animation: ${animations.fadeDefault} .25s;
+
   width: 100%;
   position: absolute;
   top: ${cssVars.inputHeightDefault};
