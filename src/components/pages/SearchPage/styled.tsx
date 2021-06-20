@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { respondUp } from 'utils/functions';
-import BackgroundSvgPath from 'assets/images/pages/RegistrationPage/Background.svg';
+import BackgroundSvgPath from 'assets/images/common/Background1.png';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 import MainToolbar from 'components/shared/MainToolbar';

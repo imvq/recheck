@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import BackgroundSvgPath from 'assets/images/pages/RegistrationPage/Background.svg';
+import BackgroundSvgPath from 'assets/images/common/Background1.png';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 

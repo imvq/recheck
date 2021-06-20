@@ -32,7 +32,7 @@ const UserConfirmationPage = (props: types.IProps) => {
         profileId: props.currentProfileInfo.currentId,
         confirmationCode: pageUuid
       })
-        .then(() => controlledHistory.replace('/'))
+        .then(() => controlledHistory.replace('/profile'))
         .catch(() => controlledHistory.replace('/404'));
       return;
     }
