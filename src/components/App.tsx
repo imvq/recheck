@@ -70,9 +70,7 @@ export default () => (
           {/* Registration page. Users are supposed to be authorized. */}
           <Route exact path='/register'>
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail redirectHomeOnRegistered />
-            <PageLockManager>
-              <RegistrationPage />
-            </PageLockManager>
+            <RegistrationPage />
           </Route>
 
           {/* Page to help complete user's registration. User UUID needed. */}

@@ -1,36 +1,33 @@
-import { connect } from 'react-redux';
+import { useState } from 'react';
 
-import controlledHistory from 'utils/routing';
-import { setPageLocked, setPageUnlocked } from 'store';
 import Api from 'utils/api';
 import ScaleStage2 from 'assets/images/pages/RegistrationPage/ScaleStage2.png';
 import RegistrationBox from './RegistrationBox';
+import ConfirmationPopup from './ConfirmationPopup';
 
-import * as types from './types';
 import * as styled from './styled';
 
-const mapDispatchToProps: types.IDispatchProps = {
-  lockPage: setPageLocked,
-  unlockPage: setPageUnlocked
+export default () => {
+  const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
+
+  return (
+    <styled.Wrapper>
+      {/* Absolute-positioned confirmation popup. */}
+      {isConfirmationVisible && <ConfirmationPopup email='email' />}
+
+      <styled.AdaptedHeader />
+      <styled.ContentWrapper>
+        <styled.StageBreadcrumpWrapper>
+          <styled.StageBreadcrumpImage src={ScaleStage2} draggable='false' />
+        </styled.StageBreadcrumpWrapper>
+        <RegistrationBox onProceed={(profileInfo) => {
+          Api.prepareProfile(profileInfo).finally(() => {
+            setIsConfirmationVisible(true);
+          });
+        }}
+        />
+      </styled.ContentWrapper>
+      <styled.AdaptedFooter />
+    </styled.Wrapper>
+  );
 };
-
-const RegistrationPage = (props: types.IProps) => (
-  <styled.Wrapper>
-    <styled.AdaptedHeader />
-    <styled.ContentWrapper>
-      <styled.StageBreadcrumpWrapper>
-        <styled.StageBreadcrumpImage src={ScaleStage2} draggable='false' />
-      </styled.StageBreadcrumpWrapper>
-      <RegistrationBox onProceed={(profileInfo) => {
-        props.lockPage();
-        Api.prepareProfile(profileInfo)
-          .then(() => controlledHistory.replace('/await-user-confirmation'))
-          .finally(() => props.unlockPage());
-      }}
-      />
-    </styled.ContentWrapper>
-    <styled.AdaptedFooter />
-  </styled.Wrapper>
-);
-
-export default connect(null, mapDispatchToProps)(RegistrationPage);

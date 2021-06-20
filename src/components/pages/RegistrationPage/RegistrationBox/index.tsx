@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
@@ -184,4 +184,6 @@ const RegistrationBox = (props: types.IProps) => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegistrationBox);
+export default memo(
+  connect(mapStateToProps, mapDispatchToProps)(RegistrationBox)
+);
