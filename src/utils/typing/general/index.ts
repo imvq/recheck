@@ -74,7 +74,7 @@ export interface OptionType {
 }
 
 export interface ExtendedOptionType extends OptionType {
-  logoUrl: string;
+  logoUrl: string | null;
 }
 
 export interface PrepareProfileDto {

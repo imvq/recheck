@@ -1,7 +1,7 @@
 import * as generalTypes from 'utils/typing/general';
 
 export interface IOwnProps {
-  optionData: generalTypes.OptionType;
+  optionData: generalTypes.ExtendedOptionType;
   onClick: (selectedValue: generalTypes.OptionType) => void;
 }
 

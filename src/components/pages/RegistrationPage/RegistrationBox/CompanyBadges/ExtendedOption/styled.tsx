@@ -21,6 +21,16 @@ export const Wrapper = styled.div`
   &:last-child {
     border-bottom: none;
   }
+
+  display: flex;
+  align-items: center;
+`;
+
+export const LogoWrapper = styled.img`
+  width: 3rem;
+  height: 100%;
+  object-fit: contain;
+  padding: .2rem;
 `;
 
 export const SelectTitle = styled.span``;
