@@ -34,6 +34,7 @@ export const cssVars = {
   zIndexPopupLogin: '100',
   zIndexPopupSearch: '100',
   zIndexSelectMenu: '150',
+  zIndexSelectMenuLayer2: '200',
   zIndexScrollButton: '200',
   zIndexPageLoader: '900'
 };
