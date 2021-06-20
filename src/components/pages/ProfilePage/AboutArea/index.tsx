@@ -58,21 +58,23 @@ const AboutArea = (props: types.IProps) => {
             : <ContentEmpty />}
       </styled.ReviewSectionWrapper>
 
-      <Pagination
-        nPages={props.reviewsGotChunksAmount}
-        onNextClick={() => {
-          props.loadNthReview(props.currentPorfileId, currentIndex + 1);
-          setCurrentIndex(currentIndex + 1);
-        }}
-        onPageClick={(page: number) => {
-          props.loadNthReview(props.currentPorfileId, page - 1);
-          setCurrentIndex(page - 1);
-        }}
-        onPrevClick={() => {
-          props.loadNthReview(props.currentPorfileId, currentIndex - 1);
-          setCurrentIndex(currentIndex - 1);
-        }}
-      />
+      {props.reviewsGotChunksAmount ? (
+        <Pagination
+          nPages={props.reviewsGotChunksAmount}
+          onNextClick={() => {
+            props.loadNthReview(props.currentPorfileId, currentIndex + 1);
+            setCurrentIndex(currentIndex + 1);
+          }}
+          onPageClick={(page: number) => {
+            props.loadNthReview(props.currentPorfileId, page - 1);
+            setCurrentIndex(page - 1);
+          }}
+          onPrevClick={() => {
+            props.loadNthReview(props.currentPorfileId, currentIndex - 1);
+            setCurrentIndex(currentIndex - 1);
+          }}
+        />
+      ) : null}
     </styled.Wrapper>
   );
 };
