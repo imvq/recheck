@@ -40,6 +40,7 @@ export default class CompanyManager {
     : Promise<Company[]> {
     return CompanyManager.repo?.createQueryBuilder('companies')
       .where('companies.name LIKE :name', { name: `${sequence}%` })
+      .limit(10)
       .getMany()
       || [];
   }
