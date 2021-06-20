@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { mixins } from 'utils/style.common';
+import { cssVars, mixins } from 'utils/style.common';
 
 export const BoxBaseWrapper = styled.div`
   width: 60rem;
@@ -91,6 +91,11 @@ export const InputWrapper = styled(InputElementWrapper)``;
 export const InputDescription = styled.span`
   font-size: 1.25rem;
   font-weight: 600;
+`;
+
+export const InputWithOptionsWrapper = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
 export const Input = styled.input`

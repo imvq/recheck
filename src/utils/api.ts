@@ -25,6 +25,11 @@ export default class Api {
     return Api.instance.post('/user/is-confirmed', { profileId });
   }
 
+  public static getMatchedCompanies(sequence: string)
+    : generalTypes.APIResponse<apiResponses.GetMatchedCompaniesDto> {
+    return Api.instance.post('/companies/find-matched', { sequence });
+  }
+
   public static getRecommendations()
     : generalTypes.APIResponse<apiResponses.GetRecommendationsDto> {
     return Api.instance.get('/companies/recommendations');

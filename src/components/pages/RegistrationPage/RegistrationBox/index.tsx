@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { AppState } from 'store';
+import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
 import * as generalTypes from 'utils/typing/general';
-import { inputHandler, isValidEmail, isValidUrl, getNValuesDown, doesEmailContainUrl } from 'utils/functions';
+import { inputHandler, isValidEmail, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
+import CompanyBadges from './CompanyBadges';
 
 import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
+import { mapCompaniesDataToOptions } from './functions';
 
 const months: generalTypes.OptionType[] = [
   { key: 0, text: 'Январь' },
@@ -29,12 +31,19 @@ const years = getNValuesDown(new Date().getFullYear(), 50)
   .map((value, index) => ({ key: index, text: value.toString() }));
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo
+  currentProfileInfo: store.profile.currentProfileInfo,
+  matchedCompanies: store.search.matchedCompanies
 });
+
+const mapDispatchToProps: types.IDispatchProps = {
+  loadMatchedCompanies,
+  clearMatchedCompanies
+};
 
 const RegistrationBox = (props: types.IProps) => {
   const [email, setEmail] = useState('');
-  const [companyName, setCompanyName] = useState('');
+  const [company, setCompany] = useState({ id: -1, name: '' });
+  const setCompanyName = (name: string) => setCompany({ id: -1, name });
   const [position, setPosition] = useState('');
   const [workStartMonth, setWorkStartMonth] = useState(-1);
   const [workStartYear, setWorkStartYear] = useState(-1);
@@ -42,6 +51,10 @@ const RegistrationBox = (props: types.IProps) => {
   const [isEmailErrorVisible, setIsEmailErrorVisible] = useState(false);
   const recalculateEmailErrorVisibility = () => {
     setIsEmailErrorVisible(!isValidEmail(email));
+  };
+
+  const findCompanyMatches = (sequence: string) => {
+    props.loadMatchedCompanies(sequence);
   };
 
   const emailHandler = (event: generalTypes.InputEvent) => {
@@ -65,7 +78,7 @@ const RegistrationBox = (props: types.IProps) => {
   );
 
   const canProceed = () => isValidEmail(email)
-    && !!companyName && !!position
+    && !!company && !!position
     && workStartMonth > -1 && workStartYear > -1;
 
   function proceedIfAllowed() {
@@ -75,7 +88,7 @@ const RegistrationBox = (props: types.IProps) => {
         name: props.currentProfileInfo.currentName,
         photoUrl: props.currentProfileInfo.currentPhotoUrl,
         email,
-        companyName,
+        company,
         position,
         workStartMonth,
         workStartYear
@@ -91,19 +104,40 @@ const RegistrationBox = (props: types.IProps) => {
         </styled.InputDescriptionWrapper>
         <styled.Input type='text' onBlur={recalculateEmailErrorVisibility} onChange={emailHandler} />
         {isEmailErrorVisible
-          ? (
+          && (
             <styled.TextDescription isHighlighted>
               Некорректный почтовый адрес
             </styled.TextDescription>
-          )
-          : null}
+          )}
       </styled.InputGroupWrapper>
 
       <styled.InputGroupWrapper>
         <styled.InputDescriptionWrapper>
           <styled.InputDescription>Название компании, где вы работаете:</styled.InputDescription>
         </styled.InputDescriptionWrapper>
-        <styled.Input type='text' onChange={companyNameHandler} />
+        <styled.InputWithOptionsWrapper>
+          <styled.Input
+            type='text'
+            onChange={(event: generalTypes.InputEvent) => {
+              companyNameHandler(event);
+              findCompanyMatches(event.target.value);
+            }}
+          />
+
+          {/* Companies with matched names. */}
+          {props.matchedCompanies.length ? (
+            <CompanyBadges
+              options={mapCompaniesDataToOptions(props.matchedCompanies)}
+              onClose={() => {
+                props.clearMatchedCompanies();
+              }}
+              onOptionSelected={selected => {
+                setCompany({ id: selected.key, name: selected.text });
+                props.clearMatchedCompanies();
+              }}
+            />
+          ) : null}
+        </styled.InputWithOptionsWrapper>
       </styled.InputGroupWrapper>
 
       <styled.InputGroupWrapper>
@@ -144,4 +178,4 @@ const RegistrationBox = (props: types.IProps) => {
   );
 };
 
-export default connect(mapStateToProps)(RegistrationBox);
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationBox);

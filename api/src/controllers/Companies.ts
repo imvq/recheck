@@ -1,4 +1,4 @@
-import { Path, GET } from 'typescript-rest';
+import { Path, GET, POST } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import dto from '@dto';
@@ -23,7 +23,7 @@ export default class CompaniesController {
   }
 
   @Path('/find-matched')
-  @GET
+  @POST
   public async getMathedCompanies(bodyData: dto.GetMatchedCompaniesDto)
     : Promise<apiResponses.IGetMatchedCompanies> {
     return this.injectedService.getMatchedCompanies(bodyData);

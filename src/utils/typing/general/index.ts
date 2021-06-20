@@ -19,12 +19,18 @@ export interface BindReviewTargetDto {
 export interface Company {
   id: string;
   name: string;
-  logoUrl: string;
+  logoUrl: string | null;
   members: {
     name: string;
     eamil: string;
     photoUrl: string;
   }[];
+}
+
+export interface CompanyReduced {
+  id: string;
+  name: string;
+  logoUrl: string | null;
 }
 
 export interface CompleteRegistrationDto {
@@ -67,12 +73,19 @@ export interface OptionType {
   text: string;
 }
 
+export interface ExtendedOptionType extends OptionType {
+  logoUrl: string;
+}
+
 export interface PrepareProfileDto {
   profileId: string;
   name: string;
   email: string;
   photoUrl: string;
-  companyName: string;
+  company: {
+    id: number;
+    name: string;
+  };
   position: string;
   workStartMonth: number;
   workStartYear: number;
