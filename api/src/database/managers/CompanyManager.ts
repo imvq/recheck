@@ -21,6 +21,11 @@ export default class CompanyManager {
       ?.save(CompanyManager.repo.create({ ...companyData })) as Promise<Company>;
   }
 
+  public static async getCompany(id: number)
+    : Promise<utilityTypes.Optional<Company>> {
+    return CompanyManager.repo?.findOne(id);
+  }
+
   public static async getCompanyByFullPublicInfo(name: string)
     : Promise<utilityTypes.Optional<Company>> {
     return CompanyManager.repo?.findOne({ where: { name } });

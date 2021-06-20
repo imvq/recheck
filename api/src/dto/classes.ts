@@ -96,7 +96,10 @@ export class UserDto {
     public name: string,
     public email: string,
     public photoUrl: string,
-    public companyName: string,
+    public company: {
+      id: number;
+      name: string;
+    },
     public position: string,
     public workStartMonth: number,
     public workStartYear: number
