@@ -93,9 +93,7 @@ export default () => (
           {/* Search page. Used to search users and companies. */}
           <Route exact path='/search'>
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
-            <PageLockManager>
-              <SearchPage />
-            </PageLockManager>
+            <SearchPage />
           </Route>
 
           {/* LinkedIn's OAuth2 window. */}

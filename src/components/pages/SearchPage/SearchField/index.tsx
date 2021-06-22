@@ -19,7 +19,7 @@ export default (props: types.IProps) => {
         onChange={(event) => setSearchText(event.target.value)}
         onBlur={doSearch}
       />
-      <styled.AdapdetMagnifier onClick={doSearch} />
+      <styled.AdaptedMagnifier onClick={doSearch} />
     </styled.Wrapper>
   );
 };

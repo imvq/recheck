@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link as ScrollLink } from 'react-scroll';
 
 import { AppState, loadRecommendations, searchUser, setPageLocked } from 'store';
-import CompanyCard from 'components/shared/CompanyCard';
-import PersonCard from 'components/shared/PersonCard';
+
 import SearchField from './SearchField';
-import CompaniesView from './ExpandView/Companies';
+import CompaniesResults from './CompaniesResults';
+import CompaniesPopup from './ExpandView/Companies';
+import CompaniesExpansionLabel from './CompaniesExpansionLabel';
+import SearchResults from './SearchResults';
+import SearchNoResults from './SearchNoResults';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -27,14 +29,27 @@ const SearchPage = (props: types.IProps) => {
 
   useEffect(() => { props.loadRecommendations(); }, []);
 
+  // Don't show anything until the user starts its search.
+  // If the user search request returned empty list than show
+  // a 'no results' label.
+  const [isFirstSearch, setIsFirstSearch] = useState(true);
+  const firstRender = useRef(true);
+  useLayoutEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+    } else {
+      setIsFirstSearch(false);
+    }
+  }, [props.userSearchResults]);
+
   return (
     <styled.Wrapper>
       <styled.Sidebar />
 
-      {/* Recommendations expansion view. Absolute-positioned popup. */}
+      {/* Recommendations expansion popup. Absolute-positioned popup. */}
       {isRecommendationsViewVisible
         && (
-        <CompaniesView
+        <CompaniesPopup
           recommendations={props.recommendations}
           onClose={() => setIsRecommendationsViewVisible(false)}
         />
@@ -43,40 +58,25 @@ const SearchPage = (props: types.IProps) => {
       <styled.AdaptedHeader id='Header' />
 
       <styled.ContentWrapper>
-        <SearchField lockPageCallback={props.lockPage} searchUserCallback={props.searchUser} />
-        <styled.TitleWrapper><styled.Title>Результат поиска:</styled.Title></styled.TitleWrapper>
-        <styled.ResultsWrapper>
-          {props.userSearchResults.results.length
-            ? props.userSearchResults.results.map(userData => (
-              <styled.CardWrapper>
-                <PersonCard userData={userData} />
-              </styled.CardWrapper>
-            ))
-            : <styled.SpanWrapper><styled.Span>Результатов нет</styled.Span></styled.SpanWrapper>}
-        </styled.ResultsWrapper>
+        {/* The search input. */}
+        <SearchField
+          lockPageCallback={props.lockPage}
+          searchUserCallback={props.searchUser}
+        />
 
-        <styled.TitleWrapper><styled.Title>Рекомендации:</styled.Title></styled.TitleWrapper>
-        <styled.ResultsWrapper>
-          {props.recommendations.length
-            ? props.recommendations.slice(0, 4).map(companyData => (
-              <styled.CardWrapper>
-                <CompanyCard companyData={companyData} />
-              </styled.CardWrapper>
-            ))
-            : <styled.SpanWrapper><styled.Span>Результатов нет</styled.Span></styled.SpanWrapper>}
-        </styled.ResultsWrapper>
+        {/* The search results. */}
+        {props.userSearchResults.results.length
+          ? <SearchResults userSearchResults={props.userSearchResults} />
+          : <SearchNoResults isFirstSearch={isFirstSearch} />}
 
-        {/* Recommendations expansion label. */}
+        {/* Recommended companies. */}
+        {props.recommendations.length > 0
+          && <CompaniesResults companies={props.recommendations} />}
+
+        {/* 'Show all recommendations' label. */}
         {props.recommendations.length > 4
-          && (
-            <styled.ExpandLabelWrapper>
-              <ScrollLink to='Header'>
-                <styled.ExpandLabel onClick={() => setIsRecommendationsViewVisible(true)}>
-                  Посмотреть все
-                </styled.ExpandLabel>
-              </ScrollLink>
-            </styled.ExpandLabelWrapper>
-          )}
+          && <CompaniesExpansionLabel onClick={() => setIsRecommendationsViewVisible(true)} />}
+
       </styled.ContentWrapper>
 
       <styled.AdaptedFooter />
