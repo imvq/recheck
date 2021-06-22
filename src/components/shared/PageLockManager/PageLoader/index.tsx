@@ -1,12 +1,15 @@
-import * as types from './types';
-import * as styled from './styled';
+import styled from 'styled-components';
 
-/**
- * Loader coverage.
- */
-export default (props: types.IProps) => (
-  <>
-    <styled.DimmedSpace />
-    {props.children}
-  </>
-);
+import { cssVars } from 'utils/style.common';
+
+export default styled.div<{ isTransparent?: boolean; }>`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: ${cssVars.zIndexPageLoader};
+  background-color: #fff;
+  opacity: ${props => (props.isTransparent ? '.8' : '1')};
+`;
