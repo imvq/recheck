@@ -4,11 +4,15 @@ import * as types from './types';
 import * as styled from './styled';
 
 export default (props: types.IProps) => {
+  const [previousSearch, setPreviousSearch] = useState<string | null>(null);
   const [searchText, setSearchText] = useState('');
 
   const doSearch = () => {
-    props.lockPageCallback();
-    props.searchUserCallback(searchText);
+    if (searchText !== previousSearch) {
+      setPreviousSearch(searchText);
+      props.lockPageCallback();
+      props.searchUserCallback(searchText);
+    }
   };
 
   return (
