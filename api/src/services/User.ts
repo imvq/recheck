@@ -158,4 +158,14 @@ export default class UserService {
       workplace: review.workplace,
     };
   }
+
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  public async checkAccessToReviewsAboutUser(bodyData: dto.CheckAccessToReviewsAboutUserDto)
+    : Promise<apiResponses.ICheckAccessToReviewsAboutUserDto> {
+    return {
+      success: await UserManager.hasAccessToReviewsAboutUser(
+        bodyData.askerProfileId, bodyData.targetEmail
+      )
+    };
+  }
 }

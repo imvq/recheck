@@ -120,6 +120,6 @@ export default class UserController {
   @POST
   public async checkAccessToReviewsAboutUser(bodyData: dto.CheckAccessToReviewsAboutUserDto)
     : Promise<apiResponses.ICheckAccessToReviewsAboutUserDto> {
-    return { success: true };
+    return this.injectedService.checkAccessToReviewsAboutUser(bodyData);
   }
 }

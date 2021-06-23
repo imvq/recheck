@@ -54,4 +54,15 @@ export default class UserManager {
       where: { name }
     });
   }
+
+  public static async hasAccessToReviewsAboutUser(askerId: string, targetEmail: string)
+    : Promise<boolean> {
+    const targetUser = await UserManager.repo?.findOne({ where: { email: targetEmail } });
+    if (!targetEmail) return false;
+
+    return !!await UserManager.repo?.createQueryBuilder('available_users')
+      .where('ownerId = :askerId', { askerId })
+      .where('targetId = :targetId', { targetId: targetUser?.profileId })
+      .getOne();
+  }
 }
