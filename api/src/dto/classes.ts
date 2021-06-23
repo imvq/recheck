@@ -42,6 +42,13 @@ export class CreateReviewDto {
   ) {}
 }
 
+export class CheckAccessToReviewsAboutUserDto {
+  public constructor(
+    public askerProfileId: string,
+    public targetEmail: string
+  ) {}
+}
+
 export class CheckIsUserConfirmedDto {
   public constructor(public profileId: string) {}
 }

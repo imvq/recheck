@@ -21,6 +21,8 @@ export interface ICheckIsUserRegisteredResponseDto {
   isRegistered: boolean;
 }
 
+export interface ICheckAccessToReviewsAboutUserDto extends ISimpleActionResponse {}
+
 export interface ICheckAuthResponseDto extends ISimpleActionResponse {}
 
 export interface ICompleteRegistration extends ISimpleActionResponse {}

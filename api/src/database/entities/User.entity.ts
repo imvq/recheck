@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, Index, OneToMany, ManyToOne } from 'typeorm';
+import * as orm from 'typeorm';
 
 import * as utilityTypes from '@typing/utility';
 import Company from './Company.entity';
@@ -7,53 +7,55 @@ import Review from './Review.entity';
 /**
  * User model.
  */
-@Entity({ name: 'users' })
+@orm.Entity({ name: 'users' })
 export default class User {
   // Primary key.
-  @Index({ unique: true })
-  @PrimaryColumn('varchar', { length: 30 })
+  @orm.Index({ unique: true })
+  @orm.PrimaryColumn('varchar', { length: 30 })
   profileId!: string;
 
   // Foreign key. Every user belongs to one company.
-  @ManyToOne(() => Company, company => company.members)
+  @orm.ManyToOne(() => Company, company => company.members)
   company!: Company;
 
   // Reviews left by the user.
-  @OneToMany(() => Review, review => review.author)
+  @orm.OneToMany(() => Review, review => review.author)
   reviewsLeft!: Review[];
 
   // Reviews of the user.
-  @OneToMany(() => Review, review => review.target)
+  @orm.OneToMany(() => Review, review => review.target)
   reviewsGot!: Review[];
 
-  @Column('varchar', { length: 36, nullable: true })
+  // Users reviews about whom are available to user.
+  @orm.ManyToMany(() => User)
+  @orm.JoinTable()
+  availableUsers!: User[];
+
+  @orm.Column('varchar', { length: 36, nullable: true })
   confirmationCode!: utilityTypes.Nullable<string>;
 
   // Full name.
-  @Column('text')
+  @orm.Column('text')
   name!: string;
 
-  @Column('text')
+  @orm.Column('text')
   email!: string;
 
-  @Column('text')
+  @orm.Column('text')
   photoUrl!: string;
 
-  @Column('text')
+  @orm.Column('text')
   position!: string;
 
   // Since which month the user started its work. 0 is January.
-  @Column('int')
+  @orm.Column('int')
   workStartMonth!: number;
 
   // Since which year the user started its work.
-  @Column('int')
+  @orm.Column('int')
   workStartYear!: number;
 
   // How many users can be viewed by the user (excluding also viewed).
-  @Column('int', { default: 0 })
+  @orm.Column('int', { default: 0 })
   reviewsAvailable!: number;
-
-  @Column('timestamptz', { default: 'NOW()' })
-  lastUpdatedAt!: Date;
 }

@@ -1,4 +1,4 @@
-import { Path, POST, GET } from 'typescript-rest';
+import { Path, POST } from 'typescript-rest';
 import { BodyGuard } from 'typescript-rest-body-guard';
 import { Inject } from 'typescript-ioc';
 
@@ -110,5 +110,16 @@ export default class UserController {
   public async getNthReviewOf(bodyData: dto.GetNthReviewLeftDto)
     : Promise<apiResponses.IGetNthReviewLeftResponseDto> {
     return this.injectedService.getNthReviewLeft(bodyData);
+  }
+
+  /**
+   * Check if a user has access to reviews about another user.
+   */
+  @Path('/check/access/reviews-about')
+  @BodyGuard
+  @POST
+  public async checkAccessToReviewsAboutUser(bodyData: dto.CheckAccessToReviewsAboutUserDto)
+    : Promise<apiResponses.ICheckAccessToReviewsAboutUserDto> {
+    return { success: true };
   }
 }
