@@ -49,7 +49,7 @@ export default class UserManager {
   public static async getUserBasicInfoByName(name: string)
     : Promise<utilityTypes.Optional<User[]>> {
     return UserManager.repo?.find({
-      select: ['name', 'photoUrl', 'position', 'workStartMonth', 'workStartYear'],
+      select: ['name', 'email', 'photoUrl', 'position', 'workStartMonth', 'workStartYear'],
       relations: ['company'],
       where: { name }
     });

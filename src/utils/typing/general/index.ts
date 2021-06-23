@@ -141,6 +141,7 @@ export interface ReviewData {
 
 export interface SearchProfileInfo {
   name: string;
+  email: string;
   photoUrl: string;
   company: {
     name: string;
