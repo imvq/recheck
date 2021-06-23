@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, KeyboardEvent } from 'react';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -15,6 +15,12 @@ export default (props: types.IProps) => {
     }
   };
 
+  const keyHandler = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      doSearch();
+    }
+  };
+
   return (
     <styled.Wrapper>
       <styled.Input
@@ -22,6 +28,7 @@ export default (props: types.IProps) => {
         placeholder='Введите название компании или имя и фамилию сотрудника, который работал с вами:'
         onChange={(event) => setSearchText(event.target.value)}
         onBlur={doSearch}
+        onKeyDown={keyHandler}
       />
       <styled.AdaptedMagnifier onClick={doSearch} />
     </styled.Wrapper>
