@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import controlledHistory from 'utils/routing';
 import { setIsSearchPopupVisible } from 'store';
 import CustomButton from 'components/shared/CustomButton';
 import OptionBadge from './OptionBadge';
@@ -89,7 +90,12 @@ const SearchPopup = (props: types.IProps) => (
             hiddenView={FreeHiddenBadge}
           />
           <styled.ButtonWrapper>
-            <CustomButton isDisabled={false}>Оставить отзыв</CustomButton>
+            <CustomButton
+              isDisabled={false}
+              onClick={() => controlledHistory.push('review-intro')}
+            >
+              Оставить отзыв
+            </CustomButton>
           </styled.ButtonWrapper>
         </styled.OptionGroupWrapper>
       </styled.OptionsWrapper>

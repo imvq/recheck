@@ -30,5 +30,6 @@ export enum MainToolbarEntry {
   ProfilePageAboutMe,
   TopUpAnAccount,
   AddWorkplace,
-  NewSearch
+  NewSearch,
+  NewReview
 }

@@ -19,7 +19,7 @@ const initialState: InteractionState = {
   isPageLocked: true,
   isSearchPopupVisible: false,
   isLoginPopupVisible: false,
-  currentMainToolbarEntry: MainToolbarEntry.ProfilePageMyReviews,
+  currentMainToolbarEntry: MainToolbarEntry.NewReview,
   isProfileAboutTabLoading: true,
   isProfileHistoryTabLoading: true,
   isProfileReviewsTabLoading: true,

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { AppState, loadRecommendations, searchUser, setPageLocked } from 'store';
 
+import SearchPopupManager from 'components/shared/SearchPopupManager';
 import SearchField from './SearchField';
 import CompaniesResults from './CompaniesResults';
 import CompaniesPopup from './ExpandView/Companies';
@@ -80,6 +81,8 @@ const SearchPage = (props: types.IProps) => {
       </styled.ContentWrapper>
 
       <styled.AdaptedFooter />
+
+      <SearchPopupManager />
 
     </styled.Wrapper>
   );
