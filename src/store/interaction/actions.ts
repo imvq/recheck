@@ -112,9 +112,13 @@ export const loadReviewsTabData = (profileId: string) => (
     .then(amountDto => {
       dispatch(setReviewsLeftChunksAmount(amountDto.data.amount));
 
-      Api.getNthReviewLeft({ profileId, nthReview: 0 })
-        .then(reviewDto => dispatch(setCurrentReviewLeft(reviewDto.data)))
-        .finally(() => dispatch(setIsProfileReviewsTabLoading(false)));
+      if (amountDto.data.amount) {
+        Api.getNthReviewLeft({ profileId, nthReview: 0 })
+          .then(reviewDto => dispatch(setCurrentReviewLeft(reviewDto.data)))
+          .finally(() => dispatch(setIsProfileReviewsTabLoading(false)));
+      } else {
+        dispatch(setIsProfileReviewsTabLoading(false));
+      }
     })
     .catch(() => {
       dispatch(setReviewsLeftChunksAmount(0));
