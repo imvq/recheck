@@ -8,9 +8,9 @@ import CompanyManager from '@database/managers/CompanyManager';
 
 export default class CompaniesService {
   @utils.dbErrorDefaultReactor({ except: [], logger })
-  public async getRecommendations()
+  public async getRecommendations(bodyData: dto.GetRecommendationsDto)
     : Promise<apiResponses.IGetRecommendations> {
-    const companies = await CompanyManager.getPredefinedCompanies();
+    const companies = await CompanyManager.getPredefinedCompanies(bodyData.chunk);
 
     // Recommended company is guaranteed to have a logo.
     // @ts-ignore

@@ -1,4 +1,4 @@
-import { Path, GET, POST } from 'typescript-rest';
+import { Path, POST } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import dto from '@dto';
@@ -16,10 +16,10 @@ export default class CompaniesController {
    * Get recommended predefined companies.
    */
   @Path('/recommendations')
-  @GET
-  public async getRecommendations()
+  @POST
+  public async getRecommendations(bodyData: dto.GetRecommendationsDto)
     : Promise<apiResponses.IGetRecommendations> {
-    return this.injectedService.getRecommendations();
+    return this.injectedService.getRecommendations(bodyData);
   }
 
   @Path('/find-matched')

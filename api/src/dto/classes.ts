@@ -97,6 +97,10 @@ export class GetNthReviewLeftDto {
   ) {}
 }
 
+export class GetRecommendationsDto {
+  public constructor(public chunk: number) {}
+}
+
 export class UserDto {
   public constructor(
     public profileId: string,

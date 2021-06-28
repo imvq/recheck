@@ -10,3 +10,4 @@ export const LI_PROFILE_URL = 'https://api.linkedin.com/v2/me';
 export const FA_PROFILE_URL = 'https://graph.facebook.com/me';
 export const EMAIL_URL = 'https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))';
 export const PHOTO_URL = 'https://api.linkedin.com/v2/me?projection=(id,profilePicture(displayImage~digitalmediaAsset:playableStreams))';
+export const RECOMMENDATIONS_DEFAULT_LENGHT = 12;

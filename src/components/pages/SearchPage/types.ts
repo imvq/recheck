@@ -6,7 +6,7 @@ export interface IStateProps {
 }
 
 export interface IDispatchProps {
-  loadRecommendations(): void;
+  loadRecommendations(chunk: number): void;
   lockPage(): void;
   searchUser(name: string): void;
 }

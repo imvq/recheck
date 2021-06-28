@@ -30,9 +30,9 @@ export default class Api {
     return Api.instance.post('/companies/find-matched', { sequence });
   }
 
-  public static getRecommendations()
+  public static getRecommendations(chunk: number)
     : generalTypes.APIResponse<apiResponses.GetRecommendationsDto> {
-    return Api.instance.get('/companies/recommendations');
+    return Api.instance.post('/companies/recommendations', { chunk });
   }
 
   public static searchUser(name: string)

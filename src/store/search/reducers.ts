@@ -22,11 +22,17 @@ export function searchReducer(
         ...state,
         matchedCompanies: action.payload
       };
-    case SET_RECOMMENDATIONS:
+    case SET_RECOMMENDATIONS: {
+      const updatedRecommendations = [
+        ...state.recommendations,
+        ...action.payload
+      ];
+
       return {
         ...state,
-        recommendations: action.payload
+        recommendations: updatedRecommendations
       };
+    }
     case SET_CURRENT_USER_SEARCH_RESULTS:
       return {
         ...state,

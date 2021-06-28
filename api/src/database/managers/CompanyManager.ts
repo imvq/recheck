@@ -2,6 +2,7 @@ import { getRepository, Repository, Not, IsNull } from 'typeorm';
 
 import * as utilityTypes from '@typing/utility';
 import * as generalTypes from '@typing/general';
+import * as constants from '@common/constants';
 import Company from '../entities/Company.entity';
 
 /**
@@ -31,9 +32,13 @@ export default class CompanyManager {
     return CompanyManager.repo?.findOne({ where: { name } });
   }
 
-  public static async getPredefinedCompanies()
+  public static async getPredefinedCompanies(chunk: number)
     : Promise<Company[]> {
-    return CompanyManager.repo?.find({ relations: ['members'], where: { logoUrl: Not(IsNull()) } }) || [];
+    return CompanyManager.repo?.createQueryBuilder('companies')
+      .where({ logoUrl: Not(IsNull()) })
+      .skip(constants.RECOMMENDATIONS_DEFAULT_LENGHT * chunk)
+      .take(constants.RECOMMENDATIONS_DEFAULT_LENGHT)
+      .getMany() || [];
   }
 
   public static async getMatched(sequence: string)

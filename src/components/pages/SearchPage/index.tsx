@@ -28,7 +28,7 @@ const mapDispatchToProps: types.IDispatchProps = {
 const SearchPage = (props: types.IProps) => {
   const [isRecommendationsViewVisible, setIsRecommendationsViewVisible] = useState(false);
 
-  useEffect(() => { props.loadRecommendations(); }, []);
+  useEffect(() => { props.loadRecommendations(0); }, []);
 
   // Don't show anything until the user starts its search.
   // If the user search request returned empty list than show
@@ -72,7 +72,12 @@ const SearchPage = (props: types.IProps) => {
 
         {/* Recommended companies. */}
         {props.recommendations.length > 0
-          && <CompaniesResults companies={props.recommendations} />}
+          && (
+          <CompaniesResults
+            loadNextChunkCallback={props.loadRecommendations}
+            companies={props.recommendations}
+          />
+          )}
 
         {/* 'Show all recommendations' label. */}
         {props.recommendations.length > 4

@@ -45,7 +45,7 @@ export const loadMatchedCompanies = (sequence: string) => (dispatch: Dispatch<Ap
     .then(matchData => dispatch(setMatchedCompanies(matchData.data.results)));
 };
 
-export const loadRecommendations = () => (dispatch: Dispatch<AppActionType>) => {
-  Api.getRecommendations()
+export const loadRecommendations = (chunk: number) => (dispatch: Dispatch<AppActionType>) => {
+  Api.getRecommendations(chunk)
     .then((recommendationsDto) => dispatch(setRecommendations(recommendationsDto.data.results)));
 };
