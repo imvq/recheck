@@ -6,15 +6,11 @@ export interface IStyledOwnProps {
   backgroundColor?: string;
   fontSize?: string;
   isHollow?: boolean;
-  isHovered: boolean;
-  isActive: boolean;
-  isDisabled: boolean;
+  isDisabled?: boolean;
 }
 
 export type IStyledProps = IStyledOwnProps;
 
-export type IOwnProps = Omit<IStyledOwnProps & {
-  onClick?: () => void;
-}, 'isHovered' | 'isActive'>;
+export type IOwnProps = IStyledOwnProps & { onClick?: () => void };
 
 export type IProps = PropsWithChildren<IOwnProps>;

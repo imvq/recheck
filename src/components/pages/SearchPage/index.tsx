@@ -52,6 +52,7 @@ const SearchPage = (props: types.IProps) => {
         && (
         <CompaniesPopup
           recommendations={props.recommendations}
+          loadNextChunkCallback={props.loadRecommendations}
           onClose={() => setIsRecommendationsViewVisible(false)}
         />
         )}
@@ -73,10 +74,7 @@ const SearchPage = (props: types.IProps) => {
         {/* Recommended companies. */}
         {props.recommendations.length > 0
           && (
-          <CompaniesResults
-            loadNextChunkCallback={props.loadRecommendations}
-            companies={props.recommendations}
-          />
+          <CompaniesResults companies={props.recommendations} />
           )}
 
         {/* 'Show all recommendations' label. */}

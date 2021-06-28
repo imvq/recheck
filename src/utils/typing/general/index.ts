@@ -24,6 +24,7 @@ export interface Company {
     name: string;
     email: string;
     photoUrl: string;
+    position: string;
   }[];
 }
 
@@ -143,10 +144,7 @@ export interface SearchProfileInfo {
   name: string;
   email: string;
   photoUrl: string;
-  company: {
-    name: string;
-    site: string;
-  },
+  company: string;
   position: string;
 }
 
@@ -156,4 +154,5 @@ export interface UserCardData {
   name: string;
   email: string;
   photoUrl: string;
+  position: string;
 }

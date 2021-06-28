@@ -8,10 +8,8 @@ const cssVarsLocal = {
   defaultHeight: '3rem'
 };
 
-type WrapperProps = Pick<IStyledProps, 'isDisabled'>;
-
-export const Wrapper = styled.button<WrapperProps>`
-  cursor: ${props => (props.isDisabled ? 'default' : 'pointer')};
+export const Wrapper = styled.button<IStyledProps>`
+  cursor: pointer;
   display: flex;
   justify-content: center;
   min-width: 12.5rem;
@@ -20,6 +18,10 @@ export const Wrapper = styled.button<WrapperProps>`
   border: none;
   outline: none;
   background: none;
+
+  &:disabled {
+    cursor: default;
+  }
 `;
 
 export const ButtonContentArea = styled.div<IStyledProps>`
@@ -40,9 +42,16 @@ export const ButtonContentArea = styled.div<IStyledProps>`
   align-items: center;
   user-select: none;
 
-  ${props => (props.isHovered ? 'filter: brightness(90%)' : '')};
-  ${props => (props.isActive ? 'filter: brightness(75%)' : '')};
-  ${props => (props.isDisabled ? 'filter: grayscale(100%)' : '')};
+  filter: ${props => (props.isDisabled ? 'grayscale(100%)' : 'none')};
+  pointer-events: ${props => (props.isDisabled ? 'none' : 'all')};
+
+  &:hover {
+    filter: brightness(90%);
+  }
+
+  &:active {
+    filter: brightness(75%);
+  }
 `;
 
 type RoundedAreaProps = Omit<

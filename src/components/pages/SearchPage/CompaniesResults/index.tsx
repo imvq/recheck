@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
-import { UserCardData } from 'utils/typing/general';
+import { Company, UserCardData } from 'utils/typing/general';
 import CompanyCard from 'components/shared/CompanyCard';
 import PersonCard from 'components/shared/PersonCard';
 
@@ -9,24 +8,18 @@ import * as types from './types';
 import * as styled from '../styled';
 
 export default (props: types.IProps) => {
-  const [chunk, setChunk] = useState(0);
+  const [currentCompany, setCurrentCompany] = useState<Company>();
   const [currentMembers, setCurrentMembers] = useState<UserCardData[]>([]);
-
-  const loadNewChunk = () => {
-    props.loadNextChunkCallback(chunk);
-    setChunk(chunk + 1);
-  };
-
-  useBottomScrollListener(loadNewChunk, {
-    offset: 100,
-    debounce: 1000
-  });
 
   const CurrentCompanies = () => (
     <>
       {props.companies.slice(0, 4).map(companyData => (
         <styled.CardWrapper>
-          <CompanyCard companyData={companyData} setCurrentMembers={setCurrentMembers} />
+          <CompanyCard
+            companyData={companyData}
+            setCurrentCompany={setCurrentCompany}
+            setCurrentMembers={setCurrentMembers}
+          />
         </styled.CardWrapper>
       ))}
     </>
@@ -36,7 +29,11 @@ export default (props: types.IProps) => {
     <>
       {currentMembers.map(memberData => (
         <styled.CardWrapper>
-          <PersonCard userData={memberData} />
+          <PersonCard userData={{
+            company: currentCompany?.name || '',
+            ...memberData
+          }}
+          />
         </styled.CardWrapper>
       ))}
     </>
@@ -48,7 +45,8 @@ export default (props: types.IProps) => {
         <styled.Title>Рекомендации:</styled.Title>
       </styled.TitleWrapper>
       <styled.ResultsWrapper>
-        {currentMembers.length === 0 ? <CurrentCompanies /> : null}
+        {currentMembers.length !== 0 && <CurrentMembers />}
+        <CurrentCompanies />
       </styled.ResultsWrapper>
     </>
   );

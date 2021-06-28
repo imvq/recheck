@@ -45,13 +45,25 @@ export const Span = styled.div<{ isEnlarged?: boolean; isDimmed?: boolean; }>`
   text-decoration: underline;
 `;
 
-export const LogoWrapper = styled.img`
-  object-fit: contain;
+export const LogoWrapper = styled.div`
+  background-color: white;
   width: 90%;
   height: 7.5rem;
   border-radius: 2rem;
   margin-top: -2.5rem;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  overflow: hidden;
   filter: drop-shadow(.5rem .5rem .6rem rgba(0, 0, 0, .2));
+
+  display: flex;
+  align-items: center;
+`;
+
+export const Logo = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 `;
 
 export const ButtonWrapper = styled.div`

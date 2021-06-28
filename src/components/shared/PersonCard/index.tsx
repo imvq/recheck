@@ -18,7 +18,7 @@ const PersonCard = (props: types.IProps) => (
     <styled.BodyWrapper>
       <styled.PhotoWrapper src={props.userData.photoUrl || ''} />
       <styled.Span isEnlarged>{props.userData.name}</styled.Span>
-      <styled.Span isDimmed>{`${props.userData.position} — ${props.userData.company.name}`}</styled.Span>
+      <styled.Span isDimmed>{`${props.userData.position} — ${props.userData.company}`}</styled.Span>
       <styled.ButtonWrapper>
         <CustomButton
           isDisabled={false}
