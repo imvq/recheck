@@ -9,6 +9,7 @@ export interface IDispatchProps {
   loadRecommendations(chunk: number): void;
   lockPage(): void;
   searchUser(name: string): void;
+  setRecommendations(companies: generalTypes.Company[]): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

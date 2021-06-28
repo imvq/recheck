@@ -14,7 +14,7 @@ export default (props: types.IProps) => {
   const CurrentCompanies = () => (
     <>
       {props.companies.slice(0, 4).map(companyData => (
-        <styled.CardWrapper>
+        <styled.CardWrapper key={companyData.id}>
           <CompanyCard
             companyData={companyData}
             setCurrentCompany={setCurrentCompany}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
 import { Company, UserCardData } from 'utils/typing/general';
@@ -21,13 +21,13 @@ export default (props: types.IProps) => {
 
   useBottomScrollListener(loadNewChunk, {
     offset: 100,
-    debounce: 1000
+    debounce: 2000
   });
 
   const CurrentCompanies = () => (
     <>
       {props.recommendations.map(company => (
-        <styled.CardWrapper>
+        <styled.CardWrapper key={company.id}>
           <CompanyCard
             companyData={company}
             setCurrentCompany={setCurrentCompany}
@@ -41,7 +41,7 @@ export default (props: types.IProps) => {
   const CurrentMembers = () => (
     <>
       {currentMembers.map(memberData => (
-        <styled.CardWrapper>
+        <styled.CardWrapper key={memberData.email}>
           <PersonCard userData={{
             company: currentCompany?.name || '',
             ...memberData
@@ -52,8 +52,13 @@ export default (props: types.IProps) => {
     </>
   );
 
+  const closeHandler = useCallback(() => {
+    setChunk(0);
+    props.onClose();
+  }, [props.onClose]);
+
   return (
-    <ExpandView title='Рекомендации' onClose={props.onClose}>
+    <ExpandView title='Рекомендации' onClose={closeHandler}>
       {currentMembers.length === 0 ? <CurrentCompanies /> : <CurrentMembers />}
     </ExpandView>
   );

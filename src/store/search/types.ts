@@ -2,6 +2,7 @@ import * as generalTypes from 'utils/typing/general';
 
 export const SET_MATCHED_COMPANIES = 'SET_MATCHED_COMPANIES';
 export const SET_RECOMMENDATIONS = 'SET_RECOMMENDATIONS';
+export const APPEND_RECOMMENDATIONS = 'APPEND_RECOMMENDATIONS';
 export const SET_CURRENT_USER_SEARCH_RESULTS = 'SET_CURRENT_USER_SEARCH_RESULTS';
 
 export interface SearchState {
@@ -20,6 +21,11 @@ export interface SetRecommendations {
   payload: generalTypes.Company[];
 }
 
+export interface AppendRecommendations {
+  type: typeof APPEND_RECOMMENDATIONS;
+  payload: generalTypes.Company[];
+}
+
 export interface SetCurrentUserSearchResults {
   type: typeof SET_CURRENT_USER_SEARCH_RESULTS;
   payload: generalTypes.SearchProfileInfo[];
@@ -27,4 +33,5 @@ export interface SetCurrentUserSearchResults {
 
 export type SearchActionType = SetMatchedCompanies
   | SetRecommendations
+  | AppendRecommendations
   | SetCurrentUserSearchResults;

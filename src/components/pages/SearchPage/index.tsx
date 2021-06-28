@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { AppState, loadRecommendations, searchUser, setPageLocked } from 'store';
+import { AppState, setRecommendations, loadRecommendations, searchUser, setPageLocked } from 'store';
 
+import * as constants from 'utils/constants';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
 import SearchField from './SearchField';
 import CompaniesResults from './CompaniesResults';
@@ -22,6 +23,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 const mapDispatchToProps: types.IDispatchProps = {
   loadRecommendations,
   searchUser,
+  setRecommendations,
   lockPage: setPageLocked
 };
 
@@ -29,6 +31,10 @@ const SearchPage = (props: types.IProps) => {
   const [isRecommendationsViewVisible, setIsRecommendationsViewVisible] = useState(false);
 
   useEffect(() => { props.loadRecommendations(0); }, []);
+
+  const resetRecommendations = () => {
+    props.setRecommendations(props.recommendations.slice(0, constants.RECOMMENDATIONS_LENGTH));
+  };
 
   // Don't show anything until the user starts its search.
   // If the user search request returned empty list than show
@@ -53,7 +59,10 @@ const SearchPage = (props: types.IProps) => {
         <CompaniesPopup
           recommendations={props.recommendations}
           loadNextChunkCallback={props.loadRecommendations}
-          onClose={() => setIsRecommendationsViewVisible(false)}
+          onClose={() => {
+            setIsRecommendationsViewVisible(false);
+            resetRecommendations();
+          }}
         />
         )}
 

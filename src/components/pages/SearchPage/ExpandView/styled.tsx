@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 
 import { animations, cssVars } from 'utils/style.common';
@@ -86,7 +87,7 @@ export const Title = styled.h2`
 
 export const CardsWrapper = styled.div``;
 
-export const CardWrapper = styled.div`
+export const CardWrapper = memo(styled.div`
   float: left;
   box-sizing: border-box;
   padding: 1rem;
@@ -94,4 +95,4 @@ export const CardWrapper = styled.div`
   &:nth-child(4n + 1) {
     clear: left;
   }
-`;
+`);

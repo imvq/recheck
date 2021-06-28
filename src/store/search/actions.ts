@@ -8,6 +8,7 @@ import {
   SearchActionType,
   SET_MATCHED_COMPANIES,
   SET_RECOMMENDATIONS,
+  APPEND_RECOMMENDATIONS,
   SET_CURRENT_USER_SEARCH_RESULTS
 } from './types';
 
@@ -25,6 +26,12 @@ export const clearMatchedCompanies = (): SearchActionType => ({
 export const setRecommendations = (results: generalTypes.Company[])
   : SearchActionType => ({
   type: SET_RECOMMENDATIONS,
+  payload: results
+});
+
+export const appendRecommendations = (results: generalTypes.Company[])
+  : SearchActionType => ({
+  type: APPEND_RECOMMENDATIONS,
   payload: results
 });
 
@@ -47,5 +54,5 @@ export const loadMatchedCompanies = (sequence: string) => (dispatch: Dispatch<Ap
 
 export const loadRecommendations = (chunk: number) => (dispatch: Dispatch<AppActionType>) => {
   Api.getRecommendations(chunk)
-    .then((recommendationsDto) => dispatch(setRecommendations(recommendationsDto.data.results)));
+    .then((recommendationsDto) => dispatch(appendRecommendations(recommendationsDto.data.results)));
 };

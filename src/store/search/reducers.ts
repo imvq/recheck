@@ -3,6 +3,7 @@ import {
   SearchActionType,
   SET_MATCHED_COMPANIES,
   SET_RECOMMENDATIONS,
+  APPEND_RECOMMENDATIONS,
   SET_CURRENT_USER_SEARCH_RESULTS
 } from './types';
 
@@ -22,7 +23,12 @@ export function searchReducer(
         ...state,
         matchedCompanies: action.payload
       };
-    case SET_RECOMMENDATIONS: {
+    case SET_RECOMMENDATIONS:
+      return {
+        ...state,
+        recommendations: action.payload
+      };
+    case APPEND_RECOMMENDATIONS: {
       const updatedRecommendations = [
         ...state.recommendations,
         ...action.payload

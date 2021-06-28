@@ -1,7 +1,9 @@
+import { memo } from 'react';
+
 import * as types from './types';
 import * as styled from './styled';
 
-export default (props: types.IProps) => (
+export default memo((props: types.IProps) => (
   <styled.Wrapper>
     <styled.FrameWrapper>
       <styled.Frame>
@@ -20,4 +22,4 @@ export default (props: types.IProps) => (
 
     <styled.ClickableBackground onClick={props.onClose} />
   </styled.Wrapper>
-);
+));
