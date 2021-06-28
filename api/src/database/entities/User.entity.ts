@@ -32,13 +32,16 @@ export default class User {
   availableUsers!: User[];
 
   @orm.Column('varchar', { length: 36, nullable: true })
+  @orm.Index()
   confirmationCode!: utilityTypes.Nullable<string>;
 
   // Full name.
   @orm.Column('text')
+  @orm.Index()
   name!: string;
 
   @orm.Column('text')
+  @orm.Index({ unique: true })
   email!: string;
 
   @orm.Column('text')
