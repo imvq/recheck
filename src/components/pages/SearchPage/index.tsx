@@ -1,7 +1,14 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { AppState, setRecommendations, loadRecommendations, searchUser, setPageLocked } from 'store';
+import {
+  AppState,
+  setRecommendations,
+  loadRecommendations,
+  searchUser,
+  setUserSearchResults,
+  setPageLocked
+} from 'store';
 
 import * as constants from 'utils/constants';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
@@ -23,6 +30,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 const mapDispatchToProps: types.IDispatchProps = {
   loadRecommendations,
   searchUser,
+  setUserSearchResults,
   setRecommendations,
   lockPage: setPageLocked
 };
@@ -83,7 +91,10 @@ const SearchPage = (props: types.IProps) => {
         {/* Recommended companies. */}
         {props.recommendations.length > 0
           && (
-          <CompaniesResults companies={props.recommendations} />
+          <CompaniesResults
+            companies={props.recommendations}
+            setUserSearchResults={props.setUserSearchResults}
+          />
           )}
 
         {/* 'Show all recommendations' label. */}

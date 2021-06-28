@@ -10,7 +10,7 @@ export default (props: types.IProps) => (
     </styled.TitleWrapper>
     <styled.ResultsWrapper>
       {props.userSearchResults.results.map(userData => (
-        <styled.CardWrapper>
+        <styled.CardWrapper key={userData.email}>
           <PersonCard userData={userData} />
         </styled.CardWrapper>
       ))}

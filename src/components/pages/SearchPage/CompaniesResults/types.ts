@@ -1,7 +1,8 @@
-import { Company } from 'utils/typing/general';
+import * as generalTypes from 'utils/typing/general';
 
 export interface IOwnProps {
-  companies: Company[];
+  companies: generalTypes.Company[];
+  setUserSearchResults(results: generalTypes.SearchProfileInfo[]): void;
 }
 
 export type IProps = IOwnProps;
