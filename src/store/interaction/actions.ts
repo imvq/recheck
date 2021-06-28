@@ -95,9 +95,13 @@ export const loadAboutTabData = (profileId: string) => (
     .then(amountDto => {
       dispatch(setReviewsGotChunksAmount(amountDto.data.amount));
 
-      Api.getNthReviewGot({ profileId, nthReview: 0 })
-        .then(reviewDto => dispatch(setCurrentReviewGot(reviewDto.data)))
-        .finally(() => dispatch(setIsProfileAboutTabLoading(false)));
+      if (amountDto.data.amount) {
+        Api.getNthReviewGot({ profileId, nthReview: 0 })
+          .then(reviewDto => dispatch(setCurrentReviewGot(reviewDto.data)))
+          .finally(() => dispatch(setIsProfileAboutTabLoading(false)));
+      } else {
+        dispatch(setIsProfileAboutTabLoading(false));
+      }
     })
     .catch(() => {
       dispatch(setReviewsGotChunksAmount(0));
