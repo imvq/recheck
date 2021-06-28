@@ -22,7 +22,7 @@ export interface Company {
   logoUrl: string | null;
   members: {
     name: string;
-    eamil: string;
+    email: string;
     photoUrl: string;
   }[];
 }
@@ -154,6 +154,6 @@ export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
 
 export interface UserCardData {
   name: string;
-  photoUrl: string;
   email: string;
+  photoUrl: string;
 }

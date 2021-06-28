@@ -35,9 +35,11 @@ export default class CompanyManager {
   public static async getPredefinedCompanies(chunk: number)
     : Promise<Company[]> {
     return CompanyManager.repo?.createQueryBuilder('companies')
+      .select(['companies', 'members.name', 'members.email', 'members.photoUrl', 'members.position'])
       .where({ logoUrl: Not(IsNull()) })
       .skip(constants.RECOMMENDATIONS_DEFAULT_LENGHT * chunk)
       .take(constants.RECOMMENDATIONS_DEFAULT_LENGHT)
+      .leftJoin('companies.members', 'members')
       .getMany() || [];
   }
 
