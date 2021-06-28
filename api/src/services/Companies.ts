@@ -12,9 +12,27 @@ export default class CompaniesService {
     : Promise<apiResponses.IGetRecommendations> {
     const companies = await CompanyManager.getPredefinedCompanies(bodyData.chunk);
 
+    // TypeORM cannot select many rows properly if the primary key is not provided.
+    // So we need to select with the primary key and than remove it.
+    const results = this.mapCompaniesToCompaniesWithRawMembers(companies);
+
     // Recommended company is guaranteed to have a logo.
     // @ts-ignore
-    return { results: companies };
+    return { results };
+  }
+
+  private mapCompaniesToCompaniesWithRawMembers(companies: Company[]) {
+    return companies.map(company => ({
+      id: company.id,
+      name: company.name,
+      logoUrl: company.logoUrl,
+      members: company.members.map(member => ({
+        name: member.name,
+        email: member.email,
+        photoUrl: member.photoUrl,
+        position: member.position
+      }))
+    }));
   }
 
   @utils.dbErrorDefaultReactor({ except: [], logger })
