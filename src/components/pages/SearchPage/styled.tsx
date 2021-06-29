@@ -7,8 +7,6 @@ import Footer from 'components/shared/Footer';
 import MainToolbar from 'components/shared/MainToolbar';
 
 export const Wrapper = styled.div`
-  background-image: url(${BackgroundSvgPath});
-  background-size: cover;
   min-height: 100%;
   display: grid;
   grid-template:
@@ -26,6 +24,10 @@ export const AdaptedFooter = styled(Footer)`
 `;
 
 export const ContentWrapper = styled.div`
+  background-image: url(${BackgroundSvgPath});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   grid-area: Content;
   height: fit-content;
   box-sizing: border-box;
@@ -40,7 +42,7 @@ export const TitleWrapper = styled.div`
 `;
 
 export const Title = styled.h2`
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   font-weight: 600;
 `;
 
@@ -59,11 +61,19 @@ export const CardWrapper = styled.div`
 
 export const SpanWrapper = styled.div`
   padding: 4rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const Span = styled.span`
-  font-size: 1.2rem;
-  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  font-weight: 600;
+`;
+
+export const ButtonWrapper = styled.div`
+  padding: 2rem 0 0;
 `;
 
 export const Sidebar = styled(MainToolbar)`

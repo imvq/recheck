@@ -19,6 +19,8 @@ import RegistrationPage from 'components/pages/RegistrationPage';
 import ReviewIntroPage from 'components/pages/ReviewIntroPage';
 import NotFoundPage from 'components/pages/NotFoundPage';
 
+import 'react-toastify/dist/ReactToastify.min.css';
+
 /**
  * Main wrapper.
  * Container component.
