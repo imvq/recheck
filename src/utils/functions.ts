@@ -1,3 +1,4 @@
+import { toast } from 'react-toastify';
 import psl from 'psl';
 
 import * as apiResponses from 'utils/typing/apiResponses';
@@ -124,4 +125,23 @@ export function mapReviewToArray(from: IReviewCardCommonData) {
     [`Оценка: ${from.qualityMark}`, from.qualityComment],
     [`Оценка: ${from.leadershipMark}`, from.leadershipComment]
   ];
+}
+
+/**
+ * Toast of copying.
+ */
+export function showCopyingToast() {
+  return toast.dark('Ссылка скопирована', {
+    position: 'bottom-left',
+    style: {
+      backgroundColor: '#33c7ba',
+      textAlign: 'center',
+      fontSize: '1.3rem'
+    },
+    autoClose: 5000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true
+  });
 }

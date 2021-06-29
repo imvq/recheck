@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 import { AppState, loadAboutTabData, loadNthReviewGot } from 'store';
+import { showCopyingToast } from 'utils/functions';
+import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';
 import ReviewCard from 'components/shared/ReviewCard';
 
@@ -10,6 +13,7 @@ import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentPorfileId: store.profile.currentProfileInfo.currentId,
+  currentEmail: store.profile.currentProfileInfo.currentEmail,
   isLoading: store.interaction.isProfileAboutTabLoading,
   reviewsGotChunksAmount: store.interaction.reviewsGotChunksAmount,
   currentReviewCardData: store.interaction.currentReviewGot
@@ -19,6 +23,10 @@ const mapDispatchToProps: types.IDispatchProps = {
   loadTabData: loadAboutTabData,
   loadNthReview: loadNthReviewGot
 };
+
+function copyLink(email: string) {
+  navigator.clipboard.writeText(`${window.location.origin}?awaiter=${email}`);
+}
 
 /**
  * Section with user's reviews.
@@ -35,7 +43,24 @@ const AboutArea = (props: types.IProps) => {
   );
 
   const ContentEmpty = () => (
-    <styled.Title isHighlighted>Никто ещё не оставил о вас отзыв :(</styled.Title>
+    <>
+      <styled.Title isHighlighted>
+        <styled.InnerSpan>Никто ещё не оставил о вас отзыв :(</styled.InnerSpan>
+      </styled.Title>
+      <styled.Title>
+        <styled.InnerSpan>Вы можете запросить отзыв о себе.</styled.InnerSpan>
+        <styled.InnerSpan>Отправьте ссылку тому, кто может оставить о вас отзыв</styled.InnerSpan>
+      </styled.Title>
+      <styled.ButtonWrapper>
+        <CustomButton onClick={() => {
+          showCopyingToast();
+          copyLink(props.currentEmail);
+        }}
+        >
+          Копировать ссылку
+        </CustomButton>
+      </styled.ButtonWrapper>
+    </>
   );
 
   const ContentAvailable = () => (
@@ -75,6 +100,9 @@ const AboutArea = (props: types.IProps) => {
           }}
         />
       ) : null}
+
+      {/* Toast notification wrapper. */}
+      <ToastContainer />
     </styled.Wrapper>
   );
 };
