@@ -13,6 +13,7 @@ import {
   SET_IS_PROFILE_ABOUT_TAB_LOADING,
   SET_IS_PROFILE_HISTORY_TAB_LOADING,
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
+  SET_REFERRAL,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
   SET_CURRENT_REVIEW_GOT,
@@ -62,6 +63,12 @@ export const setIsProfileReviewsTabLoading = (flag: boolean)
   : InteractionStateActionType => ({
   type: SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   payload: flag
+});
+
+export const setReferral = (referral: string)
+  : InteractionStateActionType => ({
+  type: SET_REFERRAL,
+  payload: referral
 });
 
 export const setReviewsGotChunksAmount = (amount: number)
