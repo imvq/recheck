@@ -2,6 +2,7 @@ import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
   isAuthorized: boolean | null;
+  isPageLocked: boolean;
 }
 
 export interface IDispatchProps {
