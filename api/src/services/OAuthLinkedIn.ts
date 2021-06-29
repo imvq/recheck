@@ -5,9 +5,11 @@ import * as constants from '@common/constants';
 import * as cookiesList from '@common/cookies';
 import * as generalTypes from '@typing/general';
 import * as apiResponses from '@typing/apiResponses';
+
 import dto from '@dto';
 import utils from '@utils';
 import logger from '@logging/Logger';
+import UserManager from '@database/managers/UserManager';
 
 /**
  * Service in charge of LinkedIn OAuth.
@@ -51,9 +53,14 @@ export default class LinkedInOAuthService {
         photo.profilePicture['displayImage~'].elements.length - 1
       ];
 
+      const savedUser = await UserManager.getUser(profile.id);
+
+      if (!savedUser) throw new Errors.UnauthorizedError('No user with such email');
+
       return {
         profileId: profile.id,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
+        email: savedUser.email,
         photoUrl: `${highestQualityPicture.identifiers[0].identifier}`
       };
     } catch (error) {

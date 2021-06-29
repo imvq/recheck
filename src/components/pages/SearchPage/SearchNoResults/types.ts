@@ -2,4 +2,8 @@ export interface IOwnProps {
   isFirstSearch: boolean;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {
+  currentEmail: string;
+}
+
+export type IProps = IOwnProps & IStateProps;

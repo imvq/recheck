@@ -5,7 +5,9 @@ import * as constants from '@common/constants';
 import * as cookiesList from '@common/cookies';
 import * as generalTypes from '@typing/general';
 import * as apiResponses from '@typing/apiResponses';
+
 import logger from '@logging/Logger';
+import UserManager from '@database/managers/UserManager';
 
 /**
  * Service in charge of Facebook OAuth.
@@ -22,15 +24,20 @@ export default class FacebookOAuthService {
         constants.FA_PROFILE_URL,
         {
           params: {
-            fields: 'id,name,picture',
+            fields: 'id,email,name,picture',
             access_token: cookies[cookiesList.FA_AT]
           }
         }
       );
 
+      const savedUser = await UserManager.getUser(profile.id);
+
+      if (!savedUser) throw new Errors.UnauthorizedError('No user with such email');
+
       return {
         profileId: profile.id,
         name: profile.name,
+        email: savedUser.email,
         photoUrl: profile.picture.data.url
       };
     } catch (error) {

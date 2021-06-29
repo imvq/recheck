@@ -8,6 +8,7 @@ export type APIResponse<TDto = any> = Promise<AxiosResponse<TDto>>;
 export interface AppProfileInfo {
   currentId: string;
   currentName: string;
+  currentEmail: string;
   currentPhotoUrl: string;
 }
 

@@ -1,9 +1,15 @@
+import { connect } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 
+import { AppState } from 'store';
 import CustomButton from 'components/shared/CustomButton';
 
 import * as types from './types';
 import * as styled from '../styled';
+
+const mapStateToProps = (store: AppState): types.IStateProps => ({
+  currentEmail: store.profile.currentProfileInfo.currentEmail
+});
 
 function notify() {
   return toast.dark('Ссылка скопирована', {
@@ -21,11 +27,11 @@ function notify() {
   });
 }
 
-function copyLink() {
-  navigator.clipboard.writeText('Test');
+function copyLink(email: string) {
+  navigator.clipboard.writeText(`${window.location.origin}?referral=${email}`);
 }
 
-export default (props: types.IProps) => {
+const SearchNoResults = (props: types.IProps) => {
   return props.isFirstSearch ? null
     : (
       <>
@@ -40,7 +46,7 @@ export default (props: types.IProps) => {
             <CustomButton
               onClick={() => {
                 notify();
-                copyLink();
+                copyLink(props.currentEmail);
               }}
               fontSize='1.3rem'
             >
@@ -54,3 +60,5 @@ export default (props: types.IProps) => {
       </>
     );
 };
+
+export default connect(mapStateToProps)(SearchNoResults);

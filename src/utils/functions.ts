@@ -4,7 +4,6 @@ import * as apiResponses from 'utils/typing/apiResponses';
 import * as generalTypes from 'utils/typing/general';
 import { IReviewCardCommonData } from 'utils/typing/general/basic';
 import { cookieManager, cookiesList } from 'utils/cookies';
-import { ScreenBreakpoint } from './enums';
 
 /**
  * Generate list with n values down starting from a certain value.
@@ -68,6 +67,7 @@ export function mapProfileDtoToState(profileDto: ProfileDto): generalTypes.AppPr
   return {
     currentId: profileDto.profileId,
     currentName: profileDto.name,
+    currentEmail: profileDto.email,
     currentPhotoUrl: profileDto.photoUrl
   };
 }

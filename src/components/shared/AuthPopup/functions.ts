@@ -112,6 +112,7 @@ export function onSuccessFacebook(
     const profileInfo: ApiResponse.FacebookProfileDto = {
       profileId: oauthData.userID,
       name: oauthData.name || '',
+      email: oauthData.email || '',
       photoUrl: oauthData.picture?.data.url || ''
     };
 
