@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import { animations, cssVars } from 'utils/style.common';
 import { ReactComponent as CloseCross } from 'assets/images/common/CloseCross.svg';
-import BackgroundPath from 'assets/images/pages/SearchPage/ExpandView/Background.svg';
 
 export const Wrapper = styled.div`
   position: absolute;
@@ -38,7 +37,6 @@ export const Frame = styled.div`
   box-sizing: border-box;
   padding: 0 2rem 2rem;
   background-color: white;
-  background-image: url(${BackgroundPath});
   background-size: cover;
   border-radius: .3rem;
 
