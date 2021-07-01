@@ -15,7 +15,7 @@ export default () => {
       {/* Absolute-positioned confirmation popup. */}
       {isConfirmationVisible && <ConfirmationPopup email='email' />}
 
-      <styled.AdaptedHeader />
+      <styled.AdaptedHeader isProfilePageAvailable={false} />
       <styled.ContentWrapper>
         <styled.StageBreadcrumpWrapper>
           <styled.StageBreadcrumpImage src={ScaleStage2} draggable='false' />

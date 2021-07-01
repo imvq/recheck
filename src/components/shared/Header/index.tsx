@@ -8,6 +8,8 @@ import * as styled from './styled';
  */
 export default (props: types.IProps) => (
   <styled.Wrapper id={props.id}>
-    <styled.LoginBadgeWrapper><ProfileMenuBadge /></styled.LoginBadgeWrapper>
+    <styled.LoginBadgeWrapper>
+      <ProfileMenuBadge isProfilePageAvailable={props.isProfilePageAvailable} />
+    </styled.LoginBadgeWrapper>
   </styled.Wrapper>
 );

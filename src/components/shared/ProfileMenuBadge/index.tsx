@@ -53,10 +53,12 @@ const LoginBadge = (props: types.IProps) => {
         }
         />
         <styled.Menu isExpanded={isExpanded}>
+          {props.isProfilePageAvailable && (
           <styled.MenuEntry onClick={() => history.push('/profile')}>
             <styled.SvgWrapper><CabinetSvg /></styled.SvgWrapper>
             <span>Профиль</span>
           </styled.MenuEntry>
+          )}
 
           <styled.MenuEntry onClick={() => onExit(props.lockPage)}>
             <styled.SvgWrapper><DoorSvg /></styled.SvgWrapper>
