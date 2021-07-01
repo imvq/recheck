@@ -33,14 +33,14 @@ function onProfileDataRetrieved(
 
   Api.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
+      setIsAuthorizedCallback(true);
+
       if (checkResponse.data.isRegistered) {
         Api.checkIsConfirmed(normalizedProfileInfo.currentId)
           .then((confirmationResponse) => {
             setIsLoginPopupVisibleCallback(false);
 
-            if (confirmationResponse.data.isConfirmed) {
-              setIsAuthorizedCallback(true);
-            } else {
+            if (!confirmationResponse.data.isConfirmed) {
               controlledHistory.push('/await-user-confirmation');
             }
           })
