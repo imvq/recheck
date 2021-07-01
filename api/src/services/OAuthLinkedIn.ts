@@ -9,7 +9,7 @@ import * as apiResponses from '@typing/apiResponses';
 import dto from '@dto';
 import utils from '@utils';
 import logger from '@logging/Logger';
-import UserManager from '@database/managers/UserManager';
+import { getSavedUserEmail } from './common';
 
 /**
  * Service in charge of LinkedIn OAuth.
@@ -35,7 +35,10 @@ export default class LinkedInOAuthService {
     }
   }
 
-  public async retrieveProfileInfo(cookies: generalTypes.IStringIndexable)
+  public async retrieveProfileInfo(
+    cookies: generalTypes.IStringIndexable,
+    options?: { withEmail: boolean; }
+  )
     : Promise<apiResponses.IRetrieveLinkedInProfileInfoResponseDto> {
     try {
       if (!cookies[cookiesList.LI_AT]) {
@@ -53,14 +56,15 @@ export default class LinkedInOAuthService {
         photo.profilePicture['displayImage~'].elements.length - 1
       ];
 
-      const savedUser = await UserManager.getUser(profile.id);
-
-      if (!savedUser) throw new Errors.UnauthorizedError('No user with such email');
+      let savedUserEmail;
+      if (options?.withEmail) {
+        savedUserEmail = await getSavedUserEmail(profile.id);
+      }
 
       return {
         profileId: profile.id,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
-        email: savedUser.email,
+        email: savedUserEmail,
         photoUrl: `${highestQualityPicture.identifiers[0].identifier}`
       };
     } catch (error) {

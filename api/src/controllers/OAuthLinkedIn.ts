@@ -16,11 +16,21 @@ export default class LinkedInController {
   /**
    * Get LinkedIn profile info.
    */
-  @Path('/retrieve')
+  @Path('/retrieve/basic')
   @GET
-  public async getLinkedInProfile(@Context context: ServiceContext)
+  public async getLinkedInProfileBasic(@Context context: ServiceContext)
     : Promise<apiResponses.IRetrieveLinkedInProfileInfoResponseDto> {
     return this.injectedService.retrieveProfileInfo(context.request.cookies);
+  }
+
+  /**
+   * Get LinkedIn profile info with custom user email.
+   */
+  @Path('/retrieve/with-email')
+  @GET
+  public async getLinkedInProfileWithEmail(@Context context: ServiceContext)
+    : Promise<apiResponses.IRetrieveLinkedInProfileInfoResponseDto> {
+    return this.injectedService.retrieveProfileInfo(context.request.cookies, { withEmail: true });
   }
 
   /**

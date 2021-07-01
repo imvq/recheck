@@ -14,10 +14,20 @@ export default class FacebookController {
   /**
    * Get Facebook profile info.
    */
-  @Path('/retrieve')
+  @Path('/retrieve/basic')
   @GET
-  public async getFacebookProfile(@Context context: ServiceContext)
+  public async getFacebookProfileBasic(@Context context: ServiceContext)
     : Promise<apiResponses.IRetrieveFacebookProfileInfoResponseDto> {
     return this.injectedService.retrieveProfileInfo(context.request.cookies);
+  }
+
+  /**
+   * Get Facebook profile info.
+   */
+  @Path('/retrieve/with-email')
+  @GET
+  public async getFacebookProfileWithEmail(@Context context: ServiceContext)
+    : Promise<apiResponses.IRetrieveFacebookProfileInfoResponseDto> {
+    return this.injectedService.retrieveProfileInfo(context.request.cookies, { withEmail: true });
   }
 }
