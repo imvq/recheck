@@ -3,7 +3,7 @@ import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-face
 import Api from 'utils/api';
 import * as constants from 'utils/constants';
 import controlledHistory from 'utils/routing';
-import * as ApiResponse from 'utils/typing/apiResponses';
+import * as apiResponses from 'utils/typing/apiResponses';
 import * as generalTypes from 'utils/typing/general';
 import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
@@ -26,7 +26,7 @@ function onProfileDataRetrieved(
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
   setCurrentProfileInfoCallback: (profileInfo: generalTypes.AppProfileInfo) => void,
-  profileResponse: ApiResponse.LinkedInProfileDto | ApiResponse.FacebookProfileDto
+  profileResponse: apiResponses.LinkedInProfileDto | apiResponses.FacebookProfileDto
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
   setCurrentProfileInfoCallback(normalizedProfileInfo);
@@ -109,7 +109,7 @@ export function onSuccessFacebook(
 
     // 2. Time to retrieve basic profile info from Facebook response.
     const oauthData = result as ReactFacebookLoginInfo;
-    const profileInfo: ApiResponse.FacebookProfileDto = {
+    const profileInfo: apiResponses.FacebookProfileDto = {
       profileId: oauthData.userID,
       name: oauthData.name || '',
       email: oauthData.email || '',
