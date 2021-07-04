@@ -52,20 +52,14 @@ export default class Api {
     return Api.instance.post('/linkedin/oauth/exchange', body);
   }
 
-  public static getProfileLinkedIn(options?: { withEmail: boolean; })
+  public static getProfileLinkedIn()
     : generalTypes.APIResponse<apiResponses.LinkedInProfileDto> {
-    const path = options?.withEmail
-      ? '/linkedin/oauth/retrieve/with-email'
-      : '/linkedin/oauth/retrieve/basic';
-    return Api.instance.get(path, { withCredentials: true });
+    return Api.instance.get('/linkedin/oauth/retrieve', { withCredentials: true });
   }
 
-  public static getProfileFacebook(options?: { withEmail: boolean; })
+  public static getProfileFacebook()
     : generalTypes.APIResponse<apiResponses.FacebookProfileDto> {
-    const path = options?.withEmail
-      ? '/facebook/oauth/retrieve/with-email'
-      : '/facebook/oauth/retrieve/basic';
-    return Api.instance.get(path, { withCredentials: true });
+    return Api.instance.get('/facebook/oauth/retrieve', { withCredentials: true });
   }
 
   public static prepareProfile(profileInfoDto: generalTypes.PrepareProfileDto)

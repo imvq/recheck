@@ -69,7 +69,7 @@ export const checkAuthorization = (
   dispatch: Dispatch<AppActionType>
 ) => {
   if (cookieManager.get(cookiesList.accessTokenLinkedIn)) {
-    Api.getProfileLinkedIn({ withEmail: true })
+    Api.getProfileLinkedIn()
       .then(profileResponse => onProfileDataRetrieved(
         dispatch,
         profileResponse,
@@ -78,7 +78,7 @@ export const checkAuthorization = (
       ))
       .catch(() => dispatch(setIsAuthorized(false)));
   } else if (cookieManager.get(cookiesList.accessTokenFacebook)) {
-    Api.getProfileFacebook({ withEmail: true })
+    Api.getProfileFacebook()
       .then(profileResponse => onProfileDataRetrieved(
         dispatch,
         profileResponse,

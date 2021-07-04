@@ -33,10 +33,7 @@ export default class FacebookOAuthService {
         }
       );
 
-      let savedUserEmail;
-      if (options?.withEmail) {
-        savedUserEmail = await getSavedUserEmail(profile.id);
-      }
+      const savedUserEmail = await getSavedUserEmail(profile.id);
 
       return {
         profileId: profile.id,

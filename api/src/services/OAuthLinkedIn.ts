@@ -35,10 +35,7 @@ export default class LinkedInOAuthService {
     }
   }
 
-  public async retrieveProfileInfo(
-    cookies: generalTypes.IStringIndexable,
-    options?: { withEmail: boolean; }
-  )
+  public async retrieveProfileInfo(cookies: generalTypes.IStringIndexable)
     : Promise<apiResponses.IRetrieveLinkedInProfileInfoResponseDto> {
     try {
       if (!cookies[cookiesList.LI_AT]) {
@@ -56,10 +53,7 @@ export default class LinkedInOAuthService {
         photo.profilePicture['displayImage~'].elements.length - 1
       ];
 
-      let savedUserEmail;
-      if (options?.withEmail) {
-        savedUserEmail = await getSavedUserEmail(profile.id);
-      }
+      const savedUserEmail = await getSavedUserEmail(profile.id);
 
       return {
         profileId: profile.id,
