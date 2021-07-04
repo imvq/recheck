@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
-import { AppState, setIsLoginPopupVisible } from 'store';
+import { AppState, setIsLoginPopupVisible, setPageUnlocked } from 'store';
 
 import * as types from './types';
 
@@ -14,7 +14,8 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  setIsLoginPopupVisible
+  setIsLoginPopupVisible,
+  unlockPage: setPageUnlocked
 };
 
 const UserConfirmationPage = (props: types.IProps) => {
@@ -32,7 +33,10 @@ const UserConfirmationPage = (props: types.IProps) => {
         profileId: props.currentProfileInfo.currentId,
         confirmationCode: pageUuid
       })
-        .then(() => controlledHistory.replace('/profile'))
+        .then(() => {
+          props.unlockPage();
+          controlledHistory.replace('/profile');
+        })
         .catch(() => controlledHistory.replace('/404'));
       return;
     }
