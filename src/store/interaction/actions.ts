@@ -14,6 +14,7 @@ import {
   SET_IS_PROFILE_HISTORY_TAB_LOADING,
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   SET_REFERRAL,
+  SET_AWAITER,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
   SET_CURRENT_REVIEW_GOT,
@@ -69,6 +70,12 @@ export const setReferral = (referral: string)
   : InteractionStateActionType => ({
   type: SET_REFERRAL,
   payload: referral
+});
+
+export const setAwaiter = (awaiter: string)
+  : InteractionStateActionType => ({
+  type: SET_AWAITER,
+  payload: awaiter
 });
 
 export const setReviewsGotChunksAmount = (amount: number)

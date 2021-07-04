@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { useQuery } from 'utils/hooks';
-import { setIsLoginPopupVisible, setReferral } from 'store';
+import { AppState, setIsLoginPopupVisible, setReferral, setAwaiter } from 'store';
+import controlledHistory from 'utils/routing';
 import CookiePopup from 'components/shared/CookiePopup';
 import AuthPopupManager from 'components/shared/AuthPopupManager';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
@@ -15,9 +17,14 @@ import Footer from './Footer';
 import * as types from './types';
 import * as styled from './styled';
 
+const mapStateToProps = (store: AppState): types.IStateProps => ({
+  isAuthorized: store.auth.isAuthorized
+});
+
 const mapDispatchToProps: types.IDispatchProps = {
   setIsLoginPopupVisible,
-  setReferral
+  setReferral,
+  setAwaiter
 };
 
 /**
@@ -26,11 +33,27 @@ const mapDispatchToProps: types.IDispatchProps = {
 const LandingPage = (props: types.IProps) => {
   const query = useQuery();
   const referral = query.get('referral');
+  const awaiter = query.get('awaiter');
 
   if (referral) {
-    props.setIsLoginPopupVisible(true);
     props.setReferral(referral);
   }
+
+  if (awaiter) {
+    props.setAwaiter(awaiter);
+  }
+
+  useEffect(() => {
+    // Can be null.
+    if ((referral || awaiter) && props.isAuthorized === false) {
+      props.setIsLoginPopupVisible(true);
+      return;
+    }
+
+    if (awaiter && props.isAuthorized === true) {
+      controlledHistory.push('/review');
+    }
+  }, [props.isAuthorized]);
 
   return (
     <styled.Wrapper>
@@ -47,4 +70,4 @@ const LandingPage = (props: types.IProps) => {
   );
 };
 
-export default connect(null, mapDispatchToProps)(LandingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
