@@ -37,6 +37,8 @@ export type LinkedInProfileDto = IProfileDto;
 
 export type FacebookProfileDto = IProfileDto;
 
+export type NofiyReferralResponseDto = ISimpleActionResponse;
+
 export type PrepareReviewResponseDto = ISimpleActionResponse;
 
 export type PrepareProfileResponseDto = ISimpleActionResponse;

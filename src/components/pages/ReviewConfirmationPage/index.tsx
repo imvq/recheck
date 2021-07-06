@@ -10,14 +10,14 @@ import * as types from './types';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.auth.isAuthorized,
-  currentProfileInfo: store.profile.currentProfileInfo
+  currentProfileInfo: store.profile.currentProfileInfo,
+  referral: store.interaction.referral
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
   unlockPage: setPageUnlocked,
   setIsLoginPopupVisible
 };
-
 const ConfirmationPage = (props: types.IProps) => {
   const { uuid: pageUuid } = useParams<{ uuid: string }>();
 
@@ -34,6 +34,13 @@ const ConfirmationPage = (props: types.IProps) => {
         reviewId: pageUuid
       })
         .then(() => {
+          if (props.referral) {
+            Api.notifyReferral({
+              referralEmail: props.referral,
+              targetName: props.currentProfileInfo.currentName,
+              targetEmail: props.currentProfileInfo.currentEmail
+            });
+          }
           props.unlockPage();
           controlledHistory.replace('/profile');
         })

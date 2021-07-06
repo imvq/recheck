@@ -96,4 +96,9 @@ export default class Api {
     : generalTypes.APIResponse<apiResponses.GetNthReviewLeftResponseDto> {
     return Api.instance.post('/user/get/nth-review-left', targetData);
   }
+
+  public static notifyReferral(notificationData: generalTypes.NotifyReferralDto)
+    : generalTypes.APIResponse<apiResponses.NofiyReferralResponseDto> {
+    return Api.instance.post('/user/notify/new-referral-user', notificationData);
+  }
 }

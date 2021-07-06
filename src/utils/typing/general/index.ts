@@ -79,6 +79,12 @@ export interface ExtendedOptionType extends OptionType {
   logoUrl: string | null;
 }
 
+export interface NotifyReferralDto {
+  referralEmail: string;
+  targetName: string;
+  targetEmail: string;
+}
+
 export interface PrepareProfileDto {
   profileId: string;
   name: string;
