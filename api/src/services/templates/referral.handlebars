@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оставьте отзыв о новом участнике</title>
+
+</head>
+
+<body style="width: 100%;font-size: 16px;height: 100%;">
+  <div class="main-wrapper"
+    style="height: 100%;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+    <div class="logo-wrapper title-wrapper" style="display: flex;align-items: center;margin-bottom: 3rem;width: 50%;">
+      <img src="https://i.imgur.com/QYsGlCK.png" alt="">
+      &nbsp;&nbsp;&nbsp;
+      <span class="text-wrapper text text--enlarged-x2 unselectable"
+        style="display: flex;font-family: sans-serif;user-select: none;font-size: 2rem;">
+        <span class="text--blue" style="color: #4f69ca;">re</span>
+        <span class="text--green" style="color: #33c7ba;">Check</span>
+      </span>
+    </div>
+
+    <div class="content-wrapper" style="width: 50%;">
+      <p class="text text--bold text--enlarged-x1_4 unselectable"
+        style="font-family: sans-serif;user-select: none;font-size: 1.4rem;font-weight: bold;">
+        По вашей ссылке пришёл новый пользователь {{ name }}.
+      </p>
+      <p class="text unselectable" style="font-family: sans-serif;user-select: none;">Теперь вы можете оставить свой
+        отзыв о нём.</p>
+      <div class="top-space-wrapper" style="margin-top: 2rem;">
+        <a draggable="false" class="activator unselectable" href="{{ origin }}/review/{{ email }}"
+          style="user-select: contain;display: flex;justify-content: center;align-items: center;width: fit-content;height: fit-content;text-decoration: none;box-sizing: border-box;padding: .8rem 2rem .8rem 2rem;background-color: #33c7ba;border-radius: .4rem;font-family: sans-serif;font-weight: 600;color: white;">
+          Оставить отзыв
+        </a>
+      </div>
+      <div class="top-space-wrapper" style="margin-top: 2rem;">
+        <p class="text unselectable" style="font-family: sans-serif;user-select: none;">Кнопка не работает? Просто
+          скопируйте ссылку в окно вашего браузера:</p>
+      </div>
+      <div class="top-space-wrapper" style="margin-top: 2rem;">
+        <a class="link-as-content text" href="{{ origin }}/review/{{ email }}"
+          style="font-family: sans-serif;color: #4f82d9;text-decoration: underline;text-decoration-color: #4f82d9;">
+          {{ origin }}/review/{{ email }}
+        </a>
+      </div>
+      <div class="top-space-wrapper" style="margin-top: 2rem;">
+        <p class="text unselectable" style="font-family: sans-serif;user-select: none;">С уважением, команда reCheck.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

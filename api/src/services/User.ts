@@ -168,4 +168,26 @@ export default class UserService {
       )
     };
   }
+
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  public async notifyReferral(bodyData: dto.NotifyReferralDto)
+    : Promise<apiResponses.INotifyReferralResponseDto> {
+    const referral = await UserManager.getUserByEmail(bodyData.referralEmail);
+
+    if (!referral) {
+      throw new Errors.BadRequestError('No referral with such an email.');
+    }
+
+    try {
+      await MailService.sendReferralNotification(
+        bodyData.referralEmail,
+        bodyData.targetName,
+        bodyData.targetEmail
+      );
+    } catch (error) {
+      return { success: false };
+    }
+
+    return { success: true };
+  }
 }

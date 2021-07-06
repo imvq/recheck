@@ -122,4 +122,15 @@ export default class UserController {
     : Promise<apiResponses.ICheckAccessToReviewsAboutUserDto> {
     return this.injectedService.checkAccessToReviewsAboutUser(bodyData);
   }
+
+  /**
+   * Notify referral about new user.
+   */
+  @Path('/notify/new-referral-user')
+  @BodyGuard
+  @POST
+  public async notifyReferral(bodyData: dto.NotifyReferralDto)
+    : Promise<apiResponses.INotifyReferralResponseDto> {
+    return this.injectedService.notifyReferral(bodyData);
+  }
 }

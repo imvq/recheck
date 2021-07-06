@@ -25,6 +25,17 @@ export default class MailService {
     await MailService.sendMail(to, templatesPath, replacements);
   }
 
+  public static async sendReferralNotification(to: string, targetName: string, targetEmail: string)
+    : Promise<void> {
+    const templatesPath = `${__dirname}/templates/referral.handlebars`;
+    const replacements = {
+      origin: process.env.ORIGIN as string,
+      targetName,
+      targetEmail
+    };
+    await MailService.sendMail(to, templatesPath, replacements);
+  }
+
   private static async sendMail(
     destination: string,
     templatesPath: string,
