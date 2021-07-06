@@ -14,6 +14,9 @@ export default class User {
   @orm.PrimaryColumn('varchar', { length: 30 })
   profileId!: string;
 
+  @orm.Column('text', { nullable: true })
+  referral!: string | null;
+
   // Foreign key. Every user belongs to one company.
   @orm.ManyToOne(() => Company, company => company.members)
   company!: Company;

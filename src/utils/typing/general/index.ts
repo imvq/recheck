@@ -97,6 +97,7 @@ export interface PrepareProfileDto {
   position: string;
   workStartMonth: number;
   workStartYear: number;
+  referral: string | null;
 }
 
 export interface PreviousSearchCardData {

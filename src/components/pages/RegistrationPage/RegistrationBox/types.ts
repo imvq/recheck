@@ -7,6 +7,7 @@ export interface IOwnProps {
 export interface IStateProps {
   currentProfileInfo: generalTypes.AppProfileInfo;
   matchedCompanies: generalTypes.CompanyReduced[];
+  referral: string | null;
 }
 
 export interface IDispatchProps {

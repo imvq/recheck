@@ -32,7 +32,8 @@ const years = getNValuesDown(new Date().getFullYear(), 50)
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
-  matchedCompanies: store.search.matchedCompanies
+  matchedCompanies: store.search.matchedCompanies,
+  referral: store.interaction.referral
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -91,7 +92,8 @@ const RegistrationBox = (props: types.IProps) => {
         company,
         position,
         workStartMonth,
-        workStartYear
+        workStartYear,
+        referral: props.referral
       });
     }
   }
