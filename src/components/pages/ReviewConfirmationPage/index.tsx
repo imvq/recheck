@@ -10,8 +10,7 @@ import * as types from './types';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.auth.isAuthorized,
-  currentProfileInfo: store.profile.currentProfileInfo,
-  referral: store.interaction.referral
+  currentProfileInfo: store.profile.currentProfileInfo
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -34,13 +33,6 @@ const ConfirmationPage = (props: types.IProps) => {
         reviewId: pageUuid
       })
         .then(() => {
-          if (props.referral) {
-            Api.notifyReferral({
-              referralEmail: props.referral,
-              targetName: props.currentProfileInfo.currentName,
-              targetEmail: props.currentProfileInfo.currentEmail
-            });
-          }
           props.unlockPage();
           controlledHistory.replace('/profile');
         })

@@ -85,8 +85,6 @@ export interface ILinkedInPhotoDto {
   }
 }
 
-export interface INotifyReferralResponseDto extends ISimpleActionResponse {}
-
 export interface IPrepareReviewResponseDto extends ISimpleActionResponse {}
 
 export interface IPrepareUserResponseDto extends ISimpleActionResponse {}

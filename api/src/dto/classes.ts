@@ -101,14 +101,6 @@ export class GetRecommendationsDto {
   public constructor(public chunk: number) {}
 }
 
-export class NotifyReferralDto {
-  public constructor(
-    public referralEmail: string,
-    public targetName: string,
-    public targetEmail: string,
-  ) {}
-}
-
 export class UserDto {
   public constructor(
     public profileId: string,

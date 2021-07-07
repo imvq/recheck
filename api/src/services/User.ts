@@ -81,6 +81,11 @@ export default class UserService {
     const targetUser = await UserManager.getUser(completionDto.profileId);
     if (targetUser && targetUser.confirmationCode === completionDto.confirmationCode) {
       await UserManager.setUserRegistered(completionDto.profileId);
+
+      if (targetUser.referral) {
+        this.notifyReferral(targetUser.referral, targetUser.name, targetUser.email);
+      }
+
       return { success: true };
     }
 
@@ -169,25 +174,15 @@ export default class UserService {
     };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
-  public async notifyReferral(bodyData: dto.NotifyReferralDto)
-    : Promise<apiResponses.INotifyReferralResponseDto> {
-    const referral = await UserManager.getUserByEmail(bodyData.referralEmail);
-
-    if (!referral) {
-      throw new Errors.BadRequestError('No referral with such an email.');
-    }
-
+  public async notifyReferral(referralEmail: string, targetName: string, targetEmail: string) {
     try {
       await MailService.sendReferralNotification(
-        bodyData.referralEmail,
-        bodyData.targetName,
-        bodyData.targetEmail
+        referralEmail,
+        targetName,
+        targetEmail
       );
     } catch (error) {
-      return { success: false };
+      logger.err(error);
     }
-
-    return { success: true };
   }
 }
