@@ -4,7 +4,17 @@ import nodemailerMailgun from 'nodemailer-mailgun-transport';
 import * as generalTypes from '@typing/general';
 import utils from '@utils';
 
+import AbortController from 'node-abort-controller';
 import TemplatesService from './Templates';
+
+/*
+ * Node.js doesn't have AbortController by default,
+ * and when the request library used by mailgun.js (ky-universal) sees that,
+ * it tries to polyfill it using abort-controller. This module will NOT work
+ * in a Node.js environment, so we have to polyfill it ourselves using node-abort-controller.
+ * https://github.com/mailgun/mailgun-js/issues/101
+ */
+global.AbortController = AbortController;
 
 function getMailTransport() {
   if (process.env.NODE_ENV === 'development') {
@@ -19,9 +29,12 @@ function getMailTransport() {
     });
   }
 
+  console.log(process.env.MAIL_API_KEY);
+  console.log(process.env.MAIL_DOMAIN);
+
   return createTransport(nodemailerMailgun({
     auth: {
-      api_key: process.env.MAIL_API_KEY || '',
+      apiKey: process.env.MAIL_API_KEY || '',
       domain: process.env.MAIL_DOMAIN || ''
     }
   }));
@@ -36,7 +49,11 @@ export default class MailService {
   public static async sendConfirmationMail(to: string, confirmationCode: string): Promise<void> {
     const templatesPath = `${__dirname}/templates/confirmation.handlebars`;
     const replacements = { origin: process.env.ORIGIN as string, uuid: confirmationCode };
-    await MailService.sendMail(to, templatesPath, replacements);
+    try {
+      await MailService.sendMail(to, templatesPath, replacements);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public static async sendReferralNotification(to: string, targetName: string, targetEmail: string)
