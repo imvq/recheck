@@ -5,6 +5,7 @@
   "scripts": {
     "migration:generate": "env-cmd -f .env.production node --require ts-node/register --require module-alias/register ./node_modules/typeorm/cli.js --config src/database/config.ts migration:generate",
     "migration:run": "env-cmd -f .env.production node --require ts-node/register --require module-alias/register ./node_modules/typeorm/cli.js --config src/database/config.ts migration:run",
+    "ecosystem:generate": "node pm2ecosystem.generate.js",
     "prepare-media-dir": "mkdir ./dist/media -p",
     "prepare-templates-dir": "mkdir ./dist/services -p && cp -r src/services/templates dist/services",
     "prepare-dirs": "npm-run-all --parallel prepare-media-dir prepare-templates-dir",
@@ -13,7 +14,7 @@
     "prepare-all": "mkdir ./dist && npm-run-all --parallel prepare-dirs prepare-swagger prepare-pm2",
     "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
     "dev": "env-cmd -f .env.development ts-node src/dev-watch",
-    "build": "mkdir ./dist/media -p && env-cmd -f .env.production tsc",
+    "build": "mkdir ./dist/media -p && npm run ecosystem:generate && env-cmd -f .env.production tsc",
     "start": "node ./dist"
   },
   "_moduleAliases": {
@@ -45,6 +46,7 @@
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
     "chalk": "^4.1.0",
+    "dotenv": "^10.0.0",
     "env-cmd": "^10.1.0",
     "eslint": "^7.15.0",
     "eslint-config-airbnb-base": "^14.2.1",

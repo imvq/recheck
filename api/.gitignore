@@ -25,6 +25,8 @@
 /.env-cmdrc.*
 !/.env-cmdrc.example.*
 
+/ecosystem.config.js
+
 /ormconfig.prod.json
 
 /npm-debug.log*
