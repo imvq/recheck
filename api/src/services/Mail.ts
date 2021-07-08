@@ -29,14 +29,12 @@ function getMailTransport() {
     });
   }
 
-  console.log(process.env.MAIL_API_KEY);
-  console.log(process.env.MAIL_DOMAIN);
-
   return createTransport(nodemailerMailgun({
     auth: {
       apiKey: process.env.MAIL_API_KEY || '',
-      domain: process.env.MAIL_DOMAIN || ''
-    }
+      domain: process.env.MAIL_DOMAIN || '',
+    },
+    host: 'api.eu.mailgun.net'
   }));
 }
 
