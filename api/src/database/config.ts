@@ -14,8 +14,8 @@ const config: ConnectionOptions = {
   database: process.env.DB_NAME as string,
   synchronize: utils.parseBoolean(process.env.DB_SYNC as string),
   logging: utils.parseBoolean(process.env.DB_LOGS as string),
-  entities: ['dist/database/entities/**/*.entity.js'],
-  migrations: ['dist/database/migrations/**/*.js'],
+  entities: [process.env.DB_ENTITIES_LOCATION || ''],
+  migrations: [process.env.DB_MIGRATIONS_LOCATION || ''],
   cli: {
     migrationsDir: 'src/database/migrations'
   }
