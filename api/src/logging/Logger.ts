@@ -11,6 +11,8 @@ import ILogger from './ILogger';
 class Logger implements ILogger {
   private static readonly logfileMode = utils.parseBoolean(process.env.LOGFILE_MODE as string);
 
+  private static readonly loggingEnabled = utils.parseBoolean(process.env.LOGGING as string);
+
   /**
    * Constructor running at first call of statuc methods of the class.
    * If it the first run then it clears the log file,
@@ -29,7 +31,7 @@ class Logger implements ILogger {
    * Log simple message.
    */
   public log(message: string): void {
-    if (process.env.NODE_ENV === 'development') {
+    if (Logger.loggingEnabled) {
       this.print(message, '[LOG]', chalk.yellow);
     }
   }
@@ -38,7 +40,7 @@ class Logger implements ILogger {
    * Log error message.
    */
   public err(message: string): void {
-    if (process.env.NODE_ENV === 'development') {
+    if (Logger.loggingEnabled) {
       this.print(message, '[ERR]', chalk.red);
     }
   }
