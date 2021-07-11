@@ -112,17 +112,24 @@ export function onSuccessFacebook(
     const profileInfo: apiResponses.FacebookProfileDto = {
       profileId: oauthData.userID,
       name: oauthData.name || '',
-      email: oauthData.email || '',
+      email: '',
+      shareableId: '',
       photoUrl: oauthData.picture?.data.url || ''
     };
 
-    onProfileDataRetrieved(
-      setPageLockedCallback,
-      setIsLoginPopupVisibleCallback,
-      setIsAuthorizedCallback,
-      setCurrentProfileInfoCallback,
-      profileInfo
-    );
+    Api.getProfileFacebookReduced(profileInfo.profileId)
+      .then(reducedProfileData => {
+        profileInfo.email = reducedProfileData.data.email;
+        profileInfo.shareableId = reducedProfileData.data.shareableId;
+
+        onProfileDataRetrieved(
+          setPageLockedCallback,
+          setIsLoginPopupVisibleCallback,
+          setIsAuthorizedCallback,
+          setCurrentProfileInfoCallback,
+          profileInfo
+        );
+      }).catch(onError);
   } else {
     onError();
   }

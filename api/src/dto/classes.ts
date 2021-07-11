@@ -120,6 +120,10 @@ export class UserDto {
 
 export class PrepareUserDto extends UserDto {}
 
+export class RetrievePorfileInfoReduced {
+  public constructor(public profileId: string) {}
+}
+
 export class SearchUserDto {
   public constructor(public name: string) {}
 }

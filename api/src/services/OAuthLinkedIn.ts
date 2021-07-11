@@ -9,7 +9,7 @@ import * as apiResponses from '@typing/apiResponses';
 import dto from '@dto';
 import utils from '@utils';
 import logger from '@logging/Logger';
-import { getSavedUserEmail } from './common';
+import UserManager from '@database/managers/UserManager';
 
 /**
  * Service in charge of LinkedIn OAuth.
@@ -53,12 +53,15 @@ export default class LinkedInOAuthService {
         photo.profilePicture['displayImage~'].elements.length - 1
       ];
 
-      const savedUserEmail = await getSavedUserEmail(profile.id);
+      const savedUser = await UserManager.getUser(profile.id);
+      const savedUserEmail = savedUser?.email;
+      const savedUserShareableId = savedUser?.shareableId;
 
       return {
         profileId: profile.id,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
         email: savedUserEmail,
+        shareableId: savedUserShareableId,
         photoUrl: `${highestQualityPicture.identifiers[0].identifier}`
       };
     } catch (error) {

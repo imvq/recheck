@@ -5,6 +5,7 @@ const initialState: ProfileState = {
     currentId: '',
     currentName: '',
     currentEmail: '',
+    currentShareableId: '',
     currentPhotoUrl: ''
   }
 };

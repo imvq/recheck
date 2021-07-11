@@ -9,7 +9,8 @@ export type IGetNthReviewResponseDto = IReviewCardCommonData;
 export interface IProfileDto {
   profileId: string;
   name: string;
-  email: string;
+  email?: string;
+  shareableId?: string;
   photoUrl: string;
 }
 

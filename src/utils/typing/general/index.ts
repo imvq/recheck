@@ -9,6 +9,7 @@ export interface AppProfileInfo {
   currentId: string;
   currentName: string;
   currentEmail: string;
+  currentShareableId: string;
   currentPhotoUrl: string;
 }
 

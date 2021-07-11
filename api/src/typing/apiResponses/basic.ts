@@ -27,6 +27,7 @@ export interface IGetNthReviewResponseDto {
 
 export interface IRetrieveProfileInfoResponseDto {
   profileId: string;
+  shareableId?: string;
   name: string;
   email?: string;
   photoUrl: string;

@@ -91,6 +91,11 @@ export interface IPrepareUserResponseDto extends ISimpleActionResponse {}
 
 export interface IRetrieveFacebookProfileInfoResponseDto extends IRetrieveProfileInfoResponseDto {}
 
+export interface IRetrieveFacebookProfileOnfoReducedResponseDto {
+  email?: string;
+  shareableId?: string;
+}
+
 export interface IRetrieveLinkedInProfileInfoResponseDto extends IRetrieveProfileInfoResponseDto {}
 
 export interface ISearchUserResponseDto {
