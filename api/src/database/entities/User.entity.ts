@@ -14,6 +14,11 @@ export default class User {
   @orm.PrimaryColumn('varchar', { length: 30 })
   profileId!: string;
 
+  @orm.Index({ unique: true })
+  @orm.Column()
+  @orm.Generated('uuid')
+  shareableId!: string;
+
   @orm.Column('text', { nullable: true })
   referral!: string | null;
 
@@ -34,6 +39,7 @@ export default class User {
   @orm.JoinTable()
   availableUsers!: User[];
 
+  // The filed is supposed to be generated manually.
   @orm.Column('varchar', { length: 36, nullable: true })
   @orm.Index()
   confirmationCode!: utilityTypes.Nullable<string>;

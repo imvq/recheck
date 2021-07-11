@@ -55,7 +55,8 @@ export default class UserService {
   }
 
   @utils.dbErrorDefaultReactor({ except: [], logger })
-  private async saveUser(profileDto: dto.PrepareUserDto, confirmationCode: string): Promise<void> {
+  private async saveUser(profileDto: dto.PrepareUserDto, confirmationCode: string)
+    : Promise<void> {
     const company = await this.prepareCompany(profileDto.company);
     await UserManager.createUser(profileDto, company, confirmationCode);
   }
