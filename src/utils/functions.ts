@@ -68,8 +68,8 @@ export function mapProfileDtoToState(profileDto: ProfileDto): generalTypes.AppPr
   return {
     currentId: profileDto.profileId,
     currentName: profileDto.name,
-    currentEmail: profileDto.email,
-    currentShareableId: profileDto.shareableId,
+    currentEmail: profileDto.email || '',
+    currentShareableId: profileDto.shareableId || '',
     currentPhotoUrl: profileDto.photoUrl
   };
 }
