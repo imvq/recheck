@@ -7,6 +7,7 @@ export interface IStateProps {
 
 export interface IDispatchProps {
   createReview(reviewData: generalTypes.ReviewData): void;
+  unlockPage(): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

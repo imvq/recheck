@@ -71,7 +71,12 @@ const BoxStepInitial = (props: types.IProps) => {
         <styled.InputDescriptionWrapper>
           <styled.InputDescription>Имя</styled.InputDescription>
         </styled.InputDescriptionWrapper>
-        <styled.Input type='text' onChange={firstNameHandler} />
+        <styled.Input
+          type='text'
+          onChange={firstNameHandler}
+          defaultValue={props.targetName}
+          disabled={!!props.targetName}
+        />
       </styled.InputGroupWrapper>
 
       <styled.InputGroupWrapper>

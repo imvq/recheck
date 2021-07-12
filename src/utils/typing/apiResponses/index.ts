@@ -17,6 +17,10 @@ export interface ExchangeLinkedInCodeResposneDto {
   'li_at': string;
 }
 
+export interface GetConnectedUserDataResponseDto {
+  name: string;
+}
+
 export interface GetMatchedCompaniesDto {
   results: genearalTypes.CompanyReduced[];
 }

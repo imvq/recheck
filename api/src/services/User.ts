@@ -188,4 +188,25 @@ export default class UserService {
       logger.log(`${referralSharedId} not found in the database.`);
     }
   }
+
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  public async getConnectedUserData(bodyData: dto.GetConnectedUserData)
+    : Promise<apiResponses.IGetConnectedUserDataResponseDto> {
+    const asker = await UserManager.getUser(bodyData.askerProfileId, ['company']);
+    const target = await UserManager.getUserBySharedId(bodyData.targetShareableId, ['company']);
+
+    if (!asker) {
+      throw new Errors.BadRequestError('No user with such an profile ID.');
+    }
+
+    if (!target) {
+      throw new Errors.BadRequestError('No user with such an shareable ID.');
+    }
+
+    if (asker.company.id !== target.company.id) {
+      throw new Errors.BadRequestError('Users\' companies does not match');
+    }
+
+    return { name: target.name };
+  }
 }

@@ -71,6 +71,13 @@ export class CreateCompanyDto {
   ) {}
 }
 
+export class GetConnectedUserData {
+  public constructor(
+    public askerProfileId: string,
+    public targetShareableId: string
+  ) {}
+}
+
 export class GetMatchedCompaniesDto {
   public constructor(public sequence: string) {}
 }

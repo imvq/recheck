@@ -67,6 +67,11 @@ export default class Api {
     return Api.instance.post('/facebook/oauth/retrieve-reduced', { profileId });
   }
 
+  public static getConnectedUserData(connectionData: generalTypes.GetConnectedUserDataDto)
+    : generalTypes.APIResponse<apiResponses.GetConnectedUserDataResponseDto> {
+    return Api.instance.post('/user/get/connected-user-data', connectionData);
+  }
+
   public static prepareProfile(profileInfoDto: generalTypes.PrepareProfileDto)
     : generalTypes.APIResponse<apiResponses.PrepareProfileResponseDto> {
     return Api.instance.post('/user/prepare', profileInfoDto);

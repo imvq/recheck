@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import { AppState, createReview } from 'store';
+import Api from 'utils/api';
+import controlledHistory from 'utils/routing';
+import { AppState, createReview, setPageUnlocked } from 'store';
 import BoxStepInitial from './BoxStepInitial';
 import BoxStepFinal from './BoxStepFinal';
 
@@ -21,7 +24,8 @@ const mapSateToProps = (store: AppState): types.IStateProps => ({
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  createReview
+  createReview,
+  unlockPage: setPageUnlocked
 };
 
 const BoxStepA = CommentBoxSimple(
@@ -78,7 +82,29 @@ const BoxStepJ = CommentBoxSimple(
  * Page in charge of adding a review.
  */
 const ReviewPage = (props: types.IProps) => {
+  const { targetShareableId } = useParams<{ targetShareableId?: string }>();
   const [step, setStep] = useState(0);
+  const [targetName, setTargetName] = useState<string>();
+
+  useEffect(() => {
+    // Do nothing until we get our user's profile data.
+    if (props.currentProfileInfo.currentId === '') {
+      return;
+    }
+
+    // Retrive target's name if we arrived here through a targeted link.
+    if (targetShareableId) {
+      Api.getConnectedUserData({
+        askerProfileId: props.currentProfileInfo.currentId,
+        targetShareableId
+      })
+        .then(connectionData => setTargetName(connectionData.data.name))
+        .catch(() => controlledHistory.push('/profile'))
+        .finally(() => props.unlockPage());
+    } else {
+      props.unlockPage();
+    }
+  }, [props.currentProfileInfo]);
 
   const proceed = () => setStep(step + 1);
   const comeback = () => setStep(step - 1);
@@ -88,7 +114,7 @@ const ReviewPage = (props: types.IProps) => {
   });
 
   const boxes = [
-    <BoxStepInitial onNextStep={proceed} />,
+    <BoxStepInitial targetName={targetName} onNextStep={proceed} />,
     <BoxStepA page={2} onNextStep={proceed} onBack={comeback}>
       Какие задачи выполнял кандидат?
     </BoxStepA>,

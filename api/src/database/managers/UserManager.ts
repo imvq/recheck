@@ -31,14 +31,14 @@ export default class UserManager {
     UserManager.repo?.save({ profileId, confirmationCode: null });
   }
 
-  public static async getUser(profileId: string)
+  public static async getUser(profileId: string, relations?: string[])
     : Promise<utilityTypes.Optional<User>> {
-    return UserManager.repo?.findOne(profileId);
+    return UserManager.repo?.findOne(profileId, { relations });
   }
 
-  public static async getUserBySharedId(id: string)
+  public static async getUserBySharedId(id: string, relations?: string[])
     : Promise<utilityTypes.Optional<User>> {
-    return UserManager.repo?.findOne({ shareableId: id });
+    return UserManager.repo?.findOne({ shareableId: id }, { relations });
   }
 
   public static async getUserWithReviewsGot(profileId: string)

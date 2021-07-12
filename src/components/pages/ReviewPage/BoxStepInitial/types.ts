@@ -1,5 +1,9 @@
 import { IProps as IPropsBase } from '../../../shared/BoxBase/types';
 
+export interface IOwnProps {
+  targetName?: string;
+}
+
 export interface IStateProps {
   firstName: string;
   lastName: string;
@@ -14,4 +18,4 @@ export interface IDispatchProps {
   setBounds(value: string): void;
 }
 
-export type IProps = IPropsBase & IStateProps & IDispatchProps;
+export type IProps = IPropsBase & IOwnProps & IStateProps & IDispatchProps;

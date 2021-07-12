@@ -122,4 +122,16 @@ export default class UserController {
     : Promise<apiResponses.ICheckAccessToReviewsAboutUserDto> {
     return this.injectedService.checkAccessToReviewsAboutUser(bodyData);
   }
+
+  /**
+   * Exchange user's name by its shareable ID.
+   * The user must be connected through its company to the asker.
+   */
+  @Path('/get/connected-user-data')
+  @BodyGuard
+  @POST
+  public async getConnectedUserData(bodyData: dto.GetConnectedUserData)
+    : Promise<apiResponses.IGetConnectedUserDataResponseDto> {
+    return this.injectedService.getConnectedUserData(bodyData);
+  }
 }

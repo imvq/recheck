@@ -53,6 +53,11 @@ export interface DemoReviewCardData {
 
 export type InputEvent = ChangeEvent<HTMLInputElement>;
 
+export interface GetConnectedUserDataDto {
+  askerProfileId: string;
+  targetShareableId: string;
+}
+
 export interface GetNReviewsGotDto {
   profileId: string;
 }
