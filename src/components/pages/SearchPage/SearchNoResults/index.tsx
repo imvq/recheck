@@ -9,11 +9,11 @@ import * as types from './types';
 import * as styled from '../styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentEmail: store.profile.currentProfileInfo.currentEmail
+  currentShareableId: store.profile.currentProfileInfo.currentShareableId
 });
 
-function copyLink(email: string) {
-  navigator.clipboard.writeText(`${window.location.origin}?referral=${email}`);
+function copyLink(link: string) {
+  navigator.clipboard.writeText(`${window.location.origin}?referral=${link}`);
 }
 
 const SearchNoResults = (props: types.IProps) => {
@@ -31,7 +31,7 @@ const SearchNoResults = (props: types.IProps) => {
             <CustomButton
               onClick={() => {
                 showCopyingToast();
-                copyLink(props.currentEmail);
+                copyLink(props.currentShareableId);
               }}
               fontSize='1.3rem'
             >

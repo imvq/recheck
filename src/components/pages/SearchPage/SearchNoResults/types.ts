@@ -3,7 +3,7 @@ export interface IOwnProps {
 }
 
 export interface IStateProps {
-  currentEmail: string;
+  currentShareableId: string;
 }
 
 export type IProps = IOwnProps & IStateProps;

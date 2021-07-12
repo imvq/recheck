@@ -175,15 +175,17 @@ export default class UserService {
     };
   }
 
-  public async notifyReferral(referralEmail: string, targetName: string, targetEmail: string) {
-    try {
+  public async notifyReferral(referralSharedId: string, targetName: string, targetEmail: string) {
+    const referral = await UserManager.getUserBySharedId(referralSharedId);
+
+    if (referral) {
       await MailService.sendReferralNotification(
-        referralEmail,
+        referral.email,
         targetName,
         targetEmail
       );
-    } catch (error) {
-      logger.err(error);
+    } else {
+      logger.log(`${referralSharedId} not found in the database.`);
     }
   }
 }

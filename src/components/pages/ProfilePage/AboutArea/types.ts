@@ -2,7 +2,7 @@ import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
   currentPorfileId: string;
-  currentEmail: string;
+  currentShareableId: string;
   isLoading: boolean;
   reviewsGotChunksAmount: number;
   currentReviewCardData: generalTypes.ReviewCardGotData | null;

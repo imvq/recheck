@@ -36,9 +36,9 @@ export default class UserManager {
     return UserManager.repo?.findOne(profileId);
   }
 
-  public static async getUserByEmail(email: string)
+  public static async getUserBySharedId(id: string)
     : Promise<utilityTypes.Optional<User>> {
-    return UserManager.repo?.findOne({ email });
+    return UserManager.repo?.findOne({ shareableId: id });
   }
 
   public static async getUserWithReviewsGot(profileId: string)

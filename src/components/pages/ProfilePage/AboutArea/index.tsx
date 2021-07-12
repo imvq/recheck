@@ -13,7 +13,7 @@ import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentPorfileId: store.profile.currentProfileInfo.currentId,
-  currentEmail: store.profile.currentProfileInfo.currentEmail,
+  currentShareableId: store.profile.currentProfileInfo.currentShareableId,
   isLoading: store.interaction.isProfileAboutTabLoading,
   reviewsGotChunksAmount: store.interaction.reviewsGotChunksAmount,
   currentReviewCardData: store.interaction.currentReviewGot
@@ -24,8 +24,8 @@ const mapDispatchToProps: types.IDispatchProps = {
   loadNthReview: loadNthReviewGot
 };
 
-function copyLink(email: string) {
-  navigator.clipboard.writeText(`${window.location.origin}?awaiter=${email}`);
+function copyLink(awaiterId: string) {
+  navigator.clipboard.writeText(`${window.location.origin}?awaiter=${awaiterId}`);
 }
 
 /**
@@ -54,7 +54,7 @@ const AboutArea = (props: types.IProps) => {
       <styled.ButtonWrapper>
         <CustomButton onClick={() => {
           showCopyingToast();
-          copyLink(props.currentEmail);
+          copyLink(props.currentShareableId);
         }}
         >
           Копировать ссылку
