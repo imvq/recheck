@@ -7,6 +7,6 @@ import * as styled from './styled';
  */
 export default () => (
   <styled.Wrapper>
-    <ProfileMenuBadge />
+    <ProfileMenuBadge isProfilePageAvailable />
   </styled.Wrapper>
 );
