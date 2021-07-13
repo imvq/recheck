@@ -37,10 +37,6 @@ export interface IFacebookBasicProfileDto {
   picture: { data: { url: string; } };
 }
 
-export interface IGetConnectedUserDataResponseDto {
-  name: string;
-}
-
 export interface IGetMatchedCompanies {
   results: {
     id: number;
@@ -74,6 +70,8 @@ export interface IHealthResponseDTO {
   message: string;
   version: string;
 }
+
+export interface IIsTargetConnectedResponsDto extends ISimpleActionResponse {}
 
 export interface ILinkedInBasicProfileDto {
   id: string;

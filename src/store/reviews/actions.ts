@@ -5,7 +5,6 @@ import * as generalTypes from 'utils/typing/general';
 import { AppActionType } from '../types';
 import {
   ReviewActionType,
-  CLEAR_INITIAL_DATA,
   CLEAR_TASKS,
   CLEAR_STRENGTHS,
   CLEAR_IMPROVEMENTS,
@@ -17,10 +16,7 @@ import {
   CLEAR_LEADERSHIP_DATA,
   CLEAR_ADVICE_DATA,
   CLEAR_RECOMMENDERS_DATA,
-  SET_FIRST_NAME,
-  SET_LAST_NAME,
-  SET_COMPANY,
-  SET_BOUNDS,
+  SET_TARGET_SHAREABLE_ID,
   SET_TASKS,
   SET_STRENGTHS,
   SET_IMPROVEMENTS,
@@ -40,10 +36,6 @@ import {
   SET_RECOMMENDER_LINK2,
   SET_RECOMMENDER_LINK3
 } from './types';
-
-export const clearInitialData = (): ReviewActionType => ({
-  type: CLEAR_INITIAL_DATA
-});
 
 export const clearTasks = (): ReviewActionType => ({
   type: CLEAR_TASKS
@@ -89,23 +81,8 @@ export const clearRecommendersData = (): ReviewActionType => ({
   type: CLEAR_RECOMMENDERS_DATA
 });
 
-export const setReviewFirstName = (payload: string): ReviewActionType => ({
-  type: SET_FIRST_NAME,
-  payload
-});
-
-export const setReviewLastName = (payload: string): ReviewActionType => ({
-  type: SET_LAST_NAME,
-  payload
-});
-
-export const setReviewCompany = (payload: string): ReviewActionType => ({
-  type: SET_COMPANY,
-  payload
-});
-
-export const setReviewBounds = (payload: string): ReviewActionType => ({
-  type: SET_BOUNDS,
+export const setTargetShareableId = (payload: string): ReviewActionType => ({
+  type: SET_TARGET_SHAREABLE_ID,
   payload
 });
 
@@ -203,7 +180,6 @@ export const createReview = (reviewData: generalTypes.ReviewData) => (
   dispatch: Dispatch<AppActionType>
 ) => {
   Api.prepareReview({ ...reviewData });
-  dispatch(clearInitialData());
   dispatch(clearTasks());
   dispatch(clearImprovements());
   dispatch(clearStrengths());

@@ -1,7 +1,6 @@
 import {
   ReviewState,
   ReviewActionType,
-  CLEAR_INITIAL_DATA,
   CLEAR_TASKS,
   CLEAR_STRENGTHS,
   CLEAR_IMPROVEMENTS,
@@ -13,10 +12,7 @@ import {
   CLEAR_LEADERSHIP_DATA,
   CLEAR_ADVICE_DATA,
   CLEAR_RECOMMENDERS_DATA,
-  SET_FIRST_NAME,
-  SET_LAST_NAME,
-  SET_COMPANY,
-  SET_BOUNDS,
+  SET_TARGET_SHAREABLE_ID,
   SET_TASKS,
   SET_STRENGTHS,
   SET_IMPROVEMENTS,
@@ -38,10 +34,7 @@ import {
 } from './types';
 
 const initialState: ReviewState = {
-  targetFirstName: '',
-  targetLastName: '',
-  workplace: '',
-  bounds: '',
+  targetShareableId: '',
   tasks: '',
   strengths: '',
   improvements: '',
@@ -67,14 +60,6 @@ export const reviewsReducer = (
   action: ReviewActionType
 ): ReviewState => {
   switch (action.type) {
-    case CLEAR_INITIAL_DATA:
-      return {
-        ...state,
-        targetFirstName: initialState.targetFirstName,
-        targetLastName: initialState.targetLastName,
-        workplace: initialState.workplace,
-        bounds: initialState.bounds
-      };
     case CLEAR_TASKS:
       return {
         ...state,
@@ -137,25 +122,10 @@ export const reviewsReducer = (
         recommenderLink2: initialState.recommenderLink2,
         recommenderLink3: initialState.recommenderLink3,
       };
-    case SET_FIRST_NAME:
+    case SET_TARGET_SHAREABLE_ID:
       return {
         ...state,
-        targetFirstName: action.payload
-      };
-    case SET_LAST_NAME:
-      return {
-        ...state,
-        targetLastName: action.payload
-      };
-    case SET_COMPANY:
-      return {
-        ...state,
-        workplace: action.payload
-      };
-    case SET_BOUNDS:
-      return {
-        ...state,
-        bounds: action.payload
+        targetShareableId: action.payload
       };
     case SET_TASKS:
       return {

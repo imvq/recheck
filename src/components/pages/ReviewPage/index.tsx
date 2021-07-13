@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
-import { AppState, createReview, setPageUnlocked } from 'store';
-import BoxStepInitial from './BoxStepInitial';
+import { AppState, createReview, setPageUnlocked, setTargetShareableId } from 'store';
 import BoxStepFinal from './BoxStepFinal';
 
 import CommentBoxSimple from './CommentBoxSimple';
@@ -25,6 +24,7 @@ const mapSateToProps = (store: AppState): types.IStateProps => ({
 
 const mapDispatchToProps: types.IDispatchProps = {
   createReview,
+  setTargetShareableId,
   unlockPage: setPageUnlocked
 };
 
@@ -84,7 +84,6 @@ const BoxStepJ = CommentBoxSimple(
 const ReviewPage = (props: types.IProps) => {
   const { targetShareableId } = useParams<{ targetShareableId?: string }>();
   const [step, setStep] = useState(0);
-  const [targetName, setTargetName] = useState<string>();
 
   useEffect(() => {
     // Do nothing until we get our user's profile data.
@@ -92,13 +91,20 @@ const ReviewPage = (props: types.IProps) => {
       return;
     }
 
-    // Retrive target's name if we arrived here through a targeted link.
+    // Check if the target exists and is connected to the asker.
+    // If not then forward to the profile page.
     if (targetShareableId) {
-      Api.getConnectedUserData({
+      props.setTargetShareableId(targetShareableId);
+
+      Api.checkIsTargetConnected({
         askerProfileId: props.currentProfileInfo.currentId,
         targetShareableId
       })
-        .then(connectionData => setTargetName(connectionData.data.name))
+        .then(connectionData => {
+          if (!connectionData.data.success) {
+            controlledHistory.push('/profile');
+          }
+        })
         .catch(() => controlledHistory.push('/profile'))
         .finally(() => props.unlockPage());
     } else {
@@ -114,7 +120,6 @@ const ReviewPage = (props: types.IProps) => {
   });
 
   const boxes = [
-    <BoxStepInitial targetName={targetName} onNextStep={proceed} />,
     <BoxStepA page={2} onNextStep={proceed} onBack={comeback}>
       Какие задачи выполнял кандидат?
     </BoxStepA>,

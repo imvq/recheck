@@ -25,6 +25,11 @@ export default class Api {
     return Api.instance.post('/user/is-confirmed', { profileId });
   }
 
+  public static checkIsTargetConnected(connectionData: generalTypes.GetConnectedUserDataDto)
+    : generalTypes.APIResponse<apiResponses.IsTargetConnectedResponseDto> {
+    return Api.instance.post('/user/target/is-connected', connectionData);
+  }
+
   public static getMatchedCompanies(sequence: string)
     : generalTypes.APIResponse<apiResponses.GetMatchedCompaniesDto> {
     return Api.instance.post('/companies/find-matched', { sequence });
@@ -65,11 +70,6 @@ export default class Api {
   public static getProfileFacebookReduced(profileId: string)
     : generalTypes.APIResponse<apiResponses.FacebookProfileReducedDto> {
     return Api.instance.post('/facebook/oauth/retrieve-reduced', { profileId });
-  }
-
-  public static getConnectedUserData(connectionData: generalTypes.GetConnectedUserDataDto)
-    : generalTypes.APIResponse<apiResponses.GetConnectedUserDataResponseDto> {
-    return Api.instance.post('/user/get/connected-user-data', connectionData);
   }
 
   public static prepareProfile(profileInfoDto: generalTypes.PrepareProfileDto)

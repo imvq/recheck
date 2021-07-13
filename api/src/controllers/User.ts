@@ -14,6 +14,18 @@ export default class UserController {
   public constructor(@Inject private readonly injectedService: UserService) {}
 
   /**
+   * Check if a user with provided shareable ID exists
+   * and is connected to asker through teh company.
+   */
+  @Path('/target/is-present')
+  @BodyGuard
+  @POST
+  public async isTargetConnected(bodyData: dto.IsTargetConnectedDto)
+    : Promise<apiResponses.IIsTargetConnectedResponsDto> {
+    return this.injectedService.isTargetConnected(bodyData);
+  }
+
+  /**
    * Check if the user is registered in the app.
    */
   @Path('/is-registered')
@@ -121,17 +133,5 @@ export default class UserController {
   public async checkAccessToReviewsAboutUser(bodyData: dto.CheckAccessToReviewsAboutUserDto)
     : Promise<apiResponses.ICheckAccessToReviewsAboutUserDto> {
     return this.injectedService.checkAccessToReviewsAboutUser(bodyData);
-  }
-
-  /**
-   * Exchange user's name by its shareable ID.
-   * The user must be connected through its company to the asker.
-   */
-  @Path('/get/connected-user-data')
-  @BodyGuard
-  @POST
-  public async getConnectedUserData(bodyData: dto.GetConnectedUserData)
-    : Promise<apiResponses.IGetConnectedUserDataResponseDto> {
-    return this.injectedService.getConnectedUserData(bodyData);
   }
 }

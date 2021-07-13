@@ -1,6 +1,5 @@
 import * as generalTypes from 'utils/typing/general';
 
-export const CLEAR_INITIAL_DATA = 'CLEAR_INITIAL_DATA';
 export const CLEAR_TASKS = 'CLEAR_TASKS';
 export const CLEAR_STRENGTHS = 'CLEAR_STRENGTHS';
 export const CLEAR_IMPROVEMENTS = 'CLEAR_IMPROVEMENTS';
@@ -12,10 +11,7 @@ export const CLEAR_QUALITY_DATA = 'CLEAR_QUALITY_DATA';
 export const CLEAR_LEADERSHIP_DATA = 'CLEAR_LEADERSHIP_DATA';
 export const CLEAR_ADVICE_DATA = 'CLEAR_ADVICE_DATA';
 export const CLEAR_RECOMMENDERS_DATA = 'CLEAR_RECOMMENDERS_DATA';
-export const SET_FIRST_NAME = 'SET_FIRST_NAME';
-export const SET_LAST_NAME = 'SET_LAST_NAME';
-export const SET_COMPANY = 'SET_COMPANY';
-export const SET_BOUNDS = 'SET_BOUNDS';
+export const SET_TARGET_SHAREABLE_ID = 'SET_TARGET_SHAREABLE_ID';
 export const SET_TASKS = 'SET_TASKS';
 export const SET_STRENGTHS = 'SET_STRENGTHS';
 export const SET_IMPROVEMENTS = 'SET_IMPROVEMENTS';
@@ -36,10 +32,6 @@ export const SET_RECOMMENDER_LINK2 = 'SET_RECOMMENDER_LINK2';
 export const SET_RECOMMENDER_LINK3 = 'SET_RECOMMENDER_LINK3';
 
 export type ReviewState = Omit<generalTypes.ReviewData, 'authorId'>;
-
-export interface ClearInitialData {
-  type: typeof CLEAR_INITIAL_DATA;
-}
 
 export interface ClearTasks {
   type: typeof CLEAR_TASKS;
@@ -85,23 +77,8 @@ export interface ClearAdviceData {
   type: typeof CLEAR_ADVICE_DATA;
 }
 
-export interface SetFirstName {
-  type: typeof SET_FIRST_NAME;
-  payload: string;
-}
-
-export interface SetLastName {
-  type: typeof SET_LAST_NAME;
-  payload: string;
-}
-
-export interface SetCompany {
-  type: typeof SET_COMPANY;
-  payload: string;
-}
-
-export interface SetBounds {
-  type: typeof SET_BOUNDS;
+export interface SetTargetShareableId {
+  type: typeof SET_TARGET_SHAREABLE_ID;
   payload: string;
 }
 
@@ -195,7 +172,7 @@ export interface SetRecommenderLink3 {
   payload: string;
 }
 
-export type ReviewActionType = ClearInitialData
+export type ReviewActionType =
   | ClearTasks
   | ClearStrengths
   | ClearImprovements
@@ -207,10 +184,7 @@ export type ReviewActionType = ClearInitialData
   | ClearLeadershipData
   | ClearAdviceData
   | ClearRecommendersData
-  | SetFirstName
-  | SetLastName
-  | SetCompany
-  | SetBounds
+  | SetTargetShareableId
   | SetTasks
   | SetStrengths
   | SetImprovements

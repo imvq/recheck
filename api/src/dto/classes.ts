@@ -71,13 +71,6 @@ export class CreateCompanyDto {
   ) {}
 }
 
-export class GetConnectedUserData {
-  public constructor(
-    public askerProfileId: string,
-    public targetShareableId: string
-  ) {}
-}
-
 export class GetMatchedCompaniesDto {
   public constructor(public sequence: string) {}
 }
@@ -106,6 +99,13 @@ export class GetNthReviewLeftDto {
 
 export class GetRecommendationsDto {
   public constructor(public chunk: number) {}
+}
+
+export class IsTargetConnectedDto {
+  public constructor(
+    public askerProfileId: string,
+    public targetShareableId: string
+  ) {}
 }
 
 export class UserDto {

@@ -130,10 +130,7 @@ export interface ReviewCardDataFull {
 
 export interface ReviewData {
   authorId: string;
-  targetFirstName: string;
-  targetLastName: string;
-  workplace: string;
-  bounds: string;
+  targetShareableId: string;
   tasks: string;
   strengths: string;
   improvements: string;

@@ -7,6 +7,7 @@ export interface IStateProps {
 
 export interface IDispatchProps {
   createReview(reviewData: generalTypes.ReviewData): void;
+  setTargetShareableId(id: string): void;
   unlockPage(): void;
 }
 

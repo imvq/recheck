@@ -19,6 +19,19 @@ import MailService from './Mail';
  */
 export default class UserService {
   @utils.dbErrorDefaultReactor({ except: [], logger })
+  public async isTargetConnected(bodyData: dto.IsTargetConnectedDto)
+    : Promise<apiResponses.IIsTargetConnectedResponsDto> {
+    const asker = await UserManager.getUser(bodyData.askerProfileId);
+    const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
+
+    if (!target || target.company.id !== asker?.company.id) {
+      return { success: false };
+    }
+
+    return { success: true };
+  }
+
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   public async checkIsUserRegistered(profileIdDto: dto.CheckIsUserRegisteredDto)
     : Promise<apiResponses.ICheckIsUserRegisteredResponseDto> {
     return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
@@ -145,7 +158,6 @@ export default class UserService {
       activityComment: review.activityComment,
       activityMark: review.activityMark,
       adviceComment: review.adviceComment,
-      bounds: review.bounds,
       improvements: review.improvements,
       leadershipComment: review.leadershipComment,
       leadershipMark: review.leadershipMark,
@@ -159,9 +171,7 @@ export default class UserService {
       strengths: review.strengths,
       targetName: review.target.name,
       targetPhotoUrl: review.target.photoUrl,
-      targetPredefinedName: review.targetPredefinedName,
       tasks: review.tasks,
-      workplace: review.workplace,
     };
   }
 
@@ -187,26 +197,5 @@ export default class UserService {
     } else {
       logger.log(`${referralSharedId} not found in the database.`);
     }
-  }
-
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
-  public async getConnectedUserData(bodyData: dto.GetConnectedUserData)
-    : Promise<apiResponses.IGetConnectedUserDataResponseDto> {
-    const asker = await UserManager.getUser(bodyData.askerProfileId, ['company']);
-    const target = await UserManager.getUserBySharedId(bodyData.targetShareableId, ['company']);
-
-    if (!asker) {
-      throw new Errors.BadRequestError('No user with such an profile ID.');
-    }
-
-    if (!target) {
-      throw new Errors.BadRequestError('No user with such an shareable ID.');
-    }
-
-    if (asker.company.id !== target.company.id) {
-      throw new Errors.BadRequestError('Users\' companies does not match');
-    }
-
-    return { name: target.name };
   }
 }
