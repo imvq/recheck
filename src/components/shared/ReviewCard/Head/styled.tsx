@@ -31,18 +31,6 @@ export const MenuContent = styled.div<{ showTarget?: boolean; }>`
   padding-bottom: 2rem;
 `;
 
-export const MenuContentSpansWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem 0;
-`;
-
-export const MenuContentSpan = styled.span<{ dimmed?: boolean; }>`
-  font-size: 1.3rem;
-  line-height: 2rem;
-  color: ${props => (props.dimmed ? '#979797' : 'black')};
-`;
-
 export const TopBar = styled.div`
   background-color: #f0f3ff;
   display: flex;

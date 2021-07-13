@@ -21,8 +21,8 @@ export default class UserService {
   @utils.dbErrorDefaultReactor({ except: [], logger })
   public async isTargetConnected(bodyData: dto.IsTargetConnectedDto)
     : Promise<apiResponses.IIsTargetConnectedResponsDto> {
-    const asker = await UserManager.getUser(bodyData.askerProfileId);
-    const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
+    const asker = await UserManager.getUser(bodyData.askerProfileId, ['company']);
+    const target = await UserManager.getUserBySharedId(bodyData.targetShareableId, ['company']);
 
     if (!target || target.company.id !== asker?.company.id) {
       return { success: false };
@@ -155,23 +155,12 @@ export default class UserService {
   private mapReviewToReducedReview(review: Review)
     : apiResponses.IGetNthReviewLeftResponseDto {
     return {
-      activityComment: review.activityComment,
-      activityMark: review.activityMark,
-      adviceComment: review.adviceComment,
-      improvements: review.improvements,
-      leadershipComment: review.leadershipComment,
-      leadershipMark: review.leadershipMark,
-      levelComment: review.leadershipComment,
-      levelMark: review.levelMark,
-      ownHireOpinionComment: review.ownHireOpinionComment,
-      ownHireOpinionMark: review.ownHireOpinionMark,
-      qualityComment: review.qualityComment,
-      qualityMark: review.qualityMark,
-      results: review.results,
-      strengths: review.strengths,
-      targetName: review.target.name,
-      targetPhotoUrl: review.target.photoUrl,
       tasks: review.tasks,
+      strengths: review.strengths,
+      recommendation: review.recommendation,
+      recommendationMark: review.recommendationMark,
+      targetName: review.target.name,
+      targetPhotoUrl: review.target.photoUrl
     };
   }
 

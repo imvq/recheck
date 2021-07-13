@@ -25,15 +25,4 @@ export default class ReviewController {
     : Promise<apiResponses.IPrepareReviewResponseDto> {
     return this.injectedService.prepareReview(reviewDto);
   }
-
-  /**
-   * Specify review's target.
-   */
-  @Path('/bind-target')
-  @BodyGuard
-  @POST
-  public async bindReviewTarget(targetDto: dto.BindReviewTargetDto)
-    : Promise<apiResponses.IBindReviewTargetResponseDto> {
-    return this.injectedService.bindReviewTarget(targetDto);
-  }
 }

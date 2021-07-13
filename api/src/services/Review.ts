@@ -19,15 +19,4 @@ export default class ReviewService {
       throw new Errors.InternalServerError('Internal database error.');
     }
   }
-
-  public async bindReviewTarget(targetData: dto.BindReviewTargetDto)
-    : Promise<apiResponses.IBindReviewTargetResponseDto> {
-    try {
-      await ReviewManager.bindReviewTarget(targetData);
-      return { success: true };
-    } catch (error) {
-      logger.err(error.message);
-      throw new Errors.InternalServerError('Internal database error.');
-    }
-  }
 }

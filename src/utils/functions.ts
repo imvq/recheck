@@ -118,13 +118,7 @@ export function mapReviewToArray(from: IReviewCardCommonData) {
   return [
     ['', from.tasks],
     ['', from.strengths],
-    ['', from.improvements],
-    ['', from.results],
-    [`Оценка: ${from.levelMark}`, from.levelComment],
-    [`Оценка: ${from.activityMark}`, from.activityComment],
-    [`Оценка: ${from.ownHireOpinionMark}`, from.ownHireOpinionComment],
-    [`Оценка: ${from.qualityMark}`, from.qualityComment],
-    [`Оценка: ${from.leadershipMark}`, from.leadershipComment]
+    [`Оценка: ${from.recommendationMark}`, from.recommendation]
   ];
 }
 

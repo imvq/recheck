@@ -44,7 +44,7 @@ export default function CommentBoxWithMark(
         <styled.MarkSelectorWrapper>
           <styled.MarkSelectorDescriptionWrapper>
             <styled.MarkSelectorDescription>
-              Оцените уровень знаний для должности, на которой был кандидат
+              {props.children}
             </styled.MarkSelectorDescription>
           </styled.MarkSelectorDescriptionWrapper>
           <MarkSelector labels={props.labels} setMark={props.setCurrentMark} />

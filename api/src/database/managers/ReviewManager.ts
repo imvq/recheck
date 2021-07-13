@@ -19,33 +19,14 @@ export default class ReviewManager {
   public static async prepareReview(reviewDto: dto.CreateReviewDto)
     : Promise<void> {
     const author = await UserManager.getUser(reviewDto.authorId);
+    const target = await UserManager.getUserBySharedId(reviewDto.targetShareableId);
     await ReviewManager.repo?.save(ReviewManager.repo.create({
       author,
+      target,
       tasks: reviewDto.tasks,
       strengths: reviewDto.strengths,
-      improvements: reviewDto.improvements,
-      results: reviewDto.results,
-      levelMark: parseInt(reviewDto.levelMark),
-      levelComment: reviewDto.levelComment,
-      activityMark: parseInt(reviewDto.activityMark),
-      activityComment: reviewDto.activityComment,
-      ownHireOpinionMark: parseInt(reviewDto.ownHireOpinionMark),
-      ownHireOpinionComment: reviewDto.ownHireOpinionComment,
-      qualityMark: parseInt(reviewDto.qualityMark),
-      qualityComment: reviewDto.qualityComment,
-      leadershipMark: parseInt(reviewDto.leadershipMark),
-      leadershipComment: reviewDto.leadershipComment,
-      adviceComment: reviewDto.adviceComment,
-      recommenderLink1: reviewDto.recommenderLink1,
-      recommenderLink2: reviewDto.recommenderLink2,
-      recommenderLink3: reviewDto.recommenderLink3
+      recommendation: reviewDto.recommendation,
+      recommendationMark: reviewDto.recommendationMark
     }));
-  }
-
-  public static async bindReviewTarget(targetDto: dto.BindReviewTargetDto)
-    : Promise<void> {
-    const target = await UserManager.getUser(targetDto.profileId);
-    const review = await ReviewManager.repo?.findOne(targetDto.reviewId);
-    await ReviewManager.repo?.save({ id: review?.id, target });
   }
 }

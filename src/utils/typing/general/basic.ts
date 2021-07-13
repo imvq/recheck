@@ -1,22 +1,8 @@
 export interface IReviewCardCommonData {
-  targetPredefinedName: string;
   targetName: string;
   targetPhotoUrl: string;
-  workplace: string;
-  bounds: string;
   tasks: string;
   strengths: string;
-  improvements: string;
-  results: string;
-  levelMark: number;
-  levelComment: string;
-  activityMark: number;
-  activityComment: string;
-  ownHireOpinionMark: number;
-  ownHireOpinionComment: string;
-  qualityMark: number;
-  qualityComment: string;
-  leadershipMark: number;
-  leadershipComment: string;
-  adviceComment: string;
+  recommendation: string;
+  recommendationMark: number;
 }

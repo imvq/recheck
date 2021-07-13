@@ -17,7 +17,7 @@ export default class UserController {
    * Check if a user with provided shareable ID exists
    * and is connected to asker through teh company.
    */
-  @Path('/target/is-present')
+  @Path('/target/is-connected')
   @BodyGuard
   @POST
   public async isTargetConnected(bodyData: dto.IsTargetConnectedDto)

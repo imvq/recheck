@@ -3,56 +3,20 @@ import {
   ReviewActionType,
   CLEAR_TASKS,
   CLEAR_STRENGTHS,
-  CLEAR_IMPROVEMENTS,
-  CLEAR_RESULTS,
-  CLEAR_LEVEL_DATA,
-  CLEAR_ACTIVITY_DATA,
-  CLEAR_OWN_HIRE_OPINION_DATA,
-  CLEAR_QUALITY_DATA,
-  CLEAR_LEADERSHIP_DATA,
-  CLEAR_ADVICE_DATA,
-  CLEAR_RECOMMENDERS_DATA,
+  CLEAR_RECOMMENDATION_DATA,
   SET_TARGET_SHAREABLE_ID,
   SET_TASKS,
   SET_STRENGTHS,
-  SET_IMPROVEMENTS,
-  SET_RESULTS,
-  SET_LEVEL_MARK,
-  SET_LEVEL_COMMENT,
-  SET_ACTIVITY_MARK,
-  SET_ACTIVITY_COMMENT,
-  SET_OWN_HIRE_OPINION_MARK,
-  SET_OWN_HIRE_OPINION_COMMENT,
-  SET_QUALITY_MARK,
-  SET_QUALITY_COMMENT,
-  SET_LEADERSHIP_MARK,
-  SET_LEADERSHIP_COMMENT,
-  SET_ADVICE_COMMENT,
-  SET_RECOMMENDER_LINK1,
-  SET_RECOMMENDER_LINK2,
-  SET_RECOMMENDER_LINK3
+  SET_RECOMMENDATION,
+  SET_RECOMMENDATION_MARK,
 } from './types';
 
 const initialState: ReviewState = {
   targetShareableId: '',
   tasks: '',
   strengths: '',
-  improvements: '',
-  results: '',
-  levelMark: 0,
-  levelComment: '',
-  activityMark: 0,
-  activityComment: '',
-  ownHireOpinionMark: 0,
-  ownHireOpinionComment: '',
-  qualityMark: 0,
-  qualityComment: '',
-  leadershipMark: 0,
-  leadershipComment: '',
-  adviceComment: '',
-  recommenderLink1: '',
-  recommenderLink2: '',
-  recommenderLink3: '',
+  recommendation: '',
+  recommendationMark: 0,
 };
 
 export const reviewsReducer = (
@@ -70,57 +34,11 @@ export const reviewsReducer = (
         ...state,
         strengths: initialState.strengths
       };
-    case CLEAR_IMPROVEMENTS:
+    case CLEAR_RECOMMENDATION_DATA:
       return {
         ...state,
-        improvements: initialState.improvements
-      };
-    case CLEAR_RESULTS:
-      return {
-        ...state,
-        results: initialState.results
-      };
-    case CLEAR_LEVEL_DATA:
-      return {
-        ...state,
-        levelMark: initialState.levelMark,
-        levelComment: initialState.levelComment
-      };
-    case CLEAR_ACTIVITY_DATA:
-      return {
-        ...state,
-        activityMark: initialState.activityMark,
-        activityComment: initialState.activityComment
-      };
-    case CLEAR_OWN_HIRE_OPINION_DATA:
-      return {
-        ...state,
-        ownHireOpinionMark: initialState.ownHireOpinionMark,
-        ownHireOpinionComment: initialState.ownHireOpinionComment
-      };
-    case CLEAR_QUALITY_DATA:
-      return {
-        ...state,
-        qualityMark: initialState.qualityMark,
-        qualityComment: initialState.qualityComment
-      };
-    case CLEAR_LEADERSHIP_DATA:
-      return {
-        ...state,
-        leadershipMark: initialState.leadershipMark,
-        leadershipComment: initialState.leadershipComment
-      };
-    case CLEAR_ADVICE_DATA:
-      return {
-        ...state,
-        adviceComment: initialState.adviceComment
-      };
-    case CLEAR_RECOMMENDERS_DATA:
-      return {
-        ...state,
-        recommenderLink1: initialState.recommenderLink1,
-        recommenderLink2: initialState.recommenderLink2,
-        recommenderLink3: initialState.recommenderLink3,
+        recommendation: initialState.recommendation,
+        recommendationMark: initialState.recommendationMark
       };
     case SET_TARGET_SHAREABLE_ID:
       return {
@@ -137,85 +55,15 @@ export const reviewsReducer = (
         ...state,
         strengths: action.payload
       };
-    case SET_IMPROVEMENTS:
+    case SET_RECOMMENDATION:
       return {
         ...state,
-        improvements: action.payload
+        recommendation: action.payload
       };
-    case SET_RESULTS:
+    case SET_RECOMMENDATION_MARK:
       return {
         ...state,
-        results: action.payload
-      };
-    case SET_LEVEL_MARK:
-      return {
-        ...state,
-        levelMark: action.payload
-      };
-    case SET_LEVEL_COMMENT:
-      return {
-        ...state,
-        levelComment: action.payload
-      };
-    case SET_ACTIVITY_MARK:
-      return {
-        ...state,
-        activityMark: action.payload
-      };
-    case SET_ACTIVITY_COMMENT:
-      return {
-        ...state,
-        activityComment: action.payload
-      };
-    case SET_OWN_HIRE_OPINION_MARK:
-      return {
-        ...state,
-        ownHireOpinionMark: action.payload
-      };
-    case SET_OWN_HIRE_OPINION_COMMENT:
-      return {
-        ...state,
-        ownHireOpinionComment: action.payload
-      };
-    case SET_QUALITY_MARK:
-      return {
-        ...state,
-        qualityMark: action.payload
-      };
-    case SET_QUALITY_COMMENT:
-      return {
-        ...state,
-        qualityComment: action.payload
-      };
-    case SET_LEADERSHIP_MARK:
-      return {
-        ...state,
-        leadershipMark: action.payload
-      };
-    case SET_LEADERSHIP_COMMENT:
-      return {
-        ...state,
-        leadershipComment: action.payload
-      };
-    case SET_ADVICE_COMMENT:
-      return {
-        ...state,
-        adviceComment: action.payload
-      };
-    case SET_RECOMMENDER_LINK1:
-      return {
-        ...state,
-        recommenderLink1: action.payload
-      };
-    case SET_RECOMMENDER_LINK2:
-      return {
-        ...state,
-        recommenderLink2: action.payload
-      };
-    case SET_RECOMMENDER_LINK3:
-      return {
-        ...state,
-        recommenderLink3: action.payload
+        recommendationMark: action.payload
       };
     default:
       return state;
