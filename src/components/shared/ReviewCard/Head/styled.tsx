@@ -32,6 +32,7 @@ export const MenuContent = styled.div<{ showTarget?: boolean; }>`
 `;
 
 export const TopBar = styled.div`
+  position: relative;
   background-color: #f0f3ff;
   display: flex;
   justify-content: space-between;
@@ -40,4 +41,18 @@ export const TopBar = styled.div`
   box-sizing: border-box;
   padding: 1.7rem;
   padding-left: 13rem;
+`;
+
+export const Photo = styled.img`
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  object-fit: contain;
+  border-radius: 50%;
+  margin-left: -8rem;
+`;
+
+export const Name = styled.span`
+  font-size: 1.3rem;
+  font-weight: 600;
 `;

@@ -43,12 +43,20 @@ export default class UserManager {
 
   public static async getUserWithReviewsGot(profileId: string)
     : Promise<utilityTypes.Optional<User>> {
-    return UserManager.repo?.findOne({ relations: ['reviewsGot', 'reviewsGot.target'], where: { profileId } });
+    return UserManager.repo?.findOne({
+      relations: ['reviewsGot', 'reviewsGot.target'],
+      where: { profileId },
+      order: { profileId: 'DESC' }
+    });
   }
 
   public static async getUserWithReviewsLeft(profileId: string)
     : Promise<utilityTypes.Optional<User>> {
-    return UserManager.repo?.findOne({ relations: ['reviewsLeft', 'reviewsLeft.target'], where: { profileId } });
+    return UserManager.repo?.findOne({
+      relations: ['reviewsLeft', 'reviewsLeft.target'],
+      where: { profileId },
+      order: { profileId: 'DESC' }
+    });
   }
 
   public static async getUserBasicInfoByName(name: string)
