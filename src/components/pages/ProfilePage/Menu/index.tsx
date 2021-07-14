@@ -1,5 +1,6 @@
 import { memo } from 'react';
 
+import controlledHistory from 'utils/routing';
 import CustomButton from 'components/shared/CustomButton';
 import MenuBar from './MenuBar';
 
@@ -36,7 +37,13 @@ export default memo((props: types.IProps) => {
         <MenuBar currentProfileInfo={props.currentProfileInfo} />
         <MenuContent />
         <styled.ButtonWrapper>
-          <CustomButton height='2.3rem' isDisabled={false}>Новый поиск</CustomButton>
+          <CustomButton
+            height='2.3rem'
+            isDisabled={false}
+            onClick={() => controlledHistory.push('/search')}
+          >
+            Новый поиск
+          </CustomButton>
         </styled.ButtonWrapper>
       </styled.Menu>
     </styled.Wrapper>
