@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
 import * as generalTypes from 'utils/typing/general';
-import { inputHandler, isValidEmail, getNValuesDown } from 'utils/functions';
+import { inputHandler, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
 import CompanyBadges from './CompanyBadges';
 
 import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
-import { mapCompaniesDataToOptions } from './functions';
+import { isValidEmail, mapCompaniesDataToOptions } from './functions';
 
 const months: generalTypes.OptionType[] = [
   { key: 0, text: 'Январь' },
