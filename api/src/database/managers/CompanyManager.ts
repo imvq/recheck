@@ -1,4 +1,5 @@
-import { getRepository, Repository, Not, IsNull } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
+import { Errors } from 'typescript-rest';
 
 import * as utilityTypes from '@typing/utility';
 import * as generalTypes from '@typing/general';
@@ -34,12 +35,32 @@ export default class CompanyManager {
 
   public static async getPredefinedCompanies(chunk: number)
     : Promise<Company[]> {
-    return CompanyManager.repo?.createQueryBuilder('companies')
-      .select(['companies', 'members.profileId', 'members.name', 'members.email', 'members.photoUrl', 'members.position'])
-      .where({ logoUrl: Not(IsNull()) })
+    if (!CompanyManager.repo) {
+      throw new Errors.InternalServerError('Repository undefined.');
+    }
+
+    const mainSubquery = CompanyManager.repo
+      .createQueryBuilder('companies')
+      .innerJoin('companies.members', 'members')
+      .where('companies.logoUrl IS NOT NULL')
+      .groupBy('members.companyId')
+      .select('members.companyId as id')
+      .addSelect('COUNT(*) as membersAmount');
+
+    return CompanyManager.repo
+      .createQueryBuilder('companies')
+      .innerJoin(`(${mainSubquery.getQuery()})`, 'filtered', 'filtered.id = companies.id')
+      .orderBy('membersAmount', 'DESC')
       .skip(constants.RECOMMENDATIONS_DEFAULT_LENGHT * chunk)
       .take(constants.RECOMMENDATIONS_DEFAULT_LENGHT)
-      .leftJoin('companies.members', 'members')
+      .select('companies')
+      .addSelect('membersAmount')
+      .addSelect('members.profileId')
+      .addSelect('members.name')
+      .addSelect('members.email')
+      .addSelect('members.photoUrl')
+      .addSelect('members.position')
+      .innerJoin('companies.members', 'members')
       .getMany() || [];
   }
 

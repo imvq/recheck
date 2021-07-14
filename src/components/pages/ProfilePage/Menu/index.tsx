@@ -1,5 +1,8 @@
 import { memo } from 'react';
+import { connect } from 'react-redux';
 
+import { MainToolbarEntry } from 'utils/enums';
+import { setCurrentMainToolbarEntry } from 'store';
 import controlledHistory from 'utils/routing';
 import CustomButton from 'components/shared/CustomButton';
 import MenuBar from './MenuBar';
@@ -7,10 +10,14 @@ import MenuBar from './MenuBar';
 import * as types from './types';
 import * as styled from './styled';
 
+const mapDispatchToProps: types.IDispatchProps = {
+  setCurrentMainToolbarEntry
+};
+
 /**
  * Menu with tabs to control the page content area.
  */
-export default memo((props: types.IProps) => {
+const Menu = (props: types.IProps) => {
   const MenuContent = () => (
     <styled.MenuContent>
       <styled.MenuContentSpan dimmed>
@@ -40,7 +47,10 @@ export default memo((props: types.IProps) => {
           <CustomButton
             height='2.3rem'
             isDisabled={false}
-            onClick={() => controlledHistory.push('/search')}
+            onClick={() => {
+              props.setCurrentMainToolbarEntry(MainToolbarEntry.NewSearch);
+              controlledHistory.push('/search');
+            }}
           >
             Новый поиск
           </CustomButton>
@@ -48,4 +58,6 @@ export default memo((props: types.IProps) => {
       </styled.Menu>
     </styled.Wrapper>
   );
-});
+};
+
+export default memo(connect(null, mapDispatchToProps)(Menu));
