@@ -1,8 +1,12 @@
-import UserManager from '@database/managers/UserManager';
+import utils from '@utils';
+
+import logger from '@logging/Logger';
 import NameTokenManager from '@database/managers/NameTokenManager';
 
 export default class NameTokens {
-  public splitName(userProfileId: string, fullName: string) {
+  @utils.dbErrorDefaultReactor({ except: [], logger })
+  public static async saveName(userProfileId: string, fullName: string) {
     const tokens = fullName.replace(/\s\s+/g, ' ').split(' ');
+    await NameTokenManager.saveTokenizedName(userProfileId, tokens);
   }
 }

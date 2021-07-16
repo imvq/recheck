@@ -13,6 +13,7 @@ import CompanyManager from '@database/managers/CompanyManager';
 
 import logger from '@logging/Logger';
 import MailService from './Mail';
+import NameTokensService from './NameTokens';
 
 /**
  * Service in charge of registration and managing user data.
@@ -55,6 +56,7 @@ export default class UserService {
 
     // Save the user.
     await this.saveUser(profileDto, confirmationCode);
+    await NameTokensService.saveName(profileDto.profileId, profileDto.name);
 
     // Send the confirmation code.
     try {

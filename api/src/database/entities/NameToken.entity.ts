@@ -11,5 +11,16 @@ export default class NameToken {
   tokenValue!: string;
 
   @orm.ManyToMany(() => User, user => user.nameTokens)
+  @orm.JoinTable({
+    name: 'name_tokens_bounds',
+    joinColumn: {
+      name: 'nameTokensId',
+      referencedColumnName: 'id'
+    },
+    inverseJoinColumn: {
+      name: 'usersProfileId',
+      referencedColumnName: 'profileId'
+    }
+  })
   bounds!: User[];
 }

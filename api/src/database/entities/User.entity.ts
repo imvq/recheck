@@ -28,7 +28,6 @@ export default class User {
   company!: Company;
 
   @orm.ManyToMany(() => NameToken, nameToken => nameToken.bounds)
-  @orm.JoinTable()
   nameTokens!: NameToken[];
 
   // Reviews left by the user.
