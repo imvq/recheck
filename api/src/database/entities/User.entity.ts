@@ -1,6 +1,7 @@
 import * as orm from 'typeorm';
 
 import * as utilityTypes from '@typing/utility';
+import NameToken from './NameToken.entity';
 import Company from './Company.entity';
 import Review from './Review.entity';
 
@@ -25,6 +26,10 @@ export default class User {
   // Foreign key. Every user belongs to one company.
   @orm.ManyToOne(() => Company, company => company.members)
   company!: Company;
+
+  @orm.ManyToMany(() => NameToken, nameToken => nameToken.bounds)
+  @orm.JoinTable()
+  nameTokens!: NameToken[];
 
   // Reviews left by the user.
   @orm.OneToMany(() => Review, review => review.author)
