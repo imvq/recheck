@@ -11,6 +11,5 @@ export default class NameToken {
   tokenValue!: string;
 
   @orm.ManyToMany(() => User, user => user.nameTokens)
-  @orm.JoinTable()
   bounds!: User[];
 }

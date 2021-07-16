@@ -5,11 +5,13 @@ import config from './config';
 import UserManager from './managers/UserManager';
 import ReviewManager from './managers/ReviewManager';
 import CompanyManager from './managers/CompanyManager';
+import NameTokenManager from './managers/NameTokenManager';
 
 function loadRepositories() {
   UserManager.loadRepository();
   ReviewManager.loadRepository();
   CompanyManager.loadRepository();
+  NameTokenManager.loadRepository();
 }
 
 /**

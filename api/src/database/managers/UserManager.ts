@@ -73,7 +73,7 @@ export default class UserManager {
     const targetUser = await UserManager.repo?.findOne({ where: { email: targetEmail } });
     if (!targetEmail) return false;
 
-    return !!await UserManager.repo?.createQueryBuilder('available_users')
+    return !!await UserManager.repo?.createQueryBuilder('users_available')
       .where('ownerId = :askerId', { askerId })
       .where('targetId = :targetId', { targetId: targetUser?.profileId })
       .getOne();
