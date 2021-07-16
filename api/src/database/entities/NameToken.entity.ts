@@ -8,6 +8,7 @@ export default class NameToken {
   id!: number;
 
   @orm.Column('text')
+  @orm.Index({ unique: true })
   tokenValue!: string;
 
   @orm.ManyToMany(() => User, user => user.nameTokens)
