@@ -1,5 +1,4 @@
-import { getRepository, Repository } from 'typeorm';
-import { Errors } from 'typescript-rest';
+import { getRepository } from 'typeorm';
 
 import * as utilityTypes from '@typing/utility';
 import * as generalTypes from '@typing/general';
@@ -10,36 +9,29 @@ import Company from '../entities/Company.entity';
  * Class providing operations with Company entity.
  */
 export default class CompanyManager {
-  private static repo: utilityTypes.Nullable<Repository<Company>> = null;
-
-  // Must be invoked after connection being established.
-  public static loadRepository() {
-    CompanyManager.repo = getRepository(Company);
-  }
-
   public static async createCompany(companyData: generalTypes.CompanyData)
     : Promise<Company> {
-    return CompanyManager.repo
-      ?.save(CompanyManager.repo.create({ ...companyData })) as Promise<Company>;
+    const repository = getRepository(Company);
+    const toBeSaved = repository.create({ ...companyData });
+
+    return repository.save(toBeSaved);
   }
 
   public static async getCompany(id: number)
     : Promise<utilityTypes.Optional<Company>> {
-    return CompanyManager.repo?.findOne(id);
+    return getRepository(Company).findOne(id);
   }
 
   public static async getCompanyByFullPublicInfo(name: string)
     : Promise<utilityTypes.Optional<Company>> {
-    return CompanyManager.repo?.findOne({ where: { name } });
+    return getRepository(Company).findOne({ where: { name } });
   }
 
   public static async getPredefinedCompanies(chunk: number)
     : Promise<Company[]> {
-    if (!CompanyManager.repo) {
-      throw new Errors.InternalServerError('Repository undefined.');
-    }
+    const repository = getRepository(Company);
 
-    const mainSubquery = CompanyManager.repo
+    const mainSubquery = repository
       .createQueryBuilder('companies')
       .innerJoin('companies.members', 'members')
       .where('companies.logoUrl IS NOT NULL')
@@ -47,7 +39,7 @@ export default class CompanyManager {
       .select('members.companyId as id')
       .addSelect('COUNT(*) as membersAmount');
 
-    return CompanyManager.repo
+    return repository
       .createQueryBuilder('companies')
       .innerJoin(`(${mainSubquery.getQuery()})`, 'filtered', 'filtered.id = companies.id')
       .orderBy('membersAmount', 'DESC')
@@ -66,7 +58,8 @@ export default class CompanyManager {
 
   public static async getMatched(sequence: string)
     : Promise<Company[]> {
-    return CompanyManager.repo?.createQueryBuilder('companies')
+    return getRepository(Company)
+      .createQueryBuilder('companies')
       .where('companies.name LIKE :name', { name: `${sequence}%` })
       .limit(10)
       .getMany()

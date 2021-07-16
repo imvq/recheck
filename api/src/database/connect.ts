@@ -2,17 +2,6 @@ import { getConnection, createConnection, Connection } from 'typeorm';
 
 import logger from '@logging/Logger';
 import config from './config';
-import UserManager from './managers/UserManager';
-import ReviewManager from './managers/ReviewManager';
-import CompanyManager from './managers/CompanyManager';
-import NameTokenManager from './managers/NameTokenManager';
-
-function loadRepositories() {
-  UserManager.loadRepository();
-  ReviewManager.loadRepository();
-  CompanyManager.loadRepository();
-  NameTokenManager.loadRepository();
-}
 
 /**
  * DB connection provider.
@@ -28,7 +17,6 @@ async function connect(): Promise<void> {
       }
     } catch {
       await createConnection(config);
-      loadRepositories();
       logger.log('Database connection established');
     }
   } catch (exception) {
