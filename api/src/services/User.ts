@@ -111,7 +111,9 @@ export default class UserService {
   @utils.dbErrorDefaultReactor({ except: [], logger })
   public async searchUser(searchDto: dto.SearchUserDto)
     : Promise<apiResponses.ISearchUserResponseDto> {
-    return { results: await UserManager.getUserBasicInfoByName(searchDto.name) || [] };
+    const results = await NameTokensService.getMatchedUsers(searchDto.tokens);
+
+    return { results: results || [] };
   }
 
   @utils.dbErrorDefaultReactor({ except: [], logger })

@@ -115,5 +115,5 @@ export class RetrievePorfileInfoReduced {
 }
 
 export class SearchUserDto {
-  public constructor(public name: string) {}
+  public constructor(public tokens: string[]) {}
 }
