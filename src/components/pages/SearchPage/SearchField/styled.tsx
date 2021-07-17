@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Input = styled.input`
-  width: 65rem;
+  width: ${cssVars.searchInputWidth};
   height: fit-content;
   display: flex;
   padding: ${cssVarsLocal.boxPadding};

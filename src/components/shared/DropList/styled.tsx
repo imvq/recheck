@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
 
   width: 100%;
   position: absolute;
-  top: ${cssVars.inputHeightDefault};
   left: 0;
   z-index: ${cssVars.zIndexSelectMenuLayer2};
 `;

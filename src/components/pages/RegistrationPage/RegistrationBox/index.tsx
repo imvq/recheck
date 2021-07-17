@@ -1,8 +1,8 @@
 import { useState, memo } from 'react';
 import { connect } from 'react-redux';
 
-import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
 import * as generalTypes from 'utils/typing/general';
+import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
 import { inputHandler, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
@@ -136,9 +136,7 @@ const RegistrationBox = (props: types.IProps) => {
           {props.matchedCompanies.length ? (
             <DropList
               options={mapCompaniesDataToOptions(props.matchedCompanies)}
-              onClose={() => {
-                props.clearMatchedCompanies();
-              }}
+              onClose={props.clearMatchedCompanies}
               onOptionSelected={selected => {
                 setCompany({ id: selected.key, name: selected.text });
                 props.clearMatchedCompanies();

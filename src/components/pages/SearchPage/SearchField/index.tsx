@@ -26,7 +26,10 @@ export default (props: types.IProps) => {
       <styled.Input
         type='text'
         placeholder='Введите название компании или имя и фамилию сотрудника, который работал с вами:'
-        onChange={(event) => setSearchText(event.target.value)}
+        onChange={(event) => {
+          props.quickSearchCallback(event);
+          setSearchText(event.target.value);
+        }}
         onBlur={doSearch}
         onKeyDown={keyHandler}
       />

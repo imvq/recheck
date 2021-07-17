@@ -4,13 +4,17 @@ import { connect } from 'react-redux';
 import {
   AppState,
   setRecommendations,
+  loadMatchedUsers,
   loadRecommendations,
+  clearMatchedUsers,
   searchUser,
   setUserSearchResults,
   setPageLocked
 } from 'store';
 
 import * as constants from 'utils/constants';
+import * as generalTypes from 'utils/typing/general';
+import { cssVars } from 'utils/style.common';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
 import DropList from 'components/shared/DropList';
 import SearchField from './SearchField';
@@ -22,13 +26,17 @@ import SearchNoResults from './SearchNoResults';
 
 import * as types from './types';
 import * as styled from './styled';
+import { mapUserSearchDataToOptions } from './functions';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
+  quickSearchMatchedUsers: store.search.quickSearchMatchedUsers,
   recommendations: store.search.recommendations,
   userSearchResults: store.search.userSearchResults
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
+  clearMatchedUsers,
+  loadMatchedUsers,
   loadRecommendations,
   searchUser,
   setUserSearchResults,
@@ -43,6 +51,10 @@ const SearchPage = (props: types.IProps) => {
 
   const resetRecommendations = () => {
     props.setRecommendations(props.recommendations.slice(0, constants.RECOMMENDATIONS_LENGTH));
+  };
+
+  const findUsersMatches = (tokens: string[]) => {
+    props.loadMatchedUsers(tokens);
   };
 
   // Don't show anything until the user starts its search.
@@ -82,14 +94,25 @@ const SearchPage = (props: types.IProps) => {
         <SearchField
           lockPageCallback={props.lockPage}
           searchUserCallback={props.searchUser}
+          quickSearchCallback={(event: generalTypes.InputEvent) => {
+            if (event.target.value) {
+              findUsersMatches(event.target.value.trim().split(' '));
+            } else {
+              props.clearMatchedUsers();
+            }
+          }}
         />
 
         {/* Quick search results. */}
-        <DropList
-          options={[]}
-          onClose={() => {}}
-          onOptionSelected={() => {}}
-        />
+        {props.quickSearchMatchedUsers.length ? (
+          <styled.DropListWrapper>
+            <DropList
+              options={mapUserSearchDataToOptions(props.quickSearchMatchedUsers)}
+              onClose={props.clearMatchedUsers}
+              onOptionSelected={() => {}}
+            />
+          </styled.DropListWrapper>
+        ) : null}
 
         {/* The search results. */}
         {props.userSearchResults.results.length

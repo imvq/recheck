@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { respondUp } from 'utils/functions';
+import { cssVars } from 'utils/style.common';
 import BackgroundSvgPath from 'assets/images/common/Background1.png';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
@@ -100,4 +101,9 @@ export const ExpandLabel = styled.span`
   color: gray;
   font-size: 1.3rem;
   font-weight: 600;
+`;
+
+export const DropListWrapper = styled.div`
+  position: relative;
+  width: ${cssVars.searchInputWidth};
 `;

@@ -22,6 +22,7 @@ export const cssVars = {
   opacityButtonActive: '.5',
   opacityButtonIdleInversed: '.8',
   profilePhotoWrapperWidth: '20rem',
+  searchInputWidth: '65rem',
   sectionShadow: 'drop-shadow(1rem 1rem .6rem rgba(0, 0, 0, .1))',
   thiknessDefault: '0.078vw',
   widthMotivatorBadge: '25rem',

@@ -72,6 +72,17 @@ export default class UserController {
   /**
    * Search user by name.
    */
+  @Path('/quick-search')
+  @BodyGuard
+  @POST
+  public async quickSearch(bodyData: dto.SearchUserDto)
+    : Promise<apiResponses.ISearchUserResponseDto> {
+    return this.injectedService.searchUser(bodyData);
+  }
+
+  /**
+   * Search user by name.
+   */
   @Path('/search')
   @BodyGuard
   @POST

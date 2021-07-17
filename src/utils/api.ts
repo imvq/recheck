@@ -40,6 +40,11 @@ export default class Api {
     return Api.instance.post('/companies/recommendations', { chunk });
   }
 
+  public static quickSearchUser(tokens: string[])
+    : generalTypes.APIResponse<{ results: apiResponses.SearchUserDto[]; }> {
+    return Api.instance.post('/user/quick-search', { tokens });
+  }
+
   public static searchUser(tokens: string[])
     : generalTypes.APIResponse<{ results: apiResponses.SearchUserDto[]; }> {
     return Api.instance.post('/user/search', { tokens });

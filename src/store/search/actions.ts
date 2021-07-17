@@ -30,6 +30,11 @@ export const clearMatchedCompanies = (): SearchActionType => ({
   payload: []
 });
 
+export const clearMatchedUsers = (): SearchActionType => ({
+  type: SET_QUICK_SEARCH_MATCHED_USERS,
+  payload: []
+});
+
 export const setRecommendations = (results: generalTypes.Company[])
   : SearchActionType => ({
   type: SET_RECOMMENDATIONS,
@@ -57,6 +62,11 @@ export const searchUser = (tokens: string[]) => (dispatch: Dispatch<AppActionTyp
 export const loadMatchedCompanies = (sequence: string) => (dispatch: Dispatch<AppActionType>) => {
   Api.getMatchedCompanies(sequence)
     .then(matchData => dispatch(setQuickSearchMatchedCompanies(matchData.data.results)));
+};
+
+export const loadMatchedUsers = (tokens: string[]) => (dispatch: Dispatch<AppActionType>) => {
+  Api.quickSearchUser(tokens)
+    .then(matchData => dispatch(setQuickSearchMatchedUsers(matchData.data.results)));
 };
 
 export const loadRecommendations = (chunk: number) => (dispatch: Dispatch<AppActionType>) => {
