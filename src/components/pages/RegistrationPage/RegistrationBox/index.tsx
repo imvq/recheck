@@ -6,7 +6,7 @@ import * as generalTypes from 'utils/typing/general';
 import { inputHandler, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
-import CompanyBadges from './CompanyBadges';
+import DropList from 'components/shared/DropList';
 
 import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
@@ -32,7 +32,7 @@ const years = getNValuesDown(new Date().getFullYear(), 50)
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
-  matchedCompanies: store.search.matchedCompanies,
+  matchedCompanies: store.search.quickSearchMatchedCompanies,
   referral: store.interaction.referral
 });
 
@@ -134,7 +134,7 @@ const RegistrationBox = (props: types.IProps) => {
 
           {/* Companies with matched names. */}
           {props.matchedCompanies.length ? (
-            <CompanyBadges
+            <DropList
               options={mapCompaniesDataToOptions(props.matchedCompanies)}
               onClose={() => {
                 props.clearMatchedCompanies();

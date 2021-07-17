@@ -1,19 +1,26 @@
 import * as generalTypes from 'utils/typing/general';
 
-export const SET_MATCHED_COMPANIES = 'SET_MATCHED_COMPANIES';
+export const SET_QUICK_SEARCH_MATCHED_COMPANIES = 'SET_QUICK_SEARCH_MATCHED_COMPANIES';
+export const SET_QUICK_SEARCH_MATCHED_USERS = 'SET_QUICK_SEARCH_MATCHED_USERS';
 export const SET_RECOMMENDATIONS = 'SET_RECOMMENDATIONS';
 export const APPEND_RECOMMENDATIONS = 'APPEND_RECOMMENDATIONS';
 export const SET_CURRENT_USER_SEARCH_RESULTS = 'SET_CURRENT_USER_SEARCH_RESULTS';
 
 export interface SearchState {
-  matchedCompanies: generalTypes.CompanyReduced[];
+  quickSearchMatchedCompanies: generalTypes.CompanyReduced[];
+  quickSearchMatchedUsers: generalTypes.SearchProfileInfo[];
   recommendations: generalTypes.Company[];
   userSearchResults: { results: generalTypes.SearchProfileInfo[]; };
 }
 
-export interface SetMatchedCompanies {
-  type: typeof SET_MATCHED_COMPANIES;
+export interface SetQuickSearchMatchedCompanies {
+  type: typeof SET_QUICK_SEARCH_MATCHED_COMPANIES;
   payload: generalTypes.CompanyReduced[];
+}
+
+export interface SetQuickSearchMatchedUsers {
+  type: typeof SET_QUICK_SEARCH_MATCHED_USERS;
+  payload: generalTypes.SearchProfileInfo[];
 }
 
 export interface SetRecommendations {
@@ -31,7 +38,9 @@ export interface SetCurrentUserSearchResults {
   payload: generalTypes.SearchProfileInfo[];
 }
 
-export type SearchActionType = SetMatchedCompanies
+export type SearchActionType =
+    SetQuickSearchMatchedCompanies
+  | SetQuickSearchMatchedUsers
   | SetRecommendations
   | AppendRecommendations
   | SetCurrentUserSearchResults;

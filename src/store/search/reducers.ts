@@ -1,14 +1,16 @@
 import {
   SearchState,
   SearchActionType,
-  SET_MATCHED_COMPANIES,
+  SET_QUICK_SEARCH_MATCHED_COMPANIES,
+  SET_QUICK_SEARCH_MATCHED_USERS,
   SET_RECOMMENDATIONS,
   APPEND_RECOMMENDATIONS,
   SET_CURRENT_USER_SEARCH_RESULTS
 } from './types';
 
 const initialState: SearchState = {
-  matchedCompanies: [],
+  quickSearchMatchedCompanies: [],
+  quickSearchMatchedUsers: [],
   recommendations: [],
   userSearchResults: { results: [] }
 };
@@ -18,10 +20,15 @@ export function searchReducer(
   action: SearchActionType
 ): SearchState {
   switch (action.type) {
-    case SET_MATCHED_COMPANIES:
+    case SET_QUICK_SEARCH_MATCHED_COMPANIES:
       return {
         ...state,
-        matchedCompanies: action.payload
+        quickSearchMatchedCompanies: action.payload
+      };
+    case SET_QUICK_SEARCH_MATCHED_USERS:
+      return {
+        ...state,
+        quickSearchMatchedUsers: action.payload
       };
     case SET_RECOMMENDATIONS:
       return {

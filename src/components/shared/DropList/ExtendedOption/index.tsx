@@ -7,7 +7,7 @@ import * as styled from './styled';
  */
 export default (props: types.IProps) => (
   <styled.Wrapper onClick={() => props.onClick(props.optionData)}>
-    <styled.LogoWrapper src={props.optionData.logoUrl || ''} alt='' />
+    <styled.LogoWrapper src={props.optionData.imageUrl || ''} alt='' />
     <styled.SelectTitle>{props.optionData.text}</styled.SelectTitle>
   </styled.Wrapper>
 );

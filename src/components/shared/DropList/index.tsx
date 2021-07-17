@@ -5,12 +5,12 @@ import ExtendedOption from './ExtendedOption';
 import * as types from './types';
 import * as styled from './styled';
 
-const CompanyBadges = (props: types.IProps) => (
+const DropList = (props: types.IProps) => (
   <OutsideClickHandler display='contents' onOutsideClick={props.onClose}>
     <styled.Wrapper>
       <styled.Content>
         {props.options.map(option => (
-          <CompanyBadges.Option
+          <DropList.Option
             key={option.key}
             optionData={option}
             onClick={() => props.onOptionSelected(option)}
@@ -21,6 +21,6 @@ const CompanyBadges = (props: types.IProps) => (
   </OutsideClickHandler>
 );
 
-CompanyBadges.Option = ExtendedOption;
+DropList.Option = ExtendedOption;
 
-export default CompanyBadges;
+export default DropList;

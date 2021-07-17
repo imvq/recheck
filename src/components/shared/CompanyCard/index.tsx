@@ -1,5 +1,7 @@
 import CustomButton from 'components/shared/CustomButton';
 
+import { mergeMembersWithCompany } from './functions';
+
 import * as types from './types';
 import * as styled from './styled';
 
@@ -20,7 +22,10 @@ export default (props: types.IProps) => (
           color='#33c7ba'
           onClick={() => {
             props.setCurrentCompany(props.companyData);
-            props.setCurrentMembers(props.companyData.members);
+            props.setCurrentMembers(mergeMembersWithCompany(
+              props.companyData.members,
+              props.companyData
+            ));
           }}
         >
           Посмотреть

@@ -18,16 +18,13 @@ export interface BindReviewTargetDto {
   profileId: string;
 }
 
+export type CompanyMember = Omit<SearchProfileInfo, 'company'>;
+
 export interface Company {
   id: string;
   name: string;
   logoUrl: string | null;
-  members: {
-    name: string;
-    email: string;
-    photoUrl: string;
-    position: string;
-  }[];
+  members: CompanyMember[];
 }
 
 export interface CompanyReduced {
@@ -82,7 +79,7 @@ export interface OptionType {
 }
 
 export interface ExtendedOptionType extends OptionType {
-  logoUrl: string | null;
+  imageUrl: string | null;
 }
 
 export interface NotifyReferralDto {
@@ -139,17 +136,9 @@ export interface ReviewData {
 
 export interface SearchProfileInfo {
   name: string;
-  email: string;
   photoUrl: string;
   company: string;
   position: string;
 }
 
 export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
-
-export interface UserCardData {
-  name: string;
-  email: string;
-  photoUrl: string;
-  position: string;
-}

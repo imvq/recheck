@@ -12,6 +12,7 @@ import {
 
 import * as constants from 'utils/constants';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
+import DropList from 'components/shared/DropList';
 import SearchField from './SearchField';
 import CompaniesResults from './CompaniesResults';
 import CompaniesPopup from './ExpandView/Companies';
@@ -81,6 +82,13 @@ const SearchPage = (props: types.IProps) => {
         <SearchField
           lockPageCallback={props.lockPage}
           searchUserCallback={props.searchUser}
+        />
+
+        {/* Quick search results. */}
+        <DropList
+          options={[]}
+          onClose={() => {}}
+          onOptionSelected={() => {}}
         />
 
         {/* The search results. */}

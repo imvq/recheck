@@ -24,6 +24,7 @@ export const AdaptedFooter = styled(Footer)`
 `;
 
 export const ContentWrapper = styled.div`
+  position: relative;
   background-image: url(${BackgroundSvgPath});
   background-size: contain;
   background-repeat: no-repeat;
