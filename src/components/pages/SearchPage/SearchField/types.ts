@@ -1,6 +1,6 @@
 export interface IOwnProps {
   lockPageCallback(): void;
-  searchUserCallback(name: string): void;
+  searchUserCallback(tokens: string[]): void;
 }
 
 export type IProps = IOwnProps;

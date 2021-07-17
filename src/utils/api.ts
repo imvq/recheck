@@ -40,9 +40,9 @@ export default class Api {
     return Api.instance.post('/companies/recommendations', { chunk });
   }
 
-  public static searchUser(name: string)
+  public static searchUser(tokens: string[])
     : generalTypes.APIResponse<{ results: apiResponses.SearchUserDto[]; }> {
-    return Api.instance.post('/user/search', { name });
+    return Api.instance.post('/user/search', { tokens });
   }
 
   public static completeRegistration(completionDto: generalTypes.CompleteRegistrationDto)

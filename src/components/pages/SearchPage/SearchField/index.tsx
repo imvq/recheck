@@ -11,7 +11,7 @@ export default (props: types.IProps) => {
     if (searchText !== previousSearch) {
       setPreviousSearch(searchText);
       props.lockPageCallback();
-      props.searchUserCallback(searchText);
+      props.searchUserCallback(searchText.trim().split(' '));
     }
   };
 
