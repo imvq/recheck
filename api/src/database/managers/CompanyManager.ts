@@ -60,7 +60,7 @@ export default class CompanyManager {
     : Promise<Company[]> {
     return getRepository(Company)
       .createQueryBuilder('companies')
-      .where('companies.name LIKE :name', { name: `${sequence}%` })
+      .where('LOWER(companies.name) LIKE :name', { name: `${sequence.toLocaleLowerCase()}%` })
       .limit(10)
       .getMany()
       || [];

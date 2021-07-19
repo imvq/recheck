@@ -50,7 +50,7 @@ export default class NameTokenManager {
     await Promise.all(tokens.map(async token => {
       const matchedNameTokensPreparedQuery = getRepository(NameToken)
         .createQueryBuilder('name_tokens')
-        .where('name_tokens.tokenValue LIKE :token', { token: `${token}%` })
+        .where('name_tokens.tokenValue LIKE :token', { token: `${token.toLocaleLowerCase()}%` })
         .leftJoinAndSelect('name_tokens.bounds', 'bounds');
 
       const matchedNameTokens = await (limitResult
