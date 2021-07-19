@@ -47,7 +47,12 @@ const mapDispatchToProps: types.IDispatchProps = {
 const SearchPage = (props: types.IProps) => {
   const [isRecommendationsViewVisible, setIsRecommendationsViewVisible] = useState(false);
 
-  useEffect(() => { props.loadRecommendations(0); }, []);
+  useEffect(() => {
+    // Load recommendations only one time and never reload them again.
+    if (props.recommendations.length === 0) {
+      props.loadRecommendations(0);
+    }
+  }, []);
 
   const resetRecommendations = () => {
     props.setRecommendations(props.recommendations.slice(0, constants.RECOMMENDATIONS_LENGTH));
