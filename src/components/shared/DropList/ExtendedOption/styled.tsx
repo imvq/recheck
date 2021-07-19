@@ -5,7 +5,7 @@ import { cssVars, mixins } from 'utils/style.common';
 export const Wrapper = styled.div`
   ${mixins.DefaultInput};
 
-  height: fit-content;
+  height: 3.678rem;
   border: none;
   border-bottom: calc(${cssVars.thiknessDefault} * 2) solid #c7c7c7;
   border-radius: 0;
