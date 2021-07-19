@@ -45,9 +45,11 @@ export const Input = styled.input`
   }
 `;
 
-export const AdaptedMagnifier = styled(MagnifierSvg)`
+export const AdaptedMagnifier = styled(MagnifierSvg)<{ $isDimmed?: boolean; }>`
   position: absolute;
-  cursor: pointer;
+  cursor: ${props => (props.$isDimmed ? 'default' : 'pointer')};
   height: 3rem;
   right: calc(${cssVarsLocal.boxPadding} * 2);
+
+  ${props => props.$isDimmed && 'filter: opacity(0.4)'};
 `;

@@ -8,7 +8,7 @@ export default (props: types.IProps) => {
   const [searchText, setSearchText] = useState('');
 
   const doSearch = () => {
-    if (searchText !== previousSearch) {
+    if (searchText !== '' && searchText !== previousSearch) {
       setPreviousSearch(searchText);
       props.lockPageCallback();
       props.searchUserCallback(searchText.trim().split(' '));
@@ -32,7 +32,8 @@ export default (props: types.IProps) => {
         }}
         onKeyDown={keyHandler}
       />
-      <styled.AdaptedMagnifier onClick={doSearch} />
+      {/* $isDimmed must not be inserted into the DOM tree so it was made transient.' */}
+      <styled.AdaptedMagnifier $isDimmed={searchText === ''} onClick={doSearch} />
     </styled.Wrapper>
   );
 };
