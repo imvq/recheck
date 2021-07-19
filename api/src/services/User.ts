@@ -109,9 +109,12 @@ export default class UserService {
   }
 
   @utils.dbErrorDefaultReactor({ except: [], logger })
-  public async searchUser(searchDto: dto.SearchUserDto)
+  public async searchUser(searchDto: dto.SearchUserDto, options?: { isQuickSearch: boolean })
     : Promise<apiResponses.ISearchUserResponseDto> {
-    const results = await NameTokensService.getMatchedUsers(searchDto.tokens);
+    const results = await NameTokensService.getMatchedUsers(
+      searchDto.tokens,
+      options?.isQuickSearch
+    );
 
     return { results: results || [] };
   }

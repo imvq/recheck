@@ -77,7 +77,7 @@ export default class UserController {
   @POST
   public async quickSearch(bodyData: dto.SearchUserDto)
     : Promise<apiResponses.ISearchUserResponseDto> {
-    return this.injectedService.searchUser(bodyData);
+    return this.injectedService.searchUser(bodyData, { isQuickSearch: true });
   }
 
   /**

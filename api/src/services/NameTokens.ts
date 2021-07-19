@@ -13,8 +13,8 @@ export default class NameTokens {
   }
 
   @utils.dbErrorDefaultReactor({ except: [], logger })
-  public static async getMatchedUsers(tokens: string[])
+  public static async getMatchedUsers(tokens: string[], limitResults?: boolean)
     : Promise<User[] | undefined> {
-    return NameTokenManager.getMatchedUsers(tokens);
+    return NameTokenManager.getMatchedUsers(tokens, limitResults);
   }
 }
