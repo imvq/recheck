@@ -8,6 +8,10 @@ import Footer from 'components/shared/Footer';
 import MainToolbar from 'components/shared/MainToolbar';
 
 export const Wrapper = styled.div`
+  background-image: url(${BackgroundSvgPath});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
   min-height: 100%;
   display: grid;
   grid-template:
@@ -26,10 +30,6 @@ export const AdaptedFooter = styled(Footer)`
 
 export const ContentWrapper = styled.div`
   position: relative;
-  background-image: url(${BackgroundSvgPath});
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
   grid-area: Content;
   height: fit-content;
   box-sizing: border-box;
