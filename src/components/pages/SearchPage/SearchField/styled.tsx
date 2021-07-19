@@ -47,6 +47,7 @@ export const Input = styled.input`
 
 export const AdaptedMagnifier = styled(MagnifierSvg)`
   position: absolute;
+  cursor: pointer;
   height: 3rem;
   right: calc(${cssVarsLocal.boxPadding} * 2);
 `;

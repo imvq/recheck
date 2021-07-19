@@ -30,7 +30,6 @@ export default (props: types.IProps) => {
           props.quickSearchCallback(event);
           setSearchText(event.target.value);
         }}
-        onBlur={doSearch}
         onKeyDown={keyHandler}
       />
       <styled.AdaptedMagnifier onClick={doSearch} />
