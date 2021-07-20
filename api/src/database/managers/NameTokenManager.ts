@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 
-import User from '../entities/User.entity';
+import { ISearchedUserDto } from '@typing/apiResponses';
+
 import NameToken from '../entities/NameToken.entity';
 
 /**
@@ -44,8 +45,8 @@ export default class NameTokenManager {
    * Find all users whose parts of their names contain provided tokens.
    */
   public static async getMatchedUsers(tokens: string[], limitResult?: boolean)
-    : Promise<User[] | undefined> {
-    const resultsMap: { [key: string]: User } = {};
+    : Promise<ISearchedUserDto[] | undefined> {
+    const resultsMap: { [key: string]: ISearchedUserDto } = {};
 
     await Promise.all(tokens.map(async token => {
       const matchedNameTokensPreparedQuery = getRepository(NameToken)
@@ -54,15 +55,13 @@ export default class NameTokenManager {
         .leftJoinAndSelect('name_tokens.bounds', 'bounds');
 
       const matchedNameTokens = await (limitResult
-        ? matchedNameTokensPreparedQuery
-          .take(10)
-          .getMany()
+        ? matchedNameTokensPreparedQuery.take(10).getMany()
         : matchedNameTokensPreparedQuery.getMany());
 
       matchedNameTokens
         .forEach(namedToken => {
           namedToken.bounds.forEach(user => {
-            resultsMap[user.profileId] = user;
+            resultsMap[user.shareableId] = user;
           });
         });
     }));

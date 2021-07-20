@@ -3,6 +3,7 @@ import { Inject } from 'typescript-ioc';
 
 import dto from '@dto';
 import CompaniesService from '@services/Companies';
+
 import * as apiResponses from '@typing/apiResponses';
 
 /**

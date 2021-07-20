@@ -2,9 +2,6 @@ import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from 't
 
 import User from './User.entity';
 
-/**
- * Review model.
- */
 @Entity({ name: 'reviews' })
 export default class Review {
   @PrimaryGeneratedColumn('uuid')

@@ -1,6 +1,5 @@
 import { getRepository } from 'typeorm';
 
-import * as utilityTypes from '@typing/utility';
 import * as generalTypes from '@typing/general';
 import Company from '../entities/Company.entity';
 import User from '../entities/User.entity';
@@ -29,17 +28,17 @@ export default class UserManager {
   }
 
   public static async getUser(profileId: string, relations?: string[])
-    : Promise<utilityTypes.Optional<User>> {
+    : Promise<User | undefined> {
     return getRepository(User).findOne(profileId, { relations });
   }
 
   public static async getUserBySharedId(id: string, relations?: string[])
-    : Promise<utilityTypes.Optional<User>> {
+    : Promise<User | undefined> {
     return getRepository(User).findOne({ shareableId: id }, { relations });
   }
 
   public static async getUserWithReviewsGot(profileId: string)
-    : Promise<utilityTypes.Optional<User>> {
+    : Promise<User | undefined> {
     return getRepository(User).findOne({
       relations: ['reviewsGot', 'reviewsGot.target'],
       where: { profileId },
@@ -48,7 +47,7 @@ export default class UserManager {
   }
 
   public static async getUserWithReviewsLeft(profileId: string)
-    : Promise<utilityTypes.Optional<User>> {
+    : Promise<User | undefined> {
     return getRepository(User).findOne({
       relations: ['reviewsLeft', 'reviewsLeft.target'],
       where: { profileId },
@@ -57,7 +56,7 @@ export default class UserManager {
   }
 
   public static async getUserBasicInfoByName(name: string)
-    : Promise<utilityTypes.Optional<User[]>> {
+    : Promise<User[] | undefined> {
     return getRepository(User).find({
       select: ['name', 'email', 'photoUrl', 'position', 'workStartMonth', 'workStartYear'],
       relations: ['company'],

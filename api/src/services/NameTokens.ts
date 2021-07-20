@@ -1,6 +1,6 @@
 import utils from '@utils';
 
-import User from '@database/entities/User.entity';
+import { ISearchedUserDto } from '@typing/apiResponses';
 
 import logger from '@logging/Logger';
 import NameTokenManager from '@database/managers/NameTokenManager';
@@ -14,7 +14,7 @@ export default class NameTokens {
 
   @utils.dbErrorDefaultReactor({ except: [], logger })
   public static async getMatchedUsers(tokens: string[], limitResults?: boolean)
-    : Promise<User[] | undefined> {
+    : Promise<ISearchedUserDto[] | undefined> {
     return NameTokenManager.getMatchedUsers(tokens, limitResults);
   }
 }

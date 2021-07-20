@@ -100,17 +100,20 @@ export interface IRetrieveFacebookProfileOnfoReducedResponseDto {
 
 export interface IRetrieveLinkedInProfileInfoResponseDto extends IRetrieveProfileInfoResponseDto {}
 
+export interface ISearchedUserDto {
+  name: string,
+  shareableId: string,
+  photoUrl: string,
+  position: string,
+  workStartMonth: number,
+  workStartYear: number,
+  company: {
+    id: number;
+    name: string;
+    logoUrl: string | null;
+  }
+}
+
 export interface ISearchUserResponseDto {
-  results: {
-    name: string,
-    photoUrl: string,
-    position: string,
-    workStartMonth: number,
-    workStartYear: number,
-    company: {
-      id: number;
-      name: string;
-      logoUrl: string | null;
-    }
-  }[]
+  results: ISearchedUserDto[];
 }

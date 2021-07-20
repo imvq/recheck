@@ -181,6 +181,7 @@ export default class UserService {
     };
   }
 
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   public async notifyReferral(referralSharedId: string, targetName: string, targetEmail: string) {
     const referral = await UserManager.getUserBySharedId(referralSharedId);
 

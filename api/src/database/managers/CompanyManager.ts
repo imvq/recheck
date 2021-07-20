@@ -1,6 +1,5 @@
 import { getRepository } from 'typeorm';
 
-import * as utilityTypes from '@typing/utility';
 import * as generalTypes from '@typing/general';
 import * as constants from '@common/constants';
 import Company from '../entities/Company.entity';
@@ -18,12 +17,12 @@ export default class CompanyManager {
   }
 
   public static async getCompany(id: number)
-    : Promise<utilityTypes.Optional<Company>> {
+    : Promise<Company | undefined> {
     return getRepository(Company).findOne(id);
   }
 
   public static async getCompanyByFullPublicInfo(name: string)
-    : Promise<utilityTypes.Optional<Company>> {
+    : Promise<Company | undefined> {
     return getRepository(Company).findOne({ where: { name } });
   }
 

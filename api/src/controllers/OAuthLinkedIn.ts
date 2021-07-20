@@ -2,9 +2,10 @@ import { GET, POST, Path, Context, ServiceContext } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 import BodyGuard from 'typescript-rest-body-guard';
 
-import * as apiResponses from '@typing/apiResponses';
-import LinkedInOAuthService from '@services/OAuthLinkedIn';
 import dto from '@dto';
+import LinkedInOAuthService from '@services/OAuthLinkedIn';
+
+import * as apiResponses from '@typing/apiResponses';
 
 /**
  * Controller in charge of retrieveing LinkedIn profile info with OAuth.

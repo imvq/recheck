@@ -1,8 +1,9 @@
 import { Path, GET } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
-import * as apiResponses from '@typing/apiResponses';
 import HealthService from '@services/Health';
+
+import * as apiResponses from '@typing/apiResponses';
 
 /**
  * Default controller in charge of checking the API.

@@ -1,5 +1,3 @@
-import * as utilityTypes from '@typing/utility';
-
 export class BindReviewTargetDto {
   public constructor(
     public reviewId: string,
@@ -50,7 +48,7 @@ export class CompleteRegistrationDto {
 export class CreateCompanyDto {
   public constructor(
     public name: string,
-    public logoUrl: utilityTypes.Nullable<string>
+    public logoUrl: string | null
   ) {}
 }
 

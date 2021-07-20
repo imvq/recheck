@@ -17,7 +17,6 @@ import express, {
 import * as constants from '@common/constants';
 import * as computed from '@common/computed';
 import * as generalTypes from '@typing/general';
-import * as utilityTypes from '@typing/utility';
 import utils from '@utils';
 
 import logger from '@logging/Logger';
@@ -31,7 +30,7 @@ export default class App {
 
   private port: number = constants.DEFAULT_PORT;
 
-  private server: utilityTypes.Nullable<https.Server | http.Server> = null;
+  private server: https.Server | http.Server | null = null;
 
   public constructor(private readonly app: Application = express()) {
     this.resolveHost();

@@ -2,8 +2,9 @@ import { GET, POST, Path, Context, ServiceContext } from 'typescript-rest';
 import { Inject } from 'typescript-ioc';
 
 import dto from '@dto';
-import * as apiResponses from '@typing/apiResponses';
 import FacebookOAuthService from '@services/OAuthFacebook';
+
+import * as apiResponses from '@typing/apiResponses';
 
 /**
  * Controller in charge of retrieveing Facebook profile info with OAuth.

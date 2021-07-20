@@ -136,6 +136,7 @@ export interface ReviewData {
 
 export interface SearchProfileInfo {
   name: string;
+  shareableId: string;
   photoUrl: string;
   company: string;
   position: string;

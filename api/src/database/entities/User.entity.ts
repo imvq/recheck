@@ -1,16 +1,11 @@
 import * as orm from 'typeorm';
 
-import * as utilityTypes from '@typing/utility';
 import NameToken from './NameToken.entity';
 import Company from './Company.entity';
 import Review from './Review.entity';
 
-/**
- * User model.
- */
 @orm.Entity({ name: 'users' })
 export default class User {
-  // Primary key.
   @orm.Index({ unique: true })
   @orm.PrimaryColumn('varchar', { length: 30 })
   profileId!: string;
@@ -46,7 +41,7 @@ export default class User {
   // The filed is supposed to be generated manually.
   @orm.Column('varchar', { length: 36, nullable: true })
   @orm.Index()
-  confirmationCode!: utilityTypes.Nullable<string>;
+  confirmationCode!: string | null;
 
   // Full name.
   @orm.Column('text')
