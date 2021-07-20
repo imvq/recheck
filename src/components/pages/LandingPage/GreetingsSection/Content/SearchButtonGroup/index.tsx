@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
-import { AppState, setPageLocked, setIsSearchPopupVisible, setIsLoginPopupVisible } from 'store';
+import controlledHistory from 'utils/routing';
+import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 import RocketGroup from './RocketGroup';
 
 import * as types from './types';
@@ -12,7 +13,6 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 
 const mapDispatchToProps: types.IDispatchProps = {
   lockPage: setPageLocked,
-  setIsSearchPopupVisible,
   setIsLoginPopupVisible
 };
 
@@ -25,7 +25,7 @@ const SearchButtonGroup = (props: types.IProps) => (
     props.isAuthorized === null
       ? props.lockPage
       : props.isAuthorized
-        ? () => props.setIsSearchPopupVisible(true)
+        ? () => controlledHistory.push('/search')
         : () => props.setIsLoginPopupVisible(true)
   }
   >
