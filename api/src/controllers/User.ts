@@ -27,6 +27,17 @@ export default class UserController {
   }
 
   /**
+   * Check if provided email is available.
+   */
+  @Path('/email/is-available')
+  @BodyGuard
+  @POST
+  public async heckIsEmailAvailable(bodyData: dto.СheckIsEmailAvailableDto)
+    : Promise<apiResponses.ICheckIsEmailAvailableResponseDto> {
+    return this.injectedService.checkIsEmailAvailable(bodyData);
+  }
+
+  /**
    * Check if the user is registered in the app.
    */
   @Path('/is-registered')

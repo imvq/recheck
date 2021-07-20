@@ -15,6 +15,11 @@ export default class Api {
     baseURL: process.env.REACT_APP_API
   });
 
+  public static checkIsEmailAvailable(email: string)
+    : generalTypes.APIResponse<apiResponses.CheckIsEmailAvailable> {
+    return Api.instance.post('/user/email/is-available', { email });
+  }
+
   public static checkIsRegistered(profileId: string)
     : generalTypes.APIResponse<apiResponses.CheckIsRegisteredResponseDto> {
     return Api.instance.post('/user/is-registered', { profileId });

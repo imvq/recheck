@@ -2,6 +2,7 @@ import { useState, memo } from 'react';
 import { connect } from 'react-redux';
 
 import * as generalTypes from 'utils/typing/general';
+import Api from 'utils/api';
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
 import { inputHandler, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
@@ -44,14 +45,19 @@ const mapDispatchToProps: types.IDispatchProps = {
 const RegistrationBox = (props: types.IProps) => {
   const [email, setEmail] = useState('');
   const [company, setCompany] = useState({ id: -1, name: '' });
-  const setCompanyName = (name: string) => setCompany({ id: -1, name });
   const [position, setPosition] = useState('');
   const [workStartMonth, setWorkStartMonth] = useState(-1);
   const [workStartYear, setWorkStartYear] = useState(-1);
 
-  const [isEmailErrorVisible, setIsEmailErrorVisible] = useState(false);
+  const [isEmailValidationErrorVisible, setIsEmailValidationErrorVisible] = useState(false);
+  const [isEmailAvailabilityErrorVisible, setIsEmailAvailabilityErrorVisible] = useState(false);
+
   const recalculateEmailErrorVisibility = () => {
-    setIsEmailErrorVisible(!isValidEmail(email));
+    setIsEmailValidationErrorVisible(!isValidEmail(email));
+
+    Api.checkIsEmailAvailable(email)
+      .then(checkData => setIsEmailAvailabilityErrorVisible(checkData.data.success))
+      .catch(() => setIsEmailAvailabilityErrorVisible(true));
   };
 
   const findCompanyMatches = (sequence: string) => {
@@ -59,9 +65,11 @@ const RegistrationBox = (props: types.IProps) => {
   };
 
   const emailHandler = (event: generalTypes.InputEvent) => {
-    setIsEmailErrorVisible(false);
+    setIsEmailValidationErrorVisible(false);
     setEmail(event.target.value);
   };
+
+  const setCompanyName = (name: string) => setCompany({ id: -1, name });
 
   const companyNameHandler = (event: generalTypes.InputEvent) => inputHandler(
     event,
@@ -78,11 +86,12 @@ const RegistrationBox = (props: types.IProps) => {
     Number.parseInt(option.text, 10)
   );
 
-  const canProceed = () => isValidEmail(email)
+  const canProceed = () => !isEmailValidationErrorVisible
+    && !isEmailAvailabilityErrorVisible
     && !!company && !!position
     && workStartMonth > -1 && workStartYear > -1;
 
-  function proceedIfAllowed() {
+  const proceedIfAllowed = () => {
     if (canProceed()) {
       props.onProceed({
         profileId: props.currentProfileInfo.currentId,
@@ -96,7 +105,7 @@ const RegistrationBox = (props: types.IProps) => {
         referral: props.referral
       });
     }
-  }
+  };
 
   return (
     <styled.BoxBaseWrapper>
@@ -105,10 +114,16 @@ const RegistrationBox = (props: types.IProps) => {
           <styled.InputDescription>Рабочий email:</styled.InputDescription>
         </styled.InputDescriptionWrapper>
         <styled.Input type='text' onBlur={recalculateEmailErrorVisibility} onChange={emailHandler} />
-        {isEmailErrorVisible
+        {isEmailValidationErrorVisible
           && (
             <styled.TextDescription isHighlighted>
               Некорректный почтовый адрес
+            </styled.TextDescription>
+          )}
+        {isEmailAvailabilityErrorVisible
+          && (
+            <styled.TextDescription isHighlighted>
+              Этот почтовый адрес уже занят
             </styled.TextDescription>
           )}
       </styled.InputGroupWrapper>
@@ -184,6 +199,4 @@ const RegistrationBox = (props: types.IProps) => {
   );
 };
 
-export default memo(
-  connect(mapStateToProps, mapDispatchToProps)(RegistrationBox)
-);
+export default memo(connect(mapStateToProps, mapDispatchToProps)(RegistrationBox));

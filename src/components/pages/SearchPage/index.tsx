@@ -14,7 +14,6 @@ import {
 
 import * as constants from 'utils/constants';
 import * as generalTypes from 'utils/typing/general';
-import { cssVars } from 'utils/style.common';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
 import DropList from 'components/shared/DropList';
 import SearchField from './SearchField';

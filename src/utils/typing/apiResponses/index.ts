@@ -3,6 +3,8 @@ import { IGetNReviewsResponseDto, IGetNthReviewResponseDto, IProfileDto, ISimple
 
 export interface BindReviewtargetResponseDto extends ISimpleActionResponse {}
 
+export interface CheckIsEmailAvailable extends ISimpleActionResponse {}
+
 export interface CheckIsRegisteredResponseDto {
   isRegistered: boolean;
 }

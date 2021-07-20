@@ -30,6 +30,10 @@ export class CheckAccessToReviewsAboutUserDto {
   ) {}
 }
 
+export class СheckIsEmailAvailableDto {
+  public constructor(public email: string) {}
+}
+
 export class CheckIsUserConfirmedDto {
   public constructor(public profileId: string) {}
 }

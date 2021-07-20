@@ -32,6 +32,11 @@ export default class UserManager {
     return getRepository(User).findOne(profileId, { relations });
   }
 
+  public static async getUserByEmail(email: string)
+    : Promise<User | undefined> {
+    return getRepository(User).findOne({ email });
+  }
+
   public static async getUserBySharedId(id: string, relations?: string[])
     : Promise<User | undefined> {
     return getRepository(User).findOne({ shareableId: id }, { relations });
