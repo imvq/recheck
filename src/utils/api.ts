@@ -87,6 +87,11 @@ export default class Api {
     return Api.instance.post('/user/prepare', profileInfoDto);
   }
 
+  public static resendConfirmation(profileId: string)
+    : generalTypes.APIResponse<apiResponses.ResendConfirmationResponseDto> {
+    return Api.instance.post('/user/confirmation/resend', { profileId });
+  }
+
   public static prepareReview(reviewData: generalTypes.ReviewData)
     : generalTypes.APIResponse<apiResponses.PrepareReviewResponseDto> {
     return Api.instance.post('/review/prepare', reviewData);

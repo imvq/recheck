@@ -112,6 +112,10 @@ export class UserDto {
 
 export class PrepareUserDto extends UserDto {}
 
+export class ResendConfirmationDto {
+  public constructor(public profileId: string) {}
+}
+
 export class RetrievePorfileInfoReduced {
   public constructor(public profileId: string) {}
 }

@@ -54,4 +54,6 @@ export type PrepareReviewResponseDto = ISimpleActionResponse;
 
 export type PrepareProfileResponseDto = ISimpleActionResponse;
 
+export type ResendConfirmationResponseDto = ISimpleActionResponse;
+
 export type SearchUserDto = genearalTypes.SearchProfileInfo;

@@ -56,6 +56,7 @@ export default class UserService {
   /**
    * Save user info and send email to confirm.
    */
+  @utils.dbErrorDefaultReactor({ except: [], logger })
   public async prepareUser(profileDto: dto.PrepareUserDto)
     : Promise<apiResponses.IPrepareUserResponseDto> {
     const confirmationCode = uuidv1();
@@ -67,6 +68,25 @@ export default class UserService {
     // Send the confirmation code.
     try {
       await MailService.sendConfirmationMail(profileDto.email, confirmationCode);
+    } catch (error) {
+      logger.err(error.message);
+      return { success: false };
+    }
+
+    return { success: true };
+  }
+
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  public async resendConfirmation(resendDto: dto.ResendConfirmationDto)
+    : Promise<apiResponses.IResendConfirmationResponseDto> {
+    const target = await UserManager.getUser(resendDto.profileId);
+
+    if (!target || !target.confirmationCode) {
+      throw new Errors.BadRequestError('User confirmation is not possible.');
+    }
+
+    try {
+      await MailService.sendConfirmationMail(target.email, target.confirmationCode);
     } catch (error) {
       logger.err(error.message);
       return { success: false };

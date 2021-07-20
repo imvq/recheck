@@ -71,6 +71,17 @@ export default class UserController {
   }
 
   /**
+   * Resend confirmation mail.
+   */
+  @Path('/confirmation/resend')
+  @BodyGuard
+  @POST
+  public async resendConfirmation(bodyData: dto.ResendConfirmationDto)
+    : Promise<apiResponses.IResendConfirmationResponseDto> {
+    return this.injectedService.resendConfirmation(bodyData);
+  }
+
+  /**
    * Complete user registration.
    */
   @Path('/confirm')
