@@ -7,8 +7,3 @@ export function mapCompaniesDataToOptions(companies: CompanyReduced[]) {
     imageUrl: company.logoUrl
   }));
 }
-
-export function isValidEmail(email: string): boolean {
-  return /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
-    .test(email.toLowerCase());
-}

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { cssVars } from 'utils/style.common';
+import { cssVars, mixins } from 'utils/style.common';
 import BackgroundSvgPath from 'assets/images/pages/UserConfirmationAwaiterPage/Background.svg';
 
 export const Wrapper = styled.div`
@@ -42,4 +42,21 @@ export const ButtonWrapper = styled.div`
   &:last-of-type {
     padding-bottom: 1rem;
   }
+`;
+
+export const InputWrapper = styled.div`
+  width: 21rem;
+  padding: 1rem 0 1rem;
+`;
+
+export const Input = styled.input`
+  ${mixins.DefaultInput};
+
+  text-align: center;
+`;
+
+export const TextAlert = styled.span`
+  color: red;
+  font-size: 1.25rem;
+  padding: 1rem 0 1rem;
 `;

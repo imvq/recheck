@@ -13,7 +13,7 @@ export const Wrapper = styled.button<IStyledProps>`
   display: flex;
   justify-content: center;
   min-width: 12.5rem;
-  width: ${props => props.width || 'fit-content'};
+  width: 'fit-content';
   height: fit-content;
   border: none;
   outline: none;
@@ -26,6 +26,7 @@ export const Wrapper = styled.button<IStyledProps>`
 
 export const ButtonContentArea = styled.div<IStyledProps>`
   position: relative;
+  width: ${props => props.width || 'initial'};
   height: ${props => props.height || cssVarsLocal.defaultHeight};
   padding: 0 calc(${cssVars.thiknessDefault} * 3) 0;
   font-size: ${props => props.fontSize || '1.1rem'};

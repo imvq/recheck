@@ -20,6 +20,14 @@ export function inputHandler(event: generalTypes.InputEvent, setter: (value: str
 }
 
 /**
+ * Validate email address.
+ */
+export function isValidEmail(email: string): boolean {
+  return /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i
+    .test(email.toLowerCase());
+}
+
+/**
  * Validate URL.
  */
 export function isValidUrl(text: string): boolean {

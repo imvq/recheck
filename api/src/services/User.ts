@@ -35,7 +35,7 @@ export default class UserService {
   @utils.dbErrorDefaultReactor({ except: [], logger })
   public async checkIsEmailAvailable(emailDto: dto.СheckIsEmailAvailableDto)
     : Promise<apiResponses.ICheckIsEmailAvailableResponseDto> {
-    return { success: !!await UserManager.getUserByEmail(emailDto.email) };
+    return { success: !await UserManager.getUserByEmail(emailDto.email) };
   }
 
   @utils.dbErrorDefaultReactor({ except: [], logger })

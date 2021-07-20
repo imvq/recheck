@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { cssVars, mixins } from 'utils/style.common';
+import { mixins } from 'utils/style.common';
 
 export const BoxBaseWrapper = styled.div`
   width: 60rem;
@@ -114,7 +114,7 @@ export const CommentArea = styled(TextArea)`
   min-height: 12rem;
 `;
 
-export const TextDescription = styled.span<{ isHighlighted?: boolean; }>`
+export const TextAlert = styled.span<{ isHighlighted?: boolean; }>`
   ${props => (props.isHighlighted ? 'color: red;' : '')}
   font-size: 1.25rem;
   padding: 1rem 0 1rem;

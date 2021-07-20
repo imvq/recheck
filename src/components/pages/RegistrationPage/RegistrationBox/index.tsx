@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import * as generalTypes from 'utils/typing/general';
 import Api from 'utils/api';
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
-import { inputHandler, getNValuesDown } from 'utils/functions';
+import { inputHandler, isValidEmail, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
 import DropList from 'components/shared/DropList';
 
 import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
-import { isValidEmail, mapCompaniesDataToOptions } from './functions';
+import { mapCompaniesDataToOptions } from './functions';
 
 const months: generalTypes.OptionType[] = [
   { key: 0, text: 'Январь' },
@@ -116,15 +116,15 @@ const RegistrationBox = (props: types.IProps) => {
         <styled.Input type='text' onBlur={recalculateEmailErrorVisibility} onChange={emailHandler} />
         {isEmailValidationErrorVisible
           && (
-            <styled.TextDescription isHighlighted>
+            <styled.TextAlert isHighlighted>
               Некорректный почтовый адрес
-            </styled.TextDescription>
+            </styled.TextAlert>
           )}
         {isEmailAvailabilityErrorVisible
           && (
-            <styled.TextDescription isHighlighted>
+            <styled.TextAlert isHighlighted>
               Этот почтовый адрес уже занят
-            </styled.TextDescription>
+            </styled.TextAlert>
           )}
       </styled.InputGroupWrapper>
 
@@ -188,7 +188,7 @@ const RegistrationBox = (props: types.IProps) => {
         </styled.InputRowWrapper>
       </styled.InputGroupWrapper>
 
-      <styled.TextDescription>Все поля обязательны к заполнению</styled.TextDescription>
+      <styled.TextAlert>Все поля обязательны к заполнению</styled.TextAlert>
 
       <styled.ButtonGroupWrapper>
         <CustomButton isDisabled={!canProceed()} onClick={proceedIfAllowed}>
