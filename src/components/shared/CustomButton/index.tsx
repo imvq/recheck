@@ -5,7 +5,7 @@ import * as styled from './styled';
  * Custom button with website-wide styles.
  */
 export default (props: types.IProps) => (
-  <styled.Wrapper onClick={props.onClick} disabled={props.isDisabled}>
+  <styled.Wrapper width={props.width} onClick={props.onClick} disabled={props.isDisabled}>
     <styled.ButtonContentArea
       isDisabled={props.isDisabled}
       height={props.height}

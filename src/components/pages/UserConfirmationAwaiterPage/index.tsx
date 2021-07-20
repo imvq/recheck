@@ -17,8 +17,18 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => (
       <styled.Text>На вашу почту было отправлено письмо с дальнейшими указаниями.</styled.Text>
       <styled.Text>Пожалуйста, проверьте ваш почтовый ящик.</styled.Text>
       <styled.ButtonWrapper>
-        <CustomButton isDisabled={false} isHollow onClick={() => onExit(props.lockPage)}>
+        <CustomButton width='16rem' isDisabled={false} isHollow onClick={() => onExit(props.lockPage)}>
           Выйти из учётной записи
+        </CustomButton>
+      </styled.ButtonWrapper>
+      <styled.ButtonWrapper>
+        <CustomButton width='16rem' isDisabled={false} isHollow onClick={() => onExit(props.lockPage)}>
+          Отправить письмо повторно
+        </CustomButton>
+      </styled.ButtonWrapper>
+      <styled.ButtonWrapper>
+        <CustomButton width='16rem' isDisabled={false} isHollow onClick={() => onExit(props.lockPage)}>
+          Изменить введённый почтовый ящик
         </CustomButton>
       </styled.ButtonWrapper>
     </styled.MainFrame>

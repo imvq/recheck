@@ -13,7 +13,7 @@ export const Wrapper = styled.button<IStyledProps>`
   display: flex;
   justify-content: center;
   min-width: 12.5rem;
-  width: fit-content;
+  width: ${props => props.width || 'fit-content'};
   height: fit-content;
   border: none;
   outline: none;

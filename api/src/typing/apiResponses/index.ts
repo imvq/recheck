@@ -95,6 +95,8 @@ export interface IPrepareUserResponseDto extends ISimpleActionResponse {}
 
 export interface IRetrieveFacebookProfileInfoResponseDto extends IRetrieveProfileInfoResponseDto {}
 
+export interface IResendConfirmationResponseDto extends ISimpleActionResponse {}
+
 export interface IRetrieveFacebookProfileOnfoReducedResponseDto {
   email?: string;
   shareableId?: string;

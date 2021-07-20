@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 export interface IStyledOwnProps {
+  width?: string;
   height?: string;
   color?: string;
   backgroundColor?: string;
