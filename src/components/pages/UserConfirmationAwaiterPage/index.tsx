@@ -124,12 +124,6 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
         {isEmailBlockExpanded && (
           <>
             <styled.ButtonWrapper>
-              <CustomButton width='16rem' isDisabled={!canProceed()} isHollow onClick={reassignConfirmationEmail}>
-                Подтвердить
-              </CustomButton>
-            </styled.ButtonWrapper>
-
-            <styled.ButtonWrapper>
               <CustomButton width='16rem' isDisabled={false} isHollow onClick={fold}>
                 Назад
               </CustomButton>
@@ -150,6 +144,12 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
                 }}
               />
             </styled.InputWrapper>
+
+            <styled.ButtonWrapper>
+              <CustomButton width='16rem' isDisabled={!canProceed()} isHollow onClick={reassignConfirmationEmail}>
+                Подтвердить
+              </CustomButton>
+            </styled.ButtonWrapper>
 
             {emailState.isEmailValidationErrorVisible
               && (<styled.TextAlert>Некорректный почтовый адрес</styled.TextAlert>)}
