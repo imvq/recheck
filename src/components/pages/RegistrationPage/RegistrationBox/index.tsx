@@ -1,10 +1,10 @@
-import { useState, memo } from 'react';
+import { useState, useRef, memo } from 'react';
 import { connect } from 'react-redux';
 
 import * as generalTypes from 'utils/typing/general';
 import Api from 'utils/api';
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
-import { inputHandler, isValidEmail, getNValuesDown } from 'utils/functions';
+import { inputHandler, isValidEmail as validateEmail, getNValuesDown } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
 import DropList from 'components/shared/DropList';
@@ -43,30 +43,54 @@ const mapDispatchToProps: types.IDispatchProps = {
 };
 
 const RegistrationBox = (props: types.IProps) => {
-  const [email, setEmail] = useState('');
   const [company, setCompany] = useState({ id: -1, name: '' });
   const [position, setPosition] = useState('');
   const [workStartMonth, setWorkStartMonth] = useState(-1);
   const [workStartYear, setWorkStartYear] = useState(-1);
 
-  const [isEmailValidationErrorVisible, setIsEmailValidationErrorVisible] = useState(false);
-  const [isEmailAvailabilityErrorVisible, setIsEmailAvailabilityErrorVisible] = useState(false);
+  // Flags defining email validation state and the fact the validation errors are visible.
+  // Validation errors are not supposed to be always visible when the email
+  // is not correct for any reason.
+  // The values is supposed to change simultaneously.
+  const [emailState, setEmailState] = useState<types.IEmailState>({
+    email: '',
+    isEmailValid: false,
+    isEmailValidationErrorVisible: false,
+    isEmailAvailabilityErrorVisible: false
+  });
 
-  const recalculateEmailErrorVisibility = () => {
-    setIsEmailValidationErrorVisible(!isValidEmail(email));
+  // Since the API doesn't respond instantly (while checking email availability)
+  // checkIsEmailAvailable's thennable gets outdated emailState from closure.
+  // To avoid this we need to store actual email data value using reference.
+  const latestEmailState = useRef(emailState);
 
-    Api.checkIsEmailAvailable(email)
-      .then(checkData => setIsEmailAvailabilityErrorVisible(checkData.data.success))
-      .catch(() => setIsEmailAvailabilityErrorVisible(true));
+  const recalculateEmailErrorState = () => {
+    setEmailState(() => {
+      const updatedEmailState = {
+        ...emailState,
+        isEmailValidationErrorVisible: !validateEmail(emailState.email),
+        // null means availability check is in progress,
+        // e.i. cannot proceed with email update.
+        isEmailAvailabilityErrorVisible: null
+      };
+
+      latestEmailState.current = updatedEmailState;
+      return updatedEmailState;
+    });
+
+    Api.checkIsEmailAvailable(emailState.email)
+      .then(checkData => setEmailState({
+        ...latestEmailState.current,
+        isEmailAvailabilityErrorVisible: !checkData.data.success
+      }))
+      .catch(() => setEmailState({
+        ...latestEmailState.current,
+        isEmailAvailabilityErrorVisible: true
+      }));
   };
 
   const findCompanyMatches = (sequence: string) => {
     props.loadMatchedCompanies(sequence);
-  };
-
-  const emailHandler = (event: generalTypes.InputEvent) => {
-    setIsEmailValidationErrorVisible(false);
-    setEmail(event.target.value);
   };
 
   const setCompanyName = (name: string) => setCompany({ id: -1, name });
@@ -86,8 +110,9 @@ const RegistrationBox = (props: types.IProps) => {
     Number.parseInt(option.text, 10)
   );
 
-  const canProceed = () => !isEmailValidationErrorVisible
-    && !isEmailAvailabilityErrorVisible
+  const canProceed = () => emailState.isEmailValid
+    && !emailState.isEmailAvailabilityErrorVisible
+    && emailState.isEmailAvailabilityErrorVisible !== null
     && !!company && !!position
     && workStartMonth > -1 && workStartYear > -1;
 
@@ -97,7 +122,7 @@ const RegistrationBox = (props: types.IProps) => {
         profileId: props.currentProfileInfo.currentId,
         name: props.currentProfileInfo.currentName,
         photoUrl: props.currentProfileInfo.currentPhotoUrl,
-        email,
+        email: emailState.email,
         company,
         position,
         workStartMonth,
@@ -113,19 +138,23 @@ const RegistrationBox = (props: types.IProps) => {
         <styled.InputDescriptionWrapper>
           <styled.InputDescription>Рабочий email:</styled.InputDescription>
         </styled.InputDescriptionWrapper>
-        <styled.Input type='text' onBlur={recalculateEmailErrorVisibility} onChange={emailHandler} />
-        {isEmailValidationErrorVisible
-          && (
-            <styled.TextAlert isHighlighted>
-              Некорректный почтовый адрес
-            </styled.TextAlert>
-          )}
-        {isEmailAvailabilityErrorVisible
-          && (
-            <styled.TextAlert isHighlighted>
-              Этот почтовый адрес уже занят
-            </styled.TextAlert>
-          )}
+        <styled.Input
+          type='text'
+          onBlur={recalculateEmailErrorState}
+          onChange={(event) => {
+            setEmailState({
+              email: event.target.value,
+              isEmailValid: validateEmail(event.target.value),
+              isEmailValidationErrorVisible: false,
+              isEmailAvailabilityErrorVisible: false
+            });
+          }}
+        />
+
+        {emailState.isEmailValidationErrorVisible
+          && (<styled.TextAlert isHighlighted>Некорректный почтовый адрес</styled.TextAlert>)}
+        {emailState.isEmailAvailabilityErrorVisible
+          && (<styled.TextAlert isHighlighted>Этот почтовый адрес уже занят</styled.TextAlert>)}
       </styled.InputGroupWrapper>
 
       <styled.InputGroupWrapper>
