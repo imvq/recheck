@@ -82,6 +82,17 @@ export default class UserController {
   }
 
   /**
+   * Update confirmation email.
+   */
+  @Path('/confirmation/reassign')
+  @BodyGuard
+  @POST
+  public async reassignConfirmationEmail(bodyData: dto.ReassignConfirmationEmailDto)
+    : Promise<apiResponses.IReassignConfirmationEmailResponseDto> {
+    return this.injectedService.reassignConfirmationEmail(bodyData);
+  }
+
+  /**
    * Complete user registration.
    */
   @Path('/confirm')

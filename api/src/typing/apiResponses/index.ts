@@ -93,6 +93,8 @@ export interface IPrepareReviewResponseDto extends ISimpleActionResponse {}
 
 export interface IPrepareUserResponseDto extends ISimpleActionResponse {}
 
+export interface IReassignConfirmationEmailResponseDto extends ISimpleActionResponse {}
+
 export interface IRetrieveFacebookProfileInfoResponseDto extends IRetrieveProfileInfoResponseDto {}
 
 export interface IResendConfirmationResponseDto extends ISimpleActionResponse {}

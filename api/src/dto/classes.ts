@@ -112,6 +112,13 @@ export class UserDto {
 
 export class PrepareUserDto extends UserDto {}
 
+export class ReassignConfirmationEmailDto {
+  public constructor(
+    public profileId: string,
+    public email: string
+  ) {}
+}
+
 export class ResendConfirmationDto {
   public constructor(public profileId: string) {}
 }

@@ -92,6 +92,11 @@ export default class Api {
     return Api.instance.post('/user/confirmation/resend', { profileId });
   }
 
+  public static reassignConfirmationEmail(reassignDto: generalTypes.ReassignConfirmationEmailDto)
+    : generalTypes.APIResponse<apiResponses.ReassignConfirmationEmailResponseDto> {
+    return Api.instance.post('/user/confirmation/reassign', reassignDto);
+  }
+
   public static prepareReview(reviewData: generalTypes.ReviewData)
     : generalTypes.APIResponse<apiResponses.PrepareReviewResponseDto> {
     return Api.instance.post('/review/prepare', reviewData);

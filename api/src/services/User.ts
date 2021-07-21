@@ -61,19 +61,13 @@ export default class UserService {
     : Promise<apiResponses.IPrepareUserResponseDto> {
     const confirmationCode = uuidv1();
 
-    // Save the user.
     await this.saveUser(profileDto, confirmationCode);
     await NameTokensService.saveName(profileDto.profileId, profileDto.name);
 
-    // Send the confirmation code.
-    try {
-      await MailService.sendConfirmationMail(profileDto.email, confirmationCode);
-    } catch (error) {
-      logger.err(error.message);
-      return { success: false };
-    }
-
-    return { success: true };
+    // We need to await the returned value to be able to handle errors
+    // just inside the decorated method so the error can be intercepted and returned.
+    // eslint-disable-next-line no-return-await
+    return await this.sendConfirmation(profileDto.email, confirmationCode);
   }
 
   @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
@@ -85,8 +79,37 @@ export default class UserService {
       throw new Errors.BadRequestError('User confirmation is not possible.');
     }
 
+    // We need to await the returned value to be able to handle errors
+    // just inside the decorated method so the error can be intercepted and returned.
+    // eslint-disable-next-line no-return-await
+    return await this.sendConfirmation(target.email, target.confirmationCode);
+  }
+
+  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  public async reassignConfirmationEmail(reassignmentDto: dto.ReassignConfirmationEmailDto)
+    : Promise<apiResponses.IReassignConfirmationEmailResponseDto> {
+    const target = await UserManager.getUser(reassignmentDto.profileId);
+
+    if (!target || target.email === reassignmentDto.email) {
+      throw new Errors.BadRequestError('Email reassignment is not possible.');
+    }
+
+    if (target.confirmationCode === null) {
+      throw new Errors.BadRequestError('User is already confirmed.');
+    }
+
+    target.email = reassignmentDto.email;
+    await UserManager.updateUser(target);
+
+    // We need to await the returned value to be able to handle errors
+    // just inside the decorated method so the error can be intercepted and returned.
+    // eslint-disable-next-line no-return-await
+    return await this.sendConfirmation(target.email, target.confirmationCode);
+  }
+
+  private async sendConfirmation(email: string, confirmationCode: string) {
     try {
-      await MailService.sendConfirmationMail(target.email, target.confirmationCode);
+      await MailService.sendConfirmationMail(email, confirmationCode);
     } catch (error) {
       logger.err(error.message);
       return { success: false };

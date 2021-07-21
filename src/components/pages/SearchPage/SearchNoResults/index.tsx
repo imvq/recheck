@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import { AppState } from 'store';
-import { showCopyingToast } from 'utils/functions';
+import { showToast } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 
 import * as types from './types';
@@ -30,7 +30,7 @@ const SearchNoResults = (props: types.IProps) => {
           <styled.ButtonWrapper>
             <CustomButton
               onClick={() => {
-                showCopyingToast();
+                showToast('Ссылка скопирована');
                 copyLink(props.currentShareableId);
               }}
               fontSize='1.3rem'

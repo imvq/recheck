@@ -1,11 +1,12 @@
 import { useState, useRef } from 'react';
 import { connect } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import * as SvgLoaders from 'svg-loaders-react';
 
 import Api from 'utils/api';
 import { AppState, setPageLocked } from 'store';
 import CustomButton from 'components/shared/CustomButton';
-import { isValidEmail as validateEmail, onExit } from 'utils/functions';
+import { isValidEmail as validateEmail, onExit, showToast } from 'utils/functions';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -68,6 +69,16 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
 
   const resendConfirmation = () => {
     Api.resendConfirmation(props.currentProfileInfo.currentId);
+    showToast('Письмо отправлено повторно');
+  };
+
+  const reassignConfirmationEmail = () => {
+    Api.reassignConfirmationEmail({
+      profileId: props.currentProfileInfo.currentId,
+      email: emailState.email
+    });
+    fold();
+    showToast('Письмо отправлено на новый адрес');
   };
 
   const expand = () => { setIsEmailBlockExpanded(true); };
@@ -113,7 +124,7 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
         {isEmailBlockExpanded && (
           <>
             <styled.ButtonWrapper>
-              <CustomButton width='16rem' isDisabled={!canProceed()} isHollow onClick={() => { alert(emailState.email); }}>
+              <CustomButton width='16rem' isDisabled={!canProceed()} isHollow onClick={reassignConfirmationEmail}>
                 Подтвердить
               </CustomButton>
             </styled.ButtonWrapper>
@@ -150,6 +161,9 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
         )}
 
       </styled.MainFrame>
+
+      {/* Toast notification wrapper. */}
+      <ToastContainer />
     </styled.Wrapper>
   );
 };

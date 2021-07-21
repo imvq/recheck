@@ -105,10 +105,10 @@ export function mapReviewToArray(from: IReviewCardCommonData) {
 }
 
 /**
- * Toast of copying.
+ * Show notification toast.
  */
-export function showCopyingToast() {
-  return toast.dark('Ссылка скопирована', {
+export function showToast(text: string) {
+  return toast.dark(text, {
     position: 'bottom-left',
     style: {
       backgroundColor: '#33c7ba',

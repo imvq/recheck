@@ -110,6 +110,11 @@ export interface PreviousSearchCardData {
   photoUrl: string;
 }
 
+export interface ReassignConfirmationEmailDto {
+  profileId: string;
+  email: string;
+}
+
 export interface ReviewCardGotData extends IReviewCardCommonData {}
 
 export interface ReviewCardLeftData extends IReviewCardCommonData {}

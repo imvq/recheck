@@ -80,4 +80,8 @@ export default class UserManager {
       .where('targetId = :targetId', { targetId: targetUser?.profileId })
       .getOne();
   }
+
+  public static async updateUser(user: User): Promise<User> {
+    return getRepository(User).save(user);
+  }
 }

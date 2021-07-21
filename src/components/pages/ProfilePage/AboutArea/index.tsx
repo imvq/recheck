@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import { AppState, loadAboutTabData, loadNthReviewGot } from 'store';
-import { showCopyingToast } from 'utils/functions';
+import { showToast } from 'utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';
 import ReviewCard from 'components/shared/ReviewCard';
@@ -53,7 +53,7 @@ const AboutArea = (props: types.IProps) => {
       </styled.Title>
       <styled.ButtonWrapper>
         <CustomButton onClick={() => {
-          showCopyingToast();
+          showToast('Ссылка скопрована');
           copyLink(props.currentShareableId);
         }}
         >
