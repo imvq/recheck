@@ -129,30 +129,23 @@ const SearchPage = (props: types.IProps) => {
     <styled.Wrapper>
       <styled.Sidebar />
 
-      {isRecommendationsViewVisible && RecommendationsPopup}
-
       <styled.AdaptedHeader id='Header' />
-
       <styled.ContentWrapper>
         {SearchInput}
-
         {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
-
         {/* The search results. */}
         {props.userSearchResults.results.length
           ? <SearchResults userSearchResults={props.userSearchResults} />
           : <SearchNoResults isFirstSearch={isFirstSearch} />}
-
         {props.recommendations.length > 0 && RecommendedCompaniesList}
-
         {/* 'Show all recommendations' label. */}
         {props.recommendations.length > 4
           && <CompaniesExpansionLabel onClick={() => setIsRecommendationsViewVisible(true)} />}
-
       </styled.ContentWrapper>
-
       <styled.AdaptedFooter />
 
+      {/* Recommended companies' stuff. */}
+      {isRecommendationsViewVisible && RecommendationsPopup}
       <SearchPopupManager />
 
     </styled.Wrapper>
