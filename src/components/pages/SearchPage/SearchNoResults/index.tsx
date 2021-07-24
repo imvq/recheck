@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
@@ -46,4 +47,4 @@ const SearchNoResults = (props: types.IProps) => {
     );
 };
 
-export default connect(mapStateToProps)(SearchNoResults);
+export default connect(mapStateToProps)(memo(SearchNoResults));

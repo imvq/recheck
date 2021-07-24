@@ -1,9 +1,9 @@
-import { useState, KeyboardEvent } from 'react';
+import { memo, useState, KeyboardEvent } from 'react';
 
 import * as types from './types';
 import * as styled from './styled';
 
-export default (props: types.IProps) => {
+export default memo((props: types.IProps) => {
   const [previousSearch, setPreviousSearch] = useState<string | null>(null);
   const [searchText, setSearchText] = useState('');
 
@@ -36,4 +36,4 @@ export default (props: types.IProps) => {
       <styled.AdaptedMagnifier $isDimmed={searchText === ''} onClick={doSearch} />
     </styled.Wrapper>
   );
-};
+});

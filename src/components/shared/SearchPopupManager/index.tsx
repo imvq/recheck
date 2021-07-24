@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { connect } from 'react-redux';
 
 import SearchPopup from 'components/shared/SearchPopup';
@@ -17,4 +18,4 @@ const SearchPopupManager = (props: types.IProps) => {
   return props.isSearchPopupVisible ? <SearchPopup /> : null;
 };
 
-export default connect(mapStateToProps)(SearchPopupManager);
+export default connect(mapStateToProps)(memo(SearchPopupManager));

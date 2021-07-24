@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 
 import ExtendedOption from './ExtendedOption';
@@ -23,4 +24,4 @@ const DropList = (props: types.IProps) => (
 
 DropList.Option = ExtendedOption;
 
-export default DropList;
+export default memo(DropList);

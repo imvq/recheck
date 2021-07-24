@@ -63,6 +63,55 @@ const SearchPage = (props: types.IProps) => {
     props.loadMatchedUsers(tokens);
   };
 
+  // Recommendations expansion popup. Absolute-positioned popup.
+  const RecommendationsPopup = (
+    <CompaniesPopup
+      recommendations={props.recommendations}
+      loadNextChunkCallback={props.loadRecommendations}
+      onClose={() => {
+        setIsRecommendationsViewVisible(false);
+        resetRecommendations();
+      }}
+    />
+  );
+
+  // Reduced list of recommended companies.
+  const RecommendedCompaniesList = (
+    <CompaniesResults
+      companies={props.recommendations}
+      setUserSearchResults={results => {
+        setIsRecommendationsViewVisible(true);
+        props.setRecommendedCompaniesShownMembers(results);
+      }}
+    />
+  );
+
+  // The search input.
+  const SearchInput = (
+    <SearchField
+      lockPageCallback={props.lockPage}
+      searchUserCallback={props.searchUser}
+      quickSearchCallback={(event: generalTypes.InputEvent) => {
+        if (event.target.value) {
+          findUsersMatches(event.target.value.trim().split(' '));
+        } else {
+          props.clearMatchedUsers();
+        }
+      }}
+    />
+  );
+
+  // Dropdown with matched users (while typing something at the search field).
+  const QuickSearchResults = (
+    <styled.DropListWrapper>
+      <DropList
+        options={mapUserSearchDataToOptions(props.quickSearchMatchedUsers)}
+        onClose={props.clearMatchedUsers}
+        onOptionSelected={() => {}}
+      />
+    </styled.DropListWrapper>
+  );
+
   // Don't show anything until the user starts its search.
   // If the user search request returned empty list than show
   // a 'no results' label.
@@ -80,62 +129,21 @@ const SearchPage = (props: types.IProps) => {
     <styled.Wrapper>
       <styled.Sidebar />
 
-      {/* Recommendations expansion popup. Absolute-positioned popup. */}
-      {isRecommendationsViewVisible
-        && (
-        <CompaniesPopup
-          recommendations={props.recommendations}
-          loadNextChunkCallback={props.loadRecommendations}
-          onClose={() => {
-            setIsRecommendationsViewVisible(false);
-            resetRecommendations();
-          }}
-        />
-        )}
+      {isRecommendationsViewVisible && RecommendationsPopup}
 
       <styled.AdaptedHeader id='Header' />
 
       <styled.ContentWrapper>
-        {/* The search input. */}
-        <SearchField
-          lockPageCallback={props.lockPage}
-          searchUserCallback={props.searchUser}
-          quickSearchCallback={(event: generalTypes.InputEvent) => {
-            if (event.target.value) {
-              findUsersMatches(event.target.value.trim().split(' '));
-            } else {
-              props.clearMatchedUsers();
-            }
-          }}
-        />
+        {SearchInput}
 
-        {/* Quick search results. */}
-        {props.quickSearchMatchedUsers.length ? (
-          <styled.DropListWrapper>
-            <DropList
-              options={mapUserSearchDataToOptions(props.quickSearchMatchedUsers)}
-              onClose={props.clearMatchedUsers}
-              onOptionSelected={() => {}}
-            />
-          </styled.DropListWrapper>
-        ) : null}
+        {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
 
         {/* The search results. */}
         {props.userSearchResults.results.length
           ? <SearchResults userSearchResults={props.userSearchResults} />
           : <SearchNoResults isFirstSearch={isFirstSearch} />}
 
-        {/* Recommended companies. */}
-        {props.recommendations.length > 0
-          && (
-          <CompaniesResults
-            companies={props.recommendations}
-            setUserSearchResults={results => {
-              setIsRecommendationsViewVisible(true);
-              props.setRecommendedCompaniesShownMembers(results);
-            }}
-          />
-          )}
+        {props.recommendations.length > 0 && RecommendedCompaniesList}
 
         {/* 'Show all recommendations' label. */}
         {props.recommendations.length > 4
