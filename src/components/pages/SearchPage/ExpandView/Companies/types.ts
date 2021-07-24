@@ -1,4 +1,4 @@
-import { Company } from 'utils/typing/general';
+import { Company, SearchProfileInfo } from 'utils/typing/general';
 
 export interface IOwnProps {
   recommendations: Company[];
@@ -6,4 +6,12 @@ export interface IOwnProps {
   onClose(): void;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {
+  recommendedCompaniesShownMembers: SearchProfileInfo[];
+}
+
+export interface IDispatchProps {
+  setRecommendedCompaniesShownMembers(members: SearchProfileInfo[]): void;
+}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

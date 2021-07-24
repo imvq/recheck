@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {
   AppState,
   setRecommendations,
+  setRecommendedCompaniesShownMembers,
   loadMatchedUsers,
   loadRecommendations,
   clearMatchedUsers,
@@ -40,6 +41,7 @@ const mapDispatchToProps: types.IDispatchProps = {
   searchUser,
   setUserSearchResults,
   setRecommendations,
+  setRecommendedCompaniesShownMembers,
   lockPage: setPageLocked
 };
 
@@ -128,7 +130,10 @@ const SearchPage = (props: types.IProps) => {
           && (
           <CompaniesResults
             companies={props.recommendations}
-            setUserSearchResults={props.setUserSearchResults}
+            setUserSearchResults={results => {
+              setIsRecommendationsViewVisible(true);
+              props.setRecommendedCompaniesShownMembers(results);
+            }}
           />
           )}
 

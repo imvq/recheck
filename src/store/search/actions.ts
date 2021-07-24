@@ -10,6 +10,7 @@ import {
   SET_QUICK_SEARCH_MATCHED_USERS,
   SET_RECOMMENDATIONS,
   APPEND_RECOMMENDATIONS,
+  SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS,
   SET_CURRENT_USER_SEARCH_RESULTS
 } from './types';
 
@@ -44,6 +45,12 @@ export const setRecommendations = (results: generalTypes.Company[])
 export const appendRecommendations = (results: generalTypes.Company[])
   : SearchActionType => ({
   type: APPEND_RECOMMENDATIONS,
+  payload: results
+});
+
+export const setRecommendedCompaniesShownMembers = (results: generalTypes.SearchProfileInfo[])
+  : SearchActionType => ({
+  type: SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS,
   payload: results
 });
 

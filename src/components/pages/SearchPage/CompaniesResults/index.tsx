@@ -10,7 +10,6 @@ export default (props: types.IProps) => {
         <styled.CardWrapper key={companyData.id}>
           <CompanyCard
             companyData={companyData}
-            setCurrentCompany={() => {}}
             setCurrentMembers={props.setUserSearchResults}
           />
         </styled.CardWrapper>

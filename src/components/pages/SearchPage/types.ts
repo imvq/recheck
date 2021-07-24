@@ -14,6 +14,7 @@ export interface IDispatchProps {
   searchUser(tokens: string[]): void;
   setUserSearchResults(results: generalTypes.SearchProfileInfo[]): void;
   setRecommendations(companies: generalTypes.Company[]): void;
+  setRecommendedCompaniesShownMembers(members: generalTypes.SearchProfileInfo[]): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

@@ -5,6 +5,7 @@ import {
   SET_QUICK_SEARCH_MATCHED_USERS,
   SET_RECOMMENDATIONS,
   APPEND_RECOMMENDATIONS,
+  SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS,
   SET_CURRENT_USER_SEARCH_RESULTS
 } from './types';
 
@@ -12,6 +13,7 @@ const initialState: SearchState = {
   quickSearchMatchedCompanies: [],
   quickSearchMatchedUsers: [],
   recommendations: [],
+  recommendedCompaniesShownMembers: [],
   userSearchResults: { results: [] }
 };
 
@@ -46,6 +48,11 @@ export function searchReducer(
         recommendations: updatedRecommendations
       };
     }
+    case SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS:
+      return {
+        ...state,
+        recommendedCompaniesShownMembers: action.payload
+      };
     case SET_CURRENT_USER_SEARCH_RESULTS:
       return {
         ...state,

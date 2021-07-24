@@ -21,7 +21,6 @@ export default (props: types.IProps) => (
           height='2.2rem'
           color='#33c7ba'
           onClick={() => {
-            props.setCurrentCompany(props.companyData);
             props.setCurrentMembers(mergeMembersWithCompany(
               props.companyData.members,
               props.companyData

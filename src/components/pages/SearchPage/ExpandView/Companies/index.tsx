@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
+import { connect } from 'react-redux';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
-import { Company, SearchProfileInfo } from 'utils/typing/general';
+import { AppState, setRecommendedCompaniesShownMembers } from 'store';
 import CompanyCard from 'components/shared/CompanyCard';
 import PersonCard from 'components/shared/PersonCard';
 import ExpandView from '../index';
@@ -9,10 +10,16 @@ import ExpandView from '../index';
 import * as types from './types';
 import * as styled from '../styled';
 
-export default (props: types.IProps) => {
+const mapSTateToProps = (store: AppState): types.IStateProps => ({
+  recommendedCompaniesShownMembers: store.search.recommendedCompaniesShownMembers
+});
+
+const mapDispatchToProps: types.IDispatchProps = {
+  setRecommendedCompaniesShownMembers
+};
+
+const Companies = (props: types.IProps) => {
   const [chunk, setChunk] = useState(0);
-  const [currentCompany, setCurrentCompany] = useState<Company>();
-  const [currentMembers, setCurrentMembers] = useState<SearchProfileInfo[]>([]);
 
   const loadNewChunk = () => {
     props.loadNextChunkCallback(chunk + 1);
@@ -30,8 +37,7 @@ export default (props: types.IProps) => {
         <styled.CardWrapper key={company.id}>
           <CompanyCard
             companyData={company}
-            setCurrentCompany={setCurrentCompany}
-            setCurrentMembers={setCurrentMembers}
+            setCurrentMembers={props.setRecommendedCompaniesShownMembers}
           />
         </styled.CardWrapper>
       ))}
@@ -40,7 +46,7 @@ export default (props: types.IProps) => {
 
   const CurrentMembers = () => (
     <>
-      {currentMembers.map(memberData => (
+      {props.recommendedCompaniesShownMembers.map(memberData => (
         <styled.CardWrapper key={Math.random()}>
           <PersonCard userData={{ ...memberData }} />
         </styled.CardWrapper>
@@ -50,12 +56,17 @@ export default (props: types.IProps) => {
 
   const closeHandler = useCallback(() => {
     setChunk(0);
+    props.setRecommendedCompaniesShownMembers([]);
     props.onClose();
   }, [props.onClose]);
 
   return (
     <ExpandView title='Рекомендации' onClose={closeHandler}>
-      {currentMembers.length === 0 ? <CurrentCompanies /> : <CurrentMembers />}
+      {props.recommendedCompaniesShownMembers.length === 0
+        ? <CurrentCompanies />
+        : <CurrentMembers />}
     </ExpandView>
   );
 };
+
+export default connect(mapSTateToProps, mapDispatchToProps)(Companies);
