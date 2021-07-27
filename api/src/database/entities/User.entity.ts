@@ -35,7 +35,17 @@ export default class User {
 
   // Users reviews about whom are available to user.
   @orm.ManyToMany(() => User)
-  @orm.JoinTable()
+  @orm.JoinTable({
+    name: 'users_available',
+    joinColumn: {
+      name: 'ownerId',
+      referencedColumnName: 'profileId'
+    },
+    inverseJoinColumn: {
+      name: 'targetId',
+      referencedColumnName: 'profileId'
+    }
+  })
   availableUsers!: User[];
 
   // The filed is supposed to be generated manually.

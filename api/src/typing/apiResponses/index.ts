@@ -23,8 +23,6 @@ export interface ICheckIsUserRegisteredResponseDto {
   isRegistered: boolean;
 }
 
-export interface ICheckAccessToReviewsAboutUserDto extends ISimpleActionResponse {}
-
 export interface ICheckAuthResponseDto extends ISimpleActionResponse {}
 
 export interface ICompleteRegistration extends ISimpleActionResponse {}
@@ -67,6 +65,8 @@ export interface IGetNReviewsLeftAmountResponseDto extends IGetNReviewsAmountRes
 export interface IGetNthReviewGotResponseDto extends IGetNthReviewResponseDto {}
 
 export interface IGetNthReviewLeftResponseDto extends IGetNthReviewResponseDto {}
+
+export interface IGetTargetNReviewsGotResponseDto extends IGetNReviewsAmountResponseDto {}
 
 export interface IHealthResponseDTO {
   message: string;

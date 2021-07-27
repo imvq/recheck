@@ -5,6 +5,7 @@ import dto from '@dto';
 import utils from '@utils';
 import * as apiResponses from '@typing/apiResponses';
 
+import User from '@database/entities/User.entity';
 import Review from '@database/entities/Review.entity';
 import Company from '@database/entities/Company.entity';
 
@@ -220,16 +221,6 @@ export default class UserService {
     };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
-  public async checkAccessToReviewsAboutUser(bodyData: dto.CheckAccessToReviewsAboutUserDto)
-    : Promise<apiResponses.ICheckAccessToReviewsAboutUserDto> {
-    return {
-      success: await UserManager.hasAccessToReviewsAboutUser(
-        bodyData.askerProfileId, bodyData.targetEmail
-      )
-    };
-  }
-
   @utils.dbErrorDefaultReactor({ except: [], logger })
   public async notifyReferral(referralSharedId: string, targetName: string, targetEmail: string) {
     const referral = await UserManager.getUserBySharedId(referralSharedId);
@@ -242,6 +233,35 @@ export default class UserService {
       );
     } else {
       logger.log(`${referralSharedId} not found in the database.`);
+    }
+  }
+
+  @utils.dbErrorDefaultReactor({
+    except: [
+      Errors.NotFoundError,
+      Errors.ForbiddenError
+    ],
+    logger
+  })
+  public async getTargetNReviewsGot(bodyData: dto.GetTargetNReviewsGotDto) {
+    const asker = await UserManager.getUser(bodyData.askerProfileId);
+    const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
+    this.handleUsersExistence(asker, target);
+    // @ts-ignore: asker and target is guaranteed to be existed here.
+    await this.handleAvailability(asker, target);
+
+    return UserManager.getTargetNReviewsGot(bodyData.askerProfileId, bodyData.targetShareableId);
+  }
+
+  private handleUsersExistence(...users: (User | undefined)[]) {
+    if (users.some(user => !user)) {
+      throw new Errors.NotFoundError('Some of the provided IDs does not represent a user.');
+    }
+  }
+
+  private async handleAvailability(asker: User, target: User) {
+    if (!await UserManager.isTargetAvailable(asker, target)) {
+      throw new Errors.ForbiddenError('Target user is not available for asker');
     }
   }
 }

@@ -11,7 +11,8 @@ import {
   SET_RECOMMENDATIONS,
   APPEND_RECOMMENDATIONS,
   SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS,
-  SET_CURRENT_USER_SEARCH_RESULTS
+  SET_CURRENT_USER_SEARCH_RESULTS,
+  SET_CURRENT_OBSERVED_USER
 } from './types';
 
 export const setQuickSearchMatchedCompanies = (results: generalTypes.CompanyReduced[])
@@ -58,6 +59,12 @@ export const setUserSearchResults = (results: generalTypes.SearchProfileInfo[])
   : SearchActionType => ({
   type: SET_CURRENT_USER_SEARCH_RESULTS,
   payload: results
+});
+
+export const setCurrentObservedUser = (user: generalTypes.SearchProfileInfo)
+  : SearchActionType => ({
+  type: SET_CURRENT_OBSERVED_USER,
+  payload: user
 });
 
 export const searchUser = (tokens: string[]) => (dispatch: Dispatch<AppActionType>) => {

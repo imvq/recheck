@@ -7,6 +7,7 @@ export interface IOwnProps {
 
 export interface IDispatchProps {
   setCurrentMainToolbarEntry(entry: MainToolbarEntry): void;
+  setCurrentObservedUser(user: generalTypes.SearchProfileInfo): void;
   setIsSearchPopupVisible(flag: boolean): void;
 }
 

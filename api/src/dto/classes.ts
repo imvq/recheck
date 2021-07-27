@@ -23,13 +23,6 @@ export class CreateReviewDto {
   ) {}
 }
 
-export class CheckAccessToReviewsAboutUserDto {
-  public constructor(
-    public askerProfileId: string,
-    public targetEmail: string
-  ) {}
-}
-
 export class СheckIsEmailAvailableDto {
   public constructor(public email: string) {}
 }
@@ -53,6 +46,13 @@ export class CreateCompanyDto {
   public constructor(
     public name: string,
     public logoUrl: string | null
+  ) {}
+}
+
+export class GetAccessToUserDto {
+  public constructor(
+    public profileId: string,
+    public shareableId: string
   ) {}
 }
 
@@ -84,6 +84,13 @@ export class GetNthReviewLeftDto {
 
 export class GetRecommendationsDto {
   public constructor(public chunk: number) {}
+}
+
+export class GetTargetNReviewsGotDto {
+  public constructor(
+    public askerProfileId: string,
+    public targetShareableId: string
+  ) {}
 }
 
 export class IsTargetConnectedDto {

@@ -170,13 +170,13 @@ export default class UserController {
   }
 
   /**
-   * Check if a user has access to reviews about another user.
+   * Get name of a user and reviews of it.
    */
-  @Path('/check/access/reviews-about')
+  @Path('/access/amount/reviews-got')
   @BodyGuard
   @POST
-  public async checkAccessToReviewsAboutUser(bodyData: dto.CheckAccessToReviewsAboutUserDto)
-    : Promise<apiResponses.ICheckAccessToReviewsAboutUserDto> {
-    return this.injectedService.checkAccessToReviewsAboutUser(bodyData);
+  public async getTargetNReviewsGot(bodyData: dto.GetTargetNReviewsGotDto)
+    : Promise<apiResponses.IGetTargetNReviewsGotResponseDto> {
+    return this.injectedService.getTargetNReviewsGot(bodyData);
   }
 }

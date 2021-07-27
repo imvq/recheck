@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { setCurrentMainToolbarEntry, setIsSearchPopupVisible } from 'store';
+import { setCurrentMainToolbarEntry, setCurrentObservedUser, setIsSearchPopupVisible } from 'store';
 import { MainToolbarEntry } from 'utils/enums';
 import CustomButton from 'components/shared/CustomButton';
 
@@ -9,7 +9,8 @@ import * as styled from './styled';
 
 const mapDispatchToProps: types.IDispatchProps = {
   setCurrentMainToolbarEntry,
-  setIsSearchPopupVisible
+  setIsSearchPopupVisible,
+  setCurrentObservedUser
 };
 
 const PersonCard = (props: types.IProps) => (
@@ -26,8 +27,7 @@ const PersonCard = (props: types.IProps) => (
           height='2.2rem'
           color='#33c7ba'
           onClick={() => {
-            props.setCurrentMainToolbarEntry(MainToolbarEntry.NewReview);
-            props.setIsSearchPopupVisible(true);
+            props.setCurrentObservedUser(props.userData);
           }}
         >
           Посмотреть

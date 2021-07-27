@@ -60,6 +60,28 @@ export default class UserManager {
     });
   }
 
+  public static async isTargetAvailable(asker: User, target: User)
+    : Promise<boolean> {
+    return await getRepository(User)
+      .createQueryBuilder('users')
+      .innerJoin('users.availableUsers', 'availableUsers')
+      .where(`users.profileId = '${asker.profileId}'`)
+      .andWhere(`availableUsers.profileId = '${target.profileId}'`)
+      .getCount() > 0;
+  }
+
+  public static async getTargetNReviewsGot(askerProfileId: string, targetShareableId: string)
+    : Promise<{ amount: number }> {
+    return getRepository(User)
+      .createQueryBuilder('users')
+      .innerJoin('users.availableUsers', 'availableUsers')
+      .innerJoin('availableUsers.reviewsGot', 'reviewsGot')
+      .where(`users.profileId = '${askerProfileId}'`)
+      .andWhere(`availableUsers.shareableId = '${targetShareableId}'`)
+      .select('COUNT(*) as amount')
+      .getRawOne();
+  }
+
   public static async getUserBasicInfoByName(name: string)
     : Promise<User[] | undefined> {
     return getRepository(User).find({
@@ -67,18 +89,6 @@ export default class UserManager {
       relations: ['company'],
       where: { name }
     });
-  }
-
-  public static async hasAccessToReviewsAboutUser(askerId: string, targetEmail: string)
-    : Promise<boolean> {
-    const repository = getRepository(User);
-    const targetUser = await repository.findOne({ where: { email: targetEmail } });
-    if (!targetEmail) return false;
-
-    return !!await repository.createQueryBuilder('users_available')
-      .where('ownerId = :askerId', { askerId })
-      .where('targetId = :targetId', { targetId: targetUser?.profileId })
-      .getOne();
   }
 
   public static async updateUser(user: User): Promise<User> {
