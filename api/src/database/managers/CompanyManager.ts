@@ -48,7 +48,7 @@ export default class CompanyManager {
       .addSelect('membersAmount')
       .addSelect('members.profileId')
       .addSelect('members.name')
-      .addSelect('members.email')
+      .addSelect('members.shareableId')
       .addSelect('members.photoUrl')
       .addSelect('members.position')
       .innerJoin('companies.members', 'members')

@@ -28,7 +28,7 @@ export default class CompaniesService {
       logoUrl: company.logoUrl,
       members: company.members.map(member => ({
         name: member.name,
-        email: member.email,
+        shareableId: member.shareableId,
         photoUrl: member.photoUrl,
         position: member.position
       }))

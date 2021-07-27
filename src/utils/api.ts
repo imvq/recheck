@@ -126,4 +126,9 @@ export default class Api {
     : generalTypes.APIResponse<apiResponses.GetNthReviewLeftResponseDto> {
     return Api.instance.post('/user/get/nth-review-left', targetData);
   }
+
+  public static getTargetNReviewsGot(bodyData: generalTypes.GetTargetNReviewsGotDto)
+    : generalTypes.APIResponse<apiResponses.GetTargetNReviewsGotResponseDto> {
+    return Api.instance.post('/user/access/amount/reviews-got', bodyData);
+  }
 }

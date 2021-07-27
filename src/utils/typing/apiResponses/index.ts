@@ -37,6 +37,8 @@ export type GetNthReviewGotResponseDto = IGetNthReviewResponseDto;
 
 export type GetNthReviewLeftResponseDto = IGetNthReviewResponseDto;
 
+export type GetTargetNReviewsGotResponseDto = IGetNReviewsResponseDto;
+
 export type LinkedInProfileDto = IProfileDto;
 
 export type FacebookProfileDto = IProfileDto;

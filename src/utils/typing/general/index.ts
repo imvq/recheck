@@ -73,6 +73,11 @@ export interface GetNthReviewLeftDto {
   nthReview: number;
 }
 
+export interface GetTargetNReviewsGotDto {
+  askerProfileId: string;
+  targetShareableId: string;
+}
+
 export interface OptionType {
   key: any;
   text: string;
