@@ -1,12 +1,14 @@
 import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
+  colleagues: Omit<generalTypes.SearchProfileInfo, 'company'>[];
   quickSearchMatchedUsers: generalTypes.SearchProfileInfo[];
   recommendations: generalTypes.Company[];
   userSearchResults: { results: generalTypes.SearchProfileInfo[]; };
 }
 
 export interface IDispatchProps {
+  clearColleagues(): void;
   clearMatchedUsers(): void;
   loadMatchedUsers(tokens: string[]): void;
   loadRecommendations(chunk: number): void;

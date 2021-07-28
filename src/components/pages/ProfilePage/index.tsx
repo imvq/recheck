@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { AppState } from 'store';
 import { MainToolbarEntry } from 'utils/enums';
 import Footer from 'components/shared/Footer';
-import SearchPopupManager from 'components/shared/SearchPopupManager';
 import Menu from './Menu';
 import ReviewsArea from './ReviewsArea';
 import HistoryArea from './HistoryArea';
@@ -41,7 +40,6 @@ const ProfilePage = (props: types.IProps) => (
       })()}
     </styled.ContentWrapper>
     <Footer />
-    <SearchPopupManager />
   </styled.Wrapper>
 );
 

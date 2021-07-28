@@ -16,7 +16,7 @@ import {
   SET_CURRENT_OBSERVED_USER
 } from './types';
 
-export const setColleaugues = (colleagues: Omit<generalTypes.SearchProfileInfo, 'company'>[])
+export const setColleagues = (colleagues: Omit<generalTypes.SearchProfileInfo, 'company'>[])
   : SearchActionType => ({
   type: SET_COLLEAGUES,
   payload: colleagues

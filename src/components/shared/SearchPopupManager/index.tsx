@@ -15,7 +15,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
  * Non-presentational component.
  */
 const SearchPopupManager = (props: types.IProps) => {
-  return props.isSearchPopupVisible ? <SearchPopup /> : null;
+  return props.isSearchPopupVisible ? <SearchPopup onClose={props.onPopupClose} /> : null;
 };
 
 export default connect(mapStateToProps)(memo(SearchPopupManager));

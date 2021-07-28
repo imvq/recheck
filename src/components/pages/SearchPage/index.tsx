@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   AppState,
+  setColleagues,
   setRecommendations,
   setRecommendedCompaniesShownMembers,
   loadMatchedUsers,
@@ -30,12 +31,14 @@ import * as styled from './styled';
 import { mapUserSearchDataToOptions } from './functions';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
+  colleagues: store.search.colleagues,
   quickSearchMatchedUsers: store.search.quickSearchMatchedUsers,
   recommendations: store.search.recommendations,
   userSearchResults: store.search.userSearchResults
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
+  clearColleagues: () => setColleagues([]),
   clearMatchedUsers,
   loadMatchedUsers,
   loadRecommendations,
@@ -50,6 +53,10 @@ const SearchPage = (props: types.IProps) => {
   const [isRecommendationsViewVisible, setIsRecommendationsViewVisible] = useState(false);
 
   useEffect(() => {
+    // Clear the colleagues array to avoid invalid conditional render
+    // due to the colleagues array dependency.
+    props.clearColleagues();
+
     // Load recommendations only one time and never reload them again.
     if (props.recommendations.length === 0) {
       props.loadRecommendations(0);
@@ -132,23 +139,34 @@ const SearchPage = (props: types.IProps) => {
       <styled.Sidebar />
 
       <styled.AdaptedHeader id='Header' />
-      <styled.ContentWrapper>
-        {SearchInput}
-        {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
-        {/* The search results. */}
-        {props.userSearchResults.results.length
-          ? <SearchResults userSearchResults={props.userSearchResults} />
-          : <SearchNoResults isFirstSearch={isFirstSearch} />}
-        {props.recommendations.length > 0 && RecommendedCompaniesList}
-        {/* 'Show all recommendations' label. */}
-        {props.recommendations.length > 4
-          && <CompaniesExpansionLabel onClick={() => setIsRecommendationsViewVisible(true)} />}
-      </styled.ContentWrapper>
+
+      {/* Main view with search field and search results area. */}
+      {props.colleagues.length === 0 && (
+        <styled.ContentWrapper>
+          {SearchInput}
+          {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
+          {/* The search results. */}
+          {props.userSearchResults.results.length
+            ? <SearchResults userSearchResults={props.userSearchResults} />
+            : <SearchNoResults isFirstSearch={isFirstSearch} />}
+          {props.recommendations.length > 0 && RecommendedCompaniesList}
+          {/* 'Show all recommendations' label. */}
+          {props.recommendations.length > 4
+            && <CompaniesExpansionLabel onClick={() => setIsRecommendationsViewVisible(true)} />}
+        </styled.ContentWrapper>
+      )}
+
+      {/* Colleagues view. */}
+      {/* Supposed to be rendered when we need to choose a colleague */}
+      {/* to give a review about. */}
+      {props.colleagues.length > 0 && (
+        <ColleaguesView />
+      )}
       <styled.AdaptedFooter />
 
       {/* Recommended companies' stuff. */}
       {isRecommendationsViewVisible && RecommendationsPopup}
-      <SearchPopupManager />
+      <SearchPopupManager onPopupClose={() => setIsRecommendationsViewVisible(false)} />
 
     </styled.Wrapper>
   );

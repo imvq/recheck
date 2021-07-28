@@ -14,7 +14,12 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 export const ColleaguesView = (props: types.IProps) => (
   <styled.Wrapper>
     {props.colleagues.map(colleague => (
-      <PersonCard key={colleague.shareableId} userData={colleague} />
+      <PersonCard
+        key={colleague.shareableId}
+        buttonText='Оставить отзыв'
+        onButtonClick={() => alert('review')}
+        userData={colleague}
+      />
     ))}
   </styled.Wrapper>
 );

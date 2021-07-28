@@ -6,7 +6,6 @@ import { AppState, setIsLoginPopupVisible, setReferral, setAwaiter } from 'store
 import controlledHistory from 'utils/routing';
 import CookiePopup from 'components/shared/CookiePopup';
 import AuthPopupManager from 'components/shared/AuthPopupManager';
-import SearchPopupManager from 'components/shared/SearchPopupManager';
 import GreetingsSection from './GreetingsSection';
 import HowToWorkSection from './HowToWorkSection';
 import InfoblockSection from './InfoblockSection';
@@ -65,7 +64,6 @@ const LandingPage = (props: types.IProps) => {
       <Footer />
       <CookiePopup />
       <AuthPopupManager />
-      <SearchPopupManager />
     </styled.Wrapper>
   );
 };

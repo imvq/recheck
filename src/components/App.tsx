@@ -16,7 +16,6 @@ import ProfilePage from 'components/pages/ProfilePage';
 import ReviewPage from 'components/pages/ReviewPage';
 import SearchPage from 'components/pages/SearchPage';
 import RegistrationPage from 'components/pages/RegistrationPage';
-import ReviewIntroPage from 'components/pages/ReviewIntroPage';
 import NotFoundPage from 'components/pages/NotFoundPage';
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -51,14 +50,6 @@ export default () => (
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
             <PageLockManager hideContentOnLock>
               <ProfilePage />
-            </PageLockManager>
-          </Route>
-
-          {/* Page before creating a review. */}
-          <Route exact path='/review-intro'>
-            <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
-            <PageLockManager>
-              <ReviewIntroPage />
             </PageLockManager>
           </Route>
 

@@ -1,4 +1,4 @@
-import { Company, SearchProfileInfo } from 'utils/typing/general';
+import { AppProfileInfo, Company, SearchProfileInfo } from 'utils/typing/general';
 
 export interface IOwnProps {
   recommendations: Company[];
@@ -7,10 +7,15 @@ export interface IOwnProps {
 }
 
 export interface IStateProps {
+  currentProfileInfo: AppProfileInfo;
   recommendedCompaniesShownMembers: SearchProfileInfo[];
 }
 
 export interface IDispatchProps {
+  lockPage(): void;
+  unlockPage(): void;
+  setCurrentObservedUser(user: SearchProfileInfo): void;
+  setIsSearchPopupVisible(flag: boolean): void;
   setRecommendedCompaniesShownMembers(members: SearchProfileInfo[]): void;
 }
 

@@ -1,14 +1,28 @@
+import { memo } from 'react';
 import { connect } from 'react-redux';
 
-import controlledHistory from 'utils/routing';
-import { setIsSearchPopupVisible } from 'store';
+import Api from 'utils/api';
+import {
+  AppState,
+  setColleagues,
+  setPageLocked,
+  setPageUnlocked,
+  setIsSearchPopupVisible
+} from 'store';
 import CustomButton from 'components/shared/CustomButton';
 import OptionBadge from './OptionBadge';
 
 import * as types from './types';
 import * as styled from './styled';
 
+const mapStateToProps = (store: AppState): types.IStateProps => ({
+  currentProfileInfo: store.profile.currentProfileInfo
+});
+
 const mapDispatchToProps: types.IDispatchProps = {
+  lockPage: setPageLocked,
+  unlockPage: setPageUnlocked,
+  setColleagues,
   setIsVisible: setIsSearchPopupVisible
 };
 
@@ -62,46 +76,57 @@ const FreeHiddenBadge = (
   </>
 );
 
-const SearchPopup = (props: types.IProps) => (
-  <styled.Wrapper>
-    <styled.Frame>
-      <styled.TopWrapper>
-        <styled.AdaptedCloseCross onClick={() => props.setIsVisible(false)} />
-      </styled.TopWrapper>
+const SearchPopup = (props: types.IProps) => {
+  const onWriteReviewClickHandler = () => {
+    Api.getColleagues(props.currentProfileInfo.currentId)
+      .then(colleaguesData => props.setColleagues(colleaguesData.data.results))
+      .finally(() => props.unlockPage());
 
-      <styled.BodyWrapper>
-        <styled.Title>Вы можете получить отзыв о кандидате двумя способами:</styled.Title>
-      </styled.BodyWrapper>
+    props.onClose();
+    props.setIsVisible(false);
+  };
 
-      <styled.OptionsWrapper>
-        <styled.OptionGroupWrapper>
-          <OptionBadge
-            mainView={BuyMainBadge}
-            hiddenView={BuyHiddenBadge}
-          />
-          <styled.ButtonWrapper>
-            <CustomButton isDisabled={false}>Купить отзыв</CustomButton>
-          </styled.ButtonWrapper>
-        </styled.OptionGroupWrapper>
+  return (
+    <styled.Wrapper>
+      <styled.Frame>
+        <styled.TopWrapper>
+          <styled.AdaptedCloseCross onClick={() => props.setIsVisible(false)} />
+        </styled.TopWrapper>
 
-        <styled.OptionGroupWrapper>
-          <OptionBadge
-            mainView={FreeMainBadge}
-            hiddenView={FreeHiddenBadge}
-          />
-          <styled.ButtonWrapper>
-            <CustomButton
-              isDisabled={false}
-              onClick={() => controlledHistory.push('review-intro')}
-            >
-              Оставить отзыв
-            </CustomButton>
-          </styled.ButtonWrapper>
-        </styled.OptionGroupWrapper>
-      </styled.OptionsWrapper>
-    </styled.Frame>
-    <styled.ClickableBackground onClick={() => props.setIsVisible(false)} />
-  </styled.Wrapper>
-);
+        <styled.BodyWrapper>
+          <styled.Title>Вы можете получить отзыв о кандидате двумя способами:</styled.Title>
+        </styled.BodyWrapper>
 
-export default connect(null, mapDispatchToProps)(SearchPopup);
+        <styled.OptionsWrapper>
+          <styled.OptionGroupWrapper>
+            <OptionBadge
+              mainView={BuyMainBadge}
+              hiddenView={BuyHiddenBadge}
+            />
+            <styled.ButtonWrapper>
+              <CustomButton isDisabled={false}>Купить отзыв</CustomButton>
+            </styled.ButtonWrapper>
+          </styled.OptionGroupWrapper>
+
+          <styled.OptionGroupWrapper>
+            <OptionBadge
+              mainView={FreeMainBadge}
+              hiddenView={FreeHiddenBadge}
+            />
+            <styled.ButtonWrapper>
+              <CustomButton
+                isDisabled={false}
+                onClick={onWriteReviewClickHandler}
+              >
+                Оставить отзыв
+              </CustomButton>
+            </styled.ButtonWrapper>
+          </styled.OptionGroupWrapper>
+        </styled.OptionsWrapper>
+      </styled.Frame>
+      <styled.ClickableBackground onClick={() => props.setIsVisible(false)} />
+    </styled.Wrapper>
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(memo(SearchPopup));
