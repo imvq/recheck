@@ -169,6 +169,29 @@ export default class UserService {
     return { results: results || [] };
   }
 
+  @utils.dbErrorDefaultReactor({ except: [Errors.NotFoundError], logger })
+  public async getColleagues(bodyData: dto.GetColleaguesDto)
+    : Promise<apiResponses.IGetColleaguesResponseDto> {
+    const asker = await UserManager.getUserWithCompanyMembers(bodyData.profileId);
+
+    if (!asker) {
+      throw new Errors.NotFoundError('No such user.');
+    }
+
+    const results = this.mapMembersToReducedMembers(asker.company.members);
+
+    return { results };
+  }
+
+  private mapMembersToReducedMembers(members: User[]) {
+    return members.map(member => ({
+      name: member.name,
+      shareableId: member.shareableId,
+      photoUrl: member.photoUrl,
+      position: member.position
+    }));
+  }
+
   @utils.dbErrorDefaultReactor({ except: [], logger })
   public async getNReviewsGot(bodyData: dto.GetNReviewsGotDto)
     : Promise<apiResponses.IGetNReviewsGotAmountResponseDto> {

@@ -11,6 +11,13 @@ export interface IGetNthReviewResponseDto {
   recommendationMark: number;
 }
 
+export interface IReducedMember {
+  name: string;
+  shareableId: string;
+  photoUrl: string;
+  position: string;
+}
+
 export interface IRetrieveProfileInfoResponseDto {
   profileId: string;
   shareableId?: string;

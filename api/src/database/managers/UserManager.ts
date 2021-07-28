@@ -42,6 +42,19 @@ export default class UserManager {
     return getRepository(User).findOne({ shareableId: id }, { relations });
   }
 
+  public static async getUserWithCompanyMembers(profileId: string)
+    : Promise<User | undefined> {
+    return getRepository(User)
+      .createQueryBuilder('users')
+      .innerJoin('users.company', 'company')
+      .innerJoin('company.members', 'members')
+      .where({ profileId })
+      .andWhere('members.profileId != :profileId', { profileId })
+      .addSelect('company')
+      .addSelect('members')
+      .getOne();
+  }
+
   public static async getUserWithReviewsGot(profileId: string)
     : Promise<User | undefined> {
     return getRepository(User).findOne({

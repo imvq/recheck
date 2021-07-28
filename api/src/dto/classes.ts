@@ -56,6 +56,10 @@ export class GetAccessToUserDto {
   ) {}
 }
 
+export class GetColleaguesDto {
+  public constructor(public profileId: string) {}
+}
+
 export class GetMatchedCompaniesDto {
   public constructor(public sequence: string) {}
 }

@@ -7,6 +7,7 @@
 import {
   IGetNReviewsAmountResponseDto,
   IGetNthReviewResponseDto,
+  IReducedMember,
   IRetrieveProfileInfoResponseDto,
   ISimpleActionResponse
 } from './basic';
@@ -37,6 +38,10 @@ export interface IFacebookBasicProfileDto {
   picture: { data: { url: string; } };
 }
 
+export interface IGetColleaguesResponseDto {
+  results: IReducedMember[];
+}
+
 export interface IGetMatchedCompanies {
   results: {
     id: number;
@@ -50,11 +55,7 @@ export interface IGetRecommendations {
     id: number;
     name: string;
     logoUrl: string;
-    members: {
-      name: string;
-      photoUrl: string;
-      position: string;
-    }[];
+    members: IReducedMember[];
   }[];
 }
 

@@ -126,6 +126,17 @@ export default class UserController {
   }
 
   /**
+   * Get colleagues of user.
+   */
+  @Path('/get/colleagues')
+  @BodyGuard
+  @POST
+  public async getColleagues(bodyData: dto.GetColleaguesDto)
+    : Promise<apiResponses.IGetColleaguesResponseDto> {
+    return this.injectedService.getColleagues(bodyData);
+  }
+
+  /**
    * Get the amount of reviews of user.
    */
   @Path('/amount/reviews-got')
