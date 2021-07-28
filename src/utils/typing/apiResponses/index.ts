@@ -21,11 +21,15 @@ export interface ExchangeLinkedInCodeResposneDto {
 
 export interface IsTargetConnectedResponseDto extends ISimpleActionResponse {}
 
-export interface GetMatchedCompaniesDto {
+export interface GetColleaguesResponseDto {
+  results: Omit<genearalTypes.SearchProfileInfo, 'company'>[];
+}
+
+export interface GetMatchedCompaniesResponseDto {
   results: genearalTypes.CompanyReduced[];
 }
 
-export interface GetRecommendationsDto {
+export interface GetRecommendationsResponseDto {
   results: genearalTypes.Company[];
 }
 

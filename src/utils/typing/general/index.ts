@@ -148,7 +148,7 @@ export interface SearchProfileInfo {
   name: string;
   shareableId: string;
   photoUrl: string;
-  company: string;
+  company?: string;
   position: string;
 }
 

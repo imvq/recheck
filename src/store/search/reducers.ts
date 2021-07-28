@@ -1,6 +1,7 @@
 import {
   SearchState,
   SearchActionType,
+  SET_COLLEAGUES,
   SET_QUICK_SEARCH_MATCHED_COMPANIES,
   SET_QUICK_SEARCH_MATCHED_USERS,
   SET_RECOMMENDATIONS,
@@ -11,6 +12,7 @@ import {
 } from './types';
 
 const initialState: SearchState = {
+  colleagues: [],
   quickSearchMatchedCompanies: [],
   quickSearchMatchedUsers: [],
   recommendations: [],
@@ -24,6 +26,11 @@ export function searchReducer(
   action: SearchActionType
 ): SearchState {
   switch (action.type) {
+    case SET_COLLEAGUES:
+      return {
+        ...state,
+        colleagues: action.payload
+      };
     case SET_QUICK_SEARCH_MATCHED_COMPANIES:
       return {
         ...state,

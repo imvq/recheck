@@ -1,5 +1,6 @@
 import * as generalTypes from 'utils/typing/general';
 
+export const SET_COLLEAGUES = 'SET_COLLEAGUES';
 export const SET_QUICK_SEARCH_MATCHED_COMPANIES = 'SET_QUICK_SEARCH_MATCHED_COMPANIES';
 export const SET_QUICK_SEARCH_MATCHED_USERS = 'SET_QUICK_SEARCH_MATCHED_USERS';
 export const SET_RECOMMENDATIONS = 'SET_RECOMMENDATIONS';
@@ -9,12 +10,18 @@ export const SET_CURRENT_USER_SEARCH_RESULTS = 'SET_CURRENT_USER_SEARCH_RESULTS'
 export const SET_CURRENT_OBSERVED_USER = 'SET_CURRENT_OBSERVED_USER';
 
 export interface SearchState {
+  colleagues: Omit<generalTypes.SearchProfileInfo, 'company'>[];
   quickSearchMatchedCompanies: generalTypes.CompanyReduced[];
   quickSearchMatchedUsers: generalTypes.SearchProfileInfo[];
   recommendations: generalTypes.Company[];
   recommendedCompaniesShownMembers: generalTypes.SearchProfileInfo[];
   userSearchResults: { results: generalTypes.SearchProfileInfo[]; };
   currentObservedUser: generalTypes.SearchProfileInfo | null;
+}
+
+export interface SetColleagues {
+  type: typeof SET_COLLEAGUES;
+  payload: Omit<generalTypes.SearchProfileInfo, 'company'>[];
 }
 
 export interface SetQuickSearchMatchedCompanies {
@@ -53,7 +60,8 @@ export interface SetCurrentObservedUser {
 }
 
 export type SearchActionType =
-    SetQuickSearchMatchedCompanies
+    SetColleagues
+  | SetQuickSearchMatchedCompanies
   | SetQuickSearchMatchedUsers
   | SetRecommendations
   | SetCurrentObservedUser

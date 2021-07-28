@@ -18,6 +18,7 @@ import * as generalTypes from 'utils/typing/general';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
 import DropList from 'components/shared/DropList';
 import SearchField from './SearchField';
+import ColleaguesView from './ColleaguesView';
 import CompaniesResults from './CompaniesResults';
 import CompaniesPopup from './ExpandView/Companies';
 import CompaniesExpansionLabel from './CompaniesExpansionLabel';
@@ -117,6 +118,7 @@ const SearchPage = (props: types.IProps) => {
   // a 'no results' label.
   const [isFirstSearch, setIsFirstSearch] = useState(true);
   const firstRender = useRef(true);
+
   useLayoutEffect(() => {
     if (firstRender.current) {
       firstRender.current = false;

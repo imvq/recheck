@@ -35,13 +35,18 @@ export default class Api {
     return Api.instance.post('/user/target/is-connected', connectionData);
   }
 
+  public static getColleagues(profileId: string)
+    : generalTypes.APIResponse<apiResponses.GetColleaguesResponseDto> {
+    return Api.instance.post('/user/get/colleagues', { profileId });
+  }
+
   public static getMatchedCompanies(sequence: string)
-    : generalTypes.APIResponse<apiResponses.GetMatchedCompaniesDto> {
+    : generalTypes.APIResponse<apiResponses.GetMatchedCompaniesResponseDto> {
     return Api.instance.post('/companies/find-matched', { sequence });
   }
 
   public static getRecommendations(chunk: number)
-    : generalTypes.APIResponse<apiResponses.GetRecommendationsDto> {
+    : generalTypes.APIResponse<apiResponses.GetRecommendationsResponseDto> {
     return Api.instance.post('/companies/recommendations', { chunk });
   }
 
