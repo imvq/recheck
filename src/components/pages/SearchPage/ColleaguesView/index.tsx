@@ -13,14 +13,17 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 
 export const ColleaguesView = (props: types.IProps) => (
   <styled.Wrapper>
-    {props.colleagues.map(colleague => (
-      <PersonCard
-        key={colleague.shareableId}
-        buttonText='Оставить отзыв'
-        onButtonClick={() => alert('review')}
-        userData={colleague}
-      />
-    ))}
+    <styled.CardsWrapper>
+      {props.colleagues.map(colleague => (
+        <styled.CardWrapper key={colleague.shareableId}>
+          <PersonCard
+            buttonText='Оставить отзыв'
+            onButtonClick={() => { /* TODO: Write a review */ }}
+            userData={colleague}
+          />
+        </styled.CardWrapper>
+      ))}
+    </styled.CardsWrapper>
   </styled.Wrapper>
 );
 
