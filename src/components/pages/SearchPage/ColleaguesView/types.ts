@@ -1,7 +1,13 @@
-import { SearchProfileInfo } from 'utils/typing/general';
+import { AppProfileInfo, SearchProfileInfo } from 'utils/typing/general';
 
 export interface IStateProps {
   colleagues: Omit<SearchProfileInfo, 'company'>[];
+  currentProfileInfo: AppProfileInfo;
 }
 
-export type IProps = IStateProps;
+export interface IDispatchProps {
+  lockPage(): void;
+  unlockPage(): void;
+}
+
+export type IProps = IStateProps & IDispatchProps;

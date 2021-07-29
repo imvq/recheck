@@ -18,6 +18,11 @@ export interface BindReviewTargetDto {
   profileId: string;
 }
 
+export interface CheckIsUserAvailableForReviewDto {
+  askerProfileId: string;
+  targetShareableId: string;
+}
+
 export type CompanyMember = Omit<SearchProfileInfo, 'company'>;
 
 export interface Company {

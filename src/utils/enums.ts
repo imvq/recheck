@@ -1,4 +1,12 @@
 /**
+ * Placeholders for pagination page buttons.
+ */
+export enum PaginationDirection {
+  Prev = '🡸',
+  Next = '🡺'
+}
+
+/**
  * Represents width of the screen.
  * Is to be used in style mixins.
  * Values are essential.
@@ -14,11 +22,12 @@ export enum ScreenBreakpoint {
 }
 
 /**
- * Placeholders for pagination page buttons.
+ * Color variants for toasts.
+ * Values are essential.
  */
-export enum PaginationDirection {
-  Prev = '🡸',
-  Next = '🡺'
+export enum ToastVariants {
+  Success = '#33c7ba',
+  Alert = '#dc3545'
 }
 
 /**

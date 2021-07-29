@@ -16,8 +16,14 @@ export default class Api {
   });
 
   public static checkIsEmailAvailable(email: string)
-    : generalTypes.APIResponse<apiResponses.CheckIsEmailAvailable> {
+    : generalTypes.APIResponse<apiResponses.CheckIsEmailAvailableResponseDto> {
     return Api.instance.post('/user/availability/email', { email });
+  }
+
+  public static checkIsUserAvailableForReview(
+    checkData: generalTypes.CheckIsUserAvailableForReviewDto
+  ): generalTypes.APIResponse<apiResponses.CheckIsUserAvailableForReviewResponseDto> {
+    return Api.instance.post('/user/availability/review', checkData);
   }
 
   public static checkIsRegistered(profileId: string)

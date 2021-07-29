@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 
 import * as apiResponses from 'utils/typing/apiResponses';
 import * as generalTypes from 'utils/typing/general';
+import { ToastVariants } from 'utils/enums';
 import { IReviewCardCommonData } from 'utils/typing/general/basic';
 import { cookieManager, cookiesList } from 'utils/cookies';
 
@@ -107,11 +108,11 @@ export function mapReviewToArray(from: IReviewCardCommonData) {
 /**
  * Show notification toast.
  */
-export function showToast(text: string) {
+export function showToast(text: string, variant = ToastVariants.Success) {
   return toast.dark(text, {
     position: 'bottom-left',
     style: {
-      backgroundColor: '#33c7ba',
+      backgroundColor: variant,
       textAlign: 'center',
       fontSize: '1.3rem'
     },
