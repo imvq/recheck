@@ -83,6 +83,18 @@ export default class UserManager {
       .getCount() > 0;
   }
 
+  public static async isTargetAvailableForReview(askerProfileId: string, targetShareableId: string)
+    : Promise<boolean> {
+    return await getRepository(User)
+      .createQueryBuilder('users')
+      .innerJoin('users.reviewsLeft', 'reviewsLeft')
+      .innerJoin('reviewsLeft.target', 'targets')
+      .select('targets')
+      .where('users.profileId = :askerProfileId', { askerProfileId })
+      .andWhere('targets.shareableId = :targetShareableId', { targetShareableId })
+      .getCount() === 0;
+  }
+
   public static async getTargetNReviewsGot(askerProfileId: string, targetShareableId: string)
     : Promise<{ amount: number }> {
     return getRepository(User)

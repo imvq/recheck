@@ -16,6 +16,8 @@ export interface IBindReviewTargetResponseDto extends ISimpleActionResponse {}
 
 export interface ICheckIsEmailAvailableResponseDto extends ISimpleActionResponse {}
 
+export interface ICheckIsUserAvailableForReviewResponseDto extends ISimpleActionResponse {}
+
 export interface ICheckIsUserConfirmedResponseDto {
   isConfirmed: boolean;
 }

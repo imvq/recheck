@@ -17,7 +17,7 @@ export default class Api {
 
   public static checkIsEmailAvailable(email: string)
     : generalTypes.APIResponse<apiResponses.CheckIsEmailAvailable> {
-    return Api.instance.post('/user/email/is-available', { email });
+    return Api.instance.post('/user/availability/email', { email });
   }
 
   public static checkIsRegistered(profileId: string)

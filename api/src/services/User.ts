@@ -36,7 +36,20 @@ export default class UserService {
   @utils.dbErrorDefaultReactor({ except: [], logger })
   public async checkIsEmailAvailable(emailDto: dto.СheckIsEmailAvailableDto)
     : Promise<apiResponses.ICheckIsEmailAvailableResponseDto> {
-    return { success: !await UserManager.getUserByEmail(emailDto.email) };
+    const success = !await UserManager.getUserByEmail(emailDto.email);
+
+    return { success };
+  }
+
+  @utils.dbErrorDefaultReactor({ except: [], logger })
+  public async checkIsUserAvailableForReview(checkDto: dto.CheckIsUserAvailableForReviewDto)
+    : Promise<apiResponses.ICheckIsUserAvailableForReviewResponseDto> {
+    const success = await UserManager.isTargetAvailableForReview(
+      checkDto.askerProfileId,
+      checkDto.targetShareableId
+    );
+
+    return { success };
   }
 
   @utils.dbErrorDefaultReactor({ except: [], logger })

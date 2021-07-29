@@ -29,12 +29,24 @@ export default class UserController {
   /**
    * Check if provided email is available.
    */
-  @Path('/email/is-available')
+  @Path('/availability/email')
   @BodyGuard
   @POST
-  public async heckIsEmailAvailable(bodyData: dto.СheckIsEmailAvailableDto)
+  public async checkIsEmailAvailable(bodyData: dto.СheckIsEmailAvailableDto)
     : Promise<apiResponses.ICheckIsEmailAvailableResponseDto> {
     return this.injectedService.checkIsEmailAvailable(bodyData);
+  }
+
+  /**
+   * Check if a user with provided shareableID already has a review
+   * from a user with provided profileID.
+   */
+  @Path('/availability/review')
+  @BodyGuard
+  @POST
+  public async checkIsUserAvailableForReview(bodyData: dto.CheckIsUserAvailableForReviewDto)
+    : Promise<apiResponses.ICheckIsUserAvailableForReviewResponseDto> {
+    return this.injectedService.checkIsUserAvailableForReview(bodyData);
   }
 
   /**
