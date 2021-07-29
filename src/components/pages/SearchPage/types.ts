@@ -1,7 +1,10 @@
 import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
-  colleagues: Omit<generalTypes.SearchProfileInfo, 'company'>[];
+  colleaguesState: {
+    colleagues: Omit<generalTypes.SearchProfileInfo, 'company'>[];
+    areLoaded: boolean;
+  }
   quickSearchMatchedUsers: generalTypes.SearchProfileInfo[];
   recommendations: generalTypes.Company[];
   userSearchResults: { results: generalTypes.SearchProfileInfo[]; };

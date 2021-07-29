@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   AppState,
-  setColleagues,
+  clearColleagues,
   setRecommendations,
   setRecommendedCompaniesShownMembers,
   loadMatchedUsers,
@@ -31,14 +31,14 @@ import * as styled from './styled';
 import { mapUserSearchDataToOptions } from './functions';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  colleagues: store.search.colleagues,
+  colleaguesState: store.search.colleaguesState,
   quickSearchMatchedUsers: store.search.quickSearchMatchedUsers,
   recommendations: store.search.recommendations,
   userSearchResults: store.search.userSearchResults
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  clearColleagues: () => setColleagues([]),
+  clearColleagues,
   clearMatchedUsers,
   loadMatchedUsers,
   loadRecommendations,
@@ -141,7 +141,7 @@ const SearchPage = (props: types.IProps) => {
       <styled.AdaptedHeader id='Header' />
 
       {/* Main view with search field and search results area. */}
-      {props.colleagues.length === 0 && (
+      {!props.colleaguesState.areLoaded && (
         <styled.ContentWrapper>
           {SearchInput}
           {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
@@ -159,7 +159,7 @@ const SearchPage = (props: types.IProps) => {
       {/* Colleagues view. */}
       {/* Supposed to be rendered when we need to choose a colleague */}
       {/* to give a review about. */}
-      {props.colleagues.length > 0 && (
+      {props.colleaguesState.areLoaded && (
         <ColleaguesView />
       )}
       <styled.AdaptedFooter />

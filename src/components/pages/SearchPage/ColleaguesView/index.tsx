@@ -13,7 +13,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  colleagues: store.search.colleagues,
+  colleaguesState: store.search.colleaguesState,
   currentProfileInfo: store.profile.currentProfileInfo
 });
 
@@ -37,22 +37,28 @@ export const ColleaguesView = (props: types.IProps) => {
 
   return (
     <styled.Wrapper>
-      <styled.CardsWrapper>
-        {props.colleagues.map(colleague => (
-          <styled.CardWrapper key={colleague.shareableId}>
-            <PersonCard
-              buttonText='Оставить отзыв'
-              userData={colleague}
-              onButtonClick={() => {
-                checkIsUserAvailableForReview(
-                  props.currentProfileInfo.currentId,
-                  colleague.shareableId
-                );
-              }}
-            />
-          </styled.CardWrapper>
-        ))}
-      </styled.CardsWrapper>
+      {props.colleaguesState.areLoaded && props.colleaguesState.colleagues.length > 0 && (
+        <styled.CardsWrapper>
+          {props.colleaguesState.colleagues.map(colleague => (
+            <styled.CardWrapper key={colleague.shareableId}>
+              <PersonCard
+                buttonText='Оставить отзыв'
+                userData={colleague}
+                onButtonClick={() => {
+                  checkIsUserAvailableForReview(
+                    props.currentProfileInfo.currentId,
+                    colleague.shareableId
+                  );
+                }}
+              />
+            </styled.CardWrapper>
+          ))}
+        </styled.CardsWrapper>
+      )}
+
+      {props.colleaguesState.areLoaded && props.colleaguesState.colleagues.length === 0 && (
+        <div>Похоже, ваши коллеги еще не с нами</div>
+      )}
 
       {/* Toast to display message in case we cannot write a review. */}
       <ToastContainer />

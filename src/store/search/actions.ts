@@ -6,6 +6,7 @@ import { AppActionType } from '../types';
 import { setPageUnlocked as unlockPage } from '../interaction/actions';
 import {
   SearchActionType,
+  CLEAR_COLLEAGUES,
   SET_COLLEAGUES,
   SET_QUICK_SEARCH_MATCHED_COMPANIES,
   SET_QUICK_SEARCH_MATCHED_USERS,
@@ -15,6 +16,10 @@ import {
   SET_CURRENT_USER_SEARCH_RESULTS,
   SET_CURRENT_OBSERVED_USER
 } from './types';
+
+export const clearColleagues = (): SearchActionType => ({
+  type: CLEAR_COLLEAGUES
+});
 
 export const setColleagues = (colleagues: Omit<generalTypes.SearchProfileInfo, 'company'>[])
   : SearchActionType => ({

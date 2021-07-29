@@ -1,6 +1,7 @@
 import {
   SearchState,
   SearchActionType,
+  CLEAR_COLLEAGUES,
   SET_COLLEAGUES,
   SET_QUICK_SEARCH_MATCHED_COMPANIES,
   SET_QUICK_SEARCH_MATCHED_USERS,
@@ -12,7 +13,10 @@ import {
 } from './types';
 
 const initialState: SearchState = {
-  colleagues: [],
+  colleaguesState: {
+    colleagues: [],
+    areLoaded: false
+  },
   quickSearchMatchedCompanies: [],
   quickSearchMatchedUsers: [],
   recommendations: [],
@@ -26,10 +30,21 @@ export function searchReducer(
   action: SearchActionType
 ): SearchState {
   switch (action.type) {
+    case CLEAR_COLLEAGUES:
+      return {
+        ...state,
+        colleaguesState: {
+          colleagues: [],
+          areLoaded: false
+        }
+      };
     case SET_COLLEAGUES:
       return {
         ...state,
-        colleagues: action.payload
+        colleaguesState: {
+          colleagues: action.payload,
+          areLoaded: true
+        }
       };
     case SET_QUICK_SEARCH_MATCHED_COMPANIES:
       return {
