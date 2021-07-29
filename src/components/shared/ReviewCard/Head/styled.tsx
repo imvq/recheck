@@ -26,8 +26,7 @@ export const MenuContent = styled.div<{ showTarget?: boolean; }>`
   padding-left: ${
   props => (props.showTarget
     ? `calc(${cssVarsLocal.photoWrapperWidth} + 2rem)`
-    : '5rem')
-};
+    : '5rem')};
   padding-bottom: 2rem;
 `;
 
@@ -47,7 +46,7 @@ export const Photo = styled.img`
   position: absolute;
   width: 5rem;
   height: 5rem;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 50%;
   margin-left: -8rem;
 `;
