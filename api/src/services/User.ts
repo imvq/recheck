@@ -187,11 +187,7 @@ export default class UserService {
     : Promise<apiResponses.IGetColleaguesResponseDto> {
     const asker = await UserManager.getUserWithCompanyMembers(bodyData.profileId);
 
-    if (!asker) {
-      throw new Errors.NotFoundError('No such user.');
-    }
-
-    const results = this.mapMembersToReducedMembers(asker.company.members);
+    const results = this.mapMembersToReducedMembers(asker?.company.members || []);
 
     return { results };
   }

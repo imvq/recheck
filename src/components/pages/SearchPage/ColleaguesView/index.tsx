@@ -8,6 +8,7 @@ import controlledHistory from 'utils/routing';
 import { showToast } from 'utils/functions';
 import { AppState, setPageLocked, setPageUnlocked } from 'store';
 import PersonCard from 'components/shared/PersonCard';
+import NoColleaguesView from './NoColleaguesView';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -57,7 +58,7 @@ export const ColleaguesView = (props: types.IProps) => {
       )}
 
       {props.colleaguesState.areLoaded && props.colleaguesState.colleagues.length === 0 && (
-        <div>Похоже, ваши коллеги еще не с нами</div>
+        <NoColleaguesView />
       )}
 
       {/* Toast to display message in case we cannot write a review. */}
