@@ -20,7 +20,7 @@ import NameTokensService from './NameTokens';
  * Service in charge of registration and managing user data.
  */
 export default class UserService {
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async isTargetConnected(bodyData: dto.IsTargetConnectedDto)
     : Promise<apiResponses.IIsTargetConnectedResponsDto> {
     const asker = await UserManager.getUser(bodyData.askerProfileId, ['company']);
@@ -33,7 +33,7 @@ export default class UserService {
     return { success: true };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async checkIsEmailAvailable(emailDto: dto.СheckIsEmailAvailableDto)
     : Promise<apiResponses.ICheckIsEmailAvailableResponseDto> {
     const success = !await UserManager.getUserByEmail(emailDto.email);
@@ -41,7 +41,7 @@ export default class UserService {
     return { success };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async checkIsUserAvailableForReview(checkDto: dto.CheckIsUserAvailableForReviewDto)
     : Promise<apiResponses.ICheckIsUserAvailableForReviewResponseDto> {
     const success = await UserManager.isTargetAvailableForReview(
@@ -52,13 +52,13 @@ export default class UserService {
     return { success };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async checkIsUserRegistered(profileIdDto: dto.CheckIsUserRegisteredDto)
     : Promise<apiResponses.ICheckIsUserRegisteredResponseDto> {
     return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async checkIsUserConfirmed(profileIdDto: dto.CheckIsUserConfirmedDto)
     : Promise<apiResponses.ICheckIsUserConfirmedResponseDto> {
     // Making confirmation code null is to be considered the user is registered.
@@ -70,7 +70,7 @@ export default class UserService {
   /**
    * Save user info and send email to confirm.
    */
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async prepareUser(profileDto: dto.PrepareUserDto)
     : Promise<apiResponses.IPrepareUserResponseDto> {
     const confirmationCode = uuidv1();
@@ -84,7 +84,7 @@ export default class UserService {
     return await this.sendConfirmation(profileDto.email, confirmationCode);
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
   public async resendConfirmation(resendDto: dto.ResendConfirmationDto)
     : Promise<apiResponses.IResendConfirmationResponseDto> {
     const target = await UserManager.getUser(resendDto.profileId);
@@ -99,7 +99,7 @@ export default class UserService {
     return await this.sendConfirmation(target.email, target.confirmationCode);
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
   public async reassignConfirmationEmail(reassignmentDto: dto.ReassignConfirmationEmailDto)
     : Promise<apiResponses.IReassignConfirmationEmailResponseDto> {
     const target = await UserManager.getUser(reassignmentDto.profileId);
@@ -132,7 +132,7 @@ export default class UserService {
     return { success: true };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   private async saveUser(profileDto: dto.PrepareUserDto, confirmationCode: string)
     : Promise<void> {
     const company = await this.prepareCompany(profileDto.company);
@@ -143,7 +143,7 @@ export default class UserService {
    * Get the company from the database with corresponding id
    * otherwise create a company with provided data and return it.
    */
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   private async prepareCompany({ id, name }: { id: number, name: string; }): Promise<Company> {
     if (id >= 0) {
       const targetCompany = await CompanyManager.getCompany(id);
@@ -154,7 +154,7 @@ export default class UserService {
     return CompanyManager.createCompany({ name, logoUrl: null });
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
   public async completeRegistration(completionDto: dto.CompleteRegistrationDto)
     : Promise<apiResponses.ICompleteRegistration> {
     const targetUser = await UserManager.getUser(completionDto.profileId);
@@ -171,7 +171,7 @@ export default class UserService {
     throw new Errors.BadRequestError('Invalid code or user.');
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async searchUser(searchDto: dto.SearchUserDto, options?: { isQuickSearch: boolean })
     : Promise<apiResponses.ISearchUserResponseDto> {
     const results = await NameTokensService.getMatchedUsers(
@@ -182,7 +182,7 @@ export default class UserService {
     return { results: results || [] };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.NotFoundError], logger })
+  @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
   public async getColleagues(bodyData: dto.GetColleaguesDto)
     : Promise<apiResponses.IGetColleaguesResponseDto> {
     const asker = await UserManager.getUserWithCompanyMembers(bodyData.profileId);
@@ -201,21 +201,21 @@ export default class UserService {
     }));
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async getNReviewsGot(bodyData: dto.GetNReviewsGotDto)
     : Promise<apiResponses.IGetNReviewsGotAmountResponseDto> {
     const targetData = await UserManager.getUserWithReviewsGot(bodyData.profileId);
     return { amount: targetData?.reviewsGot.length || 0 };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async getNReviewsLeft(bodyData: dto.GetNReviewsLeftDto)
     : Promise<apiResponses.IGetNReviewsLeftAmountResponseDto> {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     return { amount: targetData?.reviewsLeft.length || 0 };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
   public async getNthReviewGot(bodyData: dto.GetNthReviewGotDto)
     : Promise<apiResponses.IGetNthReviewGotResponseDto> {
     const target = await UserManager.getUserWithReviewsGot(bodyData.profileId);
@@ -228,7 +228,7 @@ export default class UserService {
     return this.mapReviewToReducedReview(review);
   }
 
-  @utils.dbErrorDefaultReactor({ except: [Errors.BadRequestError], logger })
+  @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
   public async getNthReviewLeft(bodyData: dto.GetNthReviewLeftDto)
     : Promise<apiResponses.IGetNthReviewLeftResponseDto> {
     const author = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
@@ -253,7 +253,7 @@ export default class UserService {
     };
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async notifyReferral(referralSharedId: string, targetName: string, targetEmail: string) {
     const referral = await UserManager.getUserBySharedId(referralSharedId);
 
@@ -268,7 +268,7 @@ export default class UserService {
     }
   }
 
-  @utils.dbErrorDefaultReactor({
+  @utils.errorsAutoHandler({
     except: [
       Errors.NotFoundError,
       Errors.ForbiddenError

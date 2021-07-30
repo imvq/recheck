@@ -7,7 +7,7 @@ import Company from '@database/entities/Company.entity';
 import CompanyManager from '@database/managers/CompanyManager';
 
 export default class CompaniesService {
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async getRecommendations(bodyData: dto.GetRecommendationsDto)
     : Promise<apiResponses.IGetRecommendations> {
     const companies = await CompanyManager.getPredefinedCompanies(bodyData.chunk);
@@ -35,7 +35,7 @@ export default class CompaniesService {
     }));
   }
 
-  @utils.dbErrorDefaultReactor({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [], logger })
   public async getMatchedCompanies(bodyData: dto.GetMatchedCompaniesDto)
     : Promise<apiResponses.IGetMatchedCompanies> {
     const matched = await CompanyManager.getMatched(bodyData.sequence);

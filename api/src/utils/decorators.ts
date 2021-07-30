@@ -2,7 +2,7 @@ import { Errors } from 'typescript-rest';
 
 import ILogger from '@logging/ILogger';
 
-export function dbErrorDefaultReactor(
+export function errorsAutoHandler(
   { except, logger }: { except?: any[], logger?: ILogger } = {}
 ) {
   return (
