@@ -1,7 +1,7 @@
-import * as generalTypes from 'utils/typing/general';
+import { ReviewCardGotData, ReviewCardLeftData } from 'utils/typing/general';
 
 export interface IOwnProps {
-  reviewCardData: generalTypes.ReviewCardGotData;
+  reviewCardData: ReviewCardGotData | ReviewCardLeftData;
   showTarget?: boolean;
 }
 

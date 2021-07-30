@@ -23,10 +23,10 @@ export const Menu = styled.div`
 export const MenuContent = styled.div<{ showTarget?: boolean; }>`
   display: flex;
   flex-direction: column;
-  padding-left: ${
-  props => (props.showTarget
-    ? `calc(${cssVarsLocal.photoWrapperWidth} + 2rem)`
+  padding-left: ${props => (props.showTarget
+    ? `calc(${cssVarsLocal.photoWrapperWidth} + 3rem)`
     : '5rem')};
+  padding-top: .5rem;
   padding-bottom: 2rem;
 `;
 
@@ -44,14 +44,27 @@ export const TopBar = styled.div`
 
 export const Photo = styled.img`
   position: absolute;
-  width: 5rem;
-  height: 5rem;
+  width: 8rem;
+  height: 8rem;
   object-fit: cover;
   border-radius: 50%;
   margin-left: -8rem;
 `;
 
+export const NameWrapper = styled.div`
+  padding-left: 2rem;
+`;
+
 export const Name = styled.span`
   font-size: 1.3rem;
   font-weight: 600;
+`;
+
+export const PlainTextWrapper = styled.div``;
+
+export const PlainText = styled.span<{ isDimmed?: boolean; }>`
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 2rem;
+  color: ${props => (props.isDimmed ? '#979797' : 'initial')};
 `;

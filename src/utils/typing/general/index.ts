@@ -127,10 +127,7 @@ export interface ReassignConfirmationEmailDto {
 
 export interface ReviewCardGotData extends IReviewCardCommonData {}
 
-export interface ReviewCardLeftData extends IReviewCardCommonData {
-  targetPosition: string;
-  targetCompanyName: string;
-}
+export interface ReviewCardLeftData extends IReviewCardCommonData {}
 
 export interface ReviewCardDataFull {
   name: string;
