@@ -244,12 +244,14 @@ export default class UserService {
   private mapReviewToReducedReview(review: Review)
     : apiResponses.IGetNthReviewLeftResponseDto {
     return {
+      targetName: review.target.name,
+      targetPhotoUrl: review.target.photoUrl,
+      targetPosition: review.target.position,
+      targetCompanyName: review.target.company.name,
       tasks: review.tasks,
       strengths: review.strengths,
       recommendation: review.recommendation,
-      recommendationMark: review.recommendationMark,
-      targetName: review.target.name,
-      targetPhotoUrl: review.target.photoUrl
+      recommendationMark: review.recommendationMark
     };
   }
 

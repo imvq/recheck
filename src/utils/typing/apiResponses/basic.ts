@@ -1,10 +1,10 @@
-import { IReviewCardCommonData } from '../general/basic';
+import { ReviewCardLeftData } from '../general';
 
 export interface IGetNReviewsResponseDto {
   amount: number;
 }
 
-export type IGetNthReviewResponseDto = IReviewCardCommonData;
+export type IGetNthReviewResponseDto = ReviewCardLeftData;
 
 export interface IProfileDto {
   profileId: string;

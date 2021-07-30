@@ -5,6 +5,8 @@ export interface IGetNReviewsAmountResponseDto {
 export interface IGetNthReviewResponseDto {
   targetName: string;
   targetPhotoUrl: string;
+  targetPosition: string;
+  targetCompanyName: string;
   tasks: string;
   strengths: string;
   recommendation: string;

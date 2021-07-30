@@ -66,11 +66,13 @@ export default class UserManager {
 
   public static async getUserWithReviewsLeft(profileId: string)
     : Promise<User | undefined> {
-    return getRepository(User).findOne({
-      relations: ['reviewsLeft', 'reviewsLeft.target'],
-      where: { profileId },
-      order: { profileId: 'DESC' }
-    });
+    return getRepository(User)
+      .createQueryBuilder('users')
+      .where({ profileId })
+      .innerJoinAndSelect('users.reviewsLeft', 'reviewsLeft')
+      .innerJoinAndSelect('reviewsLeft.target', 'target')
+      .innerJoinAndSelect('target.company', 'company')
+      .getOne();
   }
 
   public static async isTargetAvailable(asker: User, target: User)
