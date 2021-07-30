@@ -11,6 +11,7 @@ import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentPorfileId: store.profile.currentProfileInfo.currentId,
+  isAuthorized: store.auth.isAuthorized,
   isLoading: store.interaction.isProfileReviewsTabLoading,
   reviewsLeftChunksAmount: store.interaction.reviewsLeftChunksAmount,
   currentReviewCardData: store.interaction.currentReviewLeft
@@ -28,8 +29,10 @@ const ReviewsArea = (props: types.IProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    props.loadTabData(props.currentPorfileId);
-  }, []);
+    if (props.isAuthorized) {
+      props.loadTabData(props.currentPorfileId);
+    }
+  }, [props.isAuthorized]);
 
   return (
     <styled.Wrapper>
