@@ -74,15 +74,17 @@ const Companies = (props: types.IProps) => {
     </styled.CardWrapper>
   ));
 
-  const CurrentMembers = props.recommendedCompaniesShownMembers.map(memberData => (
-    <styled.CardWrapper key={memberData.shareableId}>
-      <PersonCard
-        buttonText='Посмотреть'
-        onButtonClick={() => handlePersonCardButtonClick(memberData)}
-        userData={memberData}
-      />
-    </styled.CardWrapper>
-  ));
+  const CurrentMembers = props.recommendedCompaniesShownMembers
+    .filter(member => member.shareableId !== props.currentProfileInfo.currentShareableId)
+    .map(memberData => (
+      <styled.CardWrapper key={memberData.shareableId}>
+        <PersonCard
+          buttonText='Посмотреть'
+          onButtonClick={() => handlePersonCardButtonClick(memberData)}
+          userData={memberData}
+        />
+      </styled.CardWrapper>
+    ));
 
   const closeHandler = useCallback(() => {
     setChunk(0);
