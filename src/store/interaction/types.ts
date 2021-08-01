@@ -27,8 +27,8 @@ export interface InteractionState {
   awaiter: string | null,
   reviewsGotChunksAmount: number;
   reviewsLeftChunksAmount: number;
-  currentReviewGot: generalTypes.ReviewCardGotData | null;
-  currentReviewLeft: generalTypes.ReviewCardLeftData | null;
+  currentReviewGot: generalTypes.IReviewCardGotData | null;
+  currentReviewLeft: generalTypes.IReviewCardLeftData | null;
 }
 
 export interface SetIsPageLocked {
@@ -88,12 +88,12 @@ export interface SetReviewsLeftChunksAmount {
 
 export interface SetCurrentReviewGot {
   type: typeof SET_CURRENT_REVIEW_GOT;
-  payload: generalTypes.ReviewCardGotData | null;
+  payload: generalTypes.IReviewCardGotData | null;
 }
 
 export interface SetCurrentReviewLeft {
   type: typeof SET_CURRENT_REVIEW_LEFT;
-  payload: generalTypes.ReviewCardLeftData | null;
+  payload: generalTypes.IReviewCardLeftData | null;
 }
 
 export type InteractionStateActionType =

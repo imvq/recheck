@@ -2,7 +2,7 @@ import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
   isAuthorized: boolean | null;
-  currentProfileInfo: generalTypes.AppProfileInfo;
+  currentProfileInfo: generalTypes.IAppProfileInfo;
 }
 
 export interface IDispatchProps {

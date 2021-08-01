@@ -99,7 +99,7 @@ const SearchPage = (props: types.IProps) => {
     <SearchField
       lockPageCallback={props.lockPage}
       searchUserCallback={props.searchUser}
-      quickSearchCallback={(event: generalTypes.InputEvent) => {
+      quickSearchCallback={(event: generalTypes.IInputEvent) => {
         if (event.target.value) {
           findUsersMatches(event.target.value.trim().split(' '));
         } else {

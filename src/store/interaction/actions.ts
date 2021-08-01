@@ -90,13 +90,13 @@ export const setReviewsLeftChunksAmount = (amount: number)
   payload: amount
 });
 
-export const setCurrentReviewGot = (review: generalTypes.ReviewCardGotData | null)
+export const setCurrentReviewGot = (review: generalTypes.IReviewCardGotData | null)
   : InteractionStateActionType => ({
   type: SET_CURRENT_REVIEW_GOT,
   payload: review
 });
 
-export const setCurrentReviewLeft = (review: generalTypes.ReviewCardLeftData | null)
+export const setCurrentReviewLeft = (review: generalTypes.IReviewCardLeftData | null)
   : InteractionStateActionType => ({
   type: SET_CURRENT_REVIEW_LEFT,
   payload: review

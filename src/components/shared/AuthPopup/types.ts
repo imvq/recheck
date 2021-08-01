@@ -6,7 +6,7 @@ export interface IDispatchProps {
   setPageLocked(flag: boolean): void;
   setIsLoginPopupVisible(flag: boolean): void;
   setIsAuthorized(flag: boolean): void;
-  setCurrentProfileInfo(profileInfo: generalTypes.AppProfileInfo): void;
+  setCurrentProfileInfo(profileInfo: generalTypes.IAppProfileInfo): void;
 }
 
 export type IProps = IDispatchProps;

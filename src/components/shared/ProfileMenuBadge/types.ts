@@ -12,7 +12,7 @@ export interface IStateProps {
 export interface IDispatchProps {
   lockPage(): void;
   setIsLoginPopupVisible(flag: boolean): void;
-  setCurrentProfileInfo(profileInfo: generalTypes.AppProfileInfo): void;
+  setCurrentProfileInfo(profileInfo: generalTypes.IAppProfileInfo): void;
 }
 
 export type IProps = IOwnProps & IStateProps & IDispatchProps;

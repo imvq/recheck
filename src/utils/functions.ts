@@ -16,7 +16,7 @@ export function getNValuesDown(from : number, n: number): number[] {
 /**
  * Partially applied onChange input event.
  */
-export function inputHandler(event: generalTypes.InputEvent, setter: (value: string) => void) {
+export function inputHandler(event: generalTypes.IInputEvent, setter: (value: string) => void) {
   setter(event.target.value);
 }
 
@@ -47,7 +47,7 @@ type ProfileDto = apiResponses.LinkedInProfileDto | apiResponses.FacebookProfile
 /**
  * Transform external profile DTO to store profile state object.
  */
-export function mapProfileDtoToState(profileDto: ProfileDto): generalTypes.AppProfileInfo {
+export function mapProfileDtoToState(profileDto: ProfileDto): generalTypes.IAppProfileInfo {
   return {
     currentId: profileDto.profileId,
     currentName: profileDto.name,
@@ -81,7 +81,7 @@ export const respondUp = (screen: string) => `@media (min-width: ${screen})`;
  * Partially applied onChange textarea event.
  */
 export function textAreaHandler(
-  event: generalTypes.TextAreaEvent,
+  event: generalTypes.ITextAreaEvent,
   setter: (value: string) => void
 ) {
   setter(event.target.value);

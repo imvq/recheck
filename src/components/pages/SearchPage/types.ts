@@ -2,12 +2,12 @@ import * as generalTypes from 'utils/typing/general';
 
 export interface IStateProps {
   colleaguesState: {
-    colleagues: Omit<generalTypes.SearchProfileInfo, 'company'>[];
+    colleagues: Omit<generalTypes.ISearchProfileInfo, 'company'>[];
     areLoaded: boolean;
   }
-  quickSearchMatchedUsers: generalTypes.SearchProfileInfo[];
-  recommendations: generalTypes.Company[];
-  userSearchResults: { results: generalTypes.SearchProfileInfo[]; };
+  quickSearchMatchedUsers: generalTypes.ISearchProfileInfo[];
+  recommendations: generalTypes.ICompany[];
+  userSearchResults: { results: generalTypes.ISearchProfileInfo[]; };
 }
 
 export interface IDispatchProps {
@@ -17,9 +17,9 @@ export interface IDispatchProps {
   loadRecommendations(chunk: number): void;
   lockPage(): void;
   searchUser(tokens: string[]): void;
-  setUserSearchResults(results: generalTypes.SearchProfileInfo[]): void;
-  setRecommendations(companies: generalTypes.Company[]): void;
-  setRecommendedCompaniesShownMembers(members: generalTypes.SearchProfileInfo[]): void;
+  setUserSearchResults(results: generalTypes.ISearchProfileInfo[]): void;
+  setRecommendations(companies: generalTypes.ICompany[]): void;
+  setRecommendedCompaniesShownMembers(members: generalTypes.ISearchProfileInfo[]): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

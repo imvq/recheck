@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { connect } from 'react-redux';
 import { StatusCodes } from 'http-status-codes';
 
-import { SearchProfileInfo } from 'utils/typing/general';
+import { ISearchProfileInfo } from 'utils/typing/general';
 import Api from 'utils/api';
 import {
   AppState,
@@ -41,7 +41,7 @@ const SearchResults = (props: types.IProps) => {
     }).finally(() => props.unlockPage());
   };
 
-  const handlePersonCardButtonClick = (userData: SearchProfileInfo) => {
+  const handlePersonCardButtonClick = (userData: ISearchProfileInfo) => {
     props.lockPage();
     props.setCurrentObservedUser(userData);
     requestReviewsAmount(userData.shareableId);

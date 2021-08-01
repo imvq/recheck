@@ -5,7 +5,7 @@ import { IReviewCardCommonData } from './basic';
 
 export type APIResponse<TDto = any> = Promise<AxiosResponse<TDto>>;
 
-export interface AppProfileInfo {
+export interface IAppProfileInfo {
   currentId: string;
   currentName: string;
   currentEmail: string;
@@ -13,37 +13,37 @@ export interface AppProfileInfo {
   currentPhotoUrl: string;
 }
 
-export interface BindReviewTargetDto {
+export interface IBindReviewTargetDto {
   reviewId: string;
   profileId: string;
 }
 
-export interface CheckIsUserAvailableForReviewDto {
+export interface ICheckIsUserAvailableForReviewDto {
   askerProfileId: string;
   targetShareableId: string;
 }
 
-export type CompanyMember = Omit<SearchProfileInfo, 'company'>;
+export type ICompanyMember = Omit<ISearchProfileInfo, 'company'>;
 
-export interface Company {
+export interface ICompany {
   id: string;
   name: string;
   logoUrl: string | null;
-  members: CompanyMember[];
+  members: ICompanyMember[];
 }
 
-export interface CompanyReduced {
+export interface ICompanyReduced {
   id: string;
   name: string;
   logoUrl: string | null;
 }
 
-export interface CompleteRegistrationDto {
+export interface ICompleteRegistrationDto {
   profileId: string;
   confirmationCode: string;
 }
 
-export interface DemoReviewCardData {
+export interface IDemoReviewCardData {
   name: string;
   photoUrl: string;
   position: string;
@@ -53,52 +53,52 @@ export interface DemoReviewCardData {
   nReviews: number;
 }
 
-export type InputEvent = ChangeEvent<HTMLInputElement>;
+export type IInputEvent = ChangeEvent<HTMLInputElement>;
 
-export interface GetConnectedUserDataDto {
+export interface IGetConnectedUserDataDto {
   askerProfileId: string;
   targetShareableId: string;
 }
 
-export interface GetNReviewsGotDto {
+export interface IGetNReviewsGotDto {
   profileId: string;
 }
 
-export interface GetNReviewsLeftDto {
+export interface IGetNReviewsLeftDto {
   profileId: string;
 }
 
-export interface GetNthReviewGotDto {
-  profileId: string;
-  nthReview: number;
-}
-
-export interface GetNthReviewLeftDto {
+export interface IGetNthReviewGotDto {
   profileId: string;
   nthReview: number;
 }
 
-export interface GetTargetNReviewsGotDto {
+export interface IGetNthReviewLeftDto {
+  profileId: string;
+  nthReview: number;
+}
+
+export interface IGetTargetNReviewsGotDto {
   askerProfileId: string;
   targetShareableId: string;
 }
 
-export interface OptionType {
+export interface IOptionType {
   key: any;
   text: string;
 }
 
-export interface ExtendedOptionType extends OptionType {
+export interface IExtendedOptionType extends IOptionType {
   imageUrl: string | null;
 }
 
-export interface NotifyReferralDto {
+export interface INotifyReferralDto {
   referralEmail: string;
   targetName: string;
   targetEmail: string;
 }
 
-export interface PrepareProfileDto {
+export interface IPrepareProfileDto {
   profileId: string;
   name: string;
   email: string;
@@ -113,23 +113,23 @@ export interface PrepareProfileDto {
   referral: string | null;
 }
 
-export interface PreviousSearchCardData {
+export interface IPreviousSearchCardData {
   name: string;
   position: string;
   company: string;
   photoUrl: string;
 }
 
-export interface ReassignConfirmationEmailDto {
+export interface IReassignConfirmationEmailDto {
   profileId: string;
   email: string;
 }
 
-export interface ReviewCardGotData extends IReviewCardCommonData {}
+export interface IReviewCardGotData extends IReviewCardCommonData {}
 
-export interface ReviewCardLeftData extends IReviewCardCommonData {}
+export interface IReviewCardLeftData extends IReviewCardCommonData {}
 
-export interface ReviewCardDataFull {
+export interface IReviewCardDataFull {
   name: string;
   photoUrl: string;
   position: string;
@@ -140,7 +140,7 @@ export interface ReviewCardDataFull {
   questions: string[];
 }
 
-export interface ReviewData {
+export interface IReviewData {
   authorId: string;
   targetShareableId: string;
   tasks: string;
@@ -149,7 +149,7 @@ export interface ReviewData {
   recommendationMark: number;
 }
 
-export interface SearchProfileInfo {
+export interface ISearchProfileInfo {
   name: string;
   shareableId: string;
   photoUrl: string;
@@ -157,4 +157,4 @@ export interface SearchProfileInfo {
   position: string;
 }
 
-export type TextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
+export type ITextAreaEvent = ChangeEvent<HTMLTextAreaElement>;

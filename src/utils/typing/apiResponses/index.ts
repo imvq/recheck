@@ -24,15 +24,15 @@ export interface ExchangeLinkedInCodeResposneDto {
 export interface IsTargetConnectedResponseDto extends ISimpleActionResponse {}
 
 export interface GetColleaguesResponseDto {
-  results: Omit<genearalTypes.SearchProfileInfo, 'company'>[];
+  results: Omit<genearalTypes.ISearchProfileInfo, 'company'>[];
 }
 
 export interface GetMatchedCompaniesResponseDto {
-  results: genearalTypes.CompanyReduced[];
+  results: genearalTypes.ICompanyReduced[];
 }
 
 export interface GetRecommendationsResponseDto {
-  results: genearalTypes.Company[];
+  results: genearalTypes.ICompany[];
 }
 
 export type GetNReviewsGotResponseDto = IGetNReviewsResponseDto;
@@ -66,4 +66,4 @@ export type ReassignConfirmationEmailResponseDto = ISimpleActionResponse;
 
 export type ResendConfirmationResponseDto = ISimpleActionResponse;
 
-export type SearchUserDto = genearalTypes.SearchProfileInfo;
+export type SearchUserDto = genearalTypes.ISearchProfileInfo;

@@ -5,7 +5,7 @@ export interface IStateProps {
   currentShareableId: string;
   isLoading: boolean;
   reviewsGotChunksAmount: number;
-  currentReviewCardData: generalTypes.ReviewCardGotData | null;
+  currentReviewCardData: generalTypes.IReviewCardGotData | null;
 }
 
 export interface IDispatchProps {

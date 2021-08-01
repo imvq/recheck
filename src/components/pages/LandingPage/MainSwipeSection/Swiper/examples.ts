@@ -4,7 +4,7 @@ import Lada from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Lada.p
 import Kate from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Kate.png';
 import Ciri from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Ciri.png';
 
-const examples: generalTypes.DemoReviewCardData[] = [
+const examples: generalTypes.IDemoReviewCardData[] = [
   {
     name: 'Екатерина Мазур',
     photoUrl: Kate,

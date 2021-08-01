@@ -1,22 +1,22 @@
-import { AppProfileInfo, Company, SearchProfileInfo } from 'utils/typing/general';
+import { IAppProfileInfo, ICompany, ISearchProfileInfo } from 'utils/typing/general';
 
 export interface IOwnProps {
-  recommendations: Company[];
+  recommendations: ICompany[];
   loadNextChunkCallback(chunk: number): void;
   onClose(): void;
 }
 
 export interface IStateProps {
-  currentProfileInfo: AppProfileInfo;
-  recommendedCompaniesShownMembers: SearchProfileInfo[];
+  currentProfileInfo: IAppProfileInfo;
+  recommendedCompaniesShownMembers: ISearchProfileInfo[];
 }
 
 export interface IDispatchProps {
   lockPage(): void;
   unlockPage(): void;
-  setCurrentObservedUser(user: SearchProfileInfo): void;
+  setCurrentObservedUser(user: ISearchProfileInfo): void;
   setIsSearchPopupVisible(flag: boolean): void;
-  setRecommendedCompaniesShownMembers(members: SearchProfileInfo[]): void;
+  setRecommendedCompaniesShownMembers(members: ISearchProfileInfo[]): void;
 }
 
 export type IProps = IOwnProps & IStateProps & IDispatchProps;

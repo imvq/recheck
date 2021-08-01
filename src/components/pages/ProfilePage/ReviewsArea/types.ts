@@ -5,7 +5,7 @@ export interface IStateProps {
   isAuthorized: boolean | null;
   isLoading: boolean;
   reviewsLeftChunksAmount: number;
-  currentReviewCardData: generalTypes.ReviewCardLeftData | null;
+  currentReviewCardData: generalTypes.IReviewCardLeftData | null;
 }
 
 export interface IDispatchProps {

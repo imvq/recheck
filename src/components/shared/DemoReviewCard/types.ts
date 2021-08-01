@@ -1,3 +1,3 @@
 import * as generalTypes from 'utils/typing/general';
 
-export type IProps = generalTypes.DemoReviewCardData;
+export type IProps = generalTypes.IDemoReviewCardData;

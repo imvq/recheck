@@ -1,8 +1,8 @@
-import { InputEvent } from 'utils/typing/general';
+import { IInputEvent } from 'utils/typing/general';
 
 export interface IOwnProps {
   lockPageCallback(): void;
-  quickSearchCallback(event: InputEvent): void;
+  quickSearchCallback(event: IInputEvent): void;
   searchUserCallback(tokens: string[]): void;
 }
 

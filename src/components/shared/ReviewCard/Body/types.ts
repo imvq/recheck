@@ -1,7 +1,7 @@
 import * as generalTypes from 'utils/typing/general';
 
 export interface IOwnProps {
-  reviewCardData: generalTypes.ReviewCardGotData;
+  reviewCardData: generalTypes.IReviewCardGotData;
 }
 
 export type IProps = IOwnProps;

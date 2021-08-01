@@ -25,7 +25,7 @@ function onProfileDataRetrieved(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: generalTypes.AppProfileInfo) => void,
+  setCurrentProfileInfoCallback: (profileInfo: generalTypes.IAppProfileInfo) => void,
   profileResponse: apiResponses.LinkedInProfileDto | apiResponses.FacebookProfileDto
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
@@ -60,7 +60,7 @@ export function onSuccessLinkedIn(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: generalTypes.AppProfileInfo) => void
+  setCurrentProfileInfoCallback: (profileInfo: generalTypes.IAppProfileInfo) => void
 ) {
   // Lock page to prevent user actions while retrieving and processing profile data.
   setPageLockedCallback(true);
@@ -98,7 +98,7 @@ export function onSuccessFacebook(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: generalTypes.AppProfileInfo) => void
+  setCurrentProfileInfoCallback: (profileInfo: generalTypes.IAppProfileInfo) => void
 ) {
   // Lock page to prevent user actions while processing profile data.
   setPageLockedCallback(true);

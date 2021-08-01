@@ -21,7 +21,7 @@ export default class Api {
   }
 
   public static checkIsUserAvailableForReview(
-    checkData: generalTypes.CheckIsUserAvailableForReviewDto
+    checkData: generalTypes.ICheckIsUserAvailableForReviewDto
   ): generalTypes.APIResponse<apiResponses.CheckIsUserAvailableForReviewResponseDto> {
     return Api.instance.post('/user/availability/review', checkData);
   }
@@ -36,7 +36,7 @@ export default class Api {
     return Api.instance.post('/user/is-confirmed', { profileId });
   }
 
-  public static checkIsTargetConnected(connectionData: generalTypes.GetConnectedUserDataDto)
+  public static checkIsTargetConnected(connectionData: generalTypes.IGetConnectedUserDataDto)
     : generalTypes.APIResponse<apiResponses.IsTargetConnectedResponseDto> {
     return Api.instance.post('/user/target/is-connected', connectionData);
   }
@@ -66,7 +66,7 @@ export default class Api {
     return Api.instance.post('/user/search', { tokens });
   }
 
-  public static completeRegistration(completionDto: generalTypes.CompleteRegistrationDto)
+  public static completeRegistration(completionDto: generalTypes.ICompleteRegistrationDto)
     : generalTypes.APIResponse<apiResponses.CompleteRegistartionResponseDto> {
     return Api.instance.post('/user/confirm', completionDto);
   }
@@ -93,7 +93,7 @@ export default class Api {
     return Api.instance.post('/facebook/oauth/retrieve-reduced', { profileId });
   }
 
-  public static prepareProfile(profileInfoDto: generalTypes.PrepareProfileDto)
+  public static prepareProfile(profileInfoDto: generalTypes.IPrepareProfileDto)
     : generalTypes.APIResponse<apiResponses.PrepareProfileResponseDto> {
     return Api.instance.post('/user/prepare', profileInfoDto);
   }
@@ -103,42 +103,42 @@ export default class Api {
     return Api.instance.post('/user/confirmation/resend', { profileId });
   }
 
-  public static reassignConfirmationEmail(reassignDto: generalTypes.ReassignConfirmationEmailDto)
+  public static reassignConfirmationEmail(reassignDto: generalTypes.IReassignConfirmationEmailDto)
     : generalTypes.APIResponse<apiResponses.ReassignConfirmationEmailResponseDto> {
     return Api.instance.post('/user/confirmation/reassign', reassignDto);
   }
 
-  public static prepareReview(reviewData: generalTypes.ReviewData)
+  public static prepareReview(reviewData: generalTypes.IReviewData)
     : generalTypes.APIResponse<apiResponses.PrepareReviewResponseDto> {
     return Api.instance.post('/review/prepare', reviewData);
   }
 
-  public static bindReviewTarget(bindingData: generalTypes.BindReviewTargetDto)
+  public static bindReviewTarget(bindingData: generalTypes.IBindReviewTargetDto)
     : generalTypes.APIResponse<apiResponses.BindReviewtargetResponseDto> {
     return Api.instance.post('/review/bind-target', bindingData);
   }
 
-  public static getNReviewsGot(targetData: generalTypes.GetNReviewsGotDto)
+  public static getNReviewsGot(targetData: generalTypes.IGetNReviewsGotDto)
     : generalTypes.APIResponse<apiResponses.GetNReviewsGotResponseDto> {
     return Api.instance.post('/user/amount/reviews-got', targetData);
   }
 
-  public static getNthReviewGot(targetData: generalTypes.GetNthReviewGotDto)
+  public static getNthReviewGot(targetData: generalTypes.IGetNthReviewGotDto)
     : generalTypes.APIResponse<apiResponses.GetNthReviewGotResponseDto> {
     return Api.instance.post('/user/get/nth-review-got', targetData);
   }
 
-  public static getNReviewsLeft(targetData: generalTypes.GetNReviewsLeftDto)
+  public static getNReviewsLeft(targetData: generalTypes.IGetNReviewsLeftDto)
     : generalTypes.APIResponse<apiResponses.GetNReviewsLeftResponseDto> {
     return Api.instance.post('/user/amount/reviews-left', targetData);
   }
 
-  public static getNthReviewLeft(targetData: generalTypes.GetNthReviewLeftDto)
+  public static getNthReviewLeft(targetData: generalTypes.IGetNthReviewLeftDto)
     : generalTypes.APIResponse<apiResponses.GetNthReviewLeftResponseDto> {
     return Api.instance.post('/user/get/nth-review-left', targetData);
   }
 
-  public static getTargetNReviewsGot(bodyData: generalTypes.GetTargetNReviewsGotDto)
+  public static getTargetNReviewsGot(bodyData: generalTypes.IGetTargetNReviewsGotDto)
     : generalTypes.APIResponse<apiResponses.GetTargetNReviewsGotResponseDto> {
     return Api.instance.post('/user/access/amount/reviews-got', bodyData);
   }

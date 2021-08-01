@@ -20,7 +20,7 @@ export default function CommentBoxWithMark(
   mapDispatchToProps: types.IDispatchProps
 ) {
   const Wrapped = (props: types.IProps) => {
-    function valueHandler(event: generalTypes.TextAreaEvent) {
+    function valueHandler(event: generalTypes.ITextAreaEvent) {
       textAreaHandler(event, props.setCurrentComment);
     }
 

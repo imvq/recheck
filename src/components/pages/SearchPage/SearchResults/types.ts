@@ -1,17 +1,17 @@
-import { AppProfileInfo, SearchProfileInfo } from 'utils/typing/general';
+import { IAppProfileInfo, ISearchProfileInfo } from 'utils/typing/general';
 
 export interface IOwnProps {
-  userSearchResults: { results : SearchProfileInfo[]; };
+  userSearchResults: { results : ISearchProfileInfo[]; };
 }
 
 export interface IStateProps {
-  currentProfileInfo: AppProfileInfo;
+  currentProfileInfo: IAppProfileInfo;
 }
 
 export interface IDispatchProps {
   lockPage(): void;
   unlockPage(): void;
-  setCurrentObservedUser(user: SearchProfileInfo): void;
+  setCurrentObservedUser(user: ISearchProfileInfo): void;
   setIsSearchPopupVisible(flag: boolean): void;
 }
 

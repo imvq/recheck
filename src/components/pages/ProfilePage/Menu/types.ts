@@ -2,7 +2,7 @@ import * as generalTypes from 'utils/typing/general';
 import { MainToolbarEntry } from 'utils/enums';
 
 export interface IOwnProps {
-  currentProfileInfo: generalTypes.AppProfileInfo;
+  currentProfileInfo: generalTypes.IAppProfileInfo;
 }
 
 export interface IDispatchProps {

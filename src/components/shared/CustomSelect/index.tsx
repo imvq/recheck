@@ -8,14 +8,14 @@ import CustomOption from './CustomOption';
 import * as types from './types';
 import * as styled from './styled';
 
-type TCurrentValue = generalTypes.OptionType | null;
+type TCurrentValue = generalTypes.IOptionType | null;
 
 const CustomSelect = (props: types.IProps) => {
   const [isDimmed, setIsDimmed] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
   const [currentValue, setCurrentValue] = useState<TCurrentValue>(null);
 
-  const callNewOptionHandler = (option: generalTypes.OptionType) => {
+  const callNewOptionHandler = (option: generalTypes.IOptionType) => {
     props.onNewOptionSelected(option);
     setCurrentValue(option);
     setIsDimmed(false);

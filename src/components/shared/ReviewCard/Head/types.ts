@@ -1,7 +1,7 @@
-import { ReviewCardGotData, ReviewCardLeftData } from 'utils/typing/general';
+import { IReviewCardGotData, IReviewCardLeftData } from 'utils/typing/general';
 
 export interface IOwnProps {
-  reviewCardData: ReviewCardGotData | ReviewCardLeftData;
+  reviewCardData: IReviewCardGotData | IReviewCardLeftData;
   showTarget?: boolean;
 }
 

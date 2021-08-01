@@ -1,11 +1,11 @@
-import { AppProfileInfo, SearchProfileInfo } from 'utils/typing/general';
+import { IAppProfileInfo, ISearchProfileInfo } from 'utils/typing/general';
 
 export interface IStateProps {
   colleaguesState: {
-    colleagues: Omit<SearchProfileInfo, 'company'>[];
+    colleagues: Omit<ISearchProfileInfo, 'company'>[];
     areLoaded: boolean;
   }
-  currentProfileInfo: AppProfileInfo;
+  currentProfileInfo: IAppProfileInfo;
 }
 
 export interface IDispatchProps {

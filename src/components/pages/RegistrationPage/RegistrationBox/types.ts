@@ -9,12 +9,12 @@ export interface IEmailState {
 }
 
 export interface IOwnProps {
-  onProceed(collectedInfo: generalTypes.PrepareProfileDto): void;
+  onProceed(collectedInfo: generalTypes.IPrepareProfileDto): void;
 }
 
 export interface IStateProps {
-  currentProfileInfo: generalTypes.AppProfileInfo;
-  matchedCompanies: generalTypes.CompanyReduced[];
+  currentProfileInfo: generalTypes.IAppProfileInfo;
+  matchedCompanies: generalTypes.ICompanyReduced[];
   referral: string | null;
 }
 

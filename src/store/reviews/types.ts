@@ -9,7 +9,7 @@ export const SET_STRENGTHS = 'SET_STRENGTHS';
 export const SET_RECOMMENDATION = 'SET_RECOMMENDATION';
 export const SET_RECOMMENDATION_MARK = 'SET_RECOMMENDATION_MARK';
 
-export type ReviewState = Omit<generalTypes.ReviewData, 'authorId'>;
+export type ReviewState = Omit<generalTypes.IReviewData, 'authorId'>;
 
 export interface ClearTasks {
   type: typeof CLEAR_TASKS;

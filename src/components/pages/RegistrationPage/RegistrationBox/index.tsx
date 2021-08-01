@@ -13,7 +13,7 @@ import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
 import { mapCompaniesDataToOptions } from './functions';
 
-const months: generalTypes.OptionType[] = [
+const months: generalTypes.IOptionType[] = [
   { key: 0, text: 'Январь' },
   { key: 1, text: 'Февраль' },
   { key: 2, text: 'Март' },
@@ -95,18 +95,18 @@ const RegistrationBox = (props: types.IProps) => {
 
   const setCompanyName = (name: string) => setCompany({ id: -1, name });
 
-  const companyNameHandler = (event: generalTypes.InputEvent) => inputHandler(
+  const companyNameHandler = (event: generalTypes.IInputEvent) => inputHandler(
     event,
     setCompanyName
   );
 
-  const positionHandler = (event: generalTypes.InputEvent) => inputHandler(
+  const positionHandler = (event: generalTypes.IInputEvent) => inputHandler(
     event,
     setPosition
   );
 
-  const monthHandler = (option: generalTypes.OptionType) => setWorkStartMonth(option.key);
-  const yearHandler = (option: generalTypes.OptionType) => setWorkStartYear(
+  const monthHandler = (option: generalTypes.IOptionType) => setWorkStartMonth(option.key);
+  const yearHandler = (option: generalTypes.IOptionType) => setWorkStartYear(
     Number.parseInt(option.text, 10)
   );
 
@@ -164,7 +164,7 @@ const RegistrationBox = (props: types.IProps) => {
         <styled.InputWithOptionsWrapper>
           <styled.Input
             type='text'
-            onChange={(event: generalTypes.InputEvent) => {
+            onChange={(event: generalTypes.IInputEvent) => {
               companyNameHandler(event);
               if (event.target.value) {
                 findCompanyMatches(event.target.value);

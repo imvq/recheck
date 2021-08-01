@@ -52,7 +52,7 @@ export const setReviewRecommendationMark = (payload: number): ReviewActionType =
   payload
 });
 
-export const createReview = (reviewData: generalTypes.ReviewData) => (
+export const createReview = (reviewData: generalTypes.IReviewData) => (
   dispatch: Dispatch<AppActionType>
 ) => {
   Api.prepareReview({ ...reviewData });
