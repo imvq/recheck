@@ -13,7 +13,10 @@ import {
   setUserSearchResults,
   setPageLocked
 } from 'store';
-
+import {
+  getQuickSearchMatchedUsersWithoutSelf,
+  getUserSearchResultsWithoutSelf
+} from 'store/selectors';
 import * as constants from 'utils/constants';
 import * as generalTypes from 'utils/typing/general';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
@@ -32,9 +35,9 @@ import { mapUserSearchDataToOptions } from './functions';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   colleaguesState: store.search.colleaguesState,
-  quickSearchMatchedUsers: store.search.quickSearchMatchedUsers,
+  quickSearchMatchedUsers: getQuickSearchMatchedUsersWithoutSelf(store),
   recommendations: store.search.recommendations,
-  userSearchResults: store.search.userSearchResults
+  userSearchResults: getUserSearchResultsWithoutSelf(store)
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
