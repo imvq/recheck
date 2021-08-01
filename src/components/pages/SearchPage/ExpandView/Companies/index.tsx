@@ -13,6 +13,7 @@ import {
   setPageUnlocked,
   setRecommendedCompaniesShownMembers
 } from 'store';
+import { getRecommendedCompaniesShownMembersWithoutSelf } from 'store/selectors';
 import CompanyCard from 'components/shared/CompanyCard';
 import PersonCard from 'components/shared/PersonCard';
 import ExpandView from '../index';
@@ -22,7 +23,7 @@ import * as styled from '../styled';
 
 const mapSTateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
-  recommendedCompaniesShownMembers: store.search.recommendedCompaniesShownMembers
+  recommendedCompaniesShownMembers: getRecommendedCompaniesShownMembersWithoutSelf(store)
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
