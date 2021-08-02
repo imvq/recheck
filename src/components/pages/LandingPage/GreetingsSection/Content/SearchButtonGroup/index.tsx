@@ -1,3 +1,4 @@
+import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import controlledHistory from 'utils/routing';
@@ -20,18 +21,39 @@ const mapDispatchToProps: types.IDispatchProps = {
  * Group of Programmed SVG components representing a search button
  * and a decorated SVG rocket attached to.
  */
-const SearchButtonGroup = (props: types.IProps) => (
-  <styled.Wrapper onClick={
-    props.isAuthorized === null
-      ? props.lockPage
-      : props.isAuthorized
-        ? () => controlledHistory.push('/search')
-        : () => props.setIsLoginPopupVisible(true)
-  }
-  >
-    <styled.SearchButton onClick={props.onClick} />
-    <RocketGroup />
-  </styled.Wrapper>
-);
+const SearchButtonGroup = (props: types.IProps) => {
+  const [isClickRequested, setIsClickRequested] = useState(false);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchButtonGroup);
+  useEffect(() => {
+    if (isClickRequested) {
+      const pendingFinishedCallback = getPendingFinishedCallback();
+      pendingFinishedCallback();
+    }
+  }, [props.isAuthorized]);
+
+  const onClickWhilePending = () => {
+    props.lockPage();
+    setIsClickRequested(true);
+  };
+
+  const getPendingFinishedCallback = () => {
+    return props.isAuthorized
+      ? () => controlledHistory.push('/search')
+      : () => props.setIsLoginPopupVisible(true);
+  };
+
+  const getMainHandler = () => (
+    props.isAuthorized === null
+      ? onClickWhilePending
+      : getPendingFinishedCallback()
+  );
+
+  return (
+    <styled.Wrapper onClick={getMainHandler()}>
+      <styled.SearchButton onClick={props.onClick} />
+      <RocketGroup />
+    </styled.Wrapper>
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(memo(SearchButtonGroup));
