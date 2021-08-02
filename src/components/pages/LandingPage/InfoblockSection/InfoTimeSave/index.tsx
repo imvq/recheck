@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import InfoTimeSaveBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoTimeSaveBoard.svg';
 
 import * as styledLocal from './styled';
@@ -5,7 +7,7 @@ import * as styledBase from '../BaseSubsection/styled';
 
 const styled = { ...styledLocal, ...styledBase };
 
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <styled.BoardWrapper>
       <styled.Board backgroundSource={InfoTimeSaveBoardSvg}>
@@ -30,4 +32,4 @@ export default () => (
       </styled.Board>
     </styled.BoardWrapper>
   </styled.Wrapper>
-);
+));

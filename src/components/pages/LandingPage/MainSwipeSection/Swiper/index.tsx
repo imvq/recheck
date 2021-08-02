@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { memo, useState, useEffect } from 'react';
 
 import DemoReviewCard from 'components/shared/DemoReviewCard';
 import examples from './examples';
@@ -8,24 +8,13 @@ import * as styled from './styled';
 /**
  * Swipe area with review examples.
  */
-export default () => {
+export default memo(() => {
   const [cards, setCards] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    setCards(examples.map(example => {
-      return (
-        <DemoReviewCard
-          key={example.name}
-          name={example.name}
-          photoUrl={example.photoUrl}
-          position={example.position}
-          company={example.company}
-          experience={example.experience}
-          review={example.review}
-          nReviews={example.nReviews}
-        />
-      );
-    }));
+    setCards(examples.map(example => (
+      <DemoReviewCard key={example.name} {...example} />
+    )));
   }, []);
 
   const onPrevClicked = () => {
@@ -49,4 +38,4 @@ export default () => {
       <styled.ArrowRight onClick={onNextClicked} />
     </styled.Wrapper>
   );
-};
+});

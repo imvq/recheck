@@ -1,9 +1,11 @@
+import { memo } from 'react';
+
 import * as styled from './styled';
 
 /**
  * Title of 'How to work' section.
  */
-export default () => (
+export default memo(() => (
   <styled.Wrapper id='HowToWorkTitle'>
     <styled.TextWrapper>
       <styled.Text>
@@ -14,4 +16,4 @@ export default () => (
       </styled.Text>
     </styled.TextWrapper>
   </styled.Wrapper>
-);
+));

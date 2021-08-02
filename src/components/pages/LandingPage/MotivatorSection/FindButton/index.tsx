@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, setPageLocked, setIsSearchPopupVisible, setIsLoginPopupVisible } from 'store';
@@ -33,4 +34,4 @@ const FindButton = (props: types.IProps) => (
   />
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(FindButton);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(FindButton));

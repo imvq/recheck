@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import PhoneImage from 'assets/images/pages/LandingPage/MotivatorSection/Phone.png';
 import TitleView from './TitleView';
 import FindButton from './FindButton';
@@ -5,7 +7,7 @@ import Badge from './Badge';
 
 import * as styled from './styled';
 
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <TitleView />
 
@@ -30,4 +32,4 @@ export default () => (
       </styled.AnchorSticky>
     </styled.FocusView>
   </styled.Wrapper>
-);
+));

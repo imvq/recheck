@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 
 import * as styled from './styled';
@@ -5,7 +6,7 @@ import * as styled from './styled';
 /**
  * Head buttons section.
  */
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <ScrollLink to='HowToWorkTitle' smooth duration={300}>
       <styled.TabButton>О платформе</styled.TabButton>
@@ -19,4 +20,4 @@ export default () => (
       <styled.TabButton>Отзывы</styled.TabButton>
     </ScrollLink>
   </styled.Wrapper>
-);
+));

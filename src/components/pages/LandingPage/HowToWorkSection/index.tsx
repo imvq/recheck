@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import TitleView from './TitleView';
 import StepFirstView from './StepFirstView';
 import StepSecondView from './StepSecondView';
@@ -8,11 +10,11 @@ import * as styled from './styled';
 /**
  * 'How to work' section. Group of blocks describing work of the project.
  */
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <TitleView />
     <StepFirstView />
     <StepSecondView />
     <StepThirdView />
   </styled.Wrapper>
-);
+));

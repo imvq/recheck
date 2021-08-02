@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import InfoEasementBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoEasementBoard.svg';
 
 import * as styledLocal from './styled';
@@ -5,7 +7,7 @@ import * as styledBase from '../BaseSubsection/styled';
 
 const styled = { ...styledLocal, ...styledBase };
 
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <styled.BoardWrapper>
       <styled.Board backgroundSource={InfoEasementBoardSvg}>
@@ -29,4 +31,4 @@ export default () => (
       </styled.Board>
     </styled.BoardWrapper>
   </styled.Wrapper>
-);
+));

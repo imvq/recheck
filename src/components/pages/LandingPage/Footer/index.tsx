@@ -1,11 +1,9 @@
+import { memo } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 
 import * as styled from './styled';
 
-/**
- * The footer.
- */
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <styled.SectionWrapper>
       <styled.InnerLogo />
@@ -41,4 +39,4 @@ export default () => (
 
     <styled.EmptyWrapper />
   </styled.Wrapper>
-);
+));

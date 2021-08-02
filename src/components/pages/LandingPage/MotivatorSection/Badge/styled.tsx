@@ -48,3 +48,5 @@ export const ParagraphWrapper = styled.div`
   padding-right: ${cssVarsLocal.shiftDefault};
   line-height: 1.6rem;
 `;
+
+export const Paragraph = styled.p``;

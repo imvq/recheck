@@ -1,12 +1,11 @@
+import { memo } from 'react';
+
 import ContentPic from 'assets/images/pages/LandingPage/GreetingsSection/Content/ContentPic.svg';
 import SearchButtonGroup from './SearchButtonGroup';
 
 import * as styled from './styled';
 
-/**
- * Content of greetings section.
- */
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <styled.PictureWrapper>
       <styled.Picture src={ContentPic} alt='' draggable='false' />
@@ -21,4 +20,4 @@ export default () => (
       </styled.ActionGroup>
     </styled.TextWrapper>
   </styled.Wrapper>
-);
+));

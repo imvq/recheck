@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import PictureSvg from 'assets/images/pages/LandingPage/HowToWorkSection/StepThird/Pic.svg';
 import ParagraphBackgroundSvg from 'assets/images/pages/LandingPage/HowToWorkSection/StepThird/StepThirdTextBck.svg';
 
@@ -6,7 +8,7 @@ import * as styled from './styled';
 /**
  * Last part of 'How to work' section.
  */
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <styled.CentralizingBox>
       <styled.ImageWrapper>
@@ -36,4 +38,4 @@ export default () => (
       </styled.ParagraphWrapper>
     </styled.CentralizingBox>
   </styled.Wrapper>
-);
+));

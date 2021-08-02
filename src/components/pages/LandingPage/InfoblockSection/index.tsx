@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import TitleView from './TitleView';
 import InfoTimeSave from './InfoTimeSave';
 import InfoEasement from './InfoEasement';
@@ -8,7 +10,7 @@ import * as styled from './styled';
 /**
  * Additional info section.
  */
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <TitleView />
     <styled.InfoBlockDesktopOnlyWrapper>
@@ -29,4 +31,4 @@ export default () => (
       <InfoWarranty />
     </styled.SubsectionsWrapper>
   </styled.Wrapper>
-);
+));

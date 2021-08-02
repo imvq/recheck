@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import InfoWarrantyBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoWarrantyBoard.svg';
 
 import * as styledLocal from './styled';
@@ -8,7 +10,7 @@ const styled = { ...styledLocal, ...styledBase };
 /**
  * Warranty info subsection.
  */
-export default () => (
+export default memo(() => (
   <styled.Wrapper>
     <styled.BoardWrapper>
       <styled.Board backgroundSource={InfoWarrantyBoardSvg}>
@@ -31,4 +33,4 @@ export default () => (
       </styled.Board>
     </styled.BoardWrapper>
   </styled.Wrapper>
-);
+));

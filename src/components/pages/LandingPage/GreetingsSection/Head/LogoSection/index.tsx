@@ -1,8 +1,7 @@
+import { memo } from 'react';
+
 import Logo from 'components/shared/Logo';
 
 import * as styled from './styled';
 
-/**
- * Head logo section.
- */
-export default () => <styled.Wrapper><Logo /></styled.Wrapper>;
+export default memo(() => <styled.Wrapper><Logo /></styled.Wrapper>);
