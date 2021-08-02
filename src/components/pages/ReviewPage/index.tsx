@@ -48,7 +48,7 @@ const BoxStepC = ComponentBoxWithMark(
  * Page in charge of adding a review.
  */
 const ReviewPage = (props: types.IProps) => {
-  const { targetShareableId } = useParams<{ targetShareableId?: string }>();
+  const { targetShareableId } = useParams<{ targetShareableId: string }>();
   const [step, setStep] = useState(0);
 
   useEffect(() => {
