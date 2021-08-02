@@ -5,9 +5,10 @@ export interface IStateProps {
     colleagues: Omit<generalTypes.ISearchProfileInfo, 'company'>[];
     areLoaded: boolean;
   }
+  isAuthorized: boolean | null;
   quickSearchMatchedUsers: generalTypes.ISearchProfileInfo[];
   recommendations: generalTypes.ICompany[];
-  userSearchResults: { results: generalTypes.ISearchProfileInfo[]; };
+  userSearchResults: generalTypes.ISearchProfileInfo[];
 }
 
 export interface IDispatchProps {

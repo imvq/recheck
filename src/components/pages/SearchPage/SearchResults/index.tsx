@@ -54,7 +54,7 @@ const SearchResults = (props: types.IProps) => {
       </styled.TitleWrapper>
 
       <styled.ResultsWrapper>
-        {props.userSearchResults.results.map(userData => (
+        {props.userSearchResults.map(userData => (
           <styled.CardWrapper key={userData.shareableId}>
             <PersonCard
               buttonText='Посмотреть'

@@ -35,6 +35,7 @@ import { mapUserSearchDataToOptions } from './functions';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   colleaguesState: store.search.colleaguesState,
+  isAuthorized: store.auth.isAuthorized,
   quickSearchMatchedUsers: getQuickSearchMatchedUsersWithoutSelf(store),
   recommendations: store.search.recommendations,
   userSearchResults: getUserSearchResultsWithoutSelf(store)
@@ -130,9 +131,12 @@ const SearchPage = (props: types.IProps) => {
   const firstRender = useRef(true);
 
   useLayoutEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-    } else {
+    if (props.isAuthorized) {
+      if (firstRender.current) {
+        firstRender.current = false;
+        return;
+      }
+
       setIsFirstSearch(false);
     }
   }, [props.userSearchResults]);
@@ -149,7 +153,7 @@ const SearchPage = (props: types.IProps) => {
           {SearchInput}
           {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
           {/* The search results. */}
-          {props.userSearchResults.results.length
+          {props.userSearchResults.length
             ? <SearchResults userSearchResults={props.userSearchResults} />
             : <SearchNoResults isFirstSearch={isFirstSearch} />}
           {props.recommendations.length > 0 && RecommendedCompaniesList}

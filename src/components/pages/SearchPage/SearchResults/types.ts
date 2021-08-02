@@ -1,7 +1,7 @@
 import { IAppProfileInfo, ISearchProfileInfo } from 'utils/typing/general';
 
 export interface IOwnProps {
-  userSearchResults: { results : ISearchProfileInfo[]; };
+  userSearchResults: ISearchProfileInfo[];
 }
 
 export interface IStateProps {

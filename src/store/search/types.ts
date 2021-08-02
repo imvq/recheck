@@ -19,7 +19,7 @@ export interface SearchState {
   quickSearchMatchedUsers: generalTypes.ISearchProfileInfo[];
   recommendations: generalTypes.ICompany[];
   recommendedCompaniesShownMembers: generalTypes.ISearchProfileInfo[];
-  userSearchResults: { results: generalTypes.ISearchProfileInfo[]; };
+  userSearchResults: generalTypes.ISearchProfileInfo[];
   currentObservedUser: generalTypes.ISearchProfileInfo | null;
 }
 

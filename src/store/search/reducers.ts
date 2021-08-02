@@ -21,7 +21,7 @@ const initialState: SearchState = {
   quickSearchMatchedUsers: [],
   recommendations: [],
   recommendedCompaniesShownMembers: [],
-  userSearchResults: { results: [] },
+  userSearchResults: [],
   currentObservedUser: null
 };
 
@@ -80,7 +80,7 @@ export function searchReducer(
     case SET_CURRENT_USER_SEARCH_RESULTS:
       return {
         ...state,
-        userSearchResults: { results: action.payload }
+        userSearchResults: action.payload
       };
     case SET_CURRENT_OBSERVED_USER:
       return {

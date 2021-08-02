@@ -19,6 +19,6 @@ export const getRecommendedCompaniesShownMembersWithoutSelf = createSelector(
 export const getUserSearchResultsWithoutSelf = createSelector(
   [primitive.getCurrentShareableId, primitive.getUserSearchResults],
   (selfShareableId, searchResults) => {
-    return { results: searchResults.results.filter(user => user.shareableId !== selfShareableId) };
+    return searchResults.filter(user => user.shareableId !== selfShareableId);
   }
 );
