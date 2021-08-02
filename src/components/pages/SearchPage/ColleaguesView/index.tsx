@@ -26,6 +26,7 @@ const mapDispatchToProps: types.IDispatchProps = {
 export const ColleaguesView = (props: types.IProps) => {
   const checkIsUserAvailableForReview = (askerProfileId: string, targetShareableId: string) => {
     props.lockPage();
+
     Api.checkIsUserAvailableForReview({ askerProfileId, targetShareableId })
       .then(checkData => {
         if (checkData.data.success) {
@@ -38,6 +39,11 @@ export const ColleaguesView = (props: types.IProps) => {
 
   return (
     <styled.Wrapper>
+      <styled.TitleWrapper>
+        <styled.Title>Выберите и оставьте отзыв о коллеге</styled.Title>
+        <styled.SubTitle>С этими людьми вы работаете в одной компании</styled.SubTitle>
+      </styled.TitleWrapper>
+
       {props.colleaguesState.areLoaded && props.colleaguesState.colleagues.length > 0 && (
         <styled.CardsWrapper>
           {props.colleaguesState.colleagues.map(colleague => (
