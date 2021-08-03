@@ -118,6 +118,12 @@ export default class UserManager {
     });
   }
 
+  public static async makeUserAvailable(asker: User, target: User) {
+    asker.availableUsers.push(target);
+
+    return getRepository(User).save(asker);
+  }
+
   public static async updateUser(user: User): Promise<User> {
     return getRepository(User).save(user);
   }

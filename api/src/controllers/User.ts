@@ -50,6 +50,17 @@ export default class UserController {
   }
 
   /**
+   * Make one user available to look through another's profile.
+   */
+  @Path('/availability/profile/provide')
+  @BodyGuard
+  @POST
+  public async makeUserAvailable(bodyData: dto.MakeUserAvailableDto)
+    : Promise<apiResponses.IMakeUserAvailableResponseDto> {
+    return this.injectedService.makeUserAvailable(bodyData);
+  }
+
+  /**
    * Check if the user is registered in the app.
    */
   @Path('/is-registered')

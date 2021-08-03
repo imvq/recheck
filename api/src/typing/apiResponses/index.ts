@@ -92,6 +92,8 @@ export interface ILinkedInPhotoDto {
   }
 }
 
+export interface IMakeUserAvailableResponseDto extends ISimpleActionResponse {}
+
 export interface IPrepareReviewResponseDto extends ISimpleActionResponse {}
 
 export interface IPrepareUserResponseDto extends ISimpleActionResponse {}

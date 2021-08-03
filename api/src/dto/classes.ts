@@ -111,6 +111,13 @@ export class IsTargetConnectedDto {
   ) {}
 }
 
+export class MakeUserAvailableDto {
+  public constructor(
+    public askerProfileId: string,
+    public targetShareableId: string
+  ) {}
+}
+
 export class UserDto {
   public constructor(
     public profileId: string,

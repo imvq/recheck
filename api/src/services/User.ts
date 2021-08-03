@@ -277,14 +277,28 @@ export default class UserService {
     ],
     logger
   })
-  public async getTargetNReviewsGot(bodyData: dto.GetTargetNReviewsGotDto) {
+  public async getTargetNReviewsGot(bodyData: dto.GetTargetNReviewsGotDto)
+    : Promise<apiResponses.IGetTargetNReviewsGotResponseDto> {
     const asker = await UserManager.getUser(bodyData.askerProfileId);
     const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
     this.handleUsersExistence(asker, target);
-    // @ts-ignore: asker and target is guaranteed to be existed here.
+    // @ts-ignore: asker and target are guaranteed to be existed here.
     await this.handleAvailability(asker, target);
 
     return UserManager.getTargetNReviewsGot(bodyData.askerProfileId, bodyData.targetShareableId);
+  }
+
+  @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
+  public async makeUserAvailable(bodyData: dto.MakeUserAvailableDto)
+    : Promise<apiResponses.IMakeUserAvailableResponseDto> {
+    const asker = await UserManager.getUser(bodyData.askerProfileId, ['availableUsers']);
+    const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
+    this.handleUsersExistence(asker, target);
+
+    // @ts-ignore: asker and target are guaranteed to be existed here.
+    await UserManager.makeUserAvailable(asker, target);
+
+    return { success: true };
   }
 
   private handleUsersExistence(...users: (User | undefined)[]) {
