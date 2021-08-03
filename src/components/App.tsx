@@ -12,7 +12,7 @@ import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
 import GlobalStyle from 'components/shared/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
-import ProfilePage from 'components/pages/ProfilePage';
+import OwnProfilePage from 'components/pages/OwnProfilePage';
 import ReviewPage from 'components/pages/ReviewPage';
 import SearchPage from 'components/pages/SearchPage';
 import RegistrationPage from 'components/pages/RegistrationPage';
@@ -42,14 +42,14 @@ export default () => (
             </PageLockManager>
           </Route>
 
-          {/* Profile page. */}
+          {/* Own profile page. */}
           {/* Use StartupManager to do checkAuth request to LinkedIn. */}
           {/* Check is needed to determine if we can show the page to user. */}
           {/* The result of the check is stored so that no check will be further. */}
           <Route exact path='/profile'>
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
             <PageLockManager hideContentOnLock>
-              <ProfilePage />
+              <OwnProfilePage />
             </PageLockManager>
           </Route>
 

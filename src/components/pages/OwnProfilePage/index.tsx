@@ -19,7 +19,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 /**
  * Profile page. Used to view reviews.
  */
-const ProfilePage = (props: types.IProps) => (
+const OwnProfilePage = (props: types.IProps) => (
   <styled.Wrapper>
     <styled.Sidebar />
 
@@ -43,4 +43,4 @@ const ProfilePage = (props: types.IProps) => (
   </styled.Wrapper>
 );
 
-export default connect(mapStateToProps)(ProfilePage);
+export default connect(mapStateToProps)(OwnProfilePage);
