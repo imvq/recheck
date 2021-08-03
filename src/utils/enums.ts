@@ -34,6 +34,7 @@ export enum ToastVariants {
  * Represents sidebar entries.
  */
 export enum MainToolbarEntry {
+  NoEntry,
   ProfilePageMyReviews,
   ProfilePageHistory,
   ProfilePageAboutMe,

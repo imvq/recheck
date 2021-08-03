@@ -98,7 +98,7 @@ export const interactionStateReducer = (
     case SET_REQUESTED_USER_SHAREABLE_ID:
       return {
         ...state,
-        reqestedUserShareableId: action.payload
+        requestedUserShareableId: action.payload
       };
     case SET_CURRENT_REVIEW_GOT:
       return {

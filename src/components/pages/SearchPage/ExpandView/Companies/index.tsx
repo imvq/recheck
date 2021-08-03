@@ -11,7 +11,8 @@ import {
   setIsSearchPopupVisible,
   setPageLocked,
   setPageUnlocked,
-  setRecommendedCompaniesShownMembers
+  setRecommendedCompaniesShownMembers,
+  setRequestedUserShareableId
 } from 'store';
 import { getRecommendedCompaniesShownMembersWithoutSelf } from 'store/selectors';
 import CompanyCard from 'components/shared/CompanyCard';
@@ -31,7 +32,8 @@ const mapDispatchToProps: types.IDispatchProps = {
   unlockPage: setPageUnlocked,
   setIsSearchPopupVisible,
   setCurrentObservedUser,
-  setRecommendedCompaniesShownMembers
+  setRecommendedCompaniesShownMembers,
+  setRequestedUserShareableId
 };
 
 const Companies = (props: types.IProps) => {
@@ -55,6 +57,7 @@ const Companies = (props: types.IProps) => {
       // TODO: show profile.
     }).catch(error => {
       if (error.response && error.response.status === StatusCodes.FORBIDDEN) {
+        props.setRequestedUserShareableId(targetShareableId);
         props.setIsSearchPopupVisible(true);
       }
     }).finally(() => props.unlockPage());

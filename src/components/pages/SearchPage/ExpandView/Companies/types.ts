@@ -17,6 +17,7 @@ export interface IDispatchProps {
   setCurrentObservedUser(user: ISearchProfileInfo): void;
   setIsSearchPopupVisible(flag: boolean): void;
   setRecommendedCompaniesShownMembers(members: ISearchProfileInfo[]): void;
+  setRequestedUserShareableId(shareableId: string) : void;
 }
 
 export type IProps = IOwnProps & IStateProps & IDispatchProps;

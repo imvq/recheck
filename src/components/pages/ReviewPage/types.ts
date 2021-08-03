@@ -3,6 +3,7 @@ import { MainToolbarEntry } from 'utils/enums';
 
 export interface IStateProps {
   currentProfileInfo: generalTypes.IAppProfileInfo;
+  requestedUserShareableId: string | null;
   reviewData: Omit<generalTypes.IReviewData, 'authorId'>;
 }
 

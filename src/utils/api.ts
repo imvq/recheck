@@ -56,6 +56,11 @@ export default class Api {
     return Api.instance.post('/companies/recommendations', { chunk });
   }
 
+  public static makeUserAvailable(bodyData: generalTypes.IMakeUserAvailableDto)
+    : generalTypes.APIResponse<apiResponses.IMakeUserAvailableResponseDto> {
+    return Api.instance.post('/user/availability/profile/provide', bodyData);
+  }
+
   public static quickSearchUser(tokens: string[])
     : generalTypes.APIResponse<{ results: apiResponses.SearchUserDto[]; }> {
     return Api.instance.post('/user/quick-search', { tokens });

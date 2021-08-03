@@ -92,6 +92,11 @@ export interface IExtendedOptionType extends IOptionType {
   imageUrl: string | null;
 }
 
+export interface IMakeUserAvailableDto {
+  askerProfileId: string;
+  targetShareableId: string;
+}
+
 export interface INotifyReferralDto {
   referralEmail: string;
   targetName: string;

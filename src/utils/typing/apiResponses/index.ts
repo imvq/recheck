@@ -56,6 +56,8 @@ export type FacebookProfileReducedDto = Omit<
   | 'photoUrl'
 >;
 
+export type IMakeUserAvailableResponseDto = ISimpleActionResponse;
+
 export type NofiyReferralResponseDto = ISimpleActionResponse;
 
 export type PrepareReviewResponseDto = ISimpleActionResponse;
