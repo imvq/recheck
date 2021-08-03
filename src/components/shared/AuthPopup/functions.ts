@@ -26,7 +26,7 @@ function onProfileDataRetrieved(
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
   setCurrentProfileInfoCallback: (profileInfo: generalTypes.IAppProfileInfo) => void,
-  profileResponse: apiResponses.LinkedInProfileDto | apiResponses.FacebookProfileDto
+  profileResponse: apiResponses.ILinkedInProfileDto | apiResponses.IFacebookProfileDto
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
   setCurrentProfileInfoCallback(normalizedProfileInfo);
@@ -109,7 +109,7 @@ export function onSuccessFacebook(
 
     // 2. Time to retrieve basic profile info from Facebook response.
     const oauthData = result as ReactFacebookLoginInfo;
-    const profileInfo: apiResponses.FacebookProfileDto = {
+    const profileInfo: apiResponses.IFacebookProfileDto = {
       profileId: oauthData.userID,
       name: oauthData.name || '',
       email: '',

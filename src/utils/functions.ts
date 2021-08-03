@@ -42,7 +42,7 @@ export function isValidUrl(text: string): boolean {
   ].join('')).test(text.toLowerCase());
 }
 
-type ProfileDto = apiResponses.LinkedInProfileDto | apiResponses.FacebookProfileDto;
+type ProfileDto = apiResponses.ILinkedInProfileDto | apiResponses.IFacebookProfileDto;
 
 /**
  * Transform external profile DTO to store profile state object.

@@ -20,7 +20,7 @@ export const setIsAuthorized = (isAuthorized: boolean): AuthActionType => ({
  */
 function onProfileDataRetrieved(
   dispatch: Dispatch<AppActionType>,
-  profileResponse: AxiosResponse<apiResponses.LinkedInProfileDto | apiResponses.FacebookProfileDto>,
+  profileResponse: AxiosResponse<apiResponses.ILinkedInProfileDto | apiResponses.IFacebookProfileDto>,
   isRedirectOnRegistered: boolean,
   isConfirmationCheckNeeded: boolean
 ) {

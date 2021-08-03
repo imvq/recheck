@@ -1,56 +1,56 @@
 import * as genearalTypes from '../general';
 import { IGetNReviewsResponseDto, IGetNthReviewResponseDto, IProfileDto, ISimpleActionResponse } from './basic';
 
-export interface BindReviewtargetResponseDto extends ISimpleActionResponse {}
+export interface IBindReviewtargetResponseDto extends ISimpleActionResponse {}
 
-export interface CheckIsEmailAvailableResponseDto extends ISimpleActionResponse {}
+export interface ICheckIsEmailAvailableResponseDto extends ISimpleActionResponse {}
 
-export interface CheckIsUserAvailableForReviewResponseDto extends ISimpleActionResponse {}
+export interface ICheckIsUserAvailableForReviewResponseDto extends ISimpleActionResponse {}
 
-export interface CheckIsRegisteredResponseDto {
+export interface ICheckIsRegisteredResponseDto {
   isRegistered: boolean;
 }
 
-export interface CheckIsConfirmedResponseDto {
+export interface ICheckIsConfirmedResponseDto {
   isConfirmed: boolean;
 }
 
-export interface CompleteRegistartionResponseDto extends ISimpleActionResponse {}
+export interface ICompleteRegistartionResponseDto extends ISimpleActionResponse {}
 
-export interface ExchangeLinkedInCodeResposneDto {
+export interface IExchangeLinkedInCodeResposneDto {
   'li_at': string;
 }
 
-export interface IsTargetConnectedResponseDto extends ISimpleActionResponse {}
+export interface IIsTargetConnectedResponseDto extends ISimpleActionResponse {}
 
-export interface GetColleaguesResponseDto {
+export interface IGetColleaguesResponseDto {
   results: Omit<genearalTypes.ISearchProfileInfo, 'company'>[];
 }
 
-export interface GetMatchedCompaniesResponseDto {
+export interface IGetMatchedCompaniesResponseDto {
   results: genearalTypes.ICompanyReduced[];
 }
 
-export interface GetRecommendationsResponseDto {
+export interface IGetRecommendationsResponseDto {
   results: genearalTypes.ICompany[];
 }
 
-export type GetNReviewsGotResponseDto = IGetNReviewsResponseDto;
+export type IGetNReviewsGotResponseDto = IGetNReviewsResponseDto;
 
-export type GetNReviewsLeftResponseDto = IGetNReviewsResponseDto;
+export type IGetNReviewsLeftResponseDto = IGetNReviewsResponseDto;
 
-export type GetNthReviewGotResponseDto = IGetNthReviewResponseDto;
+export type IGetNthReviewGotResponseDto = IGetNthReviewResponseDto;
 
-export type GetNthReviewLeftResponseDto = IGetNthReviewResponseDto;
+export type IGetNthReviewLeftResponseDto = IGetNthReviewResponseDto;
 
-export type GetTargetNReviewsGotResponseDto = IGetNReviewsResponseDto;
+export type IGetTargetNReviewsGotResponseDto = IGetNReviewsResponseDto;
 
-export type LinkedInProfileDto = IProfileDto;
+export type ILinkedInProfileDto = IProfileDto;
 
-export type FacebookProfileDto = IProfileDto;
+export type IFacebookProfileDto = IProfileDto;
 
-export type FacebookProfileReducedDto = Omit<
-  FacebookProfileDto,
+export type IFacebookProfileReducedDto = Omit<
+  IFacebookProfileDto,
   'profileId'
   | 'name'
   | 'photoUrl'
@@ -58,14 +58,14 @@ export type FacebookProfileReducedDto = Omit<
 
 export type IMakeUserAvailableResponseDto = ISimpleActionResponse;
 
-export type NofiyReferralResponseDto = ISimpleActionResponse;
+export type INofiyReferralResponseDto = ISimpleActionResponse;
 
-export type PrepareReviewResponseDto = ISimpleActionResponse;
+export type IPrepareReviewResponseDto = ISimpleActionResponse;
 
-export type PrepareProfileResponseDto = ISimpleActionResponse;
+export type IPrepareProfileResponseDto = ISimpleActionResponse;
 
-export type ReassignConfirmationEmailResponseDto = ISimpleActionResponse;
+export type IReassignConfirmationEmailResponseDto = ISimpleActionResponse;
 
-export type ResendConfirmationResponseDto = ISimpleActionResponse;
+export type IResendConfirmationResponseDto = ISimpleActionResponse;
 
-export type SearchUserDto = genearalTypes.ISearchProfileInfo;
+export type ISearchUserDto = genearalTypes.ISearchProfileInfo;
