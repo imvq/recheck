@@ -13,6 +13,7 @@ export interface IDispatchProps {
   unlockPage(): void;
   setCurrentObservedUser(user: ISearchProfileInfo): void;
   setIsSearchPopupVisible(flag: boolean): void;
+  setRequestedUserShareableId(shareableId: string) : void;
 }
 
 export type IProps = IOwnProps & IStateProps & IDispatchProps;

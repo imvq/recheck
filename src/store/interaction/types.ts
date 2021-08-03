@@ -12,6 +12,7 @@ export const SET_REFERRAL = 'SET_REFERRAL';
 export const SET_AWAITER = 'SET_AWAITER';
 export const SET_REVIEWS_GOT_CHUNKS_AMOUNT = 'SET_REVIEWS_GOT_CHUNKS_AMOUNT';
 export const SET_REVIEWS_LEFT_CHUNKS_AMOUNT = 'SET_REVIEWS_LEFT_CHUNKS_AMOUNT';
+export const SET_REQUESTED_USER_SHAREABLE_ID = 'SET_REQUESTED_USER_SHAREABLE_ID';
 export const SET_CURRENT_REVIEW_GOT = 'SET_CURRENT_REVIEW_GOT';
 export const SET_CURRENT_REVIEW_LEFT = 'SET_CURRENT_REVIEW_LEFT';
 
@@ -27,6 +28,7 @@ export interface InteractionState {
   awaiter: string | null,
   reviewsGotChunksAmount: number;
   reviewsLeftChunksAmount: number;
+  requestedUserShareableId: string | null;
   currentReviewGot: generalTypes.IReviewCardGotData | null;
   currentReviewLeft: generalTypes.IReviewCardLeftData | null;
 }
@@ -86,6 +88,11 @@ export interface SetReviewsLeftChunksAmount {
   payload: number;
 }
 
+export interface SetRequestedUserShareableId {
+  type: typeof SET_REQUESTED_USER_SHAREABLE_ID;
+  payload: string | null;
+}
+
 export interface SetCurrentReviewGot {
   type: typeof SET_CURRENT_REVIEW_GOT;
   payload: generalTypes.IReviewCardGotData | null;
@@ -108,5 +115,6 @@ export type InteractionStateActionType =
   | SetAwaiter
   | SetReviewsGotChunksAmount
   | SetReviewsLeftChunksAmount
+  | SetRequestedUserShareableId
   | SetCurrentReviewGot
   | SetCurrentReviewLeft;

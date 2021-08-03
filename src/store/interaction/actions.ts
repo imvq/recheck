@@ -17,6 +17,7 @@ import {
   SET_AWAITER,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
+  SET_REQUESTED_USER_SHAREABLE_ID,
   SET_CURRENT_REVIEW_GOT,
   SET_CURRENT_REVIEW_LEFT
 } from './types';
@@ -88,6 +89,12 @@ export const setReviewsLeftChunksAmount = (amount: number)
   : InteractionStateActionType => ({
   type: SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
   payload: amount
+});
+
+export const setRequestedUserShareableId = (shareableId: string | null)
+  : InteractionStateActionType => ({
+  type: SET_REQUESTED_USER_SHAREABLE_ID,
+  payload: shareableId
 });
 
 export const setCurrentReviewGot = (review: generalTypes.IReviewCardGotData | null)

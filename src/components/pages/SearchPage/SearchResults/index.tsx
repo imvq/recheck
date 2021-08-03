@@ -9,7 +9,8 @@ import {
   setCurrentObservedUser,
   setIsSearchPopupVisible,
   setPageLocked,
-  setPageUnlocked
+  setPageUnlocked,
+  setRequestedUserShareableId
 } from 'store';
 import PersonCard from 'components/shared/PersonCard';
 
@@ -24,7 +25,8 @@ const mapDispatchToProps: types.IDispatchProps = {
   lockPage: setPageLocked,
   unlockPage: setPageUnlocked,
   setIsSearchPopupVisible,
-  setCurrentObservedUser
+  setCurrentObservedUser,
+  setRequestedUserShareableId
 };
 
 const SearchResults = (props: types.IProps) => {
@@ -36,6 +38,7 @@ const SearchResults = (props: types.IProps) => {
       // TODO: show profile.
     }).catch(error => {
       if (error.response && error.response.status === StatusCodes.FORBIDDEN) {
+        props.setRequestedUserShareableId(targetShareableId);
         props.setIsSearchPopupVisible(true);
       }
     }).finally(() => props.unlockPage());
