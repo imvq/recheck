@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux';
 import { AxiosResponse } from 'axios';
 
+import * as apiResponsesBasic from 'utils/typing/apiResponses/basic';
 import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
 import { mapProfileDtoToState } from 'utils/functions';
 import { cookieManager, cookiesList } from 'utils/cookies';
-import * as apiResponses from 'utils/typing/apiResponses';
 import { setCurrentProfileInfo } from '../profile/actions';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
@@ -20,7 +20,7 @@ export const setIsAuthorized = (isAuthorized: boolean): AuthActionType => ({
  */
 function onProfileDataRetrieved(
   dispatch: Dispatch<AppActionType>,
-  profileResponse: AxiosResponse<apiResponses.ILinkedInProfileDto | apiResponses.IFacebookProfileDto>,
+  profileResponse: AxiosResponse<apiResponsesBasic.IProfileDto>,
   isRedirectOnRegistered: boolean,
   isConfirmationCheckNeeded: boolean
 ) {
