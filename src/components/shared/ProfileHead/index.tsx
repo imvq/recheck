@@ -20,6 +20,10 @@ const mapDispatchToProps: types.IDispatchProps = {
 const Menu = (props: types.IProps) => {
   const MenuContent = () => (
     <styled.MenuContent>
+      <styled.MenuContentSpan dimmed>
+        Запросов по моему профилю:&nbsp;&nbsp;
+        <styled.MenuContentSpan>0</styled.MenuContentSpan>
+      </styled.MenuContentSpan>
 
       <styled.ProfilePictureWrapper>
         <styled.ProfilePicture
