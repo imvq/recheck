@@ -4,7 +4,6 @@ import { useParams } from 'react-router-dom';
 
 import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
-import { MainToolbarEntry } from 'utils/enums';
 import {
   AppState,
   createReview,
@@ -99,7 +98,7 @@ const ReviewPage = (props: types.IProps) => {
       askerProfileId: props.currentProfileInfo.currentId,
       // @ts-ignore: requestedUserShareableId is guaranteed to be a valid string here.
       targetShareableId: props.requestedUserShareableId
-    }).then(() => { /* TODO: redirect to one's profile. */ })
+    }).then(() => controlledHistory.push(`/profile/observe/${props.requestedUserShareableId}`))
       .catch(() => controlledHistory.push('/profile'));
   };
 

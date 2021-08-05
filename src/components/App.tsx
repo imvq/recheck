@@ -12,6 +12,7 @@ import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
 import GlobalStyle from 'components/shared/GlobalStyle';
 import LandingPage from 'components/pages/LandingPage';
+import ObservedProfilePage from 'components/pages/ObservedProfilePage';
 import OwnProfilePage from 'components/pages/OwnProfilePage';
 import ReviewPage from 'components/pages/ReviewPage';
 import SearchPage from 'components/pages/SearchPage';
@@ -50,6 +51,14 @@ export default () => (
             <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
             <PageLockManager hideContentOnLock>
               <OwnProfilePage />
+            </PageLockManager>
+          </Route>
+
+          {/* Profile of another user. */}
+          <Route exact path='/profile/observe/:targetShareableId'>
+            <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
+            <PageLockManager hideContentOnLock>
+              <ObservedProfilePage />
             </PageLockManager>
           </Route>
 
