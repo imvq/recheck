@@ -12,6 +12,7 @@ import {
   setPageUnlocked,
   setTargetShareableId
 } from 'store';
+import ProfileHead from 'components/shared/ProfileHead';
 
 import CommentBoxSimple from './CommentBoxSimple';
 import * as boxSimpleMapping from './CommentBoxSimple/mapping';
@@ -122,6 +123,10 @@ const ReviewPage = (props: types.IProps) => {
     <styled.Wrapper>
       <styled.AdaptedHeader />
       <styled.ContentWrapper>
+        <styled.ProfileHeadWrapper>
+          <ProfileHead isReduced profileInfo={props.currentProfileInfo} />
+        </styled.ProfileHeadWrapper>
+
         {boxes[step]}
       </styled.ContentWrapper>
       <styled.AdaptedFooter />

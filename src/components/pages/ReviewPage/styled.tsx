@@ -32,3 +32,7 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const ProfileHeadWrapper = styled.div`
+  padding-bottom: 2rem;
+`;

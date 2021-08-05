@@ -20,10 +20,12 @@ const mapDispatchToProps: types.IDispatchProps = {
 const Menu = (props: types.IProps) => {
   const MenuContent = () => (
     <styled.MenuContent>
+      {!props.isReduced && (
       <styled.MenuContentSpan dimmed>
         Запросов по моему профилю:&nbsp;&nbsp;
         <styled.MenuContentSpan>0</styled.MenuContentSpan>
       </styled.MenuContentSpan>
+      )}
 
       <styled.ProfilePictureWrapper>
         <styled.ProfilePicture
@@ -39,6 +41,7 @@ const Menu = (props: types.IProps) => {
       <styled.Menu>
         <MenuBar currentProfileInfo={props.profileInfo} />
         <MenuContent />
+        {!props.isReduced && (
         <styled.ButtonWrapper>
           <CustomButton
             height='2.3rem'
@@ -51,6 +54,7 @@ const Menu = (props: types.IProps) => {
             Новый поиск
           </CustomButton>
         </styled.ButtonWrapper>
+        )}
       </styled.Menu>
     </styled.Wrapper>
   );

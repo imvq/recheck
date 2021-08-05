@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { mixins } from 'utils/style.common';
 
 export const BoxBaseWrapper = styled.div`
-  width: 60rem;
+  width: 64rem;
   height: fit-content;
   background-color: #f0f3ff;
   border-radius: 1.4rem;
