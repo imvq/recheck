@@ -1,8 +1,8 @@
-import * as generalTypes from 'utils/typing/general';
+import { IAppProfileInfoReduced } from 'utils/typing/general';
 import { MainToolbarEntry } from 'utils/enums';
 
 export interface IOwnProps {
-  currentProfileInfo: generalTypes.IAppProfileInfo;
+  profileInfo: IAppProfileInfoReduced;
 }
 
 export interface IDispatchProps {

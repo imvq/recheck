@@ -1,7 +1,7 @@
-import { IAppProfileInfo } from 'utils/typing/general';
+import { IAppProfileInfoReduced } from 'utils/typing/general';
 
 export interface IOwnProps {
-  currentProfileInfo: IAppProfileInfo;
+  currentProfileInfo: IAppProfileInfoReduced;
 }
 
 export type IProps = IOwnProps;

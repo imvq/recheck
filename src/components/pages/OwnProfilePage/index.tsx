@@ -27,7 +27,7 @@ const OwnProfilePage = (props: types.IProps) => (
 
     <styled.ContentWrapper>
       <styled.TitleWrapper>Мой профиль</styled.TitleWrapper>
-      <ProfileHead currentProfileInfo={props.currentProfileInfo} />
+      <ProfileHead profileInfo={props.currentProfileInfo} />
       {(() => {
         switch (props.currentMainToolbarEntry) {
           case MainToolbarEntry.ProfilePageAboutMe:
@@ -39,6 +39,7 @@ const OwnProfilePage = (props: types.IProps) => (
         }
       })()}
     </styled.ContentWrapper>
+
     <Footer />
   </styled.Wrapper>
 );

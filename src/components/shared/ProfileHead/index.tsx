@@ -31,7 +31,7 @@ const Menu = (props: types.IProps) => {
 
       <styled.ProfilePictureWrapper>
         <styled.ProfilePicture
-          src={props.currentProfileInfo.currentPhotoUrl}
+          src={props.profileInfo.currentPhotoUrl}
           draggable='false'
         />
       </styled.ProfilePictureWrapper>
@@ -41,7 +41,7 @@ const Menu = (props: types.IProps) => {
   return (
     <styled.Wrapper>
       <styled.Menu>
-        <MenuBar currentProfileInfo={props.currentProfileInfo} />
+        <MenuBar currentProfileInfo={props.profileInfo} />
         <MenuContent />
         <styled.ButtonWrapper>
           <CustomButton
@@ -60,4 +60,4 @@ const Menu = (props: types.IProps) => {
   );
 };
 
-export default memo(connect(null, mapDispatchToProps)(Menu));
+export default connect(null, mapDispatchToProps)(memo(Menu));

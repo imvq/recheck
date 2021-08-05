@@ -13,6 +13,11 @@ export interface IAppProfileInfo {
   currentPhotoUrl: string;
 }
 
+export interface IAppProfileInfoReduced {
+  currentName: string;
+  currentPhotoUrl: string;
+}
+
 export interface IBindReviewTargetDto {
   reviewId: string;
   profileId: string;
