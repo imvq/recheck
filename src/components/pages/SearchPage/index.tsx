@@ -102,7 +102,10 @@ const SearchPage = (props: types.IProps) => {
   const SearchInput = (
     <SearchField
       lockPageCallback={props.lockPage}
-      searchUserCallback={props.searchUser}
+      searchUserCallback={tokens => {
+        props.searchUser(tokens);
+        props.clearMatchedUsers();
+      }}
       quickSearchCallback={(event: generalTypes.IInputEvent) => {
         if (event.target.value) {
           findUsersMatches(event.target.value.trim().split(' '));

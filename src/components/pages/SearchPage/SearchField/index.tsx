@@ -12,6 +12,7 @@ export default memo((props: types.IProps) => {
       setPreviousSearch(searchText);
       props.lockPageCallback();
       props.searchUserCallback(searchText.trim().split(' '));
+      setSearchText('');
     }
   };
 
@@ -25,8 +26,9 @@ export default memo((props: types.IProps) => {
     <styled.Wrapper>
       <styled.Input
         type='text'
+        value={searchText}
         placeholder='Введите название компании или имя и фамилию сотрудника, который работал с вами:'
-        onChange={(event) => {
+        onChange={event => {
           props.quickSearchCallback(event);
           setSearchText(event.target.value);
         }}
