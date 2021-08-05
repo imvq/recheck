@@ -19,6 +19,7 @@ export interface IDispatchProps {
   loadRecommendations(chunk: number): void;
   lockPage(): void;
   searchUser(tokens: string[]): void;
+  searchUserByShareableId(shareableId: string): void;
   setUserSearchResults(results: generalTypes.ISearchProfileInfo[]): void;
   setRecommendations(companies: generalTypes.ICompany[]): void;
   setRecommendedCompaniesShownMembers(members: generalTypes.ISearchProfileInfo[]): void;

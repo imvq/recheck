@@ -10,6 +10,7 @@ import {
   loadRecommendations,
   clearMatchedUsers,
   searchUser,
+  searchUserByShareableId,
   setSearchText,
   setUserSearchResults,
   setPageLocked
@@ -49,6 +50,7 @@ const mapDispatchToProps: types.IDispatchProps = {
   loadMatchedUsers,
   loadRecommendations,
   searchUser,
+  searchUserByShareableId,
   setUserSearchResults,
   setRecommendations,
   setRecommendedCompaniesShownMembers,
@@ -126,8 +128,9 @@ const SearchPage = (props: types.IProps) => {
         options={mapUserSearchDataToOptions(props.quickSearchMatchedUsers)}
         onClose={props.clearMatchedUsers}
         onOptionSelected={matchedResult => {
-          props.searchUser(matchedResult.text.trim().split(' '));
+          props.searchUserByShareableId(matchedResult.key);
           props.clearMatchedUsers();
+          props.clearSearchText();
         }}
       />
     </styled.DropListWrapper>

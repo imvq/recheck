@@ -91,6 +91,14 @@ export const searchUser = (tokens: string[]) => (dispatch: Dispatch<AppActionTyp
     .finally(() => dispatch(unlockPage()));
 };
 
+export const searchUserByShareableId = (shareableId: string) => (
+  dispatch: Dispatch<AppActionType>
+) => {
+  Api.searchUserByShareableId(shareableId)
+    .then((searchResult) => dispatch(setUserSearchResults([searchResult.data.result])))
+    .finally(() => dispatch(unlockPage()));
+};
+
 export const loadMatchedCompanies = (sequence: string) => (dispatch: Dispatch<AppActionType>) => {
   Api.getMatchedCompanies(sequence)
     .then(matchData => dispatch(setQuickSearchMatchedCompanies(matchData.data.results)));
