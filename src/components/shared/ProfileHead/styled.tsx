@@ -47,9 +47,8 @@ export const ProfilePictureWrapper = styled.div`
 
 export const ProfilePicture = styled.img`
   object-fit: cover;
-  height: 80%;
-  max-width: 100%;
-  max-height: 100%;
+  width: 13rem;
+  height: 13rem;
   border-radius: 50%;
 `;
 
