@@ -8,6 +8,7 @@ import {
   SET_RECOMMENDATIONS,
   APPEND_RECOMMENDATIONS,
   SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS,
+  SET_SEARCH_TEXT,
   SET_CURRENT_USER_SEARCH_RESULTS,
   SET_CURRENT_OBSERVED_USER
 } from './types';
@@ -21,6 +22,7 @@ const initialState: SearchState = {
   quickSearchMatchedUsers: [],
   recommendations: [],
   recommendedCompaniesShownMembers: [],
+  searchText: '',
   userSearchResults: [],
   currentObservedUser: null
 };
@@ -76,6 +78,11 @@ export function searchReducer(
       return {
         ...state,
         recommendedCompaniesShownMembers: action.payload
+      };
+    case SET_SEARCH_TEXT:
+      return {
+        ...state,
+        searchText: action.payload
       };
     case SET_CURRENT_USER_SEARCH_RESULTS:
       return {

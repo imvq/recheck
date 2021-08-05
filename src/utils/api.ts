@@ -71,6 +71,11 @@ export default class Api {
     return Api.instance.post('/user/search', { tokens });
   }
 
+  public static searchUserByShareableId(shareableId: string)
+    : generalTypes.APIResponse<{ result: apiResponses.ISearchUserDto; }> {
+    return Api.instance.post('/user/search/by/shareable-id', { shareableId });
+  }
+
   public static completeRegistration(completionDto: generalTypes.ICompleteRegistrationDto)
     : generalTypes.APIResponse<apiResponses.ICompleteRegistartionResponseDto> {
     return Api.instance.post('/user/confirm', completionDto);

@@ -1,18 +1,32 @@
 import { memo, useState, KeyboardEvent } from 'react';
+import { connect } from 'react-redux';
+
+import { AppState, setSearchText } from 'store';
+import { useBlur } from 'utils/hooks';
 
 import * as types from './types';
 import * as styled from './styled';
 
-export default memo((props: types.IProps) => {
+const mapStateToProps = (store: AppState): types.IStateProps => ({
+  searchText: store.search.searchText
+});
+
+const mapDispatchToProps: types.IDispatchProps = {
+  setSearchText
+};
+
+const SearchField = (props: types.IProps) => {
   const [previousSearch, setPreviousSearch] = useState<string | null>(null);
-  const [searchText, setSearchText] = useState('');
+
+  const [inputReference, blur] = useBlur();
 
   const doSearch = () => {
-    if (searchText !== '' && searchText !== previousSearch) {
-      setPreviousSearch(searchText);
+    if (props.searchText !== '' && props.searchText !== previousSearch) {
+      setPreviousSearch(props.searchText);
       props.lockPageCallback();
-      props.searchUserCallback(searchText.trim().split(' '));
-      setSearchText('');
+      props.searchUserCallback(props.searchText.trim().split(' '));
+      props.setSearchText('');
+      blur();
     }
   };
 
@@ -26,16 +40,19 @@ export default memo((props: types.IProps) => {
     <styled.Wrapper>
       <styled.Input
         type='text'
-        value={searchText}
+        ref={inputReference}
+        value={props.searchText}
         placeholder='Введите название компании или имя и фамилию сотрудника, который работал с вами:'
         onChange={event => {
           props.quickSearchCallback(event);
-          setSearchText(event.target.value);
+          props.setSearchText(event.target.value);
         }}
         onKeyDown={keyHandler}
       />
       {/* $isDimmed must not be inserted into the DOM tree so it was made transient.' */}
-      <styled.AdaptedMagnifier $isDimmed={searchText === ''} onClick={doSearch} />
+      <styled.AdaptedMagnifier $isDimmed={props.searchText === ''} onClick={doSearch} />
     </styled.Wrapper>
   );
-});
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(memo(SearchField));

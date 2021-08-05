@@ -6,4 +6,12 @@ export interface IOwnProps {
   searchUserCallback(tokens: string[]): void;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {
+  searchText: string;
+}
+
+export interface IDispatchProps {
+  setSearchText(text: string): void;
+}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

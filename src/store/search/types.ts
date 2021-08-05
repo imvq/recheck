@@ -7,6 +7,7 @@ export const SET_QUICK_SEARCH_MATCHED_USERS = 'SET_QUICK_SEARCH_MATCHED_USERS';
 export const SET_RECOMMENDATIONS = 'SET_RECOMMENDATIONS';
 export const APPEND_RECOMMENDATIONS = 'APPEND_RECOMMENDATIONS';
 export const SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS = 'SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS';
+export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 export const SET_CURRENT_USER_SEARCH_RESULTS = 'SET_CURRENT_USER_SEARCH_RESULTS';
 export const SET_CURRENT_OBSERVED_USER = 'SET_CURRENT_OBSERVED_USER';
 
@@ -19,6 +20,7 @@ export interface SearchState {
   quickSearchMatchedUsers: generalTypes.ISearchProfileInfo[];
   recommendations: generalTypes.ICompany[];
   recommendedCompaniesShownMembers: generalTypes.ISearchProfileInfo[];
+  searchText: string;
   userSearchResults: generalTypes.ISearchProfileInfo[];
   currentObservedUser: generalTypes.ISearchProfileInfo | null;
 }
@@ -57,6 +59,11 @@ export interface SetRecommendedCompaniesShownMembers {
   payload: generalTypes.ISearchProfileInfo[];
 }
 
+export interface SetSearchText {
+  type: typeof SET_SEARCH_TEXT;
+  payload: string;
+}
+
 export interface SetCurrentUserSearchResults {
   type: typeof SET_CURRENT_USER_SEARCH_RESULTS;
   payload: generalTypes.ISearchProfileInfo[];
@@ -75,5 +82,6 @@ export type SearchActionType =
   | SetRecommendations
   | SetCurrentObservedUser
   | AppendRecommendations
+  | SetSearchText
   | SetRecommendedCompaniesShownMembers
   | SetCurrentUserSearchResults;

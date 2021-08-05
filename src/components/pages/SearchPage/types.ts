@@ -14,6 +14,7 @@ export interface IStateProps {
 export interface IDispatchProps {
   clearColleagues(): void;
   clearMatchedUsers(): void;
+  clearSearchText(): void;
   loadMatchedUsers(tokens: string[]): void;
   loadRecommendations(chunk: number): void;
   lockPage(): void;

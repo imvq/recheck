@@ -13,6 +13,7 @@ import {
   SET_RECOMMENDATIONS,
   APPEND_RECOMMENDATIONS,
   SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS,
+  SET_SEARCH_TEXT,
   SET_CURRENT_USER_SEARCH_RESULTS,
   SET_CURRENT_OBSERVED_USER
 } from './types';
@@ -77,6 +78,11 @@ export const setCurrentObservedUser = (user: generalTypes.ISearchProfileInfo)
   : SearchActionType => ({
   type: SET_CURRENT_OBSERVED_USER,
   payload: user
+});
+
+export const setSearchText = (text: string): SearchActionType => ({
+  type: SET_SEARCH_TEXT,
+  payload: text
 });
 
 export const searchUser = (tokens: string[]) => (dispatch: Dispatch<AppActionType>) => {

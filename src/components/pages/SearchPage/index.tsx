@@ -10,6 +10,7 @@ import {
   loadRecommendations,
   clearMatchedUsers,
   searchUser,
+  setSearchText,
   setUserSearchResults,
   setPageLocked
 } from 'store';
@@ -44,6 +45,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 const mapDispatchToProps: types.IDispatchProps = {
   clearColleagues,
   clearMatchedUsers,
+  clearSearchText: () => setSearchText(''),
   loadMatchedUsers,
   loadRecommendations,
   searchUser,
@@ -105,6 +107,7 @@ const SearchPage = (props: types.IProps) => {
       searchUserCallback={tokens => {
         props.searchUser(tokens);
         props.clearMatchedUsers();
+        props.clearSearchText();
       }}
       quickSearchCallback={(event: generalTypes.IInputEvent) => {
         if (event.target.value) {
@@ -122,7 +125,10 @@ const SearchPage = (props: types.IProps) => {
       <DropList
         options={mapUserSearchDataToOptions(props.quickSearchMatchedUsers)}
         onClose={props.clearMatchedUsers}
-        onOptionSelected={() => {}}
+        onOptionSelected={matchedResult => {
+          props.searchUser(matchedResult.text.trim().split(' '));
+          props.clearMatchedUsers();
+        }}
       />
     </styled.DropListWrapper>
   );
