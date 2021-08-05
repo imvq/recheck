@@ -49,7 +49,7 @@ export default function CommentBoxSimple(
           <styled.TextArea onChange={valueHandler} />
         </styled.InputGroupWrapper>
 
-        <styled.StepWrapper><span>{`${props.page} / 12`}</span></styled.StepWrapper>
+        <styled.StepWrapper><span>{`${props.page} / 3`}</span></styled.StepWrapper>
 
         <styled.ButtonGroupWrapper>
           <CustomButton isHollow isDisabled={false} onClick={returnHandler}>

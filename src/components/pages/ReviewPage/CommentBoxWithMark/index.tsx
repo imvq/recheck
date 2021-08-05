@@ -53,7 +53,7 @@ export default function CommentBoxWithMark(
         <styled.InputGroupWrapper>
           <styled.CommentArea placeholder='Прокомментируйте свой ответ' onChange={valueHandler} />
         </styled.InputGroupWrapper>
-        <styled.StepWrapper><span>6 / 12</span></styled.StepWrapper>
+        <styled.StepWrapper><span>{`${props.page} / 3`}</span></styled.StepWrapper>
 
         <styled.ButtonGroupWrapper>
           <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
