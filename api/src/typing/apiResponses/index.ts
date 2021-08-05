@@ -128,3 +128,7 @@ export interface ISearchedUserDto {
 export interface ISearchUserResponseDto {
   results: ISearchedUserDto[];
 }
+
+export interface ISearchUserByShareableIdResponseDto {
+  result: ISearchedUserDto;
+}

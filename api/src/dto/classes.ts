@@ -155,3 +155,7 @@ export class RetrievePorfileInfoReduced {
 export class SearchUserDto {
   public constructor(public tokens: string[]) {}
 }
+
+export class SearchUserByShareableIdDto {
+  public constructor(public shareableId: string) {}
+}

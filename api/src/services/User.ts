@@ -182,6 +182,18 @@ export default class UserService {
     return { results: results || [] };
   }
 
+  @utils.errorsAutoHandler({ except: [], logger })
+  public async searchUserByShareabledId(searchDto: dto.SearchUserByShareableIdDto)
+    : Promise<apiResponses.ISearchUserByShareableIdResponseDto> {
+    const result = await UserManager.getUserBySharedId(searchDto.shareableId);
+
+    if (!result) {
+      throw new Errors.NotFoundError('No such user.');
+    }
+
+    return { result };
+  }
+
   @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
   public async getColleagues(bodyData: dto.GetColleaguesDto)
     : Promise<apiResponses.IGetColleaguesResponseDto> {

@@ -149,6 +149,17 @@ export default class UserController {
   }
 
   /**
+   * Search user by shareable ID.
+   */
+  @Path('/search/by/shareable-id')
+  @BodyGuard
+  @POST
+  public async searchByShareableId(bodyData: dto.SearchUserByShareableIdDto)
+    : Promise<apiResponses.ISearchUserByShareableIdResponseDto> {
+    return this.injectedService.searchUserByShareabledId(bodyData);
+  }
+
+  /**
    * Get colleagues of user.
    */
   @Path('/get/colleagues')
