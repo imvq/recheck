@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { AppState } from 'store';
 import { MainToolbarEntry } from 'utils/enums';
 import Footer from 'components/shared/Footer';
-import Menu from './Menu';
+import ProfileHead from 'components/shared/ProfileHead';
 import ReviewsArea from './ReviewsArea';
 import HistoryArea from './HistoryArea';
 import AboutArea from './AboutArea';
@@ -27,7 +27,7 @@ const OwnProfilePage = (props: types.IProps) => (
 
     <styled.ContentWrapper>
       <styled.TitleWrapper>Мой профиль</styled.TitleWrapper>
-      <Menu currentProfileInfo={props.currentProfileInfo} />
+      <ProfileHead currentProfileInfo={props.currentProfileInfo} />
       {(() => {
         switch (props.currentMainToolbarEntry) {
           case MainToolbarEntry.ProfilePageAboutMe:
