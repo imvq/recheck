@@ -45,7 +45,7 @@ const Menu = (props: types.IProps) => {
   // Main panel.
   const MenuContent = (
     <styled.MenuContent>
-      {!props.noButtons && Infoblock}
+      {Infoblock}
       {Picture}
     </styled.MenuContent>
   );

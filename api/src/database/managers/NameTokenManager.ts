@@ -52,14 +52,16 @@ export default class NameTokenManager {
       const matchedNameTokensPreparedQuery = getRepository(NameToken)
         .createQueryBuilder('name_tokens')
         .where('name_tokens.tokenValue LIKE :token', { token: `${token.toLocaleLowerCase()}%` })
-        .leftJoinAndSelect('name_tokens.bounds', 'bounds')
+        .leftJoin('name_tokens.bounds', 'bounds')
+        .leftJoin('bounds.company', 'company')
         .select('name_tokens.id')
         .addSelect('bounds.name')
         .addSelect('bounds.shareableId')
         .addSelect('bounds.photoUrl')
         .addSelect('bounds.position')
         .addSelect('bounds.workStartMonth')
-        .addSelect('bounds.workStartYear');
+        .addSelect('bounds.workStartYear')
+        .addSelect('company');
 
       const matchedNameTokens = await (limitResult
         ? matchedNameTokensPreparedQuery.take(10).getMany()

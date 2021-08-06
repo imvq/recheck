@@ -185,7 +185,7 @@ export default class UserService {
   @utils.errorsAutoHandler({ except: [], logger })
   public async searchUserByShareabledId(searchDto: dto.SearchUserByShareableIdDto)
     : Promise<apiResponses.ISearchUserByShareableIdResponseDto> {
-    const result = await UserManager.getUserBySharedId(searchDto.shareableId);
+    const result = await UserManager.getUserBySharedId(searchDto.shareableId, ['company']);
 
     if (!result) {
       throw new Errors.NotFoundError('No such user.');
