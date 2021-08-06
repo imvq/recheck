@@ -3,9 +3,11 @@ import { ProfileState, ProfileActionType, SET_CURRENT_PROFILE_DATA } from './typ
 const initialState: ProfileState = {
   currentProfileInfo: {
     currentId: '',
+    currentShareableId: '',
     currentName: '',
     currentEmail: '',
-    currentShareableId: '',
+    currentCompany: '',
+    currentPosition: '',
     currentPhotoUrl: ''
   }
 };

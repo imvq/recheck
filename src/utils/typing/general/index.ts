@@ -7,16 +7,18 @@ export type APIResponse<TDto = any> = Promise<AxiosResponse<TDto>>;
 
 export interface IAppProfileInfo {
   currentId: string;
+  currentShareableId: string;
   currentName: string;
   currentEmail: string;
-  currentShareableId: string;
+  currentCompany: string;
+  currentPosition: string;
   currentPhotoUrl: string;
 }
 
-export interface IAppProfileInfoReduced {
-  currentName: string;
-  currentPhotoUrl: string;
-}
+export type IAppProfileInfoReduced = Omit<
+  IAppProfileInfo,
+  'currentId' | 'currentShareableId' | 'currentEmail'
+>;
 
 export interface IBindReviewTargetDto {
   reviewId: string;

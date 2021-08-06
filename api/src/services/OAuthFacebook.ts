@@ -30,13 +30,15 @@ export default class FacebookOAuthService {
         }
       );
 
-      const { email, shareableId } = await this.retrievePorfileInfoReduced(profile.id);
+      const savedUser = await UserManager.getUser(profile.id, ['company']);
 
       return {
         profileId: profile.id,
+        shareableId: savedUser?.shareableId,
         name: profile.name,
-        email,
-        shareableId,
+        email: savedUser?.email,
+        company: savedUser?.company.name,
+        position: savedUser?.position,
         photoUrl: profile.picture.data.url
       };
     } catch (error) {

@@ -50,9 +50,11 @@ type ProfileDto = apiResponses.ILinkedInProfileDto | apiResponses.IFacebookProfi
 export function mapProfileDtoToState(profileDto: ProfileDto): generalTypes.IAppProfileInfo {
   return {
     currentId: profileDto.profileId,
+    currentShareableId: profileDto.shareableId || '',
     currentName: profileDto.name,
     currentEmail: profileDto.email || '',
-    currentShareableId: profileDto.shareableId || '',
+    currentCompany: profileDto.company || '',
+    currentPosition: profileDto.position || '',
     currentPhotoUrl: profileDto.photoUrl
   };
 }
@@ -122,4 +124,13 @@ export function showToast(text: string, variant = ToastVariants.Success) {
     pauseOnHover: true,
     draggable: true
   });
+}
+
+export function mapProfileInfoToIAppProfileInfoSlice(info: generalTypes.ISearchProfileInfo) {
+  return {
+    currentName: info.name,
+    currentPhotoUrl: info.photoUrl,
+    currentCompany: info.company as string,
+    currentPosition: info.position
+  };
 }

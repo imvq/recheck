@@ -53,15 +53,15 @@ export default class LinkedInOAuthService {
         photo.profilePicture['displayImage~'].elements.length - 1
       ];
 
-      const savedUser = await UserManager.getUser(profile.id);
-      const savedUserEmail = savedUser?.email;
-      const savedUserShareableId = savedUser?.shareableId;
+      const savedUser = await UserManager.getUser(profile.id, ['company']);
 
       return {
         profileId: profile.id,
+        shareableId: savedUser?.shareableId,
         name: `${profile.localizedFirstName} ${profile.localizedLastName}`,
-        email: savedUserEmail,
-        shareableId: savedUserShareableId,
+        email: savedUser?.email,
+        company: savedUser?.company.name,
+        position: savedUser?.position,
         photoUrl: `${highestQualityPicture.identifiers[0].identifier}`
       };
     } catch (error) {

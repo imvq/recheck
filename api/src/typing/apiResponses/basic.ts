@@ -25,6 +25,8 @@ export interface IRetrieveProfileInfoResponseDto {
   shareableId?: string;
   name: string;
   email?: string;
+  company?: string;
+  position?: string;
   photoUrl: string;
 }
 

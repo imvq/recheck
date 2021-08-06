@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
+import { ISearchProfileInfo } from 'utils/typing/general';
 import { MainToolbarEntry } from 'utils/enums';
 import {
   AppState,
@@ -12,6 +13,7 @@ import {
   setPageUnlocked,
   setTargetShareableId
 } from 'store';
+import { mapProfileInfoToIAppProfileInfoSlice } from 'utils/functions';
 import ProfileHead from 'components/shared/ProfileHead';
 
 import CommentBoxSimple from './CommentBoxSimple';
@@ -57,6 +59,7 @@ const BoxStepC = ComponentBoxWithMark(
  */
 const ReviewPage = (props: types.IProps) => {
   const { targetShareableId } = useParams<{ targetShareableId: string }>();
+  const [observedUser, setObservedUser] = useState<ISearchProfileInfo>();
   const [step, setStep] = useState(0);
 
   useEffect(() => {
@@ -78,9 +81,13 @@ const ReviewPage = (props: types.IProps) => {
           if (!connectionData.data.success) {
             controlledHistory.push('/profile');
           }
+
+          Api.searchUserByShareableId(targetShareableId)
+            .then(searchResult => setObservedUser(searchResult.data.result))
+            .catch(() => controlledHistory.push('/404'))
+            .finally(() => props.unlockPage());
         })
-        .catch(() => controlledHistory.push('/profile'))
-        .finally(() => props.unlockPage());
+        .catch(() => controlledHistory.push('/profile'));
     } else {
       props.unlockPage();
     }
@@ -123,9 +130,11 @@ const ReviewPage = (props: types.IProps) => {
     <styled.Wrapper>
       <styled.AdaptedHeader />
       <styled.ContentWrapper>
+        {observedUser && (
         <styled.ProfileHeadWrapper>
-          <ProfileHead isReduced profileInfo={props.currentProfileInfo} />
+          <ProfileHead noButtons profileInfo={mapProfileInfoToIAppProfileInfoSlice(observedUser)} />
         </styled.ProfileHeadWrapper>
+        )}
 
         {boxes[step]}
       </styled.ContentWrapper>

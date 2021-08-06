@@ -3,7 +3,7 @@ import { MainToolbarEntry } from 'utils/enums';
 
 export interface IOwnProps {
   profileInfo: IAppProfileInfoReduced;
-  isReduced?: boolean;
+  noButtons?: boolean;
 }
 
 export interface IDispatchProps {

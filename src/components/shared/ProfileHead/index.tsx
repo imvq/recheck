@@ -18,43 +18,58 @@ const mapDispatchToProps: types.IDispatchProps = {
  * Menu with tabs to control the page content area.
  */
 const Menu = (props: types.IProps) => {
-  const MenuContent = () => (
-    <styled.MenuContent>
-      {!props.isReduced && (
+  // Company and position.
+  const Infoblock = (
+    <>
       <styled.MenuContentSpan dimmed>
-        Запросов по моему профилю:&nbsp;&nbsp;
-        <styled.MenuContentSpan>0</styled.MenuContentSpan>
+        Должность:&nbsp;&nbsp;
+        <styled.MenuContentSpan>{props.profileInfo.currentPosition}</styled.MenuContentSpan>
       </styled.MenuContentSpan>
-      )}
+      <styled.MenuContentSpan dimmed>
+        Место работы:&nbsp;&nbsp;
+        <styled.MenuContentSpan>{props.profileInfo.currentCompany}</styled.MenuContentSpan>
+      </styled.MenuContentSpan>
+    </>
+  );
 
-      <styled.ProfilePictureWrapper>
-        <styled.ProfilePicture
-          src={props.profileInfo.currentPhotoUrl}
-          draggable='false'
-        />
-      </styled.ProfilePictureWrapper>
+  // Avatar.
+  const Picture = (
+    <styled.ProfilePictureWrapper>
+      <styled.ProfilePicture
+        src={props.profileInfo.currentPhotoUrl}
+        draggable='false'
+      />
+    </styled.ProfilePictureWrapper>
+  );
+
+  // Main panel.
+  const MenuContent = (
+    <styled.MenuContent>
+      {!props.noButtons && Infoblock}
+      {Picture}
     </styled.MenuContent>
+  );
+
+  const onButtonClick = () => {
+    props.setCurrentMainToolbarEntry(MainToolbarEntry.NewSearch);
+    controlledHistory.push('/search');
+  };
+
+  // Button panel.
+  const Button = (
+    <styled.ButtonWrapper>
+      <CustomButton height='2.3rem' isDisabled={false} onClick={onButtonClick}>
+        Новый поиск
+      </CustomButton>
+    </styled.ButtonWrapper>
   );
 
   return (
     <styled.Wrapper>
       <styled.Menu>
         <MenuBar currentProfileInfo={props.profileInfo} />
-        <MenuContent />
-        {!props.isReduced && (
-        <styled.ButtonWrapper>
-          <CustomButton
-            height='2.3rem'
-            isDisabled={false}
-            onClick={() => {
-              props.setCurrentMainToolbarEntry(MainToolbarEntry.NewSearch);
-              controlledHistory.push('/search');
-            }}
-          >
-            Новый поиск
-          </CustomButton>
-        </styled.ButtonWrapper>
-        )}
+        {MenuContent}
+        {!props.noButtons && Button}
       </styled.Menu>
     </styled.Wrapper>
   );

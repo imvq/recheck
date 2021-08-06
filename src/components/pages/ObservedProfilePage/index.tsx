@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 import { ISearchProfileInfo } from 'utils/typing/general';
 import Api from 'utils/api';
-import controlledHostory from 'utils/routing';
+import { mapProfileInfoToIAppProfileInfoSlice } from 'utils/functions';
+import controlledHistory from 'utils/routing';
 import { setPageUnlocked } from 'store';
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
-import { mapProfileInfoToIAppProfileInfoSlice } from './functions';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -28,7 +28,7 @@ const ObservedProfilePage = (props: types.IProps) => {
   useEffect(() => {
     Api.searchUserByShareableId(targetShareableId)
       .then(searchResult => setObservedUser(searchResult.data.result))
-      .catch(() => controlledHostory.push('/404'))
+      .catch(() => controlledHistory.push('/404'))
       .finally(() => props.unlockPage());
   }, []);
 
