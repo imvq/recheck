@@ -46,12 +46,11 @@ export default class UserManager {
     : Promise<User | undefined> {
     return getRepository(User)
       .createQueryBuilder('users')
-      .innerJoin('users.company', 'company')
-      .innerJoin('company.members', 'members')
+      .innerJoinAndSelect('users.company', 'company')
+      .innerJoinAndSelect('company.members', 'members')
+      .innerJoinAndSelect('members.company', 'members_company')
       .where({ profileId })
       .andWhere('members.profileId != :profileId', { profileId })
-      .addSelect('company')
-      .addSelect('members')
       .getOne();
   }
 

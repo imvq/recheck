@@ -39,11 +39,7 @@ export interface ICompany {
   members: ICompanyMember[];
 }
 
-export interface ICompanyReduced {
-  id: string;
-  name: string;
-  logoUrl: string | null;
-}
+export type ICompanyReduced = Omit<ICompany, 'members'>;
 
 export interface ICompleteRegistrationDto {
   profileId: string;
@@ -165,8 +161,8 @@ export interface ISearchProfileInfo {
   name: string;
   shareableId: string;
   photoUrl: string;
-  company?: string;
   position: string;
+  company: ICompanyReduced;
 }
 
 export type ITextAreaEvent = ChangeEvent<HTMLTextAreaElement>;

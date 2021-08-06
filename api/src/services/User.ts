@@ -209,7 +209,8 @@ export default class UserService {
       name: member.name,
       shareableId: member.shareableId,
       photoUrl: member.photoUrl,
-      position: member.position
+      position: member.position,
+      company: member.company
     }));
   }
 

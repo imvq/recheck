@@ -13,7 +13,7 @@ export const SET_CURRENT_OBSERVED_USER = 'SET_CURRENT_OBSERVED_USER';
 
 export interface SearchState {
   colleaguesState: {
-    colleagues: Omit<generalTypes.ISearchProfileInfo, 'company'>[];
+    colleagues: generalTypes.ISearchProfileInfo[];
     areLoaded: boolean;
   }
   quickSearchMatchedCompanies: generalTypes.ICompanyReduced[];
@@ -31,7 +31,7 @@ export interface ClearColleagues {
 
 export interface SetColleagues {
   type: typeof SET_COLLEAGUES;
-  payload: Omit<generalTypes.ISearchProfileInfo, 'company'>[];
+  payload: generalTypes.ISearchProfileInfo[];
 }
 
 export interface SetQuickSearchMatchedCompanies {

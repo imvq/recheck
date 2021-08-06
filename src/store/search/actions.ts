@@ -22,7 +22,7 @@ export const clearColleagues = (): SearchActionType => ({
   type: CLEAR_COLLEAGUES
 });
 
-export const setColleagues = (colleagues: Omit<generalTypes.ISearchProfileInfo, 'company'>[])
+export const setColleagues = (colleagues: generalTypes.ISearchProfileInfo[])
   : SearchActionType => ({
   type: SET_COLLEAGUES,
   payload: colleagues

@@ -12,10 +12,7 @@ export default memo((props: types.IProps) => (
       <styled.PhotoWrapper src={props.userData.photoUrl || ''} />
       <styled.Span isEnlarged>{props.userData.name}</styled.Span>
       <styled.Span isDimmed>
-        {`
-        ${props.userData.position}
-        ${props.userData.company ? `- ${props.userData.company}` : ''}
-        `}
+        {`${props.userData.position} - ${props.userData.company.name}`}
       </styled.Span>
       <styled.ButtonWrapper>
         <CustomButton

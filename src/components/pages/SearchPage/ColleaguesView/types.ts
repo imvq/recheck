@@ -2,7 +2,7 @@ import { IAppProfileInfo, ISearchProfileInfo } from 'utils/typing/general';
 
 export interface IStateProps {
   colleaguesState: {
-    colleagues: Omit<ISearchProfileInfo, 'company'>[];
+    colleagues: ISearchProfileInfo[];
     areLoaded: boolean;
   }
   currentProfileInfo: IAppProfileInfo;

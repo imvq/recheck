@@ -130,7 +130,7 @@ export function mapProfileInfoToIAppProfileInfoSlice(info: generalTypes.ISearchP
   return {
     currentName: info.name,
     currentPhotoUrl: info.photoUrl,
-    currentCompany: info.company as string,
+    currentCompany: info.company.name,
     currentPosition: info.position
   };
 }
