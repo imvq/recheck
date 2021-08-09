@@ -27,11 +27,6 @@ export default (props: types.IProps) => (
             <styled.CardSpan>{props.company}</styled.CardSpan>
           </styled.ParagraphWrapper>
 
-          <styled.ParagraphWrapper scale={2}>
-            <styled.CardSpan lightened>Опыт работы:&nbsp;&nbsp;&nbsp;&nbsp;</styled.CardSpan>
-            <styled.CardSpan>{props.experience}</styled.CardSpan>
-          </styled.ParagraphWrapper>
-
           <styled.ParagraphWrapper scale={0.5}>
             <styled.CardSpan lightened>Отзыв с предыдущего места работы:</styled.CardSpan>
           </styled.ParagraphWrapper>

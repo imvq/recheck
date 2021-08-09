@@ -1,56 +1,52 @@
 import * as generalTypes from 'utils/typing/general';
 
-import Lada from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Lada.png';
-import Kate from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Kate.png';
-import Ciri from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Ciri.png';
+import Natalie from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Natalie.png';
+import Oleg from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Oleg.png';
+import Andrey from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Andrey.png';
 
 const examples: generalTypes.IDemoReviewCardData[] = [
   {
-    name: 'Екатерина Мазур',
-    photoUrl: Kate,
-    position: '--',
-    company: '--',
-    experience: '--',
+    name: 'Oleg Bagisky',
+    photoUrl: Oleg,
+    position: 'JS Developer',
+    company: 'DAXX',
     review: `
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-        deserunt mollit anim id est laborum.
+        Я работал с Олегом на общем проекте как тестировщик. Могу сказать, что работа
+        всегда выполнялась качественно и в срок, никогда не было проблем в общении,
+        Олег часто предлагал новые идеи и мы вместе быстро закрывали задачи.
+        По бизнес части у проджекта также не было вопросов, всё всегда было на высоте.
         `,
-    nReviews: 27
+    nReviews: 3
   },
   {
-    name: 'Лада Клищенко',
-    photoUrl: Lada,
-    position: 'Team Lead of Data Analyst team',
-    company: 'airSlate | workflow Automation',
-    experience: 'Июль 2019 — Февраль 2020',
+    name: 'Andrey Sergeev',
+    photoUrl: Andrey,
+    position: 'Head of Sales Department',
+    company: 'P&G Ukraine',
     review: `
-        Лада проработала 8 месяцев в airSlate как Team Lead of Data Analyst team.
-        Помимо поставленных задач, она взяла на себя разработку автоматизированной
-        библиотеки лендингов, вместе с командой они создали более 200 тысяч старниц
-        в течение нескольких месяцев. Лада целеустремленный, ответственный и постоянно
-        растущий профессионал.
+        Я работала с Андреем на должности заместителя управляющего директора P&G Ukraine.
+        Начав в качестве стажера, он отлично вписался в команду по обслуживанию клиентов,
+        быстро приобрел необходимый опыт и продемонстрировал хороший прогресс в управленческих
+        навыках, что позволило ему продолжить свою карьеру в качестве менеджера по работе с
+        клиентами в агентстве. Обладая трудолюбием и энтузиазмом, Андрей стал ценным активом
+        для компании. Он мог вести переговоры и повседневное общение с командами клиентов.
+        Очень рекомендую Андрея как умелого руководителя и прилежного владельца проекта.
         `,
-    nReviews: 27
+    nReviews: 8
   },
   {
-    name: 'Кирилл Усачёв',
-    photoUrl: Ciri,
-    position: '--',
-    company: '--',
-    experience: '--',
+    name: 'Natalya Morenko',
+    photoUrl: Natalie,
+    position: 'Recruiter',
+    company: 'NIX',
     review: `
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-        deserunt mollit anim id est laborum.
+        Мне было приятно работать с Наталией во время моего найма в компанию.
+        Наталья — высококвалифицированный специалист. С первого разговора я понял,
+        что она понимает все технические нюансы моей профессии (Product Analytics), поэтому
+        общаться было легко. Наталья поддерживала меня на протяжении всего моего
+        трудоустройства. Я всегда получал ответы на все вопросы.
         `,
-    nReviews: 27
+    nReviews: 5
   }
 ];
 

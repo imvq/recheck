@@ -13,13 +13,15 @@ export default memo(() => (
     <styled.CentralizingBox>
       <styled.ParagraphWrapper>
         <styled.TitleWrapper>
-          <styled.Title>Взамен оставляйте отзыв о человеке из вашей команды.</styled.Title>
+          <styled.Title>
+            Взамен оставляйте отзыв о коллеге, с которым работаете сейчас.
+          </styled.Title>
         </styled.TitleWrapper>
 
         <styled.Text>
-          Оставив отзыв о коллеге, с которым тесно работали,
-          вы увидите информацию о кандидиате бесплатно.
-          Также можете оформить платную подписку:)
+          Оставив отзыв о вашем сотруднике вы получите просмотр одного кандидата бесплатно.
+          Ваш отзыв о другом человеке будет полностью анонимным.
+          Также вы можете оформить платную подписку:)
         </styled.Text>
 
         <styled.ParagraphBackground src={ParagraphBackgroundSvg} alt='' />
