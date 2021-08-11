@@ -4,12 +4,18 @@ import { connect } from 'react-redux';
 
 import Api from 'utils/api';
 import controlledHistory from 'utils/routing';
-import { AppState, loadObservedReviewsData, setPageUnlocked } from 'store';
+import {
+  AppState,
+  loadObservedReviewsData,
+  setIsObservedPageLoading,
+  setPageUnlocked
+} from 'store';
 import { ISearchProfileInfo } from 'utils/typing/general';
 import { mapProfileInfoToIAppProfileInfoSlice as sliceProfileData } from 'utils/functions';
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
 import Pagination from 'components/shared/Pagination';
+import ReviewCard from 'components/shared/ReviewCard';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -17,12 +23,14 @@ import * as styled from './styled';
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
   isAuthorized: store.auth.isAuthorized,
+  isLoading: store.interaction.isObservedReviewsPageLoading,
   isObservedReviewsPageLoading: store.interaction.isObservedReviewsPageLoading,
   observedReviewsChunksAmount: store.interaction.observedReviewsChunksAmount
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
   loadObservedReviewsData,
+  setIsLoading: () => setIsObservedPageLoading(true),
   unlockPage: setPageUnlocked
 };
 
@@ -55,6 +63,8 @@ function ObservedProfilePage(props: types.IProps) {
   const [observedUser, setObservedUser] = useState<ISearchProfileInfo>();
 
   useEffect(() => {
+    props.setIsLoading();
+
     callApiToCheckTargetConnection(props.currentProfileInfo.currentId, targetShareableId, {
       setObservedUserCallback: setObservedUser,
       unlockPageCallback: props.unlockPage
@@ -67,6 +77,14 @@ function ObservedProfilePage(props: types.IProps) {
     }
   }, [props.currentProfileInfo.currentId, props.isAuthorized]);
 
+  const ContentEmpty = () => (
+    <>
+      <styled.Title isHighlighted>
+        <styled.InnerSpan>Никто ещё не оставил отзыв о пользователе</styled.InnerSpan>
+      </styled.Title>
+    </>
+  );
+
   return (
     <styled.Wrapper>
       <styled.Sidebar />
@@ -76,26 +94,45 @@ function ObservedProfilePage(props: types.IProps) {
       {observedUser && (
         <styled.ContentWrapper>
           <ProfileHead profileInfo={sliceProfileData(observedUser)} />
+
+          <styled.ReviewSectionWrapper>
+            {props.isLoading ? <styled.Title isHighlighted>Загрузка...</styled.Title>
+              : (
+                <ReviewCard
+                  reviewCardData={{
+                    recommendation: 'Lorem Ipsum',
+                    recommendationMark: 6,
+                    strengths: 'Lorem Ipsum',
+                    targetCompanyName: 'Ascendix Technology',
+                    targetName: 'Demo User',
+                    targetPhotoUrl: 'https://static.vecteezy.com/system/resources/previews/002/318/271/non_2x/user-profile-icon-free-vector.jpg',
+                    targetPosition: 'QA',
+                    tasks: 'Lorem Ipsum'
+                  }}
+                  showTarget
+                />
+              )}
+          </styled.ReviewSectionWrapper>
+
+          {props.observedReviewsChunksAmount ? (
+            <Pagination
+              nPages={props.observedReviewsChunksAmount}
+              onNextClick={() => {
+                // props.loadNthReview(props.currentPorfileId, currentIndex + 1);
+                // setCurrentIndex(currentIndex + 1);
+              }}
+              onPageClick={(page: number) => {
+                // props.loadNthReview(props.currentPorfileId, page - 1);
+                // setCurrentIndex(page - 1);
+              }}
+              onPrevClick={() => {
+                // props.loadNthReview(props.currentPorfileId, currentIndex - 1);
+                // setCurrentIndex(currentIndex - 1);
+              }}
+            />
+          ) : null}
         </styled.ContentWrapper>
       )}
-
-      {props.observedReviewsChunksAmount ? (
-        <Pagination
-          nPages={props.observedReviewsChunksAmount}
-          onNextClick={() => {
-            // props.loadNthReview(props.currentPorfileId, currentIndex + 1);
-            // setCurrentIndex(currentIndex + 1);
-          }}
-          onPageClick={(page: number) => {
-            // props.loadNthReview(props.currentPorfileId, page - 1);
-            // setCurrentIndex(page - 1);
-          }}
-          onPrevClick={() => {
-            // props.loadNthReview(props.currentPorfileId, currentIndex - 1);
-            // setCurrentIndex(currentIndex - 1);
-          }}
-        />
-      ) : null}
 
       <Footer />
     </styled.Wrapper>

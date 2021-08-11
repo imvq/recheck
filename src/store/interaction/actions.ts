@@ -169,7 +169,8 @@ export const loadObservedReviewsData = (askerProfileId: string, targetShareableI
   dispatch: Dispatch<AppActionType>
 ) => {
   Api.getTargetNReviewsGot({ askerProfileId, targetShareableId })
-    .then(amountData => dispatch(setObservedReviewsChunksAmount(amountData.data.amount)));
+    .then(amountData => dispatch(setObservedReviewsChunksAmount(amountData.data.amount)))
+    .finally(() => dispatch(setIsObservedPageLoading(false)));
 };
 
 export const loadNthReviewGot = (profileId: string, nthReview: number) => (
