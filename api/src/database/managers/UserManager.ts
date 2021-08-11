@@ -42,6 +42,27 @@ export default class UserManager {
     return getRepository(User).findOne({ shareableId: id }, { relations });
   }
 
+  public static async getReducedUserBySharedId(id: string, relations?: string[])
+    : Promise<User | undefined> {
+    let queryBuilder = getRepository(User)
+      .createQueryBuilder('users')
+      .select('users.name')
+      .addSelect('users.photoUrl')
+      .addSelect('users.position')
+      .addSelect('users.shareableId')
+      .addSelect('users.workStartYear')
+      .addSelect('users.workStartMonth')
+      .addSelect('users.shareableId');
+
+    relations?.forEach(relation => {
+      queryBuilder = queryBuilder
+        .innerJoinAndSelect(`users.${relation}`, `users_${relation}`)
+        .addSelect(`users_${relation}`);
+    });
+
+    return queryBuilder.where('users.shareableId = :id', { id }).getOne();
+  }
+
   public static async getUserWithCompanyMembers(profileId: string)
     : Promise<User | undefined> {
     return getRepository(User)
