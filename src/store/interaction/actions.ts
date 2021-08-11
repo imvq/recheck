@@ -17,9 +17,11 @@ import {
   SET_AWAITER,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
+  SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT,
   SET_REQUESTED_USER_SHAREABLE_ID,
   SET_CURRENT_REVIEW_GOT,
-  SET_CURRENT_REVIEW_LEFT
+  SET_CURRENT_REVIEW_LEFT,
+  SET_IS_OBSERVED_REVIEWS_PAGE_LOADING
 } from './types';
 
 export const setIsPageLocked = (value: boolean)
@@ -47,6 +49,12 @@ export const setCurrentMainToolbarEntry = (entry: MainToolbarEntry)
   : InteractionStateActionType => ({
   type: SET_CURRENT_MAIN_TOOLBAR_ENTRY,
   payload: entry
+});
+
+export const setIsObservedPageLoading = (flag: boolean)
+  : InteractionStateActionType => ({
+  type: SET_IS_OBSERVED_REVIEWS_PAGE_LOADING,
+  payload: flag
 });
 
 export const setIsProfileAboutTabLoading = (flag: boolean)
@@ -88,6 +96,12 @@ export const setReviewsGotChunksAmount = (amount: number)
 export const setReviewsLeftChunksAmount = (amount: number)
   : InteractionStateActionType => ({
   type: SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
+  payload: amount
+});
+
+export const setObservedReviewsChunksAmount = (amount: number)
+  : InteractionStateActionType => ({
+  type: SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT,
   payload: amount
 });
 
@@ -149,6 +163,13 @@ export const loadReviewsTabData = (profileId: string) => (
       dispatch(setReviewsLeftChunksAmount(0));
       dispatch(setIsProfileReviewsTabLoading(false));
     });
+};
+
+export const loadObservedReviewsData = (askerProfileId: string, targetShareableId: string) => (
+  dispatch: Dispatch<AppActionType>
+) => {
+  Api.getTargetNReviewsGot({ askerProfileId, targetShareableId })
+    .then(amountData => dispatch(setObservedReviewsChunksAmount(amountData.data.amount)));
 };
 
 export const loadNthReviewGot = (profileId: string, nthReview: number) => (

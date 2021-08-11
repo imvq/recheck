@@ -6,6 +6,7 @@ import {
   SET_IS_SEARCH_POPUP_VISIBILE,
   SET_IS_LOGIN_POPUP_VISIBILE,
   SET_CURRENT_MAIN_TOOLBAR_ENTRY,
+  SET_IS_OBSERVED_REVIEWS_PAGE_LOADING,
   SET_IS_PROFILE_ABOUT_TAB_LOADING,
   SET_IS_PROFILE_HISTORY_TAB_LOADING,
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
@@ -13,6 +14,7 @@ import {
   SET_AWAITER,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
+  SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT,
   SET_REQUESTED_USER_SHAREABLE_ID,
   SET_CURRENT_REVIEW_GOT,
   SET_CURRENT_REVIEW_LEFT
@@ -23,6 +25,7 @@ const initialState: InteractionState = {
   isSearchPopupVisible: false,
   isLoginPopupVisible: false,
   currentMainToolbarEntry: MainToolbarEntry.ProfilePageMyReviews,
+  isObservedReviewsPageLoading: false,
   isProfileAboutTabLoading: true,
   isProfileHistoryTabLoading: true,
   isProfileReviewsTabLoading: true,
@@ -30,6 +33,7 @@ const initialState: InteractionState = {
   awaiter: null,
   reviewsGotChunksAmount: 0,
   reviewsLeftChunksAmount: 0,
+  observedReviewsChunksAmount: 0,
   requestedUserShareableId: null,
   currentReviewGot: null,
   currentReviewLeft: null
@@ -44,6 +48,11 @@ export const interactionStateReducer = (
       return {
         ...state,
         isPageLocked: action.payload
+      };
+    case SET_IS_OBSERVED_REVIEWS_PAGE_LOADING:
+      return {
+        ...state,
+        isObservedPageVisible: action.payload
       };
     case SET_IS_SEARCH_POPUP_VISIBILE:
       return {
@@ -94,6 +103,11 @@ export const interactionStateReducer = (
       return {
         ...state,
         reviewsLeftChunksAmount: action.payload
+      };
+    case SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT:
+      return {
+        ...state,
+        observedReviewsChunksAmount: action.payload
       };
     case SET_REQUESTED_USER_SHAREABLE_ID:
       return {

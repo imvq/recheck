@@ -5,6 +5,7 @@ export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
 export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';
 export const SET_IS_LOGIN_POPUP_VISIBILE = 'SET_IS_LOGIN_POPUP_VISIBILE';
 export const SET_CURRENT_MAIN_TOOLBAR_ENTRY = 'SET_CURRENT_MAIN_TOOLBAR_ENTRY';
+export const SET_IS_OBSERVED_REVIEWS_PAGE_LOADING = 'SET_IS_OBSERVED_REVIEWS_PAGE_LOADING';
 export const SET_IS_PROFILE_ABOUT_TAB_LOADING = 'SET_IS_PROFILE_ABOUT_TAB_LOADING';
 export const SET_IS_PROFILE_HISTORY_TAB_LOADING = 'SET_IS_PROFILE_HISTORY_TAB_LOADING';
 export const SET_IS_PROFILE_REVIEWS_TAB_LOADING = 'SET_IS_PROFILE_REVIEWS_TAB_LOADING';
@@ -12,6 +13,7 @@ export const SET_REFERRAL = 'SET_REFERRAL';
 export const SET_AWAITER = 'SET_AWAITER';
 export const SET_REVIEWS_GOT_CHUNKS_AMOUNT = 'SET_REVIEWS_GOT_CHUNKS_AMOUNT';
 export const SET_REVIEWS_LEFT_CHUNKS_AMOUNT = 'SET_REVIEWS_LEFT_CHUNKS_AMOUNT';
+export const SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT = 'SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT';
 export const SET_REQUESTED_USER_SHAREABLE_ID = 'SET_REQUESTED_USER_SHAREABLE_ID';
 export const SET_CURRENT_REVIEW_GOT = 'SET_CURRENT_REVIEW_GOT';
 export const SET_CURRENT_REVIEW_LEFT = 'SET_CURRENT_REVIEW_LEFT';
@@ -21,6 +23,7 @@ export interface InteractionState {
   isSearchPopupVisible: boolean;
   isLoginPopupVisible: boolean;
   currentMainToolbarEntry: MainToolbarEntry;
+  isObservedReviewsPageLoading: boolean;
   isProfileAboutTabLoading: boolean;
   isProfileHistoryTabLoading: boolean;
   isProfileReviewsTabLoading: boolean;
@@ -28,6 +31,7 @@ export interface InteractionState {
   awaiter: string | null,
   reviewsGotChunksAmount: number;
   reviewsLeftChunksAmount: number;
+  observedReviewsChunksAmount: number;
   requestedUserShareableId: string | null;
   currentReviewGot: generalTypes.IReviewCardGotData | null;
   currentReviewLeft: generalTypes.IReviewCardLeftData | null;
@@ -51,6 +55,11 @@ export interface SetIsLoginPopupVisible {
 export interface SetCurrentMainToolbarEntry {
   type: typeof SET_CURRENT_MAIN_TOOLBAR_ENTRY;
   payload: MainToolbarEntry;
+}
+
+export interface SetIsObservedReviewsPageLoading {
+  type: typeof SET_IS_OBSERVED_REVIEWS_PAGE_LOADING;
+  payload: boolean;
 }
 
 export interface SetIsProfileAboutTabLoading {
@@ -88,6 +97,11 @@ export interface SetReviewsLeftChunksAmount {
   payload: number;
 }
 
+export interface SetObservedReviewsChunksAmount {
+  type: typeof SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT;
+  payload: number;
+}
+
 export interface SetRequestedUserShareableId {
   type: typeof SET_REQUESTED_USER_SHAREABLE_ID;
   payload: string | null;
@@ -108,6 +122,7 @@ export type InteractionStateActionType =
   | SetIsSearchPopupVisible
   | SetIsLoginPopupVisible
   | SetCurrentMainToolbarEntry
+  | SetIsObservedReviewsPageLoading
   | SetIsProfileAboutTabLoading
   | SetIsProfileHistoryTabLoading
   | SetIsProfileReviewsTabLoading
@@ -115,6 +130,7 @@ export type InteractionStateActionType =
   | SetAwaiter
   | SetReviewsGotChunksAmount
   | SetReviewsLeftChunksAmount
+  | SetObservedReviewsChunksAmount
   | SetRequestedUserShareableId
   | SetCurrentReviewGot
   | SetCurrentReviewLeft;

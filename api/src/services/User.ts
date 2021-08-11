@@ -187,8 +187,6 @@ export default class UserService {
     : Promise<apiResponses.ISearchUserByShareableIdResponseDto> {
     const result = await UserManager.getReducedUserBySharedId(searchDto.shareableId, ['company']);
 
-    console.log(result);
-
     if (!result) {
       throw new Errors.NotFoundError('No such user.');
     }
