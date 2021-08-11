@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
-import { mixins } from 'utils/style.common';
+import { mixins, cssVars } from 'utils/style.common';
+import { ScreenBreakpoint } from 'utils/enums';
+import { respond } from 'utils/functions';
 import { ReactComponent as SearchButtonSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/Search.svg';
+import { ReactComponent as RocketLineSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/RocketLine.svg';
+import { ReactComponent as RocketSvg } from 'assets/images/pages//LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/Rocket.svg';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -14,4 +18,29 @@ export const SearchButton = styled(SearchButtonSvg)`
   width: 16rem;
   position: relative;
   z-index: 1;
+`;
+
+export const Line = styled(RocketLineSvg)`
+  position: absolute;
+  height: 45rem;
+  right: calc(${cssVars.greetingsViewContentActionGroupWidth} / 2 - 1rem);
+  top: 2.5rem;
+
+  ${respond(ScreenBreakpoint.XS)} {
+    display: none;
+  }
+`;
+
+export const Rocket = styled(RocketSvg)`
+  position: absolute;
+  top: 16.5rem;
+  right: 27.5rem;
+  width: 9.5rem;
+  height: 9.2rem;
+
+  ${respond(ScreenBreakpoint.XS)} {
+    position: static;
+    width: 15rem;
+    height: 15rem;
+  }
 `;

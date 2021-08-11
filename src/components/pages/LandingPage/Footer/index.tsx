@@ -3,40 +3,65 @@ import { Link as ScrollLink } from 'react-scroll';
 
 import * as styled from './styled';
 
-export default memo(() => (
-  <styled.Wrapper>
-    <styled.SectionWrapper>
-      <styled.InnerLogo />
-    </styled.SectionWrapper>
+const Logo = (
+  <styled.SectionWrapper>
+    <styled.InnerLogo />
+  </styled.SectionWrapper>
+);
 
-    <styled.SectionWrapper>
-      <styled.MenuEntryTextMarked>Меню:</styled.MenuEntryTextMarked>
+const HowToWorkTitle = (
+  <ScrollLink to='HowToWorkTitle' smooth duration={900}>
+    <styled.MenuEntryText>О платформе</styled.MenuEntryText>
+  </ScrollLink>
+);
 
-      <ScrollLink to='HowToWorkTitle' smooth duration={900}>
-        <styled.MenuEntryText>О платформе</styled.MenuEntryText>
-      </ScrollLink>
+const InfoblockTitle = (
+  <ScrollLink to='InfoblockTitle' smooth duration={600}>
+    <styled.MenuEntryText>Преимущества</styled.MenuEntryText>
+  </ScrollLink>
+);
 
-      <ScrollLink to='InfoblockTitle' smooth duration={600}>
-        <styled.MenuEntryText>Преимущества</styled.MenuEntryText>
-      </ScrollLink>
+const MainSwipeTitle = (
+  <styled.AdaptingScrollLink to='MainSwipeViewTitle' smooth duration={300}>
+    <styled.MenuEntryText>Отзывы</styled.MenuEntryText>
+  </styled.AdaptingScrollLink>
+);
 
-      <styled.AdaptingScrollLink to='MainSwipeViewTitle' smooth duration={300}>
-        <styled.MenuEntryText>Отзывы</styled.MenuEntryText>
-      </styled.AdaptingScrollLink>
-    </styled.SectionWrapper>
+const MenuSection = (
+  <styled.SectionWrapper>
+    <styled.MenuEntryTextMarked>Меню:</styled.MenuEntryTextMarked>
+    {HowToWorkTitle}
+    {InfoblockTitle}
+    {MainSwipeTitle}
+  </styled.SectionWrapper>
+);
 
-    <styled.SectionWrapper>
-      <styled.MenuEntryTextMarked>Почта:</styled.MenuEntryTextMarked>
-      <styled.MenuEntryTextDisabled>info@recheck-candidate.com</styled.MenuEntryTextDisabled>
-    </styled.SectionWrapper>
+const EmailSection = (
+  <styled.SectionWrapper>
+    <styled.MenuEntryTextMarked>Почта:</styled.MenuEntryTextMarked>
+    <styled.MenuEntryTextDisabled>info@recheck-candidate.com</styled.MenuEntryTextDisabled>
+  </styled.SectionWrapper>
+);
 
-    <styled.SectionWrapper>
-      <styled.MenuEntryTextMarked>Соц. сети:</styled.MenuEntryTextMarked>
-      <styled.SocialLink href='/'>
-        <styled.TelegramIconWrapper />
-      </styled.SocialLink>
-    </styled.SectionWrapper>
+const SocialsSection = (
+  <styled.SectionWrapper>
+    <styled.MenuEntryTextMarked>Соц. сети:</styled.MenuEntryTextMarked>
+    <styled.SocialLink href='/'>
+      <styled.TelegramIconWrapper />
+    </styled.SocialLink>
+  </styled.SectionWrapper>
+);
 
-    <styled.EmptyWrapper />
-  </styled.Wrapper>
-));
+function Footer() {
+  return (
+    <styled.Wrapper>
+      {Logo}
+      {MenuSection}
+      {EmailSection}
+      {SocialsSection}
+      <styled.EmptyWrapper />
+    </styled.Wrapper>
+  );
+}
+
+export default memo(Footer);

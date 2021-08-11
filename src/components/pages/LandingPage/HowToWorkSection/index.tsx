@@ -10,11 +10,15 @@ import * as styled from './styled';
 /**
  * 'How to work' section. Group of blocks describing work of the project.
  */
-export default memo(() => (
-  <styled.Wrapper>
-    <TitleView />
-    <StepFirstView />
-    <StepSecondView />
-    <StepThirdView />
-  </styled.Wrapper>
-));
+function HowToWorkSection() {
+  return (
+    <styled.Wrapper>
+      <TitleView />
+      <StepFirstView />
+      <StepSecondView />
+      <StepThirdView />
+    </styled.Wrapper>
+  );
+}
+
+export default memo(HowToWorkSection);

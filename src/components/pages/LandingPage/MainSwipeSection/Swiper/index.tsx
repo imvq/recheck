@@ -8,7 +8,7 @@ import * as styled from './styled';
 /**
  * Swipe area with review examples.
  */
-export default memo(() => {
+function Swiper() {
   const [cards, setCards] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
@@ -38,4 +38,6 @@ export default memo(() => {
       <styled.ArrowRight onClick={onNextClicked} />
     </styled.Wrapper>
   );
-});
+}
+
+export default memo(Swiper);

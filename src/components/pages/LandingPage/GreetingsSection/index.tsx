@@ -5,9 +5,13 @@ import Content from './Content';
 
 import * as styled from './styled';
 
-export default memo(() => (
-  <styled.Wrapper>
-    <Head />
-    <Content />
-  </styled.Wrapper>
-));
+function GreetingsSection() {
+  return (
+    <styled.Wrapper>
+      <Head />
+      <Content />
+    </styled.Wrapper>
+  );
+}
+
+export default memo(GreetingsSection);

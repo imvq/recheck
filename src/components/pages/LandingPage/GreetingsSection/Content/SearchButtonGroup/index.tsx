@@ -1,9 +1,10 @@
 import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import * as styledCommon from 'components/shared/CommonStyled';
+
 import controlledHistory from 'utils/routing';
 import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
-import RocketGroup from './RocketGroup';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -21,7 +22,7 @@ const mapDispatchToProps: types.IDispatchProps = {
  * Group of Programmed SVG components representing a search button
  * and a decorated SVG rocket attached to.
  */
-const SearchButtonGroup = (props: types.IProps) => {
+function SearchButtonGroup(props: types.IProps) {
   const [isClickRequested, setIsClickRequested] = useState(false);
 
   useEffect(() => {
@@ -51,9 +52,12 @@ const SearchButtonGroup = (props: types.IProps) => {
   return (
     <styled.Wrapper onClick={getMainHandler()}>
       <styled.SearchButton onClick={props.onClick} />
-      <RocketGroup />
+      <styledCommon.DefaultWrapper>
+        <styled.Line />
+        <styled.Rocket />
+      </styledCommon.DefaultWrapper>
     </styled.Wrapper>
   );
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(SearchButtonGroup));

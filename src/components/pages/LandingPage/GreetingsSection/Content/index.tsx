@@ -5,19 +5,30 @@ import SearchButtonGroup from './SearchButtonGroup';
 
 import * as styled from './styled';
 
-export default memo(() => (
-  <styled.Wrapper>
-    <styled.PictureWrapper>
-      <styled.Picture src={ContentPic} alt='' draggable='false' />
-    </styled.PictureWrapper>
+const PictureSection = (
+  <styled.PictureWrapper>
+    <styled.Picture src={ContentPic} alt='' draggable='false' />
+  </styled.PictureWrapper>
+);
 
-    <styled.TextWrapper>
-      <styled.ActionGroup>
-        <styled.ActionGroupText>
-          Найди отзывы о кандидате с прошлых мест работы
-        </styled.ActionGroupText>
-        <SearchButtonGroup />
-      </styled.ActionGroup>
-    </styled.TextWrapper>
-  </styled.Wrapper>
-));
+const TextSection = (
+  <styled.TextWrapper>
+    <styled.ActionGroup>
+      <styled.ActionGroupText>
+        Найди отзывы о кандидате с прошлых мест работы
+      </styled.ActionGroupText>
+      <SearchButtonGroup />
+    </styled.ActionGroup>
+  </styled.TextWrapper>
+);
+
+function Content() {
+  return (
+    <styled.Wrapper>
+      {PictureSection}
+      {TextSection}
+    </styled.Wrapper>
+  );
+}
+
+export default memo(Content);
