@@ -108,7 +108,7 @@ const ReviewPage = (props: types.IProps) => {
       // @ts-ignore: requestedUserShareableId is guaranteed to be a valid string here.
       targetShareableId: props.requestedUserShareableId
     }).then(() => {
-      controlledHistory.push(`/profile/observed/${props.requestedUserShareableId}`);
+      controlledHistory.push(`/profile/observe/${props.requestedUserShareableId}`);
     })
       .catch(() => controlledHistory.push('/profile'));
   };

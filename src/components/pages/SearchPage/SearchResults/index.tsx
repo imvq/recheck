@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { StatusCodes } from 'http-status-codes';
 
 import { ISearchProfileInfo } from 'utils/typing/general';
+import controlledHistory from 'utils/routing';
 import Api from 'utils/api';
 import {
   AppState,
@@ -35,7 +36,7 @@ const SearchResults = (props: types.IProps) => {
       askerProfileId: props.currentProfileInfo.currentId,
       targetShareableId
     }).then(amountData => {
-      // TODO: show profile.
+      controlledHistory.push(`/profile/observe/${targetShareableId}`);
     }).catch(error => {
       if (error.response && error.response.status === StatusCodes.FORBIDDEN) {
         props.setRequestedUserShareableId(targetShareableId);
