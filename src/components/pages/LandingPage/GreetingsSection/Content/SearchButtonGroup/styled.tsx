@@ -21,6 +21,8 @@ export const SearchButton = styled(SearchButtonSvg)`
   z-index: 1;
 `;
 
+export const ImagesWrapper = mixins.prepared.DefaultSpan;
+
 export const Line = styled(RocketLineSvg)`
   position: absolute;
   height: 45rem;

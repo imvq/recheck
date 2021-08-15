@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import mixins from 'commons/styles/mixins';
+
 const cssVarsLocal = {
   photoWrapperWidth: '12rem'
 };
@@ -60,7 +62,7 @@ export const Name = styled.span`
   font-weight: 600;
 `;
 
-export const PlainTextWrapper = styled.div``;
+export const PlainTextWrapper = mixins.prepared.DefaultWrapper;
 
 export const PlainText = styled.span<{ isDimmed?: boolean; }>`
   font-size: 1.1rem;

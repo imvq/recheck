@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { ScreenBreakpoint } from 'commons/utils/enums';
 import { respond } from 'commons/utils/functions';
@@ -7,7 +7,7 @@ import cssVarsCommon from './cssVars';
 /**
  * Encapsulation for reusable style mixins.
  */
-export default {
+const mixins = {
   DefaultButton: css`
     cursor: pointer;
     transition: .1s;
@@ -51,7 +51,7 @@ export default {
     border-radius: 1rem;
     font-weight: 600;
   `,
-  HTWLeftOrientedCentralizingBox: css`
+  HTWLeftOrientedCentralizedBox: css`
     &:first-child {
       position: relative;
       grid-area: Aux;
@@ -133,3 +133,22 @@ export default {
     }
   `
 };
+
+/**
+ * Mixins with prepared components representing a mixin-only-containing styled components.
+ * Separation of prepared components is needed to avoid creating new components
+ * implementing the same mixins.
+ */
+const extendedMixins = {
+  ...mixins,
+  prepared: {
+    DefaultInput: styled.input`${mixins.DefaultInput};`,
+    DefaultSpan: styled.span``,
+    DefaultWrapper: styled.div``,
+    HTWLeftOrientedCentralizedBox: styled.div`${mixins.HTWLeftOrientedCentralizedBox}`,
+    LandingBlockText: styled.p`${mixins.LandingBlockText};`,
+    LandingTitle: styled.h1`${mixins.LandingTitle};`
+  }
+};
+
+export default extendedMixins;

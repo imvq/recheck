@@ -1,3 +1,3 @@
-import styled from 'styled-components';
+import mixins from 'commons/styles/mixins';
 
-export const Wrapper = styled.div``;
+export const Wrapper = mixins.prepared.DefaultWrapper;

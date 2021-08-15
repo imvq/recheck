@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
+import mixins from 'commons/styles/mixins';
 import { ScreenBreakpoint } from 'commons/utils/enums';
 import { respond } from 'commons/utils/functions';
 
@@ -23,7 +24,7 @@ export const ActionGroup = styled.div`
   user-select: none;
 `;
 
-export const ActionGroupText = styled.span``;
+export const ActionGroupText = mixins.prepared.DefaultSpan;
 
 export const PictureWrapper = styled.div`
   display: flex;

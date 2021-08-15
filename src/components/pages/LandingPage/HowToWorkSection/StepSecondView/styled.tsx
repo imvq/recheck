@@ -63,9 +63,7 @@ export const TitleWrapper = styled.div`
   z-index: 1;
 `;
 
-export const Title = styled.h1`
-  ${mixins.LandingTitle}
-`;
+export const Title = mixins.prepared.LandingTitle;
 
 export const Text = styled.p`
   ${mixins.LandingBlockText}

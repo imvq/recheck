@@ -98,9 +98,7 @@ export const InputWithOptionsWrapper = styled.div`
   width: 100%;
 `;
 
-export const Input = styled.input`
-  ${mixins.DefaultInput};
-`;
+export const Input = mixins.prepared.DefaultInput;
 
 export const TextArea = styled.textarea`
   ${mixins.DefaultInput};

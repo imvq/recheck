@@ -15,9 +15,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const CentralizingBox = styled.div`
-  ${mixins.HTWLeftOrientedCentralizingBox}
-`;
+export const CentralizingBox = mixins.prepared.HTWLeftOrientedCentralizedBox;
 
 export const ParagraphWrapper = styled.div`
   ${mixins.HTWParagraphWrapper}
@@ -41,11 +39,9 @@ export const TitleWrapper = styled.div`
   z-index: 1;
 `;
 
-export const Title = styled.h1`
-  ${mixins.LandingTitle}
-`;
+export const Title = mixins.prepared.LandingTitle;
 
-export const TitleText = styled.span``;
+export const TitleText = mixins.prepared.DefaultSpan;
 
 export const TitleHightlightedMain = styled.span`
   ${mixins.LandingTitle}

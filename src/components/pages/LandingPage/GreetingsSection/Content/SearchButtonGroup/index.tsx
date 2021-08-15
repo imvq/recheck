@@ -1,8 +1,6 @@
 import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import * as styledCommon from 'components/shared/CommonStyled';
-
 import controlledHistory from 'commons/utils/routing';
 import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 
@@ -52,10 +50,10 @@ function SearchButtonGroup(props: types.IProps) {
   return (
     <styled.Wrapper onClick={getMainHandler()}>
       <styled.SearchButton onClick={props.onClick} />
-      <styledCommon.DefaultWrapper>
+      <styled.ImagesWrapper>
         <styled.Line />
         <styled.Rocket />
-      </styledCommon.DefaultWrapper>
+      </styled.ImagesWrapper>
     </styled.Wrapper>
   );
 }
