@@ -10,25 +10,29 @@ import * as styled from './styled';
 /**
  * Additional info section.
  */
-export default memo(() => (
-  <styled.Wrapper>
-    <TitleView />
-    <styled.InfoBlockDesktopOnlyWrapper>
-      <InfoTimeSave />
-    </styled.InfoBlockDesktopOnlyWrapper>
+function InfoblockSection() {
+  return (
+    <styled.Wrapper>
+      <TitleView />
+      <styled.InfoBlockDesktopOnlyWrapper>
+        <InfoTimeSave />
+      </styled.InfoBlockDesktopOnlyWrapper>
 
-    <styled.InfoBlockDesktopOnlyWrapper>
-      <InfoEasement />
-    </styled.InfoBlockDesktopOnlyWrapper>
+      <styled.InfoBlockDesktopOnlyWrapper>
+        <InfoEasement />
+      </styled.InfoBlockDesktopOnlyWrapper>
 
-    <styled.InfoBlockDesktopOnlyWrapper>
-      <InfoWarranty />
-    </styled.InfoBlockDesktopOnlyWrapper>
+      <styled.InfoBlockDesktopOnlyWrapper>
+        <InfoWarranty />
+      </styled.InfoBlockDesktopOnlyWrapper>
 
-    <styled.SubsectionsWrapper>
-      <InfoTimeSave />
-      <InfoEasement />
-      <InfoWarranty />
-    </styled.SubsectionsWrapper>
-  </styled.Wrapper>
-));
+      <styled.SubsectionsWrapper>
+        <InfoTimeSave />
+        <InfoEasement />
+        <InfoWarranty />
+      </styled.SubsectionsWrapper>
+    </styled.Wrapper>
+  );
+}
+
+export default memo(InfoblockSection);

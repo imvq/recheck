@@ -7,30 +7,38 @@ import * as styledBase from '../BaseSubsection/styled';
 
 const styled = { ...styledLocal, ...styledBase };
 
-/**
- * Warranty info subsection.
- */
-export default memo(() => (
-  <styled.Wrapper>
-    <styled.BoardWrapper>
-      <styled.Board backgroundSource={InfoWarrantyBoardSvg}>
-        <styled.ParagraphWrapper>
-          <styled.TitleWrapper>
-            <styled.Title>
-              <styled.TitleText>
-                Будьте уверены, что отзыв
-                был оставлен человеком с
-                прошлого места работы.
-              </styled.TitleText>
-            </styled.Title>
-          </styled.TitleWrapper>
+const Title = (
+  <styled.TitleWrapper>
+    <styled.Title>
+      <styled.TitleText>
+        Будьте уверены, что отзыв
+        был оставлен человеком с
+        прошлого места работы.
+      </styled.TitleText>
+    </styled.Title>
+  </styled.TitleWrapper>
+);
 
-          <styled.Text>
-            Кандидат не сможет дать
-            неправильный контакт.
-          </styled.Text>
-        </styled.ParagraphWrapper>
-      </styled.Board>
-    </styled.BoardWrapper>
-  </styled.Wrapper>
-));
+const Text = (
+  <styled.Text>
+    Кандидат не сможет дать
+    неправильный контакт.
+  </styled.Text>
+);
+
+function InfoWarranty() {
+  return (
+    <styled.Wrapper>
+      <styled.BoardWrapper>
+        <styled.Board backgroundSource={InfoWarrantyBoardSvg}>
+          <styled.ParagraphWrapper>
+            {Title}
+            {Text}
+          </styled.ParagraphWrapper>
+        </styled.Board>
+      </styled.BoardWrapper>
+    </styled.Wrapper>
+  );
+}
+
+export default memo(InfoWarranty);
