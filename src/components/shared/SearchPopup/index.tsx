@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { connect } from 'react-redux';
 
-import Api from 'utils/api';
+import ApiClient from 'commons/externals/ApiClient';
 import {
   AppState,
   setColleagues,
@@ -78,7 +78,7 @@ const FreeHiddenBadge = (
 
 const SearchPopup = (props: types.IProps) => {
   const onWriteReviewClickHandler = () => {
-    Api.getColleagues(props.currentProfileInfo.currentId)
+    ApiClient.getColleagues(props.currentProfileInfo.currentId)
       .then(colleaguesData => props.setColleagues(colleaguesData.data.results))
       .finally(() => props.unlockPage());
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { mixins } from 'utils/style.common';
+import mixins from 'commons/styles/mixins';
 
 export const BoxBaseWrapper = styled.div`
   width: 64rem;

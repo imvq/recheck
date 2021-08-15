@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { cssVars, mixins } from 'utils/style.common';
+import cssVars from 'commons/styles/cssVars';
+import mixins from 'commons/styles/mixins';
 import { ReactComponent as ArrowUpSvg } from 'assets/images/shared/CustomSelect/ArrowUp.svg';
 import { ReactComponent as ArrowDownSvg } from 'assets/images/shared/CustomSelect/ArrowDown.svg';
 

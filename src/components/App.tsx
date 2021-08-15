@@ -3,7 +3,7 @@ import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import { Router, Switch, Route } from 'react-router-dom';
 
 import { store as appStore } from 'store';
-import controlledHistory from 'utils/routing';
+import controlledHistory from 'commons/utils/routing';
 import UserConfirmationAwaiterPage from 'components/pages/UserConfirmationAwaiterPage';
 import UserConfirmationPage from 'components/pages/UserConfirmationPage';
 import ReviewConfirmationPage from 'components/pages/ReviewConfirmationPage';

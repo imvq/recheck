@@ -1,4 +1,4 @@
-import * as generalTypes from 'utils/typing/general';
+import * as generalTypes from 'commons/types/general';
 
 export const CLEAR_COLLEAGUES = 'CLEAR_COLLEAGUES';
 export const SET_COLLEAGUES = 'SET_COLLEAGUES';

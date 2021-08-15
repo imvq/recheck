@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import { AppState } from 'store';
-import { showToast } from 'utils/functions';
+import { showToast } from 'commons/utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 
 import * as types from './types';

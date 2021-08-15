@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-import { mixins, cssVars } from 'utils/style.common';
-import { ScreenBreakpoint } from 'utils/enums';
-import { respond } from 'utils/functions';
+import cssVars from 'commons/styles/cssVars';
+import mixins from 'commons/styles/mixins';
+import { ScreenBreakpoint } from 'commons/utils/enums';
+import { respond } from 'commons/utils/functions';
 import { ReactComponent as SearchButtonSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/Search.svg';
 import { ReactComponent as RocketLineSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/RocketLine.svg';
 import { ReactComponent as RocketSvg } from 'assets/images/pages//LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/Rocket.svg';

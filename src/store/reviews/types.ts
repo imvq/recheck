@@ -1,4 +1,4 @@
-import * as generalTypes from 'utils/typing/general';
+import * as generalTypes from 'commons/types/general';
 
 export const CLEAR_TASKS = 'CLEAR_TASKS';
 export const CLEAR_STRENGTHS = 'CLEAR_STRENGTHS';

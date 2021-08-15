@@ -1,4 +1,4 @@
-import { PaginationDirection } from 'utils/enums';
+import { PaginationDirection } from 'commons/utils/enums';
 
 export interface IOwnProps {
   page: number | PaginationDirection;

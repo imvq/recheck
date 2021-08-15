@@ -2,7 +2,7 @@ import { memo, useState, KeyboardEvent } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, setSearchText } from 'store';
-import { useBlur } from 'utils/hooks';
+import { useBlur } from 'commons/utils/hooks';
 
 import * as types from './types';
 import * as styled from './styled';

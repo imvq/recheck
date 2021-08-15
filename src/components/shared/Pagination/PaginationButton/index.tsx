@@ -1,6 +1,6 @@
 import { ReactComponent as ArrowRightSvg } from 'assets/images/shared/Pagination/ArrowRight.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/shared/Pagination/ArrowLeft.svg';
-import { PaginationDirection } from 'utils/enums';
+import { PaginationDirection } from 'commons/utils/enums';
 
 import * as types from './types';
 import * as styled from './styled';

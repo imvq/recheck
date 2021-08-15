@@ -1,4 +1,4 @@
-import { IAppProfileInfo, ICompany, ISearchProfileInfo } from 'utils/typing/general';
+import { IAppProfileInfo, ICompany, ISearchProfileInfo } from 'commons/types/general';
 
 export interface IOwnProps {
   recommendations: ICompany[];

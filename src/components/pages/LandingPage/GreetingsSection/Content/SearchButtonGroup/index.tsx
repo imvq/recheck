@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as styledCommon from 'components/shared/CommonStyled';
 
-import controlledHistory from 'utils/routing';
+import controlledHistory from 'commons/utils/routing';
 import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 
 import * as types from './types';

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import { AppState } from 'store';
-import { MainToolbarEntry } from 'utils/enums';
+import { MainToolbarEntry } from 'commons/utils/enums';
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
 import ReviewsArea from './ReviewsArea';

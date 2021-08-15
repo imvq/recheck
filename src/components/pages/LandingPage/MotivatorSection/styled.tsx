@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
 
-import { cssVars, mixins } from 'utils/style.common';
-import { ScreenBreakpoint } from 'utils/enums';
-import { respond } from 'utils/functions';
+import cssVars from 'commons/styles/cssVars';
+import mixins from 'commons/styles/mixins';
+import { ScreenBreakpoint } from 'commons/utils/enums';
+import { respond } from 'commons/utils/functions';
 import MotivatorBackground from 'assets/images/pages/LandingPage/MotivatorSection/Background.png';
 
 const mixinsLocal = {

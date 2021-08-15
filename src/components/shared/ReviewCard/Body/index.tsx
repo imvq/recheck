@@ -1,5 +1,5 @@
-import { mapReviewToArray } from 'utils/functions';
-import * as constants from 'utils/constants';
+import { mapReviewToArray } from 'commons/utils/functions';
+import * as constants from 'commons/utils/constants';
 
 import * as types from './types';
 import * as styled from './styled';

@@ -1,10 +1,10 @@
 import { useState, useRef, memo } from 'react';
 import { connect } from 'react-redux';
 
-import * as generalTypes from 'utils/typing/general';
-import Api from 'utils/api';
+import * as generalTypes from 'commons/types/general';
+import ApiClient from 'commons/externals/ApiClient';
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
-import { inputHandler, isValidEmail as validateEmail, getNValuesDown } from 'utils/functions';
+import { inputHandler, isValidEmail as validateEmail, getNValuesDown } from 'commons/utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
 import DropList from 'components/shared/DropList';
@@ -78,7 +78,7 @@ const RegistrationBox = (props: types.IProps) => {
       return updatedEmailState;
     });
 
-    Api.checkIsEmailAvailable(emailState.email)
+    ApiClient.checkIsEmailAvailable(emailState.email)
       .then(checkData => setEmailState({
         ...latestEmailState.current,
         isEmailAvailabilityErrorVisible: !checkData.data.success

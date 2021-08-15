@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { Link as ScrollLink } from 'react-scroll';
 
-import { ScreenBreakpoint } from 'utils/enums';
-import { respond } from 'utils/functions';
+import { ScreenBreakpoint } from 'commons/utils/enums';
+import { respond } from 'commons/utils/functions';
 import Logo from 'components/shared/Logo';
 import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
 

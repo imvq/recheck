@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { cssVars } from 'utils/style.common';
+import cssVars from 'commons/styles/cssVars';
 import { ReactComponent as MainImage } from 'assets/images/pages/NotFoundPage/MainImage.svg';
 import { IStyledSpanProps } from './types';
 

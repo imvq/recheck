@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import * as constants from 'utils/constants';
-import { cookieManager } from 'utils/cookies';
+import * as constants from 'commons/utils/constants';
+import { cookieManager } from 'commons/utils/cookies';
 import CookieImage from 'assets/images/shared/CookiePopup/Cookie.png';
 
 import * as styled from './styled';

@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { MainToolbarEntry } from 'utils/enums';
-import { onExit } from 'utils/functions';
+import { MainToolbarEntry } from 'commons/utils/enums';
+import { onExit } from 'commons/utils/functions';
 import { AppState, setPageLocked, setCurrentMainToolbarEntry } from 'store';
-import controlledHistory from 'utils/routing';
+import controlledHistory from 'commons/utils/routing';
 import Logo from 'components/shared/Logo';
 import MenuEntry from './MenuEntry';
 

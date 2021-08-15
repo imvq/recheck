@@ -1,6 +1,6 @@
 import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
 
-import * as generalTypes from 'utils/typing/general';
+import * as generalTypes from 'commons/types/general';
 
 export interface IDispatchProps {
   setPageLocked(flag: boolean): void;

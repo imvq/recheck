@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { animations, cssVars } from 'utils/style.common';
-import { ScreenBreakpoint } from 'utils/enums';
-import { respond } from 'utils/functions';
+import animations from 'commons/styles/animations';
+import cssVars from 'commons/styles/cssVars';
+import { ScreenBreakpoint } from 'commons/utils/enums';
+import { respond } from 'commons/utils/functions';
 import { ReactComponent as CloseSvg } from 'assets/images/shared/CookiePopup/Close.svg';
 
 export const FixedJustifier = styled.div`

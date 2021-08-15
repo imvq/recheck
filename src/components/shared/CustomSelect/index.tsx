@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-import { trimText } from 'utils/functions';
-import * as generalTypes from 'utils/typing/general';
+import { trimText } from 'commons/utils/functions';
+import * as generalTypes from 'commons/types/general';
 import CustomOption from './CustomOption';
 
 import * as types from './types';

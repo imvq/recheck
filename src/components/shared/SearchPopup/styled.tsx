@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 import { ReactComponent as CloseCross } from 'assets/images/common/CloseCross.svg';
-import { animations, cssVars } from 'utils/style.common';
+import animations from 'commons/styles/animations';
+import cssVars from 'commons/styles/cssVars';
 
 const cssVarsLocal = {
   background: '#f0f3ff'

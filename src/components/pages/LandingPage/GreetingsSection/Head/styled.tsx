@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { cssVars } from 'utils/style.common';
-import { ScreenBreakpoint } from 'utils/enums';
-import { respond } from 'utils/functions';
+import cssVars from 'commons/styles/cssVars';
+import { ScreenBreakpoint } from 'commons/utils/enums';
+import { respond } from 'commons/utils/functions';
 
 const cssVarsLocal = {
   widthOffset: '12rem'

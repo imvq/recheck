@@ -1,5 +1,5 @@
-import * as generalTypes from 'utils/typing/general';
-import { MainToolbarEntry } from 'utils/enums';
+import * as generalTypes from 'commons/types/general';
+import { MainToolbarEntry } from 'commons/utils/enums';
 
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
 export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';

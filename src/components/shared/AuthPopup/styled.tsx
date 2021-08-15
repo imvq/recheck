@@ -4,7 +4,9 @@ import BackgroundPath from 'assets/images/shared/AuthPopup/Background.jpg';
 import { ReactComponent as CloseCross } from 'assets/images/common/CloseCross.svg';
 import { ReactComponent as LoginButtonLi } from 'assets/images/shared/AuthPopup/LoginButtonLi.svg';
 import { ReactComponent as LoginButtonFa } from 'assets/images/shared/AuthPopup/LoginButtonFa.svg';
-import { animations, cssVars, mixins } from 'utils/style.common';
+import animations from 'commons/styles/animations';
+import cssVars from 'commons/styles/cssVars';
+import mixins from 'commons/styles/mixins';
 
 const cssVarsLocal = {
   background: '#f0f3ff',

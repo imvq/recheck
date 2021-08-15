@@ -1,9 +1,23 @@
 /**
+ * Represents sidebar entries.
+ */
+export enum MainToolbarEntry {
+  NoEntry,
+  ProfilePageMyReviews,
+  ProfilePageHistory,
+  ProfilePageAboutMe,
+  TopUpAnAccount,
+  AddWorkplace,
+  NewSearch,
+  NewReview
+}
+
+/**
  * Placeholders for pagination page buttons.
  */
 export enum PaginationDirection {
-  Prev = '🡸',
-  Next = '🡺'
+  Prev,
+  Next
 }
 
 /**
@@ -28,18 +42,4 @@ export enum ScreenBreakpoint {
 export enum ToastVariants {
   Success = '#33c7ba',
   Alert = '#dc3545'
-}
-
-/**
- * Represents sidebar entries.
- */
-export enum MainToolbarEntry {
-  NoEntry,
-  ProfilePageMyReviews,
-  ProfilePageHistory,
-  ProfilePageAboutMe,
-  TopUpAnAccount,
-  AddWorkplace,
-  NewSearch,
-  NewReview
 }

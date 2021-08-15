@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { cssVars } from 'utils/style.common';
+import cssVars from 'commons/styles/cssVars';
 
 export const NumberWrapper = styled.button<{ isCurrent?: boolean; }>`
   background: none;

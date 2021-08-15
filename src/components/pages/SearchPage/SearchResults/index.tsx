@@ -2,9 +2,9 @@ import { memo } from 'react';
 import { connect } from 'react-redux';
 import { StatusCodes } from 'http-status-codes';
 
-import { ISearchProfileInfo } from 'utils/typing/general';
-import controlledHistory from 'utils/routing';
-import Api from 'utils/api';
+import { ISearchProfileInfo } from 'commons/types/general';
+import controlledHistory from 'commons/utils/routing';
+import ApiClient from 'commons/externals/ApiClient';
 import {
   AppState,
   setCurrentObservedUser,
@@ -32,7 +32,7 @@ const mapDispatchToProps: types.IDispatchProps = {
 
 const SearchResults = (props: types.IProps) => {
   const requestReviewsAmount = (targetShareableId: string) => {
-    Api.getTargetNReviewsGot({
+    ApiClient.getTargetNReviewsGot({
       askerProfileId: props.currentProfileInfo.currentId,
       targetShareableId
     }).then(amountData => {

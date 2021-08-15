@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { useQuery } from 'utils/hooks';
+import { useQuery } from 'commons/utils/hooks';
 import { AppState, setIsLoginPopupVisible, setReferral, setAwaiter } from 'store';
-import controlledHistory from 'utils/routing';
+import controlledHistory from 'commons/utils/routing';
 import CookiePopup from 'components/shared/CookiePopup';
 import AuthPopupManager from 'components/shared/AuthPopupManager';
 import GreetingsSection from './GreetingsSection';

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { respondUp } from 'utils/functions';
-import { cssVars } from 'utils/style.common';
+import { respondUp } from 'commons/utils/functions';
+import cssVars from 'commons/styles/cssVars';
 import BackgroundSvgPath from 'assets/images/common/Background1.png';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';

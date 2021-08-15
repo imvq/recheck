@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import Api from 'utils/api';
-import controlledHistory from 'utils/routing';
+import ApiClient from 'commons/externals/ApiClient';
+import controlledHistory from 'commons/utils/routing';
 import { AppState, setIsLoginPopupVisible, setPageUnlocked } from 'store';
 
 import * as types from './types';
@@ -29,7 +29,7 @@ const UserConfirmationPage = (props: types.IProps) => {
     }
 
     if (props.isAuthorized) {
-      Api.completeRegistration({
+      ApiClient.completeRegistration({
         profileId: props.currentProfileInfo.currentId,
         confirmationCode: pageUuid
       })

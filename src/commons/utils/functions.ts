@@ -1,10 +1,10 @@
 import { toast } from 'react-toastify';
 
-import * as apiResponses from 'utils/typing/apiResponses';
-import * as generalTypes from 'utils/typing/general';
-import { ToastVariants } from 'utils/enums';
-import { IReviewCardCommonData } from 'utils/typing/general/basic';
-import { cookieManager, cookiesList } from 'utils/cookies';
+import * as apiResponses from 'commons/types/apiResponses';
+import * as generalTypes from 'commons/types/general';
+import { ToastVariants } from 'commons/utils/enums';
+import { IReviewCardCommonData } from 'commons/types/general/basic';
+import { cookieManager, cookiesList } from 'commons/utils/cookies';
 
 /**
  * Generate list with n values down starting from a certain value.

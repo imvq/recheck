@@ -6,7 +6,7 @@ import OutsideClickHandler from 'react-outside-click-handler';
 import { ReactComponent as DoorSvg } from 'assets/images/shared/ProfileMenuBadge/Door.svg';
 import { ReactComponent as CabinetSvg } from 'assets/images/shared/ProfileMenuBadge/Cabinet.svg';
 import { AppState, setPageLocked, setIsLoginPopupVisible, setCurrentProfileInfo } from 'store';
-import { onExit } from 'utils/functions';
+import { onExit } from 'commons/utils/functions';
 
 import * as types from './types';
 import * as styled from './styled';

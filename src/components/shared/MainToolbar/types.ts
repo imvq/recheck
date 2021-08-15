@@ -1,4 +1,4 @@
-import { MainToolbarEntry } from 'utils/enums';
+import { MainToolbarEntry } from 'commons/utils/enums';
 
 export interface IOwnProps {
   className?: string;

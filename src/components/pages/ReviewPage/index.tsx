@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import Api from 'utils/api';
-import controlledHistory from 'utils/routing';
-import { ISearchProfileInfo } from 'utils/typing/general';
-import { MainToolbarEntry } from 'utils/enums';
+import ApiClient from 'commons/externals/ApiClient';
+import controlledHistory from 'commons/utils/routing';
+import { ISearchProfileInfo } from 'commons/types/general';
+import { MainToolbarEntry } from 'commons/utils/enums';
 import {
   AppState,
   createReview,
@@ -13,7 +13,7 @@ import {
   setPageUnlocked,
   setTargetShareableId
 } from 'store';
-import { mapProfileInfoToIAppProfileInfoSlice } from 'utils/functions';
+import { mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/functions';
 import ProfileHead from 'components/shared/ProfileHead';
 
 import CommentBoxSimple from './CommentBoxSimple';
@@ -73,7 +73,7 @@ const ReviewPage = (props: types.IProps) => {
     if (targetShareableId) {
       props.setTargetShareableId(targetShareableId);
 
-      Api.checkIsTargetConnected({
+      ApiClient.checkIsTargetConnected({
         askerProfileId: props.currentProfileInfo.currentId,
         targetShareableId
       })
@@ -82,7 +82,7 @@ const ReviewPage = (props: types.IProps) => {
             controlledHistory.push('/profile');
           }
 
-          Api.searchUserByShareableId(targetShareableId)
+          ApiClient.searchUserByShareableId(targetShareableId)
             .then(searchResult => setObservedUser(searchResult.data.result))
             .catch(() => controlledHistory.push('/404'))
             .finally(() => props.unlockPage());
@@ -103,7 +103,7 @@ const ReviewPage = (props: types.IProps) => {
       ...props.reviewData
     });
 
-    Api.makeUserAvailable({
+    ApiClient.makeUserAvailable({
       askerProfileId: props.currentProfileInfo.currentId,
       // @ts-ignore: requestedUserShareableId is guaranteed to be a valid string here.
       targetShareableId: props.requestedUserShareableId

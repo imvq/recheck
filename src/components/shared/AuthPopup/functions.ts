@@ -1,12 +1,12 @@
 import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
 
-import Api from 'utils/api';
-import * as constants from 'utils/constants';
-import controlledHistory from 'utils/routing';
-import * as apiResponses from 'utils/typing/apiResponses';
-import * as generalTypes from 'utils/typing/general';
-import { mapProfileDtoToState } from 'utils/functions';
-import { cookieManager, cookiesList } from 'utils/cookies';
+import ApiClient from 'commons/externals/ApiClient';
+import * as constants from 'commons/utils/constants';
+import controlledHistory from 'commons/utils/routing';
+import * as apiResponses from 'commons/types/apiResponses';
+import * as generalTypes from 'commons/types/general';
+import { mapProfileDtoToState } from 'commons/utils/functions';
+import { cookieManager, cookiesList } from 'commons/utils/cookies';
 import { FacebookLoginResponse } from './types';
 
 function setCookie(name: string, value: string) {
@@ -31,12 +31,12 @@ function onProfileDataRetrieved(
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
   setCurrentProfileInfoCallback(normalizedProfileInfo);
 
-  Api.checkIsRegistered(normalizedProfileInfo.currentId)
+  ApiClient.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       setIsAuthorizedCallback(true);
 
       if (checkResponse.data.isRegistered) {
-        Api.checkIsConfirmed(normalizedProfileInfo.currentId)
+        ApiClient.checkIsConfirmed(normalizedProfileInfo.currentId)
           .then((confirmationResponse) => {
             setIsLoginPopupVisibleCallback(false);
 
@@ -65,7 +65,7 @@ export function onSuccessLinkedIn(
   // Lock page to prevent user actions while retrieving and processing profile data.
   setPageLockedCallback(true);
 
-  Api.exchangeLinkedInCode(code)
+  ApiClient.exchangeLinkedInCode(code)
     // If the code is valid and correct.
     .then(response => {
       // 1. Save OAuth bearer token to cookies.
@@ -73,7 +73,7 @@ export function onSuccessLinkedIn(
 
       // 2. Time to get basic profile info from LinkedIn
       // and register the user if it is not yet registered.
-      Api.getProfileLinkedIn()
+      ApiClient.getProfileLinkedIn()
         .then(profileResponse => onProfileDataRetrieved(
           setPageLockedCallback,
           setIsLoginPopupVisibleCallback,
@@ -117,7 +117,7 @@ export function onSuccessFacebook(
       photoUrl: oauthData.picture?.data.url || ''
     };
 
-    Api.getProfileFacebookReduced(profileInfo.profileId)
+    ApiClient.getProfileFacebookReduced(profileInfo.profileId)
       .then(reducedProfileData => {
         profileInfo.email = reducedProfileData.data.email;
         profileInfo.shareableId = reducedProfileData.data.shareableId;

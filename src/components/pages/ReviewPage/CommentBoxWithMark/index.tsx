@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
-import * as generalTypes from 'utils/typing/general';
-import { textAreaHandler } from 'utils/functions';
+import * as generalTypes from 'commons/types/general';
+import { textAreaHandler } from 'commons/utils/functions';
 import CustomButton from 'components/shared/CustomButton';
 import MarkSelector from '../MarkSelector';
 

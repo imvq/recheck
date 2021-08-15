@@ -19,8 +19,8 @@ import {
   getQuickSearchMatchedUsersWithoutSelf,
   getUserSearchResultsWithoutSelf
 } from 'store/selectors';
-import * as constants from 'utils/constants';
-import * as generalTypes from 'utils/typing/general';
+import * as constants from 'commons/utils/constants';
+import * as generalTypes from 'commons/types/general';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
 import DropList from 'components/shared/DropList';
 import SearchField from './SearchField';

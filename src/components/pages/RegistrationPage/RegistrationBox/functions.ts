@@ -1,4 +1,4 @@
-import { ICompanyReduced } from 'utils/typing/general';
+import { ICompanyReduced } from 'commons/types/general';
 
 export function mapCompaniesDataToOptions(companies: ICompanyReduced[]) {
   return companies.map(company => ({

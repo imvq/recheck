@@ -1,4 +1,4 @@
-import controlledHistory from 'utils/routing';
+import controlledHistory from 'commons/utils/routing';
 
 import ManPath from 'assets/images/pages/RegistrationPage/ConfirmationPopup/Man.png';
 

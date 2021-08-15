@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux';
 import { AxiosResponse } from 'axios';
 
-import * as apiResponsesBasic from 'utils/typing/apiResponses/basic';
-import Api from 'utils/api';
-import controlledHistory from 'utils/routing';
-import { mapProfileDtoToState } from 'utils/functions';
-import { cookieManager, cookiesList } from 'utils/cookies';
+import * as apiResponsesBasic from 'commons/types/apiResponses/basic';
+import ApiClient from 'commons/externals/ApiClient';
+import controlledHistory from 'commons/utils/routing';
+import { mapProfileDtoToState } from 'commons/utils/functions';
+import { cookieManager, cookiesList } from 'commons/utils/cookies';
 import { setCurrentProfileInfo } from '../profile/actions';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
@@ -28,7 +28,7 @@ function onProfileDataRetrieved(
   dispatch(setCurrentProfileInfo(normalizedProfileInfo));
 
   // Check user existence.
-  Api.checkIsRegistered(normalizedProfileInfo.currentId)
+  ApiClient.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       if (checkResponse.data.isRegistered) {
         // No need for registered users to be at registration page.
@@ -40,7 +40,7 @@ function onProfileDataRetrieved(
         // Provide confirmation check only if it is supposed to be.
         if (isConfirmationCheckNeeded) {
           // If the user exists, check if it is confirmed.
-          Api.checkIsConfirmed(normalizedProfileInfo.currentId)
+          ApiClient.checkIsConfirmed(normalizedProfileInfo.currentId)
             .then((confirmationResponse) => {
               if (confirmationResponse.data.isConfirmed) {
                 dispatch(setIsAuthorized(true));
@@ -69,7 +69,7 @@ export const checkAuthorization = (
   dispatch: Dispatch<AppActionType>
 ) => {
   if (cookieManager.get(cookiesList.accessTokenLinkedIn)) {
-    Api.getProfileLinkedIn()
+    ApiClient.getProfileLinkedIn()
       .then(profileResponse => onProfileDataRetrieved(
         dispatch,
         profileResponse,
@@ -78,7 +78,7 @@ export const checkAuthorization = (
       ))
       .catch(() => dispatch(setIsAuthorized(false)));
   } else if (cookieManager.get(cookiesList.accessTokenFacebook)) {
-    Api.getProfileFacebook()
+    ApiClient.getProfileFacebook()
       .then(profileResponse => onProfileDataRetrieved(
         dispatch,
         profileResponse,

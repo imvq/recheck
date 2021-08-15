@@ -2,10 +2,10 @@ import { memo } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
-import Api from 'utils/api';
-import { ToastVariants } from 'utils/enums';
-import controlledHistory from 'utils/routing';
-import { showToast } from 'utils/functions';
+import ApiClient from 'commons/externals/ApiClient';
+import { ToastVariants } from 'commons/utils/enums';
+import controlledHistory from 'commons/utils/routing';
+import { showToast } from 'commons/utils/functions';
 import { AppState, setPageLocked, setPageUnlocked } from 'store';
 import PersonCard from 'components/shared/PersonCard';
 import NoColleaguesView from './NoColleaguesView';
@@ -27,7 +27,7 @@ export const ColleaguesView = (props: types.IProps) => {
   const checkIsUserAvailableForReview = (askerProfileId: string, targetShareableId: string) => {
     props.lockPage();
 
-    Api.checkIsUserAvailableForReview({ askerProfileId, targetShareableId })
+    ApiClient.checkIsUserAvailableForReview({ askerProfileId, targetShareableId })
       .then(checkData => {
         if (checkData.data.success) {
           controlledHistory.push(`/review/${targetShareableId}`);

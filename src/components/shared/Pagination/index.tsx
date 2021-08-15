@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { PaginationDirection } from 'utils/enums';
+import { PaginationDirection } from 'commons/utils/enums';
 import PaginationButton from './PaginationButton';
 
 import * as types from './types';

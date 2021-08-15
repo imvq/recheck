@@ -1,5 +1,5 @@
-import * as generalTypes from 'utils/typing/general';
-import { MainToolbarEntry } from 'utils/enums';
+import * as generalTypes from 'commons/types/general';
+import { MainToolbarEntry } from 'commons/utils/enums';
 
 export interface IStateProps {
   currentProfileInfo: generalTypes.IAppProfileInfo;

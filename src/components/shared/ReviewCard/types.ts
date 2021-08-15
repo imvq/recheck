@@ -1,4 +1,4 @@
-import { IReviewCardGotData, IReviewCardLeftData } from 'utils/typing/general';
+import { IReviewCardGotData, IReviewCardLeftData } from 'commons/types/general';
 
 export interface IOwnProps {
   reviewCardData: IReviewCardGotData | IReviewCardLeftData;

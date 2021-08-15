@@ -1,4 +1,4 @@
-import { IAppProfileInfo } from 'utils/typing/general';
+import { IAppProfileInfo } from 'commons/types/general';
 
 export interface IStateProps {
   currentProfileInfo: IAppProfileInfo;

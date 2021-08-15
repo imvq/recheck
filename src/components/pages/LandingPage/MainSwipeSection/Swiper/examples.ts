@@ -1,4 +1,4 @@
-import * as generalTypes from 'utils/typing/general';
+import * as generalTypes from 'commons/types/general';
 
 import Natalie from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Natalie.png';
 import Oleg from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Oleg.png';

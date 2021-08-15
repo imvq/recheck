@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import * as SvgLoaders from 'svg-loaders-react';
 
-import Api from 'utils/api';
+import ApiClient from 'commons/externals/ApiClient';
 import { AppState, setPageLocked } from 'store';
 import CustomButton from 'components/shared/CustomButton';
-import { isValidEmail as validateEmail, onExit, showToast } from 'utils/functions';
+import { isValidEmail as validateEmail, onExit, showToast } from 'commons/utils/functions';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -56,7 +56,7 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
       return updatedEmailState;
     });
 
-    Api.checkIsEmailAvailable(emailState.email)
+    ApiClient.checkIsEmailAvailable(emailState.email)
       .then(checkData => setEmailState({
         ...latestEmailState.current,
         isEmailAvailabilityErrorVisible: !checkData.data.success
@@ -68,12 +68,12 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
   };
 
   const resendConfirmation = () => {
-    Api.resendConfirmation(props.currentProfileInfo.currentId);
+    ApiClient.resendConfirmation(props.currentProfileInfo.currentId);
     showToast('Письмо отправлено повторно');
   };
 
   const reassignConfirmationEmail = () => {
-    Api.reassignConfirmationEmail({
+    ApiClient.reassignConfirmationEmail({
       profileId: props.currentProfileInfo.currentId,
       email: emailState.email
     });

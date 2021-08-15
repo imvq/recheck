@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import { StatusCodes } from 'http-status-codes';
 
-import { ISearchProfileInfo } from 'utils/typing/general';
-import controlledHistory from 'utils/routing';
-import Api from 'utils/api';
+import { ISearchProfileInfo } from 'commons/types/general';
+import controlledHistory from 'commons/utils/routing';
+import ApiClient from 'commons/externals/ApiClient';
 import {
   AppState,
   setCurrentObservedUser,
@@ -51,7 +51,7 @@ const Companies = (props: types.IProps) => {
   });
 
   const requestReviewsAmount = (targetShareableId: string) => {
-    Api.getTargetNReviewsGot({
+    ApiClient.getTargetNReviewsGot({
       askerProfileId: props.currentProfileInfo.currentId,
       targetShareableId
     }).then(amountData => {

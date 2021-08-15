@@ -1,4 +1,4 @@
-import { IAppProfileInfo, ISearchProfileInfo } from 'utils/typing/general';
+import { IAppProfileInfo, ISearchProfileInfo } from 'commons/types/general';
 
 export interface IOwnProps {
   onClose(): void;

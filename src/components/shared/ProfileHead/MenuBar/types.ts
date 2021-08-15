@@ -1,4 +1,4 @@
-import { IAppProfileInfoReduced } from 'utils/typing/general';
+import { IAppProfileInfoReduced } from 'commons/types/general';
 
 export interface IOwnProps {
   currentProfileInfo: IAppProfileInfoReduced;

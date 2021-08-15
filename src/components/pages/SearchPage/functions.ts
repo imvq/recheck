@@ -1,4 +1,4 @@
-import { ISearchProfileInfo } from 'utils/typing/general';
+import { ISearchProfileInfo } from 'commons/types/general';
 
 export function mapUserSearchDataToOptions(users: ISearchProfileInfo[]) {
   return users.map(user => ({

@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 
-import Api from 'utils/api';
-import * as generalTypes from 'utils/typing/general';
+import ApiClient from 'commons/externals/ApiClient';
+import * as generalTypes from 'commons/types/general';
 import { AppActionType } from '../types';
 import { setPageUnlocked as unlockPage } from '../interaction/actions';
 import {
@@ -86,7 +86,7 @@ export const setSearchText = (text: string): SearchActionType => ({
 });
 
 export const searchUser = (tokens: string[]) => (dispatch: Dispatch<AppActionType>) => {
-  Api.searchUser(tokens)
+  ApiClient.searchUser(tokens)
     .then((searchResults) => dispatch(setUserSearchResults(searchResults.data.results)))
     .finally(() => dispatch(unlockPage()));
 };
@@ -94,22 +94,22 @@ export const searchUser = (tokens: string[]) => (dispatch: Dispatch<AppActionTyp
 export const searchUserByShareableId = (shareableId: string) => (
   dispatch: Dispatch<AppActionType>
 ) => {
-  Api.searchUserByShareableId(shareableId)
+  ApiClient.searchUserByShareableId(shareableId)
     .then((searchResult) => dispatch(setUserSearchResults([searchResult.data.result])))
     .finally(() => dispatch(unlockPage()));
 };
 
 export const loadMatchedCompanies = (sequence: string) => (dispatch: Dispatch<AppActionType>) => {
-  Api.getMatchedCompanies(sequence)
+  ApiClient.getMatchedCompanies(sequence)
     .then(matchData => dispatch(setQuickSearchMatchedCompanies(matchData.data.results)));
 };
 
 export const loadMatchedUsers = (tokens: string[]) => (dispatch: Dispatch<AppActionType>) => {
-  Api.quickSearchUser(tokens)
+  ApiClient.quickSearchUser(tokens)
     .then(matchData => dispatch(setQuickSearchMatchedUsers(matchData.data.results)));
 };
 
 export const loadRecommendations = (chunk: number) => (dispatch: Dispatch<AppActionType>) => {
-  Api.getRecommendations(chunk)
+  ApiClient.getRecommendations(chunk)
     .then((recommendationsDto) => dispatch(appendRecommendations(recommendationsDto.data.results)));
 };

@@ -1,5 +1,5 @@
-import { IAppProfileInfoReduced } from 'utils/typing/general';
-import { MainToolbarEntry } from 'utils/enums';
+import { IAppProfileInfoReduced } from 'commons/types/general';
+import { MainToolbarEntry } from 'commons/utils/enums';
 
 export interface IOwnProps {
   profileInfo: IAppProfileInfoReduced;

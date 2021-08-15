@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import Api from 'utils/api';
-import controlledHistory from 'utils/routing';
+import ApiClient from 'commons/externals/ApiClient';
+import controlledHistory from 'commons/utils/routing';
 import { AppState, setPageUnlocked, setIsLoginPopupVisible } from 'store';
 
 import * as types from './types';
@@ -28,7 +28,7 @@ const ConfirmationPage = (props: types.IProps) => {
     }
 
     if (props.isAuthorized) {
-      Api.bindReviewTarget({
+      ApiClient.bindReviewTarget({
         profileId: props.currentProfileInfo.currentId,
         reviewId: pageUuid
       })

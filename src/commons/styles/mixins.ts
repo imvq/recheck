@@ -1,95 +1,35 @@
-import { css, keyframes } from 'styled-components';
+import { css } from 'styled-components';
 
-import { ScreenBreakpoint } from 'utils/enums';
-import { respond } from 'utils/functions';
-
-/**
- * Encapsulation for reusable styles variables.
- */
-export const cssVars = {
-  colorBackgroundBadge: '#dde0ee',
-  colorBackgroundRect: '#e9edfb',
-  colorForegroundPickMain: '#4f69ca',
-  colorForegroundPickAux1: '#33c7ba',
-  footerHeight: '17.5rem',
-  greetingsViewContentActionGroupWidth: '38rem',
-  greetingsViewHeadEdgeElemsWidthBase: '15rem',
-  greetingsViewHeadPaddingHorizontal: '16rem',
-  inputBorderRadiusDefault: '.6rem',
-  inputHeightDefault: '3.072rem',
-  logoRectHeightBase: '2.625rem',
-  opacityButtonHover: '.8',
-  opacityButtonActive: '.5',
-  opacityButtonIdleInversed: '.8',
-  profilePhotoWrapperWidth: '20rem',
-  searchInputWidth: '65rem',
-  sectionShadow: 'drop-shadow(1rem 1rem .6rem rgba(0, 0, 0, .1))',
-  thiknessDefault: '0.078vw',
-  widthMotivatorBadge: '25rem',
-  widthReviewCard: '67.38em',
-  zIndexDimmedContent: '801',
-  zIndexDimmingWrapper: '800',
-  zIndexLoginBadge: '50',
-  zIndexPopupCookie: '100',
-  zIndexPopupExpandView: '100',
-  zIndexPopupLogin: '100',
-  zIndexPopupSearch: '100',
-  zIndexSelectMenu: '150',
-  zIndexSelectMenuLayer2: '200',
-  zIndexScrollButton: '200',
-  zIndexPageLoader: '900'
-};
-
-/**
- * Encapsulation for reusable CSS animations.
- */
-export const animations = {
-  fadeDefault: keyframes`
-    0% {
-      transform: scale(.9);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  `,
-  slideIn: keyframes`
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0%);
-    }
-  `
-};
+import { ScreenBreakpoint } from 'commons/utils/enums';
+import { respond } from 'commons/utils/functions';
+import cssVarsCommon from './cssVars';
 
 /**
  * Encapsulation for reusable style mixins.
  */
-export const mixins = {
+export default {
   DefaultButton: css`
     cursor: pointer;
     transition: .1s;
     filter: drop-shadow(.2rem .3125rem .5rem rgba(0, 0, 0, .25));
 
     &:hover {
-      opacity: ${cssVars.opacityButtonHover};
-      filter: alpha(opacity=${cssVars.opacityButtonHover} * 100);
+      opacity: ${cssVarsCommon.opacityButtonHover};
+      filter: alpha(opacity=${cssVarsCommon.opacityButtonHover} * 100);
     }
 
     &:active {
-      opacity: ${cssVars.opacityButtonActive};
-      filter: alpha(opacity=${cssVars.opacityButtonActive} * 100);
+      opacity: ${cssVarsCommon.opacityButtonActive};
+      filter: alpha(opacity=${cssVarsCommon.opacityButtonActive} * 100);
     }
   `,
   DefaultInput: css`
     width: 100%;
-    height: ${cssVars.inputHeightDefault};
+    height: ${cssVarsCommon.inputHeightDefault};
     font-size: 1.3rem;
     line-height: normal;
-    border: calc(${cssVars.thiknessDefault} * 2) solid #c7c7c7;
-    border-radius: ${cssVars.inputBorderRadiusDefault};
+    border: calc(${cssVarsCommon.thiknessDefault} * 2) solid #c7c7c7;
+    border-radius: ${cssVarsCommon.inputBorderRadiusDefault};
     background-color: white;
     box-sizing: border-box;
     padding: .6rem;
@@ -104,7 +44,7 @@ export const mixins = {
     }
   `,
   HTWBadge: css`
-    background-color: ${cssVars.colorBackgroundBadge};
+    background-color: ${cssVarsCommon.colorBackgroundBadge};
     box-sizing: border-box;
     margin: 1rem;
     padding: 1rem;

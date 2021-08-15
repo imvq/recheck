@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Api from 'utils/api';
+import ApiClient from 'commons/externals/ApiClient';
 import ScaleStage2 from 'assets/images/pages/RegistrationPage/ScaleStage2.png';
 import RegistrationBox from './RegistrationBox';
 import ConfirmationPopup from './ConfirmationPopup';
@@ -23,7 +23,7 @@ export default () => {
         </styled.StageBreadcrumpWrapper>
         <RegistrationBox onProceed={profileInfo => {
           setEmail(profileInfo.email);
-          Api.prepareProfile(profileInfo).finally(() => {
+          ApiClient.prepareProfile(profileInfo).finally(() => {
             setIsConfirmationVisible(true);
           });
         }}

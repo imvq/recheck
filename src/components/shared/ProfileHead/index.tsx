@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import { connect } from 'react-redux';
 
-import { MainToolbarEntry } from 'utils/enums';
+import { MainToolbarEntry } from 'commons/utils/enums';
 import { setCurrentMainToolbarEntry } from 'store';
-import controlledHistory from 'utils/routing';
+import controlledHistory from 'commons/utils/routing';
 import CustomButton from 'components/shared/CustomButton';
 import MenuBar from './MenuBar';
 
