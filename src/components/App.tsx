@@ -1,32 +1,34 @@
+import { lazy, Suspense } from 'react';
 import { Provider } from 'react-redux';
 import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import { Router, Switch, Route } from 'react-router-dom';
 
 import { store as appStore } from 'store';
 import controlledHistory from 'commons/utils/routing';
-import UserConfirmationAwaiterPage from 'components/pages/UserConfirmationAwaiterPage';
-import UserConfirmationPage from 'components/pages/UserConfirmationPage';
-import ReviewConfirmationPage from 'components/pages/ReviewConfirmationPage';
-import PageStartupManager from 'components/shared/PageStartupManager';
+import GlobalStyle from 'components/shared/GlobalStyle';
+import NotFoundPage from 'components/pages/NotFoundPage';
 import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
-import GlobalStyle from 'components/shared/GlobalStyle';
-import LandingPage from 'components/pages/LandingPage';
-import ObservedProfilePage from 'components/pages/ObservedProfilePage';
-import OwnProfilePage from 'components/pages/OwnProfilePage';
-import ReviewPage from 'components/pages/ReviewPage';
-import SearchPage from 'components/pages/SearchPage';
-import RegistrationPage from 'components/pages/RegistrationPage';
-import NotFoundPage from 'components/pages/NotFoundPage';
+import PageStartupManager from 'components/shared/PageStartupManager';
 
 import 'react-toastify/dist/ReactToastify.min.css';
+
+const LandingPage = lazy(() => import('components/pages/LandingPage'));
+const ObservedProfilePage = lazy(() => import('components/pages/ObservedProfilePage'));
+const OwnProfilePage = lazy(() => import('components/pages/OwnProfilePage'));
+const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
+const ReviewConfirmationPage = lazy(() => import('components/pages/ReviewConfirmationPage'));
+const ReviewPage = lazy(() => import('components/pages/ReviewPage'));
+const SearchPage = lazy(() => import('components/pages/SearchPage'));
+const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
+const UserConfirmationPage = lazy(() => import('components/pages/UserConfirmationPage'));
 
 /**
  * Main wrapper.
  * Container component.
  */
 export default () => (
-  <>
+  <Suspense fallback={<></>}>
     <GlobalStyle />
     <Provider store={appStore}>
       <Router history={controlledHistory}>
@@ -122,5 +124,5 @@ export default () => (
         </Switch>
       </Router>
     </Provider>
-  </>
+  </Suspense>
 );
