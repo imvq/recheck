@@ -16,7 +16,7 @@ export enum MainToolbarEntry {
  * Placeholders for pagination page buttons.
  */
 export enum PaginationDirection {
-  Prev,
+  Prev = -1,
   Next
 }
 
