@@ -11,6 +11,7 @@ import {
   clearMatchedUsers,
   searchUser,
   searchUserByShareableId,
+  setCurrentMainToolbarEntry,
   setSearchText,
   setUserSearchResults,
   setPageLocked
@@ -19,8 +20,11 @@ import {
   getQuickSearchMatchedUsersWithoutSelf,
   getUserSearchResultsWithoutSelf
 } from 'store/selectors';
+
 import * as constants from 'commons/utils/constants';
 import * as generalTypes from 'commons/types/general';
+
+import { MainToolbarEntry } from 'commons/utils/enums';
 import SearchPopupManager from 'components/shared/SearchPopupManager';
 import DropList from 'components/shared/DropList';
 import SearchField from './SearchField';
@@ -51,19 +55,22 @@ const mapDispatchToProps: types.IDispatchProps = {
   loadRecommendations,
   searchUser,
   searchUserByShareableId,
+  setCurrentMainToolbarEntry,
   setUserSearchResults,
   setRecommendations,
   setRecommendedCompaniesShownMembers,
   lockPage: setPageLocked
 };
 
-const SearchPage = (props: types.IProps) => {
+function SearchPage(props: types.IProps) {
   const [isRecommendationsViewVisible, setIsRecommendationsViewVisible] = useState(false);
 
   useEffect(() => {
     // Clear the colleagues array to avoid invalid conditional render
     // due to the colleagues array dependency.
     props.clearColleagues();
+
+    props.setCurrentMainToolbarEntry(MainToolbarEntry.NewSearch);
 
     // Load recommendations only one time and never reload them again.
     if (props.recommendations.length === 0) {
@@ -189,6 +196,6 @@ const SearchPage = (props: types.IProps) => {
 
     </styled.Wrapper>
   );
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

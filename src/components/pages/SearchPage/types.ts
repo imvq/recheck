@@ -1,5 +1,7 @@
 import * as generalTypes from 'commons/types/general';
 
+import { MainToolbarEntry } from 'commons/utils/enums';
+
 export interface IStateProps {
   colleaguesState: {
     colleagues: Omit<generalTypes.ISearchProfileInfo, 'company'>[];
@@ -20,6 +22,7 @@ export interface IDispatchProps {
   lockPage(): void;
   searchUser(tokens: string[]): void;
   searchUserByShareableId(shareableId: string): void;
+  setCurrentMainToolbarEntry(entry: MainToolbarEntry): void;
   setUserSearchResults(results: generalTypes.ISearchProfileInfo[]): void;
   setRecommendations(companies: generalTypes.ICompany[]): void;
   setRecommendedCompaniesShownMembers(members: generalTypes.ISearchProfileInfo[]): void;

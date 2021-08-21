@@ -19,29 +19,31 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 /**
  * Profile page. Used to view reviews.
  */
-const OwnProfilePage = (props: types.IProps) => (
-  <styled.Wrapper>
-    <styled.Sidebar />
+function OwnProfilePage(props: types.IProps) {
+  return (
+    <styled.Wrapper>
+      <styled.Sidebar />
 
-    <styled.AdaptedHeader />
+      <styled.AdaptedHeader />
 
-    <styled.ContentWrapper>
-      <styled.TitleWrapper id='ProfileTitle'>Мой профиль</styled.TitleWrapper>
-      <ProfileHead profileInfo={props.currentProfileInfo} />
-      {(() => {
-        switch (props.currentMainToolbarEntry) {
-          case MainToolbarEntry.ProfilePageAboutMe:
-            return <AboutArea />;
-          case MainToolbarEntry.ProfilePageHistory:
-            return <HistoryArea cardsData={[]} />;
-          default:
-            return <ReviewsArea />;
-        }
-      })()}
-    </styled.ContentWrapper>
+      <styled.ContentWrapper>
+        <styled.TitleWrapper id='ProfileTitle'>Мой профиль</styled.TitleWrapper>
+        <ProfileHead profileInfo={props.currentProfileInfo} />
+        {(() => {
+          switch (props.currentMainToolbarEntry) {
+            case MainToolbarEntry.ProfilePageAboutMe:
+              return <AboutArea />;
+            case MainToolbarEntry.ProfilePageHistory:
+              return <HistoryArea cardsData={[]} />;
+            default:
+              return <ReviewsArea />;
+          }
+        })()}
+      </styled.ContentWrapper>
 
-    <Footer />
-  </styled.Wrapper>
-);
+      <Footer />
+    </styled.Wrapper>
+  );
+}
 
 export default connect(mapStateToProps)(OwnProfilePage);
