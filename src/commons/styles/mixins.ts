@@ -142,6 +142,7 @@ const mixins = {
 const extendedMixins = {
   ...mixins,
   prepared: {
+    DefaultImage: styled.img``,
     DefaultInput: styled.input`${mixins.DefaultInput};`,
     DefaultSpan: styled.span``,
     DefaultWrapper: styled.div``,

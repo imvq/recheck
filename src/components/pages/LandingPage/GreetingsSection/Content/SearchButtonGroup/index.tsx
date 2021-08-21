@@ -49,7 +49,7 @@ function SearchButtonGroup(props: types.IProps) {
 
   return (
     <styled.Wrapper onClick={getMainHandler()}>
-      <styled.SearchButton onClick={props.onClick} />
+      <styled.SearchButton />
       <styled.ImagesWrapper>
         <styled.Line />
         <styled.Rocket />

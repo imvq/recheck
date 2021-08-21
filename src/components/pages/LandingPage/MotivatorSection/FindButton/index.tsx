@@ -1,10 +1,12 @@
-import { memo } from 'react';
+import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { AppState, setPageLocked, setIsSearchPopupVisible, setIsLoginPopupVisible } from 'store';
-import FindCandidateBtn from 'assets/images/pages/LandingPage/MotivatorSection/FindCandidateBtn.svg';
+import controlledHistory from 'commons/utils/routing';
+import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
+import FindCandidateSvg from 'assets/images/pages/LandingPage/MotivatorSection/FindCandidateBtn.svg';
 
 import * as types from './types';
+import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.auth.isAuthorized
@@ -12,26 +14,47 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 
 const mapDispatchToProps: types.IDispatchProps = {
   lockPage: setPageLocked,
-  setIsSearchPopupVisible,
   setIsLoginPopupVisible
 };
 
 /**
  * Button to redirect to search page from the bottom landing page section.
  */
-const FindButton = (props: types.IProps) => (
-  <img
-    role='none'
-    src={FindCandidateBtn}
-    alt=''
-    onClick={
-      props.isAuthorized === null
-        ? props.lockPage
-        : props.isAuthorized
-          ? () => props.setIsSearchPopupVisible(true)
-          : () => props.setIsLoginPopupVisible(true)
+function FindButton(props: types.IProps) {
+  const [isClickRequested, setIsClickRequested] = useState(false);
+
+  useEffect(() => {
+    if (isClickRequested) {
+      const pendingFinishedCallback = getPendingFinishedCallback();
+      pendingFinishedCallback();
     }
-  />
-);
+  }, [props.isAuthorized]);
+
+  const onClickWhilePending = () => {
+    props.lockPage();
+    setIsClickRequested(true);
+  };
+
+  const getPendingFinishedCallback = () => {
+    return props.isAuthorized
+      ? () => controlledHistory.push('/search')
+      : () => props.setIsLoginPopupVisible(true);
+  };
+
+  const getMainHandler = () => (
+    props.isAuthorized === null
+      ? onClickWhilePending
+      : getPendingFinishedCallback()
+  );
+
+  return (
+    <styled.Wrapper
+      role='none'
+      src={FindCandidateSvg}
+      alt=''
+      onClick={getMainHandler()}
+    />
+  );
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(FindButton));

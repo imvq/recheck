@@ -8,7 +8,6 @@ export interface IStateProps {
 
 export interface IDispatchProps {
   lockPage(): void;
-  setIsSearchPopupVisible(flag: boolean): void;
   setIsLoginPopupVisible(flag: boolean): void;
 }
 
