@@ -26,7 +26,7 @@ const OwnProfilePage = (props: types.IProps) => (
     <styled.AdaptedHeader />
 
     <styled.ContentWrapper>
-      <styled.TitleWrapper>Мой профиль</styled.TitleWrapper>
+      <styled.TitleWrapper id='ProfileTitle'>Мой профиль</styled.TitleWrapper>
       <ProfileHead profileInfo={props.currentProfileInfo} />
       {(() => {
         switch (props.currentMainToolbarEntry) {

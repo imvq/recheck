@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 import { PaginationDirection } from 'commons/utils/enums';
 import PaginationButton from './PaginationButton';
@@ -6,10 +6,7 @@ import PaginationButton from './PaginationButton';
 import * as types from './types';
 import * as styled from './styled';
 
-/**
- * Pagination.
- */
-export default (props: types.IProps) => {
+function Pagination(props: types.IProps) {
   const pageButtons = [] as JSX.Element[];
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -64,4 +61,6 @@ export default (props: types.IProps) => {
   );
 
   return <styled.Wrapper>{pageButtons}</styled.Wrapper>;
-};
+}
+
+export default memo(Pagination);

@@ -17,7 +17,7 @@ const mapDispatchToProps: types.IDispatchProps = {
 /**
  * Menu with tabs to control the page content area.
  */
-const Menu = (props: types.IProps) => {
+function ProfileHead(props: types.IProps) {
   // Company and position.
   const Infoblock = (
     <>
@@ -73,6 +73,6 @@ const Menu = (props: types.IProps) => {
       </styled.Menu>
     </styled.Wrapper>
   );
-};
+}
 
-export default connect(null, mapDispatchToProps)(memo(Menu));
+export default connect(null, mapDispatchToProps)(memo(ProfileHead));
