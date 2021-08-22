@@ -2,8 +2,7 @@ import { toast } from 'react-toastify';
 
 import * as apiResponses from 'commons/types/apiResponses';
 import * as generalTypes from 'commons/types/general';
-import { ScreenBreakpoint } from 'commons/types/unions';
-import { ToastVariants } from 'commons/utils/enums';
+import { ScreenBreakpoint, toastVariants } from 'commons/types/unions';
 import { IReviewCardCommonData } from 'commons/types/general/basic';
 import { cookieManager, cookiesList } from 'commons/utils/cookies';
 
@@ -111,7 +110,7 @@ export function mapReviewToArray(from: IReviewCardCommonData) {
 /**
  * Show notification toast.
  */
-export function showToast(text: string, variant = ToastVariants.Success) {
+export function showToast(text: string, variant = toastVariants.Success) {
   return toast.dark(text, {
     position: 'bottom-left',
     style: {

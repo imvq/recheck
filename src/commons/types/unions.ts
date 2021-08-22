@@ -1,4 +1,8 @@
 /**
+ * App-wide union types to be used as enumerations.
+ */
+
+/**
  * Placeholders for pagination page buttons.
  */
 export const paginationDirections = {
@@ -24,3 +28,13 @@ export const screenBreakpoints = {
 } as const;
 
 export type ScreenBreakpoint = typeof screenBreakpoints[keyof typeof screenBreakpoints];
+
+/**
+ * Color variants for toasts.
+ */
+export const toastVariants = {
+  Success: '#33c7ba',
+  Alert: '#dc3545'
+};
+
+export type ToastVariant = typeof toastVariants[keyof typeof toastVariants];

@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import ApiClient from 'commons/externals/ApiClient';
-import { ToastVariants } from 'commons/utils/enums';
 import controlledHistory from 'commons/utils/routing';
+import { toastVariants } from 'commons/types/unions';
 import { showToast } from 'commons/utils/functions';
 import { AppState, setPageLocked, setPageUnlocked } from 'store';
+
 import PersonCard from 'components/shared/PersonCard';
 import NoColleaguesView from './NoColleaguesView';
 
@@ -32,7 +33,7 @@ export const ColleaguesView = (props: types.IProps) => {
         if (checkData.data.success) {
           controlledHistory.push(`/review/${targetShareableId}`);
         } else {
-          showToast('Вы уже оставляли отзыв на этого пользователя.', ToastVariants.Alert);
+          showToast('Вы уже оставляли отзыв на этого пользователя.', toastVariants.Alert);
         }
       }).finally(() => props.unlockPage());
   };
