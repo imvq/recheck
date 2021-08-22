@@ -1,6 +1,6 @@
 import { memo, useState } from 'react';
 
-import { PaginationDirection } from 'commons/utils/enums';
+import { paginationDirections } from 'commons/types/unions';
 import PaginationButton from './PaginationButton';
 
 import * as types from './types';
@@ -26,9 +26,9 @@ function Pagination(props: types.IProps) {
   };
 
   pageButtons.push(
-    <styled.ButtonWrapper key={PaginationDirection.Prev}>
+    <styled.ButtonWrapper key={paginationDirections.Prev}>
       <PaginationButton
-        page={PaginationDirection.Prev}
+        page={paginationDirections.Prev}
         callback={onPrevExtended}
         isEnabled={currentPage > 1}
         isCurrent={false}
@@ -50,9 +50,9 @@ function Pagination(props: types.IProps) {
   }
 
   pageButtons.push(
-    <styled.ButtonWrapper key={PaginationDirection.Next}>
+    <styled.ButtonWrapper key={paginationDirections.Next}>
       <PaginationButton
-        page={PaginationDirection.Next}
+        page={paginationDirections.Next}
         callback={onNextExtended}
         isEnabled={currentPage < props.nPages}
         isCurrent={false}

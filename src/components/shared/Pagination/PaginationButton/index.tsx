@@ -1,17 +1,18 @@
+import { memo } from 'react';
 import { Link as ScrollLink } from 'react-scroll';
 
 import { ReactComponent as ArrowRightSvg } from 'assets/images/shared/Pagination/ArrowRight.svg';
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/shared/Pagination/ArrowLeft.svg';
-import { PaginationDirection } from 'commons/utils/enums';
+import { PaginationDirection, paginationDirections } from 'commons/types/unions';
 
 import * as types from './types';
 import * as styled from './styled';
 
-const isArrowRight = (page: number | PaginationDirection) => page === PaginationDirection.Next;
-const isArrowLeft = (page: number | PaginationDirection) => page === PaginationDirection.Prev;
+const isArrowPrev = (page: number | PaginationDirection) => page === paginationDirections.Prev;
+const isArrowNext = (page: number | PaginationDirection) => page === paginationDirections.Next;
 
-export default (props: types.IProps) => {
-  if (isArrowLeft(props.page)) {
+function PaginationButton(props: types.IProps) {
+  if (isArrowPrev(props.page)) {
     return (
       <ScrollLink to='ProfileTitle' smooth duration={300}>
         <styled.ArrowLeftWrapper isEnabled={props.isEnabled}>
@@ -21,7 +22,7 @@ export default (props: types.IProps) => {
     );
   }
 
-  if (isArrowRight(props.page)) {
+  if (isArrowNext(props.page)) {
     return (
       <ScrollLink to='ProfileTitle' smooth duration={300}>
         <styled.ArrowRightWrapper isEnabled={props.isEnabled}>
@@ -43,4 +44,6 @@ export default (props: types.IProps) => {
       </styled.NumberWrapper>
     </ScrollLink>
   );
-};
+}
+
+export default memo(PaginationButton);

@@ -13,14 +13,6 @@ export enum MainToolbarEntry {
 }
 
 /**
- * Placeholders for pagination page buttons.
- */
-export enum PaginationDirection {
-  Prev = -1,
-  Next
-}
-
-/**
  * Represents width of the screen.
  * Is to be used in style mixins.
  * Values are essential.
