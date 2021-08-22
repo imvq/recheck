@@ -1,24 +1,10 @@
 import { toast } from 'react-toastify';
 
-import * as apiResponses from 'commons/types/apiResponses';
+import * as apiResponses from 'commons/types/responses';
 import * as generalTypes from 'commons/types/general';
 import { ScreenBreakpoint, toastVariants } from 'commons/types/unions';
 import { IReviewCardCommonData } from 'commons/types/general/basic';
 import { cookieManager, cookiesList } from 'commons/utils/cookies';
-
-/**
- * Generate list with n values down starting from a certain value.
- */
-export function getNValuesDown(from : number, n: number): number[] {
-  return Array.from({ length: n }, (_, i) => from - i);
-}
-
-/**
- * Partially applied onChange input event.
- */
-export function inputHandler(event: generalTypes.IInputEvent, setter: (value: string) => void) {
-  setter(event.target.value);
-}
 
 /**
  * Validate email address.

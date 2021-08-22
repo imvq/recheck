@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
-import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
+
 import { ReactComponent as SearchButtonSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/Search.svg';
 import { ReactComponent as RocketLineSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/RocketLine.svg';
 import { ReactComponent as RocketSvg } from 'assets/images/pages//LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/Rocket.svg';
+import { screenBreakpoints } from 'commons/types/unions';
+import { respond } from 'commons/utils/functions';
 
 export const Wrapper = styled.div`
   position: relative;

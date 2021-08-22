@@ -1,7 +1,3 @@
-export interface IOwnProps {
-  onClick?: (...args: any[]) => void;
-}
-
 export interface IStateProps {
   isAuthorized: boolean | null;
 }
@@ -11,4 +7,4 @@ export interface IDispatchProps {
   setIsLoginPopupVisible(flag: boolean): void;
 }
 
-export type IProps = IOwnProps & IStateProps & IDispatchProps;
+export type IProps = IStateProps & IDispatchProps;

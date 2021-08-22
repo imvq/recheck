@@ -1,11 +1,11 @@
-import * as generalTypes from 'commons/types/general';
+import { IReviewCardLeftData } from 'commons/types/general';
 
 export interface IStateProps {
   currentPorfileId: string;
   isAuthorized: boolean | null;
   isLoading: boolean;
   reviewsLeftChunksAmount: number;
-  currentReviewCardData: generalTypes.IReviewCardLeftData | null;
+  currentReviewCardData: IReviewCardLeftData | null;
 }
 
 export interface IDispatchProps {

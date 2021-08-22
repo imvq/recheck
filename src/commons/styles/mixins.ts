@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
+
 import cssVarsCommon from './cssVars';
 
 /**
@@ -144,6 +145,7 @@ const extendedMixins = {
   prepared: {
     DefaultImage: styled.img``,
     DefaultInput: styled.input`${mixins.DefaultInput};`,
+    DefaultParagraph: styled.p``,
     DefaultSpan: styled.span``,
     DefaultWrapper: styled.div``,
     HTWLeftOrientedCentralizedBox: styled.div`${mixins.HTWLeftOrientedCentralizedBox}`,

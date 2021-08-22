@@ -1,9 +1,10 @@
 import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import controlledHistory from 'commons/utils/routing';
-import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 import FindCandidateSvg from 'assets/images/pages/LandingPage/MotivatorSection/FindCandidateBtn.svg';
+import controlledHistory from 'commons/utils/routing';
+
+import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 
 import * as types from './types';
 import * as styled from './styled';

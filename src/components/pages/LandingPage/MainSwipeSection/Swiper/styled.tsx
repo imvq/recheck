@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 import animations from 'commons/styles/animations';
 import cssVars from 'commons/styles/cssVars';
+
 import { ReactComponent as ArrowLeftSvg } from 'assets/images/pages/LandingPage/MainSwipeSection/ArrowLeft.svg';
 import { ReactComponent as ArrowRightSvg } from 'assets/images/pages/LandingPage/MainSwipeSection/ArrowRight.svg';
 

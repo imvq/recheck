@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { Link as ScrollLink } from 'react-scroll';
 
+import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
+
 import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
+
 import Logo from 'components/shared/Logo';
-import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
 
 export const Wrapper = styled.div`
   grid-area: Footer;

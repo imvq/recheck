@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 
 import { AppState, loadAboutTabData, loadNthReviewGot } from 'store';
 import { showToast } from 'commons/utils/functions';
+
 import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';
 import ReviewCard from 'components/shared/ReviewCard';
@@ -31,7 +32,7 @@ function copyLink(awaiterId: string) {
 /**
  * Section with user's reviews.
  */
-const AboutArea = (props: types.IProps) => {
+function AboutArea(props: types.IProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -105,6 +106,6 @@ const AboutArea = (props: types.IProps) => {
       <ToastContainer />
     </styled.Wrapper>
   );
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(AboutArea);

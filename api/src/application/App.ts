@@ -14,8 +14,8 @@ import express, {
   NextFunction
 } from 'express';
 
-import * as constants from '@common/constants';
-import * as computed from '@common/computed';
+import * as constants from '@commons/constants';
+import * as computed from '@commons/computed';
 import * as generalTypes from '@typing/general';
 import utils from '@utils';
 

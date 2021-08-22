@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import BackgroundSvgPath from 'assets/images/common/Background1.png';
-import Header from 'components/shared/Header';
+import BackgroundSvgPath from 'assets/images/common/BackgroundDefault.png';
 import Footer from 'components/shared/Footer';
+import Header from 'components/shared/Header';
 import MainToolbar from 'components/shared/MainToolbar';
 
 export const Wrapper = styled.div`

@@ -3,7 +3,7 @@ import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-face
 import ApiClient from 'commons/externals/ApiClient';
 import * as constants from 'commons/utils/constants';
 import controlledHistory from 'commons/utils/routing';
-import * as apiResponses from 'commons/types/apiResponses';
+import * as apiResponses from 'commons/types/responses';
 import * as generalTypes from 'commons/types/general';
 import { mapProfileDtoToState } from 'commons/utils/functions';
 import { cookieManager, cookiesList } from 'commons/utils/cookies';

@@ -1,7 +1,7 @@
-import * as generalTypes from 'commons/types/general';
+import { IPreviousSearchCardData } from 'commons/types/general';
 
 export interface IOwnProps {
-  cardsData: generalTypes.IPreviousSearchCardData[];
+  cardsData: IPreviousSearchCardData[];
 }
 
 export type IProps = IOwnProps;

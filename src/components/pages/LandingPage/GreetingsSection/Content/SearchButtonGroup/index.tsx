@@ -2,6 +2,7 @@ import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import controlledHistory from 'commons/utils/routing';
+
 import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 
 import * as types from './types';

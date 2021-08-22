@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import controlledHistory from 'commons/utils/routing';
+
 import { useQuery } from 'commons/utils/hooks';
 import { AppState, setIsLoginPopupVisible, setReferral, setAwaiter } from 'store';
-import controlledHistory from 'commons/utils/routing';
+
 import CookiePopup from 'components/shared/CookiePopup';
 import AuthPopupManager from 'components/shared/AuthPopupManager';
+
+import Footer from './Footer';
 import GreetingsSection from './GreetingsSection';
 import HowToWorkSection from './HowToWorkSection';
 import InfoblockSection from './InfoblockSection';
 import MainSwipeSection from './MainSwipeSection';
 import MotivatorSection from './MotivatorSection';
-import Footer from './Footer';
 
 import * as types from './types';
 import * as styled from './styled';

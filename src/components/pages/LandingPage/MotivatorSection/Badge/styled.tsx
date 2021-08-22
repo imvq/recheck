@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
+import mixins from 'commons/styles/mixins';
 
 const cssVarsLocal = {
   colorBackground: '#cad0eb',
@@ -49,4 +50,4 @@ export const ParagraphWrapper = styled.div`
   line-height: 1.6rem;
 `;
 
-export const Paragraph = styled.p``;
+export const Paragraph = mixins.prepared.DefaultParagraph;

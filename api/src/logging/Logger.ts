@@ -1,7 +1,7 @@
 import { appendFile, writeFile } from 'fs';
 import chalk from 'chalk';
 
-import * as computed from '@common/computed';
+import * as computed from '@commons/computed';
 import utils from '@utils';
 import ILogger from './ILogger';
 

@@ -1,9 +1,9 @@
 import { memo } from 'react';
 
-import TitleView from './TitleView';
-import InfoTimeSave from './InfoTimeSave';
 import InfoEasement from './InfoEasement';
+import InfoTimeSave from './InfoTimeSave';
 import InfoWarranty from './InfoWarranty';
+import TitleView from './TitleView';
 
 import * as styled from './styled';
 

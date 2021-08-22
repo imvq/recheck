@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
 import ContentPic from 'assets/images/pages/LandingPage/GreetingsSection/Content/ContentPic.svg';
+
 import SearchButtonGroup from './SearchButtonGroup';
 
 import * as styled from './styled';

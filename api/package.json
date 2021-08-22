@@ -18,7 +18,7 @@
   },
   "_moduleAliases": {
     "@application": "dist/application",
-    "@common": "dist/common",
+    "@commons": "dist/commons",
     "@config": "dist/config",
     "@controllers": "dist/controllers",
     "@database": "dist/database",

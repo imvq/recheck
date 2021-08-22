@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
 
+import MotivatorBackground from 'assets/images/pages/LandingPage/MotivatorSection/Background.png';
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
+
 import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
-import MotivatorBackground from 'assets/images/pages/LandingPage/MotivatorSection/Background.png';
 
 const mixinsLocal = {
   MotivatorBadgeAdapted: css`
@@ -108,4 +109,25 @@ export const ButtonWrapper = styled.div`
     padding-left: 0;
     padding-right: 6.5rem;
   }
+`;
+
+export const TitleWrapper = styled.div`
+  grid-area: TitleView;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+`;
+
+export const TextWrapper = styled.div`
+  margin-top: 1rem;
+
+  ${respond(screenBreakpoints.XS)} {
+    margin-top: 5rem;
+  }
+`;
+
+export const TitleText = styled.span`
+  font-weight: 600;
+  font-size: 2.536rem;
 `;

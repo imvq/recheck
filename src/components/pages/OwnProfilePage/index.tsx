@@ -1,12 +1,14 @@
 import { connect } from 'react-redux';
 
-import { AppState } from 'store';
 import { MainToolbarEntry } from 'commons/utils/enums';
+import { AppState } from 'store';
+
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
-import ReviewsArea from './ReviewsArea';
-import HistoryArea from './HistoryArea';
+
 import AboutArea from './AboutArea';
+import HistoryArea from './HistoryArea';
+import ReviewsArea from './ReviewsArea';
 
 import * as types from './types';
 import * as styled from './styled';

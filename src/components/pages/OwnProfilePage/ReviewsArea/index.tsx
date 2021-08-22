@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, loadReviewsTabData, loadNthReviewLeft } from 'store';
+
 import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';
 import ReviewCard from 'components/shared/ReviewCard';
@@ -25,7 +26,7 @@ const mapDispatchToProps: types.IDispatchProps = {
 /**
  * Section with user's reviews.
  */
-const ReviewsArea = (props: types.IProps) => {
+function ReviewsArea(props: types.IProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -34,30 +35,34 @@ const ReviewsArea = (props: types.IProps) => {
     }
   }, [props.isAuthorized]);
 
+  const Results = (
+    <styled.TitleWrapper>
+      {props.isLoading
+        ? <styled.Title isHighlighted>Загрузка...</styled.Title>
+        : props.currentReviewCardData
+          ? <ReviewCard showTarget reviewCardData={props.currentReviewCardData} />
+          : <styled.Title isHighlighted>Оставьте свой первый отзыв!</styled.Title>}
+    </styled.TitleWrapper>
+  );
+
+  const NoResults = (
+    <>
+      <CustomButton isDisabled={false}>Написать отзыв</CustomButton>
+      <styled.TitleWrapper isReduced>
+        <styled.Title isReduced>
+          *За каждый оставленный вами отзыв вы получаете +1 поиск отзыва бесплатно
+        </styled.Title>
+      </styled.TitleWrapper>
+    </>
+  );
+
   return (
     <styled.Wrapper>
-      <styled.TitleWrapper>
-        {props.isLoading
-          ? <styled.Title isHighlighted>Загрузка...</styled.Title>
-          : props.currentReviewCardData
-            ? <ReviewCard showTarget reviewCardData={props.currentReviewCardData} />
-            : <styled.Title isHighlighted>Оставьте свой первый отзыв!</styled.Title>}
-      </styled.TitleWrapper>
+      {Results}
 
-      {!props.currentReviewCardData
-        ? (
-          <>
-            <CustomButton isDisabled={false}>Написать отзыв</CustomButton>
-            <styled.TitleWrapper isReduced>
-              <styled.Title isReduced>
-                *За каждый оставленный вами отзыв вы получаете +1 поиск отзыва бесплатно
-              </styled.Title>
-            </styled.TitleWrapper>
-          </>
-        )
-        : null}
+      {!props.currentReviewCardData && NoResults}
 
-      {props.reviewsLeftChunksAmount ? (
+      {props.reviewsLeftChunksAmount && (
         <Pagination
           nPages={props.reviewsLeftChunksAmount}
           onNextClick={() => {
@@ -73,9 +78,9 @@ const ReviewsArea = (props: types.IProps) => {
             setCurrentIndex(currentIndex - 1);
           }}
         />
-      ) : null}
+      )}
     </styled.Wrapper>
   );
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ReviewsArea);

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
+import RectUpper from 'assets/images/pages/LandingPage/GreetingsSection/RectUpper.svg';
+
 import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
-import RectUpper from 'assets/images/pages/LandingPage/GreetingsSection/RectUpper.svg';
 
 export const Wrapper = styled.div`
   width: 100%;

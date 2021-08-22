@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { AxiosResponse } from 'axios';
 
-import * as apiResponsesBasic from 'commons/types/apiResponses/basic';
+import * as apiResponsesBasic from 'commons/types/responses/basic';
 import ApiClient from 'commons/externals/ApiClient';
 import controlledHistory from 'commons/utils/routing';
 import { mapProfileDtoToState } from 'commons/utils/functions';

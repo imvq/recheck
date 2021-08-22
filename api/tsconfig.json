@@ -25,8 +25,8 @@
       "@application": [
         "src/application"
       ],
-      "@common/*": [
-        "src/common/*"
+      "@commons/*": [
+        "src/commons/*"
       ],
       "@config/*": [
         "src/config/*"

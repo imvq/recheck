@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
-import PictureSvg from 'assets/images/pages/LandingPage/HowToWorkSection/StepThird/Pic.svg';
-import ParagraphBackgroundSvg from 'assets/images/pages/LandingPage/HowToWorkSection/StepThird/StepThirdTextBck.svg';
+import ParagraphBackgroundSvg from 'assets/images/pages/LandingPage/HowToWorkSection/StepThird/ParagraphBackground.svg';
+import PictureSvg from 'assets/images/pages/LandingPage/HowToWorkSection/StepThird/Picture.svg';
 
 import * as styled from './styled';
 

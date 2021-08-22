@@ -4,7 +4,7 @@
 
 import axios from 'axios';
 
-import * as apiResponses from '../types/apiResponses';
+import * as apiResponses from '../types/responses';
 import * as generalTypes from '../types/general';
 
 /**
@@ -62,17 +62,17 @@ export default class ApiClient {
   }
 
   public static quickSearchUser(tokens: string[])
-    : generalTypes.APIResponse<{ results: apiResponses.ISearchUserDto[]; }> {
+    : generalTypes.APIResponse<{ results: apiResponses.ISearchUserResponseDto[]; }> {
     return ApiClient.instance.post('/user/quick-search', { tokens });
   }
 
   public static searchUser(tokens: string[])
-    : generalTypes.APIResponse<{ results: apiResponses.ISearchUserDto[]; }> {
+    : generalTypes.APIResponse<{ results: apiResponses.ISearchUserResponseDto[]; }> {
     return ApiClient.instance.post('/user/search', { tokens });
   }
 
   public static searchUserByShareableId(shareableId: string)
-    : generalTypes.APIResponse<{ result: apiResponses.ISearchUserDto; }> {
+    : generalTypes.APIResponse<{ result: apiResponses.ISearchUserResponseDto; }> {
     return ApiClient.instance.post('/user/search/by/shareable-id', { shareableId });
   }
 

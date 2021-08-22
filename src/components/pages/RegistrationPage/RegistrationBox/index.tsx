@@ -1,35 +1,18 @@
 import { useState, useRef, memo } from 'react';
 import { connect } from 'react-redux';
 
-import * as generalTypes from 'commons/types/general';
 import ApiClient from 'commons/externals/ApiClient';
+
+import { isValidEmail as validateEmail } from 'commons/utils/functions';
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
-import { inputHandler, isValidEmail as validateEmail, getNValuesDown } from 'commons/utils/functions';
+
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
 import DropList from 'components/shared/DropList';
 
+import * as misc from './misc';
 import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
-import { mapCompaniesDataToOptions } from './functions';
-
-const months: generalTypes.IOptionType[] = [
-  { key: 0, text: 'Январь' },
-  { key: 1, text: 'Февраль' },
-  { key: 2, text: 'Март' },
-  { key: 3, text: 'Апрель' },
-  { key: 4, text: 'Май' },
-  { key: 5, text: 'Июнь' },
-  { key: 6, text: 'Июль' },
-  { key: 7, text: 'Август' },
-  { key: 8, text: 'Сентябрь' },
-  { key: 9, text: 'Октябрь' },
-  { key: 10, text: 'Ноябрь' },
-  { key: 11, text: 'Декабрь' },
-];
-
-const years = getNValuesDown(new Date().getFullYear(), 50)
-  .map((value, index) => ({ key: index, text: value.toString() }));
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
@@ -42,7 +25,7 @@ const mapDispatchToProps: types.IDispatchProps = {
   clearMatchedCompanies
 };
 
-const RegistrationBox = (props: types.IProps) => {
+function RegistrationBox(props: types.IProps) {
   const [company, setCompany] = useState({ id: -1, name: '' });
   const [position, setPosition] = useState('');
   const [workStartMonth, setWorkStartMonth] = useState(-1);
@@ -64,7 +47,7 @@ const RegistrationBox = (props: types.IProps) => {
   // To avoid this we need to store actual email data value using reference.
   const latestEmailState = useRef(emailState);
 
-  const recalculateEmailErrorState = () => {
+  function recalculateEmailErrorState() {
     setEmailState(() => {
       const updatedEmailState = {
         ...emailState,
@@ -75,6 +58,7 @@ const RegistrationBox = (props: types.IProps) => {
       };
 
       latestEmailState.current = updatedEmailState;
+
       return updatedEmailState;
     });
 
@@ -87,37 +71,10 @@ const RegistrationBox = (props: types.IProps) => {
         ...latestEmailState.current,
         isEmailAvailabilityErrorVisible: true
       }));
-  };
+  }
 
-  const findCompanyMatches = (sequence: string) => {
-    props.loadMatchedCompanies(sequence);
-  };
-
-  const setCompanyName = (name: string) => setCompany({ id: -1, name });
-
-  const companyNameHandler = (event: generalTypes.IInputEvent) => inputHandler(
-    event,
-    setCompanyName
-  );
-
-  const positionHandler = (event: generalTypes.IInputEvent) => inputHandler(
-    event,
-    setPosition
-  );
-
-  const monthHandler = (option: generalTypes.IOptionType) => setWorkStartMonth(option.key);
-  const yearHandler = (option: generalTypes.IOptionType) => setWorkStartYear(
-    Number.parseInt(option.text, 10)
-  );
-
-  const canProceed = () => emailState.isEmailValid
-    && !emailState.isEmailAvailabilityErrorVisible
-    && emailState.isEmailAvailabilityErrorVisible !== null
-    && !!company && !!position
-    && workStartMonth > -1 && workStartYear > -1;
-
-  const proceedIfAllowed = () => {
-    if (canProceed()) {
+  function proceedIfAllowed() {
+    if (misc.canProceed(emailState, company, position, workStartMonth, workStartYear)) {
       props.onProceed({
         profileId: props.currentProfileInfo.currentId,
         name: props.currentProfileInfo.currentName,
@@ -130,102 +87,126 @@ const RegistrationBox = (props: types.IProps) => {
         referral: props.referral
       });
     }
-  };
+  }
+
+  // Email input filed with space reserved for displaying email errors.
+  const EmailSection = (
+    <styled.InputGroupWrapper>
+      <styled.InputDescriptionWrapper>
+        <styled.InputDescription>Рабочий email:</styled.InputDescription>
+      </styled.InputDescriptionWrapper>
+
+      <styled.Input
+        type='text'
+        onBlur={recalculateEmailErrorState}
+        onChange={event => misc.emailHandler(event, setEmailState)}
+      />
+
+      {emailState.isEmailValidationErrorVisible
+          && (<styled.TextAlert isHighlighted>Некорректный почтовый адрес</styled.TextAlert>)}
+      {emailState.isEmailAvailabilityErrorVisible
+          && (<styled.TextAlert isHighlighted>Этот почтовый адрес уже занят</styled.TextAlert>)}
+    </styled.InputGroupWrapper>
+  );
+
+  // Field where users can type name of their company.
+  const CompaniesInput = (
+    <styled.Input
+      type='text'
+      autoComplete='on'
+      value={company.name}
+      onChange={event => misc.companySelectorHandler(
+        event,
+        setCompany,
+        props.loadMatchedCompanies,
+        props.clearMatchedCompanies
+      )}
+    />
+  );
+
+  // Companies with matched names.
+  const MatchedCompanies = (
+    <DropList
+      options={misc.mapCompaniesDataToOptions(props.matchedCompanies)}
+      onClose={props.clearMatchedCompanies}
+      onOptionSelected={selected => {
+        setCompany({ id: selected.key, name: selected.text });
+        props.clearMatchedCompanies();
+      }}
+    />
+  );
+
+  // Finalization button.
+  const ProceedButton = (
+    <styled.ButtonGroupWrapper>
+      <CustomButton
+        isDisabled={!misc.canProceed(emailState, company, position, workStartMonth, workStartYear)}
+        onClick={proceedIfAllowed}
+      >
+        Продолжить
+      </CustomButton>
+    </styled.ButtonGroupWrapper>
+  );
+
+  // Companies input field and space reserved for companies dropping list.
+  const CompaniesSection = (
+    <styled.InputGroupWrapper>
+      <styled.InputDescriptionWrapper>
+        <styled.InputDescription>
+          Название компании, где вы работаете:
+        </styled.InputDescription>
+      </styled.InputDescriptionWrapper>
+
+      <styled.InputWithOptionsWrapper>
+        {CompaniesInput}
+        {props.matchedCompanies.length > 0 && MatchedCompanies}
+      </styled.InputWithOptionsWrapper>
+    </styled.InputGroupWrapper>
+  );
+
+  const PositionSection = (
+    <styled.InputGroupWrapper>
+      <styled.InputDescriptionWrapper>
+        <styled.InputDescription>Ваша должность:</styled.InputDescription>
+      </styled.InputDescriptionWrapper>
+      <styled.Input type='text' onChange={event => misc.positionHandler(event, setPosition)} />
+    </styled.InputGroupWrapper>
+  );
+
+  const DatePickers = (
+    <styled.InputGroupWrapper>
+      <styled.InputDescriptionWrapper>
+        <styled.InputDescription>Дата начала работы:</styled.InputDescription>
+      </styled.InputDescriptionWrapper>
+      <styled.InputRowWrapper>
+        <CustomSelect
+          width='49%'
+          options={misc.months}
+          placeholder='Месяц'
+          onNewOptionSelected={option => misc.monthHandler(option, setWorkStartMonth)}
+        />
+        <CustomSelect
+          width='49%'
+          options={misc.years}
+          placeholder='Год'
+          onNewOptionSelected={option => misc.yearHandler(option, setWorkStartYear)}
+        />
+      </styled.InputRowWrapper>
+    </styled.InputGroupWrapper>
+  );
 
   return (
     <styled.BoxBaseWrapper>
-      <styled.InputGroupWrapper>
-        <styled.InputDescriptionWrapper>
-          <styled.InputDescription>Рабочий email:</styled.InputDescription>
-        </styled.InputDescriptionWrapper>
-        <styled.Input
-          type='text'
-          onBlur={recalculateEmailErrorState}
-          onChange={(event) => {
-            setEmailState({
-              email: event.target.value,
-              isEmailValid: validateEmail(event.target.value),
-              isEmailValidationErrorVisible: false,
-              isEmailAvailabilityErrorVisible: false
-            });
-          }}
-        />
-
-        {emailState.isEmailValidationErrorVisible
-          && (<styled.TextAlert isHighlighted>Некорректный почтовый адрес</styled.TextAlert>)}
-        {emailState.isEmailAvailabilityErrorVisible
-          && (<styled.TextAlert isHighlighted>Этот почтовый адрес уже занят</styled.TextAlert>)}
-      </styled.InputGroupWrapper>
-
-      <styled.InputGroupWrapper>
-        <styled.InputDescriptionWrapper>
-          <styled.InputDescription>Название компании, где вы работаете:</styled.InputDescription>
-        </styled.InputDescriptionWrapper>
-        <styled.InputWithOptionsWrapper>
-          <styled.Input
-            type='text'
-            onChange={(event: generalTypes.IInputEvent) => {
-              companyNameHandler(event);
-              if (event.target.value) {
-                findCompanyMatches(event.target.value);
-              } else {
-                props.clearMatchedCompanies();
-              }
-            }}
-            autoComplete='on'
-            value={company.name}
-          />
-
-          {/* Companies with matched names. */}
-          {props.matchedCompanies.length ? (
-            <DropList
-              options={mapCompaniesDataToOptions(props.matchedCompanies)}
-              onClose={props.clearMatchedCompanies}
-              onOptionSelected={selected => {
-                setCompany({ id: selected.key, name: selected.text });
-                props.clearMatchedCompanies();
-              }}
-            />
-          ) : null}
-        </styled.InputWithOptionsWrapper>
-      </styled.InputGroupWrapper>
-
-      <styled.InputGroupWrapper>
-        <styled.InputDescriptionWrapper>
-          <styled.InputDescription>Ваша должность:</styled.InputDescription>
-        </styled.InputDescriptionWrapper>
-        <styled.Input type='text' onChange={positionHandler} />
-      </styled.InputGroupWrapper>
-
-      <styled.InputGroupWrapper>
-        <styled.InputDescriptionWrapper>
-          <styled.InputDescription>Дата начала работы:</styled.InputDescription>
-        </styled.InputDescriptionWrapper>
-        <styled.InputRowWrapper>
-          <CustomSelect
-            width='49%'
-            options={months}
-            placeholder='Месяц'
-            onNewOptionSelected={monthHandler}
-          />
-          <CustomSelect
-            width='49%'
-            options={years}
-            placeholder='Год'
-            onNewOptionSelected={yearHandler}
-          />
-        </styled.InputRowWrapper>
-      </styled.InputGroupWrapper>
+      {EmailSection}
+      {CompaniesSection}
+      {PositionSection}
+      {DatePickers}
 
       <styled.TextAlert>Все поля обязательны к заполнению</styled.TextAlert>
 
-      <styled.ButtonGroupWrapper>
-        <CustomButton isDisabled={!canProceed()} onClick={proceedIfAllowed}>
-          Продолжить
-        </CustomButton>
-      </styled.ButtonGroupWrapper>
+      {ProceedButton}
     </styled.BoxBaseWrapper>
   );
-};
+}
 
-export default memo(connect(mapStateToProps, mapDispatchToProps)(RegistrationBox));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(RegistrationBox));

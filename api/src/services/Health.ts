@@ -1,4 +1,4 @@
-import * as constants from '@common/constants';
+import * as constants from '@commons/constants';
 import * as apiResponses from '@typing/apiResponses';
 
 /**

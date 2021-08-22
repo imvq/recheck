@@ -1,8 +1,8 @@
 import { Errors } from 'typescript-rest';
 import axios from 'axios';
 
-import * as constants from '@common/constants';
-import * as cookiesList from '@common/cookies';
+import * as constants from '@commons/constants';
+import * as cookiesList from '@commons/cookies';
 import * as generalTypes from '@typing/general';
 import * as apiResponses from '@typing/apiResponses';
 

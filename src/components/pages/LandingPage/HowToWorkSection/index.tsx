@@ -1,9 +1,9 @@
 import { memo } from 'react';
 
-import TitleView from './TitleView';
 import StepFirstView from './StepFirstView';
 import StepSecondView from './StepSecondView';
 import StepThirdView from './StepThirdView';
+import TitleView from './TitleView';
 
 import * as styled from './styled';
 

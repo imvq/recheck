@@ -54,6 +54,7 @@ rules:
       },
     ]
   prefer-destructuring: 0
+  radix: 0
   react/destructuring-assignment: 0
   react/jsx-filename-extension: [2, extensions: ['.js', '.jsx', '.ts', 'tsx']]
   react/jsx-props-no-spreading: 0

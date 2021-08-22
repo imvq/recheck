@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import ApiClient from 'commons/externals/ApiClient';
 import controlledHistory from 'commons/utils/routing';
@@ -10,8 +10,10 @@ import {
   setIsObservedPageLoading,
   setPageUnlocked
 } from 'store';
+
 import { ISearchProfileInfo } from 'commons/types/general';
 import { mapProfileInfoToIAppProfileInfoSlice as sliceProfileData } from 'commons/utils/functions';
+
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
 import Pagination from 'components/shared/Pagination';

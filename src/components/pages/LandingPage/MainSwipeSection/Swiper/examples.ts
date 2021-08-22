@@ -1,8 +1,8 @@
 import * as generalTypes from 'commons/types/general';
 
+import Andrey from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Andrey.png';
 import Natalie from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Natalie.png';
 import Oleg from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Oleg.png';
-import Andrey from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Andrey.png';
 
 const examples: generalTypes.IDemoReviewCardData[] = [
   {

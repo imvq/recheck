@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import animations from 'commons/styles/animations';
 import cssVars from 'commons/styles/cssVars';
+
 import { ReactComponent as CloseCross } from 'assets/images/common/CloseCross.svg';
 
 export const Wrapper = styled.div`

@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import Header from 'components/shared/Header';
 import MainToolbar from 'components/shared/MainToolbar';
 
-/**
- * Styled component for main profile page wrapper.
- */
 export const Wrapper = styled.div`
   height: 100%;
   display: grid;
@@ -22,9 +19,6 @@ export const TitleWrapper = styled.div`
   text-align: center;
 `;
 
-/**
- * Header with grid applied to.
- */
 export const AdaptedHeader = styled(Header)`
   grid-area: Header;
 `;

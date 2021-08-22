@@ -14,3 +14,19 @@ export const Wrapper = styled.div`
     display: none;
   }
 `;
+
+export const TitleOuterWrapper = styled.div`
+  grid-area: TitleView;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+`;
+
+export const TitleWrapper = styled.div`
+  margin-top: 1rem;
+`;
+
+export const TitleText = styled.span`
+  font-weight: 600;
+  font-size: 2.536rem;
+`;

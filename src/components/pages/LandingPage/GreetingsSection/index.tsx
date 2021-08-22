@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
-import Head from './Head';
 import Content from './Content';
+import Head from './Head';
 
 import * as styled from './styled';
 

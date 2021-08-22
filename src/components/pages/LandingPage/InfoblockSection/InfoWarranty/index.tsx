@@ -2,8 +2,8 @@ import { memo } from 'react';
 
 import InfoWarrantyBoardSvg from 'assets/images/pages/LandingPage/InfoblockSection/InfoWarrantyBoard.svg';
 
-import * as styledLocal from './styled';
 import * as styledBase from '../BaseSubsection/styled';
+import * as styledLocal from './styled';
 
 const styled = { ...styledLocal, ...styledBase };
 
