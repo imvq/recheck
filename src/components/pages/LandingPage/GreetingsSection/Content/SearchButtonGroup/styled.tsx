@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 import { ReactComponent as SearchButtonSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/Search.svg';
 import { ReactComponent as RocketLineSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/RocketLine.svg';
@@ -29,7 +29,7 @@ export const Line = styled(RocketLineSvg)`
   right: calc(${cssVars.greetingsViewContentActionGroupWidth} / 2 - 1rem);
   top: 2.5rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: none;
   }
 `;
@@ -41,7 +41,7 @@ export const Rocket = styled(RocketSvg)`
   width: 9.5rem;
   height: 9.2rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     position: static;
     width: 15rem;
     height: 15rem;

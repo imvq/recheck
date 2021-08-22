@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 import RectUpper from 'assets/images/pages/LandingPage/GreetingsSection/RectUpper.svg';
 
@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
     'Head'     8rem
     'Content'  45rem;
   
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     background-image: none;
     background-color: lighten(#e9edfb, 2);
 

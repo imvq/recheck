@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 
 export const Wrapper = styled.div`
@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
     'TitleView TitleView TitleView'          17.904rem
     'InfoTimeSave InfoEasement InfoWarranty' 35.785rem / 1fr 36.295rem 1fr;
   
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     grid-template:
       'TitleView'  12rem
       'InfoBlocks';
@@ -19,7 +19,7 @@ export const Wrapper = styled.div`
 export const SubsectionsWrapper = styled.div`
   display: none;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     grid-area: InfoBlocks;
     display: flex;
     flex-wrap: wrap;
@@ -29,7 +29,7 @@ export const SubsectionsWrapper = styled.div`
 `;
 
 export const InfoBlockDesktopOnlyWrapper = styled.div`
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: none;
   }
 `;

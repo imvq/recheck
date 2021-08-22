@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 
 export const Wrapper = styled.div`
@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
 export const TextWrapper = styled.div`
   margin-top: 11.309rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     margin-top: 5rem;
   }
 `;

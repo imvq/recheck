@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 
 export const Wrapper = styled.div`
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     background-color: ${cssVars.colorBackgroundRect};
   }
 `;
@@ -32,7 +32,7 @@ export const PictureWrapper = styled.div`
   margin-left: -3rem;
   margin-right: -12rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: none;
   }
 `;

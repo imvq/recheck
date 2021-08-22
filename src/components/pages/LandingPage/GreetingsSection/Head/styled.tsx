@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 
 const cssVarsLocal = {
@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
   grid-template:
     'LogoWrapper TabSection TelegramWrapper' 1fr / 1fr 30rem 1fr;
   
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: flex;
     justify-content: space-evenly;
     background-color: $color-background-default;
@@ -28,7 +28,7 @@ export const LogoWrapper = styled.div`
   align-items: center;
   margin-right: ${cssVars.greetingsViewHeadPaddingHorizontal};
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     margin: 0;
   }
 `;
@@ -40,7 +40,7 @@ export const TabsWrapper = styled.div`
   padding-top: .2rem;
   align-items: center;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: none;
   }
 `;
@@ -64,7 +64,7 @@ export const CabinetWrapper = styled.div`
     + ${cssVarsLocal.widthOffset}
   );
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     margin: 0;
   }
 `;

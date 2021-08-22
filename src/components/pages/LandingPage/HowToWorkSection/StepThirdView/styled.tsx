@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 
 export const Wrapper = styled.div`
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
   grid-area: StepThirdView;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     ${mixins.HTWBadge};
   }
 `;

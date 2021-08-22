@@ -2,13 +2,13 @@ import styled, { css } from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 import MotivatorBackground from 'assets/images/pages/LandingPage/MotivatorSection/Background.png';
 
 const mixinsLocal = {
   MotivatorBadgeAdapted: css`
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       position: static;
       margin-left: calc(-${cssVars.widthMotivatorBadge} / 2);
     }
@@ -27,7 +27,7 @@ export const Wrapper = styled.div`
     'TitleView' 14.5rem
     'FocusView' 1fr;
   
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     height: 80rem;
   }
 `;
@@ -51,7 +51,7 @@ export const AnchorSticky = styled(Anchor)`
   justify-content: center;
   align-items: center;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     width: unset;
     max-width: 100%;
   }
@@ -81,7 +81,7 @@ export const MotivatorBadgeWrapper = styled.div`
     left: 13rem;
   }
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     margin-bottom: 1rem;
   }
 `;
@@ -90,7 +90,7 @@ export const Image = styled.img`
   width: 42rem;
   padding-left: 10rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     padding-left: 0;
     max-width: 100%;
   }
@@ -104,7 +104,7 @@ export const ButtonWrapper = styled.div`
   width: 15rem;
   padding-left: 3.5rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     padding-left: 0;
     padding-right: 6.5rem;
   }

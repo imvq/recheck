@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 
 export const Wrapper = styled.div`
@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   display: grid;
   grid-template: 'Main Aux' 1fr / 1fr 1fr;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     ${mixins.HTWBadge};
 
     display: flex;
@@ -25,7 +25,7 @@ export const CentralizingBox = styled.div`
     display: flex;
     justify-content: flex-end;
 
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       width: 100%;
     }
   }
@@ -36,7 +36,7 @@ export const CentralizingBox = styled.div`
     display: flex;
     justify-content: flex-start;
 
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       display: none;
     }
   }

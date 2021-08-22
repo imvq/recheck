@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import cssVars from 'commons/styles/cssVars';
 import { respond } from 'commons/utils/functions';
 import Logo from 'components/shared/Logo';
@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
   background-color: #e1e6fb;
   border-top: 0.2rem solid #9ea9d1;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     height: 20rem;
     flex-direction: column;
   }
@@ -30,7 +30,7 @@ export const SectionWrapper = styled.div`
   padding-left: 1.5rem;
   padding-top: 3.5rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     width: 100%;
     flex-direction: row;
     justify-content: space-evenly;
@@ -40,13 +40,13 @@ export const SectionWrapper = styled.div`
     padding: 0;
     justify-content: center;
 
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       display: none;
     }
   }
 
   &:nth-child(2) {
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       text-decoration: underline;
     }
   }
@@ -55,13 +55,13 @@ export const SectionWrapper = styled.div`
 export const EmptyWrapper = styled.div`
   width: 6rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: none;
   }
 `;
 
 export const InnerLogo = styled(Logo)`
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: none;
   }
 `;
@@ -76,7 +76,7 @@ export const MenuEntryText = styled.span`
     text-decoration: underline;
   }
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     font-size: 1.5rem;
     font-weight: 800;
   }
@@ -90,7 +90,7 @@ export const MenuEntryTextMarked = styled(MenuEntryText)`
     cursor: default;
   }
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: none;
   }
 `;

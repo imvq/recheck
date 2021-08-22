@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 
 export const Wrapper = styled.div`
@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     background-color: #fbfbff;
   }
 `;
@@ -19,7 +19,7 @@ export const LoginBadgeWrapper = styled.div`
   padding: 0 5rem 0;
   align-items: center;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     margin: 0;
   }
 `;

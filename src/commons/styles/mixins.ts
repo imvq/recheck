@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 import cssVarsCommon from './cssVars';
 
@@ -58,7 +58,7 @@ const mixins = {
       display: flex;
       justify-content: flex-end;
 
-      ${respond(ScreenBreakpoint.XS)} {
+      ${respond(screenBreakpoints.XS)} {
         display: none;
       }
     }
@@ -68,7 +68,7 @@ const mixins = {
       grid-area: Main;
       display: flex;
 
-      ${respond(ScreenBreakpoint.XS)} {
+      ${respond(screenBreakpoints.XS)} {
         justify-content: center;
         width: 100%;
       }
@@ -78,7 +78,7 @@ const mixins = {
     display: grid;
     grid-template: 'Aux Main' 1fr / 1fr 1fr;
 
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       display: flex;
       align-items: center;
     }
@@ -87,7 +87,7 @@ const mixins = {
     position: absolute;
     z-index: 0;
 
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       display: none;
     }
   `,
@@ -96,7 +96,7 @@ const mixins = {
     display: flex;
     flex-direction: column;
 
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       position: static;
       align-items: center;
     }
@@ -115,7 +115,7 @@ const mixins = {
     max-width: 37.3rem;
     user-select: none;
 
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       text-align: center;
       max-width: initial;
     }
@@ -127,7 +127,7 @@ const mixins = {
     z-index: 1;
     user-select: none;
 
-    ${respond(ScreenBreakpoint.XS)} {
+    ${respond(screenBreakpoints.XS)} {
       text-align: center;
       max-width: initial;
     }

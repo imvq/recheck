@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import animations from 'commons/styles/animations';
 import cssVars from 'commons/styles/cssVars';
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 import { ReactComponent as CloseSvg } from 'assets/images/shared/CookiePopup/Close.svg';
 
@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
   box-sizing: border-box;
   padding: 1rem 5rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     background-color: white;
     box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.45);
     border: none;
@@ -57,7 +57,7 @@ export const SubsectionWrapper = styled.section`
 export const AdaptedImage = styled.img`
   height: 80%;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: none;
   }
 `;
@@ -67,7 +67,7 @@ export const TextWrapper = styled.div`
   font-size: 1.3rem;
   font-weight: 600;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     line-height: 1.7rem;
   }
 `;
@@ -87,7 +87,7 @@ export const LinkButton = styled.button`
   text-decoration: underline;
   color: ${cssVars.colorForegroundPickAux1};
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: none;
   }
 `;
@@ -96,7 +96,7 @@ export const CloseButtonWrapper = styled.div`
   display: none;
   margin-left: 1rem;
 
-  ${respond(ScreenBreakpoint.XS)} {
+  ${respond(screenBreakpoints.XS)} {
     display: unset;
     height: 90%;
   }

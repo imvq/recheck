@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { respondUp } from 'commons/utils/functions';
+import { screenBreakpoints } from 'commons/types/unions';
 import cssVars from 'commons/styles/cssVars';
 import BackgroundSvgPath from 'assets/images/common/Background1.png';
 import Header from 'components/shared/Header';
@@ -89,7 +90,7 @@ export const ExpandLabelWrapper = styled.div`
   box-sizing: border-box;
   padding: 0 2rem 0;
 
-  ${respondUp('2400px')} {
+  ${respondUp(screenBreakpoints.XXXXD)} {
     padding: initial;
     justify-content: center;
   }

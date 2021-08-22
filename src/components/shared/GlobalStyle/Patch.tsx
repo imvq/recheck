@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { ScreenBreakpoint } from 'commons/utils/enums';
+import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/functions';
 
 /**
@@ -18,27 +18,27 @@ export default createGlobalStyle`
   }
 
   :root {
-    ${respond(ScreenBreakpoint.XXXD)} {
+    ${respond(screenBreakpoints.XXXD)} {
       font-size: 0.9rem;
     }
 
-    ${respond(ScreenBreakpoint.XXD)} {
+    ${respond(screenBreakpoints.XXD)} {
       font-size: 0.83rem;
     }
 
-    ${respond(ScreenBreakpoint.XD)} {
+    ${respond(screenBreakpoints.XD)} {
       font-size: 0.8rem;
     }
 
-    ${respond(ScreenBreakpoint.LG)} {
+    ${respond(screenBreakpoints.LG)} {
       font-size: 0.7rem;
     }
 
-    ${respond(ScreenBreakpoint.MD)} {
+    ${respond(screenBreakpoints.MD)} {
       font-size: 0.6rem;
     }
 
-    ${respond(ScreenBreakpoint.SM)} {
+    ${respond(screenBreakpoints.SM)} {
       font-size: 0.5rem;
     }
   }

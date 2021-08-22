@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 
 import * as apiResponses from 'commons/types/apiResponses';
 import * as generalTypes from 'commons/types/general';
+import { ScreenBreakpoint } from 'commons/types/unions';
 import { ToastVariants } from 'commons/utils/enums';
 import { IReviewCardCommonData } from 'commons/types/general/basic';
 import { cookieManager, cookiesList } from 'commons/utils/cookies';
@@ -72,12 +73,12 @@ export function onExit(lockPageCallback: () => void) {
 /**
  * Get media query for max screen size.
  */
-export const respond = (screen: string) => `@media (max-width: ${screen})`;
+export const respond = (screen: ScreenBreakpoint) => `@media (max-width: ${screen}px)`;
 
 /**
  * Get media query for min screen size.
  */
-export const respondUp = (screen: string) => `@media (min-width: ${screen})`;
+export const respondUp = (screen: ScreenBreakpoint) => `@media (min-width: ${screen}px)`;
 
 /**
  * Partially applied onChange textarea event.
