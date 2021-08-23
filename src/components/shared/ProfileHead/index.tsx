@@ -1,18 +1,13 @@
 import { memo } from 'react';
-import { connect } from 'react-redux';
 
-import { MainToolbarEntry } from 'commons/utils/enums';
-import { setCurrentMainToolbarEntry } from 'store';
-import controlledHistory from 'commons/utils/routing';
+import { jumpToSearchPage } from 'commons/utils/routing';
+
 import CustomButton from 'components/shared/CustomButton';
+
 import MenuBar from './MenuBar';
 
 import * as types from './types';
 import * as styled from './styled';
-
-const mapDispatchToProps: types.IDispatchProps = {
-  setCurrentMainToolbarEntry
-};
 
 /**
  * Menu with tabs to control the page content area.
@@ -50,15 +45,10 @@ function ProfileHead(props: types.IProps) {
     </styled.MenuContent>
   );
 
-  const onButtonClick = () => {
-    props.setCurrentMainToolbarEntry(MainToolbarEntry.NewSearch);
-    controlledHistory.push('/search');
-  };
-
   // Button panel.
   const Button = (
     <styled.ButtonWrapper>
-      <CustomButton height='2.3rem' isDisabled={false} onClick={onButtonClick}>
+      <CustomButton height='2.3rem' isDisabled={false} onClick={jumpToSearchPage}>
         Новый поиск
       </CustomButton>
     </styled.ButtonWrapper>
@@ -75,4 +65,4 @@ function ProfileHead(props: types.IProps) {
   );
 }
 
-export default connect(null, mapDispatchToProps)(memo(ProfileHead));
+export default memo(ProfileHead);

@@ -1,3 +1,9 @@
 import { createBrowserHistory } from 'history';
 
-export default createBrowserHistory();
+const controlledBrowserHistory = createBrowserHistory();
+
+export default controlledBrowserHistory;
+
+export function jumpToSearchPage() {
+  controlledBrowserHistory.push('/search');
+}

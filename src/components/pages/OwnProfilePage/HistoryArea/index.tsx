@@ -1,3 +1,5 @@
+import { jumpToSearchPage } from 'commons/utils/routing';
+
 import CustomButton from 'components/shared/CustomButton';
 import PreviousSearchCard from 'components/shared/PreviousSearchCard';
 
@@ -21,7 +23,7 @@ function HistoryArea(props: types.IProps) {
       <styled.TitleWrapper>
         <styled.Title isHighlighted>Упс.. у вас ещё не было поисков</styled.Title>
       </styled.TitleWrapper>
-      <CustomButton isDisabled={false}>Новый поиск</CustomButton>
+      <CustomButton isDisabled={false} onClick={jumpToSearchPage}>Новый поиск</CustomButton>
     </>
   );
 
