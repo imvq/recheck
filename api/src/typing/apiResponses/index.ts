@@ -9,14 +9,14 @@ import {
   IGetNthReviewResponseDto,
   IReducedMember,
   IRetrieveProfileInfoResponseDto,
-  ISimpleActionResponse
+  ISimpleActionResponseDto
 } from './basic';
 
-export interface IBindReviewTargetResponseDto extends ISimpleActionResponse {}
+export interface IBindReviewTargetResponseDto extends ISimpleActionResponseDto {}
 
-export interface ICheckIsEmailAvailableResponseDto extends ISimpleActionResponse {}
+export interface ICheckIsEmailAvailableResponseDto extends ISimpleActionResponseDto {}
 
-export interface ICheckIsUserAvailableForReviewResponseDto extends ISimpleActionResponse {}
+export interface ICheckIsUserAvailableForReviewResponseDto extends ISimpleActionResponseDto {}
 
 export interface ICheckIsUserConfirmedResponseDto {
   isConfirmed: boolean;
@@ -26,9 +26,11 @@ export interface ICheckIsUserRegisteredResponseDto {
   isRegistered: boolean;
 }
 
-export interface ICheckAuthResponseDto extends ISimpleActionResponse {}
+export interface ICheckAuthResponseDto extends ISimpleActionResponseDto {}
 
-export interface ICompleteRegistration extends ISimpleActionResponse {}
+export interface ICompleteRegistration extends ISimpleActionResponseDto {}
+
+export interface IDoesUserHasAvailableProfilesResponseDto extends ISimpleActionResponseDto {}
 
 export interface IExchangeLinkedInAuthCodeResponseDto {
   'li_at': string;
@@ -76,7 +78,7 @@ export interface IHealthResponseDTO {
   version: string;
 }
 
-export interface IIsTargetConnectedResponsDto extends ISimpleActionResponse {}
+export interface IIsTargetConnectedResponsDto extends ISimpleActionResponseDto {}
 
 export interface ILinkedInBasicProfileDto {
   id: string;
@@ -92,17 +94,17 @@ export interface ILinkedInPhotoDto {
   }
 }
 
-export interface IMakeUserAvailableResponseDto extends ISimpleActionResponse {}
+export interface IMakeUserAvailableResponseDto extends ISimpleActionResponseDto {}
 
-export interface IPrepareReviewResponseDto extends ISimpleActionResponse {}
+export interface IPrepareReviewResponseDto extends ISimpleActionResponseDto {}
 
-export interface IPrepareUserResponseDto extends ISimpleActionResponse {}
+export interface IPrepareUserResponseDto extends ISimpleActionResponseDto {}
 
-export interface IReassignConfirmationEmailResponseDto extends ISimpleActionResponse {}
+export interface IReassignConfirmationEmailResponseDto extends ISimpleActionResponseDto {}
 
 export interface IRetrieveFacebookProfileInfoResponseDto extends IRetrieveProfileInfoResponseDto {}
 
-export interface IResendConfirmationResponseDto extends ISimpleActionResponse {}
+export interface IResendConfirmationResponseDto extends ISimpleActionResponseDto {}
 
 export interface IRetrieveFacebookProfileOnfoReducedResponseDto {
   email?: string;

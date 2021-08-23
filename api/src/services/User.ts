@@ -325,4 +325,15 @@ export default class UserService {
       throw new Errors.ForbiddenError('Target user is not available for asker');
     }
   }
+
+  @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
+  public async doesUserHasAvailableProfiles(checkDto: dto.DoesUserHasAvailableProfilesDto)
+    : Promise<apiResponses.IDoesUserHasAvailableProfilesResponseDto> {
+    const asker = await UserManager.getUser(checkDto.profileId);
+
+    this.handleUsersExistence(asker);
+
+    // @ts-ignore: asker and target are guaranteed to be existed here.
+    return { success: asker.reviewsAvailable > 0 };
+  }
 }

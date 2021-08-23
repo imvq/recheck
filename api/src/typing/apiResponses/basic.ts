@@ -36,6 +36,6 @@ export interface IRetrieveProfileInfoResponseDto {
   photoUrl: string;
 }
 
-export interface ISimpleActionResponse {
+export interface ISimpleActionResponseDto {
   success: boolean;
 }

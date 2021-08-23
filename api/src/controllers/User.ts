@@ -27,6 +27,17 @@ export default class UserController {
   }
 
   /**
+   * Check if a user can view somebody's profile.
+   */
+  @Path('/availability/reviews')
+  @BodyGuard
+  @POST
+  public async doesUserHasAvailableProfiles(bodyData: dto.DoesUserHasAvailableProfilesDto)
+    : Promise<apiResponses.IDoesUserHasAvailableProfilesResponseDto> {
+    return this.injectedService.doesUserHasAvailableProfiles(bodyData);
+  }
+
+  /**
    * Check if provided email is available.
    */
   @Path('/availability/email')
