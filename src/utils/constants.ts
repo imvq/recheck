@@ -13,3 +13,5 @@ export const REVIEW_QESTIONS = [
   'Опишите сильные стороны кандидата',
   'Насколько вероятно, что вы порекомендуете кандидата?'
 ];
+
+export const WAYFORPAY_LINK_BUTTON = 'https://secure.wayforpay.com/button/be67852de5587';

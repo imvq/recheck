@@ -10,6 +10,7 @@ import {
   setIsSearchPopupVisible
 } from 'store';
 import CustomButton from 'components/shared/CustomButton';
+import * as constants from 'utils/constants';
 import OptionBadge from './OptionBadge';
 
 import * as types from './types';
@@ -77,6 +78,12 @@ const FreeHiddenBadge = (
 );
 
 const SearchPopup = (props: types.IProps) => {
+  const onBuyReviewClickHandler = () => {
+    window.location.href = constants.WAYFORPAY_LINK_BUTTON;
+    props.onClose();
+    props.setIsVisible(false);
+  };
+
   const onWriteReviewClickHandler = () => {
     Api.getColleagues(props.currentProfileInfo.currentId)
       .then(colleaguesData => props.setColleagues(colleaguesData.data.results))
@@ -104,7 +111,12 @@ const SearchPopup = (props: types.IProps) => {
               hiddenView={BuyHiddenBadge}
             />
             <styled.ButtonWrapper>
-              <CustomButton isDisabled={false}>Купить отзыв</CustomButton>
+              <CustomButton
+                isDisabled={false}
+                onClick={onBuyReviewClickHandler}
+              >
+                Купить отзыв
+              </CustomButton>
             </styled.ButtonWrapper>
           </styled.OptionGroupWrapper>
 
