@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import ApiClient from 'commons/externals/ApiClient';
 import controlledHistory from 'commons/utils/routing';
+
 import { AppState, setPageUnlocked, setIsLoginPopupVisible } from 'store';
 
 import * as types from './types';
@@ -17,7 +18,8 @@ const mapDispatchToProps: types.IDispatchProps = {
   unlockPage: setPageUnlocked,
   setIsLoginPopupVisible
 };
-const ConfirmationPage = (props: types.IProps) => {
+
+function ReviewConfirmationPage(props: types.IProps) {
   const { uuid: pageUuid } = useParams<{ uuid: string }>();
 
   useEffect(() => {
@@ -37,6 +39,7 @@ const ConfirmationPage = (props: types.IProps) => {
           controlledHistory.replace('/profile');
         })
         .catch(() => controlledHistory.replace('/404'));
+
       return;
     }
 
@@ -47,6 +50,6 @@ const ConfirmationPage = (props: types.IProps) => {
   }, [props.isAuthorized]);
 
   return null;
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConfirmationPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ReviewConfirmationPage);

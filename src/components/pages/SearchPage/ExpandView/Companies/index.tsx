@@ -1,11 +1,12 @@
 import { memo, useState, useCallback } from 'react';
-import { connect } from 'react-redux';
-import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import { StatusCodes } from 'http-status-codes';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import { connect } from 'react-redux';
+
+import ApiClient from 'commons/externals/ApiClient';
+import controlledHistory from 'commons/utils/routing';
 
 import { ISearchProfileInfo } from 'commons/types/general';
-import controlledHistory from 'commons/utils/routing';
-import ApiClient from 'commons/externals/ApiClient';
 import {
   AppState,
   setCurrentObservedUser,
@@ -16,8 +17,10 @@ import {
   setRequestedUserShareableId
 } from 'store';
 import { getRecommendedCompaniesShownMembersWithoutSelf } from 'store/selectors';
+
 import CompanyCard from 'components/shared/CompanyCard';
 import PersonCard from 'components/shared/PersonCard';
+
 import ExpandView from '../index';
 
 import * as types from './types';
@@ -37,7 +40,7 @@ const mapDispatchToProps: types.IDispatchProps = {
   setRequestedUserShareableId
 };
 
-const Companies = (props: types.IProps) => {
+function Companies(props: types.IProps) {
   const [chunk, setChunk] = useState(0);
 
   const loadNewChunk = () => {
@@ -50,7 +53,7 @@ const Companies = (props: types.IProps) => {
     debounce: 2000
   });
 
-  const requestReviewsAmount = (targetShareableId: string) => {
+  function requestReviewsAmount(targetShareableId: string) {
     ApiClient.getTargetNReviewsGot({
       askerProfileId: props.currentProfileInfo.currentId,
       targetShareableId
@@ -62,13 +65,13 @@ const Companies = (props: types.IProps) => {
         props.setIsSearchPopupVisible(true);
       }
     }).finally(() => props.unlockPage());
-  };
+  }
 
-  const handlePersonCardButtonClick = (userData: ISearchProfileInfo) => {
+  function handlePersonCardButtonClick(userData: ISearchProfileInfo) {
     props.lockPage();
     props.setCurrentObservedUser(userData);
     requestReviewsAmount(userData.shareableId);
-  };
+  }
 
   const CurrentCompanies = props.recommendations.map(company => (
     <styled.CardWrapper key={company.id}>
@@ -104,6 +107,6 @@ const Companies = (props: types.IProps) => {
         : <>{ CurrentMembers }</>}
     </ExpandView>
   );
-};
+}
 
 export default connect(mapSTateToProps, mapDispatchToProps)(memo(Companies));

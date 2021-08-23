@@ -1,8 +1,8 @@
-import * as generalTypes from 'commons/types/general';
+import { IAppProfileInfo } from 'commons/types/general';
 
 export interface IStateProps {
   isAuthorized: boolean | null;
-  currentProfileInfo: generalTypes.IAppProfileInfo;
+  currentProfileInfo: IAppProfileInfo;
 }
 
 export interface IDispatchProps {

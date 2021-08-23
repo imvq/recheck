@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import ApiClient from 'commons/externals/ApiClient';
 import controlledHistory from 'commons/utils/routing';
+
 import { AppState, setIsLoginPopupVisible, setPageUnlocked } from 'store';
 
 import * as types from './types';
@@ -18,7 +19,7 @@ const mapDispatchToProps: types.IDispatchProps = {
   unlockPage: setPageUnlocked
 };
 
-const UserConfirmationPage = (props: types.IProps) => {
+function UserConfirmationPage(props: types.IProps) {
   const { uuid: pageUuid } = useParams<{ uuid: string }>();
 
   useEffect(() => {
@@ -48,6 +49,6 @@ const UserConfirmationPage = (props: types.IProps) => {
   }, [props.isAuthorized]);
 
   return null;
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserConfirmationPage);

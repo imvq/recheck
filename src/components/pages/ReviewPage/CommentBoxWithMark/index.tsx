@@ -1,8 +1,12 @@
+import { memo } from 'react';
 import { connect } from 'react-redux';
 
 import * as generalTypes from 'commons/types/general';
+
 import { textAreaHandler } from 'commons/utils/functions';
+
 import CustomButton from 'components/shared/CustomButton';
+
 import MarkSelector from '../MarkSelector';
 
 import * as types from './types';
@@ -19,12 +23,10 @@ export default function CommentBoxWithMark(
   mapStateToProps: types.IStatePropsMapped,
   mapDispatchToProps: types.IDispatchProps
 ) {
-  const Wrapped = (props: types.IProps) => {
+  function Wrapped(props: types.IProps) {
     function valueHandler(event: generalTypes.ITextAreaEvent) {
       textAreaHandler(event, props.setCurrentComment);
     }
-
-    const canProceed = !!props.mark;
 
     function returnHandler() {
       props.clearPrevious();
@@ -33,40 +35,49 @@ export default function CommentBoxWithMark(
     }
 
     function proceedIfAllowed() {
-      if (canProceed) {
+      if (props.mark) {
         props.onNextStep();
       }
     }
 
+    const ChildrenSection = (
+      <styled.MarkSelectorWrapper>
+        <styled.MarkSelectorDescriptionWrapper>
+          <styled.MarkSelectorDescription>
+            {props.children}
+          </styled.MarkSelectorDescription>
+        </styled.MarkSelectorDescriptionWrapper>
+        <MarkSelector labels={props.labels} setMark={props.setCurrentMark} />
+      </styled.MarkSelectorWrapper>
+    );
+
+    const CommentSection = (
+      <styled.InputGroupWrapper>
+        <styled.CommentArea placeholder='Прокомментируйте свой ответ' onChange={valueHandler} />
+      </styled.InputGroupWrapper>
+    );
+
+    const ButtonsSection = (
+      <styled.ButtonGroupWrapper>
+        <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
+          Назад
+        </CustomButton>
+
+        <CustomButton isDisabled={!props.mark} onClick={proceedIfAllowed}>
+          Далее
+        </CustomButton>
+      </styled.ButtonGroupWrapper>
+    );
+
     return (
       <styled.BoxBaseWrapper>
-
-        <styled.MarkSelectorWrapper>
-          <styled.MarkSelectorDescriptionWrapper>
-            <styled.MarkSelectorDescription>
-              {props.children}
-            </styled.MarkSelectorDescription>
-          </styled.MarkSelectorDescriptionWrapper>
-          <MarkSelector labels={props.labels} setMark={props.setCurrentMark} />
-        </styled.MarkSelectorWrapper>
-
-        <styled.InputGroupWrapper>
-          <styled.CommentArea placeholder='Прокомментируйте свой ответ' onChange={valueHandler} />
-        </styled.InputGroupWrapper>
+        {ChildrenSection}
+        {CommentSection}
         <styled.StepWrapper><span>{`${props.page} / 3`}</span></styled.StepWrapper>
-
-        <styled.ButtonGroupWrapper>
-          <CustomButton isHollow isDisabled={false} onClick={returnHandler}>
-            Назад
-          </CustomButton>
-
-          <CustomButton isDisabled={!canProceed} onClick={proceedIfAllowed}>
-            Далее
-          </CustomButton>
-        </styled.ButtonGroupWrapper>
+        {ButtonsSection}
       </styled.BoxBaseWrapper>
     );
-  };
+  }
 
-  return connect(mapStateToProps, mapDispatchToProps)(Wrapped);
+  return connect(mapStateToProps, mapDispatchToProps)(memo(Wrapped));
 }

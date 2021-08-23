@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
+import mixins from 'commons/styles/mixins';
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+
+export const NoColleaguesViewWrapper = mixins.prepared.DefaultWrapper;
 
 export const TitleWrapper = styled.div`
   display: flex;

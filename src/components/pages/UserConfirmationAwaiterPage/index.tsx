@@ -1,12 +1,16 @@
 import { useState, useRef } from 'react';
-import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+
 import * as SvgLoaders from 'svg-loaders-react';
 
+import { connect } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+
 import ApiClient from 'commons/externals/ApiClient';
-import { AppState, setPageLocked } from 'store';
-import CustomButton from 'components/shared/CustomButton';
+
 import { isValidEmail as validateEmail, onExit, showToast } from 'commons/utils/functions';
+import { AppState, setPageLocked } from 'store';
+
+import CustomButton from 'components/shared/CustomButton';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -19,7 +23,7 @@ const mapDispatchToProps: types.IDispatchProps = {
   lockPage: setPageLocked
 };
 
-const UserConfirmationAwaiterPage = (props: types.IProps) => {
+function UserConfirmationAwaiterPage(props: types.IProps) {
   const [isEmailBlockExpanded, setIsEmailBlockExpanded] = useState(false);
 
   // Flags defining email validation state and the fact the validation errors are visible.
@@ -38,11 +42,13 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
   // To avoid this we need to store actual email data value using reference.
   const latestEmailState = useRef(emailState);
 
-  const canProceed = () => emailState.isEmailValid
-    && !emailState.isEmailAvailabilityErrorVisible
-    && emailState.isEmailAvailabilityErrorVisible !== null;
+  function canProceed() {
+    return emailState.isEmailValid
+      && !emailState.isEmailAvailabilityErrorVisible
+      && emailState.isEmailAvailabilityErrorVisible !== null;
+  }
 
-  const recalculateEmailErrorState = () => {
+  function recalculateEmailErrorState() {
     setEmailState(() => {
       const updatedEmailState = {
         ...emailState,
@@ -53,6 +59,7 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
       };
 
       latestEmailState.current = updatedEmailState;
+
       return updatedEmailState;
     });
 
@@ -65,25 +72,27 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
         ...latestEmailState.current,
         isEmailAvailabilityErrorVisible: true
       }));
-  };
+  }
 
-  const resendConfirmation = () => {
+  function resendConfirmation() {
     ApiClient.resendConfirmation(props.currentProfileInfo.currentId);
     showToast('Письмо отправлено повторно');
-  };
+  }
 
-  const reassignConfirmationEmail = () => {
+  function reassignConfirmationEmail() {
     ApiClient.reassignConfirmationEmail({
       profileId: props.currentProfileInfo.currentId,
       email: emailState.email
     });
+
     fold();
+
     showToast('Письмо отправлено на новый адрес');
-  };
+  }
 
-  const expand = () => { setIsEmailBlockExpanded(true); };
+  const expand = () => setIsEmailBlockExpanded(true);
 
-  const fold = () => {
+  function fold() {
     setIsEmailBlockExpanded(false);
     setEmailState({
       email: '',
@@ -91,7 +100,63 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
       isEmailAvailabilityErrorVisible: false,
       isEmailValidationErrorVisible: false
     });
-  };
+  }
+
+  const ButtonsSection = (
+    <>
+      <styled.ButtonWrapper>
+        <CustomButton width='16rem' isDisabled={false} isHollow onClick={() => onExit(props.lockPage)}>
+          Выйти из учётной записи
+        </CustomButton>
+      </styled.ButtonWrapper>
+
+      <styled.ButtonWrapper>
+        <CustomButton width='16rem' isDisabled={false} isHollow onClick={resendConfirmation}>
+          Отправить письмо повторно
+        </CustomButton>
+      </styled.ButtonWrapper>
+
+      <styled.ButtonWrapper>
+        <CustomButton width='16rem' isDisabled={false} isHollow onClick={expand}>
+          Изменить введённый почтовый ящик
+        </CustomButton>
+      </styled.ButtonWrapper>
+    </>
+  );
+
+  const ReturnSection = (
+    <styled.ButtonWrapper>
+      <CustomButton width='16rem' isDisabled={false} isHollow onClick={fold}>
+        Назад
+      </CustomButton>
+    </styled.ButtonWrapper>
+  );
+
+  const ConfirmationSection = (
+    <styled.ButtonWrapper>
+      <CustomButton width='16rem' isDisabled={!canProceed()} isHollow onClick={reassignConfirmationEmail}>
+        Подтвердить
+      </CustomButton>
+    </styled.ButtonWrapper>
+  );
+
+  const InputSection = (
+    <styled.InputWrapper>
+      <styled.Input
+        type='text'
+        placeholder='Новый почтовый адрес'
+        onBlur={recalculateEmailErrorState}
+        onChange={(event) => {
+          setEmailState({
+            email: event.target.value,
+            isEmailValid: validateEmail(event.target.value),
+            isEmailValidationErrorVisible: false,
+            isEmailAvailabilityErrorVisible: false
+          });
+        }}
+      />
+    </styled.InputWrapper>
+  );
 
   return (
     <styled.Wrapper>
@@ -99,57 +164,13 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
         <styled.Text>На вашу почту было отправлено письмо с дальнейшими указаниями.</styled.Text>
         <styled.Text>Пожалуйста, проверьте ваш почтовый ящик.</styled.Text>
 
-        {!isEmailBlockExpanded && (
-          <>
-            <styled.ButtonWrapper>
-              <CustomButton width='16rem' isDisabled={false} isHollow onClick={() => onExit(props.lockPage)}>
-                Выйти из учётной записи
-              </CustomButton>
-            </styled.ButtonWrapper>
-
-            <styled.ButtonWrapper>
-              <CustomButton width='16rem' isDisabled={false} isHollow onClick={resendConfirmation}>
-                Отправить письмо повторно
-              </CustomButton>
-            </styled.ButtonWrapper>
-
-            <styled.ButtonWrapper>
-              <CustomButton width='16rem' isDisabled={false} isHollow onClick={expand}>
-                Изменить введённый почтовый ящик
-              </CustomButton>
-            </styled.ButtonWrapper>
-          </>
-        )}
+        {!isEmailBlockExpanded && ButtonsSection}
 
         {isEmailBlockExpanded && (
           <>
-            <styled.ButtonWrapper>
-              <CustomButton width='16rem' isDisabled={false} isHollow onClick={fold}>
-                Назад
-              </CustomButton>
-            </styled.ButtonWrapper>
-
-            <styled.InputWrapper>
-              <styled.Input
-                type='text'
-                placeholder='Новый почтовый адрес'
-                onBlur={recalculateEmailErrorState}
-                onChange={(event) => {
-                  setEmailState({
-                    email: event.target.value,
-                    isEmailValid: validateEmail(event.target.value),
-                    isEmailValidationErrorVisible: false,
-                    isEmailAvailabilityErrorVisible: false
-                  });
-                }}
-              />
-            </styled.InputWrapper>
-
-            <styled.ButtonWrapper>
-              <CustomButton width='16rem' isDisabled={!canProceed()} isHollow onClick={reassignConfirmationEmail}>
-                Подтвердить
-              </CustomButton>
-            </styled.ButtonWrapper>
+            {ReturnSection}
+            {InputSection}
+            {ConfirmationSection}
 
             {emailState.isEmailValidationErrorVisible
               && (<styled.TextAlert>Некорректный почтовый адрес</styled.TextAlert>)}
@@ -166,6 +187,6 @@ const UserConfirmationAwaiterPage = (props: types.IProps) => {
       <ToastContainer />
     </styled.Wrapper>
   );
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserConfirmationAwaiterPage);

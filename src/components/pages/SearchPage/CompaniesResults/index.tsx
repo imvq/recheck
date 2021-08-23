@@ -5,7 +5,13 @@ import CompanyCard from 'components/shared/CompanyCard';
 import * as types from './types';
 import * as styled from '../styled';
 
-export default memo((props: types.IProps) => {
+function CompaniesResults(props: types.IProps) {
+  const Title = (
+    <styled.TitleWrapper>
+      <styled.Title>Рекомендации:</styled.Title>
+    </styled.TitleWrapper>
+  );
+
   const CurrentCompanies = props.companies.slice(0, 4).map(companyData => (
     <styled.CardWrapper key={companyData.id}>
       <CompanyCard
@@ -15,15 +21,18 @@ export default memo((props: types.IProps) => {
     </styled.CardWrapper>
   ));
 
+  const CompaniesSection = (
+    <styled.ResultsWrapper>
+      {CurrentCompanies}
+    </styled.ResultsWrapper>
+  );
+
   return (
     <>
-      <styled.TitleWrapper>
-        <styled.Title>Рекомендации:</styled.Title>
-      </styled.TitleWrapper>
-
-      <styled.ResultsWrapper>
-        {CurrentCompanies}
-      </styled.ResultsWrapper>
+      {Title}
+      {CompaniesSection}
     </>
   );
-});
+}
+
+export default memo(CompaniesResults);

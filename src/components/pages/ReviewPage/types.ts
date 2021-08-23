@@ -1,15 +1,15 @@
-import * as generalTypes from 'commons/types/general';
+import { IAppProfileInfo, IReviewData } from 'commons/types/general';
 import { MainToolbarEntry } from 'commons/utils/enums';
 
 export interface IStateProps {
-  currentProfileInfo: generalTypes.IAppProfileInfo;
+  currentProfileInfo: IAppProfileInfo;
   requestedUserShareableId: string | null;
-  reviewData: Omit<generalTypes.IReviewData, 'authorId'>;
+  reviewData: Omit<IReviewData, 'authorId'>;
 }
 
 export interface IDispatchProps {
   setCurrentMainToolbarEntry(entry: MainToolbarEntry): void;
-  createReview(reviewData: generalTypes.IReviewData): void;
+  createReview(reviewData: IReviewData): void;
   setTargetShareableId(id: string): void;
   unlockPage(): void;
 }

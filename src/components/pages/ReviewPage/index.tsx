@@ -4,8 +4,9 @@ import { useParams } from 'react-router-dom';
 
 import ApiClient from 'commons/externals/ApiClient';
 import controlledHistory from 'commons/utils/routing';
+
 import { ISearchProfileInfo } from 'commons/types/general';
-import { MainToolbarEntry } from 'commons/utils/enums';
+import { mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/functions';
 import {
   AppState,
   createReview,
@@ -13,15 +14,15 @@ import {
   setPageUnlocked,
   setTargetShareableId
 } from 'store';
-import { mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/functions';
+
 import ProfileHead from 'components/shared/ProfileHead';
 
-import CommentBoxSimple from './CommentBoxSimple';
 import * as boxSimpleMapping from './CommentBoxSimple/mapping';
-
-import ComponentBoxWithMark from './CommentBoxWithMark';
-import * as boxWithMarkMapping from './CommentBoxWithMark/mapping';
 import * as boxWithMarkLabels from './CommentBoxWithMark/labels';
+import * as boxWithMarkMapping from './CommentBoxWithMark/mapping';
+
+import CommentBoxSimple from './CommentBoxSimple';
+import ComponentBoxWithMark from './CommentBoxWithMark';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -57,7 +58,7 @@ const BoxStepC = ComponentBoxWithMark(
 /**
  * Page in charge of adding a review.
  */
-const ReviewPage = (props: types.IProps) => {
+function ReviewPage(props: types.IProps) {
   const { targetShareableId } = useParams<{ targetShareableId: string }>();
   const [observedUser, setObservedUser] = useState<ISearchProfileInfo>();
   const [step, setStep] = useState(0);
@@ -97,7 +98,7 @@ const ReviewPage = (props: types.IProps) => {
 
   const comeback = () => setStep(step - 1);
 
-  const finalize = () => {
+  function finalize() {
     props.createReview({
       authorId: props.currentProfileInfo.currentId,
       ...props.reviewData
@@ -109,9 +110,8 @@ const ReviewPage = (props: types.IProps) => {
       targetShareableId: props.requestedUserShareableId
     }).then(() => {
       controlledHistory.push(`/profile/observe/${props.requestedUserShareableId}`);
-    })
-      .catch(() => controlledHistory.push('/profile'));
-  };
+    }).catch(() => controlledHistory.push('/profile'));
+  }
 
   const boxes = [
     <BoxStepA page={1} onNextStep={proceed} onBack={comeback}>
@@ -140,6 +140,6 @@ const ReviewPage = (props: types.IProps) => {
       <styled.AdaptedFooter />
     </styled.Wrapper>
   );
-};
+}
 
 export default connect(mapSateToProps, mapDispatchToProps)(ReviewPage);

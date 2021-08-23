@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
+
 import { ReactComponent as MagnifierSvg } from 'assets/images/pages/SearchPage/SearchField/Magnifier.svg';
 
 const cssVarsLocal = {

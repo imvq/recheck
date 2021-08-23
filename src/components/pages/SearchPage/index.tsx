@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 
+import * as generalTypes from 'commons/types/general';
+import * as constants from 'commons/utils/constants';
+
+import { MainToolbarEntry } from 'commons/utils/enums';
 import {
   AppState,
   clearColleagues,
@@ -21,23 +25,20 @@ import {
   getUserSearchResultsWithoutSelf
 } from 'store/selectors';
 
-import * as constants from 'commons/utils/constants';
-import * as generalTypes from 'commons/types/general';
-
-import { MainToolbarEntry } from 'commons/utils/enums';
-import SearchPopupManager from 'components/shared/SearchPopupManager';
 import DropList from 'components/shared/DropList';
-import SearchField from './SearchField';
+import SearchPopupManager from 'components/shared/SearchPopupManager';
+
 import ColleaguesView from './ColleaguesView';
+import CompaniesExpansionLabel from './CompaniesExpansionLabel';
 import CompaniesResults from './CompaniesResults';
 import CompaniesPopup from './ExpandView/Companies';
-import CompaniesExpansionLabel from './CompaniesExpansionLabel';
-import SearchResults from './SearchResults';
+import SearchField from './SearchField';
 import SearchNoResults from './SearchNoResults';
+import SearchResults from './SearchResults';
 
+import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
-import { mapUserSearchDataToOptions } from './functions';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   colleaguesState: store.search.colleaguesState,
@@ -132,7 +133,7 @@ function SearchPage(props: types.IProps) {
   const QuickSearchResults = (
     <styled.DropListWrapper>
       <DropList
-        options={mapUserSearchDataToOptions(props.quickSearchMatchedUsers)}
+        options={misc.mapUserSearchDataToOptions(props.quickSearchMatchedUsers)}
         onClose={props.clearMatchedUsers}
         onOptionSelected={matchedResult => {
           props.searchUserByShareableId(matchedResult.key);

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
-import { AppState, loadAboutTabData, loadNthReviewGot } from 'store';
 import { showToast } from 'commons/utils/functions';
+import { AppState, loadAboutTabData, loadNthReviewGot } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
+import BackgroundSvgPath from 'assets/images/pages/UserConfirmationAwaiterPage/Background.svg';
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
-import BackgroundSvgPath from 'assets/images/pages/UserConfirmationAwaiterPage/Background.svg';
 
 export const Wrapper = styled.div`
   background-image: url(${BackgroundSvgPath});

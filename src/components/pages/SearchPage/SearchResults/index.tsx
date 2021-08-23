@@ -1,10 +1,12 @@
 import { memo } from 'react';
-import { connect } from 'react-redux';
 import { StatusCodes } from 'http-status-codes';
+import { connect } from 'react-redux';
+
+import ApiClient from 'commons/externals/ApiClient';
+import controlledHistory from 'commons/utils/routing';
 
 import { ISearchProfileInfo } from 'commons/types/general';
-import controlledHistory from 'commons/utils/routing';
-import ApiClient from 'commons/externals/ApiClient';
+
 import {
   AppState,
   setCurrentObservedUser,
@@ -30,8 +32,8 @@ const mapDispatchToProps: types.IDispatchProps = {
   setRequestedUserShareableId
 };
 
-const SearchResults = (props: types.IProps) => {
-  const requestReviewsAmount = (targetShareableId: string) => {
+function SearchResults(props: types.IProps) {
+  function requestReviewsAmount(targetShareableId: string) {
     ApiClient.getTargetNReviewsGot({
       askerProfileId: props.currentProfileInfo.currentId,
       targetShareableId
@@ -43,33 +45,40 @@ const SearchResults = (props: types.IProps) => {
         props.setIsSearchPopupVisible(true);
       }
     }).finally(() => props.unlockPage());
-  };
+  }
 
-  const handlePersonCardButtonClick = (userData: ISearchProfileInfo) => {
+  function handlePersonCardButtonClick(userData: ISearchProfileInfo) {
     props.lockPage();
     props.setCurrentObservedUser(userData);
     requestReviewsAmount(userData.shareableId);
-  };
+  }
+
+  const Title = (
+    <styled.TitleWrapper>
+      <styled.Title>Результат поиска:</styled.Title>
+    </styled.TitleWrapper>
+  );
+
+  const Results = (
+    <styled.ResultsWrapper>
+      {props.userSearchResults.map(userData => (
+        <styled.CardWrapper key={userData.shareableId}>
+          <PersonCard
+            buttonText='Посмотреть'
+            onButtonClick={() => handlePersonCardButtonClick(userData)}
+            userData={userData}
+          />
+        </styled.CardWrapper>
+      ))}
+    </styled.ResultsWrapper>
+  );
 
   return (
     <>
-      <styled.TitleWrapper>
-        <styled.Title>Результат поиска:</styled.Title>
-      </styled.TitleWrapper>
-
-      <styled.ResultsWrapper>
-        {props.userSearchResults.map(userData => (
-          <styled.CardWrapper key={userData.shareableId}>
-            <PersonCard
-              buttonText='Посмотреть'
-              onButtonClick={() => handlePersonCardButtonClick(userData)}
-              userData={userData}
-            />
-          </styled.CardWrapper>
-        ))}
-      </styled.ResultsWrapper>
+      {Title}
+      {Results}
     </>
   );
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(SearchResults));
