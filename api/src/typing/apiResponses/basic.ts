@@ -1,3 +1,9 @@
+// This module contains types for Swagger docs auto-generating.
+// There are some restrictions for types here:
+// 1) no generics;
+// 2) no classes;
+// 3) no array/functional interfaces.
+
 export interface IGetNReviewsAmountResponseDto {
   amount: number;
 }

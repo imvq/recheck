@@ -25,6 +25,9 @@ export interface IStringIndexable {
   [key: string]: string;
 }
 
-export type CompanyData = dto.CreateCompanyDto;
+export interface CompanyData {
+  name: string;
+  logoUrl: string | null;
+}
 
 export type UserData = dto.UserDto;

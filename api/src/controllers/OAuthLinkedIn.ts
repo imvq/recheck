@@ -1,6 +1,7 @@
-import { GET, POST, Path, Context, ServiceContext } from 'typescript-rest';
-import { Inject } from 'typescript-ioc';
 import BodyGuard from 'typescript-rest-body-guard';
+
+import { Inject } from 'typescript-ioc';
+import { GET, POST, Path, Context, ServiceContext } from 'typescript-rest';
 
 import dto from '@dto';
 import LinkedInOAuthService from '@services/OAuthLinkedIn';

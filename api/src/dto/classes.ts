@@ -1,3 +1,10 @@
+// This module contains types for Swagger docs auto-generating.
+// There are some restrictions for types here:
+// 1) classes only;
+// 2) public fields only (i.e. public getters with private fields is not allowed).
+
+import { PairRelatedRequestDto, SelfRelatedRequestDto } from './base';
+
 export class BindReviewTargetDto {
   public constructor(
     public reviewId: string,
@@ -27,20 +34,11 @@ export class СheckIsEmailAvailableDto {
   public constructor(public email: string) {}
 }
 
-export class CheckIsUserAvailableForReviewDto {
-  public constructor(
-    public askerProfileId: string,
-    public targetShareableId: string,
-  ) {}
-}
+export class CheckIsUserAvailableForReviewDto extends PairRelatedRequestDto {}
 
-export class CheckIsUserConfirmedDto {
-  public constructor(public profileId: string) {}
-}
+export class CheckIsUserConfirmedDto extends SelfRelatedRequestDto {}
 
-export class CheckIsUserRegisteredDto {
-  public constructor(public profileId: string) {}
-}
+export class CheckIsUserRegisteredDto extends SelfRelatedRequestDto {}
 
 export class CompleteRegistrationDto {
   public constructor(
@@ -63,21 +61,15 @@ export class GetAccessToUserDto {
   ) {}
 }
 
-export class GetColleaguesDto {
-  public constructor(public profileId: string) {}
-}
+export class GetColleaguesDto extends SelfRelatedRequestDto {}
 
 export class GetMatchedCompaniesDto {
   public constructor(public sequence: string) {}
 }
 
-export class GetNReviewsGotDto {
-  public constructor(public profileId: string) {}
-}
+export class GetNReviewsGotDto extends SelfRelatedRequestDto {}
 
-export class GetNReviewsLeftDto {
-  public constructor(public profileId: string) {}
-}
+export class GetNReviewsLeftDto extends SelfRelatedRequestDto {}
 
 export class GetNthReviewGotDto {
   public constructor(
@@ -97,26 +89,13 @@ export class GetRecommendationsDto {
   public constructor(public chunk: number) {}
 }
 
-export class GetTargetNReviewsGotDto {
-  public constructor(
-    public askerProfileId: string,
-    public targetShareableId: string
-  ) {}
-}
+export class GetTargetNReviewsGotDto extends PairRelatedRequestDto {}
 
-export class IsTargetConnectedDto {
-  public constructor(
-    public askerProfileId: string,
-    public targetShareableId: string
-  ) {}
-}
+export class DoesUserHasAvailableProfilesDto extends SelfRelatedRequestDto {}
 
-export class MakeUserAvailableDto {
-  public constructor(
-    public askerProfileId: string,
-    public targetShareableId: string
-  ) {}
-}
+export class IsTargetConnectedDto extends PairRelatedRequestDto {}
+
+export class MakeUserAvailableDto extends PairRelatedRequestDto {}
 
 export class UserDto {
   public constructor(
@@ -144,13 +123,9 @@ export class ReassignConfirmationEmailDto {
   ) {}
 }
 
-export class ResendConfirmationDto {
-  public constructor(public profileId: string) {}
-}
+export class ResendConfirmationDto extends SelfRelatedRequestDto {}
 
-export class RetrievePorfileInfoReduced {
-  public constructor(public profileId: string) {}
-}
+export class RetrievePorfileInfoReduced extends SelfRelatedRequestDto {}
 
 export class SearchUserDto {
   public constructor(public tokens: string[]) {}
