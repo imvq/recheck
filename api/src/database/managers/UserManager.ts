@@ -98,11 +98,19 @@ export default class UserManager {
 
   public static async isTargetAvailable(asker: User, target: User)
     : Promise<boolean> {
-    return await getRepository(User)
+    const actualAvailability = await getRepository(User)
+      // Acutal availability (user bought view rights).
       .createQueryBuilder('users')
       .innerJoin('users.availableUsers', 'availableUsers')
       .where(`users.profileId = '${asker.profileId}'`)
       .andWhere(`availableUsers.profileId = '${target.profileId}'`)
+      .getCount() > 0;
+
+    return actualAvailability || await getRepository(User)
+      // Recruiter availability (asker invited the target).
+      .createQueryBuilder('users')
+      .where(`target.profileId = '${target.profileId}'`)
+      .andWhere(`target.recruiter = ${asker.shareableId}`)
       .getCount() > 0;
   }
 
