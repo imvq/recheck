@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 
 import * as generalTypes from '@typing/general';
+
 import Company from '../entities/Company.entity';
 import User from '../entities/User.entity';
 
@@ -16,7 +17,7 @@ export default class UserManager {
     const repository = getRepository(User);
     const toBeSaved = repository.create({ ...userData, company, confirmationCode });
 
-    await UserManager.updateUser(toBeSaved);
+    await getRepository(User).save(toBeSaved);
   }
 
   /**
@@ -127,6 +128,7 @@ export default class UserManager {
   }
 
   public static async makeUserAvailable(asker: User, target: User) {
+    asker.reviewsAvailable -= 1;
     asker.availableUsers.push(target);
 
     return UserManager.updateUser(asker);

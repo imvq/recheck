@@ -13,3 +13,20 @@ export class PairRelatedRequestDto {
 export class SelfRelatedRequestDto {
   public constructor(public profileId: string) {}
 }
+
+export class UserDto {
+  public constructor(
+    public profileId: string,
+    public name: string,
+    public email: string,
+    public photoUrl: string,
+    public company: {
+      id: number;
+      name: string;
+    },
+    public position: string,
+    public workStartMonth: number,
+    public workStartYear: number,
+    public referral: string | null
+  ) {}
+}

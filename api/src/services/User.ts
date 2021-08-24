@@ -55,7 +55,7 @@ export default class UserService {
     return { success };
   }
 
-  @utils.errorsAutoHandler({ except: [], logger })
+  @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
   public async checkIsUserCanBeViewed(checkDto: dto.CheckIsUserCanBeViewed)
     : Promise<apiResponses.ICheckIsUserCanBeViewedResponseDto> {
     const asker = await UserManager.getUser(checkDto.askerProfileId);
@@ -335,7 +335,7 @@ export default class UserService {
     const asker = await UserManager.getUser(checkDto.profileId);
     UserService.handleUsersExistence(asker);
 
-    // @ts-ignore: asker and target are guaranteed to be existed here.
+    // @ts-ignore: asker is guaranteed to be existed here.
     return { success: asker.reviewsAvailable > 0 };
   }
 

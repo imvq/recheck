@@ -3,7 +3,7 @@
 // 1) classes only;
 // 2) public fields only (i.e. public getters with private fields is not allowed).
 
-import { PairRelatedRequestDto, SelfRelatedRequestDto } from './basic';
+import { PairRelatedRequestDto, SelfRelatedRequestDto, UserDto } from './basic';
 
 export class BindReviewTargetDto {
   public constructor(
@@ -99,24 +99,9 @@ export class IsTargetConnectedDto extends PairRelatedRequestDto {}
 
 export class MakeUserAvailableDto extends PairRelatedRequestDto {}
 
-export class UserDto {
-  public constructor(
-    public profileId: string,
-    public name: string,
-    public email: string,
-    public photoUrl: string,
-    public company: {
-      id: number;
-      name: string;
-    },
-    public position: string,
-    public workStartMonth: number,
-    public workStartYear: number,
-    public referral: string | null
-  ) {}
-}
-
 export class PrepareUserDto extends UserDto {}
+
+export class ProfileUserDto extends UserDto {}
 
 export class ReassignConfirmationEmailDto {
   public constructor(

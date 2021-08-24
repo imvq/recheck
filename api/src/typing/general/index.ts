@@ -30,4 +30,4 @@ export interface CompanyData {
   logoUrl: string | null;
 }
 
-export type UserData = dto.UserDto;
+export type UserData = dto.ProfileUserDto;
