@@ -1,8 +1,16 @@
 import { memo } from 'react';
+import { connect } from 'react-redux';
+
+import { setIsSpendFreeViewPopupVisible } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';
 
+import * as types from './types';
 import * as styled from '../Popups/styled';
+
+const mapDispatchToProps: types.IDispatchProps = {
+  setVisible: setIsSpendFreeViewPopupVisible
+};
 
 const TitleWrapper = (
   <styled.BodyWrapper>
@@ -10,10 +18,10 @@ const TitleWrapper = (
   </styled.BodyWrapper>
 );
 
-function SpendFreeViewsPopup() {
+function SpendFreeViewsPopup(props: types.IProps) {
   const TopWrapper = (
     <styled.TopWrapper>
-      <styled.AdaptedCloseCross onClick={() => { /* TODO: setIsVisible */ }} />
+      <styled.AdaptedCloseCross onClick={() => props.setVisible(false)} />
     </styled.TopWrapper>
   );
 
@@ -50,4 +58,4 @@ function SpendFreeViewsPopup() {
   );
 }
 
-export default memo(SpendFreeViewsPopup);
+export default connect(null, mapDispatchToProps)(memo(SpendFreeViewsPopup));
