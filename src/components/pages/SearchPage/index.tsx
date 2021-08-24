@@ -5,6 +5,7 @@ import * as generalTypes from 'commons/types/general';
 import * as constants from 'commons/utils/constants';
 
 import { MainToolbarEntry } from 'commons/utils/enums';
+import { useQuery } from 'commons/utils/hooks';
 import {
   AppState,
   clearColleagues,
@@ -64,12 +65,17 @@ const mapDispatchToProps: types.IDispatchProps = {
 };
 
 function SearchPage(props: types.IProps) {
+  const query = useQuery();
+  const colleaguesUpdateQueryFlag = query.get('no-colleagues-update') !== 'true';
+
   const [isRecommendationsViewVisible, setIsRecommendationsViewVisible] = useState(false);
 
   useEffect(() => {
     // Clear the colleagues array to avoid invalid conditional render
     // due to the colleagues array dependency.
-    props.clearColleagues();
+    if (colleaguesUpdateQueryFlag) {
+      props.clearColleagues();
+    }
 
     props.setCurrentMainToolbarEntry(MainToolbarEntry.NewSearch);
 

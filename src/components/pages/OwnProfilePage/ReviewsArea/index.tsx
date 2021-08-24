@@ -1,7 +1,17 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { AppState, loadReviewsTabData, loadNthReviewLeft } from 'store';
+import ApiClient from 'commons/externals/ApiClient';
+import controlledHistory from 'commons/utils/routing';
+
+import {
+  AppState,
+  loadReviewsTabData,
+  loadNthReviewLeft,
+  setColleagues,
+  setPageLocked,
+  setPageUnlocked
+} from 'store';
 
 import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';
@@ -11,7 +21,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentPorfileId: store.profile.currentProfileInfo.currentId,
+  currentProfileId: store.profile.currentProfileInfo.currentId,
   isAuthorized: store.auth.isAuthorized,
   isLoading: store.interaction.isProfileReviewsTabLoading,
   reviewsLeftChunksAmount: store.interaction.reviewsLeftChunksAmount,
@@ -20,7 +30,10 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 
 const mapDispatchToProps: types.IDispatchProps = {
   loadTabData: loadReviewsTabData,
-  loadNthReview: loadNthReviewLeft
+  loadNthReview: loadNthReviewLeft,
+  setColleagues,
+  lockPage: setPageLocked,
+  unlockPage: setPageUnlocked
 };
 
 /**
@@ -31,7 +44,7 @@ function ReviewsArea(props: types.IProps) {
 
   useEffect(() => {
     if (props.isAuthorized) {
-      props.loadTabData(props.currentPorfileId);
+      props.loadTabData(props.currentProfileId);
     }
   }, [props.isAuthorized]);
 
@@ -45,9 +58,23 @@ function ReviewsArea(props: types.IProps) {
     </styled.TitleWrapper>
   );
 
+  function onWriteReviewClickHandler() {
+    props.lockPage();
+
+    ApiClient.getColleagues(props.currentProfileId)
+      .then(colleaguesData => {
+        controlledHistory.push('/search?no-colleagues-update=true');
+        props.setColleagues(colleaguesData.data.results);
+      })
+      .finally(() => props.unlockPage());
+  }
+
   const NoResults = (
     <>
-      <CustomButton isDisabled={false}>Написать отзыв</CustomButton>
+      <CustomButton isDisabled={false} onClick={onWriteReviewClickHandler}>
+        Написать отзыв
+      </CustomButton>
+
       <styled.TitleWrapper isReduced>
         <styled.Title isReduced>
           *За каждый оставленный вами отзыв вы получаете +1 поиск отзыва бесплатно
@@ -62,19 +89,19 @@ function ReviewsArea(props: types.IProps) {
 
       {!props.currentReviewCardData && NoResults}
 
-      {props.reviewsLeftChunksAmount && (
+      {props.reviewsLeftChunksAmount > 0 && (
         <Pagination
           nPages={props.reviewsLeftChunksAmount}
           onNextClick={() => {
-            props.loadNthReview(props.currentPorfileId, currentIndex + 1);
+            props.loadNthReview(props.currentProfileId, currentIndex + 1);
             setCurrentIndex(currentIndex + 1);
           }}
           onPageClick={(page: number) => {
-            props.loadNthReview(props.currentPorfileId, page - 1);
+            props.loadNthReview(props.currentProfileId, page - 1);
             setCurrentIndex(page - 1);
           }}
           onPrevClick={() => {
-            props.loadNthReview(props.currentPorfileId, currentIndex - 1);
+            props.loadNthReview(props.currentProfileId, currentIndex - 1);
             setCurrentIndex(currentIndex - 1);
           }}
         />

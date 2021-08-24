@@ -1,7 +1,7 @@
-import { IReviewCardLeftData } from 'commons/types/general';
+import { IReviewCardLeftData, ISearchProfileInfo } from 'commons/types/general';
 
 export interface IStateProps {
-  currentPorfileId: string;
+  currentProfileId: string;
   isAuthorized: boolean | null;
   isLoading: boolean;
   reviewsLeftChunksAmount: number;
@@ -11,6 +11,9 @@ export interface IStateProps {
 export interface IDispatchProps {
   loadTabData: (profileId: string) => void;
   loadNthReview: (profileId: string, nthReview: number) => void;
+  lockPage(): void;
+  unlockPage(): void;
+  setColleagues(colleagues: Omit<ISearchProfileInfo, 'company'>[]): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;
