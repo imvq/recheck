@@ -9,8 +9,9 @@ import User from '@database/entities/User.entity';
 import Review from '@database/entities/Review.entity';
 import Company from '@database/entities/Company.entity';
 
-import UserManager from '@database/managers/UserManager';
 import CompanyManager from '@database/managers/CompanyManager';
+import ReviewManager from '@database/managers/ReviewManager';
+import UserManager from '@database/managers/UserManager';
 
 import logger from '@logging/Logger';
 import MailService from './Mail';
@@ -44,7 +45,7 @@ export default class UserService {
   @utils.errorsAutoHandler({ except: [], logger })
   public async checkIsUserAvailableForReview(checkDto: dto.CheckIsUserAvailableForReviewDto)
     : Promise<apiResponses.ICheckIsUserAvailableForReviewResponseDto> {
-    const success = await UserManager.isTargetAvailableForReview(
+    const success = await ReviewManager.doesReviewExists(
       checkDto.askerProfileId,
       checkDto.targetShareableId
     );

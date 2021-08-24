@@ -25,4 +25,12 @@ export default class ReviewManager {
 
     await repository.save(toBeSaved);
   }
+
+  public static async doesReviewExists(authorId: string, targetShareableId: string) {
+    return await getRepository(Review)
+      .createQueryBuilder('reviews')
+      .where('reviews.authorId = :authorId', { authorId })
+      .andWhere('reviews.targetShareableId = :targetShareableId', { targetShareableId })
+      .getCount() !== 0;
+  }
 }
