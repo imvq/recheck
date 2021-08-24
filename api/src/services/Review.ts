@@ -15,7 +15,7 @@ import UserService from './User';
  * Service in charge of reviews stuff.
  */
 export default class ReviewService {
-  @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
+  @utils.errorsAutoHandler({ except: [Errors.NotFoundError, Errors.ConflictError], logger })
   public async prepareReview(reviewData: dto.CreateReviewDto)
     : Promise<apiResponses.IPrepareReviewResponseDto> {
     const author = await UserManager.getUser(reviewData.authorId);
