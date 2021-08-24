@@ -30,6 +30,11 @@ export interface ICheckIsUserAvailableForReviewDto {
   targetShareableId: string;
 }
 
+export interface ICheckIsUserCanBeViewed {
+  askerProfileId: string;
+  targetShareableId: string;
+}
+
 export type ICompanyMember = Omit<ISearchProfileInfo, 'company'>;
 
 export interface ICompany {

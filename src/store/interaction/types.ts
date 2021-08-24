@@ -2,6 +2,7 @@ import * as generalTypes from 'commons/types/general';
 import { MainToolbarEntry } from 'commons/utils/enums';
 
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
+export const SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE = 'SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE';
 export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';
 export const SET_IS_LOGIN_POPUP_VISIBILE = 'SET_IS_LOGIN_POPUP_VISIBILE';
 export const SET_CURRENT_MAIN_TOOLBAR_ENTRY = 'SET_CURRENT_MAIN_TOOLBAR_ENTRY';
@@ -21,6 +22,7 @@ export const SET_CURRENT_REVIEW_LEFT = 'SET_CURRENT_REVIEW_LEFT';
 export interface InteractionState {
   isPageLocked: boolean;
   isSearchPopupVisible: boolean;
+  isSpendFreeViewPopupVisible: boolean;
   isLoginPopupVisible: boolean;
   currentMainToolbarEntry: MainToolbarEntry;
   isObservedReviewsPageLoading: boolean;
@@ -44,6 +46,11 @@ export interface SetIsPageLocked {
 
 export interface SetIsSearchPopupVisible {
   type: typeof SET_IS_SEARCH_POPUP_VISIBILE;
+  payload: boolean;
+}
+
+export interface SetIsSpendFreeViewPopupVisible {
+  type: typeof SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE;
   payload: boolean;
 }
 
@@ -120,6 +127,7 @@ export interface SetCurrentReviewLeft {
 export type InteractionStateActionType =
   SetIsPageLocked
   | SetIsSearchPopupVisible
+  | SetIsSpendFreeViewPopupVisible
   | SetIsLoginPopupVisible
   | SetCurrentMainToolbarEntry
   | SetIsObservedReviewsPageLoading

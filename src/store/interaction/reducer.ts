@@ -4,6 +4,7 @@ import {
   InteractionStateActionType,
   SET_IS_PAGE_LOCKED,
   SET_IS_SEARCH_POPUP_VISIBILE,
+  SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE,
   SET_IS_LOGIN_POPUP_VISIBILE,
   SET_CURRENT_MAIN_TOOLBAR_ENTRY,
   SET_IS_OBSERVED_REVIEWS_PAGE_LOADING,
@@ -23,6 +24,7 @@ import {
 const initialState: InteractionState = {
   isPageLocked: true,
   isSearchPopupVisible: false,
+  isSpendFreeViewPopupVisible: false,
   isLoginPopupVisible: false,
   currentMainToolbarEntry: MainToolbarEntry.ProfilePageMyReviews,
   isObservedReviewsPageLoading: false,
@@ -58,6 +60,11 @@ export const interactionStateReducer = (
       return {
         ...state,
         isSearchPopupVisible: action.payload
+      };
+    case SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE:
+      return {
+        ...state,
+        isSpendFreeViewPopupVisible: action.payload
       };
     case SET_IS_LOGIN_POPUP_VISIBILE:
       return {

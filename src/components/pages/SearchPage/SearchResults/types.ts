@@ -11,8 +11,8 @@ export interface IStateProps {
 export interface IDispatchProps {
   lockPage(): void;
   unlockPage(): void;
-  setCurrentObservedUser(user: ISearchProfileInfo): void;
   setIsSearchPopupVisible(flag: boolean): void;
+  setIsSpendFreeViewPopupVisible(flag: boolean): void;
   setRequestedUserShareableId(shareableId: string) : void;
 }
 

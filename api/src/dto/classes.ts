@@ -36,6 +36,8 @@ export class СheckIsEmailAvailableDto {
 
 export class CheckIsUserAvailableForReviewDto extends PairRelatedRequestDto {}
 
+export class CheckIsUserCanBeViewed extends PairRelatedRequestDto {}
+
 export class CheckIsUserConfirmedDto extends SelfRelatedRequestDto {}
 
 export class CheckIsUserRegisteredDto extends SelfRelatedRequestDto {}
@@ -54,7 +56,7 @@ export class CreateCompanyDto {
   ) {}
 }
 
-export class DoesUserHasAvailableProfilesDto extends SelfRelatedRequestDto {}
+export class DoesUserHasAvailableProfilesViewsDto extends SelfRelatedRequestDto {}
 
 export class GetAccessToUserDto {
   public constructor(

@@ -8,6 +8,8 @@ export interface ICheckIsEmailAvailableResponseDto extends ISimpleActionResponse
 
 export interface ICheckIsUserAvailableForReviewResponseDto extends ISimpleActionResponse {}
 
+export interface ICheckIsUserCanBeViewedResponseDto extends ISimpleActionResponse {}
+
 export interface ICheckIsRegisteredResponseDto {
   isRegistered: boolean;
 }
@@ -17,6 +19,8 @@ export interface ICheckIsConfirmedResponseDto {
 }
 
 export interface ICompleteRegistartionResponseDto extends ISimpleActionResponse {}
+
+export interface IDoesUserHasAvailableProfilesViewsResponseDto extends ISimpleActionResponse {}
 
 export interface IExchangeLinkedInCodeResposneDto {
   'li_at': string;

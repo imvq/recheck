@@ -9,8 +9,8 @@ import { ISearchProfileInfo } from 'commons/types/general';
 
 import {
   AppState,
-  setCurrentObservedUser,
   setIsSearchPopupVisible,
+  setIsSpendFreeViewPopupVisible,
   setPageLocked,
   setPageUnlocked,
   setRequestedUserShareableId
@@ -28,20 +28,32 @@ const mapDispatchToProps: types.IDispatchProps = {
   lockPage: setPageLocked,
   unlockPage: setPageUnlocked,
   setIsSearchPopupVisible,
-  setCurrentObservedUser,
+  setIsSpendFreeViewPopupVisible,
   setRequestedUserShareableId
 };
 
 function SearchResults(props: types.IProps) {
-  function requestReviewsAmount(targetShareableId: string) {
-    ApiClient.getTargetNReviewsGot({
+  function processTarget(targetShareableId: string) {
+    ApiClient.checkIsUserCanBeViewed({
       askerProfileId: props.currentProfileInfo.currentId,
       targetShareableId
-    }).then(amountData => {
-      controlledHistory.push(`/profile/observe/${targetShareableId}`);
+    }).then(checkData => {
+      if (checkData.data.success) {
+        controlledHistory.push(`/profile/observe/${targetShareableId}`);
+      } else {
+        ApiClient.doesUserHasAvailableProfilesViews(props.currentProfileInfo.currentId)
+          .then(viewsAvailabilityData => {
+            if (viewsAvailabilityData.data.success) {
+              props.setIsSpendFreeViewPopupVisible(true);
+            } else {
+              props.setIsSearchPopupVisible(true);
+            }
+          })
+          .finally(props.unlockPage);
+      }
     }).catch(error => {
+      // Any other errors are not meant to be seen while using the website interface.
       if (error.response && error.response.status === StatusCodes.FORBIDDEN) {
-        props.setRequestedUserShareableId(targetShareableId);
         props.setIsSearchPopupVisible(true);
       }
     }).finally(() => props.unlockPage());
@@ -49,8 +61,8 @@ function SearchResults(props: types.IProps) {
 
   function handlePersonCardButtonClick(userData: ISearchProfileInfo) {
     props.lockPage();
-    props.setCurrentObservedUser(userData);
-    requestReviewsAmount(userData.shareableId);
+    props.setRequestedUserShareableId(userData.shareableId);
+    processTarget(userData.shareableId);
   }
 
   const Title = (

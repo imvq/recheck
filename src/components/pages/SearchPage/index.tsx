@@ -27,7 +27,7 @@ import {
 } from 'store/selectors';
 
 import DropList from 'components/shared/DropList';
-import SearchPopupManager from 'components/shared/SearchPopupManager';
+import PopupManager from 'components/shared/PopupManager';
 
 import ColleaguesView from './ColleaguesView';
 import CompaniesExpansionLabel from './CompaniesExpansionLabel';
@@ -199,7 +199,7 @@ function SearchPage(props: types.IProps) {
 
       {/* Recommended companies' stuff. */}
       {isRecommendationsViewVisible && RecommendationsPopup}
-      <SearchPopupManager onPopupClose={() => setIsRecommendationsViewVisible(false)} />
+      <PopupManager onPopupClose={() => setIsRecommendationsViewVisible(false)} />
 
     </styled.Wrapper>
   );

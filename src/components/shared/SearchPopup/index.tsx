@@ -13,7 +13,7 @@ import CustomButton from 'components/shared/CustomButton';
 import OptionBadge from './OptionBadge';
 
 import * as types from './types';
-import * as styled from './styled';
+import * as styled from '../Popups/styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo
@@ -76,57 +76,74 @@ const FreeHiddenBadge = (
   </>
 );
 
-const SearchPopup = (props: types.IProps) => {
-  const onWriteReviewClickHandler = () => {
+const TitleWrapper = (
+  <styled.BodyWrapper>
+    <styled.Title>Вы можете получить отзыв о кандидате двумя способами:</styled.Title>
+  </styled.BodyWrapper>
+);
+
+function SearchPopup(props: types.IProps) {
+  function onWriteReviewClickHandler() {
+    props.lockPage();
+
     ApiClient.getColleagues(props.currentProfileInfo.currentId)
       .then(colleaguesData => props.setColleagues(colleaguesData.data.results))
       .finally(() => props.unlockPage());
 
     props.onClose();
     props.setIsVisible(false);
-  };
+  }
+
+  const TopWrapper = (
+    <styled.TopWrapper>
+      <styled.AdaptedCloseCross onClick={() => props.setIsVisible(false)} />
+    </styled.TopWrapper>
+  );
+
+  const BuySection = (
+    <styled.OptionGroupWrapper>
+      <OptionBadge
+        mainView={BuyMainBadge}
+        hiddenView={BuyHiddenBadge}
+      />
+      <styled.ButtonWrapper>
+        <CustomButton isDisabled={false}>Купить отзыв</CustomButton>
+      </styled.ButtonWrapper>
+    </styled.OptionGroupWrapper>
+  );
+
+  const WriteReviewSection = (
+    <styled.OptionGroupWrapper>
+      <OptionBadge
+        mainView={FreeMainBadge}
+        hiddenView={FreeHiddenBadge}
+      />
+      <styled.ButtonWrapper>
+        <CustomButton
+          isDisabled={false}
+          onClick={onWriteReviewClickHandler}
+        >
+          Оставить отзыв
+        </CustomButton>
+      </styled.ButtonWrapper>
+    </styled.OptionGroupWrapper>
+  );
 
   return (
     <styled.Wrapper>
       <styled.Frame>
-        <styled.TopWrapper>
-          <styled.AdaptedCloseCross onClick={() => props.setIsVisible(false)} />
-        </styled.TopWrapper>
-
-        <styled.BodyWrapper>
-          <styled.Title>Вы можете получить отзыв о кандидате двумя способами:</styled.Title>
-        </styled.BodyWrapper>
+        {TopWrapper}
+        {TitleWrapper}
 
         <styled.OptionsWrapper>
-          <styled.OptionGroupWrapper>
-            <OptionBadge
-              mainView={BuyMainBadge}
-              hiddenView={BuyHiddenBadge}
-            />
-            <styled.ButtonWrapper>
-              <CustomButton isDisabled={false}>Купить отзыв</CustomButton>
-            </styled.ButtonWrapper>
-          </styled.OptionGroupWrapper>
-
-          <styled.OptionGroupWrapper>
-            <OptionBadge
-              mainView={FreeMainBadge}
-              hiddenView={FreeHiddenBadge}
-            />
-            <styled.ButtonWrapper>
-              <CustomButton
-                isDisabled={false}
-                onClick={onWriteReviewClickHandler}
-              >
-                Оставить отзыв
-              </CustomButton>
-            </styled.ButtonWrapper>
-          </styled.OptionGroupWrapper>
+          {BuySection}
+          {WriteReviewSection}
         </styled.OptionsWrapper>
+
       </styled.Frame>
       <styled.ClickableBackground onClick={() => props.setIsVisible(false)} />
     </styled.Wrapper>
   );
-};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(SearchPopup));

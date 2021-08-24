@@ -27,17 +27,6 @@ export default class UserController {
   }
 
   /**
-   * Check if a user can view somebody's profile.
-   */
-  @Path('/availability/reviews')
-  @BodyGuard
-  @POST
-  public async doesUserHasAvailableProfiles(bodyData: dto.DoesUserHasAvailableProfilesDto)
-    : Promise<apiResponses.IDoesUserHasAvailableProfilesResponseDto> {
-    return this.injectedService.doesUserHasAvailableProfiles(bodyData);
-  }
-
-  /**
    * Check if provided email is available.
    */
   @Path('/availability/email')
@@ -58,6 +47,28 @@ export default class UserController {
   public async checkIsUserAvailableForReview(bodyData: dto.CheckIsUserAvailableForReviewDto)
     : Promise<apiResponses.ICheckIsUserAvailableForReviewResponseDto> {
     return this.injectedService.checkIsUserAvailableForReview(bodyData);
+  }
+
+  /**
+   * Check if a user can be viewed by another one.
+   */
+  @Path('/availability/can-view')
+  @BodyGuard
+  @POST
+  public async checkIsUserCanBeViewed(bodyData: dto.CheckIsUserCanBeViewed)
+    : Promise<apiResponses.ICheckIsUserCanBeViewedResponseDto> {
+    return this.injectedService.checkIsUserCanBeViewed(bodyData);
+  }
+
+  /**
+   * Check if a user has free profile views.
+   */
+  @Path('/availability/profile-views')
+  @BodyGuard
+  @POST
+  public async doesUserHasAvailableProfilesViews(bodyData: dto.DoesUserHasAvailableProfilesViewsDto)
+    : Promise<apiResponses.IDoesUserHasAvailableProfilesViewsResponseDto> {
+    return this.injectedService.doesUserHasAvailableProfilesViews(bodyData);
   }
 
   /**

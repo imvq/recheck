@@ -56,6 +56,18 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
+  public async checkIsUserCanBeViewed(checkDto: dto.CheckIsUserCanBeViewed)
+    : Promise<apiResponses.ICheckIsUserCanBeViewedResponseDto> {
+    const asker = await UserManager.getUser(checkDto.askerProfileId);
+    const target = await UserManager.getUserBySharedId(checkDto.targetShareableId);
+    UserService.handleUsersExistence(asker, target);
+    // @ts-ignore: asker and target are guaranteed to be existed here.
+    const success = await UserManager.isTargetAvailable(asker, target);
+
+    return { success };
+  }
+
+  @utils.errorsAutoHandler({ except: [], logger })
   public async checkIsUserRegistered(profileIdDto: dto.CheckIsUserRegisteredDto)
     : Promise<apiResponses.ICheckIsUserRegisteredResponseDto> {
     return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
@@ -317,6 +329,16 @@ export default class UserService {
     return { success: true };
   }
 
+  @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
+  public async doesUserHasAvailableProfilesViews(checkDto: dto.DoesUserHasAvailableProfilesViewsDto)
+    : Promise<apiResponses.IDoesUserHasAvailableProfilesViewsResponseDto> {
+    const asker = await UserManager.getUser(checkDto.profileId);
+    UserService.handleUsersExistence(asker);
+
+    // @ts-ignore: asker and target are guaranteed to be existed here.
+    return { success: asker.reviewsAvailable > 0 };
+  }
+
   public static handleUsersExistence(...users: (User | undefined)[]) {
     if (users.some(user => !user)) {
       throw new Errors.NotFoundError('Some of the provided IDs does not represent a user.');
@@ -327,15 +349,5 @@ export default class UserService {
     if (!await UserManager.isTargetAvailable(asker, target)) {
       throw new Errors.ForbiddenError('Target user is not available for asker');
     }
-  }
-
-  @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
-  public async doesUserHasAvailableProfiles(checkDto: dto.DoesUserHasAvailableProfilesDto)
-    : Promise<apiResponses.IDoesUserHasAvailableProfilesResponseDto> {
-    const asker = await UserManager.getUser(checkDto.profileId);
-    UserService.handleUsersExistence(asker);
-
-    // @ts-ignore: asker and target are guaranteed to be existed here.
-    return { success: asker.reviewsAvailable > 0 };
   }
 }

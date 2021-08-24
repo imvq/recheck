@@ -26,6 +26,16 @@ export default class ApiClient {
     return ApiClient.instance.post('/user/availability/review', checkData);
   }
 
+  public static checkIsUserCanBeViewed(checkData: generalTypes.ICheckIsUserCanBeViewed)
+    : generalTypes.APIResponse<apiResponses.ICheckIsUserCanBeViewedResponseDto> {
+    return ApiClient.instance.post('/user/availability/can-view', checkData);
+  }
+
+  public static doesUserHasAvailableProfilesViews(profileId: string)
+    : generalTypes.APIResponse<apiResponses.ICheckIsUserAvailableForReviewResponseDto> {
+    return ApiClient.instance.post('/user/availability/profile-views', { profileId });
+  }
+
   public static checkIsRegistered(profileId: string)
     : generalTypes.APIResponse<apiResponses.ICheckIsRegisteredResponseDto> {
     return ApiClient.instance.post('/user/is-registered', { profileId });

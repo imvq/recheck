@@ -8,6 +8,7 @@ import {
   InteractionStateActionType,
   SET_IS_PAGE_LOCKED,
   SET_IS_SEARCH_POPUP_VISIBILE,
+  SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE,
   SET_IS_LOGIN_POPUP_VISIBILE,
   SET_CURRENT_MAIN_TOOLBAR_ENTRY,
   SET_IS_PROFILE_ABOUT_TAB_LOADING,
@@ -36,6 +37,12 @@ export const setPageUnlocked = () => setIsPageLocked(false);
 export const setIsSearchPopupVisible = (flag: boolean)
   : InteractionStateActionType => ({
   type: SET_IS_SEARCH_POPUP_VISIBILE,
+  payload: flag
+});
+
+export const setIsSpendFreeViewPopupVisible = (flag: boolean)
+  : InteractionStateActionType => ({
+  type: SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE,
   payload: flag
 });
 
@@ -177,6 +184,7 @@ export const loadNthReviewGot = (profileId: string, nthReview: number) => (
   dispatch: Dispatch<AppActionType>
 ) => {
   dispatch(setIsProfileAboutTabLoading(true));
+
   ApiClient.getNthReviewGot({ profileId, nthReview })
     .then(nthReviewResponse => dispatch(setCurrentReviewGot(nthReviewResponse.data)))
     .finally(() => dispatch(setIsProfileAboutTabLoading(false)));
@@ -186,6 +194,7 @@ export const loadNthReviewLeft = (profileId: string, nthReview: number) => (
   dispatch: Dispatch<AppActionType>
 ) => {
   dispatch(setIsProfileReviewsTabLoading(true));
+
   ApiClient.getNthReviewLeft({ profileId, nthReview })
     .then(nthReviewResponse => dispatch(setCurrentReviewLeft(nthReviewResponse.data)))
     .finally(() => dispatch(setIsProfileReviewsTabLoading(false)));
