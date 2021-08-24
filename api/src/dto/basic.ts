@@ -27,6 +27,7 @@ export class UserDto {
     public position: string,
     public workStartMonth: number,
     public workStartYear: number,
-    public referral: string | null
+    public referral: string | null,
+    public recruiter: string | null
   ) {}
 }

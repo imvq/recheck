@@ -15,8 +15,11 @@ export default class User {
   @orm.Generated('uuid')
   shareableId!: string;
 
-  @orm.Column('text', { nullable: true })
+  @orm.Column('uuid', { nullable: true })
   referral!: string | null;
+
+  @orm.Column('uuid', { nullable: true })
+  recruiter!: string | null;
 
   // Foreign key. Every user belongs to one company.
   @orm.ManyToOne(() => Company, company => company.members)

@@ -1,3 +1,4 @@
+import { IAppProfileInfo } from 'commons/types/general';
 import { MainToolbarEntry } from 'commons/utils/enums';
 
 export interface IOwnProps {
@@ -6,6 +7,7 @@ export interface IOwnProps {
 
 export interface IStateProps {
   currentMainToolbarEntry: MainToolbarEntry;
+  currentProfileInfo: IAppProfileInfo;
 }
 
 export interface IDispatchProps {
