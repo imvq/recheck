@@ -109,7 +109,11 @@ function ReviewPage(props: types.IProps) {
       // @ts-ignore: requestedUserShareableId is guaranteed to be a valid string here.
       targetShareableId: props.requestedUserShareableId
     }).then(() => {
-      controlledHistory.push(`/profile/observe/${props.requestedUserShareableId}`);
+      const redirectTo = props.requestedUserShareableId
+        ? `/profile/observe/${props.requestedUserShareableId}`
+        : '/profile';
+
+      controlledHistory.push(redirectTo);
     }).catch(() => controlledHistory.push('/profile'));
   }
 
