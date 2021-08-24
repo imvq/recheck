@@ -294,7 +294,7 @@ export default class UserService {
     : Promise<apiResponses.IGetTargetNReviewsGotResponseDto> {
     const asker = await UserManager.getUser(bodyData.askerProfileId);
     const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
-    this.handleUsersExistence(asker, target);
+    UserService.handleUsersExistence(asker, target);
     // @ts-ignore: asker and target are guaranteed to be existed here.
     await this.handleAvailability(asker, target);
 
@@ -306,7 +306,7 @@ export default class UserService {
     : Promise<apiResponses.IMakeUserAvailableResponseDto> {
     const asker = await UserManager.getUser(bodyData.askerProfileId, ['availableUsers']);
     const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
-    this.handleUsersExistence(asker, target);
+    UserService.handleUsersExistence(asker, target);
 
     // @ts-ignore: asker and target are guaranteed to be existed here.
     await UserManager.makeUserAvailable(asker, target);
@@ -314,13 +314,13 @@ export default class UserService {
     return { success: true };
   }
 
-  private handleUsersExistence(...users: (User | undefined)[]) {
+  public static handleUsersExistence(...users: (User | undefined)[]) {
     if (users.some(user => !user)) {
       throw new Errors.NotFoundError('Some of the provided IDs does not represent a user.');
     }
   }
 
-  private async handleAvailability(asker: User, target: User) {
+  public static async handleAvailability(asker: User, target: User) {
     if (!await UserManager.isTargetAvailable(asker, target)) {
       throw new Errors.ForbiddenError('Target user is not available for asker');
     }
@@ -330,8 +330,7 @@ export default class UserService {
   public async doesUserHasAvailableProfiles(checkDto: dto.DoesUserHasAvailableProfilesDto)
     : Promise<apiResponses.IDoesUserHasAvailableProfilesResponseDto> {
     const asker = await UserManager.getUser(checkDto.profileId);
-
-    this.handleUsersExistence(asker);
+    UserService.handleUsersExistence(asker);
 
     // @ts-ignore: asker and target are guaranteed to be existed here.
     return { success: asker.reviewsAvailable > 0 };

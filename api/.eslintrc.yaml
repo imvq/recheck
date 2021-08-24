@@ -37,6 +37,7 @@ rules:
   no-empty-function: 0
   no-console: 0
   no-nested-ternary: 0
+  no-param-reassign: ['error', { 'props': false }]
   no-shadow: 0
   no-useless-constructor: 0
   no-underscore-dangle: 0

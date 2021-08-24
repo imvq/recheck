@@ -16,7 +16,7 @@ export default class UserManager {
     const repository = getRepository(User);
     const toBeSaved = repository.create({ ...userData, company, confirmationCode });
 
-    await repository.save(toBeSaved);
+    await UserManager.updateUser(toBeSaved);
   }
 
   /**
@@ -141,7 +141,13 @@ export default class UserManager {
   public static async makeUserAvailable(asker: User, target: User) {
     asker.availableUsers.push(target);
 
-    return getRepository(User).save(asker);
+    return UserManager.updateUser(asker);
+  }
+
+  public static async addAvailableReviews(target: User, n = 1) {
+    target.reviewsAvailable += n;
+
+    return UserManager.updateUser(target);
   }
 
   public static async updateUser(user: User): Promise<User> {
