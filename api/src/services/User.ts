@@ -1,19 +1,21 @@
 import { Errors } from 'typescript-rest';
 import { v1 as uuidv1 } from 'uuid';
 
-import dto from '@dto';
-import utils from '@utils';
 import * as apiResponses from '@typing/apiResponses';
 
-import User from '@database/entities/User.entity';
-import Review from '@database/entities/Review.entity';
+import dto from '@dto';
+import utils from '@utils';
+
 import Company from '@database/entities/Company.entity';
+import Review from '@database/entities/Review.entity';
+import User from '@database/entities/User.entity';
 
 import CompanyManager from '@database/managers/CompanyManager';
 import ReviewManager from '@database/managers/ReviewManager';
 import UserManager from '@database/managers/UserManager';
 
 import logger from '@logging/Logger';
+
 import MailService from './Mail';
 import NameTokensService from './NameTokens';
 
@@ -297,7 +299,7 @@ export default class UserService {
     const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
     UserService.handleUsersExistence(asker, target);
     // @ts-ignore: asker and target are guaranteed to be existed here.
-    await this.handleAvailability(asker, target);
+    await UserService.handleAvailability(asker, target);
 
     return UserManager.getTargetNReviewsGot(bodyData.askerProfileId, bodyData.targetShareableId);
   }
