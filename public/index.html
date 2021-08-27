@@ -2,38 +2,49 @@
 <html lang="ru" prefix="og: http://ogp.me/ns#">
 
 <head>
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
+  <!-- Google Tag Manager. -->
+  <script>
+    (function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
         'gtm.start':
           new Date().getTime(), event: 'gtm.js'
       }); var f = d.getElementsByTagName(s)[0],
         j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-PZTLFW8');</script>
-  <!-- End Google Tag Manager -->
+    })(window, document, 'script', 'dataLayer', 'GTM-PZTLFW8');
+  </script>
 
+  <!-- Basic info. -->
   <meta charset="utf-8" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Платформа для поиска отзывов о кандидате с прошлых мест работы" />
 
-  <meta property="og:locale" content="ru_RU" />
+  <!-- Open Graph Meta. -->
+  <meta property="og:locale" content="ru" />
   <meta property="og:title" content="reCheck" />
   <meta property="og:description" content="Платформа для поиска отзывов о кандидате с прошлых мест работы" />
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 
+  <!-- Windows 8 Pin Icon. -->
   <meta name="msapplication-TileImage" content="%PUBLIC_URL%/metro/mstile-150x150.png">
   <meta name="msapplication-TileColor" content="#33c7ba">
 
+  <!-- Apple devices icons. -->
   <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple/apple-touch-icon.png" />
-  <link rel="icon" href="%PUBLIC_URL%/icons/favicons/16x16.png" type="image/png" sizes="16x16">
+  <link rel="mask-icon" href="%PUBLIC_URL%/apple/safari-pinned-tab.svg" color="#33c7ba">
+
+  <!-- Web browser icons. -->
   <link rel="icon" href="%PUBLIC_URL%/icons/favicons/32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="%PUBLIC_URL%/icons/favicons/96x96.png" type="image/png" sizes="96x96">
-  <link rel="mask-icon" href="%PUBLIC_URL%/apple/safari-pinned-tab.svg" color="#33c7ba">
+  <link rel="icon" href="%PUBLIC_URL%/icons/favicons/192x192.png" type="image/png" sizes="192x192">
+
+  <!-- Web Manifest. -->
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- Fonts. -->
   <link rel="stylesheet" href="%PUBLIC_URL%/fonts/declarations.css">
 
   <title>reCheck</title>
@@ -41,11 +52,13 @@
 
 <body>
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZTLFW8" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZTLFW8" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe>
+  </noscript>
 
   <noscript>Вам необходимо включить JavaScript для работы с сайтом.</noscript>
+
   <div id="root"></div>
 </body>
 
