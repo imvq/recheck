@@ -1,23 +1,17 @@
-import { Server, Errors } from 'typescript-rest';
-import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import fs from 'fs';
 import http from 'http';
 import https from 'https';
-import fs from 'fs';
-import express, {
-  Application,
-  Handler,
-  Request,
-  Response,
-  NextFunction
-} from 'express';
+import morgan from 'morgan';
+import path from 'path';
+
+import express, { Application, Handler, Request, Response, NextFunction } from 'express';
+import { Server, Errors } from 'typescript-rest';
 
 import * as constants from '@commons/constants';
-import * as computed from '@commons/computed';
 import * as generalTypes from '@typing/general';
-import utils from '@utils';
 
 import logger from '@logging/Logger';
 import connect from '@database/connect';
@@ -26,41 +20,40 @@ import connect from '@database/connect';
  * Main server application class.
  */
 export default class App {
-  private host: string = constants.DEFAULT_HOST;
+  private host: string = process.env.HOST || constants.DEFAULT_HOST;
 
-  private port: number = constants.DEFAULT_PORT;
+  private port: number = Number.parseInt(process.env.PORT || '') || constants.DEFAULT_PORT;
 
   private server: https.Server | http.Server | null = null;
 
+  private root = require && require.main ? path.dirname(require.main.filename) : `../${__dirname}`;
+
   public constructor(private readonly app: Application = express()) {
-    this.resolveHost();
-    this.resolvePort();
     this.applyMidlewares();
     this.applyControllers();
-    this.applyErrorHandler();
-    this.applyStaticsResolver();
 
     if (process.env.NODE_ENV === 'development') {
-      this.applyDevStuff();
+      this.applyDevelopmentStuff();
     }
   }
 
-  /**
-   * Start the application.
-   */
-  public async start(): Promise<void> {
-    return new Promise<void>((resolve) => {
-      this.server = this.app.listen(this.port, this.host, () => {
-        logger.log(`Listening to ${this.host}:${this.port}`);
-        return resolve();
-      });
+  public start = async () => new Promise<void>(resolve => {
+    this.server = this.app.listen(this.port, this.host, () => {
+      logger.log(`Listening to ${this.host}:${this.port}`);
+      return resolve();
     });
-  }
+  });
+
+  public stop = async () => new Promise<void>(resolve => {
+    this.server?.close();
+    return resolve();
+  });
 
   /**
    * Start the application over self-signed SSL certificate.
+   * Use this in development instead of using start().
    */
-  public async dev(): Promise<void> {
+  public async dev() {
     return new Promise<void>((resolve) => {
       this.server = https.createServer({
         key: fs.readFileSync(process.env.SSL_KEY_PATH as string),
@@ -74,42 +67,7 @@ export default class App {
     });
   }
 
-  /**
-   * Stop the application.
-   */
-  public async stop(): Promise<void> {
-    return new Promise<void>((resolve) => {
-      this.server?.close();
-      return resolve();
-    });
-  }
-
-  /**
-   * If a valid environment variable for the host is provided
-   * then use it.
-   */
-  private resolveHost(): void {
-    if (process.env.HOST) {
-      this.host = process.env.HOST as string;
-    }
-  }
-
-  /**
-   * If a valid environment variable for the port is provided
-   * then use it.
-   */
-  private resolvePort(): void {
-    const maybePort = process.env.PORT;
-    if (utils.isString(maybePort)
-      && utils.isValidNumber(maybePort as string)) {
-      this.port = parseInt(maybePort as string, 10);
-    }
-  }
-
-  /**
-   * Plug in extensions for the application.
-   */
-  private applyMidlewares(): void {
+  private applyMidlewares() {
     // Cross-Origin Resource Sharing.
     this.app.use(cors({
       credentials: true,
@@ -123,60 +81,54 @@ export default class App {
     this.app.use(cookieParser());
 
     // Provide database connection on each request.
-    this.app.use(async (
-      _request: Request, _response: Response, advance: NextFunction
-    ) => {
-      await connect();
-      advance();
-    });
+    this.app.use(App.connectionHook);
+
+    // Apply JSON error handler.
+    this.app.use(App.jsonErrorsHook);
   }
 
   /**
    * Apply IoC REST controllers.
    */
-  private applyControllers(): void {
-    const controllersDir = `${computed.ROOT_DIR}/controllers`;
+  private applyControllers() {
+    const controllersDir = `${this.root}/controllers`;
     const apiRouter = express.Router();
+
     Server.loadControllers(apiRouter, `${controllersDir}/**/*.js`, __dirname);
+
     this.app.use('/api/v1', apiRouter);
   }
 
-  /**
-   * Apply JSON error handler.
-   */
-  private applyErrorHandler(): void {
-    this.app.use((
-      error: any, _: Request, response: Response, advance: NextFunction
-    ) => {
-      if (error instanceof Errors.HttpError) {
-        if (!response.headersSent) {
-          response.set('Content-Type', 'application/json')
-            .status(error.statusCode)
-            .json({ error: error.message, code: error.statusCode });
-        }
-      }
-
-      // Important to allow default error handler to close connection
-      // if headers are already sent.
-      return advance();
-    });
-  }
-
-  /**
-   * Provide resolving of static files.
-   */
-  private applyStaticsResolver(): void {
-    this.app.use('/media', express.static(`${computed.ROOT_DIR}/media`));
-  }
-
-  /**
-   * Apply development-only stuff.
-   */
-  public applyDevStuff(): void {
+  private applyDevelopmentStuff() {
     // Development logging.
     this.app.use(morgan('dev') as Handler);
 
     // Interactive API documenting.
-    Server.swagger(this.app, { filePath: `${computed.ROOT_DIR}/swagger.yaml` });
+    Server.swagger(this.app, { filePath: `${this.root}/swagger.yaml` });
+  }
+
+  /**
+   * Database connection handler.
+   */
+  private static async connectionHook(_req: Request, _res: Response, next: NextFunction) {
+    await connect();
+    next();
+  }
+
+  /**
+   * Errors handler (Since express does not provide its own anymore).
+   */
+  private static async jsonErrorsHook(err: any, _: Request, res: Response, next: NextFunction) {
+    if (err instanceof Errors.HttpError) {
+      if (!res.headersSent) {
+        res.set('Content-Type', 'application/json')
+          .status(err.statusCode)
+          .json({ error: err.message, code: err.statusCode });
+      }
+    }
+
+    // Important to allow default error handler to close connection
+    // if headers are already sent.
+    return next();
   }
 }

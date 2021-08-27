@@ -1,10 +1,10 @@
-import { createTransport, Transporter } from 'nodemailer';
+import AbortController from 'node-abort-controller';
 import nodemailerMailgun from 'nodemailer-mailgun-transport';
 
-import * as generalTypes from '@typing/general';
-import utils from '@utils';
+import { createTransport, Transporter } from 'nodemailer';
 
-import AbortController from 'node-abort-controller';
+import { IReplacements } from '@typing/general';
+
 import TemplatesService from './Templates';
 
 /*
@@ -20,7 +20,7 @@ function getMailTransport() {
   if (process.env.NODE_ENV === 'development') {
     return createTransport({
       port: parseInt(process.env.MAIL_PORT || ''),
-      secure: utils.parseBoolean(process.env.MAIL_SECURED || ''),
+      secure: process.env.MAIL_SECURED === 'true',
       host: process.env.MAIL_HOST || '',
       auth: {
         user: process.env.MAIL_USERNAME || '',
@@ -44,7 +44,7 @@ function getMailTransport() {
 export default class MailService {
   private static readonly instance: Transporter = getMailTransport();
 
-  public static async sendConfirmationMail(to: string, confirmationCode: string): Promise<void> {
+  public static async sendConfirmationMail(to: string, confirmationCode: string) {
     const templatesPath = `${__dirname}/templates/confirmation.handlebars`;
     const replacements = { origin: process.env.ORIGIN as string, uuid: confirmationCode };
     try {
@@ -54,8 +54,7 @@ export default class MailService {
     }
   }
 
-  public static async sendReferralNotification(to: string, targetName: string, targetEmail: string)
-    : Promise<void> {
+  public static async sendNotification(to: string, targetName: string, targetEmail: string) {
     const templatesPath = `${__dirname}/templates/referral.handlebars`;
     const replacements = {
       origin: process.env.ORIGIN as string,
@@ -68,8 +67,8 @@ export default class MailService {
   private static async sendMail(
     destination: string,
     templatesPath: string,
-    replacements: generalTypes.IReplacements
-  ): Promise<void> {
+    replacements: IReplacements
+  ) {
     const html = TemplatesService.getCompiledTemplate(templatesPath, replacements);
     const options = {
       from: process.env.MAIL_USERNAME as string,
@@ -77,6 +76,7 @@ export default class MailService {
       subject: 'Подтверждение регистрации в reCheck',
       html
     };
+
     await MailService.instance.sendMail(options);
   }
 }

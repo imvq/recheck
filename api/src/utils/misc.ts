@@ -8,16 +8,6 @@
 export const getDummy = () => {};
 
 /**
- * Get stringified boolean value if possible.
- */
-export const parseBoolean = (arg: string) => arg === 'true';
-
-/**
- * Check if the argument specified is string.
- */
-export const isString = (arg: any) => typeof arg === 'string';
-
-/**
  * Get axios config for authorized requests.
  */
 export function createAuthConfig(accessToken: string) {

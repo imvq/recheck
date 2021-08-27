@@ -288,7 +288,7 @@ export default class UserService {
     const referral = await UserManager.getUserBySharedId(referralSharedId);
 
     if (referral) {
-      await MailService.sendReferralNotification(
+      await MailService.sendNotification(
         referral.email,
         targetName,
         targetEmail
