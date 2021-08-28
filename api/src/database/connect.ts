@@ -5,19 +5,19 @@ import logger from '@logging/Logger';
 import config from './config';
 
 export default class PostgreSqlConnector {
-  private static connection: orm.Connection | null = null;
+  private connection: orm.Connection | null = null;
 
-  public static async connect() {
+  public async connect() {
     try {
-      await PostgreSqlConnector.getConnection();
+      await this.getConnection();
     } catch (exception) {
       logger.err(exception?.message || 'Database connection error.');
     }
   }
 
-  private static async getConnection() {
+  private async getConnection() {
     try {
-      await PostgreSqlConnector.getExistedConnection();
+      await this.getExistedConnection();
     } catch {
       await orm.createConnection(config);
 
@@ -25,11 +25,11 @@ export default class PostgreSqlConnector {
     }
   }
 
-  private static async getExistedConnection() {
-    PostgreSqlConnector.connection = orm.getConnection();
+  private async getExistedConnection() {
+    this.connection = orm.getConnection();
 
-    if (!PostgreSqlConnector.connection.isConnected) {
-      await PostgreSqlConnector.connection.connect();
+    if (!this.connection.isConnected) {
+      await this.connection.connect();
 
       logger.log('Database connection re-established');
     }

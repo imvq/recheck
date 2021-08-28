@@ -1,11 +1,8 @@
 import 'module-alias/register';
 import 'source-map-support/register';
 
-import startServer from '@application';
+import ServerRunner from '@application/ServerRunner';
 
-/**
- * The entry point.
- */
 if (require.main === module) {
-  startServer();
+  new ServerRunner().startServer();
 }

@@ -27,7 +27,7 @@ const getRoot = () => (require && require.main ? getHome() : `../${__dirname}`);
 /**
  * Main server application class.
  */
-export default class App {
+export default class BackendApplication {
   private host = getHost();
 
   private port = getPort();
@@ -35,6 +35,8 @@ export default class App {
   private root = getRoot();
 
   private server: https.Server | http.Server | null = null;
+
+  private database = new PostgreSqlConnector();
 
   public constructor(private readonly app: Application = express()) {
     this.applyMidlewares();
@@ -89,10 +91,10 @@ export default class App {
     this.app.use(cookieParser());
 
     // Provide database connection on each request.
-    this.app.use(App.connectionHook);
+    this.app.use(this.connectionHook.bind(this));
 
     // Apply JSON error handler.
-    this.app.use(App.jsonErrorsHook);
+    this.app.use(this.jsonErrorsHook.bind(this));
   }
 
   /**
@@ -118,15 +120,15 @@ export default class App {
   /**
    * Database connection handler.
    */
-  private static async connectionHook(_req: Request, _res: Response, next: NextFunction) {
-    await PostgreSqlConnector.connect();
+  private async connectionHook(_req: Request, _res: Response, next: NextFunction) {
+    await this.database.connect();
     next();
   }
 
   /**
    * Errors handler (Since express does not provide its own anymore).
    */
-  private static async jsonErrorsHook(err: any, _: Request, res: Response, next: NextFunction) {
+  private async jsonErrorsHook(err: any, _: Request, res: Response, next: NextFunction) {
     if (err instanceof Errors.HttpError) {
       if (!res.headersSent) {
         res.set('Content-Type', 'application/json')

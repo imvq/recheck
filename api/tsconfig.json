@@ -22,8 +22,8 @@
     "allowJs": true,
     "strict": true,
     "paths": {
-      "@application": [
-        "src/application"
+      "@application/*": [
+        "src/application/*"
       ],
       "@commons/*": [
         "src/commons/*"
