@@ -16,17 +16,25 @@ import * as generalTypes from '@typing/general';
 import logger from '@logging/Logger';
 import PostgreSqlConnector from '@database/connect';
 
+const getHost = () => process.env.HOST || constants.DEFAULT_HOST;
+
+const getPort = () => Number.parseInt(process.env.PORT || '') || constants.DEFAULT_PORT;
+
+const getHome = () => (require.main && path.dirname(require.main.filename));
+
+const getRoot = () => (require && require.main ? getHome() : `../${__dirname}`);
+
 /**
  * Main server application class.
  */
 export default class App {
-  private host: string = process.env.HOST || constants.DEFAULT_HOST;
+  private host = getHost();
 
-  private port: number = Number.parseInt(process.env.PORT || '') || constants.DEFAULT_PORT;
+  private port = getPort();
+
+  private root = getRoot();
 
   private server: https.Server | http.Server | null = null;
-
-  private root = require && require.main ? path.dirname(require.main.filename) : `../${__dirname}`;
 
   public constructor(private readonly app: Application = express()) {
     this.applyMidlewares();
