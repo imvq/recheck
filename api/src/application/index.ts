@@ -1,10 +1,8 @@
 import logger from '@logging/Logger';
+
 import App from './App';
 
-/**
- * Start the server.
- */
-export default async function startServer(): Promise<void> {
+export default async function startServer() {
   const apiServer = new App();
 
   switch (process.env.NODE_ENV || '') {
@@ -19,11 +17,11 @@ export default async function startServer(): Promise<void> {
       process.exit(0);
   }
 
-  const graceful = async () => {
+  async function graceful() {
     logger.log('Server terminated manually');
     await apiServer.stop();
     process.exit(0);
-  };
+  }
 
   process.on('SIGTERM', graceful);
   process.on('SIGINT', graceful);

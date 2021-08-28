@@ -14,7 +14,7 @@ import * as constants from '@commons/constants';
 import * as generalTypes from '@typing/general';
 
 import logger from '@logging/Logger';
-import connect from '@database/connect';
+import PostgreSqlConnector from '@database/connect';
 
 /**
  * Main server application class.
@@ -111,7 +111,7 @@ export default class App {
    * Database connection handler.
    */
   private static async connectionHook(_req: Request, _res: Response, next: NextFunction) {
-    await connect();
+    await PostgreSqlConnector.connect();
     next();
   }
 
