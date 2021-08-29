@@ -1,13 +1,12 @@
-import { ReactFacebookLoginInfo, ReactFacebookFailureResponse } from 'react-facebook-login';
+import * as constants from 'commons/utils/constants';
+import * as apiResponses from 'commons/types/responses';
 
 import ApiClient from 'commons/externals/ApiClient';
-import * as constants from 'commons/utils/constants';
 import controlledHistory from 'commons/utils/routing';
-import * as apiResponses from 'commons/types/responses';
-import * as generalTypes from 'commons/types/general';
-import { mapProfileDtoToState } from 'commons/utils/functions';
+
 import { cookieManager, cookiesList } from 'commons/utils/cookies';
-import { FacebookLoginResponse } from './types';
+import { IAppProfileInfo } from 'commons/types/general';
+import { mapProfileDtoToState } from 'commons/utils/functions';
 
 function setCookie(name: string, value: string) {
   const tokenExpiration = new Date(Date.now() + constants.MONTH_MS * 2);
@@ -18,14 +17,11 @@ export function onError() {
   window.location.replace(window.location.origin);
 }
 
-/**
- * Do stuff on LinkedIn or Facebook profile info got through the API.
- */
 function onProfileDataRetrieved(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: generalTypes.IAppProfileInfo) => void,
+  setCurrentProfileInfoCallback: (profileInfo: IAppProfileInfo) => void,
   profileResponse: apiResponses.ILinkedInProfileDto | apiResponses.IFacebookProfileDto
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
@@ -60,7 +56,7 @@ export function onSuccessLinkedIn(
   setPageLockedCallback: (flag: boolean) => void,
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: generalTypes.IAppProfileInfo) => void
+  setCurrentProfileInfoCallback: (profileInfo: IAppProfileInfo) => void
 ) {
   // Lock page to prevent user actions while retrieving and processing profile data.
   setPageLockedCallback(true);
@@ -85,52 +81,4 @@ export function onSuccessLinkedIn(
     }).catch(onError)
     // Unlock the page in the end.
     .finally(() => setPageLockedCallback(false));
-}
-
-function isFacebookFailureResponse(result: FacebookLoginResponse)
-  : result is ReactFacebookFailureResponse {
-  // 'status' is a field of ReactFacebookFailureResponse type.
-  return !!((result as ReactFacebookFailureResponse).status as string | undefined);
-}
-
-export function onSuccessFacebook(
-  result: FacebookLoginResponse,
-  setPageLockedCallback: (flag: boolean) => void,
-  setIsLoginPopupVisibleCallback: (flag: boolean) => void,
-  setIsAuthorizedCallback: (flag: boolean) => void,
-  setCurrentProfileInfoCallback: (profileInfo: generalTypes.IAppProfileInfo) => void
-) {
-  // Lock page to prevent user actions while processing profile data.
-  setPageLockedCallback(true);
-
-  if (!isFacebookFailureResponse(result)) {
-    // 1. Save OAuth bearer token to cookies.
-    setCookie(cookiesList.accessTokenFacebook, result.accessToken);
-
-    // 2. Time to retrieve basic profile info from Facebook response.
-    const oauthData = result as ReactFacebookLoginInfo;
-    const profileInfo: apiResponses.IFacebookProfileDto = {
-      profileId: oauthData.userID,
-      name: oauthData.name || '',
-      email: '',
-      shareableId: '',
-      photoUrl: oauthData.picture?.data.url || ''
-    };
-
-    ApiClient.getProfileFacebookReduced(profileInfo.profileId)
-      .then(reducedProfileData => {
-        profileInfo.email = reducedProfileData.data.email;
-        profileInfo.shareableId = reducedProfileData.data.shareableId;
-
-        onProfileDataRetrieved(
-          setPageLockedCallback,
-          setIsLoginPopupVisibleCallback,
-          setIsAuthorizedCallback,
-          setCurrentProfileInfoCallback,
-          profileInfo
-        );
-      }).catch(onError);
-  } else {
-    onError();
-  }
 }

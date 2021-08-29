@@ -1843,11 +1843,6 @@
   resolved "https://registry.npmjs.org/@types/q/-/q-1.5.4.tgz"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
-"@types/react-css-modules@^4.6.2":
-  version "4.6.2"
-  resolved "https://registry.npmjs.org/@types/react-css-modules/-/react-css-modules-4.6.2.tgz"
-  integrity sha512-jRgAsH//g6BHS/cINR90HE2GJWGZe5tLYilxFMY1zTns4BvQ8DUXMQg5333HVSGoj7bjkDLK/whrgfzdAattHg==
-
 "@types/react-dom@^17.0.0":
   version "17.0.1"
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-17.0.1.tgz"
@@ -9516,11 +9511,6 @@ react-error-overlay@^6.0.9:
   version "6.0.9"
   resolved "https://registry.npmjs.org/react-error-overlay/-/react-error-overlay-6.0.9.tgz"
   integrity sha512-nQTTcUu+ATDbrSD1BZHr5kgSD4oF8OFjxun8uAaL8RwPBacGBNPf/yAuVVdx17N8XNzRDMrZ9XcKZHCjPW+9ew==
-
-react-facebook-login@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/react-facebook-login/-/react-facebook-login-4.1.1.tgz"
-  integrity sha512-COnHEHlYGTKipz4963safFAK9PaNTcCiXfPXMS/yxo8El+/AJL5ye8kMJf23lKSSGGPgqFQuInskIHVqGqTvSw==
 
 react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
