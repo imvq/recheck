@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 const LandingPage = lazy(() => import('components/pages/LandingPage'));
 const ObservedProfilePage = lazy(() => import('components/pages/ObservedProfilePage'));
 const OwnProfilePage = lazy(() => import('components/pages/OwnProfilePage'));
+const PrivacyPllicyPage = lazy(() => import('components/pages/PrivacyPolicyPage'));
 const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
 const ReviewConfirmationPage = lazy(() => import('components/pages/ReviewConfirmationPage'));
 const ReviewPage = lazy(() => import('components/pages/ReviewPage'));
@@ -43,6 +44,11 @@ export default () => (
             <PageLockManager>
               <LandingPage />
             </PageLockManager>
+          </Route>
+
+          {/* Provacy Policy needed for legitimate usage of OAuth. */}
+          <Route exact path='/privacy-policy'>
+            <PrivacyPllicyPage />
           </Route>
 
           {/* Own profile page. */}
