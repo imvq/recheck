@@ -2,10 +2,9 @@ import { memo } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
-import ApiClient from 'commons/externals/ApiClient';
-
 import { toastVariants } from 'commons/types/unions';
 import { jumpTo, showToast } from 'commons/utils/misc';
+import { apiClient } from 'commons/utils/services';
 import { AppState, setPageLocked, setPageUnlocked } from 'store';
 
 import PersonCard from 'components/shared/PersonCard';
@@ -42,7 +41,7 @@ function ColleaguesView(props: types.IProps) {
 
     const askerProfileId = props.currentProfileInfo.currentId;
 
-    ApiClient.checkIsUserAvailableForReview({ askerProfileId, targetShareableId })
+    apiClient.checkIsUserAvailableForReview({ askerProfileId, targetShareableId })
       .then(checkData => {
         if (checkData.data.success) {
           jumpTo('/review/', targetShareableId);

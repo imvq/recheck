@@ -2,8 +2,7 @@ import { useState, useRef, memo } from 'react';
 import { validate as validateEmail } from 'email-validator';
 import { connect } from 'react-redux';
 
-import ApiClient from 'commons/externals/ApiClient';
-
+import { apiClient } from 'commons/utils/services';
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';
@@ -62,7 +61,7 @@ function RegistrationBox(props: types.IProps) {
       return updatedEmailState;
     });
 
-    ApiClient.checkIsEmailAvailable(emailState.email)
+    apiClient.checkIsEmailAvailable(emailState.email)
       .then(checkData => setEmailState({
         ...latestEmailState.current,
         isEmailAvailabilityErrorVisible: !checkData.data.success

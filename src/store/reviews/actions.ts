@@ -1,7 +1,9 @@
 import { Dispatch } from 'redux';
 
-import ApiClient from 'commons/externals/ApiClient';
 import * as generalTypes from 'commons/types/general';
+
+import { apiClient } from 'commons/utils/services';
+
 import { AppActionType } from '../types';
 import {
   ReviewActionType,
@@ -55,7 +57,7 @@ export const setReviewRecommendationMark = (payload: number): ReviewActionType =
 export const createReview = (reviewData: generalTypes.IReviewData) => (
   dispatch: Dispatch<AppActionType>
 ) => {
-  ApiClient.prepareReview({ ...reviewData });
+  apiClient.prepareReview({ ...reviewData });
   dispatch(clearTasks());
   dispatch(clearRecommendationData());
   dispatch(clearStrengths());

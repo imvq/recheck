@@ -4,10 +4,9 @@ import { AxiosResponse } from 'axios';
 import * as apiResponsesBasic from 'commons/types/responses/basic';
 import * as constants from 'commons/utils/constants';
 
-import ApiClient from 'commons/externals/ApiClient';
-
 import { jumpTo, mapProfileDtoToState } from 'commons/utils/misc';
-import { cookieManager } from 'commons/utils/services/cookies';
+import { apiClient, cookieManager } from 'commons/utils/services';
+
 import { setCurrentProfileInfo } from '../profile/actions';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
@@ -30,7 +29,7 @@ function onProfileDataRetrieved(
   dispatch(setCurrentProfileInfo(normalizedProfileInfo));
 
   // Check user existence.
-  ApiClient.checkIsRegistered(normalizedProfileInfo.currentId)
+  apiClient.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       if (checkResponse.data.isRegistered) {
         // No need for registered users to be at registration page.
@@ -42,8 +41,8 @@ function onProfileDataRetrieved(
         // Provide confirmation check only if it is supposed to be.
         if (isConfirmationCheckNeeded) {
           // If the user exists, check if it is confirmed.
-          ApiClient.checkIsConfirmed(normalizedProfileInfo.currentId)
-            .then((confirmationResponse) => {
+          apiClient.checkIsConfirmed(normalizedProfileInfo.currentId)
+            .then(confirmationResponse => {
               if (confirmationResponse.data.isConfirmed) {
                 dispatch(setIsAuthorized(true));
                 return;
@@ -72,7 +71,7 @@ export const checkAuthorization = (
   dispatch: Dispatch<AppActionType>
 ) => {
   if (cookieManager.get(constants.ACCESS_TOKEN_LINKEDIN)) {
-    ApiClient.getProfileLinkedIn()
+    apiClient.getProfileLinkedIn()
       .then(profileResponse => onProfileDataRetrieved(
         dispatch,
         profileResponse,

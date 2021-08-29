@@ -1,11 +1,9 @@
 import * as constants from 'commons/utils/constants';
 
-import ApiClient from 'commons/externals/ApiClient';
-
 import { IAppProfileInfo } from 'commons/types/general';
 import { IRetrievedProfileDto } from 'commons/types/responses/basic';
 import { jumpTo, mapProfileDtoToState } from 'commons/utils/misc';
-import { cookieManager } from 'commons/utils/services';
+import { apiClient, cookieManager } from 'commons/utils/services';
 
 function setCookie(name: string, value: string) {
   const tokenExpiration = new Date(Date.now() + constants.MONTH_MS * 2);
@@ -26,12 +24,12 @@ function onProfileDataRetrieved(
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
   setCurrentProfileInfoCallback(normalizedProfileInfo);
 
-  ApiClient.checkIsRegistered(normalizedProfileInfo.currentId)
+  apiClient.checkIsRegistered(normalizedProfileInfo.currentId)
     .then((checkResponse) => {
       setIsAuthorizedCallback(true);
 
       if (checkResponse.data.isRegistered) {
-        ApiClient.checkIsConfirmed(normalizedProfileInfo.currentId)
+        apiClient.checkIsConfirmed(normalizedProfileInfo.currentId)
           .then((confirmationResponse) => {
             setIsLoginPopupVisibleCallback(false);
 
@@ -60,7 +58,7 @@ export function onSuccessLinkedIn(
   // Lock page to prevent user actions while retrieving and processing profile data.
   setPageLockedCallback(true);
 
-  ApiClient.exchangeLinkedInCode(code)
+  apiClient.exchangeLinkedInCode(code)
     // If the code is valid and correct.
     .then(response => {
       // 1. Save OAuth bearer token to cookies.
@@ -68,7 +66,7 @@ export function onSuccessLinkedIn(
 
       // 2. Time to get basic profile info from LinkedIn
       // and register the user if it is not yet registered.
-      ApiClient.getProfileLinkedIn()
+      apiClient.getProfileLinkedIn()
         .then(profileResponse => onProfileDataRetrieved(
           setPageLockedCallback,
           setIsLoginPopupVisibleCallback,

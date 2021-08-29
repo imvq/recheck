@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import ApiClient from 'commons/externals/ApiClient';
-
 import { jumpTo, mapProfileInfoToIAppProfileInfoSlice as sliceProfileData } from 'commons/utils/misc';
+import { apiClient } from 'commons/utils/services';
 import { AppState, loadObservedReviewsData, setIsObservedPageLoading, setPageUnlocked } from 'store';
 
 import { ISearchProfileInfo } from 'commons/types/general';
@@ -42,7 +41,7 @@ export async function callApiToCheckTargetConnection(
   callbacks: FindTargetCallbacks
 ) {
   try {
-    const searchResult = await ApiClient.searchUserByShareableId(targetShareableId);
+    const searchResult = await apiClient.searchUserByShareableId(targetShareableId);
     callbacks.setObservedUserCallback(searchResult.data.result);
   } catch {
     jumpTo('/404');

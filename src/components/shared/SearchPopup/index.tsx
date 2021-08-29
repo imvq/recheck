@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { connect } from 'react-redux';
 
-import ApiClient from 'commons/externals/ApiClient';
+import { apiClient } from 'commons/utils/services';
 import {
   AppState,
   setColleagues,
@@ -86,7 +86,7 @@ function SearchPopup(props: types.IProps) {
   function onWriteReviewClickHandler() {
     props.lockPage();
 
-    ApiClient.getColleagues(props.currentProfileInfo.currentId)
+    apiClient.getColleagues(props.currentProfileInfo.currentId)
       .then(colleaguesData => props.setColleagues(colleaguesData.data.results))
       .finally(() => props.unlockPage());
 

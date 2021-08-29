@@ -2,10 +2,9 @@ import { memo } from 'react';
 import { StatusCodes } from 'http-status-codes';
 import { connect } from 'react-redux';
 
-import ApiClient from 'commons/externals/ApiClient';
-
 import { ISearchProfileInfo } from 'commons/types/general';
 import { jumpTo } from 'commons/utils/misc';
+import { apiClient } from 'commons/utils/services';
 import {
   AppState,
   setIsSearchPopupVisible,
@@ -34,14 +33,14 @@ const mapDispatchToProps: types.IDispatchProps = {
 
 function SearchResults(props: types.IProps) {
   function processTarget(targetShareableId: string) {
-    ApiClient.checkIsUserCanBeViewed({
+    apiClient.checkIsUserCanBeViewed({
       askerProfileId: props.currentProfileInfo.currentId,
       targetShareableId
     }).then(checkData => {
       if (checkData.data.success) {
         jumpTo('/profile/observe/', targetShareableId);
       } else {
-        ApiClient.doesUserHasAvailableProfilesViews(props.currentProfileInfo.currentId)
+        apiClient.doesUserHasAvailableProfilesViews(props.currentProfileInfo.currentId)
           .then(viewsAvailabilityData => {
             if (viewsAvailabilityData.data.success) {
               props.setIsSpendFreeViewPopupVisible(true);

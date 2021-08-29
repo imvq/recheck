@@ -1,9 +1,8 @@
 import { memo } from 'react';
 import { connect } from 'react-redux';
 
-import ApiClient from 'commons/externals/ApiClient';
-
 import { jumpTo } from 'commons/utils/misc';
+import { apiClient } from 'commons/utils/services';
 import { AppState, setIsSearchPopupVisible, setIsSpendFreeViewPopupVisible } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';
@@ -34,7 +33,7 @@ function SpendFreeViewsPopup(props: types.IProps) {
   }
 
   function handleProceed() {
-    ApiClient.makeUserAvailable({
+    apiClient.makeUserAvailable({
       askerProfileId: props.currentProfileInfo.currentId,
       targetShareableId: props.requestedUserShareableId as string
     }).then(responseDto => {

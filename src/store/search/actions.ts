@@ -1,9 +1,11 @@
 import { Dispatch } from 'redux';
 
-import ApiClient from 'commons/externals/ApiClient';
 import * as generalTypes from 'commons/types/general';
-import { AppActionType } from '../types';
+
+import { apiClient } from 'commons/utils/services';
+
 import { setPageUnlocked as unlockPage } from '../interaction/actions';
+import { AppActionType } from '../types';
 import {
   SearchActionType,
   CLEAR_COLLEAGUES,
@@ -86,7 +88,7 @@ export const setSearchText = (text: string): SearchActionType => ({
 });
 
 export const searchUser = (tokens: string[]) => (dispatch: Dispatch<AppActionType>) => {
-  ApiClient.searchUser(tokens)
+  apiClient.searchUser(tokens)
     .then((searchResults) => dispatch(setUserSearchResults(searchResults.data.results)))
     .finally(() => dispatch(unlockPage()));
 };
@@ -94,22 +96,22 @@ export const searchUser = (tokens: string[]) => (dispatch: Dispatch<AppActionTyp
 export const searchUserByShareableId = (shareableId: string) => (
   dispatch: Dispatch<AppActionType>
 ) => {
-  ApiClient.searchUserByShareableId(shareableId)
+  apiClient.searchUserByShareableId(shareableId)
     .then((searchResult) => dispatch(setUserSearchResults([searchResult.data.result])))
     .finally(() => dispatch(unlockPage()));
 };
 
 export const loadMatchedCompanies = (sequence: string) => (dispatch: Dispatch<AppActionType>) => {
-  ApiClient.getMatchedCompanies(sequence)
+  apiClient.getMatchedCompanies(sequence)
     .then(matchData => dispatch(setQuickSearchMatchedCompanies(matchData.data.results)));
 };
 
 export const loadMatchedUsers = (tokens: string[]) => (dispatch: Dispatch<AppActionType>) => {
-  ApiClient.quickSearchUser(tokens)
+  apiClient.quickSearchUser(tokens)
     .then(matchData => dispatch(setQuickSearchMatchedUsers(matchData.data.results)));
 };
 
 export const loadRecommendations = (chunk: number) => (dispatch: Dispatch<AppActionType>) => {
-  ApiClient.getRecommendations(chunk)
+  apiClient.getRecommendations(chunk)
     .then((recommendationsDto) => dispatch(appendRecommendations(recommendationsDto.data.results)));
 };

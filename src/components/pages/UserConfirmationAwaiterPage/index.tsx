@@ -3,12 +3,13 @@ import { validate as validateEmail } from 'email-validator';
 
 import * as SvgLoaders from 'svg-loaders-react';
 
+import cssVars from 'commons/styles/cssVars';
+
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
-import ApiClient from 'commons/externals/ApiClient';
-
 import { onExit, showToast } from 'commons/utils/misc';
+import { apiClient } from 'commons/utils/services';
 import { AppState, setPageLocked } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';
@@ -64,7 +65,7 @@ function UserConfirmationAwaiterPage(props: types.IProps) {
       return updatedEmailState;
     });
 
-    ApiClient.checkIsEmailAvailable(emailState.email)
+    apiClient.checkIsEmailAvailable(emailState.email)
       .then(checkData => setEmailState({
         ...latestEmailState.current,
         isEmailAvailabilityErrorVisible: !checkData.data.success
@@ -76,12 +77,12 @@ function UserConfirmationAwaiterPage(props: types.IProps) {
   }
 
   function resendConfirmation() {
-    ApiClient.resendConfirmation(props.currentProfileInfo.currentId);
+    apiClient.resendConfirmation(props.currentProfileInfo.currentId);
     showToast('Письмо отправлено повторно');
   }
 
   function reassignConfirmationEmail() {
-    ApiClient.reassignConfirmationEmail({
+    apiClient.reassignConfirmationEmail({
       profileId: props.currentProfileInfo.currentId,
       email: emailState.email
     });
@@ -178,7 +179,7 @@ function UserConfirmationAwaiterPage(props: types.IProps) {
             {emailState.isEmailAvailabilityErrorVisible
               && (<styled.TextAlert>Этот почтовый адрес уже занят</styled.TextAlert>)}
             {emailState.isEmailAvailabilityErrorVisible === null
-              && (<SvgLoaders.Oval stroke='#33c7ba' />)}
+              && (<SvgLoaders.Oval stroke={cssVars.colorForegroundPickAux1} />)}
           </>
         )}
 

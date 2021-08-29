@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import ApiClient from 'commons/externals/ApiClient';
-
 import { jumpTo } from 'commons/utils/misc';
+import { apiClient } from 'commons/utils/services';
 import {
   AppState,
   loadReviewsTabData,
@@ -61,7 +60,7 @@ function ReviewsArea(props: types.IProps) {
   function onWriteReviewClickHandler() {
     props.lockPage();
 
-    ApiClient.getColleagues(props.currentProfileId)
+    apiClient.getColleagues(props.currentProfileId)
       .then(colleaguesData => {
         jumpTo('/search', '?no-colleagues-update=true');
         props.setColleagues(colleaguesData.data.results);

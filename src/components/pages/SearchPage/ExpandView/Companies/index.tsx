@@ -3,10 +3,9 @@ import { StatusCodes } from 'http-status-codes';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import { connect } from 'react-redux';
 
-import ApiClient from 'commons/externals/ApiClient';
-
-import { jumpTo } from 'commons/utils/misc';
 import { ISearchProfileInfo } from 'commons/types/general';
+import { jumpTo } from 'commons/utils/misc';
+import { apiClient } from 'commons/utils/services';
 import {
   AppState,
   setIsSearchPopupVisible,
@@ -54,14 +53,14 @@ function Companies(props: types.IProps) {
   });
 
   function requestReviewsAmount(targetShareableId: string) {
-    ApiClient.checkIsUserCanBeViewed({
+    apiClient.checkIsUserCanBeViewed({
       askerProfileId: props.currentProfileInfo.currentId,
       targetShareableId
     }).then(checkData => {
       if (checkData.data.success) {
         jumpTo('/profile/observe/', targetShareableId);
       } else {
-        ApiClient.doesUserHasAvailableProfilesViews(props.currentProfileInfo.currentId)
+        apiClient.doesUserHasAvailableProfilesViews(props.currentProfileInfo.currentId)
           .then(viewsAvailabilityData => {
             if (viewsAvailabilityData.data.success) {
               props.setIsSpendFreeViewPopupVisible(true);

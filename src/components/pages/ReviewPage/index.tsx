@@ -2,10 +2,9 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import ApiClient from 'commons/externals/ApiClient';
-
 import { ISearchProfileInfo } from 'commons/types/general';
 import { jumpTo, mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/misc';
+import { apiClient } from 'commons/utils/services';
 import {
   AppState,
   createReview,
@@ -75,7 +74,7 @@ function ReviewPage(props: types.IProps) {
     if (targetShareableId) {
       props.setTargetShareableId(targetShareableId);
 
-      ApiClient.checkIsTargetConnected({
+      apiClient.checkIsTargetConnected({
         askerProfileId: props.currentProfileInfo.currentId,
         targetShareableId
       })
@@ -84,7 +83,7 @@ function ReviewPage(props: types.IProps) {
             jumpTo('/profile');
           }
 
-          ApiClient.searchUserByShareableId(targetShareableId)
+          apiClient.searchUserByShareableId(targetShareableId)
             .then(searchResult => setObservedUser(searchResult.data.result))
             .catch(() => jumpTo('/404'))
             .finally(() => props.unlockPage());
@@ -105,7 +104,7 @@ function ReviewPage(props: types.IProps) {
       ...props.reviewData
     });
 
-    ApiClient.makeUserAvailable({
+    apiClient.makeUserAvailable({
       askerProfileId: props.currentProfileInfo.currentId,
       // @ts-ignore: requestedUserShareableId is guaranteed to be a valid string here.
       targetShareableId: props.requestedUserShareableId

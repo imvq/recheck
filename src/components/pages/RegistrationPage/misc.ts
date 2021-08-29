@@ -1,6 +1,5 @@
-import ApiClient from 'commons/externals/ApiClient';
-
 import { IPrepareProfileDto } from 'commons/types/general';
+import { apiClient } from 'commons/utils/services';
 
 /**
  * Do something when user finished registering.
@@ -12,7 +11,7 @@ export function proceedHandler(
 ) {
   additionalOuterActionsCallback(profileInfo.email);
 
-  ApiClient.prepareProfile(profileInfo).finally(() => {
+  apiClient.prepareProfile(profileInfo).finally(() => {
     confirmationsVisibilityCallback(true);
   });
 }
