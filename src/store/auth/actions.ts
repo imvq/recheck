@@ -5,9 +5,9 @@ import * as apiResponsesBasic from 'commons/types/responses/basic';
 import * as constants from 'commons/utils/constants';
 
 import ApiClient from 'commons/externals/ApiClient';
-import controlledHistory from 'commons/utils/routing';
-import { mapProfileDtoToState } from 'commons/utils/misc';
-import { cookieManager } from 'commons/utils/services';
+
+import { jumpTo, mapProfileDtoToState } from 'commons/utils/misc';
+import { cookieManager } from 'commons/utils/services/cookies';
 import { setCurrentProfileInfo } from '../profile/actions';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
@@ -35,7 +35,7 @@ function onProfileDataRetrieved(
       if (checkResponse.data.isRegistered) {
         // No need for registered users to be at registration page.
         if (isRedirectOnRegistered) {
-          controlledHistory.replace('/');
+          jumpTo('/');
           return;
         }
 
@@ -46,9 +46,10 @@ function onProfileDataRetrieved(
             .then((confirmationResponse) => {
               if (confirmationResponse.data.isConfirmed) {
                 dispatch(setIsAuthorized(true));
-              } else {
-                controlledHistory.push('/await-user-confirmation');
+                return;
               }
+
+              jumpTo('/await-user-confirmation');
             })
             .catch(() => dispatch(setIsAuthorized(false)));
         } else {
@@ -58,7 +59,7 @@ function onProfileDataRetrieved(
       } else {
         // Register the user if it is not registered in our app yet.
         dispatch(setIsAuthorized(true));
-        controlledHistory.push('/register');
+        jumpTo('/register');
       }
     })
     .catch(() => dispatch(setIsAuthorized(false)));

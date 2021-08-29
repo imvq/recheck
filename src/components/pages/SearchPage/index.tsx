@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as generalTypes from 'commons/types/general';
 import * as constants from 'commons/utils/constants';
 
-import { MainToolbarEntry } from 'commons/utils/enums';
+import { mainToolbarEntries } from 'commons/types/unions';
 import { useQuery } from 'commons/utils/misc/hooks';
 import {
   AppState,
@@ -77,7 +77,7 @@ function SearchPage(props: types.IProps) {
       props.clearColleagues();
     }
 
-    props.setCurrentMainToolbarEntry(MainToolbarEntry.NewSearch);
+    props.setCurrentMainToolbarEntry(mainToolbarEntries.NewSearch);
 
     // Load recommendations only one time and never reload them again.
     if (props.recommendations.length === 0) {

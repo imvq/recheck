@@ -2,8 +2,8 @@ import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import FindCandidateSvg from 'assets/images/pages/LandingPage/MotivatorSection/FindCandidateBtn.svg';
-import controlledHistory from 'commons/utils/routing';
 
+import { jumpTo } from 'commons/utils/misc';
 import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 
 import * as types from './types';
@@ -38,7 +38,7 @@ function FindButton(props: types.IProps) {
 
   const getPendingFinishedCallback = () => {
     return props.isAuthorized
-      ? () => controlledHistory.push('/search')
+      ? () => jumpTo('/search')
       : () => props.setIsLoginPopupVisible(true);
   };
 

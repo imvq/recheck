@@ -1,6 +1,6 @@
 import * as generalTypes from 'commons/types/general';
 
-import { MainToolbarEntry } from 'commons/utils/enums';
+import { MainToolbarEntry } from 'commons/types/unions';
 
 export interface IStateProps {
   colleaguesState: {

@@ -2,10 +2,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import controlledHistory from 'commons/utils/routing';
-
-import { MainToolbarEntry } from 'commons/utils/enums';
-import { onExit, showToast } from 'commons/utils/misc';
+import { mainToolbarEntries } from 'commons/types/unions';
+import { jumpTo, onExit, showToast } from 'commons/utils/misc';
 import { AppState, setPageLocked, setCurrentMainToolbarEntry } from 'store';
 
 import Logo from 'components/shared/Logo';
@@ -19,14 +17,6 @@ import * as styled from './styled';
 function copyLink(link: string) {
   navigator.clipboard.writeText(`${window.location.origin}?recruiter=${link}`);
   showToast('Ссылка приглашения скопирована. Отправьте её кандидату');
-}
-
-function switchToSearch() {
-  controlledHistory.replace('/search');
-}
-
-function switchToProfile() {
-  controlledHistory.replace('/profile');
 }
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
@@ -49,10 +39,10 @@ function MainToolbar(props: types.IProps) {
           <styled.ButtonWrapper>
             <MenuEntry
               onClick={() => {
-                props.setCurrentMainToolbarEntry(MainToolbarEntry.ProfilePageMyReviews);
-                switchToProfile();
+                props.setCurrentMainToolbarEntry(mainToolbarEntries.ProfilePageMyReviews);
+                jumpTo('/profile');
               }}
-              isPressed={props.currentMainToolbarEntry === MainToolbarEntry.ProfilePageMyReviews}
+              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.ProfilePageMyReviews}
             >
               Мои отзывы
             </MenuEntry>
@@ -61,10 +51,10 @@ function MainToolbar(props: types.IProps) {
           <styled.ButtonWrapper>
             <MenuEntry
               onClick={() => {
-                props.setCurrentMainToolbarEntry(MainToolbarEntry.ProfilePageHistory);
-                switchToProfile();
+                props.setCurrentMainToolbarEntry(mainToolbarEntries.ProfilePageHistory);
+                jumpTo('/profile');
               }}
-              isPressed={props.currentMainToolbarEntry === MainToolbarEntry.ProfilePageHistory}
+              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.ProfilePageHistory}
             >
               История поиска
             </MenuEntry>
@@ -75,10 +65,10 @@ function MainToolbar(props: types.IProps) {
           <styled.ButtonWrapper>
             <MenuEntry
               onClick={() => {
-                props.setCurrentMainToolbarEntry(MainToolbarEntry.ProfilePageAboutMe);
-                switchToProfile();
+                props.setCurrentMainToolbarEntry(mainToolbarEntries.ProfilePageAboutMe);
+                jumpTo('/profile');
               }}
-              isPressed={props.currentMainToolbarEntry === MainToolbarEntry.ProfilePageAboutMe}
+              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.ProfilePageAboutMe}
             >
               Обо мне
             </MenuEntry>
@@ -86,8 +76,8 @@ function MainToolbar(props: types.IProps) {
 
           <styled.ButtonWrapper>
             <MenuEntry
-              onClick={() => props.setCurrentMainToolbarEntry(MainToolbarEntry.TopUpAnAccount)}
-              isPressed={props.currentMainToolbarEntry === MainToolbarEntry.TopUpAnAccount}
+              onClick={() => props.setCurrentMainToolbarEntry(mainToolbarEntries.TopUpAnAccount)}
+              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.TopUpAnAccount}
             >
               Пополнить счёт
             </MenuEntry>
@@ -95,8 +85,8 @@ function MainToolbar(props: types.IProps) {
 
           <styled.ButtonWrapper>
             <MenuEntry
-              onClick={() => props.setCurrentMainToolbarEntry(MainToolbarEntry.AddWorkplace)}
-              isPressed={props.currentMainToolbarEntry === MainToolbarEntry.AddWorkplace}
+              onClick={() => props.setCurrentMainToolbarEntry(mainToolbarEntries.AddWorkplace)}
+              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.AddWorkplace}
             >
               Добавить место работы
             </MenuEntry>
@@ -105,10 +95,10 @@ function MainToolbar(props: types.IProps) {
           <styled.ButtonWrapper>
             <MenuEntry
               onClick={() => {
-                props.setCurrentMainToolbarEntry(MainToolbarEntry.NewSearch);
-                switchToSearch();
+                props.setCurrentMainToolbarEntry(mainToolbarEntries.NewSearch);
+                jumpTo('/search');
               }}
-              isPressed={props.currentMainToolbarEntry === MainToolbarEntry.NewSearch}
+              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.NewSearch}
             >
               Новый поиск
             </MenuEntry>

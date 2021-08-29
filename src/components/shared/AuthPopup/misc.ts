@@ -1,11 +1,10 @@
 import * as constants from 'commons/utils/constants';
 
 import ApiClient from 'commons/externals/ApiClient';
-import controlledHistory from 'commons/utils/routing';
 
 import { IAppProfileInfo } from 'commons/types/general';
 import { IRetrievedProfileDto } from 'commons/types/responses/basic';
-import { mapProfileDtoToState } from 'commons/utils/misc';
+import { jumpTo, mapProfileDtoToState } from 'commons/utils/misc';
 import { cookieManager } from 'commons/utils/services';
 
 function setCookie(name: string, value: string) {
@@ -37,7 +36,7 @@ function onProfileDataRetrieved(
             setIsLoginPopupVisibleCallback(false);
 
             if (!confirmationResponse.data.isConfirmed) {
-              controlledHistory.push('/await-user-confirmation');
+              jumpTo('/await-user-confirmation');
             }
           })
           .catch(() => setIsAuthorizedCallback(false));
@@ -45,7 +44,7 @@ function onProfileDataRetrieved(
         // Unlock the page and forward the user to
         // registration page if it is not registered in our app yet.
         setPageLockedCallback(false);
-        controlledHistory.push('/register');
+        jumpTo('/register');
       }
     })
     .catch(() => setIsAuthorizedCallback(false));

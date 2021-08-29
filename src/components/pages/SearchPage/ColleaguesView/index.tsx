@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import ApiClient from 'commons/externals/ApiClient';
-import controlledHistory from 'commons/utils/routing';
 
 import { toastVariants } from 'commons/types/unions';
-import { showToast } from 'commons/utils/misc';
+import { jumpTo, showToast } from 'commons/utils/misc';
 import { AppState, setPageLocked, setPageUnlocked } from 'store';
 
 import PersonCard from 'components/shared/PersonCard';
@@ -46,7 +45,7 @@ function ColleaguesView(props: types.IProps) {
     ApiClient.checkIsUserAvailableForReview({ askerProfileId, targetShareableId })
       .then(checkData => {
         if (checkData.data.success) {
-          controlledHistory.push(`/review/${targetShareableId}`);
+          jumpTo('/review/', targetShareableId);
           return;
         }
 

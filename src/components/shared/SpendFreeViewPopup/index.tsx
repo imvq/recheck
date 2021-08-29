@@ -2,9 +2,9 @@ import { memo } from 'react';
 import { connect } from 'react-redux';
 
 import ApiClient from 'commons/externals/ApiClient';
-import controlledHistory from 'commons/utils/routing';
 
-import { AppState, setIsSearchPopupVisible, setIsSpendFreeViewPopupVisible, setTargetShareableId } from 'store';
+import { jumpTo } from 'commons/utils/misc';
+import { AppState, setIsSearchPopupVisible, setIsSpendFreeViewPopupVisible } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';
 
@@ -39,7 +39,7 @@ function SpendFreeViewsPopup(props: types.IProps) {
       targetShareableId: props.requestedUserShareableId as string
     }).then(responseDto => {
       if (responseDto.data.success) {
-        controlledHistory.push(`/profile/observe/${props.requestedUserShareableId}`);
+        jumpTo('/profile/observe/', props.requestedUserShareableId as string);
       }
     }).finally(() => props.setVisible(false));
   }

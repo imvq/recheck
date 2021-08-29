@@ -1,10 +1,12 @@
-import { jumpToSearchPage } from 'commons/utils/routing';
+import { jumpTo } from 'commons/utils/misc';
 
 import CustomButton from 'components/shared/CustomButton';
 import PreviousSearchCard from 'components/shared/PreviousSearchCard';
 
 import * as types from './types';
 import * as styled from './styled';
+
+const jumpToSearchPage = () => jumpTo('/search');
 
 function HistoryArea(props: types.IProps) {
   const Results = (

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import ApiClient from 'commons/externals/ApiClient';
-import controlledHistory from 'commons/utils/routing';
 
+import { jumpTo } from 'commons/utils/misc';
 import {
   AppState,
   loadReviewsTabData,
@@ -63,7 +63,7 @@ function ReviewsArea(props: types.IProps) {
 
     ApiClient.getColleagues(props.currentProfileId)
       .then(colleaguesData => {
-        controlledHistory.push('/search?no-colleagues-update=true');
+        jumpTo('/search', '?no-colleagues-update=true');
         props.setColleagues(colleaguesData.data.results);
       })
       .finally(() => props.unlockPage());

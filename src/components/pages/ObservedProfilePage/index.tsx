@@ -3,16 +3,11 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import ApiClient from 'commons/externals/ApiClient';
-import controlledHistory from 'commons/utils/routing';
-import {
-  AppState,
-  loadObservedReviewsData,
-  setIsObservedPageLoading,
-  setPageUnlocked
-} from 'store';
+
+import { jumpTo, mapProfileInfoToIAppProfileInfoSlice as sliceProfileData } from 'commons/utils/misc';
+import { AppState, loadObservedReviewsData, setIsObservedPageLoading, setPageUnlocked } from 'store';
 
 import { ISearchProfileInfo } from 'commons/types/general';
-import { mapProfileInfoToIAppProfileInfoSlice as sliceProfileData } from 'commons/utils/misc';
 
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
@@ -50,7 +45,7 @@ export async function callApiToCheckTargetConnection(
     const searchResult = await ApiClient.searchUserByShareableId(targetShareableId);
     callbacks.setObservedUserCallback(searchResult.data.result);
   } catch {
-    controlledHistory.push('/404');
+    jumpTo('/404');
   } finally {
     callbacks.unlockPageCallback();
   }

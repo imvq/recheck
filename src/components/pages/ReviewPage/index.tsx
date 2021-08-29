@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import ApiClient from 'commons/externals/ApiClient';
-import controlledHistory from 'commons/utils/routing';
 
 import { ISearchProfileInfo } from 'commons/types/general';
-import { mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/misc';
+import { jumpTo, mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/misc';
 import {
   AppState,
   createReview,
@@ -55,6 +54,8 @@ const BoxStepC = ComponentBoxWithMark(
   boxWithMarkMapping.mapStepCDispatchToProps
 );
 
+const jumpToProfile = () => jumpTo('/profile');
+
 /**
  * Page in charge of adding a review.
  */
@@ -80,15 +81,15 @@ function ReviewPage(props: types.IProps) {
       })
         .then(connectionData => {
           if (!connectionData.data.success) {
-            controlledHistory.push('/profile');
+            jumpTo('/profile');
           }
 
           ApiClient.searchUserByShareableId(targetShareableId)
             .then(searchResult => setObservedUser(searchResult.data.result))
-            .catch(() => controlledHistory.push('/404'))
+            .catch(() => jumpTo('/404'))
             .finally(() => props.unlockPage());
         })
-        .catch(() => controlledHistory.push('/profile'));
+        .catch(() => jumpTo('/profile'));
     } else {
       props.unlockPage();
     }
@@ -109,12 +110,13 @@ function ReviewPage(props: types.IProps) {
       // @ts-ignore: requestedUserShareableId is guaranteed to be a valid string here.
       targetShareableId: props.requestedUserShareableId
     }).then(() => {
-      const redirectTo = props.requestedUserShareableId
-        ? `/profile/observe/${props.requestedUserShareableId}`
-        : '/profile';
+      if (props.requestedUserShareableId) {
+        jumpTo('/profile/observe/', props.requestedUserShareableId);
+        return;
+      }
 
-      controlledHistory.push(redirectTo);
-    }).catch(() => controlledHistory.push('/profile'));
+      jumpTo('/profile');
+    }).catch(jumpToProfile);
   }
 
   const boxes = [

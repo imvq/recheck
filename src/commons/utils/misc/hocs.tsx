@@ -1,3 +1,7 @@
+/**
+ * Higher order components.
+ */
+
 import { ComponentType, ReactNode } from 'react';
 
 import mixins from 'commons/styles/mixins';

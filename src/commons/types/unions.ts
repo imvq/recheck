@@ -3,6 +3,22 @@
  */
 
 /**
+ * Toolbar manu entries.
+ */
+export const mainToolbarEntries = {
+  NoEntry: 'NoEntry',
+  ProfilePageMyReviews: 'ProfilePageMyReviews',
+  ProfilePageHistory: 'ProfilePageHistory',
+  ProfilePageAboutMe: 'ProfilePageAboutMe',
+  TopUpAnAccount: 'TopUpAnAccount',
+  AddWorkplace: 'AddWorkplace',
+  NewSearch: 'NewSearch',
+  NewReview: 'NewReview'
+};
+
+export type MainToolbarEntry = typeof mainToolbarEntries[keyof typeof mainToolbarEntries];
+
+/**
  * Placeholders for pagination page buttons.
  */
 export const paginationDirections = {

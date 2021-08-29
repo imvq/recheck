@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 
 import * as generalTypes from 'commons/types/general';
 import ApiClient from 'commons/externals/ApiClient';
-import { MainToolbarEntry } from 'commons/utils/enums';
+import { MainToolbarEntry } from 'commons/types/unions';
 import { AppActionType } from '../types';
 import {
   InteractionStateActionType,

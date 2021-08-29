@@ -1,4 +1,5 @@
-import { MainToolbarEntry } from 'commons/utils/enums';
+import { mainToolbarEntries } from 'commons/types/unions';
+
 import {
   InteractionState,
   InteractionStateActionType,
@@ -26,7 +27,7 @@ const initialState: InteractionState = {
   isSearchPopupVisible: false,
   isSpendFreeViewPopupVisible: false,
   isLoginPopupVisible: false,
-  currentMainToolbarEntry: MainToolbarEntry.ProfilePageMyReviews,
+  currentMainToolbarEntry: mainToolbarEntries.ProfilePageMyReviews,
   isObservedReviewsPageLoading: false,
   isProfileAboutTabLoading: true,
   isProfileHistoryTabLoading: true,

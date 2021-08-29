@@ -4,8 +4,8 @@ import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import { connect } from 'react-redux';
 
 import ApiClient from 'commons/externals/ApiClient';
-import controlledHistory from 'commons/utils/routing';
 
+import { jumpTo } from 'commons/utils/misc';
 import { ISearchProfileInfo } from 'commons/types/general';
 import {
   AppState,
@@ -59,7 +59,7 @@ function Companies(props: types.IProps) {
       targetShareableId
     }).then(checkData => {
       if (checkData.data.success) {
-        controlledHistory.push(`/profile/observe/${targetShareableId}`);
+        jumpTo('/profile/observe/', targetShareableId);
       } else {
         ApiClient.doesUserHasAvailableProfilesViews(props.currentProfileInfo.currentId)
           .then(viewsAvailabilityData => {

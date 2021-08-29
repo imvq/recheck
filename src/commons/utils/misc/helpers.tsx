@@ -1,3 +1,7 @@
+/**
+ * Small helper functions.
+ */
+
 import { toast } from 'react-toastify';
 
 import * as constants from 'commons/utils/constants';
@@ -5,7 +9,7 @@ import * as constants from 'commons/utils/constants';
 import { ISearchProfileInfo } from 'commons/types/general';
 import { IRetrievedProfileDto } from 'commons/types/responses/basic';
 import { ScreenBreakpoint, toastVariants } from 'commons/types/unions';
-import { cookieManager } from 'commons/utils/services';
+import { cookieManager } from 'commons/utils/services/cookies';
 
 export function onExit(lockPageCallback: () => void) {
   lockPageCallback();

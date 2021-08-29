@@ -3,10 +3,11 @@ import { Provider } from 'react-redux';
 import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import { Router, Switch, Route } from 'react-router-dom';
 
+import { controlledHistory } from 'commons/utils/services';
 import { store as appStore } from 'store';
-import controlledHistory from 'commons/utils/routing';
-import GlobalStyle from 'components/shared/GlobalStyle';
+
 import NotFoundPage from 'components/pages/NotFoundPage';
+import GlobalStyle from 'components/shared/GlobalStyle';
 import PageLockManager from 'components/shared/PageLockManager';
 import PageForceUnlocker from 'components/shared/PageForceUnlocker';
 import PageStartupManager from 'components/shared/PageStartupManager';

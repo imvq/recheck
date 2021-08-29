@@ -1,5 +1,5 @@
 import * as generalTypes from 'commons/types/general';
-import { MainToolbarEntry } from 'commons/utils/enums';
+import { MainToolbarEntry } from 'commons/types/unions';
 
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
 export const SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE = 'SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE';

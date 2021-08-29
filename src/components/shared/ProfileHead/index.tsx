@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { jumpToSearchPage } from 'commons/utils/routing';
+import { jumpTo } from 'commons/utils/misc';
 
 import CustomButton from 'components/shared/CustomButton';
 
@@ -8,6 +8,8 @@ import MenuBar from './MenuBar';
 
 import * as types from './types';
 import * as styled from './styled';
+
+const jumpToSearchPage = () => jumpTo('/search');
 
 /**
  * Menu with tabs to control the page content area.

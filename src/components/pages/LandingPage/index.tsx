@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import controlledHistory from 'commons/utils/routing';
-
-import { useQuery } from 'commons/utils/misc';
+import { jumpTo, useQuery } from 'commons/utils/misc';
 import { AppState, setIsLoginPopupVisible, setReferral, setAwaiter } from 'store';
 
 import CookiePopup from 'components/shared/CookiePopup';
@@ -53,7 +51,7 @@ const LandingPage = (props: types.IProps) => {
     }
 
     if (awaiter && props.isAuthorized === true) {
-      controlledHistory.push('/review');
+      jumpTo('/review/', awaiter);
     }
   }, [props.isAuthorized]);
 

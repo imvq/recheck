@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import ApiClient from 'commons/externals/ApiClient';
-import controlledHistory from 'commons/utils/routing';
 
+import { jumpTo } from 'commons/utils/misc';
 import { AppState, setPageUnlocked, setIsLoginPopupVisible } from 'store';
 
 import * as types from './types';
@@ -36,16 +36,16 @@ function ReviewConfirmationPage(props: types.IProps) {
       })
         .then(() => {
           props.unlockPage();
-          controlledHistory.replace('/profile');
+          jumpTo('/profile');
         })
-        .catch(() => controlledHistory.replace('/404'));
+        .catch(() => jumpTo('/404'));
 
       return;
     }
 
     if (!props.isAuthorized) {
       props.setIsLoginPopupVisible(true);
-      controlledHistory.replace('/');
+      jumpTo('/');
     }
   }, [props.isAuthorized]);
 

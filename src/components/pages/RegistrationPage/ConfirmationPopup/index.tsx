@@ -1,17 +1,15 @@
-import controlledHistory from 'commons/utils/routing';
-
 import Man from 'assets/images/pages/RegistrationPage/ConfirmationPopup/Man.png';
+
+import { jumpTo } from 'commons/utils/misc';
 
 import * as types from './types';
 import * as styled from './styled';
 
-function goHome() {
-  controlledHistory.replace('/await-user-confirmation');
-}
+const onClose = () => jumpTo('/await-user-confirmation');
 
 const ClosingButton = (
   <styled.TopWrapper>
-    <styled.AdaptedCloseCross onClick={goHome} />
+    <styled.AdaptedCloseCross onClick={onClose} />
   </styled.TopWrapper>
 );
 
@@ -36,7 +34,7 @@ function ConfirmationPopup(props: types.IProps) {
         </styled.Frame>
       </styled.FrameWrapper>
 
-      <styled.ClickableBackground onClick={goHome} />
+      <styled.ClickableBackground onClick={onClose} />
     </styled.Wrapper>
   );
 }

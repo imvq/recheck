@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { MainToolbarEntry } from 'commons/utils/enums';
+import { mainToolbarEntries } from 'commons/types/unions';
 import { AppState } from 'store';
 
 import Footer from 'components/shared/Footer';
@@ -33,9 +33,9 @@ function OwnProfilePage(props: types.IProps) {
         <ProfileHead profileInfo={props.currentProfileInfo} />
         {(() => {
           switch (props.currentMainToolbarEntry) {
-            case MainToolbarEntry.ProfilePageAboutMe:
+            case mainToolbarEntries.ProfilePageAboutMe:
               return <AboutArea />;
-            case MainToolbarEntry.ProfilePageHistory:
+            case mainToolbarEntries.ProfilePageHistory:
               return <HistoryArea cardsData={[]} />;
             default:
               return <ReviewsArea />;
