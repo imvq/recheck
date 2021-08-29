@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import controlledHistory from 'commons/utils/routing';
 
 import { MainToolbarEntry } from 'commons/utils/enums';
-import { onExit, showToast } from 'commons/utils/functions';
+import { onExit, showToast } from 'commons/utils/misc';
 import { AppState, setPageLocked, setCurrentMainToolbarEntry } from 'store';
 
 import Logo from 'components/shared/Logo';

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { screenBreakpoints } from 'commons/types/unions';
 import cssVars from 'commons/styles/cssVars';
-import { respond } from 'commons/utils/functions';
+import { respond } from 'commons/utils/misc';
 import Logo from 'components/shared/Logo';
 import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
 

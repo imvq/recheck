@@ -5,7 +5,7 @@ import * as generalTypes from 'commons/types/general';
 import * as constants from 'commons/utils/constants';
 
 import { MainToolbarEntry } from 'commons/utils/enums';
-import { useQuery } from 'commons/utils/hooks';
+import { useQuery } from 'commons/utils/misc/hooks';
 import {
   AppState,
   clearColleagues,

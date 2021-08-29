@@ -6,7 +6,7 @@ export interface IGetNReviewsResponseDto {
 
 export type IGetNthReviewResponseDto = IReviewCardLeftData;
 
-export interface IProfileDto {
+export interface IRetrievedProfileDto {
   profileId: string;
   shareableId?: string;
   name: string;

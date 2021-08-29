@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { respondUp } from 'commons/utils/functions';
+import { respondUp } from 'commons/utils/misc';
 import { screenBreakpoints } from 'commons/types/unions';
 import cssVars from 'commons/styles/cssVars';
 import BackgroundSvgPath from 'assets/images/common/BackgroundDefault.png';

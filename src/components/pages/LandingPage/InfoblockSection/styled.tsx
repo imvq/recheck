@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
+import { respond } from 'commons/utils/misc';
 
 export const Wrapper = styled.div`
   display: grid;

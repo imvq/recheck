@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 import { ReactComponent as LogoFull } from 'assets/images/common/LogoFull.svg';
 import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
-import { wrapped } from 'commons/utils/hocs';
+import { respond, wrapped } from 'commons/utils/misc';
 
 export const Wrapper = styled.div`
   height: 100%;

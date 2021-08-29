@@ -6,7 +6,7 @@ import ApiClient from 'commons/externals/ApiClient';
 import controlledHistory from 'commons/utils/routing';
 
 import { toastVariants } from 'commons/types/unions';
-import { showToast } from 'commons/utils/functions';
+import { showToast } from 'commons/utils/misc';
 import { AppState, setPageLocked, setPageUnlocked } from 'store';
 
 import PersonCard from 'components/shared/PersonCard';

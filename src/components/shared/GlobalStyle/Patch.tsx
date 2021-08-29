@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
+import { respond } from 'commons/utils/misc';
 
 /**
  * Global patch style component.

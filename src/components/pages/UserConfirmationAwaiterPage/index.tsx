@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { validate as validateEmail } from 'email-validator';
 
 import * as SvgLoaders from 'svg-loaders-react';
 
@@ -7,7 +8,7 @@ import { ToastContainer } from 'react-toastify';
 
 import ApiClient from 'commons/externals/ApiClient';
 
-import { isValidEmail as validateEmail, onExit, showToast } from 'commons/utils/functions';
+import { onExit, showToast } from 'commons/utils/misc';
 import { AppState, setPageLocked } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import cssVars from 'commons/styles/cssVars';
 
 import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
+import { respond } from 'commons/utils/misc';
 
 const cssVarsLocal = {
   widthOffset: '12rem'

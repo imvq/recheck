@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import controlledHistory from 'commons/utils/routing';
 
-import { useQuery } from 'commons/utils/hooks';
+import { useQuery } from 'commons/utils/misc';
 import { AppState, setIsLoginPopupVisible, setReferral, setAwaiter } from 'store';
 
 import CookiePopup from 'components/shared/CookiePopup';

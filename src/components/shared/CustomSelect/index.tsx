@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-import { trimText } from 'commons/utils/functions';
 import * as generalTypes from 'commons/types/general';
 import CustomOption from './CustomOption';
 
+import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
@@ -21,7 +21,7 @@ const CustomSelect = (props: types.IProps) => {
     setIsDimmed(false);
   };
 
-  const trimmedValue = currentValue ? trimText(currentValue.text, 32) : null;
+  const trimmedValue = currentValue ? misc.trimText(currentValue.text, 32) : null;
 
   return (
     <OutsideClickHandler display='contents' onOutsideClick={() => setIsExpanded(false)}>

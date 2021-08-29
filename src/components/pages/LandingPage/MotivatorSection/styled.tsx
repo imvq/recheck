@@ -5,7 +5,7 @@ import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
 
 import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
+import { respond } from 'commons/utils/misc';
 
 const mixinsLocal = {
   MotivatorBadgeAdapted: css`

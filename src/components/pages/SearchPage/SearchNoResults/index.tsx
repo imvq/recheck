@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
-import { showToast } from 'commons/utils/functions';
+import { showToast } from 'commons/utils/misc';
 import { AppState } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';

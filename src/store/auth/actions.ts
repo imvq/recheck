@@ -2,10 +2,12 @@ import { Dispatch } from 'redux';
 import { AxiosResponse } from 'axios';
 
 import * as apiResponsesBasic from 'commons/types/responses/basic';
+import * as constants from 'commons/utils/constants';
+
 import ApiClient from 'commons/externals/ApiClient';
 import controlledHistory from 'commons/utils/routing';
-import { mapProfileDtoToState } from 'commons/utils/functions';
-import { cookieManager, cookiesList } from 'commons/utils/cookies';
+import { mapProfileDtoToState } from 'commons/utils/misc';
+import { cookieManager } from 'commons/utils/services';
 import { setCurrentProfileInfo } from '../profile/actions';
 import { AppActionType } from '../types';
 import { AuthActionType, SET_IS_AUTHORIZED } from './types';
@@ -20,7 +22,7 @@ export const setIsAuthorized = (isAuthorized: boolean): AuthActionType => ({
  */
 function onProfileDataRetrieved(
   dispatch: Dispatch<AppActionType>,
-  profileResponse: AxiosResponse<apiResponsesBasic.IProfileDto>,
+  profileResponse: AxiosResponse<apiResponsesBasic.IRetrievedProfileDto>,
   isRedirectOnRegistered: boolean,
   isConfirmationCheckNeeded: boolean
 ) {
@@ -68,7 +70,7 @@ export const checkAuthorization = (
 ) => (
   dispatch: Dispatch<AppActionType>
 ) => {
-  if (cookieManager.get(cookiesList.accessTokenLinkedIn)) {
+  if (cookieManager.get(constants.ACCESS_TOKEN_LINKEDIN)) {
     ApiClient.getProfileLinkedIn()
       .then(profileResponse => onProfileDataRetrieved(
         dispatch,
@@ -77,16 +79,5 @@ export const checkAuthorization = (
         isConfirmationCheckNeeded
       ))
       .catch(() => dispatch(setIsAuthorized(false)));
-  } else if (cookieManager.get(cookiesList.accessTokenFacebook)) {
-    ApiClient.getProfileFacebook()
-      .then(profileResponse => onProfileDataRetrieved(
-        dispatch,
-        profileResponse,
-        isRedirectOnRegistered,
-        isConfirmationCheckNeeded
-      ))
-      .catch(() => dispatch(setIsAuthorized(false)));
-  } else {
-    dispatch(setIsAuthorized(false));
   }
 };

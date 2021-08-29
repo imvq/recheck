@@ -12,7 +12,7 @@ import {
 } from 'store';
 
 import { ISearchProfileInfo } from 'commons/types/general';
-import { mapProfileInfoToIAppProfileInfoSlice as sliceProfileData } from 'commons/utils/functions';
+import { mapProfileInfoToIAppProfileInfoSlice as sliceProfileData } from 'commons/utils/misc';
 
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';

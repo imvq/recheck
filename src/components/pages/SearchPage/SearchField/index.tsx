@@ -1,7 +1,7 @@
 import { memo, useState, ChangeEvent, KeyboardEvent } from 'react';
 import { connect } from 'react-redux';
 
-import { useBlur } from 'commons/utils/hooks';
+import { useBlur } from 'commons/utils/misc/hooks';
 import { AppState, setSearchText } from 'store';
 
 import * as types from './types';

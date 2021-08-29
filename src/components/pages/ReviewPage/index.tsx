@@ -6,7 +6,7 @@ import ApiClient from 'commons/externals/ApiClient';
 import controlledHistory from 'commons/utils/routing';
 
 import { ISearchProfileInfo } from 'commons/types/general';
-import { mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/functions';
+import { mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/misc';
 import {
   AppState,
   createReview,

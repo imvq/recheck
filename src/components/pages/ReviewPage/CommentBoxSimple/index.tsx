@@ -1,12 +1,11 @@
 import { memo } from 'react';
 import { connect } from 'react-redux';
 
-import * as generalTypes from 'commons/types/general';
-
-import { textAreaHandler } from 'commons/utils/functions';
+import { ITextAreaEvent } from 'commons/types/general';
 
 import CustomButton from 'components/shared/CustomButton';
 
+import * as misc from '../misc';
 import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
 
@@ -18,8 +17,8 @@ export default function CommentBoxSimple(
   mapDispatchToProps: types.IDispatchProps
 ) {
   function Wrapped(props: types.IProps) {
-    function valueHandler(event: generalTypes.ITextAreaEvent) {
-      textAreaHandler(event, props.setCurrent);
+    function valueHandler(event: ITextAreaEvent) {
+      misc.textAreaHandler(event, props.setCurrent);
     }
 
     const canProceed = !!props.comment;

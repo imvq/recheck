@@ -1,11 +1,11 @@
-import { mapReviewToArray } from 'commons/utils/functions';
 import * as constants from 'commons/utils/constants';
 
+import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
 export default (props: types.IProps) => {
-  const answers = mapReviewToArray(props.reviewCardData);
+  const answers = misc.mapReviewToArray(props.reviewCardData);
 
   return (
     <styled.Wrapper>

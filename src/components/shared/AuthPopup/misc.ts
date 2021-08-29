@@ -1,12 +1,12 @@
 import * as constants from 'commons/utils/constants';
-import * as apiResponses from 'commons/types/responses';
 
 import ApiClient from 'commons/externals/ApiClient';
 import controlledHistory from 'commons/utils/routing';
 
-import { cookieManager, cookiesList } from 'commons/utils/cookies';
 import { IAppProfileInfo } from 'commons/types/general';
-import { mapProfileDtoToState } from 'commons/utils/functions';
+import { IRetrievedProfileDto } from 'commons/types/responses/basic';
+import { mapProfileDtoToState } from 'commons/utils/misc';
+import { cookieManager } from 'commons/utils/services';
 
 function setCookie(name: string, value: string) {
   const tokenExpiration = new Date(Date.now() + constants.MONTH_MS * 2);
@@ -22,7 +22,7 @@ function onProfileDataRetrieved(
   setIsLoginPopupVisibleCallback: (flag: boolean) => void,
   setIsAuthorizedCallback: (flag: boolean) => void,
   setCurrentProfileInfoCallback: (profileInfo: IAppProfileInfo) => void,
-  profileResponse: apiResponses.ILinkedInProfileDto | apiResponses.IFacebookProfileDto
+  profileResponse: IRetrievedProfileDto
 ) {
   const normalizedProfileInfo = mapProfileDtoToState(profileResponse);
   setCurrentProfileInfoCallback(normalizedProfileInfo);
@@ -65,7 +65,7 @@ export function onSuccessLinkedIn(
     // If the code is valid and correct.
     .then(response => {
       // 1. Save OAuth bearer token to cookies.
-      setCookie(cookiesList.accessTokenLinkedIn, response.data[cookiesList.accessTokenLinkedIn]);
+      setCookie(constants.ACCESS_TOKEN_LINKEDIN, response.data[constants.ACCESS_TOKEN_LINKEDIN]);
 
       // 2. Time to get basic profile info from LinkedIn
       // and register the user if it is not yet registered.

@@ -7,7 +7,7 @@ import { ReactComponent as SearchButtonSvg } from 'assets/images/pages/LandingPa
 import { ReactComponent as RocketLineSvg } from 'assets/images/pages/LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/RocketLine.svg';
 import { ReactComponent as RocketSvg } from 'assets/images/pages//LandingPage/GreetingsSection/Content/SearchButtonGroup/RocketGroup/Rocket.svg';
 import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
+import { respond } from 'commons/utils/misc';
 
 export const Wrapper = styled.div`
   position: relative;

@@ -1,9 +1,9 @@
 import { useState, useRef, memo } from 'react';
+import { validate as validateEmail } from 'email-validator';
 import { connect } from 'react-redux';
 
 import ApiClient from 'commons/externals/ApiClient';
 
-import { isValidEmail as validateEmail } from 'commons/utils/functions';
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';

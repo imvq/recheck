@@ -99,18 +99,8 @@ export default class ApiClient {
   }
 
   public static getProfileLinkedIn()
-    : generalTypes.APIResponse<apiResponses.ILinkedInProfileDto> {
+    : generalTypes.APIResponse<apiResponses.IGetProfileLinkedInDto> {
     return ApiClient.instance.get('/linkedin/oauth/retrieve', { withCredentials: true });
-  }
-
-  public static getProfileFacebook()
-    : generalTypes.APIResponse<apiResponses.IFacebookProfileDto> {
-    return ApiClient.instance.get('/facebook/oauth/retrieve', { withCredentials: true });
-  }
-
-  public static getProfileFacebookReduced(profileId: string)
-    : generalTypes.APIResponse<apiResponses.IFacebookProfileReducedDto> {
-    return ApiClient.instance.post('/facebook/oauth/retrieve-reduced', { profileId });
   }
 
   public static prepareProfile(profileInfoDto: generalTypes.IPrepareProfileDto)

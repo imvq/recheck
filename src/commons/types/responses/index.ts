@@ -1,6 +1,6 @@
 import * as genearalTypes from '../general';
 
-import { IGetNReviewsResponseDto, IGetNthReviewResponseDto, IProfileDto, ISimpleActionResponse } from './basic';
+import { IGetNReviewsResponseDto, IGetNthReviewResponseDto, ISimpleActionResponse, IRetrievedProfileDto } from './basic';
 
 export interface IBindReviewtargetResponseDto extends ISimpleActionResponse {}
 
@@ -32,6 +32,8 @@ export interface IGetColleaguesResponseDto {
   results: Omit<genearalTypes.ISearchProfileInfo, 'company'>[];
 }
 
+export type IGetProfileLinkedInDto = IRetrievedProfileDto;
+
 export interface IGetMatchedCompaniesResponseDto {
   results: genearalTypes.ICompanyReduced[];
 }
@@ -49,17 +51,6 @@ export type IGetNthReviewGotResponseDto = IGetNthReviewResponseDto;
 export type IGetNthReviewLeftResponseDto = IGetNthReviewResponseDto;
 
 export type IGetTargetNReviewsGotResponseDto = IGetNReviewsResponseDto;
-
-export type ILinkedInProfileDto = IProfileDto;
-
-export type IFacebookProfileDto = IProfileDto;
-
-export type IFacebookProfileReducedDto = Omit<
-  IFacebookProfileDto,
-  'profileId'
-  | 'name'
-  | 'photoUrl'
->;
 
 export type IMakeUserAvailableResponseDto = ISimpleActionResponse;
 

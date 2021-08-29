@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import animations from 'commons/styles/animations';
 import cssVars from 'commons/styles/cssVars';
 import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
+import { respond } from 'commons/utils/misc';
 import { ReactComponent as CloseSvg } from 'assets/images/shared/CookiePopup/Close.svg';
 
 export const FixedJustifier = styled.div`

@@ -1,5 +1,6 @@
+import { validate as validateEmail } from 'email-validator';
+
 import { ICompanyReduced, IInputEvent, IOptionType } from 'commons/types/general';
-import { isValidEmail as validateEmail } from 'commons/utils/functions';
 
 import { IEmailState } from './types';
 

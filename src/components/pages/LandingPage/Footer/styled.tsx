@@ -4,7 +4,7 @@ import { Link as ScrollLink } from 'react-scroll';
 import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
 
 import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
+import { respond } from 'commons/utils/misc';
 
 import Logo from 'components/shared/Logo';
 

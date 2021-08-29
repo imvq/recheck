@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import { screenBreakpoints } from 'commons/types/unions';
-import { respond } from 'commons/utils/functions';
+import { respond } from 'commons/utils/misc';
 
 import cssVarsCommon from './cssVars';
 
@@ -150,7 +150,8 @@ const extendedMixins = {
     DefaultWrapper: styled.div``,
     HTWLeftOrientedCentralizedBox: styled.div`${mixins.HTWLeftOrientedCentralizedBox}`,
     LandingBlockText: styled.p`${mixins.LandingBlockText};`,
-    LandingTitle: styled.h1`${mixins.LandingTitle};`
+    LandingTitle: styled.h1`${mixins.LandingTitle};`,
+    WrapperWithPadding: styled.div<{ padding: string }>`padding: ${props => props.padding};`
   }
 };
 
