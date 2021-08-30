@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { AppState, checkAuthorization, setPageUnlocked } from 'store';
@@ -17,16 +17,13 @@ const mapDispatchToProps: types.IDispatchProps = {
 /**
  * Wrapper checking user's authentication status.
  */
-const PageStartupManager: FunctionComponent<types.IProps> = (props) => {
+function PageStartupManager(props: types.IProps) {
   useEffect(() => {
     if (props.isAuthorized === null) {
       // If the page we load is the first website page for current session.
       // In that case we won't have isAuthorized flag set
       // so we have to call the API to check user's authorization.
-      props.checkAuthorization(
-        !!props.redirectHomeOnRegistered,
-        !props.noConfirmationCheckNeeded
-      );
+      props.checkAuthorization(!!props.redirectHomeOnRegistered, !props.noConfirmationCheckNeeded);
     }
   }, []);
 
@@ -43,6 +40,6 @@ const PageStartupManager: FunctionComponent<types.IProps> = (props) => {
   }, [props.isAuthorized]);
 
   return null;
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageStartupManager);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(PageStartupManager));

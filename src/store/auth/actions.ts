@@ -79,5 +79,9 @@ export const checkAuthorization = (
         isConfirmationCheckNeeded
       ))
       .catch(() => dispatch(setIsAuthorized(false)));
+
+    return;
   }
+
+  dispatch(setIsAuthorized(false));
 };

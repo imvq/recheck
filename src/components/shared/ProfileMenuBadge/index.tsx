@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
 import OutsideClickHandler from 'react-outside-click-handler';
 
-import { ReactComponent as DoorSvg } from 'assets/images/shared/ProfileMenuBadge/Door.svg';
+import { memo, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import { ReactComponent as CabinetSvg } from 'assets/images/shared/ProfileMenuBadge/Cabinet.svg';
-import { AppState, setPageLocked, setIsLoginPopupVisible, setCurrentProfileInfo } from 'store';
+import { ReactComponent as DoorSvg } from 'assets/images/shared/ProfileMenuBadge/Door.svg';
 import { onExit } from 'commons/utils/misc';
+import { AppState, setPageLocked, setIsLoginPopupVisible, setCurrentProfileInfo } from 'store';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -23,9 +24,9 @@ const mapDispatchToProps: types.IDispatchProps = {
 };
 
 /**
- * Component used to provide OAuth2 with LinkedIn and Facebook.
+ * Component used to provide OAuth2 with LinkedIn.
  */
-const LoginBadge = (props: types.IProps) => {
+function LoginBadge(props: types.IProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isExpansionAwaited, setIsExpansionAwaited] = useState(false);
   const history = useHistory();
@@ -68,6 +69,6 @@ const LoginBadge = (props: types.IProps) => {
       </styled.Wrapper>
     </OutsideClickHandler>
   );
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginBadge);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(LoginBadge));

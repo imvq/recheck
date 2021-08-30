@@ -17,11 +17,8 @@ import logger from '@logging/Logger';
 import PostgreSqlConnector from '@database/connect';
 
 const getHost = () => process.env.HOST || constants.DEFAULT_HOST;
-
 const getPort = () => Number.parseInt(process.env.PORT || '') || constants.DEFAULT_PORT;
-
 const getHome = () => (require.main && path.dirname(require.main.filename));
-
 const getRoot = () => (require && require.main ? getHome() : `../${__dirname}`);
 
 /**

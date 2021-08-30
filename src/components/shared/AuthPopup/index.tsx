@@ -52,8 +52,6 @@ function AuthPopup(props: types.IProps) {
       <styled.ButtonsGroupWrapper>
         {LinkedInLoginButton}
 
-        <styled.ButtonsGroupSpan>или</styled.ButtonsGroupSpan>
-
         {/* TODO: Organize Google login button here. */}
       </styled.ButtonsGroupWrapper>
     </styled.BodyWrapper>
