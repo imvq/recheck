@@ -112,3 +112,29 @@ export function canProceed(
     && !!company && !!position
     && workStartMonth > -1 && workStartYear > -1;
 }
+
+// TODO: Remove this shit.
+function isExceptionalEmail(text: string) {
+  return ['mave7dev@gmail.com', 'ladaklischenko@gmail.com'].includes(text);
+}
+
+function conatinsForbiddenDomain(text: string) {
+  return [
+    '@gmail.com',
+    '@outlook.com',
+    '@hotmail.com',
+    '@yahoo.com',
+    '@aim.com',
+    '@aol.com',
+    '@yandex.com',
+    '@mail.ru'
+  ].some(domain => text.includes(domain));
+}
+
+export function validateEmailWithDomains(text: string) {
+  const exceptionalEmailCondition = isExceptionalEmail(text);
+  const validEmailCondition = validateEmail(text);
+  const validDomainCondition = !conatinsForbiddenDomain(text);
+
+  return exceptionalEmailCondition || (validEmailCondition && validDomainCondition);
+}

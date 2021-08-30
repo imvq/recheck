@@ -1,5 +1,4 @@
 import { useState, useRef, memo } from 'react';
-import { validate as validateEmail } from 'email-validator';
 import { connect } from 'react-redux';
 
 import { apiClient } from 'commons/utils/services';
@@ -50,7 +49,7 @@ function RegistrationBox(props: types.IProps) {
     setEmailState(() => {
       const updatedEmailState = {
         ...emailState,
-        isEmailValidationErrorVisible: !validateEmail(emailState.email),
+        isEmailValidationErrorVisible: !misc.validateEmailWithDomains(emailState.email),
         // null means availability check is in progress,
         // e.i. cannot proceed with email update.
         isEmailAvailabilityErrorVisible: null
@@ -101,10 +100,16 @@ function RegistrationBox(props: types.IProps) {
         onChange={event => misc.emailHandler(event, setEmailState)}
       />
 
-      {emailState.isEmailValidationErrorVisible
-          && (<styled.TextAlert isHighlighted>Некорректный почтовый адрес</styled.TextAlert>)}
       {emailState.isEmailAvailabilityErrorVisible
           && (<styled.TextAlert isHighlighted>Этот почтовый адрес уже занят</styled.TextAlert>)}
+      {emailState.isEmailValidationErrorVisible && (
+        <styled.TextAlert isHighlighted>
+          Некорректная почта. Предоставляемое значение должно быть валидным почтовым адресом
+          вида myemail@example.com,
+          а сам почтовый адрес должен относиться к домену, принадлежащему компании, в которой вы
+          работаете.
+        </styled.TextAlert>
+      )}
     </styled.InputGroupWrapper>
   );
 
