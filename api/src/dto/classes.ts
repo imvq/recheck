@@ -89,6 +89,14 @@ export class GetNthReviewLeftDto {
   ) {}
 }
 
+export class GetTargetNthReviewGotDto {
+  public constructor(
+    public askerProfileId: string,
+    public targetShareableId: string,
+    public nthReview: number
+  ) {}
+}
+
 export class GetRecommendationsDto {
   public constructor(public chunk: number) {}
 }

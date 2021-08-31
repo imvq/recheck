@@ -246,4 +246,15 @@ export default class UserController {
     : Promise<apiResponses.IGetTargetNReviewsGotResponseDto> {
     return this.injectedService.getTargetNReviewsGot(bodyData);
   }
+
+  /**
+   * Get n-th review (about other user) left by user.
+   */
+  @Path('/access/get/nth-review-got')
+  @BodyGuard
+  @POST
+  public async getTargetNthReviewsGot(bodyData: dto.GetTargetNthReviewGotDto)
+     : Promise<apiResponses.IGetNthReviewGotResponseDto> {
+    return this.injectedService.getTargetNthReviewGot(bodyData);
+  }
 }

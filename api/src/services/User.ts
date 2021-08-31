@@ -316,6 +316,23 @@ export default class UserService {
     return UserManager.getTargetNReviewsGot(bodyData.askerProfileId, bodyData.targetShareableId);
   }
 
+  @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
+  public async getTargetNthReviewGot(bodyData: dto.GetTargetNthReviewGotDto)
+    : Promise<apiResponses.IGetNthReviewGotResponseDto> {
+    const asker = await UserManager.getUser(bodyData.askerProfileId);
+    const target = await UserManager.getTargetUserWithReviewsGot(bodyData.targetShareableId);
+    UserService.handleUsersExistence(asker, target);
+    // @ts-ignore: asker and target are guaranteed to be existed here.
+    await UserService.handleAvailability(asker, target);
+
+    if (!target?.reviewsGot || target?.reviewsGot.length <= bodyData.nthReview) {
+      throw new Errors.BadRequestError('No review with the index.');
+    }
+
+    const review = target.reviewsGot[bodyData.nthReview];
+    return this.mapReviewToReducedReview(review);
+  }
+
   @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
   public async makeUserAvailable(bodyData: dto.MakeUserAvailableDto)
     : Promise<apiResponses.IMakeUserAvailableResponseDto> {

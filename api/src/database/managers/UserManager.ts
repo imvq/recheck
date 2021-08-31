@@ -85,6 +85,15 @@ export default class UserManager {
     });
   }
 
+  public static async getTargetUserWithReviewsGot(shareableId: string)
+    : Promise<User | undefined> {
+    return getRepository(User).findOne({
+      relations: ['reviewsGot', 'reviewsGot.target'],
+      where: { shareableId },
+      order: { profileId: 'DESC' }
+    });
+  }
+
   public static async getUserWithReviewsLeft(profileId: string)
     : Promise<User | undefined> {
     return getRepository(User)
