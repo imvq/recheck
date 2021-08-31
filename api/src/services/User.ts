@@ -253,6 +253,7 @@ export default class UserService {
     }
 
     const review = target.reviewsGot[bodyData.nthReview];
+
     return this.mapReviewToReducedReview(review);
   }
 
@@ -266,6 +267,7 @@ export default class UserService {
     }
 
     const review = author.reviewsLeft[bodyData.nthReview];
+
     return this.mapReviewToReducedReview(review);
   }
 
@@ -308,17 +310,12 @@ export default class UserService {
   public async getTargetNReviewsGot(bodyData: dto.GetTargetNReviewsGotDto)
     : Promise<apiResponses.IGetTargetNReviewsGotResponseDto> {
     const asker = await UserManager.getUser(bodyData.askerProfileId);
-    const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
+    const target = await UserManager.getTargetUserWithReviewsGot(bodyData.targetShareableId);
     UserService.handleUsersExistence(asker, target);
     // @ts-ignore: asker and target are guaranteed to be existed here.
     await UserService.handleAvailability(asker, target);
 
-    const amount = await UserManager.getTargetNReviewsGot(
-      bodyData.askerProfileId,
-      bodyData.targetShareableId
-    );
-
-    return { amount };
+    return { amount: target?.reviewsGot.length || 0 };
   }
 
   @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
@@ -335,6 +332,7 @@ export default class UserService {
     }
 
     const review = target.reviewsGot[bodyData.nthReview];
+
     return this.mapReviewToReducedReview(review);
   }
 

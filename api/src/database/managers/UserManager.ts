@@ -79,7 +79,7 @@ export default class UserManager {
   public static async getUserWithReviewsGot(profileId: string)
     : Promise<User | undefined> {
     return getRepository(User).findOne({
-      relations: ['reviewsGot', 'reviewsGot.target'],
+      relations: ['reviewsGot', 'reviewsGot.target', 'reviewsGot.target.company'],
       where: { profileId },
       order: { profileId: 'DESC' }
     });
@@ -88,7 +88,7 @@ export default class UserManager {
   public static async getTargetUserWithReviewsGot(shareableId: string)
     : Promise<User | undefined> {
     return getRepository(User).findOne({
-      relations: ['reviewsGot', 'reviewsGot.target'],
+      relations: ['reviewsGot', 'reviewsGot.target', 'reviewsGot.target.company'],
       where: { shareableId },
       order: { profileId: 'DESC' }
     });
@@ -96,13 +96,11 @@ export default class UserManager {
 
   public static async getUserWithReviewsLeft(profileId: string)
     : Promise<User | undefined> {
-    return getRepository(User)
-      .createQueryBuilder('users')
-      .where({ profileId })
-      .innerJoinAndSelect('users.reviewsLeft', 'reviewsLeft')
-      .innerJoinAndSelect('reviewsLeft.target', 'target')
-      .innerJoinAndSelect('target.company', 'company')
-      .getOne();
+    return getRepository(User).findOne({
+      relations: ['reviewsLeft', 'reviewsGot.target', 'reviewsGot.target.company'],
+      where: { profileId },
+      order: { profileId: 'DESC' }
+    });
   }
 
   public static async isTargetAvailable(asker: User, target: User)
@@ -121,17 +119,6 @@ export default class UserManager {
       .where(`users.profileId = '${target.profileId}'`)
       .andWhere(`users.recruiter = '${asker.shareableId}'`)
       .getCount() > 0;
-  }
-
-  public static async getTargetNReviewsGot(askerProfileId: string, targetShareableId: string)
-    : Promise<number> {
-    return getRepository(User)
-      .createQueryBuilder('users')
-      .innerJoin('users.availableUsers', 'availableUsers')
-      .innerJoin('availableUsers.reviewsGot', 'reviewsGot')
-      .where('users.profileId = :askerProfileId', { askerProfileId })
-      .andWhere('availableUsers.shareableId = :targetShareableId', { targetShareableId })
-      .getCount();
   }
 
   public static async getUserBasicInfoByName(name: string)

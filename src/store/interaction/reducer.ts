@@ -20,7 +20,8 @@ import {
   SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT,
   SET_REQUESTED_USER_SHAREABLE_ID,
   SET_CURRENT_REVIEW_GOT,
-  SET_CURRENT_REVIEW_LEFT
+  SET_CURRENT_REVIEW_LEFT,
+  SET_CURRENT_OBSERVED_REVIEW_GOT
 } from './types';
 
 const initialState: InteractionState = {
@@ -139,6 +140,11 @@ export const interactionStateReducer = (
       return {
         ...state,
         currentReviewLeft: action.payload
+      };
+    case SET_CURRENT_OBSERVED_REVIEW_GOT:
+      return {
+        ...state,
+        currentObservedReviewGot: action.payload
       };
     default:
       return state;
