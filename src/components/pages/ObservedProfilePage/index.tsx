@@ -79,7 +79,7 @@ function ObservedProfilePage(props: types.IProps) {
       </styled.TitleWrapper>
 
       {/* @ts-ignore: Used only in case the data is not null. */}
-      <ReviewCard reviewCardData={props.currentReviewCardData} />
+      <ReviewCard showTarget reviewCardData={props.currentReviewCardData} />
     </>
   );
 

@@ -12,7 +12,7 @@ export default (props: types.IProps) => (
         </styled.NameWrapper>
       </styled.TopBar>
 
-      <styled.MenuContent showTarget={props.showTarget}>
+      <styled.MenuContent>
         <styled.PlainTextWrapper>
           <styled.PlainText isDimmed>
             Должность:&nbsp;&nbsp;

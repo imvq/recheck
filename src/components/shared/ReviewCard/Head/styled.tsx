@@ -22,12 +22,10 @@ export const Menu = styled.div`
   flex-direction: column;
 `;
 
-export const MenuContent = styled.div<{ showTarget?: boolean; }>`
+export const MenuContent = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: ${props => (props.showTarget
-    ? `calc(${cssVarsLocal.photoWrapperWidth} + 3rem)`
-    : '5rem')};
+  padding-left: calc(${cssVarsLocal.photoWrapperWidth} + 3rem);
   padding-top: .5rem;
   padding-bottom: 2rem;
 `;
