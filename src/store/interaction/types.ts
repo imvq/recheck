@@ -1,4 +1,5 @@
 import * as generalTypes from 'commons/types/general';
+
 import { MainToolbarEntry } from 'commons/types/unions';
 
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
@@ -10,6 +11,7 @@ export const SET_IS_OBSERVED_REVIEWS_PAGE_LOADING = 'SET_IS_OBSERVED_REVIEWS_PAG
 export const SET_IS_PROFILE_ABOUT_TAB_LOADING = 'SET_IS_PROFILE_ABOUT_TAB_LOADING';
 export const SET_IS_PROFILE_HISTORY_TAB_LOADING = 'SET_IS_PROFILE_HISTORY_TAB_LOADING';
 export const SET_IS_PROFILE_REVIEWS_TAB_LOADING = 'SET_IS_PROFILE_REVIEWS_TAB_LOADING';
+export const SET_RECRUITER = 'SET_RECRUITER';
 export const SET_REFERRAL = 'SET_REFERRAL';
 export const SET_AWAITER = 'SET_AWAITER';
 export const SET_REVIEWS_GOT_CHUNKS_AMOUNT = 'SET_REVIEWS_GOT_CHUNKS_AMOUNT';
@@ -29,6 +31,7 @@ export interface InteractionState {
   isProfileAboutTabLoading: boolean;
   isProfileHistoryTabLoading: boolean;
   isProfileReviewsTabLoading: boolean;
+  recruiter: string| null;
   referral: string | null;
   awaiter: string | null,
   reviewsGotChunksAmount: number;
@@ -84,6 +87,11 @@ export interface SetIsProfileReviewsTabLoading {
   payload: boolean;
 }
 
+export interface SetRecruiter {
+  type: typeof SET_RECRUITER;
+  payload: string;
+}
+
 export interface SetReferral {
   type: typeof SET_REFERRAL;
   payload: string;
@@ -134,6 +142,7 @@ export type InteractionStateActionType =
   | SetIsProfileAboutTabLoading
   | SetIsProfileHistoryTabLoading
   | SetIsProfileReviewsTabLoading
+  | SetRecruiter
   | SetReferral
   | SetAwaiter
   | SetReviewsGotChunksAmount

@@ -16,6 +16,7 @@ export interface IStateProps {
   currentProfileInfo: generalTypes.IAppProfileInfo;
   matchedCompanies: generalTypes.ICompanyReduced[];
   referral: string | null;
+  recruiter: string | null;
 }
 
 export interface IDispatchProps {
