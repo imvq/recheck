@@ -16,6 +16,7 @@ import {
   SET_IS_PROFILE_ABOUT_TAB_LOADING,
   SET_IS_PROFILE_HISTORY_TAB_LOADING,
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
+  SET_IS_OBSERVED_REVIEWS_PAGE_LOADING,
   SET_RECRUITER,
   SET_REFERRAL,
   SET_AWAITER,
@@ -25,7 +26,7 @@ import {
   SET_REQUESTED_USER_SHAREABLE_ID,
   SET_CURRENT_REVIEW_GOT,
   SET_CURRENT_REVIEW_LEFT,
-  SET_IS_OBSERVED_REVIEWS_PAGE_LOADING
+  SET_CURRENT_OBSERVED_REVIEW_GOT
 } from './types';
 
 export const setIsPageLocked = (value: boolean)
@@ -139,14 +140,20 @@ export const setCurrentReviewLeft = (review: generalTypes.IReviewCardLeftData | 
   payload: review
 });
 
+export const setCurrentObservedReviewGot = (review: generalTypes.IReviewCardGotData | null)
+  : InteractionStateActionType => ({
+  type: SET_CURRENT_OBSERVED_REVIEW_GOT,
+  payload: review
+});
+
 export const loadAboutTabData = (profileId: string) => (
   dispatch: Dispatch<AppActionType>
 ) => {
   apiClient.getNReviewsGot({ profileId })
-    .then(amountDto => {
-      dispatch(setReviewsGotChunksAmount(amountDto.data.amount));
+    .then(amountData => {
+      dispatch(setReviewsGotChunksAmount(amountData.data.amount));
 
-      if (amountDto.data.amount) {
+      if (amountData.data.amount) {
         apiClient.getNthReviewGot({ profileId, nthReview: 0 })
           .then(reviewDto => dispatch(setCurrentReviewGot(reviewDto.data)))
           .finally(() => dispatch(setIsProfileAboutTabLoading(false)));
@@ -164,10 +171,10 @@ export const loadReviewsTabData = (profileId: string) => (
   dispatch: Dispatch<AppActionType>
 ) => {
   apiClient.getNReviewsLeft({ profileId })
-    .then(amountDto => {
-      dispatch(setReviewsLeftChunksAmount(amountDto.data.amount));
+    .then(amountData => {
+      dispatch(setReviewsLeftChunksAmount(amountData.data.amount));
 
-      if (amountDto.data.amount) {
+      if (amountData.data.amount) {
         apiClient.getNthReviewLeft({ profileId, nthReview: 0 })
           .then(reviewDto => dispatch(setCurrentReviewLeft(reviewDto.data)))
           .finally(() => dispatch(setIsProfileReviewsTabLoading(false)));
@@ -185,7 +192,17 @@ export const loadObservedReviewsData = (askerProfileId: string, targetShareableI
   dispatch: Dispatch<AppActionType>
 ) => {
   apiClient.getTargetNReviewsGot({ askerProfileId, targetShareableId })
-    .then(amountData => dispatch(setObservedReviewsChunksAmount(amountData.data.amount)))
+    .then(amountData => {
+      dispatch(setObservedReviewsChunksAmount(amountData.data.amount));
+
+      if (amountData.data.amount) {
+        apiClient.getTargetNthReviewGot({ askerProfileId, targetShareableId, nthReview: 0 })
+          .then(reviewDto => dispatch(setCurrentObservedReviewGot(reviewDto.data)))
+          .finally(() => dispatch(setIsObservedPageLoading(false)));
+      } else {
+        dispatch(setIsProfileReviewsTabLoading(false));
+      }
+    })
     .finally(() => dispatch(setIsObservedPageLoading(false)));
 };
 
@@ -207,4 +224,18 @@ export const loadNthReviewLeft = (profileId: string, nthReview: number) => (
   apiClient.getNthReviewLeft({ profileId, nthReview })
     .then(nthReviewResponse => dispatch(setCurrentReviewLeft(nthReviewResponse.data)))
     .finally(() => dispatch(setIsProfileReviewsTabLoading(false)));
+};
+
+export const loadTargetNthReviewGot = (
+  askerProfileId: string,
+  targetShareableId: string,
+  nthReview: number
+) => (
+  dispatch: Dispatch<AppActionType>
+) => {
+  dispatch(setIsObservedPageLoading(true));
+
+  apiClient.getTargetNthReviewGot({ askerProfileId, targetShareableId, nthReview })
+    .then(nthReviewResponse => dispatch(setCurrentObservedReviewGot(nthReviewResponse.data)))
+    .finally(() => dispatch(setIsObservedPageLoading(false)));
 };

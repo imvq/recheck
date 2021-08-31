@@ -20,6 +20,7 @@ export const SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT = 'SET_OBSERVED_REVIEWS_CHUNKS_A
 export const SET_REQUESTED_USER_SHAREABLE_ID = 'SET_REQUESTED_USER_SHAREABLE_ID';
 export const SET_CURRENT_REVIEW_GOT = 'SET_CURRENT_REVIEW_GOT';
 export const SET_CURRENT_REVIEW_LEFT = 'SET_CURRENT_REVIEW_LEFT';
+export const SET_CURRENT_OBSERVED_REVIEW_GOT = 'SET_CURRENT_OBSERVED_REVIEW_GOT';
 
 export interface InteractionState {
   isPageLocked: boolean;
@@ -40,6 +41,7 @@ export interface InteractionState {
   requestedUserShareableId: string | null;
   currentReviewGot: generalTypes.IReviewCardGotData | null;
   currentReviewLeft: generalTypes.IReviewCardLeftData | null;
+  currentObservedReviewGot: generalTypes.IReviewCardGotData | null;
 }
 
 export interface SetIsPageLocked {
@@ -132,6 +134,11 @@ export interface SetCurrentReviewLeft {
   payload: generalTypes.IReviewCardLeftData | null;
 }
 
+export interface SetCurrentObservedReviewGot {
+  type: typeof SET_CURRENT_OBSERVED_REVIEW_GOT;
+  payload: generalTypes.IReviewCardGotData | null;
+}
+
 export type InteractionStateActionType =
   SetIsPageLocked
   | SetIsSearchPopupVisible
@@ -150,4 +157,5 @@ export type InteractionStateActionType =
   | SetObservedReviewsChunksAmount
   | SetRequestedUserShareableId
   | SetCurrentReviewGot
-  | SetCurrentReviewLeft;
+  | SetCurrentReviewLeft
+  | SetCurrentObservedReviewGot;

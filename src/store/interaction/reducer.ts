@@ -41,7 +41,8 @@ const initialState: InteractionState = {
   observedReviewsChunksAmount: 0,
   requestedUserShareableId: null,
   currentReviewGot: null,
-  currentReviewLeft: null
+  currentReviewLeft: null,
+  currentObservedReviewGot: null
 };
 
 export const interactionStateReducer = (

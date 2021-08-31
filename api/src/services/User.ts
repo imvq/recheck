@@ -313,7 +313,12 @@ export default class UserService {
     // @ts-ignore: asker and target are guaranteed to be existed here.
     await UserService.handleAvailability(asker, target);
 
-    return UserManager.getTargetNReviewsGot(bodyData.askerProfileId, bodyData.targetShareableId);
+    const amount = await UserManager.getTargetNReviewsGot(
+      bodyData.askerProfileId,
+      bodyData.targetShareableId
+    );
+
+    return { amount };
   }
 
   @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })

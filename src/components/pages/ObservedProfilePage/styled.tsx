@@ -48,6 +48,11 @@ export const ReviewSectionWrapper = styled.div`
   margin: 4rem 0 3rem;
 `;
 
+export const TitleWrapper = styled.div`
+  box-sizing: border-box;
+  padding: 0 0 3rem;
+`;
+
 export const Title = styled.p<{ isHighlighted?: boolean; }>`
   font-size: 1.5rem;
   line-height: 2.5rem;

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { jumpTo, mapProfileInfoToIAppProfileInfoSlice as sliceProfileData } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
-import { AppState, loadObservedReviewsData, setIsObservedPageLoading, setPageUnlocked } from 'store';
+import { AppState, loadObservedReviewsData, loadTargetNthReviewGot, setIsObservedPageLoading, setPageUnlocked } from 'store';
 
 import { ISearchProfileInfo } from 'commons/types/general';
 
@@ -17,38 +17,28 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo,
+  currentProfileId: store.profile.currentProfileInfo.currentId,
   isAuthorized: store.auth.isAuthorized,
   isLoading: store.interaction.isObservedReviewsPageLoading,
   isObservedReviewsPageLoading: store.interaction.isObservedReviewsPageLoading,
-  observedReviewsChunksAmount: store.interaction.observedReviewsChunksAmount
+  observedReviewsChunksAmount: store.interaction.observedReviewsChunksAmount,
+  currentReviewCardData: store.interaction.currentObservedReviewGot
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
   loadObservedReviewsData,
+  loadNthReview: loadTargetNthReviewGot,
   setIsLoading: () => setIsObservedPageLoading(true),
   unlockPage: setPageUnlocked
 };
 
-type FindTargetCallbacks = {
-  setObservedUserCallback: (user: ISearchProfileInfo) => void;
-  unlockPageCallback: () => void;
-}
+const NoContent = <styled.Title isHighlighted>Загрузка...</styled.Title>;
 
-export async function callApiToCheckTargetConnection(
-  askerProfileId: string,
-  targetShareableId: string,
-  callbacks: FindTargetCallbacks
-) {
-  try {
-    const searchResult = await apiClient.searchUserByShareableId(targetShareableId);
-    callbacks.setObservedUserCallback(searchResult.data.result);
-  } catch {
-    jumpTo('/404');
-  } finally {
-    callbacks.unlockPageCallback();
-  }
-}
+const ContentEmpty = (
+  <styled.Title isHighlighted>
+    <styled.InnerSpan>Никто ещё не оставил отзыв о пользователе</styled.InnerSpan>
+  </styled.Title>
+);
 
 /**
  * Someone else's profile page (not the own page of the current user).
@@ -57,27 +47,39 @@ function ObservedProfilePage(props: types.IProps) {
   const { targetShareableId } = useParams<{ targetShareableId: string }>();
 
   const [observedUser, setObservedUser] = useState<ISearchProfileInfo>();
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     props.setIsLoading();
 
-    callApiToCheckTargetConnection(props.currentProfileInfo.currentId, targetShareableId, {
-      setObservedUserCallback: setObservedUser,
-      unlockPageCallback: props.unlockPage
-    });
+    apiClient.checkIsUserCanBeViewed({
+      askerProfileId: props.currentProfileId,
+      targetShareableId
+    })
+      .then(checkData => {
+        if (!checkData.data.success) {
+          jumpTo('/404');
+          return;
+        }
+
+        apiClient.searchUserByShareableId(targetShareableId)
+          .then(searchResult => {
+            setObservedUser(searchResult.data.result);
+
+            props.loadObservedReviewsData(props.currentProfileId, targetShareableId);
+          });
+      })
+      .catch(() => jumpTo('/404'));
   }, []);
 
-  useEffect(() => {
-    if (props.isAuthorized) {
-      props.loadObservedReviewsData(props.currentProfileInfo.currentId, targetShareableId);
-    }
-  }, [props.currentProfileInfo.currentId, props.isAuthorized]);
-
-  const ContentEmpty = () => (
+  const ContentAvailable = (
     <>
-      <styled.Title isHighlighted>
-        <styled.InnerSpan>Никто ещё не оставил отзыв о пользователе</styled.InnerSpan>
-      </styled.Title>
+      <styled.TitleWrapper>
+        <styled.Title isHighlighted>Отзывы о кандидате:</styled.Title>
+      </styled.TitleWrapper>
+
+      {/* @ts-ignore: Used only in case the data is not null. */}
+      <ReviewCard reviewCardData={props.currentReviewCardData} />
     </>
   );
 
@@ -92,38 +94,24 @@ function ObservedProfilePage(props: types.IProps) {
           <ProfileHead profileInfo={sliceProfileData(observedUser)} />
 
           <styled.ReviewSectionWrapper>
-            {props.isLoading ? <styled.Title isHighlighted>Загрузка...</styled.Title>
-              : (
-                <ReviewCard
-                  reviewCardData={{
-                    recommendation: 'Lorem Ipsum',
-                    recommendationMark: 6,
-                    strengths: 'Lorem Ipsum',
-                    targetCompanyName: 'Ascendix Technology',
-                    targetName: 'Demo User',
-                    targetPhotoUrl: 'https://static.vecteezy.com/system/resources/previews/002/318/271/non_2x/user-profile-icon-free-vector.jpg',
-                    targetPosition: 'QA',
-                    tasks: 'Lorem Ipsum'
-                  }}
-                  showTarget
-                />
-              )}
+            {props.isLoading ? NoContent
+              : props.currentReviewCardData ? ContentAvailable : ContentEmpty}
           </styled.ReviewSectionWrapper>
 
           {props.observedReviewsChunksAmount ? (
             <Pagination
               nPages={props.observedReviewsChunksAmount}
               onNextClick={() => {
-                // props.loadNthReview(props.currentPorfileId, currentIndex + 1);
-                // setCurrentIndex(currentIndex + 1);
+                props.loadNthReview(props.currentProfileId, targetShareableId, currentIndex + 1);
+                setCurrentIndex(currentIndex + 1);
               }}
               onPageClick={(page: number) => {
-                // props.loadNthReview(props.currentPorfileId, page - 1);
-                // setCurrentIndex(page - 1);
+                props.loadNthReview(props.currentProfileId, targetShareableId, page - 1);
+                setCurrentIndex(page - 1);
               }}
               onPrevClick={() => {
-                // props.loadNthReview(props.currentPorfileId, currentIndex - 1);
-                // setCurrentIndex(currentIndex - 1);
+                props.loadNthReview(props.currentProfileId, targetShareableId, currentIndex - 1);
+                setCurrentIndex(currentIndex - 1);
               }}
             />
           ) : null}

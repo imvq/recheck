@@ -52,6 +52,8 @@ export type IGetNthReviewLeftResponseDto = IGetNthReviewResponseDto;
 
 export type IGetTargetNReviewsGotResponseDto = IGetNReviewsResponseDto;
 
+export type IGetTargetNthReviewGotResponseDto = IGetNthReviewResponseDto;
+
 export type IMakeUserAvailableResponseDto = ISimpleActionResponse;
 
 export type INofiyReferralResponseDto = ISimpleActionResponse;

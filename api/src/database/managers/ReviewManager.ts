@@ -33,6 +33,6 @@ export default class ReviewManager {
       .innerJoin('reviews.target', 'target')
       .where('author.profileId = :authorId', { authorId })
       .andWhere('target.shareableId = :targetShareableId', { targetShareableId })
-      .getCount() !== 0;
+      .getCount() > 0;
   }
 }

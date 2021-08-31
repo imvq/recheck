@@ -124,15 +124,14 @@ export default class UserManager {
   }
 
   public static async getTargetNReviewsGot(askerProfileId: string, targetShareableId: string)
-    : Promise<{ amount: number }> {
+    : Promise<number> {
     return getRepository(User)
       .createQueryBuilder('users')
       .innerJoin('users.availableUsers', 'availableUsers')
       .innerJoin('availableUsers.reviewsGot', 'reviewsGot')
-      .where(`users.profileId = '${askerProfileId}'`)
-      .andWhere(`availableUsers.shareableId = '${targetShareableId}'`)
-      .select('COUNT(*) as amount')
-      .getRawOne();
+      .where('users.profileId = :askerProfileId', { askerProfileId })
+      .andWhere('availableUsers.shareableId = :targetShareableId', { targetShareableId })
+      .getCount();
   }
 
   public static async getUserBasicInfoByName(name: string)

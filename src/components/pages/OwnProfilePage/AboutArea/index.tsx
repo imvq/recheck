@@ -13,7 +13,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentPorfileId: store.profile.currentProfileInfo.currentId,
+  currentProfileId: store.profile.currentProfileInfo.currentId,
   currentShareableId: store.profile.currentProfileInfo.currentShareableId,
   isLoading: store.interaction.isProfileAboutTabLoading,
   reviewsGotChunksAmount: store.interaction.reviewsGotChunksAmount,
@@ -26,8 +26,11 @@ const mapDispatchToProps: types.IDispatchProps = {
 };
 
 function copyLink(awaiterId: string) {
+  showToast('Ссылка скопрована');
   navigator.clipboard.writeText(`${window.location.origin}?awaiter=${awaiterId}`);
 }
+
+const NoContent = <styled.Title isHighlighted>Загрузка...</styled.Title>;
 
 /**
  * Section with user's reviews.
@@ -36,14 +39,10 @@ function AboutArea(props: types.IProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    props.loadTabData(props.currentPorfileId);
+    props.loadTabData(props.currentProfileId);
   }, []);
 
-  const NoContent = () => (
-    <styled.Title isHighlighted>Загрузка...</styled.Title>
-  );
-
-  const ContentEmpty = () => (
+  const ContentEmpty = (
     <>
       <styled.Title isHighlighted>
         <styled.InnerSpan>Никто ещё не оставил о вас отзыв :(</styled.InnerSpan>
@@ -53,18 +52,14 @@ function AboutArea(props: types.IProps) {
         <styled.InnerSpan>Отправьте ссылку тому, кто может оставить о вас отзыв</styled.InnerSpan>
       </styled.Title>
       <styled.ButtonWrapper>
-        <CustomButton onClick={() => {
-          showToast('Ссылка скопрована');
-          copyLink(props.currentShareableId);
-        }}
-        >
+        <CustomButton onClick={() => copyLink(props.currentShareableId)}>
           Копировать ссылку
         </CustomButton>
       </styled.ButtonWrapper>
     </>
   );
 
-  const ContentAvailable = () => (
+  const ContentAvailable = (
     <>
       <styled.TitleWrapper>
         <styled.Title isHighlighted>Отзывы обо мне:</styled.Title>
@@ -78,25 +73,23 @@ function AboutArea(props: types.IProps) {
   return (
     <styled.Wrapper>
       <styled.ReviewSectionWrapper>
-        {props.isLoading ? <NoContent />
-          : props.currentReviewCardData
-            ? <ContentAvailable />
-            : <ContentEmpty />}
+        {props.isLoading ? NoContent
+          : props.currentReviewCardData ? ContentAvailable : ContentEmpty}
       </styled.ReviewSectionWrapper>
 
       {props.reviewsGotChunksAmount ? (
         <Pagination
           nPages={props.reviewsGotChunksAmount}
           onNextClick={() => {
-            props.loadNthReview(props.currentPorfileId, currentIndex + 1);
+            props.loadNthReview(props.currentProfileId, currentIndex + 1);
             setCurrentIndex(currentIndex + 1);
           }}
           onPageClick={(page: number) => {
-            props.loadNthReview(props.currentPorfileId, page - 1);
+            props.loadNthReview(props.currentProfileId, page - 1);
             setCurrentIndex(page - 1);
           }}
           onPrevClick={() => {
-            props.loadNthReview(props.currentPorfileId, currentIndex - 1);
+            props.loadNthReview(props.currentProfileId, currentIndex - 1);
             setCurrentIndex(currentIndex - 1);
           }}
         />

@@ -1,7 +1,7 @@
 import { IReviewCardGotData } from 'commons/types/general';
 
 export interface IStateProps {
-  currentPorfileId: string;
+  currentProfileId: string;
   currentShareableId: string;
   isLoading: boolean;
   reviewsGotChunksAmount: number;

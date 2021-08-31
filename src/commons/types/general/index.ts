@@ -90,6 +90,12 @@ export interface IGetTargetNReviewsGotDto {
   targetShareableId: string;
 }
 
+export interface IGetTargetNthReviewGotDto {
+  askerProfileId: string;
+  targetShareableId: string;
+  nthReview: number;
+}
+
 export interface IOptionType {
   key: any;
   text: string;

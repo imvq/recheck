@@ -145,6 +145,11 @@ class ApiClient {
     : generalTypes.APIResponse<apiResponses.IGetTargetNReviewsGotResponseDto> {
     return this.instance.post('/user/access/amount/reviews-got', bodyData);
   }
+
+  public getTargetNthReviewGot(bodyData: generalTypes.IGetTargetNthReviewGotDto)
+    : generalTypes.APIResponse<apiResponses.IGetTargetNthReviewGotResponseDto> {
+    return this.instance.post('/user/access/get/nth-review-got', bodyData);
+  }
 }
 
 export const apiClient = new ApiClient();

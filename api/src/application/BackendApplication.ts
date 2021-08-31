@@ -126,12 +126,10 @@ export default class BackendApplication {
    * Errors handler (Since express does not provide its own anymore).
    */
   private async jsonErrorsHook(err: any, _: Request, res: Response, next: NextFunction) {
-    if (err instanceof Errors.HttpError) {
-      if (!res.headersSent) {
-        res.set('Content-Type', 'application/json')
-          .status(err.statusCode)
-          .json({ error: err.message, code: err.statusCode });
-      }
+    if (err instanceof Errors.HttpError && !res.headersSent) {
+      res.set('Content-Type', 'application/json')
+        .status(err.statusCode)
+        .json({ error: err.message, code: err.statusCode });
     }
 
     // Important to allow default error handler to close connection
