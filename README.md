@@ -1,4 +1,4 @@
-# <img src="public/favicon.ico" height='30'> reCheck
+# <img src="public/icons/favicons/32x32.png" height='30'> reCheck
 reCheck это платформа для проверки кандидатов на работу по отзывам коллег.
 
 ## Фронтенд
