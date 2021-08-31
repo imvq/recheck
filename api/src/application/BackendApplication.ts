@@ -36,12 +36,13 @@ export default class BackendApplication {
   private database = new PostgreSqlConnector();
 
   public constructor(private readonly app: Application = express()) {
-    this.applyMidlewares();
-    this.applyControllers();
-
     if (process.env.NODE_ENV === 'development') {
       this.applyDevelopmentStuff();
     }
+
+    this.applyMidlewares();
+    this.applyControllers();
+    this.applyJsonErrorHandler();
   }
 
   public start = async () => new Promise<void>(resolve => {
@@ -89,9 +90,14 @@ export default class BackendApplication {
 
     // Provide database connection on each request.
     this.app.use(this.connectionHook.bind(this));
+  }
 
-    // Apply JSON error handler.
-    this.app.use(this.jsonErrorsHook.bind(this));
+  /**
+   * Database connection handler.
+   */
+  private async connectionHook(_req: Request, _res: Response, next: NextFunction) {
+    await this.database.connect();
+    next();
   }
 
   /**
@@ -114,18 +120,14 @@ export default class BackendApplication {
     Server.swagger(this.app, { filePath: `${this.root}/swagger.yaml` });
   }
 
-  /**
-   * Database connection handler.
-   */
-  private async connectionHook(_req: Request, _res: Response, next: NextFunction) {
-    await this.database.connect();
-    next();
+  private applyJsonErrorHandler() {
+    this.app.use(this.jsonErrorsHook.bind(this));
   }
 
   /**
    * Errors handler (Since express does not provide its own anymore).
    */
-  private async jsonErrorsHook(err: any, _: Request, res: Response, next: NextFunction) {
+  private jsonErrorsHook(err: any, _: Request, res: Response, next: NextFunction) {
     if (err instanceof Errors.HttpError && !res.headersSent) {
       res.set('Content-Type', 'application/json')
         .status(err.statusCode)
