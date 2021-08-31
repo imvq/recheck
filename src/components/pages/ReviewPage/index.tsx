@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { ISearchProfileInfo } from 'commons/types/general';
-import { jumpTo, mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/misc';
+import { jumpBack, jumpTo, mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 import {
   AppState,
@@ -119,7 +119,7 @@ function ReviewPage(props: types.IProps) {
   }
 
   const boxes = [
-    <BoxStepA page={1} onNextStep={proceed} onBack={comeback}>
+    <BoxStepA page={1} onNextStep={proceed} onBack={jumpBack}>
       Опишите какие задачи и обязанности были у кандидата. Как он с ними справился?
     </BoxStepA>,
     <BoxStepB page={2} onNextStep={proceed} onBack={comeback}>
@@ -136,7 +136,11 @@ function ReviewPage(props: types.IProps) {
       <styled.ContentWrapper>
         {observedUser && (
         <styled.ProfileHeadWrapper>
-          <ProfileHead noButtons profileInfo={mapProfileInfoToIAppProfileInfoSlice(observedUser)} />
+          <ProfileHead
+            profileInfo={mapProfileInfoToIAppProfileInfoSlice(observedUser)}
+            isSolid
+            noButtons
+          />
         </styled.ProfileHeadWrapper>
         )}
 

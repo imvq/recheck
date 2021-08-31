@@ -29,7 +29,7 @@ export default function CommentBoxWithMark(
 
     function returnHandler() {
       props.clearPrevious();
-      props.clearPrevious();
+      props.clearCurrent();
       props.onBack();
     }
 

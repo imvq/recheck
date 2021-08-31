@@ -16,7 +16,7 @@ export interface IStatePropsMapped {
 }
 
 export interface IDispatchProps {
-  clearPrevious(): void;
+  clearPrevious: (() => void) | null;
   clearCurrent(): void;
   setCurrent(value: string): void;
 }

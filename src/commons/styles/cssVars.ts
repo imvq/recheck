@@ -3,6 +3,7 @@
  */
 export default {
   colorBackgroundBadge: '#dde0ee',
+  colorBackgroundReviewBadge: '#c1eeed',
   colorBackgroundRect: '#e9edfb',
   colorForegroundPickMain: '#4f69ca',
   colorForegroundPickAux1: '#33c7ba',

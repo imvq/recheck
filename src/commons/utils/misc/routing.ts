@@ -16,6 +16,10 @@ type Page = '/'
   | '/await-user-confirmation'
   | '/search';
 
+export function jumpBack() {
+  controlledHistory.goBack();
+}
+
 export function jumpTo(page: Page, continuation?: string) {
   controlledHistory.push(`${page}${continuation || ''}`);
 }

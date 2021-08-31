@@ -1,10 +1,10 @@
 import { memo } from 'react';
 
+import cssVars from 'commons/styles/cssVars';
+
 import { jumpTo } from 'commons/utils/misc';
 
 import CustomButton from 'components/shared/CustomButton';
-
-import MenuBar from './MenuBar';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -12,17 +12,25 @@ import * as styled from './styled';
 const jumpToSearchPage = () => jumpTo('/search');
 
 /**
- * Menu with tabs to control the page content area.
+ * Menu with basic profile info.
  */
 function ProfileHead(props: types.IProps) {
+  const MenuBar = (
+    <styled.MenuBarWrapper backgroundColor={cssVars.colorBackgroundReviewBadge}>
+      <styled.MenuContentTitle>
+        {props.profileInfo.currentName}
+      </styled.MenuContentTitle>
+    </styled.MenuBarWrapper>
+  );
+
   // Company and position.
   const Infoblock = (
     <>
-      <styled.MenuContentSpan dimmed>
+      <styled.MenuContentSpan isDimmed>
         Должность:&nbsp;&nbsp;
         <styled.MenuContentSpan>{props.profileInfo.currentPosition}</styled.MenuContentSpan>
       </styled.MenuContentSpan>
-      <styled.MenuContentSpan dimmed>
+      <styled.MenuContentSpan isDimmed>
         Место работы:&nbsp;&nbsp;
         <styled.MenuContentSpan>{props.profileInfo.currentCompany}</styled.MenuContentSpan>
       </styled.MenuContentSpan>
@@ -41,7 +49,7 @@ function ProfileHead(props: types.IProps) {
 
   // Main panel.
   const MenuContent = (
-    <styled.MenuContent>
+    <styled.MenuContent backgroundColor={cssVars.colorBackgroundReviewBadge}>
       {Infoblock}
       {Picture}
     </styled.MenuContent>
@@ -59,7 +67,7 @@ function ProfileHead(props: types.IProps) {
   return (
     <styled.Wrapper>
       <styled.Menu>
-        <MenuBar currentProfileInfo={props.profileInfo} />
+        {MenuBar}
         {MenuContent}
         {!props.noButtons && Button}
       </styled.Menu>

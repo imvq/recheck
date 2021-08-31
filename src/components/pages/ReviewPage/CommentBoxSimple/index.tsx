@@ -24,8 +24,8 @@ export default function CommentBoxSimple(
     const canProceed = !!props.comment;
 
     function returnHandler() {
-      props.clearPrevious();
-      props.clearPrevious();
+      props.clearPrevious?.();
+      props.clearCurrent();
       props.onBack();
     }
 

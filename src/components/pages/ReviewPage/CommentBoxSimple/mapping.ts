@@ -7,7 +7,7 @@ export const mapStepAStateToProps = (store: AppState): types.IStateProps => ({
 });
 
 export const mapStepADispatchToProps: types.IDispatchProps = {
-  clearPrevious: () => {},
+  clearPrevious: null,
   clearCurrent: dispatchers.clearTasks,
   setCurrent: dispatchers.setReviewTasks
 };
