@@ -21,7 +21,7 @@ export default class ReviewService {
     const author = await UserManager.getUser(reviewData.authorId);
     UserService.handleUsersExistence(author);
 
-    if (ReviewManager.doesReviewExists(reviewData.authorId, reviewData.targetShareableId)) {
+    if (await ReviewManager.doesReviewExists(reviewData.authorId, reviewData.targetShareableId)) {
       throw new Errors.ConflictError('User has already created review for the target.');
     }
 
