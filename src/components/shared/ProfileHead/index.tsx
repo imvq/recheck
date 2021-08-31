@@ -15,8 +15,14 @@ const jumpToSearchPage = () => jumpTo('/search');
  * Menu with basic profile info.
  */
 function ProfileHead(props: types.IProps) {
+  let backgroundColor: string | undefined;
+
+  if (props.isSolid) {
+    backgroundColor = cssVars.colorBackgroundReviewBadge;
+  }
+
   const MenuBar = (
-    <styled.MenuBarWrapper backgroundColor={cssVars.colorBackgroundReviewBadge}>
+    <styled.MenuBarWrapper backgroundColor={backgroundColor}>
       <styled.MenuContentTitle>
         {props.profileInfo.currentName}
       </styled.MenuContentTitle>
@@ -49,7 +55,7 @@ function ProfileHead(props: types.IProps) {
 
   // Main panel.
   const MenuContent = (
-    <styled.MenuContent backgroundColor={cssVars.colorBackgroundReviewBadge}>
+    <styled.MenuContent backgroundColor={backgroundColor}>
       {Infoblock}
       {Picture}
     </styled.MenuContent>
