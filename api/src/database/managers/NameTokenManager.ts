@@ -8,10 +8,10 @@ import NameToken from '../entities/NameToken.entity';
  * Class providing operations with NameToken entity.
  */
 export default class NameTokenManager {
-  public static async saveTokenizedName(userProfileId: string, tokens: string[]): Promise<void> {
+  public static async saveTokenizedName(userProfileId: string, tokens: string[]) {
     const repository = getRepository(NameToken);
 
-    await Promise.all(tokens.map(async tokenValue => {
+    await Promise.all([...new Set(tokens)].map(async tokenValue => {
       const tokenEntityObject = await NameTokenManager.createEntityRepresentationOf(tokenValue);
 
       await repository
