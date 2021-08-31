@@ -47,7 +47,7 @@ export default class UserService {
   @utils.errorsAutoHandler({ except: [], logger })
   public async checkIsUserAvailableForReview(checkDto: dto.CheckIsUserAvailableForReviewDto)
     : Promise<apiResponses.ICheckIsUserAvailableForReviewResponseDto> {
-    const success = await ReviewManager.doesReviewExists(
+    const success = !await ReviewManager.doesReviewExists(
       checkDto.askerProfileId,
       checkDto.targetShareableId
     );

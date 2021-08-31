@@ -29,8 +29,10 @@ export default class ReviewManager {
   public static async doesReviewExists(authorId: string, targetShareableId: string) {
     return await getRepository(Review)
       .createQueryBuilder('reviews')
-      .where('reviews.authorId = :authorId', { authorId })
-      .andWhere('reviews.targetShareableId = :targetShareableId', { targetShareableId })
+      .innerJoin('reviews.author', 'author')
+      .innerJoin('reviews.target', 'target')
+      .where('author.profileId = :authorId', { authorId })
+      .andWhere('target.shareableId = :targetShareableId', { targetShareableId })
       .getCount() !== 0;
   }
 }
