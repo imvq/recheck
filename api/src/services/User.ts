@@ -281,7 +281,8 @@ export default class UserService {
       tasks: review.tasks,
       strengths: review.strengths,
       recommendation: review.recommendation,
-      recommendationMark: review.recommendationMark
+      recommendationMark: review.recommendationMark,
+      date: review.date
     };
   }
 

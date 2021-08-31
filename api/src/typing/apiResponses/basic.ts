@@ -17,6 +17,7 @@ export interface IGetNthReviewResponseDto {
   strengths: string;
   recommendation: string;
   recommendationMark: number;
+  date: string;
 }
 
 export interface IReducedMember {

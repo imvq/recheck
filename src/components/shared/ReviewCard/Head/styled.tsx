@@ -55,7 +55,7 @@ export const NameWrapper = styled.div`
   padding-left: 2rem;
 `;
 
-export const Name = styled.span`
+export const TopBarText = styled.span`
   font-size: 1.3rem;
   font-weight: 600;
 `;

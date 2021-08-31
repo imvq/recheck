@@ -9,7 +9,7 @@ import * as styled from './styled';
  */
 export default (props: types.IProps) => (
   <styled.Wrapper>
-    {props.showTarget && <Head reviewCardData={props.reviewCardData} />}
+    <Head reviewCardData={props.reviewCardData} showTarget={props.showTarget} />
     <Body reviewCardData={props.reviewCardData} />
   </styled.Wrapper>
 );

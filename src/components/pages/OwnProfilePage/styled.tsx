@@ -13,10 +13,14 @@ export const Wrapper = styled.div`
 `;
 
 export const TitleWrapper = styled.div`
+  text-align: center;
+  box-sizing: border-box;
+  padding: 4rem 0;
+`;
+
+export const Title = styled.span`
   font-size: 1.6rem;
   font-weight: 700;
-  padding: 4rem 0;
-  text-align: center;
 `;
 
 export const AdaptedHeader = styled(Header)`

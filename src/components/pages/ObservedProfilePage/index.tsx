@@ -32,10 +32,10 @@ const mapDispatchToProps: types.IDispatchProps = {
   unlockPage: setPageUnlocked
 };
 
-const NoContent = <styled.Title isHighlighted>Загрузка...</styled.Title>;
+const NoContent = <styled.Title>Загрузка...</styled.Title>;
 
 const ContentEmpty = (
-  <styled.Title isHighlighted>
+  <styled.Title>
     <styled.InnerSpan>Никто ещё не оставил отзыв о пользователе</styled.InnerSpan>
   </styled.Title>
 );
@@ -75,11 +75,11 @@ function ObservedProfilePage(props: types.IProps) {
   const ContentAvailable = (
     <>
       <styled.TitleWrapper>
-        <styled.Title isHighlighted>Отзывы о кандидате:</styled.Title>
+        <styled.Title>Отзывы о кандидате:</styled.Title>
       </styled.TitleWrapper>
 
       {/* @ts-ignore: Used only in case the data is not null. */}
-      <ReviewCard showTarget reviewCardData={props.currentReviewCardData} />
+      <ReviewCard reviewCardData={props.currentReviewCardData} />
     </>
   );
 
@@ -91,6 +91,10 @@ function ObservedProfilePage(props: types.IProps) {
 
       {observedUser && (
         <styled.ContentWrapper>
+          <styled.TitleWrapper id='ProfileTitle'>
+            <styled.Title>Просмотр профиля</styled.Title>
+          </styled.TitleWrapper>
+
           <ProfileHead profileInfo={sliceProfileData(observedUser)} />
 
           <styled.ReviewSectionWrapper>

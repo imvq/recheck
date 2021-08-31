@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, Index } from 'typeorm';
 
 import User from './User.entity';
 
@@ -26,4 +26,8 @@ export default class Review {
 
   @Column('int')
   recommendationMark!: number;
+
+  @Index()
+  @Column('date', { default: () => 'CURRENT_TIMESTAMP' })
+  date!: string;
 }

@@ -7,4 +7,5 @@ export interface IReviewCardCommonData {
   strengths: string;
   recommendation: string;
   recommendationMark: number;
+  date: string;
 }

@@ -49,14 +49,15 @@ export const ReviewSectionWrapper = styled.div`
 `;
 
 export const TitleWrapper = styled.div`
+  text-align: center;
   box-sizing: border-box;
   padding: 0 0 3rem;
 `;
 
-export const Title = styled.p<{ isHighlighted?: boolean; }>`
+export const Title = styled.p`
   font-size: 1.5rem;
   line-height: 2.5rem;
-  font-weight: ${props => (props.isHighlighted ? '600' : '400')};
+  font-weight: 700;
   text-align: center;
 `;
 
