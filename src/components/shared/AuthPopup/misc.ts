@@ -25,12 +25,12 @@ function onProfileDataRetrieved(
   setCurrentProfileInfoCallback(normalizedProfileInfo);
 
   apiClient.checkIsRegistered(normalizedProfileInfo.currentId)
-    .then((checkResponse) => {
+    .then(checkResponse => {
       setIsAuthorizedCallback(true);
 
       if (checkResponse.data.isRegistered) {
         apiClient.checkIsConfirmed(normalizedProfileInfo.currentId)
-          .then((confirmationResponse) => {
+          .then(confirmationResponse => {
             setIsLoginPopupVisibleCallback(false);
 
             if (!confirmationResponse.data.isConfirmed) {

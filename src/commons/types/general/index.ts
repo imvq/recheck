@@ -129,7 +129,6 @@ export interface IPrepareProfileDto {
   workStartMonth: number;
   workStartYear: number;
   referral: string | null;
-  recruiter: string | null;
 }
 
 export interface IPreviousSearchCardData {

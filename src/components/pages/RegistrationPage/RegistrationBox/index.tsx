@@ -15,8 +15,7 @@ import * as styled from '../../../shared/BoxBase';
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentProfileInfo: store.profile.currentProfileInfo,
   matchedCompanies: store.search.quickSearchMatchedCompanies,
-  referral: store.interaction.referral,
-  recruiter: store.interaction.recruiter
+  referral: store.interaction.referral
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -83,7 +82,6 @@ function RegistrationBox(props: types.IProps) {
         position,
         workStartMonth,
         workStartYear,
-        recruiter: props.recruiter,
         referral: props.referral
       });
     }

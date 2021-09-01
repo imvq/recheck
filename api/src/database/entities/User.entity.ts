@@ -18,9 +18,6 @@ export default class User {
   @orm.Column('uuid', { nullable: true })
   referral!: string | null;
 
-  @orm.Column('uuid', { nullable: true })
-  recruiter!: string | null;
-
   // Foreign key. Every user belongs to one company.
   @orm.ManyToOne(() => Company, company => company.members)
   company!: Company;

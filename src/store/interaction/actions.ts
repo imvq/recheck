@@ -17,7 +17,6 @@ import {
   SET_IS_PROFILE_HISTORY_TAB_LOADING,
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   SET_IS_OBSERVED_REVIEWS_PAGE_LOADING,
-  SET_RECRUITER,
   SET_REFERRAL,
   SET_AWAITER,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
@@ -84,12 +83,6 @@ export const setIsProfileReviewsTabLoading = (flag: boolean)
   : InteractionStateActionType => ({
   type: SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   payload: flag
-});
-
-export const setRecruiter = (recruiter: string)
-  : InteractionStateActionType => ({
-  type: SET_RECRUITER,
-  payload: recruiter
 });
 
 export const setReferral = (referral: string)

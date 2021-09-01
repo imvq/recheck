@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { jumpTo, useQuery } from 'commons/utils/misc';
 import { AppState, setIsLoginPopupVisible, setReferral, setAwaiter } from 'store';
 
-import CookiePopup from 'components/shared/CookiePopup';
 import AuthPopupManager from 'components/shared/AuthPopupManager';
+import CookiePopup from 'components/shared/CookiePopup';
 
 import Footer from './Footer';
 import GreetingsSection from './GreetingsSection';
@@ -44,13 +44,13 @@ const LandingPage = (props: types.IProps) => {
   }
 
   useEffect(() => {
-    // Can be null.
-    if ((referral || awaiter) && props.isAuthorized === false) {
+    // props.isAuthorized can be null.
+    if (referral && props.isAuthorized === false) {
       props.setIsLoginPopupVisible(true);
       return;
     }
 
-    if (awaiter && props.isAuthorized === true) {
+    if (awaiter) {
       jumpTo('/review/', awaiter);
     }
   }, [props.isAuthorized]);

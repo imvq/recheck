@@ -73,7 +73,7 @@ export default () => (
 
           {/* Review page. Used to add new reviews. */}
           <Route exact path='/review/:targetShareableId'>
-            <PageStartupManager preventUnlockStrictly redirectHomeOnFail />
+            <PageStartupManager preventUnlockStrictly />
             <PageLockManager hideContentOnLock>
               <ReviewPage />
             </PageLockManager>
