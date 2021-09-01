@@ -121,7 +121,11 @@ function ReviewPage(props: types.IProps) {
         }).then(() => {
           jumpTo('/profile/observe/', props.requestedUserShareableId as string);
         }).catch(jumpToProfile);
+
+        return;
       }
+
+      jumpToProfile();
     } else {
       saveReviewToCookies(props.reviewData);
       props.setIsLoginPopupVisible(true);
