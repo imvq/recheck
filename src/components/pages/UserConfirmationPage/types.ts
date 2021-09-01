@@ -1,12 +1,13 @@
-import { IAppProfileInfo } from 'commons/types/general';
+import { IReviewData } from 'commons/types/general';
 
 export interface IStateProps {
   isAuthorized: boolean | null;
-  currentProfileInfo: IAppProfileInfo;
+  currentProfileId: string;
 }
 
 export interface IDispatchProps {
   setIsLoginPopupVisible(flag: boolean): void;
+  createReview(reviewData: IReviewData): void;
   unlockPage(): void;
 }
 

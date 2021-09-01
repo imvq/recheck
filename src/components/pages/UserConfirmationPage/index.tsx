@@ -2,24 +2,35 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { IReviewDataReduced } from 'commons/types/general';
 import { jumpTo } from 'commons/utils/misc';
-import { apiClient } from 'commons/utils/services';
-import { AppState, setIsLoginPopupVisible, setPageUnlocked } from 'store';
+import { apiClient, cookieManager } from 'commons/utils/services';
+import { AppState, createReview, setIsLoginPopupVisible, setPageUnlocked } from 'store';
 
 import * as types from './types';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.auth.isAuthorized,
-  currentProfileInfo: store.profile.currentProfileInfo
+  currentProfileId: store.profile.currentProfileInfo.currentId
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
   setIsLoginPopupVisible,
+  createReview,
   unlockPage: setPageUnlocked
 };
 
+function retrievePreparedReview(): IReviewDataReduced | undefined {
+  return cookieManager.get('preparedReview');
+}
+
 function UserConfirmationPage(props: types.IProps) {
   const { uuid: pageUuid } = useParams<{ uuid: string }>();
+
+  function finalize() {
+    props.unlockPage();
+    jumpTo('/profile');
+  }
 
   useEffect(() => {
     // true       | false          | null
@@ -30,12 +41,26 @@ function UserConfirmationPage(props: types.IProps) {
 
     if (props.isAuthorized) {
       apiClient.completeRegistration({
-        profileId: props.currentProfileInfo.currentId,
+        profileId: props.currentProfileId,
         confirmationCode: pageUuid
       })
         .then(() => {
-          props.unlockPage();
-          jumpTo('/profile');
+          const preparedReview = retrievePreparedReview();
+
+          if (preparedReview) {
+            apiClient.checkIsTargetConnected({
+              askerProfileId: props.currentProfileId,
+              targetShareableId: preparedReview.targetShareableId
+            }).then(checkData => {
+              if (checkData.data.success) {
+                props.createReview({ ...preparedReview, authorId: props.currentProfileId });
+              }
+            }).finally(finalize);
+
+            return;
+          }
+
+          finalize();
         })
         .catch(() => jumpTo('/404'));
       return;

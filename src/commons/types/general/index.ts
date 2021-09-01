@@ -167,6 +167,12 @@ export interface IReviewData {
   recommendationMark: number;
 }
 
+export type IReviewDataReduced = Omit<IReviewData, 'authorId'>;
+
+export interface ISavedReviewData extends IReviewCardCommonData {
+  targetShareableId: string;
+}
+
 export interface ISearchProfileInfo {
   name: string;
   shareableId: string;
