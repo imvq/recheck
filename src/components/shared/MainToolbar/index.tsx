@@ -15,7 +15,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 function copyLink(link: string) {
-  navigator.clipboard.writeText(`${window.location.origin}?recruiter=${link}`);
+  navigator.clipboard.writeText(`${window.location.origin}?referral=${link}`);
   showToast('Ссылка приглашения скопирована. Отправьте её кандидату');
 }
 

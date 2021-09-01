@@ -114,10 +114,10 @@ export default class UserManager {
       .getCount() > 0;
 
     return actualAvailability || await getRepository(User)
-      // Recruiter availability (asker invited the target).
+      // Referral availability (asker invited the target).
       .createQueryBuilder('users')
       .where(`users.profileId = '${target.profileId}'`)
-      .andWhere(`users.recruiter = '${asker.shareableId}'`)
+      .andWhere(`users.referral = '${asker.shareableId}'`)
       .getCount() > 0;
   }
 
