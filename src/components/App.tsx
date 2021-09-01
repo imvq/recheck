@@ -19,7 +19,6 @@ const ObservedProfilePage = lazy(() => import('components/pages/ObservedProfileP
 const OwnProfilePage = lazy(() => import('components/pages/OwnProfilePage'));
 const PrivacyPllicyPage = lazy(() => import('components/pages/PrivacyPolicyPage'));
 const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
-const ReviewConfirmationPage = lazy(() => import('components/pages/ReviewConfirmationPage'));
 const ReviewPage = lazy(() => import('components/pages/ReviewPage'));
 const SearchPage = lazy(() => import('components/pages/SearchPage'));
 const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
@@ -76,14 +75,6 @@ export default () => (
             <PageStartupManager preventUnlockStrictly />
             <PageLockManager hideContentOnLock>
               <ReviewPage />
-            </PageLockManager>
-          </Route>
-
-          {/* Confirmation page. Used to bind review with the user. Review UUID needed. */}
-          <Route exact path='/review/connect/:uuid'>
-            <PageStartupManager preventUnlockStrictly />
-            <PageLockManager>
-              <ReviewConfirmationPage />
             </PageLockManager>
           </Route>
 
