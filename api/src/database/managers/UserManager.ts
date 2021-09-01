@@ -97,7 +97,7 @@ export default class UserManager {
   public static async getUserWithReviewsLeft(profileId: string)
     : Promise<User | undefined> {
     return getRepository(User).findOne({
-      relations: ['reviewsLeft', 'reviewsGot.target', 'reviewsGot.target.company'],
+      relations: ['reviewsLeft', 'reviewsLeft.target', 'reviewsLeft.target.company'],
       where: { profileId },
       order: { profileId: 'DESC' }
     });
