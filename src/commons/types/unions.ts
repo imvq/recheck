@@ -14,7 +14,7 @@ export const mainToolbarEntries = {
   AddWorkplace: 'AddWorkplace',
   NewSearch: 'NewSearch',
   NewReview: 'NewReview'
-};
+} as const;
 
 export type MainToolbarEntry = typeof mainToolbarEntries[keyof typeof mainToolbarEntries];
 
