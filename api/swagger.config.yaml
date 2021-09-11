@@ -1,9 +1,0 @@
-swagger:
-  outputDirectory: ./dist
-  entryFile:
-    - ./src/controllers/*
-  outputFormat: OpenApi_3
-  name: reCheck
-  description: reCheck website API
-  produces: [application/json]
-  version: 1.0.0
