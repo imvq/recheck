@@ -1,8 +1,7 @@
 import { Errors } from 'typescript-rest';
 import axios from 'axios';
 
-import * as constants from '@commons/constants';
-import * as cookiesList from '@commons/cookies';
+import * as constants from '@business/constants';
 import * as generalTypes from '@typing/general';
 import * as apiResponses from '@typing/apiResponses';
 
@@ -25,9 +24,12 @@ export default class LinkedInOAuthService {
       params.append('client_id', process.env.LINKEDIN_APP_CLIENT_ID as string);
       params.append('client_secret', process.env.LINKEDIN_APP_CLIENT_SECRET as string);
 
-      const { data } = await axios.post(constants.AUTH_URL, params, utils.createUrlEncodedConfig());
+      const { data } = await axios.post(
+        constants.LI_AUTH_URL, params,
+        utils.createUrlEncodedConfig()
+      );
 
-      return { [cookiesList.LI_AT]: data['access_token'] };
+      return { [constants.COOKIE_LI]: data['access_token'] };
     } catch (error) {
       logger.log(JSON.stringify(error));
       throw error instanceof Errors.UnauthorizedError ? error
@@ -38,16 +40,16 @@ export default class LinkedInOAuthService {
   public async retrieveProfileInfo(cookies: generalTypes.IStringIndexable)
     : Promise<apiResponses.IRetrieveLinkedInProfileInfoResponseDto> {
     try {
-      if (!cookies[cookiesList.LI_AT]) {
+      if (!cookies[constants.COOKIE_LI]) {
         throw new Errors.UnauthorizedError('No Bearer token provided');
       }
 
-      const config = utils.createAuthConfig(cookies[cookiesList.LI_AT]);
+      const config = utils.createAuthConfig(cookies[constants.COOKIE_LI]);
       const { data: profile } = await axios.get(
         constants.LI_PROFILE_URL, config
       );
       const { data: photo } = await axios.get(
-        constants.PHOTO_URL, config
+        constants.LI_PHOTO_URL, config
       );
       const highestQualityPicture = photo.profilePicture['displayImage~'].elements[
         photo.profilePicture['displayImage~'].elements.length - 1

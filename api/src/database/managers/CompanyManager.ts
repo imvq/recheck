@@ -1,7 +1,7 @@
 import { getRepository } from 'typeorm';
 
 import * as generalTypes from '@typing/general';
-import * as constants from '@commons/constants';
+import * as constants from '@business/constants';
 import Company from '../entities/Company.entity';
 
 /**

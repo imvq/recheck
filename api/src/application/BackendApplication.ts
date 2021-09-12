@@ -10,7 +10,7 @@ import path from 'path';
 import express, { Application, Handler, Request, Response, NextFunction } from 'express';
 import { Server, Errors } from 'typescript-rest';
 
-import * as constants from '@commons/constants';
+import * as constants from '@business/constants';
 import * as generalTypes from '@typing/general';
 
 import logger from '@logging/Logger';
