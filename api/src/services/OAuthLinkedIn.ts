@@ -25,7 +25,7 @@ export default class LinkedInOAuthService {
 
       const { data } = await axios.post(
         constants.LI_AUTH_URL, params,
-        utils.createUrlEncodedConfig()
+        { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
       );
 
       return { [constants.COOKIE_LI]: data['access_token'] };
@@ -42,7 +42,7 @@ export default class LinkedInOAuthService {
         throw new Errors.UnauthorizedError('No Bearer token provided');
       }
 
-      const config = utils.createAuthConfig(cookies[constants.COOKIE_LI]);
+      const config = { headers: { Authorization: `Bearer ${constants.COOKIE_LI}` } };
       const { data: profile } = await axios.get(
         constants.LI_PROFILE_URL, config
       );

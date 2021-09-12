@@ -1,4 +1,4 @@
-import logger from '@logging/Logger';
+import { logger } from '@business/preloaded';
 
 import BackendApplication from '@application/BackendApplication';
 
@@ -14,12 +14,12 @@ export default class ServerRunner {
         await application.dev();
         break;
       default:
-        logger.err('Invalid NODE_ENV provided');
+        logger?.err('Invalid NODE_ENV provided');
         process.exit(0);
     }
 
     async function graceful() {
-      logger.log('Server terminated manually');
+      logger?.log('Server terminated manually');
       await application.stop();
       process.exit(0);
     }
