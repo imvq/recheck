@@ -18,31 +18,17 @@
     "skipLibCheck": true,
     "module": "commonjs",
     "outDir": "dist",
-    "sourceMap": true,
     "allowJs": true,
     "strict": true,
     "paths": {
-      "@application/*": [
-        "src/application/*"
-      ],
-      "@business/*": [
-        "src/business/*"
-      ],
-      "@controllers/*": [
-        "src/controllers/*"
-      ],
-      "@dto": [
-        "src/dto"
-      ],
-      "@services/*": [
-        "src/services/*"
-      ],
-      "@utils": [
-        "src/utils"
-      ],
-      "@typing": [
-        "src/typing"
-      ]
+      "@application": ["src/application"],
+      "@application/*": ["src/application/*"],
+      "@business": ["src/business"],
+      "@business/*": ["src/business/*"],
+      "@controllers": ["src/controllers"],
+      "@controllers/*": ["src/controllers/*"],
+      "@typing": ["src/typing"],
+      "@typing/*": ["src/typing/*"]
     }
   },
   "include": [
