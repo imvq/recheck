@@ -16,8 +16,7 @@
   },
   "_moduleAliases": {
     "@application": "dist/application",
-    "@commons": "dist/commons",
-    "@config": "dist/config",
+    "@business": "dist/business",
     "@controllers": "dist/controllers",
     "@database": "dist/database",
     "@dto": "dist/dto",
