@@ -13,7 +13,6 @@ import { Server, Errors } from 'typescript-rest';
 import * as constants from '@business/constants';
 
 import logger from '@business/logging';
-import PostgreSqlConnector from '@database/connect';
 
 const getHost = () => process.env.HOST || constants.DEFAULT_HOST;
 const getPort = () => Number.parseInt(process.env.PORT || '') || constants.DEFAULT_PORT;
@@ -31,8 +30,6 @@ export default class BackendApplication {
   private root = getRoot();
 
   private server: https.Server | http.Server | null = null;
-
-  private database = new PostgreSqlConnector();
 
   public constructor(private readonly app: Application = express()) {
     if (process.env.NODE_ENV === 'development') {
@@ -83,17 +80,6 @@ export default class BackendApplication {
 
     // Provide functionality to read cookies.
     this.app.use(cookieParser());
-
-    // Provide database connection on each request.
-    this.app.use(this.connectionHook.bind(this));
-  }
-
-  /**
-   * Database connection handler.
-   */
-  private async connectionHook(_req: Request, _res: Response, next: NextFunction) {
-    await this.database.connect();
-    next();
   }
 
   /**

@@ -31,9 +31,6 @@
       "@controllers/*": [
         "src/controllers/*"
       ],
-      "@database/*": [
-        "src/database/*"
-      ],
       "@dto": [
         "src/dto"
       ],

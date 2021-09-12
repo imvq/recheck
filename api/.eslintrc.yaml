@@ -28,9 +28,11 @@ rules:
   class-methods-use-this: 0
   comma-dangle: 0
   dot-notation: 0
+  global-require: 0
   import/extensions: 0
   import/no-absolute-path: 0
   import/no-extraneous-dependencies: 0
+  import/no-mutable-exports: 0
   import/no-named-as-default: 0
   import/prefer-default-export: 0
   max-classes-per-file: 0
@@ -46,4 +48,6 @@ rules:
   object-curly-newline: 0
   prefer-destructuring: 0
   radix: 0
+  semi: 0
   '@typescript-eslint/no-shadow': error
+  '@typescript-eslint/semi': error
