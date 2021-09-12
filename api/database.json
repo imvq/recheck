@@ -1,0 +1,25 @@
+{
+  "dev": {
+    "driver": "pg",
+    "user": {
+      "ENV": "DB_USERNAME"
+    },
+    "password": {
+      "ENV": "DB_PASSWORD"
+    },
+    "host": "localhost",
+    "database": "recheck"
+  },
+  "prod": {
+    "driver": "pg",
+    "user": {
+      "ENV": "DB_USERNAME"
+    },
+    "password": {
+      "ENV": "DB_PASSWORD"
+    },
+    "host": "localhost",
+    "database": "recheck"
+  },
+  "sql-file": true
+}
