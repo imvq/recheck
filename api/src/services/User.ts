@@ -1,8 +1,6 @@
 import { Errors } from 'typescript-rest';
 import { v1 as uuidv1 } from 'uuid';
 
-import * as apiResponses from '@typing/apiResponses';
-
 import dto from '@dto';
 import utils from '@utils';
 
@@ -14,7 +12,7 @@ import CompanyManager from '@database/managers/CompanyManager';
 import ReviewManager from '@database/managers/ReviewManager';
 import UserManager from '@database/managers/UserManager';
 
-import logger from '@logging/Logger';
+import logger from '@business/logging';
 
 import MailService from './Mail';
 import NameTokensService from './NameTokens';
@@ -24,8 +22,7 @@ import NameTokensService from './NameTokens';
  */
 export default class UserService {
   @utils.errorsAutoHandler({ except: [], logger })
-  public async isTargetConnected(bodyData: dto.IsTargetConnectedDto)
-    : Promise<apiResponses.IIsTargetConnectedResponsDto> {
+  public async isTargetConnected(bodyData: dto.IsTargetConnectedDto) {
     const asker = await UserManager.getUser(bodyData.askerProfileId, ['company']);
     const target = await UserManager.getUserBySharedId(bodyData.targetShareableId, ['company']);
 
@@ -37,16 +34,14 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
-  public async checkIsEmailAvailable(emailDto: dto.СheckIsEmailAvailableDto)
-    : Promise<apiResponses.ICheckIsEmailAvailableResponseDto> {
+  public async checkIsEmailAvailable(emailDto: dto.СheckIsEmailAvailableDto) {
     const success = !await UserManager.getUserByEmail(emailDto.email);
 
     return { success };
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
-  public async checkIsUserAvailableForReview(checkDto: dto.CheckIsUserAvailableForReviewDto)
-    : Promise<apiResponses.ICheckIsUserAvailableForReviewResponseDto> {
+  public async checkIsUserAvailableForReview(checkDto: dto.CheckIsUserAvailableForReviewDto) {
     const success = !await ReviewManager.doesReviewExists(
       checkDto.askerProfileId,
       checkDto.targetShareableId
@@ -56,8 +51,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
-  public async checkIsUserCanBeViewed(checkDto: dto.CheckIsUserCanBeViewed)
-    : Promise<apiResponses.ICheckIsUserCanBeViewedResponseDto> {
+  public async checkIsUserCanBeViewed(checkDto: dto.CheckIsUserCanBeViewed) {
     const asker = await UserManager.getUser(checkDto.askerProfileId);
     const target = await UserManager.getUserBySharedId(checkDto.targetShareableId);
     UserService.handleUsersExistence(asker, target);
@@ -68,14 +62,12 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
-  public async checkIsUserRegistered(profileIdDto: dto.CheckIsUserRegisteredDto)
-    : Promise<apiResponses.ICheckIsUserRegisteredResponseDto> {
+  public async checkIsUserRegistered(profileIdDto: dto.CheckIsUserRegisteredDto) {
     return { isRegistered: !!await UserManager.getUser(profileIdDto.profileId) };
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
-  public async checkIsUserConfirmed(profileIdDto: dto.CheckIsUserConfirmedDto)
-    : Promise<apiResponses.ICheckIsUserConfirmedResponseDto> {
+  public async checkIsUserConfirmed(profileIdDto: dto.CheckIsUserConfirmedDto) {
     // Making confirmation code null is to be considered the user is registered.
     return {
       isConfirmed: (await UserManager.getUser(profileIdDto.profileId))?.confirmationCode === null
@@ -86,8 +78,7 @@ export default class UserService {
    * Save user info and send email to confirm.
    */
   @utils.errorsAutoHandler({ except: [], logger })
-  public async prepareUser(profileDto: dto.PrepareUserDto)
-    : Promise<apiResponses.IPrepareUserResponseDto> {
+  public async prepareUser(profileDto: dto.PrepareUserDto) {
     const confirmationCode = uuidv1();
 
     await this.saveUser(profileDto, confirmationCode);
@@ -100,8 +91,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
-  public async resendConfirmation(resendDto: dto.ResendConfirmationDto)
-    : Promise<apiResponses.IResendConfirmationResponseDto> {
+  public async resendConfirmation(resendDto: dto.ResendConfirmationDto) {
     const target = await UserManager.getUser(resendDto.profileId);
 
     if (!target || !target.confirmationCode) {
@@ -115,8 +105,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
-  public async reassignConfirmationEmail(reassignmentDto: dto.ReassignConfirmationEmailDto)
-    : Promise<apiResponses.IReassignConfirmationEmailResponseDto> {
+  public async reassignConfirmationEmail(reassignmentDto: dto.ReassignConfirmationEmailDto) {
     const target = await UserManager.getUser(reassignmentDto.profileId);
 
     if (!target || target.email === reassignmentDto.email) {
@@ -170,8 +159,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
-  public async completeRegistration(completionDto: dto.CompleteRegistrationDto)
-    : Promise<apiResponses.ICompleteRegistration> {
+  public async completeRegistration(completionDto: dto.CompleteRegistrationDto) {
     const targetUser = await UserManager.getUser(completionDto.profileId);
     if (targetUser && targetUser.confirmationCode === completionDto.confirmationCode) {
       await UserManager.setUserRegistered(completionDto.profileId);
@@ -187,8 +175,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
-  public async searchUser(searchDto: dto.SearchUserDto, options?: { isQuickSearch: boolean })
-    : Promise<apiResponses.ISearchUserResponseDto> {
+  public async searchUser(searchDto: dto.SearchUserDto, options?: { isQuickSearch: boolean }) {
     const results = await NameTokensService.getMatchedUsers(
       searchDto.tokens,
       options?.isQuickSearch
@@ -198,8 +185,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
-  public async searchUserByShareabledId(searchDto: dto.SearchUserByShareableIdDto)
-    : Promise<apiResponses.ISearchUserByShareableIdResponseDto> {
+  public async searchUserByShareabledId(searchDto: dto.SearchUserByShareableIdDto) {
     const result = await UserManager.getReducedUserBySharedId(searchDto.shareableId, ['company']);
 
     if (!result) {
@@ -210,8 +196,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
-  public async getColleagues(bodyData: dto.GetColleaguesDto)
-    : Promise<apiResponses.IGetColleaguesResponseDto> {
+  public async getColleagues(bodyData: dto.GetColleaguesDto) {
     const asker = await UserManager.getUserWithCompanyMembers(bodyData.profileId);
 
     const results = this.mapMembersToReducedMembers(asker?.company.members || []);
@@ -230,22 +215,19 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
-  public async getNReviewsGot(bodyData: dto.GetNReviewsGotDto)
-    : Promise<apiResponses.IGetNReviewsGotAmountResponseDto> {
+  public async getNReviewsGot(bodyData: dto.GetNReviewsGotDto) {
     const targetData = await UserManager.getUserWithReviewsGot(bodyData.profileId);
     return { amount: targetData?.reviewsGot.length || 0 };
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
-  public async getNReviewsLeft(bodyData: dto.GetNReviewsLeftDto)
-    : Promise<apiResponses.IGetNReviewsLeftAmountResponseDto> {
+  public async getNReviewsLeft(bodyData: dto.GetNReviewsLeftDto) {
     const targetData = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
     return { amount: targetData?.reviewsLeft.length || 0 };
   }
 
   @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
-  public async getNthReviewGot(bodyData: dto.GetNthReviewGotDto)
-    : Promise<apiResponses.IGetNthReviewGotResponseDto> {
+  public async getNthReviewGot(bodyData: dto.GetNthReviewGotDto) {
     const target = await UserManager.getUserWithReviewsGot(bodyData.profileId);
 
     if (!target?.reviewsGot || target?.reviewsGot.length <= bodyData.nthReview) {
@@ -258,8 +240,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
-  public async getNthReviewLeft(bodyData: dto.GetNthReviewLeftDto)
-    : Promise<apiResponses.IGetNthReviewLeftResponseDto> {
+  public async getNthReviewLeft(bodyData: dto.GetNthReviewLeftDto) {
     const author = await UserManager.getUserWithReviewsLeft(bodyData.profileId);
 
     if (!author?.reviewsLeft || author?.reviewsLeft.length <= bodyData.nthReview) {
@@ -271,8 +252,7 @@ export default class UserService {
     return this.mapReviewToReducedReview(review);
   }
 
-  private mapReviewToReducedReview(review: Review)
-    : apiResponses.IGetNthReviewLeftResponseDto {
+  private mapReviewToReducedReview(review: Review) {
     return {
       targetName: review.target.name,
       targetPhotoUrl: review.target.photoUrl,
@@ -308,8 +288,7 @@ export default class UserService {
     ],
     logger
   })
-  public async getTargetNReviewsGot(bodyData: dto.GetTargetNReviewsGotDto)
-    : Promise<apiResponses.IGetTargetNReviewsGotResponseDto> {
+  public async getTargetNReviewsGot(bodyData: dto.GetTargetNReviewsGotDto) {
     const asker = await UserManager.getUser(bodyData.askerProfileId);
     const target = await UserManager.getTargetUserWithReviewsGot(bodyData.targetShareableId);
     UserService.handleUsersExistence(asker, target);
@@ -320,8 +299,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [Errors.BadRequestError], logger })
-  public async getTargetNthReviewGot(bodyData: dto.GetTargetNthReviewGotDto)
-    : Promise<apiResponses.IGetNthReviewGotResponseDto> {
+  public async getTargetNthReviewGot(bodyData: dto.GetTargetNthReviewGotDto) {
     const asker = await UserManager.getUser(bodyData.askerProfileId);
     const target = await UserManager.getTargetUserWithReviewsGot(bodyData.targetShareableId);
     UserService.handleUsersExistence(asker, target);
@@ -338,8 +316,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
-  public async makeUserAvailable(bodyData: dto.MakeUserAvailableDto)
-    : Promise<apiResponses.IMakeUserAvailableResponseDto> {
+  public async makeUserAvailable(bodyData: dto.MakeUserAvailableDto) {
     const asker = await UserManager.getUser(bodyData.askerProfileId, ['availableUsers']);
     const target = await UserManager.getUserBySharedId(bodyData.targetShareableId);
     UserService.handleUsersExistence(asker, target);
@@ -351,8 +328,7 @@ export default class UserService {
   }
 
   @utils.errorsAutoHandler({ except: [Errors.NotFoundError], logger })
-  public async doesUserHasAvailableProfilesViews(checkDto: dto.DoesUserHasAvailableProfilesViewsDto)
-    : Promise<apiResponses.IDoesUserHasAvailableProfilesViewsResponseDto> {
+  public async doesUserHasAvailableProfilesViews(checkDto: dto.DoesUserHasAvailableProfilesViewsDto) {
     const asker = await UserManager.getUser(checkDto.profileId);
     UserService.handleUsersExistence(asker);
 

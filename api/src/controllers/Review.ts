@@ -5,8 +5,6 @@ import BodyGuard from 'typescript-rest-body-guard';
 import dto from '@dto';
 import ReviewService from '@services/Review';
 
-import * as apiResponses from '@typing/apiResponses';
-
 /**
  * Default controller in charge of reviews.
  */
@@ -22,8 +20,7 @@ export default class ReviewController {
   @Path('/prepare')
   @BodyGuard
   @POST
-  public async prepareReview(reviewDto: dto.CreateReviewDto)
-    : Promise<apiResponses.IPrepareReviewResponseDto> {
+  public async prepareReview(reviewDto: dto.CreateReviewDto) {
     return this.injectedService.prepareReview(reviewDto);
   }
 }

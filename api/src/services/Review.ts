@@ -1,9 +1,7 @@
 import { Errors } from 'typescript-rest';
 
-import * as apiResponses from '@typing/apiResponses';
-
 import dto from '@dto';
-import logger from '@logging/Logger';
+import logger from '@business/logging';
 import utils from '@utils';
 
 import ReviewManager from '@database/managers/ReviewManager';
@@ -16,8 +14,7 @@ import UserService from './User';
  */
 export default class ReviewService {
   @utils.errorsAutoHandler({ except: [Errors.NotFoundError, Errors.ConflictError], logger })
-  public async prepareReview(reviewData: dto.CreateReviewDto)
-    : Promise<apiResponses.IPrepareReviewResponseDto> {
+  public async prepareReview(reviewData: dto.CreateReviewDto) {
     const author = await UserManager.getUser(reviewData.authorId);
     UserService.handleUsersExistence(author);
 

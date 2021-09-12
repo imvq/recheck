@@ -28,9 +28,6 @@
       "@business/*": [
         "src/business/*"
       ],
-      "@config/*": [
-        "src/config/*"
-      ],
       "@controllers/*": [
         "src/controllers/*"
       ],
@@ -40,17 +37,14 @@
       "@dto": [
         "src/dto"
       ],
-      "@logging/*": [
-        "src/logging/*"
-      ],
       "@services/*": [
         "src/services/*"
       ],
       "@utils": [
         "src/utils"
       ],
-      "@typing/*": [
-        "src/typing/*"
+      "@typing": [
+        "src/typing"
       ]
     }
   },

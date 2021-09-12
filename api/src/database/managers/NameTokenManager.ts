@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 
-import { ISearchedUserDto } from '@typing/apiResponses';
+import { ISearchedUserDto } from '@typing';
 
 import NameToken from '../entities/NameToken.entity';
 

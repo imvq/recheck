@@ -5,8 +5,6 @@ import { Inject } from 'typescript-ioc';
 import dto from '@dto';
 import UserService from '@services/User';
 
-import * as apiResponses from '@typing/apiResponses';
-
 /**
  * Default controller in charge of users.
  */
@@ -21,8 +19,7 @@ export default class UserController {
   @Path('/target/is-connected')
   @BodyGuard
   @POST
-  public async isTargetConnected(bodyData: dto.IsTargetConnectedDto)
-    : Promise<apiResponses.IIsTargetConnectedResponsDto> {
+  public async isTargetConnected(bodyData: dto.IsTargetConnectedDto) {
     return this.injectedService.isTargetConnected(bodyData);
   }
 
@@ -32,8 +29,7 @@ export default class UserController {
   @Path('/availability/email')
   @BodyGuard
   @POST
-  public async checkIsEmailAvailable(bodyData: dto.СheckIsEmailAvailableDto)
-    : Promise<apiResponses.ICheckIsEmailAvailableResponseDto> {
+  public async checkIsEmailAvailable(bodyData: dto.СheckIsEmailAvailableDto) {
     return this.injectedService.checkIsEmailAvailable(bodyData);
   }
 
@@ -44,8 +40,7 @@ export default class UserController {
   @Path('/availability/review')
   @BodyGuard
   @POST
-  public async checkIsUserAvailableForReview(bodyData: dto.CheckIsUserAvailableForReviewDto)
-    : Promise<apiResponses.ICheckIsUserAvailableForReviewResponseDto> {
+  public async checkIsUserAvailableForReview(bodyData: dto.CheckIsUserAvailableForReviewDto) {
     return this.injectedService.checkIsUserAvailableForReview(bodyData);
   }
 
@@ -55,8 +50,7 @@ export default class UserController {
   @Path('/availability/can-view')
   @BodyGuard
   @POST
-  public async checkIsUserCanBeViewed(bodyData: dto.CheckIsUserCanBeViewed)
-    : Promise<apiResponses.ICheckIsUserCanBeViewedResponseDto> {
+  public async checkIsUserCanBeViewed(bodyData: dto.CheckIsUserCanBeViewed) {
     return this.injectedService.checkIsUserCanBeViewed(bodyData);
   }
 
@@ -66,8 +60,7 @@ export default class UserController {
   @Path('/availability/profile-views')
   @BodyGuard
   @POST
-  public async doesUserHasAvailableProfilesViews(bodyData: dto.DoesUserHasAvailableProfilesViewsDto)
-    : Promise<apiResponses.IDoesUserHasAvailableProfilesViewsResponseDto> {
+  public async doesUserHasAvailableProfilesViews(bodyData: dto.DoesUserHasAvailableProfilesViewsDto) {
     return this.injectedService.doesUserHasAvailableProfilesViews(bodyData);
   }
 
@@ -77,8 +70,7 @@ export default class UserController {
   @Path('/availability/profile/provide')
   @BodyGuard
   @POST
-  public async makeUserAvailable(bodyData: dto.MakeUserAvailableDto)
-    : Promise<apiResponses.IMakeUserAvailableResponseDto> {
+  public async makeUserAvailable(bodyData: dto.MakeUserAvailableDto) {
     return this.injectedService.makeUserAvailable(bodyData);
   }
 
@@ -88,8 +80,7 @@ export default class UserController {
   @Path('/is-registered')
   @BodyGuard
   @POST
-  public async checkIsUserRegistered(bodyData: dto.CheckIsUserRegisteredDto)
-    : Promise<apiResponses.ICheckIsUserRegisteredResponseDto> {
+  public async checkIsUserRegistered(bodyData: dto.CheckIsUserRegisteredDto) {
     return this.injectedService.checkIsUserRegistered(bodyData);
   }
 
@@ -99,8 +90,7 @@ export default class UserController {
   @Path('/is-confirmed')
   @BodyGuard
   @POST
-  public async checkIsUserConfirmed(bodyData: dto.CheckIsUserConfirmedDto)
-    : Promise<apiResponses.ICheckIsUserConfirmedResponseDto> {
+  public async checkIsUserConfirmed(bodyData: dto.CheckIsUserConfirmedDto) {
     return this.injectedService.checkIsUserConfirmed(bodyData);
   }
 
@@ -110,8 +100,7 @@ export default class UserController {
   @Path('/prepare')
   @BodyGuard
   @POST
-  public async prepareUser(bodyData: dto.PrepareUserDto)
-    : Promise<apiResponses.IPrepareUserResponseDto> {
+  public async prepareUser(bodyData: dto.PrepareUserDto) {
     return this.injectedService.prepareUser(bodyData);
   }
 
@@ -121,8 +110,7 @@ export default class UserController {
   @Path('/confirmation/resend')
   @BodyGuard
   @POST
-  public async resendConfirmation(bodyData: dto.ResendConfirmationDto)
-    : Promise<apiResponses.IResendConfirmationResponseDto> {
+  public async resendConfirmation(bodyData: dto.ResendConfirmationDto) {
     return this.injectedService.resendConfirmation(bodyData);
   }
 
@@ -132,8 +120,7 @@ export default class UserController {
   @Path('/confirmation/reassign')
   @BodyGuard
   @POST
-  public async reassignConfirmationEmail(bodyData: dto.ReassignConfirmationEmailDto)
-    : Promise<apiResponses.IReassignConfirmationEmailResponseDto> {
+  public async reassignConfirmationEmail(bodyData: dto.ReassignConfirmationEmailDto) {
     return this.injectedService.reassignConfirmationEmail(bodyData);
   }
 
@@ -143,8 +130,7 @@ export default class UserController {
   @Path('/confirm')
   @BodyGuard
   @POST
-  public async completeRegistration(bodyData: dto.CompleteRegistrationDto)
-    : Promise<apiResponses.ICompleteRegistration> {
+  public async completeRegistration(bodyData: dto.CompleteRegistrationDto) {
     return this.injectedService.completeRegistration(bodyData);
   }
 
@@ -154,8 +140,7 @@ export default class UserController {
   @Path('/quick-search')
   @BodyGuard
   @POST
-  public async quickSearch(bodyData: dto.SearchUserDto)
-    : Promise<apiResponses.ISearchUserResponseDto> {
+  public async quickSearch(bodyData: dto.SearchUserDto) {
     return this.injectedService.searchUser(bodyData, { isQuickSearch: true });
   }
 
@@ -165,8 +150,7 @@ export default class UserController {
   @Path('/search')
   @BodyGuard
   @POST
-  public async search(bodyData: dto.SearchUserDto)
-    : Promise<apiResponses.ISearchUserResponseDto> {
+  public async search(bodyData: dto.SearchUserDto) {
     return this.injectedService.searchUser(bodyData);
   }
 
@@ -176,8 +160,7 @@ export default class UserController {
   @Path('/search/by/shareable-id')
   @BodyGuard
   @POST
-  public async searchByShareableId(bodyData: dto.SearchUserByShareableIdDto)
-    : Promise<apiResponses.ISearchUserByShareableIdResponseDto> {
+  public async searchByShareableId(bodyData: dto.SearchUserByShareableIdDto) {
     return this.injectedService.searchUserByShareabledId(bodyData);
   }
 
@@ -187,8 +170,7 @@ export default class UserController {
   @Path('/get/colleagues')
   @BodyGuard
   @POST
-  public async getColleagues(bodyData: dto.GetColleaguesDto)
-    : Promise<apiResponses.IGetColleaguesResponseDto> {
+  public async getColleagues(bodyData: dto.GetColleaguesDto) {
     return this.injectedService.getColleagues(bodyData);
   }
 
@@ -198,8 +180,7 @@ export default class UserController {
   @Path('/amount/reviews-got')
   @BodyGuard
   @POST
-  public async getNReviewsGot(bodyData: dto.GetNReviewsGotDto)
-    : Promise<apiResponses.IGetNReviewsGotAmountResponseDto> {
+  public async getNReviewsGot(bodyData: dto.GetNReviewsGotDto) {
     return this.injectedService.getNReviewsGot(bodyData);
   }
 
@@ -209,8 +190,7 @@ export default class UserController {
   @Path('/get/nth-review-got')
   @BodyGuard
   @POST
-  public async getNthReviewGot(bodyData: dto.GetNthReviewGotDto)
-    : Promise<apiResponses.IGetNthReviewGotResponseDto> {
+  public async getNthReviewGot(bodyData: dto.GetNthReviewGotDto) {
     return this.injectedService.getNthReviewGot(bodyData);
   }
 
@@ -220,8 +200,7 @@ export default class UserController {
   @Path('/amount/reviews-left')
   @BodyGuard
   @POST
-  public async getNReviewsOf(bodyData: dto.GetNReviewsLeftDto)
-    : Promise<apiResponses.IGetNReviewsLeftAmountResponseDto> {
+  public async getNReviewsOf(bodyData: dto.GetNReviewsLeftDto) {
     return this.injectedService.getNReviewsLeft(bodyData);
   }
 
@@ -231,8 +210,7 @@ export default class UserController {
   @Path('/get/nth-review-left')
   @BodyGuard
   @POST
-  public async getNthReviewOf(bodyData: dto.GetNthReviewLeftDto)
-    : Promise<apiResponses.IGetNthReviewLeftResponseDto> {
+  public async getNthReviewOf(bodyData: dto.GetNthReviewLeftDto) {
     return this.injectedService.getNthReviewLeft(bodyData);
   }
 
@@ -242,8 +220,7 @@ export default class UserController {
   @Path('/access/amount/reviews-got')
   @BodyGuard
   @POST
-  public async getTargetNReviewsGot(bodyData: dto.GetTargetNReviewsGotDto)
-    : Promise<apiResponses.IGetTargetNReviewsGotResponseDto> {
+  public async getTargetNReviewsGot(bodyData: dto.GetTargetNReviewsGotDto) {
     return this.injectedService.getTargetNReviewsGot(bodyData);
   }
 
@@ -253,8 +230,7 @@ export default class UserController {
   @Path('/access/get/nth-review-got')
   @BodyGuard
   @POST
-  public async getTargetNthReviewsGot(bodyData: dto.GetTargetNthReviewGotDto)
-     : Promise<apiResponses.IGetNthReviewGotResponseDto> {
+  public async getTargetNthReviewsGot(bodyData: dto.GetTargetNthReviewGotDto) {
     return this.injectedService.getTargetNthReviewGot(bodyData);
   }
 }

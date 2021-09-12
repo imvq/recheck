@@ -1,14 +1,16 @@
 import { getRepository } from 'typeorm';
 
-import * as generalTypes from '@typing/general';
 import * as constants from '@business/constants';
+
+import { ICompanyData } from '@typing';
+
 import Company from '../entities/Company.entity';
 
 /**
  * Class providing operations with Company entity.
  */
 export default class CompanyManager {
-  public static async createCompany(companyData: generalTypes.CompanyData)
+  public static async createCompany(companyData: ICompanyData)
     : Promise<Company> {
     const repository = getRepository(Company);
     const toBeSaved = repository.create({ ...companyData });

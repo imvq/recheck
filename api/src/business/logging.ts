@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import ILogger from './ILogger';
+import { ILogger } from '@typing';
 
 /**
  * Simple logger class to output info to log file.

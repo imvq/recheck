@@ -2,20 +2,19 @@ import { Errors } from 'typescript-rest';
 import axios from 'axios';
 
 import * as constants from '@business/constants';
-import * as generalTypes from '@typing/general';
-import * as apiResponses from '@typing/apiResponses';
 
 import dto from '@dto';
 import utils from '@utils';
-import logger from '@logging/Logger';
+import logger from '@business/logging';
 import UserManager from '@database/managers/UserManager';
+
+import { IStringIndexable } from '@typing';
 
 /**
  * Service in charge of LinkedIn OAuth.
  */
 export default class LinkedInOAuthService {
-  public async exchangeLinkedInAuthCode(exchangeDto: dto.ExchangeLinkedInAuthCodeDto)
-    : Promise<apiResponses.IExchangeLinkedInAuthCodeResponseDto> {
+  public async exchangeLinkedInAuthCode(exchangeDto: dto.ExchangeLinkedInAuthCodeDto) {
     try {
       const params = new URLSearchParams();
       params.append('grant_type', 'authorization_code');
@@ -37,8 +36,7 @@ export default class LinkedInOAuthService {
     }
   }
 
-  public async retrieveProfileInfo(cookies: generalTypes.IStringIndexable)
-    : Promise<apiResponses.IRetrieveLinkedInProfileInfoResponseDto> {
+  public async retrieveProfileInfo(cookies: IStringIndexable) {
     try {
       if (!cookies[constants.COOKIE_LI]) {
         throw new Errors.UnauthorizedError('No Bearer token provided');

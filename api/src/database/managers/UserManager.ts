@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 
-import * as generalTypes from '@typing/general';
+import dto from '@dto';
 
 import Company from '../entities/Company.entity';
 import User from '../entities/User.entity';
@@ -10,7 +10,7 @@ import User from '../entities/User.entity';
  */
 export default class UserManager {
   public static async createUser(
-    userData: generalTypes.UserData,
+    userData: dto.PrepareUserDto,
     company: Company,
     confirmationCode: string
   ): Promise<void> {

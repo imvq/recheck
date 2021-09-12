@@ -4,8 +4,6 @@ import { Inject } from 'typescript-ioc';
 import dto from '@dto';
 import CompaniesService from '@services/Companies';
 
-import * as apiResponses from '@typing/apiResponses';
-
 /**
  * Default controller in charge of companies.
  */
@@ -18,15 +16,13 @@ export default class CompaniesController {
    */
   @Path('/recommendations')
   @POST
-  public async getRecommendations(bodyData: dto.GetRecommendationsDto)
-    : Promise<apiResponses.IGetRecommendations> {
+  public async getRecommendations(bodyData: dto.GetRecommendationsDto) {
     return this.injectedService.getRecommendations(bodyData);
   }
 
   @Path('/find-matched')
   @POST
-  public async getMathedCompanies(bodyData: dto.GetMatchedCompaniesDto)
-    : Promise<apiResponses.IGetMatchedCompanies> {
+  public async getMathedCompanies(bodyData: dto.GetMatchedCompaniesDto) {
     return this.injectedService.getMatchedCompanies(bodyData);
   }
 }

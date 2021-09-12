@@ -3,7 +3,7 @@ import nodemailerMailgun from 'nodemailer-mailgun-transport';
 
 import { createTransport, Transporter } from 'nodemailer';
 
-import { IReplacements } from '@typing/general';
+import { IReplacements } from '@typing';
 
 import TemplatesService from './Templates';
 

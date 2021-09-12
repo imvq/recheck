@@ -1,15 +1,12 @@
-import * as apiResponses from '@typing/apiResponses';
-
 import dto from '@dto';
 import utils from '@utils';
-import logger from '@logging/Logger';
+import logger from '@business/logging';
 import Company from '@database/entities/Company.entity';
 import CompanyManager from '@database/managers/CompanyManager';
 
 export default class CompaniesService {
   @utils.errorsAutoHandler({ except: [], logger })
-  public async getRecommendations(bodyData: dto.GetRecommendationsDto)
-    : Promise<apiResponses.IGetRecommendations> {
+  public async getRecommendations(bodyData: dto.GetRecommendationsDto) {
     const companies = await CompanyManager.getPredefinedCompanies(bodyData.chunk);
 
     // TypeORM cannot select many rows properly if the primary key is not provided.
@@ -36,8 +33,7 @@ export default class CompaniesService {
   }
 
   @utils.errorsAutoHandler({ except: [], logger })
-  public async getMatchedCompanies(bodyData: dto.GetMatchedCompaniesDto)
-    : Promise<apiResponses.IGetMatchedCompanies> {
+  public async getMatchedCompanies(bodyData: dto.GetMatchedCompaniesDto) {
     const matched = await CompanyManager.getMatched(bodyData.sequence);
     return { results: this.mapMatchedToPlainInfo(matched) };
   }

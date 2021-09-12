@@ -11,9 +11,8 @@ import express, { Application, Handler, Request, Response, NextFunction } from '
 import { Server, Errors } from 'typescript-rest';
 
 import * as constants from '@business/constants';
-import * as generalTypes from '@typing/general';
 
-import logger from '@logging/Logger';
+import logger from '@business/logging';
 import PostgreSqlConnector from '@database/connect';
 
 const getHost = () => process.env.HOST || constants.DEFAULT_HOST;
@@ -77,10 +76,7 @@ export default class BackendApplication {
 
   private applyMidlewares() {
     // Cross-Origin Resource Sharing.
-    this.app.use(cors({
-      credentials: true,
-      origin: process.env.ORIGIN as string
-    }) as generalTypes.ICorsMiddleware);
+    this.app.use(cors({ credentials: true, origin: process.env.ORIGIN || '*' }));
 
     // Provide functionality to read POST data.
     this.app.use(bodyParser.json());
