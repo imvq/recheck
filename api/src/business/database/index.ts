@@ -2,6 +2,8 @@ import pgp, { IInitOptions } from 'pg-promise';
 
 import { ILogger } from '@typing';
 
+export * from './accessors';
+
 export default function getDatabase(logger: ILogger | null) {
   const initOptionsDev: IInitOptions = {
     query: (queryObject) => (logger as ILogger).log(queryObject.query)
