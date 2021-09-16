@@ -5,7 +5,18 @@ import * as accessors from '@business/database/accessors';
 import { database } from '@business/preloaded';
 import { assertBodyData, reply } from '@business/utilities';
 
-export function checkIfUserIsRegistered(request: Request, response: Response) {}
+export async function checkIfUserIsRegistered(request: Request, response: Response) {
+  interface IBodyParams {
+    socialId: string;
+  }
+
+  const { socialId }: IBodyParams = request.body;
+  assertBodyData(socialId);
+
+  const targetUser = await database.oneOrNone(accessors.sqlFindUserBySocialId, { socialId });
+
+  reply(response, { message: !!targetUser });
+}
 
 export async function checkIfEmailIsAvailable(request: Request, response: Response) {
   interface IBodyParams {
@@ -20,4 +31,4 @@ export async function checkIfEmailIsAvailable(request: Request, response: Respon
   reply(response, { message: !targetedEmail });
 }
 
-export function prepareUser(request: Request, response: Response) {}
+export async function prepareUser(request: Request, response: Response) {}
