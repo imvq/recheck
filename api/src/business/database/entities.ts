@@ -99,6 +99,19 @@ export interface User {
 }
 
 /**
+ * Users must confirm themselves by providing their confirmation codes.
+ */
+export interface UserConfirmation {
+  id?: string;
+
+  /**
+   * Code value. Only unconfirmed users have records with confirmation codes.
+   * Absence of a confirmation code for a user determines the user is confirmed.
+   */
+  codeValue?: string;
+}
+
+/**
  * To provide quick search of users their full names are split by words
  * which are then used in pattern search.
  */
