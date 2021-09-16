@@ -1,5 +1,5 @@
 -- Creating table for confirmation codes.
-CREATE TABLE IF NOT EXISTS public.confirmation (
+CREATE TABLE IF NOT EXISTS public.confirmations (
     id         BIGSERIAL,
     user_id    BIGSERIAL,
     code_value UUID       NOT NULL DEFAULT uuid_generate_v4(),
