@@ -18,6 +18,19 @@ export async function checkIfUserIsRegistered(request: Request, response: Respon
   reply(response, { message: !!targetUser });
 }
 
+export async function checkIfUserIsConfirmed(request: Request, response: Response) {
+  interface IBodyParams {
+    socialId: string;
+  }
+
+  const { socialId }: IBodyParams = request.body;
+  assertBodyData(socialId);
+
+  const confirmation = await database.oneOrNone(accessors.sqlFindUserConfirmation, { socialId });
+
+  reply(response, { message: !confirmation });
+}
+
 export async function checkIfEmailIsAvailable(request: Request, response: Response) {
   interface IBodyParams {
     email: string;
