@@ -110,7 +110,7 @@ export interface NameToken {
    * To avoid problems with case sensitivity,
    * the app client have ensure that all values are lowercased.
    */
-  value?: string;
+  tokenValue?: string;
 
   // Joins.
   bounds?: User[];
