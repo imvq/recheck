@@ -44,4 +44,16 @@ export async function checkIfEmailIsAvailable(request: Request, response: Respon
   reply(response, { message: !targetedEmail });
 }
 
-export async function prepareUser(request: Request, response: Response) {}
+export async function prepareUser(request: Request, response: Response) {
+  interface IBodyParams {
+    email: string;
+    socialId: string;
+    name: string;
+    photoUrl: string;
+  }
+
+  const { email, socialId, name, photoUrl }: IBodyParams = request.body;
+  assertBodyData(email, socialId, name, photoUrl);
+
+  // TODO: preparation stuff.
+}
