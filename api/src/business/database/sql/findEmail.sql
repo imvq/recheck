@@ -1,3 +1,1 @@
-SELECT email
-FROM public.users
-WHERE email = ${email};
+SELECT email FROM users WHERE email = ${email};

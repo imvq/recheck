@@ -1,3 +1,1 @@
-SELECT *
-FROM public.users
-WHERE social_id = ${socialId};
+SELECT * FROM public.users WHERE social_id = ${socialId};
