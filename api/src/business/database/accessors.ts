@@ -7,4 +7,5 @@ function sql(file: string) {
 }
 
 export const sqlFindEmail = sql('./sql/findEmail.sql');
+export const sqlFindUserConfirmation = sql('./sql/findUserConfirmation.sql');
 export const sqlFindUserBySocialId = sql('./sql/findUserBySocialId');

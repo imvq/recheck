@@ -26,9 +26,9 @@ export class BadRequestError extends HttpError {
 
 export function useDefaultErrorHandler(error: any, response: Response) {
   if (error instanceof HttpError) {
-    reply(response, error.message, error.statusCode);
+    reply(response, { message: error.message }, error.statusCode);
     return;
   }
 
-  reply(response, 'Internal server error', httpStatus.INTERNAL_SERVER_ERROR);
+  reply(response, { message: 'Server-side error occured.' }, httpStatus.INTERNAL_SERVER_ERROR);
 }

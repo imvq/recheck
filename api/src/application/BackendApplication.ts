@@ -9,6 +9,7 @@ import * as constants from '@business/constants';
 
 import { useDefaultErrorHandler } from '@business/errors';
 import { logger, morgan } from '@business/preloaded';
+import { reply } from '@business/utilities';
 
 /**
  * Main server application class.
@@ -54,7 +55,7 @@ export default class BackendApplication {
   private applyJsonErrorHandler() {
     this.app.use((_req: Request, res: Response) => {
       if (!res.headersSent) {
-        res.status(httpStatus.NOT_FOUND).json({ message: 'Route not found' });
+        reply(res, { message: 'Route not found' }, httpStatus.NOT_FOUND);
       }
     });
 
