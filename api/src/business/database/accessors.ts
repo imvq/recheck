@@ -6,13 +6,13 @@ function sql(file: string) {
   return new QueryFile(fullPath, { minify: true });
 }
 
-export const sqlFindEmail = sql('./sql/findEmail.sql');
-export const sqlFindCompany = sql('./sql/findCompany.sql');
-export const sqlFindNameToken = sql('./sql/findNameToken.sql');
-export const sqlFindUserConfirmation = sql('./sql/findUserConfirmation.sql');
-export const sqlFindUserBySocialId = sql('./sql/findUserBySocialId');
+export const sqlFindEmail = sql('./sql/read/findEmail.sql');
+export const sqlFindCompany = sql('./sql/read/findCompany.sql');
+export const sqlFindNameToken = sql('./sql/read/findNameToken.sql');
+export const sqlFindUserConfirmation = sql('./sql/read/findUserConfirmation.sql');
+export const sqlFindUserBySocialId = sql('./sql/read/findUserBySocialId');
 
-export const sqlCreateCompany = sql('./sql/createCompany.sql');
-export const sqlCreateNameToken = sql('./sql/createNameToken.sql');
-export const sqlCreateNameTokenBinding = sql('./sql/createNameTokenBinding.sql');
-export const sqlCreateUser = sql('./sql/createUser.sql');
+export const sqlCreateCompany = sql('./sql/create/createCompany.sql');
+export const sqlCreateNameToken = sql('./sql/create/createNameToken.sql');
+export const sqlCreateNameTokenBinding = sql('./sql/create/createNameTokenBinding.sql');
+export const sqlCreateUser = sql('./sql/create/createUser.sql');
