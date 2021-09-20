@@ -64,7 +64,7 @@ export async function prepareUser(request: Request, response: Response) {
 
   const { photoUrl = constants.DEFAULT_PHOTO_PLACEHOLDER_URL, ...rest }: IBodyParams = request.body;
   const { email, inviterId, socialId, fullName, companyId, createdCompanyName } = rest;
-  assertBodyData(email, inviterId, socialId, fullName, photoUrl);
+  assertBodyData(photoUrl, email, inviterId, socialId, fullName, companyId, createdCompanyName);
 
   // We have to check for conflicts despite existing API checker
   // since we cannot expext the API's users to make all needed checks before calling
