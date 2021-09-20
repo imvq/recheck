@@ -8,6 +8,8 @@ export function assertBodyData(...args: any[]) {
   }
 }
 
-export function reply(responseInjection: Response, message: object, status = 200) {
+const successReply = { message: 'Success.' };
+
+export function reply(responseInjection: Response, message: object = successReply, status = 200) {
   responseInjection.status(status).json(message);
 }

@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS public.users
     current_position     TEXT       NOT NULL,
     current_work_y_from  VARCHAR(4) NOT NULL,
     current_work_m_from  SMALLINT   NOT NULL,
-    reviews_available    INTEGER    NOT NULL,
+    reviews_available    INTEGER    NOT NULL DEFAULT 0,
 
     -- Indices for unique fields will be generated automatically.
     CONSTRAINT usr_unique_private_token UNIQUE(private_token),

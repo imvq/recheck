@@ -45,9 +45,9 @@ const EmailSection = (
 
 const SocialsSection = (
   <styled.SectionWrapper>
-    <styled.MenuEntryTextMarked>Соц. сети:</styled.MenuEntryTextMarked>
-    <styled.SocialLink href='/'>
-      <styled.TelegramIconWrapper />
+    <styled.MenuEntryTextMarked>Ссылки:</styled.MenuEntryTextMarked>
+    <styled.SocialLink href='/privacy-policy'>
+      <styled.MenuEntryText>Политика конфиденциальности</styled.MenuEntryText>
     </styled.SocialLink>
   </styled.SectionWrapper>
 );

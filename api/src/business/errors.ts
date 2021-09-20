@@ -24,6 +24,12 @@ export class BadRequestError extends HttpError {
   }
 }
 
+export class ConflictError extends HttpError {
+  public constructor(message: string) {
+    super(message, httpStatus.CONFLICT);
+  }
+}
+
 export function useDefaultErrorHandler(error: any, response: Response) {
   if (error instanceof HttpError) {
     reply(response, { message: error.message }, error.statusCode);
