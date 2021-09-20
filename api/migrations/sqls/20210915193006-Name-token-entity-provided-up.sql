@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS public.name_tokens
     CONSTRAINT nt_pk_id PRIMARY KEY(id)
 );
 
--- Creating table for name tokens bounds.
-CREATE TABLE IF NOT EXISTS public.name_tokens_bounds
+-- Creating table for name tokens bindings.
+CREATE TABLE IF NOT EXISTS public.name_tokens_bindings
 (
     name_token_id bigserial,
     user_id       bigserial,
@@ -25,4 +25,4 @@ CREATE TABLE IF NOT EXISTS public.name_tokens_bounds
 
 -- Setting owner.
 ALTER TABLE public.name_tokens OWNER TO recheck;
-ALTER TABLE public.name_tokens_bounds OWNER TO recheck;
+ALTER TABLE public.name_tokens_bindings OWNER TO recheck;
