@@ -7,6 +7,8 @@ import * as errors from '@business/errors';
 import { database } from '@business/preloaded';
 import { assertBodyData, reply } from '@business/utilities';
 
+import * as nameTokensLogic from './nameTokens';
+
 export async function checkIfUserIsRegistered(request: Request, response: Response) {
   interface IBodyParams {
     socialId: string;
@@ -61,8 +63,8 @@ export async function prepareUser(request: Request, response: Response) {
   }
 
   const { photoUrl = constants.DEFAULT_PHOTO_PLACEHOLDER_URL, ...rest }: IBodyParams = request.body;
-  const { email, inviterId, socialId, fullName: name, companyId, createdCompanyName } = rest;
-  assertBodyData(email, inviterId, socialId, name, photoUrl);
+  const { email, inviterId, socialId, fullName, companyId, createdCompanyName } = rest;
+  assertBodyData(email, inviterId, socialId, fullName, photoUrl);
 
   // We have to check for conflicts despite existing API checker
   // since we cannot expext the API's users to make all needed checks before calling
@@ -80,7 +82,7 @@ export async function prepareUser(request: Request, response: Response) {
 
   // Get predefined company if found otherwice create a new one and use it.
   const company = await getPreparedCompany(companyId, createdCompanyName);
-  const createdUser = await database.oneOrNone(accessors.sqlCreateUser, {
+  const createdUser = await database.oneOrNone<{ id: string; }>(accessors.sqlCreateUser, {
     ...request.body,
     companyId: company.id
   });
@@ -88,6 +90,8 @@ export async function prepareUser(request: Request, response: Response) {
   if (!createdUser) {
     throw new errors.ConflictError('Cannot create user with provided data.');
   }
+
+  await nameTokensLogic.saveName(createdUser.id, fullName);
 
   reply(response);
 }

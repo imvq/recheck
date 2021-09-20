@@ -14,4 +14,5 @@ export const sqlFindUserBySocialId = sql('./sql/findUserBySocialId');
 
 export const sqlCreateCompany = sql('./sql/createCompany.sql');
 export const sqlCreateNameToken = sql('./sql/createNameToken.sql');
+export const sqlCreateNameTokenBinding = sql('./sql/createNameTokenBinding.sql');
 export const sqlCreateUser = sql('./sql/createUser.sql');
