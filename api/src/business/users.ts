@@ -1,12 +1,14 @@
 import { Request, Response } from 'express';
 
-import * as accessors from '@business/database/accessors';
 import * as constants from '@business/constants';
+import * as accessors from '@business/database/accessors';
+import * as mappers from '@business/database/mappers';
 import * as errors from '@business/errors';
 
 import { database } from '@business/preloaded';
 import { assertBodyData, reply } from '@business/utilities';
 
+import * as mailingLogic from './mailing';
 import * as nameTokensLogic from './nameTokens';
 
 export async function checkIfUserIsRegistered(request: Request, response: Response) {
@@ -82,16 +84,25 @@ export async function prepareUser(request: Request, response: Response) {
 
   // Get predefined company if found otherwice create a new one and use it.
   const company = await getPreparedCompany(companyId, createdCompanyName);
-  const createdUser = await database.oneOrNone<{ id: string; }>(accessors.sqlCreateUser, {
+  const createdUserEntity = await database.oneOrNone<{ id: string; }>(accessors.sqlCreateUser, {
     ...request.body,
     companyId: company.id
   });
 
-  if (!createdUser) {
+  if (!createdUserEntity) {
     throw new errors.ConflictError('Cannot create user with provided data.');
   }
 
-  await nameTokensLogic.saveName(createdUser.id, fullName);
+  const createdUser = mappers.mapDatabaseEntityToUser(createdUserEntity);
+
+  // The ID is guaranteed to be defined.
+  await nameTokensLogic.saveName(createdUser.id as string, fullName);
+
+  // All the fields are guaranteed to be defined.
+  await mailingLogic.sendConfirmationMail(
+    createdUser.email as string,
+    createdUser.confirmationCode as string
+  );
 
   reply(response);
 }

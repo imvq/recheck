@@ -70,6 +70,11 @@ export interface User {
   reviewsAvailable?: number;
 
   /**
+   * Confirmation code (used with INNER JOIN).
+   */
+  confirmationCode?: string;
+
+  /**
    * A user's company.
    * If a user choses non-existent company, a new company is created
    * (that company will have name provided by the user and default logo URL).
