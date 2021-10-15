@@ -8,12 +8,12 @@
     "migration:create": "db-migrate create",
     "migration:run:up": "env-cmd -f .env.production db-migrate up",
     "migration:run:down": "env-cmd -f .env.production db-migrate down",
-    "prepare-media-dir": "mkdir ./dist/media -p",
+    "prepare-media-dir": "cp -R ./media ./dist",
     "prepare-templates-dir": "mkdir ./dist/services -p && cp -r src/services/templates dist/services",
     "prepare-dirs": "yarn-run-all --parallel prepare-media-dir prepare-templates-dir",
     "prepare-all": "mkdir ./dist && yarn-run-all --parallel prepare-dirs",
-    "start": "env-cmd -f .env.development ts-node src/dev-watch",
-    "build": "mkdir ./dist/media -p && npm run ecosystem:generate && env-cmd -f .env.production tsc"
+    "start": "rm -rf ./dist && prepare-all && env-cmd -f .env.development ts-node src/dev-watch",
+    "build": "rm -rf ./dist && prepare-all && yarn run ecosystem:generate && env-cmd -f .env.production tsc"
   },
   "_moduleAliases": {
     "@application": "dist/application",
