@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { Request, Response } from 'express';
 
 import * as constants from '@business/constants';
@@ -6,7 +8,7 @@ import * as mappers from '@business/database/mappers';
 import * as errors from '@business/errors';
 
 import { database } from '@business/preloaded';
-import { assertBodyData, reply } from '@business/utilities';
+import { assertBodyData, reply, AccessToken } from '@business/utilities';
 
 import * as mailingLogic from './mailing';
 import * as nameTokensLogic from './nameTokens';
@@ -111,4 +113,43 @@ export async function getPreparedCompany(id: string, name: string | null) {
   const company = await database.oneOrNone<{ id: string; }>(accessors.sqlFindCompany, { id });
 
   return company || database.one<{ id: string; }>(accessors.sqlCreateCompany, { name });
+}
+
+export async function retrieveProfile(request: Request, response: Response) {
+  const accessToken = new AccessToken(request.cookies['accessToken']);
+
+  if (!accessToken.socialMedia || !accessToken.tokenValue) {
+    throw new errors.UnauthorizedError('No valid access token provided');
+  }
+
+  if (accessToken.socialMedia === 'linkedin') {
+    reply(response, { result: retrieveProfileFromLinkedIn(accessToken.tokenValue) });
+  }
+
+  // TODO: Google profile retrieving.
+}
+
+async function retrieveProfileFromLinkedIn(accessToken: string) {
+  const config = { headers: { Authorization: `Bearer ${accessToken}` } };
+
+  const { data: profile } = await axios.get('https://api.linkedin.com/v2/me', config);
+
+  const { data: photo } = await axios.get(
+    'https://api.linkedin.com/v2/me?projection=(id,profilePicture(displayImage~digitalmediaAsset:playableStreams))',
+    config
+  );
+
+  const highestQualityPicture = photo.profilePicture['displayImage~'].elements[
+    photo.profilePicture['displayImage~'].elements.length - 1
+  ];
+
+  const socialId = profile.id;
+
+  const targetUserEntity = await database.oneOrNone(accessors.sqlFindUserBySocialId, { socialId });
+
+  if (!targetUserEntity) {
+    throw new errors.ConflictError('No user registered for this social media ID.');
+  }
+
+  return mappers.mapDatabaseEntityToUser(targetUserEntity);
 }

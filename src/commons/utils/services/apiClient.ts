@@ -1,7 +1,24 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import * as apiResponses from '../../types/responses';
 import * as generalTypes from '../../types/general';
+
+type ApiPromise<TDto = any> = Promise<AxiosResponse<TDto>>;
+
+const apiInstance = axios.create({ baseURL: process.env.REACT_APP_API });
+
+interface IProfile {
+  privateToken: string;
+  shareableId: string;
+  socialId: string;
+  fullName: string;
+  companyName: string;
+  position: string;
+}
+
+export function retrieveProfile(): ApiPromise<IProfile> {
+  return apiInstance.get('/user/profile', { withCredentials: true });
+}
 
 class ApiClient {
   private instance = axios.create({
@@ -151,5 +168,3 @@ class ApiClient {
     return this.instance.post('/user/access/get/nth-review-got', bodyData);
   }
 }
-
-export const apiClient = new ApiClient();

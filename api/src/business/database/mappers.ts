@@ -18,5 +18,6 @@ export const mapDatabaseEntityToUser = (entity: any): User => ({
   currentWorkStartingYear: entity['current_work_y_from'],
   currentWorkStartingMonth: entity['current_work_m_from'],
   reviewsAvailable: entity['reviews_available'],
-  confirmationCode: entity['confirmation_code']
+  confirmationCode: entity['confirmation_code'],
+  currentCompanyId: entity['company_id']
 });

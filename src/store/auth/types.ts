@@ -1,12 +1,12 @@
-export const SET_IS_AUTHORIZED = 'SET_IS_LOGGED_IN';
+export const SET_IS_AUTHORIZED = 'SET_IS_AUTHORIZED';
 
-export interface AuthState {
+export interface IState {
   isAuthorized: boolean | null;
 }
 
-export interface SetIsAuthorized {
+export interface ISetIsAuthorized {
   type: typeof SET_IS_AUTHORIZED;
   payload: boolean;
 }
 
-export type AuthActionType = SetIsAuthorized;
+export type IAction = ISetIsAuthorized;

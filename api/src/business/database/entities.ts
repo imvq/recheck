@@ -75,11 +75,11 @@ export interface User {
   confirmationCode?: string;
 
   /**
-   * A user's company.
+   * A user's company's ID.
    * If a user choses non-existent company, a new company is created
    * (that company will have name provided by the user and default logo URL).
    */
-  currentCompany?: Company;
+  currentCompanyId?: string;
 
   /**
    * Inviter is a user who invited the current user to use the service.

@@ -49,6 +49,7 @@ export default class BackendApplication {
   }
 
   private applyControllers() {
+    this.app.use('/api/v1/login', require('@controllers/login').default);
     this.app.use('/api/v1/users', require('@controllers/users').default);
   }
 

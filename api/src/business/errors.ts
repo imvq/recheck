@@ -12,12 +12,6 @@ export abstract class HttpError {
   public get statusCode() { return this._status; }
 }
 
-export class NotFoundError extends HttpError {
-  public constructor(message: string) {
-    super(message, httpStatus.NOT_FOUND);
-  }
-}
-
 export class BadRequestError extends HttpError {
   public constructor(message: string) {
     super(message, httpStatus.BAD_REQUEST);
@@ -27,6 +21,24 @@ export class BadRequestError extends HttpError {
 export class ConflictError extends HttpError {
   public constructor(message: string) {
     super(message, httpStatus.CONFLICT);
+  }
+}
+
+export class InternalServerError extends HttpError {
+  public constructor(message: string) {
+    super(message, httpStatus.INTERNAL_SERVER_ERROR);
+  }
+}
+
+export class NotFoundError extends HttpError {
+  public constructor(message: string) {
+    super(message, httpStatus.NOT_FOUND);
+  }
+}
+
+export class UnauthorizedError extends HttpError {
+  public constructor(message: string) {
+    super(message, httpStatus.UNAUTHORIZED);
   }
 }
 

@@ -1,8 +1,21 @@
-import * as generalTypes from 'commons/types/general';
-import { ProfileActionType, SET_CURRENT_PROFILE_DATA } from './types';
+import * as types from './types';
 
-export const setCurrentProfileInfo = (profileInfo: generalTypes.IAppProfileInfo)
-  : ProfileActionType => ({
-  type: SET_CURRENT_PROFILE_DATA,
-  payload: profileInfo
+export const setIsAuthorized = (isAuthorized: boolean): types.IAction => ({
+  type: types.SET_IS_AUTHORIZED,
+  payload: isAuthorized
+});
+
+export const setPrivateToken = (privateToken: string): types.IAction => ({
+  type: types.SET_PRIVATE_TOKEN,
+  payload: privateToken
+});
+
+export const setShareableId = (shareableId: string): types.IAction => ({
+  type: types.SET_SHAREABLE_ID,
+  payload: shareableId
+});
+
+export const setSocialId = (socialId: string): types.IAction => ({
+  type: types.SET_SOCIAL_ID,
+  payload: socialId
 });

@@ -1,28 +1,34 @@
-import { ProfileState, ProfileActionType, SET_CURRENT_PROFILE_DATA } from './types';
+import * as types from './types';
 
-const initialState: ProfileState = {
-  currentProfileInfo: {
-    currentId: '',
-    currentShareableId: '',
-    currentName: '',
-    currentEmail: '',
-    currentCompany: '',
-    currentPosition: '',
-    currentPhotoUrl: ''
-  }
+const initialState: types.IState = {
+  isAuthorized: null,
+  privateToken: null,
+  shareableId: null,
+  socialId: null
 };
 
-export function profileReducer(
-  state = initialState,
-  action: ProfileActionType
-): ProfileState {
+export function profileReducer(state = initialState, action: types.IAction): types.IState {
   switch (action.type) {
-    case SET_CURRENT_PROFILE_DATA:
+    case types.SET_IS_AUTHORIZED:
       return {
         ...state,
-        currentProfileInfo: action.payload
+        isAuthorized: action.payload
       };
-    default:
-      return state;
+    case types.SET_PRIVATE_TOKEN:
+      return {
+        ...state,
+        privateToken: action.payload
+      };
+    case types.SET_SHAREABLE_ID:
+      return {
+        ...state,
+        shareableId: action.payload
+      };
+    case types.SET_SOCIAL_ID:
+      return {
+        ...state,
+        socialId: action.payload
+      };
+    default: return state;
   }
 }

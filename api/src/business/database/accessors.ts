@@ -12,6 +12,7 @@ export const sqlFindNameToken = sql('./sql/read/findNameToken.sql');
 export const sqlFindUserConfirmation = sql('./sql/read/findUserConfirmation.sql');
 export const sqlUserWithConfirmation = sql('./sql/read/userWithConfirmation.sql');
 export const sqlFindUserBySocialId = sql('./sql/read/findUserBySocialId');
+export const sqlFindUserWithCompany = sql('./sql/read/findUserWithCompany');
 
 export const sqlCreateCompany = sql('./sql/create/createCompany.sql');
 export const sqlCreateNameToken = sql('./sql/create/createNameToken.sql');
