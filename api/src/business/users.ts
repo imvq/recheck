@@ -1,6 +1,10 @@
+import * as stream from 'stream';
+
 import axios from 'axios';
 
 import { Request, Response } from 'express';
+import { createWriteStream } from 'fs';
+import { promisify } from 'util';
 
 import * as constants from '@business/constants';
 import * as accessors from '@business/database/accessors';
@@ -52,6 +56,27 @@ export async function checkIfEmailIsAvailable(request: Request, response: Respon
   reply(response, { message: !targetedEmail });
 }
 
+function downloadPhoto(photoUrl: string, outputPath: string) {
+  const writer = createWriteStream(outputPath);
+
+  return axios({ method: 'GET', url: photoUrl, responseType: 'stream' })
+    .then(async response => {
+      response.data.pipe(writer);
+      return promisify(stream.finished)(writer);
+    });
+}
+
+async function saveUserPhoto(photoUrl: string, userSocialId: string) {
+  const localPhotoPath = `media/${userSocialId}`;
+
+  try {
+    await downloadPhoto(photoUrl, localPhotoPath);
+    return localPhotoPath;
+  } catch {
+    return 'media/user-default.png';
+  }
+}
+
 export async function prepareUser(request: Request, response: Response) {
   interface IBodyParams {
     email: string;
@@ -86,8 +111,13 @@ export async function prepareUser(request: Request, response: Response) {
 
   // Get predefined company if found otherwice create a new one and use it.
   const company = await getPreparedCompany(companyId, createdCompanyName);
+
+  // Save user photo at the server (or provide link to a default placeholder).
+  const savedPhotoUrl = await saveUserPhoto(photoUrl, socialId);
+
   const createdUserEntity = await database.oneOrNone<{ id: string; }>(accessors.sqlCreateUser, {
     ...request.body,
+    photoUrl: savedPhotoUrl,
     companyId: company.id
   });
 
