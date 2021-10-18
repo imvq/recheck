@@ -15,22 +15,28 @@ const Title = (
 );
 
 function RegistrationPage() {
-  const [email, setEmail] = useState('');
+  // When user press registretion button
+  // we must show a popup telling that they must check their email.
+  // For that purpose we need email to show in the popup and flag
+  // defining that the popup must be visualized.
+  const [emailToShow, setEmailToShow] = useState('');
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
   const Content = (
-    <RegistrationBox onProceed={profileInfo => misc.proceedHandler(
-      profileInfo,
-      setEmail,
-      setIsConfirmationVisible
-    )}
+    <RegistrationBox onProceed={userPreparationData => {
+      misc.proceedHandler(userPreparationData)
+        .finally(() => {
+          setEmailToShow(userPreparationData.email);
+          setIsConfirmationVisible(true);
+        });
+    }}
     />
   );
 
   return (
     <styled.Wrapper>
       {/* Absolute-positioned confirmation popup. */}
-      {isConfirmationVisible && <ConfirmationPopup email={email} />}
+      {isConfirmationVisible && <ConfirmationPopup email={emailToShow} />}
 
       <styled.AdaptedHeader isProfilePageAvailable={false} />
       <styled.ContentWrapper>

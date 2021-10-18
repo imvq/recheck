@@ -15,3 +15,16 @@ export interface IUserSelf {
   companyId: string;
   companyName: string;
 }
+
+export interface IUserPreparationData {
+  socialId: string;
+  inviterId: string | null;
+  fullName: string;
+  email: string;
+  photoUrl: string | null;
+  currentPosition: string;
+  companyId: string;
+  createdCompanyName: string | null;
+  currentWorkYearFrom: number;
+  currentWorkMonthFrom: number;
+}

@@ -1,17 +1,11 @@
-import { IPrepareProfileDto } from 'commons/types/general';
+import { IUserPreparationData } from 'commons/types';
 import { apiClient } from 'commons/utils/services';
 
 /**
- * Do something when user finished registering.
+ * When user press register we must call the API to perpare a new user.
+ * Down here is a handler for registration page defining what to do after proceeding button
+ * is clicked.
  */
-export function proceedHandler(
-  profileInfo: IPrepareProfileDto,
-  additionalOuterActionsCallback: (email: string) => void,
-  confirmationsVisibilityCallback: (flag: boolean) => void
-) {
-  additionalOuterActionsCallback(profileInfo.email);
-
-  apiClient.prepareProfile(profileInfo).finally(() => {
-    confirmationsVisibilityCallback(true);
-  });
+export async function proceedHandler(profileInfo: IUserPreparationData) {
+  return apiClient.prepareUser(profileInfo);
 }

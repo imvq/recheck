@@ -13,7 +13,6 @@ import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo,
   matchedCompanies: store.search.quickSearchMatchedCompanies,
   referral: store.interaction.referral
 });
@@ -60,7 +59,7 @@ function RegistrationBox(props: types.IProps) {
       return updatedEmailState;
     });
 
-    apiClient.checkIsEmailAvailable(emailState.email)
+    apiClient.checkIfEmailIsAvailable(emailState.email)
       .then(checkData => setEmailState({
         ...latestEmailState.current,
         isEmailAvailabilityErrorVisible: !checkData.data.success

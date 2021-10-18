@@ -27,7 +27,7 @@ export async function checkIfUserIsRegistered(request: Request, response: Respon
 
   const targetUser = await database.oneOrNone(accessors.sqlFindUserBySocialId, { socialId });
 
-  reply(response, { message: !!targetUser });
+  reply(response, { success: !!targetUser });
 }
 
 export async function checkIfUserIsConfirmed(request: Request, response: Response) {
@@ -40,7 +40,7 @@ export async function checkIfUserIsConfirmed(request: Request, response: Respons
 
   const confirmation = await database.oneOrNone(accessors.sqlFindUserConfirmation, { socialId });
 
-  reply(response, { message: !confirmation });
+  reply(response, { success: !confirmation });
 }
 
 export async function checkIfEmailIsAvailable(request: Request, response: Response) {
@@ -53,7 +53,7 @@ export async function checkIfEmailIsAvailable(request: Request, response: Respon
 
   const targetedEmail = await database.oneOrNone(accessors.sqlFindEmail, { email });
 
-  reply(response, { message: !targetedEmail });
+  reply(response, { success: !targetedEmail });
 }
 
 function downloadPhoto(photoUrl: string, outputPath: string) {

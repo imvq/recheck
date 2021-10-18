@@ -7,6 +7,7 @@ import * as usersLogic from '@business/users';
  */
 const router = Router();
 
-router.post('/profile', usersLogic.retrieveProfile);
+router.get('/profile', usersLogic.retrieveProfile);
+router.post('/availability/email', usersLogic.checkIfEmailIsAvailable);
 
 export default router;

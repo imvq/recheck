@@ -1,4 +1,4 @@
-import * as generalTypes from 'commons/types/general';
+import * as commonTypes from 'commons/types';
 
 export interface IEmailState {
   email: string,
@@ -9,12 +9,11 @@ export interface IEmailState {
 }
 
 export interface IOwnProps {
-  onProceed(collectedInfo: generalTypes.IPrepareProfileDto): void;
+  onProceed(collectedInfo: commonTypes.IUserPreparationData): void;
 }
 
 export interface IStateProps {
-  currentProfileInfo: generalTypes.IAppProfileInfo;
-  matchedCompanies: generalTypes.ICompanyReduced[];
+  matchedCompanies: commonTypes.ICompanyReduced[];
   referral: string | null;
 }
 
