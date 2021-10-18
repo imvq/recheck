@@ -1,4 +1,4 @@
-import { User, Company, NameToken, Review, UserConfirmation } from './entities';
+import { User, Company } from './entities';
 
 export const mapDatabaseEntityToCompany = (entity: any): Company => ({
   id: entity['id'],
@@ -6,7 +6,9 @@ export const mapDatabaseEntityToCompany = (entity: any): Company => ({
   logoUrl: entity['logo_url']
 });
 
-export const mapDatabaseEntityToUser = (entity: any): User => ({
+type WithCompany = { currentCompanyName?: string; };
+
+export const mapDatabaseEntityToUserSelfInfo = (entity: any): User & WithCompany => ({
   id: entity['id'],
   privateToken: entity['private_token'],
   shareableId: entity['shareable_id'],
@@ -15,9 +17,9 @@ export const mapDatabaseEntityToUser = (entity: any): User => ({
   email: entity['email'],
   photoUrl: entity['photo_url'],
   currentPosition: entity['current_position'],
-  currentWorkStartingYear: entity['current_work_y_from'],
-  currentWorkStartingMonth: entity['current_work_m_from'],
-  reviewsAvailable: entity['reviews_available'],
+  currentWorkStartYear: entity['current_work_y_from'],
+  currentWorkStartMonth: entity['current_work_m_from'],
   confirmationCode: entity['confirmation_code'],
-  currentCompanyId: entity['company_id']
+  currentCompanyId: entity['company_id'],
+  currentCompanyName: entity['company_name']
 });

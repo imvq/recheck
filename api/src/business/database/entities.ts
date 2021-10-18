@@ -56,13 +56,13 @@ export interface User {
    * Year from which a user started their current work.
    * Domain: simple string e.g. 2021.
    */
-  currentWorkStartingYear?: number;
+  currentWorkStartYear?: number;
 
   /**
    * Month from which a user started their current work.
    * Domain: number in [0, 11] (0 means January 11 means December).
    */
-  currentWorkStartingMonth?: number;
+  currentWorkStartMonth?: number;
 
   /**
    * How many other users may be opened by the current user for free.

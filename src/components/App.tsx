@@ -3,14 +3,12 @@ import { Provider } from 'react-redux';
 import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import { Router, Switch, Route } from 'react-router-dom';
 
-import { controlledHistory } from 'commons/utils/services';
+import { historyManager } from 'commons/utils/services';
 import { store as appStore } from 'store';
 
 import NotFoundPage from 'components/pages/NotFoundPage';
 import GlobalStyle from 'components/shared/GlobalStyle';
-import PageLockManager from 'components/shared/PageLockManager';
-import PageForceUnlocker from 'components/shared/PageForceUnlocker';
-import PageStartupManager from 'components/shared/PageStartupManager';
+import PageAccessGuard from 'components/shared/PageAccessGuard';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -32,18 +30,16 @@ export default () => (
   <Suspense fallback={<></>}>
     <GlobalStyle />
     <Provider store={appStore}>
-      <Router history={controlledHistory}>
+      <Router history={historyManager}>
         <Switch>
 
           {/* Home page. */}
           {/* Use StartupManager to do checkAuth request to LinkedIn. */}
           {/* The result of the check is stored so that no check will be further. */}
           <Route exact path='/'>
-            <PageForceUnlocker />
-            <PageStartupManager />
-            <PageLockManager>
+            <PageAccessGuard>
               <LandingPage />
-            </PageLockManager>
+            </PageAccessGuard>
           </Route>
 
           {/* Provacy Policy needed for legitimate usage of OAuth. */}

@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 
 import * as loginLogic from '@business/login';
 
@@ -7,8 +7,6 @@ import * as loginLogic from '@business/login';
  */
 const router = Router();
 
-router.post('/linkedin/exchange', (request: Request, response: Response) => {
-  loginLogic.exchangeLinkedInCode(request, response);
-});
+router.post('/linkedin/exchange', loginLogic.exchangeLinkedInCode);
 
 export default router;

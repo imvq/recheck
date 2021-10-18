@@ -2,7 +2,7 @@
  * Routing stuff.
  */
 
-import { controlledHistory } from 'commons/utils/services';
+import { historyManager } from 'commons/utils/services';
 
 type Page = '/'
   | '/404'
@@ -17,9 +17,9 @@ type Page = '/'
   | '/search';
 
 export function jumpBack() {
-  controlledHistory.goBack();
+  historyManager.goBack();
 }
 
 export function jumpTo(page: Page, continuation?: string) {
-  controlledHistory.push(`${page}${continuation || ''}`);
+  historyManager.push(`${page}${continuation || ''}`);
 }

@@ -125,7 +125,7 @@ export async function prepareUser(request: Request, response: Response) {
     throw new errors.ConflictError('Cannot create user with provided data.');
   }
 
-  const createdUser = mappers.mapDatabaseEntityToUser(createdUserEntity);
+  const createdUser = mappers.mapDatabaseEntityToUserSelfInfo(createdUserEntity);
 
   // The ID is guaranteed to be defined.
   await nameTokensLogic.saveName(createdUser.id as string, fullName);
@@ -153,33 +153,35 @@ export async function retrieveProfile(request: Request, response: Response) {
   }
 
   if (accessToken.socialMedia === 'linkedin') {
-    reply(response, { result: retrieveProfileFromLinkedIn(accessToken.tokenValue) });
+    reply(response, { result: retrieveProfileWithLinkedIn(accessToken.tokenValue) });
   }
 
   // TODO: Google profile retrieving.
 }
 
-async function retrieveProfileFromLinkedIn(accessToken: string) {
-  const config = { headers: { Authorization: `Bearer ${accessToken}` } };
+async function retrieveProfileWithLinkedIn(accessToken: string) {
+  let profile: { id: string; } | null = null;
+  let targetEntity = null;
 
-  const { data: profile } = await axios.get('https://api.linkedin.com/v2/me', config);
+  try {
+    const profileLink = 'https://api.linkedin.com/v2/me';
+    const profileOptions = { headers: { Authorization: `Bearer ${accessToken}` } };
+    profile = await axios.get(profileLink, profileOptions);
+  } catch {
+    throw new errors.UnauthorizedError('LinkedIn refused to authorize.');
+  }
 
-  const { data: photo } = await axios.get(
-    'https://api.linkedin.com/v2/me?projection=(id,profilePicture(displayImage~digitalmediaAsset:playableStreams))',
-    config
-  );
+  try {
+    const targetAccessor = accessors.sqlFindUserWithCompanyBySocialId;
+    const socialId = profile?.id;
+    targetEntity = await database.oneOrNone(targetAccessor, { socialId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
 
-  const highestQualityPicture = photo.profilePicture['displayImage~'].elements[
-    photo.profilePicture['displayImage~'].elements.length - 1
-  ];
-
-  const socialId = profile.id;
-
-  const targetUserEntity = await database.oneOrNone(accessors.sqlFindUserBySocialId, { socialId });
-
-  if (!targetUserEntity) {
+  if (!targetEntity) {
     throw new errors.ConflictError('No user registered for this social media ID.');
   }
 
-  return mappers.mapDatabaseEntityToUser(targetUserEntity);
+  return mappers.mapDatabaseEntityToUserSelfInfo(targetEntity);
 }
