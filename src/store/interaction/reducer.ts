@@ -12,7 +12,7 @@ import {
   SET_IS_PROFILE_ABOUT_TAB_LOADING,
   SET_IS_PROFILE_HISTORY_TAB_LOADING,
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
-  SET_REFERRAL,
+  SET_INVITER,
   SET_AWAITER,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
@@ -33,7 +33,7 @@ const initialState: InteractionState = {
   isProfileAboutTabLoading: true,
   isProfileHistoryTabLoading: true,
   isProfileReviewsTabLoading: true,
-  referral: null,
+  inviter: null,
   awaiter: null,
   reviewsGotChunksAmount: 0,
   reviewsLeftChunksAmount: 0,
@@ -94,7 +94,7 @@ export const interactionStateReducer = (
         ...state,
         isProfileReviewsTabLoading: action.payload
       };
-    case SET_REFERRAL:
+    case SET_INVITER:
       return {
         ...state,
         referral: action.payload

@@ -20,6 +20,11 @@ export const setSocialId = (socialId: string): types.IAction => ({
   payload: socialId
 });
 
+export const setInviterId = (inviterId: string): types.IAction => ({
+  type: types.SET_INVITER_ID,
+  payload: inviterId
+});
+
 export const setFullName = (fullName: string): types.IAction => ({
   type: types.SET_FULL_NAME,
   payload: fullName

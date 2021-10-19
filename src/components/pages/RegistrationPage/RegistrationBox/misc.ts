@@ -1,10 +1,10 @@
 import { validate as validateEmail } from 'email-validator';
 
-import { ICompanyReduced, IInputEvent, IOptionType } from 'commons/types/general';
+import { ICompanyBasic, ICompany, IInputEvent, ISelectOptionType } from 'commons/types';
 
 import { IEmailState } from './types';
 
-export const months: IOptionType[] = [
+export const months: ISelectOptionType[] = [
   { key: 0, text: 'Январь' },
   { key: 1, text: 'Февраль' },
   { key: 2, text: 'Март' },
@@ -42,13 +42,11 @@ export function emailHandler(event: IInputEvent, callback: (email: IEmailState) 
   });
 }
 
-type Company = { id: number, name: string };
-
-export function companyNameSetter(name: string, callback: (company: Company) => void) {
+export function companyNameSetter(name: string, callback: (company: ICompanyBasic) => void) {
   callback({ id: -1, name });
 }
 
-export function companyNameHandler(event: IInputEvent, callback: (company: Company) => void) {
+export function companyNameHandler(event: IInputEvent, callback: (company: ICompanyBasic) => void) {
   inputHandler(event, name => companyNameSetter(name, callback));
 }
 
@@ -56,22 +54,22 @@ export function positionHandler(event: IInputEvent, callback: (position: string)
   inputHandler(event, callback);
 }
 
-export function monthHandler(option: IOptionType, callback: (month: number) => void) {
+export function monthHandler(option: ISelectOptionType, callback: (month: number) => void) {
   callback(option.key);
 }
 
-export function yearHandler(option: IOptionType, callback: (year: number) => void) {
+export function yearHandler(option: ISelectOptionType, callback: (year: number) => void) {
   callback(Number.parseInt(option.text));
 }
 
 /**
  * Get optionified companies datum.
  */
-export function mapCompaniesDataToOptions(companies: ICompanyReduced[]) {
+export function mapCompaniesDataToOptions(companies: ICompany[]) {
   return companies.map(
     company => ({
       key: company.id,
-      text: company.name,
+      text: company.name || '',
       imageUrl: company.logoUrl
     })
   );
@@ -82,7 +80,7 @@ export function mapCompaniesDataToOptions(companies: ICompanyReduced[]) {
  */
 export function companySelectorHandler(
   event: IInputEvent,
-  companySetter: (company: Company) => void,
+  companySetter: (company: ICompanyBasic) => void,
   matchedCompaniesLoader: (sequence: string) => void,
   matchedCompaniesEraser: () => void
 ) {
@@ -100,41 +98,17 @@ export function companySelectorHandler(
  * Can the user proceed registration.
  */
 export function canProceed(
+  fullName: string,
   emailState: IEmailState,
-  company: Company,
+  company: ICompanyBasic,
   position: string,
-  workStartMonth: number,
-  workStartYear: number
+  currentWorkMonthFrom: number,
+  currentWorkYearFrom: number
 ) {
-  return emailState.isEmailValid
+  return fullName !== ''
+    && emailState.isEmailValid
     && !emailState.isEmailAvailabilityErrorVisible
     && emailState.isEmailAvailabilityErrorVisible !== null
     && !!company && !!position
-    && workStartMonth > -1 && workStartYear > -1;
-}
-
-// TODO: Remove this shit.
-function isExceptionalEmail(text: string) {
-  return ['mave7dev@gmail.com', 'ladaklischenko@gmail.com'].includes(text);
-}
-
-function conatinsForbiddenDomain(text: string) {
-  return [
-    '@gmail.com',
-    '@outlook.com',
-    '@hotmail.com',
-    '@yahoo.com',
-    '@aim.com',
-    '@aol.com',
-    '@yandex.com',
-    '@mail.ru'
-  ].some(domain => text.includes(domain));
-}
-
-export function validateEmailWithDomains(text: string) {
-  const exceptionalEmailCondition = isExceptionalEmail(text);
-  const validEmailCondition = validateEmail(text);
-  const validDomainCondition = !conatinsForbiddenDomain(text);
-
-  return exceptionalEmailCondition || (validEmailCondition && validDomainCondition);
+    && currentWorkMonthFrom > -1 && currentWorkYearFrom > -1;
 }

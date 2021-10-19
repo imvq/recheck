@@ -1,8 +1,24 @@
 import { AxiosResponse } from 'axios';
+import { ChangeEvent } from 'react';
 
 export type ApiPromise<TDto = any> = Promise<AxiosResponse<TDto>>;
 
+export interface ICompanyBasic {
+  id: string | number;
+  name: string | null;
+}
+
+export interface ICompany extends ICompanyBasic {
+  logoUrl: string | null;
+}
+
+export interface ISelectOptionType {
+  key: any;
+  text: string;
+}
+
 export interface IUserSelf {
+  registered: boolean;
   privateToken: string;
   shareableId: string;
   socialId: string;
@@ -10,8 +26,8 @@ export interface IUserSelf {
   email: string;
   photoUrl: string;
   currentPosition: string;
-  currentWorkStartYear: number;
-  currentWorkStartMonth: number;
+  currentWorkYearFrom: number;
+  currentWorkMonthFrom: number;
   companyId: string;
   companyName: string;
 }
@@ -23,8 +39,9 @@ export interface IUserPreparationData {
   email: string;
   photoUrl: string | null;
   currentPosition: string;
-  companyId: string;
-  createdCompanyName: string | null;
+  company: ICompanyBasic;
   currentWorkYearFrom: number;
   currentWorkMonthFrom: number;
 }
+
+export type IInputEvent = ChangeEvent<HTMLInputElement>;

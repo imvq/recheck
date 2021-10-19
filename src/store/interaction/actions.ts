@@ -17,7 +17,7 @@ import {
   SET_IS_PROFILE_HISTORY_TAB_LOADING,
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   SET_IS_OBSERVED_REVIEWS_PAGE_LOADING,
-  SET_REFERRAL,
+  SET_INVITER,
   SET_AWAITER,
   SET_REVIEWS_GOT_CHUNKS_AMOUNT,
   SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
@@ -85,10 +85,10 @@ export const setIsProfileReviewsTabLoading = (flag: boolean)
   payload: flag
 });
 
-export const setReferral = (referral: string)
+export const setInviter = (inviter: string)
   : InteractionStateActionType => ({
-  type: SET_REFERRAL,
-  payload: referral
+  type: SET_INVITER,
+  payload: inviter
 });
 
 export const setAwaiter = (awaiter: string)

@@ -180,8 +180,14 @@ async function retrieveProfileWithLinkedIn(accessToken: string) {
   }
 
   if (!targetEntity) {
-    throw new errors.ConflictError('No user registered for this social media ID.');
+    return {
+      socialId: profile?.id,
+      registered: false
+    };
   }
 
-  return mappers.mapDatabaseEntityToUserSelfInfo(targetEntity);
+  return {
+    ...mappers.mapDatabaseEntityToUserSelfInfo(targetEntity),
+    registered: true
+  };
 }

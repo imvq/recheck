@@ -4,7 +4,7 @@ export interface IStateProps {
 
 export interface IDispatchProps {
   setIsLoginPopupVisible(flag: boolean): void;
-  setReferral(referral: string): void;
+  setInviter(referral: string): void;
   setAwaiter(awaiter: string): void;
 }
 

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { jumpTo, useQuery } from 'commons/utils/misc';
-import { AppState, setIsLoginPopupVisible, setReferral, setAwaiter } from 'store';
+import { AppState, setIsLoginPopupVisible, setInviter, setAwaiter } from 'store';
 
 import AuthPopupManager from 'components/shared/AuthPopupManager';
 import CookiePopup from 'components/shared/CookiePopup';
@@ -23,7 +23,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 
 const mapDispatchToProps: types.IDispatchProps = {
   setIsLoginPopupVisible,
-  setReferral,
+  setInviter,
   setAwaiter
 };
 
@@ -32,11 +32,11 @@ const mapDispatchToProps: types.IDispatchProps = {
  */
 const LandingPage = (props: types.IProps) => {
   const query = useQuery();
-  const referral = query.get('referral');
+  const inviter = query.get('inviter');
   const awaiter = query.get('awaiter');
 
-  if (referral) {
-    props.setReferral(referral);
+  if (inviter) {
+    props.setInviter(inviter);
   }
 
   if (awaiter) {
@@ -45,7 +45,7 @@ const LandingPage = (props: types.IProps) => {
 
   useEffect(() => {
     // props.isAuthorized can be null.
-    if (referral && props.isAuthorized === false) {
+    if (inviter && props.isAuthorized === false) {
       props.setIsLoginPopupVisible(true);
       return;
     }

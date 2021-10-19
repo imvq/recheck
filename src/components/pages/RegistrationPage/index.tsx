@@ -23,7 +23,7 @@ function RegistrationPage() {
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
   const Content = (
-    <RegistrationBox onProceed={userPreparationData => {
+    <RegistrationBox onRegisterButtonPressed={userPreparationData => {
       misc.proceedHandler(userPreparationData)
         .finally(() => {
           setEmailToShow(userPreparationData.email);

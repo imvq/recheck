@@ -1,6 +1,8 @@
 import { useState, useRef, memo } from 'react';
 import { connect } from 'react-redux';
+import { validate as validateEmail } from 'email-validator';
 
+import { ICompanyBasic } from 'commons/types';
 import { apiClient } from 'commons/utils/services';
 import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
 
@@ -14,7 +16,7 @@ import * as styled from '../../../shared/BoxBase';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   matchedCompanies: store.search.quickSearchMatchedCompanies,
-  referral: store.interaction.referral
+  inviter: store.interaction.inviter
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -23,10 +25,11 @@ const mapDispatchToProps: types.IDispatchProps = {
 };
 
 function RegistrationBox(props: types.IProps) {
-  const [company, setCompany] = useState({ id: -1, name: '' });
-  const [position, setPosition] = useState('');
-  const [workStartMonth, setWorkStartMonth] = useState(-1);
-  const [workStartYear, setWorkStartYear] = useState(-1);
+  const [fullName, setFullName] = useState('');
+  const [company, setCompany] = useState<ICompanyBasic>({ id: -1, name: null });
+  const [currentPosition, setCurrentPosition] = useState('');
+  const [currentWorkMonthFrom, setCurrentWorkMonthFrom] = useState(-1);
+  const [currentWorkYearFrom, setCurrentWorkYearFrom] = useState(-1);
 
   // Flags defining email validation state and the fact the validation errors are visible.
   // Validation errors are not supposed to be always visible when the email
@@ -44,11 +47,21 @@ function RegistrationBox(props: types.IProps) {
   // To avoid this we need to store actual email data value using reference.
   const latestEmailState = useRef(emailState);
 
+  // Flag indicating if the user can press the registration button.
+  const canProceed = misc.canProceed(
+    fullName,
+    emailState,
+    company,
+    currentPosition,
+    currentWorkMonthFrom,
+    currentWorkYearFrom
+  );
+
   function recalculateEmailErrorState() {
     setEmailState(() => {
       const updatedEmailState = {
         ...emailState,
-        isEmailValidationErrorVisible: !misc.validateEmailWithDomains(emailState.email),
+        isEmailValidationErrorVisible: !validateEmail(emailState.email),
         // null means availability check is in progress,
         // e.i. cannot proceed with email update.
         isEmailAvailabilityErrorVisible: null
@@ -71,20 +84,30 @@ function RegistrationBox(props: types.IProps) {
   }
 
   function proceedIfAllowed() {
-    if (misc.canProceed(emailState, company, position, workStartMonth, workStartYear)) {
-      props.onProceed({
-        profileId: props.currentProfileInfo.currentId,
-        name: props.currentProfileInfo.currentName,
-        photoUrl: props.currentProfileInfo.currentPhotoUrl,
+    if (canProceed) {
+      props.onRegisterButtonPressed({
+        socialId: '',
+        inviterId: props.inviter,
+        fullName,
+        photoUrl: null,
         email: emailState.email,
         company,
-        position,
-        workStartMonth,
-        workStartYear,
-        referral: props.referral
+        currentPosition,
+        currentWorkMonthFrom,
+        currentWorkYearFrom
       });
     }
   }
+
+  // Full name section. Users must choose how others will see them.
+  const NameSection = (
+    <styled.InputGroupWrapper>
+      <styled.InputDescriptionWrapper>
+        <styled.InputDescription>Ваше имя (то, как Вас будут видеть):</styled.InputDescription>
+      </styled.InputDescriptionWrapper>
+      <styled.Input type='text' onChange={event => setFullName(event.target.value)} />
+    </styled.InputGroupWrapper>
+  );
 
   // Email input filed with space reserved for displaying email errors.
   const EmailSection = (
@@ -117,7 +140,7 @@ function RegistrationBox(props: types.IProps) {
     <styled.Input
       type='text'
       autoComplete='on'
-      value={company.name}
+      value={company.name || ''}
       onChange={event => misc.companySelectorHandler(
         event,
         setCompany,
@@ -143,7 +166,7 @@ function RegistrationBox(props: types.IProps) {
   const ProceedButton = (
     <styled.ButtonGroupWrapper>
       <CustomButton
-        isDisabled={!misc.canProceed(emailState, company, position, workStartMonth, workStartYear)}
+        isDisabled={!canProceed}
         onClick={proceedIfAllowed}
       >
         Продолжить
@@ -172,7 +195,7 @@ function RegistrationBox(props: types.IProps) {
       <styled.InputDescriptionWrapper>
         <styled.InputDescription>Ваша должность:</styled.InputDescription>
       </styled.InputDescriptionWrapper>
-      <styled.Input type='text' onChange={event => misc.positionHandler(event, setPosition)} />
+      <styled.Input type='text' onChange={event => misc.positionHandler(event, setCurrentPosition)} />
     </styled.InputGroupWrapper>
   );
 
@@ -186,13 +209,13 @@ function RegistrationBox(props: types.IProps) {
           width='49%'
           options={misc.months}
           placeholder='Месяц'
-          onNewOptionSelected={option => misc.monthHandler(option, setWorkStartMonth)}
+          onNewOptionSelected={option => misc.monthHandler(option, setCurrentWorkMonthFrom)}
         />
         <CustomSelect
           width='49%'
           options={misc.years}
           placeholder='Год'
-          onNewOptionSelected={option => misc.yearHandler(option, setWorkStartYear)}
+          onNewOptionSelected={option => misc.yearHandler(option, setCurrentWorkYearFrom)}
         />
       </styled.InputRowWrapper>
     </styled.InputGroupWrapper>
@@ -200,6 +223,7 @@ function RegistrationBox(props: types.IProps) {
 
   return (
     <styled.BoxBaseWrapper>
+      {NameSection}
       {EmailSection}
       {CompaniesSection}
       {PositionSection}
