@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 export interface IOwnProps {
   children?: ReactNode;
   hideContentOnLock?: boolean;
-  redirectHomeOnFail?: boolean;
+  forAuthorizedUsersOnly?: boolean;
 }
 
 export interface IStateProps {

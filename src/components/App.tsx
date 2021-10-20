@@ -76,7 +76,6 @@ export default () => (
 
           {/* Registration page. Users are supposed to be authorized. */}
           <Route exact path='/register'>
-            <PageStartupManager preventDefaultUnlock redirectHomeOnFail redirectHomeOnRegistered />
             <RegistrationPage />
           </Route>
 
