@@ -23,6 +23,7 @@ export interface ISelectOptionType {
 
 export interface IUserSelf {
   registered: boolean;
+  confirmed: boolean;
   privateToken: string;
   shareableId: string;
   socialId: string;

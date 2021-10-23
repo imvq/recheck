@@ -42,6 +42,21 @@ export default () => (
             </PageAccessGuard>
           </Route>
 
+          {/* Registration page. Users are supposed to be partilly authorized */}
+          {/* i. e. they must have social ID loaded, but no other profile info. */}
+          <Route exact path='/register'>
+            <RegistrationPage />
+          </Route>
+
+          {/* Page to complete user's registration. User UUID needed. */}
+          {/* Users are free to be unathorized but in that case they will be */}
+          {/* redirected to the landing page. */}
+          <Route exact path='/register/complete/:uuid'>
+            <PageAccessGuard>
+              <UserConfirmationPage />
+            </PageAccessGuard>
+          </Route>
+
           {/* Provacy Policy needed for legitimate usage of OAuth. */}
           <Route exact path='/privacy-policy'>
             <PrivacyPllicyPage />
@@ -71,20 +86,6 @@ export default () => (
             <PageStartupManager preventUnlockStrictly />
             <PageLockManager hideContentOnLock>
               <ReviewPage />
-            </PageLockManager>
-          </Route>
-
-          {/* Registration page. Users are supposed to be authorized. */}
-          <Route exact path='/register'>
-            <RegistrationPage />
-          </Route>
-
-          {/* Page to help complete user's registration. User UUID needed. */}
-          {/* The user must be logged in as well. */}
-          <Route exact path='/register/complete/:uuid'>
-            <PageStartupManager preventUnlockStrictly noConfirmationCheckNeeded />
-            <PageLockManager>
-              <UserConfirmationPage />
             </PageLockManager>
           </Route>
 

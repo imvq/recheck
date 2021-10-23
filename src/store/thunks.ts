@@ -30,6 +30,14 @@ function loadProfileData(profileData: AxiosResponse<types.IUserSelf>) {
   if (!profileData.data.registered) {
     profileActions.setSocialId(profileData.data.socialId);
     jumpTo('/register');
+
+    return;
+  }
+
+  if (!profileData.data.confirmed) {
+    profileActions.setSocialId(profileData.data.socialId);
+    jumpTo('/await-user-confirmation');
+
     return;
   }
 
@@ -45,4 +53,6 @@ function loadProfileData(profileData: AxiosResponse<types.IUserSelf>) {
   profileActions.setCurrentPosition(profileData.data.currentPosition);
   profileActions.setCurrentCompany({ id: companyId, name: companyName });
   profileActions.setCurrentWorkStarPeriod({ year, month });
+
+  profileActions.setIsAuthorized(true);
 }
