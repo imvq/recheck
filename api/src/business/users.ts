@@ -17,19 +17,6 @@ import { assertBodyData, reply, AccessToken } from '@business/utilities';
 import * as mailingLogic from './mailing';
 import * as nameTokensLogic from './nameTokens';
 
-export async function checkIfUserIsRegistered(request: Request, response: Response) {
-  interface IBodyParams {
-    socialId: string;
-  }
-
-  const { socialId }: IBodyParams = request.body;
-  assertBodyData(socialId);
-
-  const targetUser = await database.oneOrNone(accessors.sqlFindUserBySocialId, { socialId });
-
-  reply(response, { success: !!targetUser });
-}
-
 export async function checkIfUserIsConfirmed(request: Request, response: Response) {
   interface IBodyParams {
     socialId: string;
