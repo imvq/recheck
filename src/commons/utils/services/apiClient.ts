@@ -20,5 +20,10 @@ export function checkIfEmailIsAvailable(email: string): ApiPromise<SimpleBoolean
 
 export function prepareUser(preparationData: commonTypes.IUserPreparationData)
   : ApiPromise<SimpleBooleanResponse> {
-  return apiInstance.post('/users/prepare', preparationData);
+  return apiInstance.post('/users/registration/prepare', preparationData);
+}
+
+export function completeRegistration(confirmationData: commonTypes.IRegistrationConfirmationData)
+  : ApiPromise<SimpleBooleanResponse> {
+  return apiInstance.post('/users/registration/confirm', confirmationData);
 }

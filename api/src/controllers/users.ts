@@ -10,6 +10,7 @@ const router = Router();
 router.get('/profile', usersLogic.retrieveProfile);
 
 router.post('/availability/email', usersLogic.checkIfEmailIsAvailable);
-router.post('/prepare', usersLogic.prepareUser);
+router.post('/registration/prepare', usersLogic.prepareUser);
+router.post('/registration/confirm', usersLogic.confirmRegistration);
 
 export default router;

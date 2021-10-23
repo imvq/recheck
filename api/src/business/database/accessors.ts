@@ -10,7 +10,7 @@ export const sqlFindEmail = sql('./sql/read/findEmail.sql');
 export const sqlFindCompany = sql('./sql/read/findCompany.sql');
 export const sqlFindNameToken = sql('./sql/read/findNameToken.sql');
 export const sqlFindConfirmation = sql('./sql/read/confirmation.sql');
-export const sqlFindConfirmationWithUser = sql('./sql/read/confirmationWithUser.sql');
+export const sqlFindConfirmationBySocialId = sql('./sql/read/confirmationBySocialId.sql');
 export const sqlFindUserBySocialId = sql('./sql/read/findUserBySocialId');
 export const sqlFindUserWithCompanyBySocialId = sql('./sql/read/userWithCompanyBySocialId');
 

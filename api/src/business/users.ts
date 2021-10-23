@@ -17,19 +17,6 @@ import { assertBodyData, reply, AccessToken } from '@business/utilities';
 import * as mailingLogic from './mailing';
 import * as nameTokensLogic from './nameTokens';
 
-export async function checkIfUserIsConfirmed(request: Request, response: Response) {
-  interface IBodyParams {
-    socialId: string;
-  }
-
-  const { socialId }: IBodyParams = request.body;
-  assertBodyData(socialId);
-
-  const confirmation = await database.oneOrNone(accessors.sqlFindConfirmation, { socialId });
-
-  reply(response, { success: !confirmation });
-}
-
 export async function checkIfEmailIsAvailable(request: Request, response: Response) {
   interface IBodyParams {
     email: string;
@@ -129,18 +116,17 @@ export async function prepareUser(request: Request, response: Response) {
 export async function confirmRegistration(request: Request, response: Response) {
   interface IBodyParams {
     confirmationCode: string;
-    socialId: string;
   }
 
-  const { confirmationCode, socialId }: IBodyParams = request.body;
-  assertBodyData(confirmRegistration, socialId);
+  const { confirmationCode }: IBodyParams = request.body;
+  assertBodyData(confirmRegistration);
 
   const confirmationData = await database.oneOrNone<{ id: string; }>(
-    accessors.sqlFindConfirmationWithUser, { confirmationCode, socialId }
+    accessors.sqlFindConfirmation, { codeValue: confirmationCode }
   );
 
   if (!confirmationData) {
-    throw new errors.ConflictError('Inconsistent confirmation data provided.');
+    throw new errors.NotFoundError('Inconsistent confirmation data provided.');
   }
 
   try {
@@ -174,7 +160,6 @@ export async function retrieveProfile(request: Request, response: Response) {
 
 async function retrieveProfileWithLinkedIn(accessToken: string) {
   let profile: { id: string; } | null = null;
-  let targetEntity = null;
 
   try {
     const profileLink = 'https://api.linkedin.com/v2/me';
@@ -184,9 +169,16 @@ async function retrieveProfileWithLinkedIn(accessToken: string) {
     throw new errors.UnauthorizedError('LinkedIn refused to authorize.');
   }
 
+  // @ts-ignore: profile.id is guaranteed to be defined here.
+  return retrieveLocalProfileData(profile.id);
+}
+
+async function retrieveLocalProfileData(socialId: string) {
+  let targetEntity = null;
+  let confirmed = false;
+
   try {
     const targetAccessor = accessors.sqlFindUserWithCompanyBySocialId;
-    const socialId = profile?.id;
     targetEntity = await database.oneOrNone(targetAccessor, { socialId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
@@ -194,13 +186,22 @@ async function retrieveProfileWithLinkedIn(accessToken: string) {
 
   if (!targetEntity) {
     return {
-      socialId: profile?.id,
-      registered: false
+      socialId,
+      registered: false,
+      confirmed
     };
+  }
+
+  try {
+    const targetAccessor = accessors.sqlFindConfirmationBySocialId;
+    confirmed = !await database.oneOrNone(targetAccessor, { socialId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
   }
 
   return {
     ...mappers.normalizeUserEntity(targetEntity),
-    registered: true
+    registered: true,
+    confirmed
   };
 }

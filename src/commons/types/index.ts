@@ -12,6 +12,10 @@ export interface ICompany extends ICompanyBasic {
   logoUrl: string | null;
 }
 
+export interface IRegistrationConfirmationData {
+  confirmationCode: string;
+}
+
 export interface ISelectOptionType {
   key: any;
   text: string;
