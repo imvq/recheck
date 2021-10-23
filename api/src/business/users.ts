@@ -38,7 +38,7 @@ export async function checkIfUserIsConfirmed(request: Request, response: Respons
   const { socialId }: IBodyParams = request.body;
   assertBodyData(socialId);
 
-  const confirmation = await database.oneOrNone(accessors.sqlFindUserConfirmation, { socialId });
+  const confirmation = await database.oneOrNone(accessors.sqlFindConfirmation, { socialId });
 
   reply(response, { success: !confirmation });
 }
@@ -125,7 +125,7 @@ export async function prepareUser(request: Request, response: Response) {
     throw new errors.ConflictError('Cannot create user with provided data.');
   }
 
-  const createdUser = mappers.mapDatabaseEntityToUserSelfInfo(createdUserEntity);
+  const createdUser = mappers.normalizeUserEntity(createdUserEntity);
 
   // The ID is guaranteed to be defined.
   await nameTokensLogic.saveName(createdUser.id as string, fullName);
@@ -137,6 +137,32 @@ export async function prepareUser(request: Request, response: Response) {
   );
 
   reply(response);
+}
+
+export async function confirmRegistration(request: Request, response: Response) {
+  interface IBodyParams {
+    confirmationCode: string;
+    socialId: string;
+  }
+
+  const { confirmationCode, socialId }: IBodyParams = request.body;
+  assertBodyData(confirmRegistration, socialId);
+
+  const confirmationData = await database.oneOrNone<{ id: string; }>(
+    accessors.sqlFindConfirmationWithUser, { confirmationCode, socialId }
+  );
+
+  if (!confirmationData) {
+    throw new errors.ConflictError('Inconsistent confirmation data provided.');
+  }
+
+  try {
+    await database.none(accessors.sqlDeleteConfirmation, { id: confirmationData.id });
+
+    reply(response, { message: 'Success.' });
+  } catch {
+    throw new errors.InternalServerError('Impossible to confirm provided code.');
+  }
 }
 
 export async function getPreparedCompany(id: string, name: string | null) {
@@ -187,7 +213,7 @@ async function retrieveProfileWithLinkedIn(accessToken: string) {
   }
 
   return {
-    ...mappers.mapDatabaseEntityToUserSelfInfo(targetEntity),
+    ...mappers.normalizeUserEntity(targetEntity),
     registered: true
   };
 }

@@ -1,4 +1,4 @@
-import { User, Company } from './entities';
+import { User, UserConfirmation, Company } from './entities';
 
 export const mapDatabaseEntityToCompany = (entity: any): Company => ({
   id: entity['id'],
@@ -8,7 +8,7 @@ export const mapDatabaseEntityToCompany = (entity: any): Company => ({
 
 type WithCompany = { currentCompanyName?: string; };
 
-export const mapDatabaseEntityToUserSelfInfo = (entity: any): User & WithCompany => ({
+export const normalizeUserEntity = (entity: any): User & WithCompany => ({
   id: entity['id'],
   privateToken: entity['private_token'],
   shareableId: entity['shareable_id'],
@@ -22,4 +22,12 @@ export const mapDatabaseEntityToUserSelfInfo = (entity: any): User & WithCompany
   confirmationCode: entity['confirmation_code'],
   currentCompanyId: entity['company_id'],
   currentCompanyName: entity['company_name']
+});
+
+type WithUserId = { userId: string; };
+
+export const normalizeConfirmationEntity = (entity: any): UserConfirmation & WithUserId => ({
+  id: entity['id'],
+  codeValue: entity['code_value'],
+  userId: entity['user_id']
 });

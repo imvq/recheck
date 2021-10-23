@@ -4,24 +4,19 @@ import { connect } from 'react-redux';
 import ScaleStage2 from 'assets/images/pages/RegistrationPage/ScaleStage2.png';
 
 import { jumpTo } from 'commons/utils/misc';
+import { apiClient } from 'commons/utils/services';
+import { IUserPreparationData } from 'commons/types';
 import { AppState } from 'store';
 
 import RegistrationBox from './RegistrationBox';
 import ConfirmationPopup from './ConfirmationPopup';
 
-import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   socialId: store.profile.socialId
 });
-
-const Title = (
-  <styled.StageBreadcrumpWrapper>
-    <styled.StageBreadcrumpImage src={ScaleStage2} draggable='false' />
-  </styled.StageBreadcrumpWrapper>
-);
 
 function RegistrationPage(props: types.IProps) {
   // Registration page is suppose to accept users who are not authorized yet
@@ -40,16 +35,13 @@ function RegistrationPage(props: types.IProps) {
   const [emailToShow, setEmailToShow] = useState('');
   const [isConfirmationVisible, setIsConfirmationVisible] = useState(false);
 
-  const Content = (
-    <RegistrationBox onRegisterButtonPressed={userPreparationData => {
-      misc.proceedHandler(userPreparationData)
-        .finally(() => {
-          setEmailToShow(userPreparationData.email);
-          setIsConfirmationVisible(true);
-        });
-    }}
-    />
-  );
+  function prepareUser(userPreparationData: IUserPreparationData) {
+    apiClient.prepareUser(userPreparationData)
+      .finally(() => {
+        setEmailToShow(userPreparationData.email);
+        setIsConfirmationVisible(true);
+      });
+  }
 
   return (
     <styled.Wrapper>
@@ -58,8 +50,11 @@ function RegistrationPage(props: types.IProps) {
 
       <styled.AdaptedHeader isProfilePageAvailable={false} />
       <styled.ContentWrapper>
-        {Title}
-        {Content}
+        <styled.StageBreadcrumpWrapper>
+          <styled.StageBreadcrumpImage src={ScaleStage2} draggable='false' />
+        </styled.StageBreadcrumpWrapper>
+
+        <RegistrationBox onRegisterButtonPressed={prepareUser} />
       </styled.ContentWrapper>
       <styled.AdaptedFooter />
     </styled.Wrapper>
