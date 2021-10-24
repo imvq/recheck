@@ -17,7 +17,10 @@ export async function updateAuthorizationStatus() {
     if (cookieManager.get('accessToken')) {
       apiClient.retrieveProfile()
         .then(profileData => loadProfileData(profileData))
-        .catch(() => dispatch(profileActions.setIsAuthorized(false)));
+        .catch(() => {
+          cookieManager.remove('accessToken');
+          dispatch(profileActions.setIsAuthorized(false));
+        });
 
       return;
     }
