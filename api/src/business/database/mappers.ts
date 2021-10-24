@@ -17,8 +17,8 @@ export const normalizeUserEntity = (entity: any): User & WithCompany => ({
   email: entity['email'],
   photoUrl: entity['photo_url'],
   currentPosition: entity['current_position'],
-  currentWorkStartYear: entity['current_work_y_from'],
-  currentWorkStartMonth: entity['current_work_m_from'],
+  currentWorkYearFrom: entity['current_work_y_from'],
+  currentWorkMonthFrom: entity['current_work_m_from'],
   confirmationCode: entity['confirmation_code'],
   currentCompanyId: entity['company_id'],
   currentCompanyName: entity['company_name']

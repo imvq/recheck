@@ -58,4 +58,6 @@ function loadProfileData(profileData: AxiosResponse<types.IUserSelf>) {
   profileActions.setCurrentWorkStarPeriod({ year, month });
 
   profileActions.setIsAuthorized(true);
+
+  jumpTo('/profile');
 }

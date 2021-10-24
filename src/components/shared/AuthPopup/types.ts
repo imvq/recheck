@@ -1,10 +1,11 @@
-import { IAppProfileInfo } from 'commons/types/general';
+export interface IOwnProps {}
+
+export interface IStateProps {}
 
 export interface IDispatchProps {
   setPageLocked(flag: boolean): void;
   setIsLoginPopupVisible(flag: boolean): void;
-  setIsAuthorized(flag: boolean): void;
-  setCurrentProfileInfo(profileInfo: IAppProfileInfo): void;
+  updateAuthorizationStatus(): void;
 }
 
-export type IProps = IDispatchProps;
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

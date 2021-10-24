@@ -16,6 +16,22 @@ export interface IRegistrationConfirmationData {
   confirmationCode: string;
 }
 
+export interface IRetrievedProfileData {
+  registered: boolean;
+  confirmed: boolean;
+  socialId: string;
+  privateToken?: string;
+  shareableId?: string;
+  fullName?: string;
+  email?: string;
+  photoUrl?: string;
+  currentPosition?: string;
+  currentWorkYearFrom?: string;
+  currentWorkMonthFrom?: string;
+  currentCompanyId?: string;
+  currentCompanyName?: string;
+}
+
 export interface ISelectOptionType {
   key: any;
   text: string;
