@@ -1,5 +1,3 @@
-import { IAppProfileInfo } from 'commons/types/general';
-
 export interface IEmailState {
   email: string,
   isEmailValid: boolean,
@@ -9,11 +7,13 @@ export interface IEmailState {
 }
 
 export interface IStateProps {
-  currentProfileInfo: IAppProfileInfo;
+  email: string | null;
+  privateToken: string | null;
 }
 
 export interface IDispatchProps {
-  lockPage(): void;
+  setPageLocked(): void;
+  setEmail(email: string): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

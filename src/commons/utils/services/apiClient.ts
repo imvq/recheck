@@ -33,7 +33,12 @@ export function prepareUser(preparationData: commonTypes.IUserPreparationData)
   return apiInstance.post('/users/registration/prepare', preparationData);
 }
 
-export function completeRegistration(confirmationData: commonTypes.IRegistrationConfirmationData)
+export function resendConfirmation(privateToken: string, updatedEmail?: string)
   : ApiPromise<SimpleBooleanResponse> {
-  return apiInstance.post('/users/registration/confirm', confirmationData);
+  return apiInstance.post('/users/registration/confirming/resend', { privateToken, updatedEmail });
+}
+
+export function completeRegistration(confirmationCode: string)
+  : ApiPromise<SimpleBooleanResponse> {
+  return apiInstance.post('/users/registration/confirming/apply', { confirmationCode });
 }

@@ -39,6 +39,8 @@ function loadProfileData(profileData: AxiosResponse<types.IUserSelf>) {
 
   if (!profileData.data.confirmed) {
     profileActions.setSocialId(profileData.data.socialId);
+    profileActions.setPrivateToken(profileData.data.privateToken);
+    profileActions.setEmail(profileData.data.email);
     jumpTo('/await-user-confirmation');
 
     return;

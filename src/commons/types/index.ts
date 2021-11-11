@@ -12,10 +12,6 @@ export interface ICompany extends ICompanyBasic {
   logoUrl: string | null;
 }
 
-export interface IRegistrationConfirmationData {
-  confirmationCode: string;
-}
-
 export interface IRetrievedProfileData {
   registered: boolean;
   confirmed: boolean;

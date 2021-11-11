@@ -42,6 +42,12 @@ export class UnauthorizedError extends HttpError {
   }
 }
 
+export class ForbiddenError extends HttpError {
+  public constructor(message: string) {
+    super(message, httpStatus.FORBIDDEN);
+  }
+}
+
 export function useDefaultErrorHandler(error: any, response: Response) {
   if (error instanceof HttpError) {
     reply(response, { message: error.message }, error.statusCode);

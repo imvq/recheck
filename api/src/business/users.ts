@@ -105,9 +105,72 @@ export async function prepareUser(request: Request, response: Response) {
   await nameTokensLogic.saveName(createdUser.id as string, fullName);
 
   // All the fields are guaranteed to be defined.
-  await mailingLogic.sendConfirmationMail(
+  await sendFirstConfirmation(
     createdUser.email as string,
     createdUser.confirmationCode as string
+  );
+
+  reply(response);
+}
+
+/**
+ * Send confirmation code to a user.
+ * The function is responsible for the first confirmation sending.
+ * The function is called right after the registration when the user's datum are available.
+ * Therefore, their email and code are passed directly.
+ */
+export async function sendFirstConfirmation(email: string, confirmationCode: string) {
+  await mailingLogic.sendConfirmationMail(email, confirmationCode);
+}
+
+/**
+ * Send confirmation code to a user.
+ * The function is called after triggering the corresponding API endpoints
+ * which are responsible either for:
+ *   1) resending the confirmation or
+ *   2) resending the confirmation and updating the email.
+ * Eitherway user's private token is required.
+ *
+ * The confirmation never changes.
+ *
+ * If an email is provided it is treated as user's new email and replace previous one.
+ */
+export async function resendConfirmation(request: Request, response: Response) {
+  interface IBodyData {
+    privateToken: string;
+    updatedEmail?: string;
+  }
+
+  const { privateToken, updatedEmail }: IBodyData = request.body;
+  assertBodyData(privateToken, updatedEmail);
+
+  const targetAccessor = accessors.sqlReadUserByPrivateToken;
+  let targetUser;
+
+  try {
+    targetUser = await database.oneOrNone(targetAccessor, { privateToken });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+
+  if (!targetUser) {
+    throw new errors.ForbiddenError('Inacceptable private token.');
+  }
+
+  // Update email if needed.
+  if (updatedEmail) {
+    const updateAccessor = accessors.sqlUpdateUsersEmail;
+
+    try {
+      await database.none(updateAccessor, { privateToken, updatedEmail });
+    } catch {
+      throw new errors.InternalServerError('Database conflict.');
+    }
+  }
+
+  await mailingLogic.sendConfirmationMail(
+    updatedEmail || targetUser.email,
+    targetUser.confirmationCode
   );
 
   reply(response);

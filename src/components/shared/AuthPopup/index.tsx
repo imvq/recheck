@@ -16,7 +16,7 @@ const mapDispatchToProps: types.IDispatchProps = {
 };
 
 function AuthPopup(props: types.IProps) {
-  function onClickLinkedIn(data: { code: string }) {
+  function onLinkedInButtonClicked(data: { code: string }) {
     props.setPageLocked(true);
 
     apiClient.exchangeLinkedInCode(data.code, `${window.location.origin}/linkedin`)
@@ -42,7 +42,7 @@ function AuthPopup(props: types.IProps) {
       redirectUri={`${window.location.origin}/linkedin`}
       scope='r_liteprofile'
       onFailure={() => window.location.reload()}
-      onSuccess={onClickLinkedIn}
+      onSuccess={onLinkedInButtonClicked}
     >
       <styled.AdaptedLoginButtonLi />
     </LinkedIn>
