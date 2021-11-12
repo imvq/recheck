@@ -15,8 +15,7 @@ export let logger: ILogger | null = null;
 export let morgan: ((_: string) => Handler) | null = null;
 
 if (process.env.NODE_ENV !== 'production') {
-  const Logger = require('./logging').default;
-  logger = new Logger();
+  logger = require('./logging').default;
 
   morgan = require('morgan');
 }
