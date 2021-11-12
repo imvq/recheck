@@ -25,7 +25,7 @@ export async function checkIfEmailIsAvailable(request: Request, response: Respon
   const { email }: IBodyParams = request.body;
   assertBodyData(email);
 
-  const targetedEmail = await database.oneOrNone(accessors.sqlFindEmail, { email });
+  const targetedEmail = await database.oneOrNone(accessors.sqlReadEmail, { email });
 
   reply(response, { success: !targetedEmail });
 }
@@ -73,12 +73,12 @@ export async function prepareUser(request: Request, response: Response) {
   // since we cannot expext the API's users to make all needed checks before calling
   // the preparation endpoint.
 
-  const targetUser = await database.oneOrNone(accessors.sqlFindUserBySocialId, { socialId });
+  const targetUser = await database.oneOrNone(accessors.sqlReadUserBySocialId, { socialId });
   if (targetUser) {
     throw new errors.ConflictError('User with provided social ID already exists.');
   }
 
-  const targetedEmail = await database.oneOrNone(accessors.sqlFindEmail, { email });
+  const targetedEmail = await database.oneOrNone(accessors.sqlReadEmail, { email });
   if (targetedEmail) {
     throw new errors.ConflictError('Attempt to register email that is already in use.');
   }
@@ -185,7 +185,7 @@ export async function confirmRegistration(request: Request, response: Response) 
   assertBodyData(confirmRegistration);
 
   const confirmationData = await database.oneOrNone<{ id: string; }>(
-    accessors.sqlFindConfirmation, { codeValue: confirmationCode }
+    accessors.sqlReadConfirmation, { codeValue: confirmationCode }
   );
 
   if (!confirmationData) {
@@ -202,7 +202,7 @@ export async function confirmRegistration(request: Request, response: Response) 
 }
 
 export async function getPreparedCompany(id: string, name: string | null) {
-  const company = await database.oneOrNone<{ id: string; }>(accessors.sqlFindCompany, { id });
+  const company = await database.oneOrNone<{ id: string; }>(accessors.sqlReadCompany, { id });
 
   return company || database.one<{ id: string; }>(accessors.sqlCreateCompany, { name });
 }
@@ -241,7 +241,7 @@ async function retrieveLocalProfileData(socialId: string) {
   let confirmed = false;
 
   try {
-    const targetAccessor = accessors.sqlFindUserWithCompanyBySocialId;
+    const targetAccessor = accessors.sqlReadUserWithCompanyBySocialId;
     targetEntity = await database.oneOrNone(targetAccessor, { socialId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
@@ -256,7 +256,7 @@ async function retrieveLocalProfileData(socialId: string) {
   }
 
   try {
-    const targetAccessor = accessors.sqlFindConfirmationBySocialId;
+    const targetAccessor = accessors.sqlReadConfirmationBySocialId;
     confirmed = !await database.oneOrNone(targetAccessor, { socialId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');

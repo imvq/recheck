@@ -8,21 +8,21 @@ function sql(file: string) {
 
 // Create.
 
-export const sqlCreateCompany = sql('./sql/create/createCompany.sql');
-export const sqlCreateNameToken = sql('./sql/create/createNameToken.sql');
-export const sqlCreateNameTokenBinding = sql('./sql/create/createNameTokenBinding.sql');
+export const sqlCreateCompany = sql('./sql/create/company.sql');
+export const sqlCreateNameToken = sql('./sql/create/nameToken.sql');
+export const sqlCreateNameTokenBinding = sql('./sql/create/nameTokenBinding.sql');
 export const sqlCreateUser = sql('./sql/create/user.sql');
 
 // Read.
 
-export const sqlFindEmail = sql('./sql/read/findEmail.sql');
-export const sqlFindCompany = sql('./sql/read/findCompany.sql');
-export const sqlFindNameToken = sql('./sql/read/findNameToken.sql');
-export const sqlFindConfirmation = sql('./sql/read/confirmation.sql');
-export const sqlFindConfirmationBySocialId = sql('./sql/read/confirmationBySocialId.sql');
+export const sqlReadEmail = sql('./sql/read/email.sql');
+export const sqlReadCompany = sql('./sql/read/company.sql');
+export const sqlReadNameToken = sql('./sql/read/nameToken.sql');
+export const sqlReadConfirmation = sql('./sql/read/confirmation.sql');
+export const sqlReadConfirmationBySocialId = sql('./sql/read/confirmationBySocialId.sql');
 export const sqlReadUserByPrivateToken = sql('./sql/read/user.sql');
-export const sqlFindUserBySocialId = sql('./sql/read/findUserBySocialId');
-export const sqlFindUserWithCompanyBySocialId = sql('./sql/read/userWithCompanyBySocialId');
+export const sqlReadUserBySocialId = sql('./sql/read/userBySocialId');
+export const sqlReadUserWithCompanyBySocialId = sql('./sql/read/userWithCompanyBySocialId');
 
 // Update.
 

@@ -13,7 +13,7 @@ export async function saveName(userId: string, fullName: string) {
 
 async function getEntityRepresentationOf(tokenValue: string) {
   const token = await database.oneOrNone<{ id: string; }>(
-    accessors.sqlFindNameToken,
+    accessors.sqlReadNameToken,
     { tokenValue }
   );
 
