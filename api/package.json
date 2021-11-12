@@ -9,11 +9,11 @@
     "migration:run:up": "env-cmd -f .env.production db-migrate up",
     "migration:run:down": "env-cmd -f .env.production db-migrate down",
     "prepare-media-dir": "cp -R ./media ./dist",
-    "prepare-templates-dir": "mkdir ./dist/services -p && cp -r src/services/templates dist/services",
-    "prepare-dirs": "yarn-run-all --parallel prepare-media-dir prepare-templates-dir",
-    "prepare-all": "mkdir ./dist && yarn-run-all --parallel prepare-dirs",
-    "start": "rm -rf ./dist && prepare-all && env-cmd -f .env.development ts-node src/dev-watch",
-    "build": "rm -rf ./dist && prepare-all && yarn run ecosystem:generate && env-cmd -f .env.production tsc"
+    "prepare-templates-dir": "mkdir ./dist/services -p && cp -R src/services/templates dist/services",
+    "prepare-dirs": "yarn run prepare-media-dir && yarn run prepare-templates-dir",
+    "prepare-all": "mkdir ./dist && yarn run prepare-dirs",
+    "start": "rm -rf ./dist && yarn run prepare-all && env-cmd -f .env.development ts-node src/dev-watch",
+    "build": "rm -rf ./dist && yarn run prepare-all && yarn run ecosystem:generate && env-cmd -f .env.production tsc"
   },
   "_moduleAliases": {
     "@application": "dist/application",
@@ -61,7 +61,6 @@
     "morgan": "^1.10.0",
     "ts-node": "^9.1.1",
     "tsc-watch": "^4.2.9",
-    "typescript": "3.7.5",
-    "yarn-run-all": "^3.1.1"
+    "typescript": "3.7.5"
   }
 }

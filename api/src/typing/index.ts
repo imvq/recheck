@@ -1,5 +1,3 @@
-export * from './general';
-
 export interface ICompanyData {
   name: string;
   logoUrl: string | null;
