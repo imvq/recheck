@@ -30,6 +30,27 @@ export async function checkIfEmailIsAvailable(request: Request, response: Respon
   reply(response, { success: !targetedEmail });
 }
 
+export async function checkIfUserCanBeViewed(request: Request, response: Response) {
+  interface IBodyParams {
+    privateToken: string;
+    targetShareableId: string;
+  }
+
+  const { privateToken, targetShareableId }: IBodyParams = request.body;
+  assertBodyData(privateToken, targetShareableId);
+
+  const checkAccessor = accessors.sqlReadUserAvailability;
+  let availability;
+
+  try {
+    availability = await database.oneOrNone(checkAccessor, { privateToken, targetShareableId });
+  } catch {
+    reply(response, { success: false });
+  }
+
+  reply(response, { success: !!availability });
+}
+
 function downloadPhoto(photoUrl: string, outputPath: string) {
   const writer = createWriteStream(outputPath);
 
@@ -154,7 +175,7 @@ export async function resendConfirmation(request: Request, response: Response) {
   }
 
   if (!targetUser) {
-    throw new errors.ForbiddenError('Inacceptable private token.');
+    throw new errors.ForbiddenError('Unacceptable private token.');
   }
 
   // Update email if needed.
@@ -211,7 +232,7 @@ export async function retrieveProfile(request: Request, response: Response) {
   const accessToken = new AccessToken(request.cookies['accessToken']);
 
   if (!accessToken.socialMedia || !accessToken.tokenValue) {
-    throw new errors.UnauthorizedError('No valid access token provided');
+    throw new errors.ForbiddenError('No valid access token provided.');
   }
 
   if (accessToken.socialMedia === 'linkedin') {
@@ -229,7 +250,7 @@ async function retrieveProfileWithLinkedIn(accessToken: string) {
     const profileOptions = { headers: { Authorization: `Bearer ${accessToken}` } };
     profile = await axios.get(profileLink, profileOptions);
   } catch {
-    throw new errors.UnauthorizedError('LinkedIn refused to authorize.');
+    throw new errors.ForbiddenError('LinkedIn refused to authorize.');
   }
 
   // @ts-ignore: profile.id is guaranteed to be defined here.

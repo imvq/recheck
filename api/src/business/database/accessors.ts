@@ -20,7 +20,8 @@ export const sqlReadCompany = sql('./sql/read/company.sql');
 export const sqlReadNameToken = sql('./sql/read/nameToken.sql');
 export const sqlReadConfirmation = sql('./sql/read/confirmation.sql');
 export const sqlReadConfirmationBySocialId = sql('./sql/read/confirmationBySocialId.sql');
-export const sqlReadUserByPrivateToken = sql('./sql/read/user.sql');
+export const sqlReadUserAvailability = sql('./sql/read/userAvailability.sql');
+export const sqlReadUserByPrivateToken = sql('./sql/read/userByPrivateToken.sql');
 export const sqlReadUserBySocialId = sql('./sql/read/userBySocialId');
 export const sqlReadUserWithCompanyBySocialId = sql('./sql/read/userWithCompanyBySocialId');
 
