@@ -1,8 +1,8 @@
 -- Creating table for name tokens.
 CREATE TABLE IF NOT EXISTS public.name_tokens
 (
-    id          bigserial,
-    token_value text       NOT NULL,
+    id          BIGSERIAL,
+    token_value TEXT       NOT NULL,
 
     -- Indices for unique fields will be generated automatically.
     CONSTRAINT nt_unique_token_value UNIQUE(token_value),
@@ -14,8 +14,8 @@ CREATE TABLE IF NOT EXISTS public.name_tokens
 -- Creating table for name tokens bindings.
 CREATE TABLE IF NOT EXISTS public.name_tokens_bindings
 (
-    name_token_id bigserial,
-    user_id       bigserial,
+    name_token_id BIGSERIAL,
+    user_id       BIGSERIAL,
 
     -- Index for the primary key will be generated automatically.
     CONSTRAINT ntb_pk_id         PRIMARY KEY(name_token_id, user_id),

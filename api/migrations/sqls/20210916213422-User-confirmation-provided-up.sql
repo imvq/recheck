@@ -10,4 +10,4 @@ CREATE TABLE IF NOT EXISTS public.confirmations (
 );
 
 -- Setting owner.
-ALTER TABLE public.confirmation OWNER TO recheck;
+ALTER TABLE public.confirmations OWNER TO recheck;
