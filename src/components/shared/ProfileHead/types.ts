@@ -1,7 +1,7 @@
-import { IAppProfileInfoReduced } from 'commons/types/general';
+import { ISearchProfileData } from 'commons/types';
 
 export interface IOwnProps {
-  profileInfo: IAppProfileInfoReduced;
+  profileInfo: ISearchProfileData;
   isSolid?: boolean;
   noButtons?: boolean;
 }

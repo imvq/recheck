@@ -18,7 +18,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isAuthorized: store.auth.isAuthorized
+  isAuthorized: store.profile.isAuthorized
 });
 
 const mapDispatchToProps: types.IDispatchProps = {

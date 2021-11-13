@@ -67,42 +67,37 @@ export default () => (
           {/* Check is needed to determine if we can show the page to user. */}
           {/* The result of the check is stored so that no check will be further. */}
           <Route exact path='/profile'>
-            <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
-            <PageLockManager hideContentOnLock>
+            <PageAccessGuard>
               <OwnProfilePage />
-            </PageLockManager>
+            </PageAccessGuard>
           </Route>
 
           {/* Profile of another user. */}
           <Route exact path='/profile/observe/:targetShareableId'>
-            <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
-            <PageLockManager hideContentOnLock>
+            <PageAccessGuard hideContentOnLock>
               <ObservedProfilePage />
-            </PageLockManager>
+            </PageAccessGuard>
           </Route>
 
           {/* Review page. Used to add new reviews. */}
           <Route exact path='/review/:targetShareableId'>
-            <PageStartupManager preventUnlockStrictly />
-            <PageLockManager hideContentOnLock>
+            <PageAccessGuard hideContentOnLock>
               <ReviewPage />
-            </PageLockManager>
+            </PageAccessGuard>
           </Route>
 
           {/* Page with message persuading to check user's email. */}
           <Route exact path='/await-user-confirmation'>
-            <PageForceUnlocker />
-            <PageLockManager>
+            <PageAccessGuard>
               <UserConfirmationAwaiterPage />
-            </PageLockManager>
+            </PageAccessGuard>
           </Route>
 
           {/* Search page. Used to search users and companies. */}
           <Route exact path='/search'>
-            <PageStartupManager preventDefaultUnlock redirectHomeOnFail />
-            <PageLockManager>
+            <PageAccessGuard>
               <SearchPage />
-            </PageLockManager>
+            </PageAccessGuard>
           </Route>
 
           {/* LinkedIn's OAuth2 window. */}

@@ -24,6 +24,15 @@ export const normalizeUserEntity = (entity: any): User & WithCompany => ({
   currentCompanyName: entity['company_name']
 });
 
+export const normalizePublicUserEntity = (entity: any): User & WithCompany => ({
+  fullName: entity['full_name'],
+  shareableId: entity['shareable_id'],
+  photoUrl: entity['photo_url'],
+  currentPosition: entity['position'],
+  currentCompanyId: entity['company_id'],
+  currentCompanyName: entity['company_name']
+});
+
 type WithUserId = { userId: string; };
 
 export const normalizeConfirmationEntity = (entity: any): UserConfirmation & WithUserId => ({

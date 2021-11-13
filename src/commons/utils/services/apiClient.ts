@@ -28,6 +28,11 @@ export function checkIfEmailIsAvailable(email: string)
   return apiInstance.post('/users/availability/email', email);
 }
 
+export function checkIfUserCanBeViewed(privateToken: string, targetShareableId: string)
+  : ApiPromise<SimpleBooleanResponse> {
+  return apiInstance.post('/users/availability/user', { privateToken, targetShareableId });
+}
+
 export function prepareUser(preparationData: commonTypes.IUserPreparationData)
   : ApiPromise<SimpleBooleanResponse> {
   return apiInstance.post('/users/registration/prepare', preparationData);
@@ -36,6 +41,11 @@ export function prepareUser(preparationData: commonTypes.IUserPreparationData)
 export function resendConfirmation(privateToken: string, updatedEmail?: string)
   : ApiPromise<SimpleBooleanResponse> {
   return apiInstance.post('/users/registration/confirming/resend', { privateToken, updatedEmail });
+}
+
+export function searchUserByShareableId(shareableId: string)
+  : ApiPromise<commonTypes.ISearchProfileData> {
+  return apiInstance.post('/search/user', { shareableId });
 }
 
 export function completeRegistration(confirmationCode: string)

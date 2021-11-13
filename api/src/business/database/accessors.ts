@@ -22,6 +22,7 @@ export const sqlReadConfirmation = sql('./sql/read/confirmation.sql');
 export const sqlReadConfirmationBySocialId = sql('./sql/read/confirmationBySocialId.sql');
 export const sqlReadUserAvailability = sql('./sql/read/userAvailability.sql');
 export const sqlReadUserByPrivateToken = sql('./sql/read/userByPrivateToken.sql');
+export const sqlReadUserByShareableId = sql('./sql/read/userByShareableId.sql');
 export const sqlReadUserBySocialId = sql('./sql/read/userBySocialId');
 export const sqlReadUserWithCompanyBySocialId = sql('./sql/read/userWithCompanyBySocialId');
 

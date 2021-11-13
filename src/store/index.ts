@@ -1,7 +1,6 @@
 import thunkMiddlware, { ThunkMiddleware } from 'redux-thunk';
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 
-import { authReducer } from './auth/reducers';
 import { interactionStateReducer } from './interaction/reducer';
 import { profileReducer } from './profile/reducers';
 import { reviewsReducer } from './reviews/reducer';
@@ -12,7 +11,6 @@ import { AppActionType } from './types';
  * All store reducers combined to one.
  */
 const rootReducer = combineReducers({
-  auth: authReducer,
   interaction: interactionStateReducer,
   profile: profileReducer,
   reviews: reviewsReducer,
@@ -45,7 +43,6 @@ export const store = createStore(
 );
 
 export * from './types';
-export * from './auth/actions';
 export * from './interaction/actions';
 export * from './profile/actions';
 export * from './reviews/actions';

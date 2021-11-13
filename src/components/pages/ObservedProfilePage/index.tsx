@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { jumpTo, mapProfileInfoToIAppProfileInfoSlice as sliceProfileData } from 'commons/utils/misc';
+import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 import { AppState, loadObservedReviewsData, loadTargetNthReviewGot, setIsObservedPageLoading, setPageUnlocked } from 'store';
 
-import { ISearchProfileInfo } from 'commons/types/general';
+import { ISearchProfileData } from 'commons/types';
 
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
@@ -17,8 +17,8 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileId: store.profile.currentProfileInfo.currentId,
-  isAuthorized: store.auth.isAuthorized,
+  privateToken: store.profile.privateToken,
+  isAuthorized: store.profile.isAuthorized,
   isLoading: store.interaction.isObservedReviewsPageLoading,
   isObservedReviewsPageLoading: store.interaction.isObservedReviewsPageLoading,
   observedReviewsChunksAmount: store.interaction.observedReviewsChunksAmount,
@@ -46,31 +46,31 @@ const ContentEmpty = (
 function ObservedProfilePage(props: types.IProps) {
   const { targetShareableId } = useParams<{ targetShareableId: string }>();
 
-  const [observedUser, setObservedUser] = useState<ISearchProfileInfo>();
+  const [observedUser, setObservedUser] = useState<ISearchProfileData>();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    props.setIsLoading();
+    if (props.privateToken) {
+      props.setIsLoading();
 
-    apiClient.checkIsUserCanBeViewed({
-      askerProfileId: props.currentProfileId,
-      targetShareableId
-    })
-      .then(checkData => {
-        if (!checkData.data.success) {
-          jumpTo('/404');
-          return;
-        }
+      apiClient.checkIfUserCanBeViewed(props.privateToken as string, targetShareableId)
+        .then(checkData => {
+          if (!checkData.data.success) {
+            jumpTo('/404');
+            return;
+          }
 
-        apiClient.searchUserByShareableId(targetShareableId)
-          .then(searchResult => {
-            setObservedUser(searchResult.data.result);
+          apiClient.searchUserByShareableId(targetShareableId)
+            .then(searchResult => {
+              setObservedUser(searchResult.data);
 
-            props.loadObservedReviewsData(props.currentProfileId, targetShareableId);
-          });
-      })
-      .catch(() => jumpTo('/404'));
-  }, []);
+            // TODO: load reviews.
+            // props.loadObservedReviewsData(props.currentProfileId, targetShareableId);
+            });
+        })
+        .catch(() => jumpTo('/404'));
+    }
+  }, [props.privateToken]);
 
   const ContentAvailable = (
     <>
@@ -95,7 +95,7 @@ function ObservedProfilePage(props: types.IProps) {
             <styled.Title>Просмотр профиля</styled.Title>
           </styled.TitleWrapper>
 
-          <ProfileHead profileInfo={sliceProfileData(observedUser)} />
+          <ProfileHead profileInfo={observedUser} />
 
           <styled.ReviewSectionWrapper>
             {props.isLoading ? NoContent
@@ -106,15 +106,27 @@ function ObservedProfilePage(props: types.IProps) {
             <Pagination
               nPages={props.observedReviewsChunksAmount}
               onNextClick={() => {
-                props.loadNthReview(props.currentProfileId, targetShareableId, currentIndex + 1);
+                props.loadNthReview(
+                  props.privateToken as string,
+                  targetShareableId,
+                  currentIndex + 1
+                );
                 setCurrentIndex(currentIndex + 1);
               }}
               onPageClick={(page: number) => {
-                props.loadNthReview(props.currentProfileId, targetShareableId, page - 1);
+                props.loadNthReview(
+                  props.privateToken as string,
+                  targetShareableId,
+                  page - 1
+                );
                 setCurrentIndex(page - 1);
               }}
               onPrevClick={() => {
-                props.loadNthReview(props.currentProfileId, targetShareableId, currentIndex - 1);
+                props.loadNthReview(
+                  props.privateToken as string,
+                  targetShareableId,
+                  currentIndex - 1
+                );
                 setCurrentIndex(currentIndex - 1);
               }}
             />

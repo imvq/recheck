@@ -24,7 +24,7 @@ function ProfileHead(props: types.IProps) {
   const MenuBar = (
     <styled.MenuBarWrapper backgroundColor={backgroundColor}>
       <styled.MenuContentTitle>
-        {props.profileInfo.currentName}
+        {props.profileInfo.fullName}
       </styled.MenuContentTitle>
     </styled.MenuBarWrapper>
   );
@@ -38,7 +38,7 @@ function ProfileHead(props: types.IProps) {
       </styled.MenuContentSpan>
       <styled.MenuContentSpan isDimmed>
         Место работы:&nbsp;&nbsp;
-        <styled.MenuContentSpan>{props.profileInfo.currentCompany}</styled.MenuContentSpan>
+        <styled.MenuContentSpan>{props.profileInfo.currentCompanyName}</styled.MenuContentSpan>
       </styled.MenuContentSpan>
     </>
   );
@@ -47,7 +47,7 @@ function ProfileHead(props: types.IProps) {
   const Picture = (
     <styled.ProfilePictureWrapper>
       <styled.ProfilePicture
-        src={props.profileInfo.currentPhotoUrl}
+        src={props.profileInfo.photoUrl}
         draggable='false'
       />
     </styled.ProfilePictureWrapper>

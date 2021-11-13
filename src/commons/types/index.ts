@@ -28,6 +28,15 @@ export interface IRetrievedProfileData {
   currentCompanyName?: string;
 }
 
+export interface ISearchProfileData {
+  fullName: string;
+  shareableId: string;
+  photoUrl: string;
+  currentPosition: string;
+  currentCompanyId: string;
+  currentCompanyName: string;
+}
+
 export interface ISelectOptionType {
   key: any;
   text: string;

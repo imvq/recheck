@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { ISearchProfileInfo } from 'commons/types/general';
+import { ISearchProfileData } from 'commons/types';
 import { jumpBack, jumpTo, mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/misc';
 import { apiClient, cookieManager } from 'commons/utils/services';
 import {
@@ -29,7 +29,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapSateToProps = (store: AppState): types.IStateProps => ({
-  isAuthorized: store.auth.isAuthorized,
+  isAuthorized: store.profile.isAuthorized,
   currentProfileInfo: store.profile.currentProfileInfo,
   requestedUserShareableId: store.interaction.requestedUserShareableId,
   reviewData: { ...store.reviews }
@@ -73,7 +73,7 @@ function saveReviewToCookies(review: any) {
 function ReviewPage(props: types.IProps) {
   const { targetShareableId } = useParams<{ targetShareableId: string }>();
 
-  const [observedUser, setObservedUser] = useState<ISearchProfileInfo>();
+  const [observedUser, setObservedUser] = useState<ISearchProfileData>();
   const [step, setStep] = useState(0);
 
   const proceed = () => setStep(step + 1);
@@ -83,8 +83,8 @@ function ReviewPage(props: types.IProps) {
   useEffect(() => {
     apiClient.searchUserByShareableId(targetShareableId)
       .then(searchResult => {
-        setObservedUser(searchResult.data.result);
-        props.setTargetShareableId(searchResult.data.result.shareableId);
+        setObservedUser(searchResult.data);
+        props.setTargetShareableId(searchResult.data.shareableId);
       })
       .catch(() => jumpTo('/404'))
       .finally(() => props.unlockPage());
@@ -98,16 +98,17 @@ function ReviewPage(props: types.IProps) {
 
     props.lockPage();
 
-    apiClient.checkIsTargetConnected({
-      askerProfileId: props.currentProfileInfo.currentId,
-      targetShareableId
-    })
-      .then(connectionData => {
-        if (!connectionData.data.success) {
-          jumpTo('/404');
-        }
-      })
-      .catch(() => jumpTo('/404'));
+    // TODO: check if the target is connected.
+    // apiClient.checkIsTargetConnected({
+    //   askerProfileId: props.currentProfileInfo.currentId,
+    //   targetShareableId
+    // })
+    //   .then(connectionData => {
+    //     if (!connectionData.data.success) {
+    //       jumpTo('/404');
+    //     }
+    //   })
+    //   .catch(() => jumpTo('/404'));
   }, []);
 
   function finalize() {

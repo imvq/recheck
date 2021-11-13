@@ -1,7 +1,7 @@
 import { IReviewCardGotData } from 'commons/types/general';
 
 export interface IStateProps {
-  currentProfileId: string;
+  privateToken: string | null;
   isAuthorized: boolean | null;
   isLoading: boolean;
   isObservedReviewsPageLoading: boolean;
