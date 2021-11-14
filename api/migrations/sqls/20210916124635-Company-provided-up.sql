@@ -13,7 +13,9 @@ CREATE TABLE IF NOT EXISTS public.companies
 ALTER TABLE public.users
     ADD COLUMN company_id BIGSERIAL,
 
-    ADD CONSTRAINT usr_fk_company FOREIGN KEY(company_id) REFERENCES public.companies(id);
+    ADD CONSTRAINT usr_fk_company
+        FOREIGN KEY(company_id) REFERENCES public.companies(id)
+        ON UPDATE NO ACTION ON DELETE NO ACTION;
 
 -- Setting owner.
 ALTER TABLE public.companies OWNER TO recheck;
