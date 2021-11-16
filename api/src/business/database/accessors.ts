@@ -68,7 +68,7 @@ export async function readUserByPrivateToken(privateToken: string) {
   }
 }
 
-export async function readReadUserWithCompanyBySocialId(socialId: string) {
+export async function readUserWithCompanyBySocialId(socialId: string) {
   try {
     const accessor = sql('./sql/read/userWithCompanyBySocialId.sql');
     return database.oneOrNone(accessor, { socialId });
@@ -117,6 +117,24 @@ export async function readNameToken(tokenValue: string) {
   try {
     const accessor = sql('./sql/read/nameToken.sql');
     return database.oneOrNone(accessor, { tokenValue });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readLeftReviewsAmount(authorId: string) {
+  try {
+    const accessor = sql('./sql/read/reviewsLeftAmount.sql');
+    return database.one(accessor, { authorId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readReceivedReviewsAmount(targetShareableId: string) {
+  try {
+    const accessor = sql('./sql/read/reviewsReceivedAmount.sql');
+    return database.one(accessor, { targetShareableId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
   }

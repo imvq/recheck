@@ -284,7 +284,7 @@ async function retrieveSocialIdFromLinkedIn(accessToken: string) {
  * If no confirmation code record is present then the user is already confirmed.
  */
 async function retrieveLocalProfileData(socialId: string) {
-  const targetUserEntity = await accessors.readReadUserWithCompanyBySocialId(socialId);
+  const targetUserEntity = await accessors.readUserWithCompanyBySocialId(socialId);
 
   if (!targetUserEntity) {
     return {
