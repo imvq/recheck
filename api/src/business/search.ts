@@ -5,26 +5,26 @@ import * as mappers from '@business/database/mappers';
 import * as errors from '@business/errors';
 
 import { database } from '@business/preloaded';
-import { assertBodyData, reply } from '@business/utilities';
+import { assertBodyData, reply } from '@business/commons';
 
-export async function searchUserByShareableId(request: Request, response: Response) {
-  interface IBodyParams {
-    shareableId: string;
-  }
+// export async function searchUserByShareableId(request: Request, response: Response) {
+//   interface IBodyParams {
+//     shareableId: string;
+//   }
 
-  const { shareableId }: IBodyParams = request.body;
-  assertBodyData(shareableId);
+//   const { shareableId }: IBodyParams = request.body;
+//   assertBodyData(shareableId);
 
-  const targetAccessor = accessors.sqlReadUserByShareableId;
-  let targetEntity;
+//   const targetAccessor = accessors.sqlReadUserByShareableId;
+//   let targetEntity;
 
-  try {
-    targetEntity = await database.oneOrNone(targetAccessor, { shareableId });
-  } catch {
-    throw new errors.InternalServerError('Database conflict.');
-  }
+//   try {
+//     targetEntity = await database.oneOrNone(targetAccessor, { shareableId });
+//   } catch {
+//     throw new errors.InternalServerError('Database conflict.');
+//   }
 
-  const target = mappers.normalizePublicUserEntity(targetEntity);
+//   const target = mappers.normalizePublicUserEntity(targetEntity);
 
-  reply(response, target);
-}
+//   reply(response, target);
+// }

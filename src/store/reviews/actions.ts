@@ -1,7 +1,8 @@
 import { Dispatch } from 'redux';
 
-import * as generalTypes from 'commons/types/general';
+import { IReviewData } from 'commons/types';
 
+import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 
 import { AppActionType } from '../types';
@@ -54,10 +55,13 @@ export const setReviewRecommendationMark = (payload: number): ReviewActionType =
   payload
 });
 
-export const createReview = (reviewData: generalTypes.IReviewData) => (
+export const createReview = (reviewData: IReviewData, callback: () => void) => (
   dispatch: Dispatch<AppActionType>
 ) => {
-  apiClient.prepareReview({ ...reviewData });
+  apiClient.prepareReview({ ...reviewData })
+    .then(() => callback())
+    .catch(() => jumpTo('/404'));
+
   dispatch(clearTasks());
   dispatch(clearRecommendationData());
   dispatch(clearStrengths());

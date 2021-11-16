@@ -7,6 +7,6 @@ import * as searchLogic from '@business/search';
  */
 const router = Router();
 
-router.post('/availability/email', searchLogic.searchUserByShareableId);
+// router.post('/availability/email', searchLogic.searchUserByShareableId);
 
 export default router;

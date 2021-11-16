@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { ISearchProfileData } from 'commons/types';
-import { jumpBack, jumpTo, mapProfileInfoToIAppProfileInfoSlice } from 'commons/utils/misc';
+import { jumpBack, jumpTo } from 'commons/utils/misc';
 import { apiClient, cookieManager } from 'commons/utils/services';
 import {
   AppState,
@@ -30,7 +30,7 @@ import * as styled from './styled';
 
 const mapSateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.profile.isAuthorized,
-  currentProfileInfo: store.profile.currentProfileInfo,
+  privateToken: store.profile.privateToken,
   requestedUserShareableId: store.interaction.requestedUserShareableId,
   reviewData: { ...store.reviews }
 });
@@ -113,20 +113,11 @@ function ReviewPage(props: types.IProps) {
 
   function finalize() {
     if (props.isAuthorized) {
-      props.createReview({ authorId: props.currentProfileInfo.currentId, ...props.reviewData });
-
-      if (props.requestedUserShareableId) {
-        apiClient.makeUserAvailable({
-          askerProfileId: props.currentProfileInfo.currentId,
-          targetShareableId: props.requestedUserShareableId
-        }).then(() => {
-          jumpTo('/profile/observe/', props.requestedUserShareableId as string);
-        }).catch(jumpToProfile);
-
-        return;
-      }
-
-      jumpToProfile();
+      props.createReview(
+        props.privateToken as string,
+        props.reviewData,
+        () => jumpTo('/profile/observe/', props.requestedUserShareableId as string)
+      );
     } else {
       saveReviewToCookies(props.reviewData);
       props.setIsLoginPopupVisible(true);
@@ -151,11 +142,7 @@ function ReviewPage(props: types.IProps) {
       <styled.ContentWrapper>
         {observedUser && (
         <styled.ProfileHeadWrapper>
-          <ProfileHead
-            profileInfo={mapProfileInfoToIAppProfileInfoSlice(observedUser)}
-            isSolid
-            noButtons
-          />
+          <ProfileHead profileInfo={observedUser} isSolid noButtons />
         </styled.ProfileHeadWrapper>
         )}
 

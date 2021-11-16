@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { assertBodyData, reply } from '@business/utilities';
+import { assertBodyData, reply } from '@business/commons';
 
 export async function prepareReview(request: Request, response: Response) {
   interface IBodyParams {

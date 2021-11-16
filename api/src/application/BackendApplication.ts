@@ -9,7 +9,7 @@ import * as constants from '@business/constants';
 
 import { useDefaultErrorHandler } from '@business/errors';
 import { logger, morgan } from '@business/preloaded';
-import { reply } from '@business/utilities';
+import { reply } from '@business/commons';
 
 /**
  * Main server application class.

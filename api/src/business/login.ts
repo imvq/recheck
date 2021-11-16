@@ -4,7 +4,7 @@ import { Request, Response } from 'express';
 
 import * as errors from '@business/errors';
 
-import { assertBodyData, reply } from '@business/utilities';
+import { assertBodyData, reply } from '@business/commons';
 
 export async function exchangeLinkedInCode(request: Request, response: Response) {
   interface IBodyData {

@@ -28,6 +28,18 @@ export interface IRetrievedProfileData {
   currentCompanyName?: string;
 }
 
+export interface IReviewData {
+  targetShareableId: string;
+  tasks: string;
+  strengths: string;
+  recommendation: string;
+  recommendationMark: number;
+}
+
+export interface ICreatedReviewData extends IReviewData {
+  privateToken: string;
+}
+
 export interface ISearchProfileData {
   fullName: string;
   shareableId: string;
