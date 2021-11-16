@@ -2,7 +2,7 @@ import httpStatus from 'http-status';
 
 import { Response } from 'express';
 
-import { reply } from '@business/utilities';
+import { reply } from '@business/commons';
 
 export abstract class HttpError {
   public constructor(protected _message: string, protected _status: number) {}
@@ -33,12 +33,6 @@ export class InternalServerError extends HttpError {
 export class NotFoundError extends HttpError {
   public constructor(message: string) {
     super(message, httpStatus.NOT_FOUND);
-  }
-}
-
-export class UnauthorizedError extends HttpError {
-  public constructor(message: string) {
-    super(message, httpStatus.UNAUTHORIZED);
   }
 }
 

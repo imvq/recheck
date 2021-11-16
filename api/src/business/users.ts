@@ -11,12 +11,16 @@ import * as accessors from '@business/database/accessors';
 import * as mappers from '@business/database/mappers';
 import * as errors from '@business/errors';
 
-import { database } from '@business/preloaded';
-import { assertBodyData, reply, AccessToken } from '@business/utilities';
+import { assertBodyData, reply, AccessToken } from '@business/commons';
 
 import * as mailingLogic from './mailing';
 import * as nameTokensLogic from './nameTokens';
 
+/**
+ * When a user register on the website they have to check
+ * their email address availability.
+ * The function is used to check if an email is already present in the database.
+ */
 export async function checkIfEmailIsAvailable(request: Request, response: Response) {
   interface IBodyParams {
     email: string;
@@ -25,11 +29,19 @@ export async function checkIfEmailIsAvailable(request: Request, response: Respon
   const { email }: IBodyParams = request.body;
   assertBodyData(email);
 
-  const targetedEmail = await database.oneOrNone(accessors.sqlReadEmail, { email });
+  const targetedEmail = await accessors.readEmail(email);
 
   reply(response, { success: !targetedEmail });
 }
 
+/**
+ * To view someone's profile a user must have appropriate rights access.
+ *
+ * When a user tries to force view unavailable profile it must result with an error.
+ * However, while observing the list with unavailable users within the web client
+ * must preliminarily check if the user would be able to view some profile
+ * before the user proceeds to that profile page.
+ */
 export async function checkIfUserCanBeViewed(request: Request, response: Response) {
   interface IBodyParams {
     privateToken: string;
@@ -39,16 +51,28 @@ export async function checkIfUserCanBeViewed(request: Request, response: Respons
   const { privateToken, targetShareableId }: IBodyParams = request.body;
   assertBodyData(privateToken, targetShareableId);
 
-  const checkAccessor = accessors.sqlReadUserAvailability;
-  let availability;
-
-  try {
-    availability = await database.oneOrNone(checkAccessor, { privateToken, targetShareableId });
-  } catch {
-    reply(response, { success: false });
-  }
+  const asker = await accessors.readUserByPrivateToken(privateToken);
+  const availability = await accessors.readUserAvailability(asker.id, targetShareableId);
 
   reply(response, { success: !!availability });
+}
+
+/**
+ * As there is no guarantee that users' photos are available all the time
+ * (since they located on third-party resourses) the photos must be saved locally.
+ *
+ * Saving also makes it posible to process photos making them more optimized
+ * for the website use-cases.
+ */
+async function saveUserPhoto(photoUrl: string, userSocialId: string) {
+  const localPhotoPath = `media/${userSocialId}`;
+
+  try {
+    await downloadPhoto(photoUrl, localPhotoPath);
+    return localPhotoPath;
+  } catch {
+    return 'media/user-default.png';
+  }
 }
 
 function downloadPhoto(photoUrl: string, outputPath: string) {
@@ -61,17 +85,15 @@ function downloadPhoto(photoUrl: string, outputPath: string) {
     });
 }
 
-async function saveUserPhoto(photoUrl: string, userSocialId: string) {
-  const localPhotoPath = `media/${userSocialId}`;
-
-  try {
-    await downloadPhoto(photoUrl, localPhotoPath);
-    return localPhotoPath;
-  } catch {
-    return 'media/user-default.png';
-  }
-}
-
+/**
+ * Save a user.
+ *
+ * User's data is supposed to be retrieved from a social media user is authenticated with
+ * and from the user's input.
+ *
+ * Saving does not mean the user is able to use the website since they have to confirm
+ * themselves first.
+ */
 export async function prepareUser(request: Request, response: Response) {
   interface IBodyParams {
     email: string;
@@ -94,12 +116,12 @@ export async function prepareUser(request: Request, response: Response) {
   // since we cannot expext the API's users to make all needed checks before calling
   // the preparation endpoint.
 
-  const targetUser = await database.oneOrNone(accessors.sqlReadUserBySocialId, { socialId });
+  const targetUser = await accessors.readUserBySocialId(socialId);
   if (targetUser) {
     throw new errors.ConflictError('User with provided social ID already exists.');
   }
 
-  const targetedEmail = await database.oneOrNone(accessors.sqlReadEmail, { email });
+  const targetedEmail = await accessors.readEmail(email);
   if (targetedEmail) {
     throw new errors.ConflictError('Attempt to register email that is already in use.');
   }
@@ -110,26 +132,19 @@ export async function prepareUser(request: Request, response: Response) {
   // Save user photo at the server (or provide link to a default placeholder).
   const savedPhotoUrl = await saveUserPhoto(photoUrl, socialId);
 
-  const createdUserEntity = await database.oneOrNone<{ id: string; }>(accessors.sqlCreateUser, {
+  const createdUserEntity = await accessors.createUser({
     ...request.body,
     photoUrl: savedPhotoUrl,
     companyId: company.id
   });
 
-  if (!createdUserEntity) {
-    throw new errors.ConflictError('Cannot create user with provided data.');
-  }
-
-  const createdUser = mappers.normalizeUserEntity(createdUserEntity);
+  const createdUser = mappers.normalizeCreatedUser(createdUserEntity);
 
   // The ID is guaranteed to be defined.
-  await nameTokensLogic.saveName(createdUser.id as string, fullName);
+  await nameTokensLogic.saveName(createdUser.id, fullName);
 
   // All the fields are guaranteed to be defined.
-  await sendFirstConfirmation(
-    createdUser.email as string,
-    createdUser.confirmationCode as string
-  );
+  await sendFirstConfirmation(createdUser.email, createdUser.confirmationCode);
 
   reply(response);
 }
@@ -163,40 +178,29 @@ export async function resendConfirmation(request: Request, response: Response) {
   }
 
   const { privateToken, updatedEmail }: IBodyData = request.body;
-  assertBodyData(privateToken, updatedEmail);
+  assertBodyData(privateToken);
 
-  const targetAccessor = accessors.sqlReadUserByPrivateToken;
-  let targetUser;
-
-  try {
-    targetUser = await database.oneOrNone(targetAccessor, { privateToken });
-  } catch {
-    throw new errors.InternalServerError('Database conflict.');
-  }
-
-  if (!targetUser) {
-    throw new errors.ForbiddenError('Unacceptable private token.');
-  }
+  const targetUser = await accessors.readUserByPrivateToken(privateToken);
+  const targetEmail = updatedEmail || targetUser.email;
 
   // Update email if needed.
   if (updatedEmail) {
-    const updateAccessor = accessors.sqlUpdateUsersEmail;
-
-    try {
-      await database.none(updateAccessor, { privateToken, updatedEmail });
-    } catch {
-      throw new errors.InternalServerError('Database conflict.');
-    }
+    await accessors.updateEmail(privateToken, updatedEmail);
   }
 
-  await mailingLogic.sendConfirmationMail(
-    updatedEmail || targetUser.email,
-    targetUser.confirmationCode
-  );
+  await mailingLogic.sendConfirmationMail(targetEmail, targetUser.confirmationCode);
 
   reply(response);
 }
 
+/**
+ * To be able to use the website a user must confirm themselves.
+ * For that purpose, they need to provide the confirmation code received by email.
+ *
+ * To avoid data clogging, the confirmation entity is deleted after successful confirming.
+ *
+ * If a user doesn't have a corresponding confirmation code record they are considered confirmed.
+ */
 export async function confirmRegistration(request: Request, response: Response) {
   interface IBodyParams {
     confirmationCode: string;
@@ -205,29 +209,43 @@ export async function confirmRegistration(request: Request, response: Response) 
   const { confirmationCode }: IBodyParams = request.body;
   assertBodyData(confirmRegistration);
 
-  const confirmationData = await database.oneOrNone<{ id: string; }>(
-    accessors.sqlReadConfirmation, { codeValue: confirmationCode }
-  );
+  await accessors.deleteConfirmation(confirmationCode);
 
-  if (!confirmationData) {
-    throw new errors.NotFoundError('Inconsistent confirmation data provided.');
-  }
-
-  try {
-    await database.none(accessors.sqlDeleteConfirmation, { id: confirmationData.id });
-
-    reply(response, { message: 'Success.' });
-  } catch {
-    throw new errors.InternalServerError('Impossible to confirm provided code.');
-  }
+  reply(response, { message: 'Success.' });
 }
 
+/**
+ * There are two use-cases when a user choose their company:
+ *   1) the company is chosen from the list of existing companies;
+ *   2) the company is created.
+ *
+ * If a user choose a company the web client sends its ID as a companyId parameter.
+ * The companyName parameter is to be null.
+ *
+ * If a user creates a new company the web client sends its name.
+ * The companyId parameter is to be -1.
+ * Technically, When any invalid ID is passed the company is considered as a new one
+ * and the API will try to create it using provided name.
+ *
+ */
 export async function getPreparedCompany(id: string, name: string | null) {
-  const company = await database.oneOrNone<{ id: string; }>(accessors.sqlReadCompany, { id });
+  const company = await accessors.readCompany(id);
 
-  return company || database.one<{ id: string; }>(accessors.sqlCreateCompany, { name });
+  return company || accessors.createCompany(name);
 }
 
+/**
+ * Since LinkedIn provides limited access and API calls
+ * their OAuth is used only for identifying users
+ * (as both LinkedIn and Google OAuth provide IDs for each user).
+ * The same approach is applied to Google OAuth to avoid incoherence.
+ *
+ * All the information about users is stored at the server.
+ * Each user has a social ID which is the ID provided by LinkedIn or Google.
+ * User info can be retrieved when a social network identifies the user
+ * and provide a valid social ID. Then the server's API collects user info
+ * and sends the asker the info including a private token the user can get private access with.
+ */
 export async function retrieveProfile(request: Request, response: Response) {
   const accessToken = new AccessToken(request.cookies['accessToken']);
 
@@ -236,56 +254,49 @@ export async function retrieveProfile(request: Request, response: Response) {
   }
 
   if (accessToken.socialMedia === 'linkedin') {
-    reply(response, { result: retrieveProfileWithLinkedIn(accessToken.tokenValue) });
+    const socialId = await retrieveSocialIdFromLinkedIn(accessToken.tokenValue);
+    const savedLocalUser = await retrieveLocalProfileData(socialId);
+
+    reply(response, { result: savedLocalUser });
   }
 
   // TODO: Google profile retrieving.
 }
 
-async function retrieveProfileWithLinkedIn(accessToken: string) {
-  let profile: { id: string; } | null = null;
-
+/**
+ * Retrieving social ID from LinkedIn.
+ */
+async function retrieveSocialIdFromLinkedIn(accessToken: string) {
   try {
     const profileLink = 'https://api.linkedin.com/v2/me';
     const profileOptions = { headers: { Authorization: `Bearer ${accessToken}` } };
-    profile = await axios.get(profileLink, profileOptions);
+    const profile = await axios.get<any, { id: string; }>(profileLink, profileOptions);
+
+    return profile.id;
   } catch {
     throw new errors.ForbiddenError('LinkedIn refused to authorize.');
   }
-
-  // @ts-ignore: profile.id is guaranteed to be defined here.
-  return retrieveLocalProfileData(profile.id);
 }
 
+/**
+ * Retrieving locally saved personal profile data.
+ * If no profile found then the user is not registered yet (therefore, not confirmed as well).
+ * If no confirmation code record is present then the user is already confirmed.
+ */
 async function retrieveLocalProfileData(socialId: string) {
-  let targetEntity = null;
-  let confirmed = false;
+  const targetUserEntity = await accessors.readReadUserWithCompanyBySocialId(socialId);
 
-  try {
-    const targetAccessor = accessors.sqlReadUserWithCompanyBySocialId;
-    targetEntity = await database.oneOrNone(targetAccessor, { socialId });
-  } catch {
-    throw new errors.InternalServerError('Database conflict.');
-  }
-
-  if (!targetEntity) {
+  if (!targetUserEntity) {
     return {
       socialId,
       registered: false,
-      confirmed
+      confirmed: false
     };
   }
 
-  try {
-    const targetAccessor = accessors.sqlReadConfirmationBySocialId;
-    confirmed = !await database.oneOrNone(targetAccessor, { socialId });
-  } catch {
-    throw new errors.InternalServerError('Database conflict.');
-  }
-
   return {
-    ...mappers.normalizeUserEntity(targetEntity),
+    ...mappers.normalizePersonalUserInfo(targetUserEntity),
     registered: true,
-    confirmed
+    confirmed: !await accessors.readConfirmationBySocialId(socialId)
   };
 }

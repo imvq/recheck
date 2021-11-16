@@ -1,35 +1,141 @@
 import { join as joinPath } from 'path';
 import { QueryFile } from 'pg-promise';
 
+import * as errors from '@business/errors';
+
+import { database } from '@business/preloaded';
+
 function sql(file: string) {
   const fullPath = joinPath(__dirname, file);
   return new QueryFile(fullPath, { minify: true });
 }
 
-// Create.
+export async function createCompany(name: string | null) {
+  if (name === null) {
+    throw new errors.BadRequestError('No company name defined.');
+  }
 
-export const sqlCreateCompany = sql('./sql/create/company.sql');
-export const sqlCreateNameToken = sql('./sql/create/nameToken.sql');
-export const sqlCreateNameTokenBinding = sql('./sql/create/nameTokenBinding.sql');
-export const sqlCreateUser = sql('./sql/create/user.sql');
+  try {
+    const accessor = sql('./sql/create/company.sql');
+    return database.one(accessor, { name });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
 
-// Read.
+export async function createUser(parameters: any) {
+  try {
+    const accessor = sql('./sql/create/user.sql');
+    return database.one(accessor, { ...parameters });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
 
-export const sqlReadEmail = sql('./sql/read/email.sql');
-export const sqlReadCompany = sql('./sql/read/company.sql');
-export const sqlReadNameToken = sql('./sql/read/nameToken.sql');
-export const sqlReadConfirmation = sql('./sql/read/confirmation.sql');
-export const sqlReadConfirmationBySocialId = sql('./sql/read/confirmationBySocialId.sql');
-export const sqlReadUserAvailability = sql('./sql/read/userAvailability.sql');
-export const sqlReadUserByPrivateToken = sql('./sql/read/userByPrivateToken.sql');
-export const sqlReadUserByShareableId = sql('./sql/read/userByShareableId.sql');
-export const sqlReadUserBySocialId = sql('./sql/read/userBySocialId');
-export const sqlReadUserWithCompanyBySocialId = sql('./sql/read/userWithCompanyBySocialId');
+export async function createNameToken(tokenValue: string) {
+  try {
+    const accessor = sql('./sql/create/nameToken.sql');
+    return database.one(accessor, { tokenValue });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
 
-// Update.
+export async function createNameTokenBinding(userId: string, tokenId: string) {
+  try {
+    const accessor = sql('./sql/create/nameTokenBinding.sql');
+    return database.one(accessor, { userId, tokenId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
 
-export const sqlUpdateUsersEmail = sql('./sql/update/usersEmail.sql');
+export async function readEmail(email: string) {
+  try {
+    const accessor = sql('./sql/read/email.sql');
+    return database.oneOrNone(accessor, { email });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
 
-// Delete.
+export async function readUserByPrivateToken(privateToken: string) {
+  try {
+    const accessor = sql('./sql/read/userByPrivateToken.sql');
+    return database.one(accessor, { privateToken });
+  } catch {
+    throw new errors.ForbiddenError('Unacceptable private token.');
+  }
+}
 
-export const sqlDeleteConfirmation = sql('./sql/delete/confiration.sql');
+export async function readReadUserWithCompanyBySocialId(socialId: string) {
+  try {
+    const accessor = sql('./sql/read/userWithCompanyBySocialId.sql');
+    return database.oneOrNone(accessor, { socialId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readUserBySocialId(socialId: string) {
+  try {
+    const accessor = sql('./sql/read/userBySocialId');
+    return database.oneOrNone(accessor, { socialId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readConfirmationBySocialId(socialId: string) {
+  try {
+    const accessor = sql('./sql/read/confirmationBySocialId.sql');
+    return database.oneOrNone(accessor, { socialId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readUserAvailability(askerId: string, targetShareableId: string) {
+  try {
+    const accessor = sql('./sql/read/userAvailability.sql');
+    return database.oneOrNone(accessor, { askerId, targetShareableId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readCompany(companyId: string) {
+  try {
+    const accessor = sql('./sql/read/company.sql');
+    return database.oneOrNone(accessor, { companyId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readNameToken(tokenValue: string) {
+  try {
+    const accessor = sql('./sql/read/nameToken.sql');
+    return database.oneOrNone(accessor, { tokenValue });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function updateEmail(privateToken: string, email: string) {
+  try {
+    const accessor = sql('./sql/update/email.sql');
+    return database.none(accessor, { privateToken, email });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function deleteConfirmation(confirmationCode: string) {
+  try {
+    const accessor = sql('./sql/delete/confirmation.sql');
+    return database.one(accessor, { confirmationCode });
+  } catch {
+    throw new errors.NotFoundError('Impossible to confirm provided code.');
+  }
+}

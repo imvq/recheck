@@ -1,15 +1,10 @@
-import { User, UserConfirmation, Company } from './entities';
-
-export const mapDatabaseEntityToCompany = (entity: any): Company => ({
-  id: entity['id'],
-  name: entity['name'],
-  logoUrl: entity['logo_url']
+export const normalizeCreatedUser = (entity: any) => ({
+  id: `${entity['id']}`,
+  email: `${entity['email']}`,
+  confirmationCode: `${entity['confirmation_code']}`
 });
 
-type WithCompany = { currentCompanyName?: string; };
-
-export const normalizeUserEntity = (entity: any): User & WithCompany => ({
-  id: entity['id'],
+export const normalizePersonalUserInfo = (entity: any) => ({
   privateToken: entity['private_token'],
   shareableId: entity['shareable_id'],
   socialId: entity['social_id'],
@@ -19,23 +14,11 @@ export const normalizeUserEntity = (entity: any): User & WithCompany => ({
   currentPosition: entity['current_position'],
   currentWorkYearFrom: entity['current_work_y_from'],
   currentWorkMonthFrom: entity['current_work_m_from'],
-  confirmationCode: entity['confirmation_code'],
   currentCompanyId: entity['company_id'],
   currentCompanyName: entity['company_name']
 });
 
-export const normalizePublicUserEntity = (entity: any): User & WithCompany => ({
-  fullName: entity['full_name'],
-  shareableId: entity['shareable_id'],
-  photoUrl: entity['photo_url'],
-  currentPosition: entity['position'],
-  currentCompanyId: entity['company_id'],
-  currentCompanyName: entity['company_name']
-});
-
-type WithUserId = { userId: string; };
-
-export const normalizeConfirmationEntity = (entity: any): UserConfirmation & WithUserId => ({
+export const normalizeConfirmationEntity = (entity: any) => ({
   id: entity['id'],
   codeValue: entity['code_value'],
   userId: entity['user_id']

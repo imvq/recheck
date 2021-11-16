@@ -1,1 +1,6 @@
-SELECT email FROM users WHERE email = ${email};
+SELECT
+    email
+FROM
+    users
+WHERE
+    email = ${email};

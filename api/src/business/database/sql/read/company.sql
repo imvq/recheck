@@ -1,1 +1,6 @@
-SELECT * FROM companies WHERE id = ${id};
+SELECT
+    *
+FROM
+    companies
+WHERE
+    id = ${id};

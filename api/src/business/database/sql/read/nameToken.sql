@@ -1,1 +1,6 @@
-SELECT * FROM name_tokens WHERE token_value = ${tokenValue};
+SELECT
+    *
+FROM
+    name_tokens
+WHERE
+    token_value = ${tokenValue};
