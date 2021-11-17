@@ -12,6 +12,13 @@ export interface ICompany extends ICompanyBasic {
   logoUrl: string | null;
 }
 
+export interface ICreatedReviewData {
+  privateToken: string;
+  targetShareableId: string;
+  answers: string[];
+  marks: number[];
+}
+
 export interface IRetrievedProfileData {
   registered: boolean;
   confirmed: boolean;
@@ -28,16 +35,9 @@ export interface IRetrievedProfileData {
   currentCompanyName?: string;
 }
 
-export interface IReviewData {
+export interface IReceivedReviewData {
   targetShareableId: string;
-  tasks: string;
-  strengths: string;
-  recommendation: string;
-  recommendationMark: number;
-}
-
-export interface ICreatedReviewData extends IReviewData {
-  privateToken: string;
+  content: string;
 }
 
 export interface ISearchProfileData {

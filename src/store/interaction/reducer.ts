@@ -14,8 +14,6 @@ import {
   SET_IS_PROFILE_REVIEWS_TAB_LOADING,
   SET_INVITER,
   SET_AWAITER,
-  SET_REVIEWS_GOT_CHUNKS_AMOUNT,
-  SET_REVIEWS_LEFT_CHUNKS_AMOUNT,
   SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT,
   SET_REQUESTED_USER_SHAREABLE_ID,
   SET_CURRENT_REVIEW_GOT,
@@ -35,8 +33,6 @@ const initialState: InteractionState = {
   isProfileReviewsTabLoading: true,
   inviter: null,
   awaiter: null,
-  reviewsGotChunksAmount: 0,
-  reviewsLeftChunksAmount: 0,
   observedReviewsChunksAmount: 0,
   requestedUserShareableId: null,
   currentReviewGot: null,
@@ -103,16 +99,6 @@ export const interactionStateReducer = (
       return {
         ...state,
         awaiter: action.payload
-      };
-    case SET_REVIEWS_GOT_CHUNKS_AMOUNT:
-      return {
-        ...state,
-        reviewsGotChunksAmount: action.payload
-      };
-    case SET_REVIEWS_LEFT_CHUNKS_AMOUNT:
-      return {
-        ...state,
-        reviewsLeftChunksAmount: action.payload
       };
     case SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT:
       return {

@@ -33,7 +33,7 @@ export async function getReceivedReviewsAmount(request: Request, response: Respo
   const author = await accessors.readUserByPrivateToken(privateToken);
   const amount = await accessors.readReceivedReviewsAmount(author.shareableId);
 
-  reply(response, { result: amount });
+  reply(response, { result: +amount });
 }
 
 /**
@@ -52,5 +52,5 @@ export async function getLeftReviewsAmount(request: Request, response: Response)
   const author = await accessors.readUserByPrivateToken(privateToken);
   const amount = await accessors.readLeftReviewsAmount(author.id);
 
-  reply(response, { result: amount });
+  reply(response, { result: +amount });
 }

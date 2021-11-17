@@ -1,11 +1,13 @@
-import { IReviewCardGotData } from 'commons/types/general';
+import { IReceivedReviewData } from 'commons/types';
+
+export interface IOwnProps {}
 
 export interface IStateProps {
-  currentProfileId: string;
-  currentShareableId: string;
+  privateToken: string | null;
+  shareableId: string | null;
   isLoading: boolean;
-  reviewsGotChunksAmount: number;
-  currentReviewCardData: IReviewCardGotData | null;
+  receivedReviewsAmount: number;
+  currentReviewData: IReceivedReviewData | null;
 }
 
 export interface IDispatchProps {
@@ -13,4 +15,4 @@ export interface IDispatchProps {
   loadNthReview: (profileId: string, nthReview: number) => void;
 }
 
-export type IProps = IStateProps & IDispatchProps;
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

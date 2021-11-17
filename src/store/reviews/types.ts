@@ -1,59 +1,74 @@
-import * as generalTypes from 'commons/types/general';
+import { ICreatedReviewData, IReceivedReviewData } from 'commons/types';
 
-export const CLEAR_TASKS = 'CLEAR_TASKS';
-export const CLEAR_STRENGTHS = 'CLEAR_STRENGTHS';
-export const CLEAR_RECOMMENDATION_DATA = 'CLEAR_RECOMMENDATION';
-export const SET_TARGET_SHAREABLE_ID = 'SET_TARGET_SHAREABLE_ID';
-export const SET_TASKS = 'SET_TASKS';
-export const SET_STRENGTHS = 'SET_STRENGTHS';
-export const SET_RECOMMENDATION = 'SET_RECOMMENDATION';
-export const SET_RECOMMENDATION_MARK = 'SET_RECOMMENDATION_MARK';
+export const PUSH_ANSWER = 'PUSH_ANSWER';
+export const POP_ANSWER = 'POP_ANSWER';
+export const PUSH_MARK = 'PUSH_MARK';
+export const POP_MARK = 'POP_MARK';
+export const CLEAR_ANSWERS_AND_MARKS = 'CLEAR_ANSWERS_AND_MARKS';
+export const SET_RECEIVED_REVIEWS_AMOUNT = 'SET_RECEIVED_REVIEWS_AMOUNT';
+export const SET_LEFT_REVIEWS_AMOUNT = 'SET_LEFT_REVIEWS_AMOUNT';
+export const SET_CURRENT_RECEIVED_REVIEW = 'SET_CURRENT_RECEIVED_REVIEW';
+export const SET_CURRENT_CREATED_REVIEW = 'SET_CURRENT_CREATED_REVIEW';
 
-export type ReviewState = Omit<generalTypes.IReviewData, 'authorId'>;
-
-export interface ClearTasks {
-  type: typeof CLEAR_TASKS;
+export interface IState {
+  currentReviewTargetShareableId: string | null;
+  answers: string[];
+  marks: number[];
+  receivedReviewsAmount: number;
+  leftReviewsAmount: number;
+  currentReceivedReview: IReceivedReviewData | null;
+  currentCreatedReview: ICreatedReviewData | null;
 }
 
-export interface ClearRecommendationData {
-  type: typeof CLEAR_RECOMMENDATION_DATA;
-}
-
-export interface ClearStrengths {
-  type: typeof CLEAR_STRENGTHS;
-}
-
-export interface SetTargetShareableId {
-  type: typeof SET_TARGET_SHAREABLE_ID;
+export interface PushAnswer {
+  type: typeof PUSH_ANSWER,
   payload: string;
 }
 
-export interface SetTasks {
-  type: typeof SET_TASKS;
-  payload: string;
+export interface PopAnswer {
+  type: typeof POP_ANSWER
 }
 
-export interface SetStrengths {
-  type: typeof SET_STRENGTHS;
-  payload: string;
-}
-
-export interface SetRecommendation {
-  type: typeof SET_RECOMMENDATION;
-  payload: string;
-}
-
-export interface SetRecommendationMark {
-  type: typeof SET_RECOMMENDATION_MARK;
+export interface PushMark {
+  type: typeof PUSH_MARK,
   payload: number;
 }
 
-export type ReviewActionType =
-  | ClearTasks
-  | ClearStrengths
-  | ClearRecommendationData
-  | SetTargetShareableId
-  | SetTasks
-  | SetStrengths
-  | SetRecommendation
-  | SetRecommendationMark;
+export interface PopMark {
+  type: typeof POP_MARK
+}
+
+export interface ClearAnswersAndMarks {
+  type: typeof CLEAR_ANSWERS_AND_MARKS
+}
+
+export interface SetReceivedReviewsAmount {
+  type: typeof SET_RECEIVED_REVIEWS_AMOUNT;
+  payload: number;
+}
+
+export interface SetLeftReviewsAmount {
+  type: typeof SET_LEFT_REVIEWS_AMOUNT;
+  payload: number;
+}
+
+export interface SetCurrentReceivedReview {
+  type: typeof SET_CURRENT_RECEIVED_REVIEW,
+  payload: IReceivedReviewData
+}
+
+export interface SetCurrentCreatedReview {
+  type: typeof SET_CURRENT_CREATED_REVIEW,
+  payload: ICreatedReviewData
+}
+
+export type IAction =
+    PushAnswer
+  | PopAnswer
+  | PushMark
+  | PopMark
+  | ClearAnswersAndMarks
+  | SetReceivedReviewsAmount
+  | SetLeftReviewsAmount
+  | SetCurrentReceivedReview
+  | SetCurrentCreatedReview;

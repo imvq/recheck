@@ -1,69 +1,50 @@
-import {
-  ReviewState,
-  ReviewActionType,
-  CLEAR_TASKS,
-  CLEAR_STRENGTHS,
-  CLEAR_RECOMMENDATION_DATA,
-  SET_TARGET_SHAREABLE_ID,
-  SET_TASKS,
-  SET_STRENGTHS,
-  SET_RECOMMENDATION,
-  SET_RECOMMENDATION_MARK,
-} from './types';
+import * as types from './types';
 
-const initialState: ReviewState = {
-  targetShareableId: '',
-  tasks: '',
-  strengths: '',
-  recommendation: '',
-  recommendationMark: 0,
+const initialState: types.IState = {
+  currentReviewTargetShareableId: null,
+  answers: [],
+  marks: [],
+  receivedReviewsAmount: 0,
+  leftReviewsAmount: 0
 };
 
-export const reviewsReducer = (
-  state = initialState,
-  action: ReviewActionType
-): ReviewState => {
+export const reviewsReducer = (state = initialState, action: types.IAction): types.IState => {
   switch (action.type) {
-    case CLEAR_TASKS:
+    case types.PUSH_ANSWER:
       return {
         ...state,
-        tasks: initialState.tasks
+        answers: [...state.answers, action.payload]
       };
-    case CLEAR_STRENGTHS:
+    case types.POP_ANSWER:
       return {
         ...state,
-        strengths: initialState.strengths
+        answers: state.answers.slice(0, -1)
       };
-    case CLEAR_RECOMMENDATION_DATA:
+    case types.PUSH_MARK:
       return {
         ...state,
-        recommendation: initialState.recommendation,
-        recommendationMark: initialState.recommendationMark
+        marks: [...state.marks, action.payload]
       };
-    case SET_TARGET_SHAREABLE_ID:
+    case types.POP_MARK:
       return {
         ...state,
-        targetShareableId: action.payload
+        marks: state.marks.slice(0, -1)
       };
-    case SET_TASKS:
+    case types.CLEAR_ANSWERS_AND_MARKS:
       return {
         ...state,
-        tasks: action.payload
+        answers: [],
+        marks: []
       };
-    case SET_STRENGTHS:
+    case types.SET_RECEIVED_REVIEWS_AMOUNT:
       return {
         ...state,
-        strengths: action.payload
+        receivedReviewsAmount: action.payload
       };
-    case SET_RECOMMENDATION:
+    case types.SET_LEFT_REVIEWS_AMOUNT:
       return {
         ...state,
-        recommendation: action.payload
-      };
-    case SET_RECOMMENDATION_MARK:
-      return {
-        ...state,
-        recommendationMark: action.payload
+        leftReviewsAmount: action.payload
       };
     default:
       return state;

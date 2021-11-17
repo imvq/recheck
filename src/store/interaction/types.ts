@@ -13,13 +13,7 @@ export const SET_IS_PROFILE_HISTORY_TAB_LOADING = 'SET_IS_PROFILE_HISTORY_TAB_LO
 export const SET_IS_PROFILE_REVIEWS_TAB_LOADING = 'SET_IS_PROFILE_REVIEWS_TAB_LOADING';
 export const SET_INVITER = 'SET_INVITER';
 export const SET_AWAITER = 'SET_AWAITER';
-export const SET_REVIEWS_GOT_CHUNKS_AMOUNT = 'SET_REVIEWS_GOT_CHUNKS_AMOUNT';
-export const SET_REVIEWS_LEFT_CHUNKS_AMOUNT = 'SET_REVIEWS_LEFT_CHUNKS_AMOUNT';
-export const SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT = 'SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT';
 export const SET_REQUESTED_USER_SHAREABLE_ID = 'SET_REQUESTED_USER_SHAREABLE_ID';
-export const SET_CURRENT_REVIEW_GOT = 'SET_CURRENT_REVIEW_GOT';
-export const SET_CURRENT_REVIEW_LEFT = 'SET_CURRENT_REVIEW_LEFT';
-export const SET_CURRENT_OBSERVED_REVIEW_GOT = 'SET_CURRENT_OBSERVED_REVIEW_GOT';
 
 export interface InteractionState {
   isPageLocked: boolean;
@@ -32,14 +26,8 @@ export interface InteractionState {
   isProfileHistoryTabLoading: boolean;
   isProfileReviewsTabLoading: boolean;
   inviter: string | null;
-  awaiter: string | null,
-  reviewsGotChunksAmount: number;
-  reviewsLeftChunksAmount: number;
-  observedReviewsChunksAmount: number;
+  awaiter: string | null;
   requestedUserShareableId: string | null;
-  currentReviewGot: generalTypes.IReviewCardGotData | null;
-  currentReviewLeft: generalTypes.IReviewCardLeftData | null;
-  currentObservedReviewGot: generalTypes.IReviewCardGotData | null;
 }
 
 export interface SetIsPageLocked {
@@ -97,43 +85,13 @@ export interface SetAwaiter {
   payload: string;
 }
 
-export interface SetReviewsGotChunksAmount {
-  type: typeof SET_REVIEWS_GOT_CHUNKS_AMOUNT;
-  payload: number;
-}
-
-export interface SetReviewsLeftChunksAmount {
-  type: typeof SET_REVIEWS_LEFT_CHUNKS_AMOUNT;
-  payload: number;
-}
-
-export interface SetObservedReviewsChunksAmount {
-  type: typeof SET_OBSERVED_REVIEWS_CHUNKS_AMOUNT;
-  payload: number;
-}
-
 export interface SetRequestedUserShareableId {
   type: typeof SET_REQUESTED_USER_SHAREABLE_ID;
   payload: string | null;
 }
 
-export interface SetCurrentReviewGot {
-  type: typeof SET_CURRENT_REVIEW_GOT;
-  payload: generalTypes.IReviewCardGotData | null;
-}
-
-export interface SetCurrentReviewLeft {
-  type: typeof SET_CURRENT_REVIEW_LEFT;
-  payload: generalTypes.IReviewCardLeftData | null;
-}
-
-export interface SetCurrentObservedReviewGot {
-  type: typeof SET_CURRENT_OBSERVED_REVIEW_GOT;
-  payload: generalTypes.IReviewCardGotData | null;
-}
-
 export type InteractionStateActionType =
-  SetIsPageLocked
+    SetIsPageLocked
   | SetIsSearchPopupVisible
   | SetIsSpendFreeViewPopupVisible
   | SetIsLoginPopupVisible
@@ -144,10 +102,4 @@ export type InteractionStateActionType =
   | SetIsProfileReviewsTabLoading
   | SetInviter
   | SetAwaiter
-  | SetReviewsGotChunksAmount
-  | SetReviewsLeftChunksAmount
-  | SetObservedReviewsChunksAmount
-  | SetRequestedUserShareableId
-  | SetCurrentReviewGot
-  | SetCurrentReviewLeft
-  | SetCurrentObservedReviewGot;
+  | SetRequestedUserShareableId;

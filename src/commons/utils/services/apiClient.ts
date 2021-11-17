@@ -14,6 +14,10 @@ interface AccesstokenResponse {
   accessToken: string;
 }
 
+interface AmountResponse {
+  result: number;
+}
+
 export function exchangeLinkedInCode(authCode: string, redirectPath: string)
   : ApiPromise<AccesstokenResponse> {
   return apiInstance.post('/login/linkedin/exchange', { authCode, redirectPath });
@@ -43,12 +47,22 @@ export function resendConfirmation(privateToken: string, updatedEmail?: string)
   return apiInstance.post('/users/registration/confirming/resend', { privateToken, updatedEmail });
 }
 
+export function completeRegistration(confirmationCode: string)
+  : ApiPromise<SimpleBooleanResponse> {
+  return apiInstance.post('/users/registration/confirming/apply', { confirmationCode });
+}
+
 export function searchUserByShareableId(shareableId: string)
   : ApiPromise<commonTypes.ISearchProfileData> {
   return apiInstance.post('/search/user', { shareableId });
 }
 
-export function completeRegistration(confirmationCode: string)
-  : ApiPromise<SimpleBooleanResponse> {
-  return apiInstance.post('/users/registration/confirming/apply', { confirmationCode });
+export function getReceivedReviewsAmount(privateToken: string)
+  : ApiPromise<AmountResponse> {
+  return apiInstance.get(`/reviews/${privateToken}/received/amount`);
+}
+
+export function getLeftReviewsAmount(privateToken: string)
+  : ApiPromise<AmountResponse> {
+  return apiInstance.get(`/reviews/${privateToken}/left/amount`);
 }

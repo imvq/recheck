@@ -6,7 +6,9 @@ import * as types from 'commons/types';
 import { jumpTo } from 'commons/utils/misc';
 import { apiClient, cookieManager } from 'commons/utils/services';
 
+import * as interactionActions from './interaction/actions';
 import * as profileActions from './profile/actions';
+import * as reviewsActions from './reviews/actions';
 
 import { AppActionType } from './types';
 
@@ -63,3 +65,34 @@ function loadProfileData(profileData: AxiosResponse<types.IUserSelf>) {
 
   jumpTo('/profile');
 }
+
+export function loadAboutTabData(privateToken: string) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    apiClient.getReceivedReviewsAmount(privateToken)
+
+      .then(amountData => {
+        dispatch(reviewsActions.setReceivedReviewsAmount(amountData.data.result));
+
+        // TODO: load Nth review.
+
+        dispatch(interactionActions.setIsProfileAboutTabLoading(false));
+      })
+
+      .catch(() => {
+        dispatch(reviewsActions.setReceivedReviewsAmount(0));
+        dispatch(interactionActions.setIsProfileAboutTabLoading(false));
+      });
+  };
+}
+
+export const createReview = (reviewData: IReviewData, callback: () => void) => (
+  dispatch: Dispatch<AppActionType>
+) => {
+  apiClient.prepareReview({ ...reviewData })
+    .then(() => callback())
+    .catch(() => jumpTo('/404'));
+
+  dispatch(clearTasks());
+  dispatch(clearRecommendationData());
+  dispatch(clearStrengths());
+};
