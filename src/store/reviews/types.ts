@@ -1,5 +1,6 @@
-import { ICreatedReviewData, IReceivedReviewData } from 'commons/types';
+import { IReviewCreated, IReviewReceived } from 'commons/types';
 
+export const SET_QUESTIONS = 'SET_QUESTIONS';
 export const PUSH_ANSWER = 'PUSH_ANSWER';
 export const POP_ANSWER = 'POP_ANSWER';
 export const PUSH_MARK = 'PUSH_MARK';
@@ -12,12 +13,18 @@ export const SET_CURRENT_CREATED_REVIEW = 'SET_CURRENT_CREATED_REVIEW';
 
 export interface IState {
   currentReviewTargetShareableId: string | null;
+  questions: string[];
   answers: string[];
-  marks: number[];
+  marks: (number | null)[];
   receivedReviewsAmount: number;
   leftReviewsAmount: number;
-  currentReceivedReview: IReceivedReviewData | null;
-  currentCreatedReview: ICreatedReviewData | null;
+  currentReceivedReview: IReviewReceived | null;
+  currentCreatedReview: IReviewCreated | null;
+}
+
+export interface SetQuestions {
+  type: typeof SET_QUESTIONS,
+  payload: string[];
 }
 
 export interface PushAnswer {
@@ -31,7 +38,7 @@ export interface PopAnswer {
 
 export interface PushMark {
   type: typeof PUSH_MARK,
-  payload: number;
+  payload: number | null;
 }
 
 export interface PopMark {
@@ -54,16 +61,17 @@ export interface SetLeftReviewsAmount {
 
 export interface SetCurrentReceivedReview {
   type: typeof SET_CURRENT_RECEIVED_REVIEW,
-  payload: IReceivedReviewData
+  payload: IReviewReceived
 }
 
 export interface SetCurrentCreatedReview {
   type: typeof SET_CURRENT_CREATED_REVIEW,
-  payload: ICreatedReviewData
+  payload: IReviewCreated
 }
 
 export type IAction =
-    PushAnswer
+    SetQuestions
+  | PushAnswer
   | PopAnswer
   | PushMark
   | PopMark

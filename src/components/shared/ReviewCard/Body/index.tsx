@@ -1,21 +1,22 @@
-import * as constants from 'commons/utils/constants';
+import { memo } from 'react';
 
-import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
-export default (props: types.IProps) => {
-  const answers = misc.mapReviewToArray(props.reviewCardData);
-
+function Body(props: types.IProps) {
   return (
     <styled.Wrapper>
-      {constants.REVIEW_QESTIONS.map((question, index) => (
+      {props.reviewCardData.questions.map((question, index) => (
         <styled.EntryWrapper key={question}>
           <styled.QuestionTitle>{question}</styled.QuestionTitle>
-          <styled.Answer>{answers[index][0]}</styled.Answer>
-          <styled.Answer>{answers[index][1]}</styled.Answer>
+          <styled.Answer>{props.reviewCardData.answers[index]}</styled.Answer>
+
+          {props.reviewCardData.marks[index]
+            && <styled.Answer>{`Оценка: ${props.reviewCardData.marks[index]}`}</styled.Answer>}
         </styled.EntryWrapper>
       ))}
     </styled.Wrapper>
   );
-};
+}
+
+export default memo(Body);

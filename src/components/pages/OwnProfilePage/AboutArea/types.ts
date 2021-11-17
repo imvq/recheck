@@ -1,4 +1,4 @@
-import { IReceivedReviewData } from 'commons/types';
+import { IReviewReceived } from 'commons/types';
 
 export interface IOwnProps {}
 
@@ -7,7 +7,7 @@ export interface IStateProps {
   shareableId: string | null;
   isLoading: boolean;
   receivedReviewsAmount: number;
-  currentReviewData: IReceivedReviewData | null;
+  currentReviewData: IReviewReceived | null;
 }
 
 export interface IDispatchProps {

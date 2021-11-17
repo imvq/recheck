@@ -2,14 +2,22 @@ import * as types from './types';
 
 const initialState: types.IState = {
   currentReviewTargetShareableId: null,
+  questions: [],
   answers: [],
   marks: [],
   receivedReviewsAmount: 0,
-  leftReviewsAmount: 0
+  leftReviewsAmount: 0,
+  currentReceivedReview: null,
+  currentCreatedReview: null
 };
 
 export const reviewsReducer = (state = initialState, action: types.IAction): types.IState => {
   switch (action.type) {
+    case types.SET_QUESTIONS:
+      return {
+        ...state,
+        questions: action.payload
+      };
     case types.PUSH_ANSWER:
       return {
         ...state,
@@ -45,6 +53,16 @@ export const reviewsReducer = (state = initialState, action: types.IAction): typ
       return {
         ...state,
         leftReviewsAmount: action.payload
+      };
+    case types.SET_CURRENT_RECEIVED_REVIEW:
+      return {
+        ...state,
+        currentReceivedReview: action.payload
+      };
+    case types.SET_CURRENT_CREATED_REVIEW:
+      return {
+        ...state,
+        currentCreatedReview: action.payload
       };
     default:
       return state;

@@ -12,13 +12,6 @@ export interface ICompany extends ICompanyBasic {
   logoUrl: string | null;
 }
 
-export interface ICreatedReviewData {
-  privateToken: string;
-  targetShareableId: string;
-  answers: string[];
-  marks: number[];
-}
-
 export interface IRetrievedProfileData {
   registered: boolean;
   confirmed: boolean;
@@ -35,7 +28,27 @@ export interface IRetrievedProfileData {
   currentCompanyName?: string;
 }
 
-export interface IReceivedReviewData {
+export interface IReviewCreated {
+  privateToken: string;
+  targetShareableId: string;
+  questions: string[];
+  answers: string[];
+  marks: (number | null)[];
+}
+
+export interface IReviewParsed {
+  targetShareableId: string;
+  targetPhotoUrl: string;
+  targetName: string;
+  targetPosition: string;
+  targetCompanyName: string;
+  date: string;
+  questions: string[];
+  answers: string[];
+  marks: (number | null)[];
+}
+
+export interface IReviewReceived {
   targetShareableId: string;
   content: string;
 }

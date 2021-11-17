@@ -1,8 +1,12 @@
-import { IReviewCardGotData, IReviewCardLeftData } from 'commons/types/general';
+import { IReviewParsed } from 'commons/types';
 
 export interface IOwnProps {
-  reviewCardData: IReviewCardGotData | IReviewCardLeftData;
+  reviewCardData: IReviewParsed;
   showTarget?: boolean;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {}
+
+export interface IDispatchProps {}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;
