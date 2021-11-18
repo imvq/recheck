@@ -4,7 +4,14 @@ const initialState: types.IState = {
   isAuthorized: null,
   privateToken: null,
   shareableId: null,
-  socialId: null
+  socialId: null,
+  inviterShareableId: null,
+  fullName: '',
+  email: null,
+  photoUrl: null,
+  currentPosition: null,
+  company: null,
+  currentWorkStartDay: null
 };
 
 export function profileReducer(state = initialState, action: types.IAction): types.IState {
@@ -28,6 +35,41 @@ export function profileReducer(state = initialState, action: types.IAction): typ
       return {
         ...state,
         socialId: action.payload
+      };
+    case types.SET_INVITER_SHAREABLE_ID:
+      return {
+        ...state,
+        inviterShareableId: action.payload
+      };
+    case types.SET_FULL_NAME:
+      return {
+        ...state,
+        fullName: action.payload
+      };
+    case types.SET_EMAIL:
+      return {
+        ...state,
+        email: action.payload
+      };
+    case types.SET_PHOTO_URL:
+      return {
+        ...state,
+        photoUrl: action.payload
+      };
+    case types.SET_CURRENT_POSITION:
+      return {
+        ...state,
+        currentPosition: action.payload
+      };
+    case types.SET_CURRENT_COMPANY:
+      return {
+        ...state,
+        company: action.payload
+      };
+    case types.SET_CURRENT_WORK_START_PERIOD:
+      return {
+        ...state,
+        currentWorkStartDay: action.payload
       };
     default: return state;
   }

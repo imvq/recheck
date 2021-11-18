@@ -1,19 +1,6 @@
-import {
-  SearchState,
-  SearchActionType,
-  CLEAR_COLLEAGUES,
-  SET_COLLEAGUES,
-  SET_QUICK_SEARCH_MATCHED_COMPANIES,
-  SET_QUICK_SEARCH_MATCHED_USERS,
-  SET_RECOMMENDATIONS,
-  APPEND_RECOMMENDATIONS,
-  SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS,
-  SET_SEARCH_TEXT,
-  SET_CURRENT_USER_SEARCH_RESULTS,
-  SET_CURRENT_OBSERVED_USER
-} from './types';
+import * as types from './types';
 
-const initialState: SearchState = {
+const initialState: types.SearchState = {
   colleaguesState: {
     colleagues: [],
     areLoaded: false
@@ -27,12 +14,9 @@ const initialState: SearchState = {
   currentObservedUser: null
 };
 
-export function searchReducer(
-  state = initialState,
-  action: SearchActionType
-): SearchState {
+export function searchReducer(state = initialState, action: types.IAction): types.SearchState {
   switch (action.type) {
-    case CLEAR_COLLEAGUES:
+    case types.CLEAR_COLLEAGUES:
       return {
         ...state,
         colleaguesState: {
@@ -40,7 +24,7 @@ export function searchReducer(
           areLoaded: false
         }
       };
-    case SET_COLLEAGUES:
+    case types.SET_COLLEAGUES:
       return {
         ...state,
         colleaguesState: {
@@ -48,22 +32,22 @@ export function searchReducer(
           areLoaded: true
         }
       };
-    case SET_QUICK_SEARCH_MATCHED_COMPANIES:
+    case types.SET_QUICK_SEARCH_MATCHED_COMPANIES:
       return {
         ...state,
         quickSearchMatchedCompanies: action.payload
       };
-    case SET_QUICK_SEARCH_MATCHED_USERS:
+    case types.SET_QUICK_SEARCH_MATCHED_USERS:
       return {
         ...state,
         quickSearchMatchedUsers: action.payload
       };
-    case SET_RECOMMENDATIONS:
+    case types.SET_RECOMMENDATIONS:
       return {
         ...state,
         recommendations: action.payload
       };
-    case APPEND_RECOMMENDATIONS: {
+    case types.APPEND_RECOMMENDATIONS: {
       const updatedRecommendations = [
         ...state.recommendations,
         ...action.payload
@@ -74,22 +58,22 @@ export function searchReducer(
         recommendations: updatedRecommendations
       };
     }
-    case SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS:
+    case types.SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS:
       return {
         ...state,
         recommendedCompaniesShownMembers: action.payload
       };
-    case SET_SEARCH_TEXT:
+    case types.SET_SEARCH_TEXT:
       return {
         ...state,
         searchText: action.payload
       };
-    case SET_CURRENT_USER_SEARCH_RESULTS:
+    case types.SET_CURRENT_USER_SEARCH_RESULTS:
       return {
         ...state,
         userSearchResults: action.payload
       };
-    case SET_CURRENT_OBSERVED_USER:
+    case types.SET_CURRENT_OBSERVED_USER:
       return {
         ...state,
         currentObservedUser: action.payload

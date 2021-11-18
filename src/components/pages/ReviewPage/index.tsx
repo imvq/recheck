@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { ISearchProfileData } from 'commons/types';
+import { ISearchedProfile } from 'commons/types';
 import { jumpBack, jumpTo } from 'commons/utils/misc';
 import { apiClient, cookieManager } from 'commons/utils/services';
 import {
@@ -82,7 +82,7 @@ function saveReviewToCookies(review: any) {
 function ReviewPage(props: types.IProps) {
   const { targetShareableId } = useParams<{ targetShareableId: string }>();
 
-  const [observedUser, setObservedUser] = useState<ISearchProfileData>();
+  const [observedUser, setObservedUser] = useState<ISearchedProfile>();
   const [step, setStep] = useState(0);
 
   const proceed = () => setStep(step + 1);

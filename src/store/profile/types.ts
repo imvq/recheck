@@ -2,7 +2,7 @@ export const SET_IS_AUTHORIZED = 'SET_IS_AUTHORIZED';
 export const SET_PRIVATE_TOKEN = 'SET_PRIVATE_TOKEN';
 export const SET_SHAREABLE_ID = 'SET_SHAREABLE_ID';
 export const SET_SOCIAL_ID = 'SET_SOCIAL_ID';
-export const SET_INVITER_ID = 'SET_INVITER_ID';
+export const SET_INVITER_SHAREABLE_ID = 'SET_INVITER_SHAREABLE_ID';
 export const SET_FULL_NAME = 'SET_FULL_NAME';
 export const SET_EMAIL = 'SET_EMAIL';
 export const SET_PHOTO_URL = 'SET_PHOTO_URL';
@@ -15,7 +15,7 @@ export interface IState {
   privateToken: string | null;
   shareableId: string | null;
   socialId: string | null;
-  inviterId: string | null;
+  inviterShareableId: string | null;
   fullName: string;
   email: string | null;
   photoUrl: string | null;
@@ -44,8 +44,8 @@ interface ISetSocialId {
   payload: string;
 }
 
-interface ISetInviterId {
-  type: typeof SET_INVITER_ID;
+interface ISetInviterShareableId {
+  type: typeof SET_INVITER_SHAREABLE_ID;
   payload: string;
 }
 
@@ -80,11 +80,11 @@ interface ISetWorkStartPeriod {
 }
 
 export type IAction =
-  ISetIsAuthorized
+    ISetIsAuthorized
   | ISetPrivateToken
   | ISetShareableId
   | ISetSocialId
-  | ISetInviterId
+  | ISetInviterShareableId
   | ISetFullName
   | ISetEmail
   | ISetPhotoUrl

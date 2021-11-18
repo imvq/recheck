@@ -1,7 +1,7 @@
-import { ISearchProfileData } from 'commons/types';
+import { ISearchedProfile } from 'commons/types';
 
 export interface IOwnProps {
-  profileInfo: ISearchProfileData;
+  profileInfo: ISearchedProfile;
   isSolid?: boolean;
   noButtons?: boolean;
 }

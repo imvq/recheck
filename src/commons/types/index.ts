@@ -12,6 +12,12 @@ export interface ICompany extends ICompanyBasic {
   logoUrl: string | null;
 }
 
+export interface ICompanyWithMembers extends ICompany {
+  members: ISearchedProfileBasic[];
+}
+
+export type IInputEvent = ChangeEvent<HTMLInputElement>;
+
 export interface IRetrievedProfileData {
   registered: boolean;
   confirmed: boolean;
@@ -61,11 +67,14 @@ export interface IReviewReceived {
   content: string;
 }
 
-export interface ISearchProfileData {
+export interface ISearchedProfileBasic {
   fullName: string;
   shareableId: string;
   photoUrl: string;
   currentPosition: string;
+}
+
+export interface ISearchedProfile extends ISearchedProfileBasic {
   currentCompanyId: string;
   currentCompanyName: string;
 }
@@ -102,5 +111,3 @@ export interface IUserPreparationData {
   currentWorkYearFrom: number;
   currentWorkMonthFrom: number;
 }
-
-export type IInputEvent = ChangeEvent<HTMLInputElement>;

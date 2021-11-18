@@ -1,12 +1,10 @@
-import { AuthActionType } from './auth/types';
-import { InteractionStateActionType } from './interaction/types';
-import { IAction as IProfileActionType } from './profile/types';
-import { IAction } from './reviews/types';
-import { SearchActionType } from './search/types';
+import { IAction as IInteractionActions } from './interaction/types';
+import { IAction as IProfileActions } from './profile/types';
+import { IAction as IReviewsActions } from './reviews/types';
+import { IAction as ISearchAction } from './search/types';
 
 export type AppActionType =
-   AuthActionType
-    | InteractionStateActionType
-    | IProfileActionType
-    | IAction
-    | SearchActionType;
+    IInteractionActions
+  | IProfileActions
+  | IReviewsActions
+  | ISearchAction;

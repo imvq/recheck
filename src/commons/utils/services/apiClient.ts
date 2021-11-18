@@ -53,7 +53,7 @@ export function completeRegistration(confirmationCode: string)
 }
 
 export function searchUserByShareableId(shareableId: string)
-  : ApiPromise<commonTypes.ISearchProfileData> {
+  : ApiPromise<commonTypes.ISearchedProfile> {
   return apiInstance.post('/search/user', { shareableId });
 }
 

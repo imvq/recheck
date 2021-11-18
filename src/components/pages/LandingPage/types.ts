@@ -1,11 +1,12 @@
+export interface IOwnProps {}
+
 export interface IStateProps {
   isAuthorized: boolean | null;
 }
 
 export interface IDispatchProps {
   setIsLoginPopupVisible(flag: boolean): void;
-  setInviter(referral: string): void;
-  setAwaiter(awaiter: string): void;
+  setInviterShareableId(inviter: string): void;
 }
 
-export type IProps = IStateProps & IDispatchProps;
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

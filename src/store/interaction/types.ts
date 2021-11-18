@@ -1,5 +1,3 @@
-import * as generalTypes from 'commons/types/general';
-
 import { MainToolbarEntry } from 'commons/types/unions';
 
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
@@ -11,11 +9,9 @@ export const SET_IS_OBSERVED_REVIEWS_PAGE_LOADING = 'SET_IS_OBSERVED_REVIEWS_PAG
 export const SET_IS_PROFILE_ABOUT_TAB_LOADING = 'SET_IS_PROFILE_ABOUT_TAB_LOADING';
 export const SET_IS_PROFILE_HISTORY_TAB_LOADING = 'SET_IS_PROFILE_HISTORY_TAB_LOADING';
 export const SET_IS_PROFILE_REVIEWS_TAB_LOADING = 'SET_IS_PROFILE_REVIEWS_TAB_LOADING';
-export const SET_INVITER = 'SET_INVITER';
-export const SET_AWAITER = 'SET_AWAITER';
 export const SET_REQUESTED_USER_SHAREABLE_ID = 'SET_REQUESTED_USER_SHAREABLE_ID';
 
-export interface InteractionState {
+export interface IState {
   isPageLocked: boolean;
   isSearchPopupVisible: boolean;
   isSpendFreeViewPopupVisible: boolean;
@@ -25,8 +21,6 @@ export interface InteractionState {
   isProfileAboutTabLoading: boolean;
   isProfileHistoryTabLoading: boolean;
   isProfileReviewsTabLoading: boolean;
-  inviter: string | null;
-  awaiter: string | null;
   requestedUserShareableId: string | null;
 }
 
@@ -75,22 +69,12 @@ export interface SetIsProfileReviewsTabLoading {
   payload: boolean;
 }
 
-export interface SetInviter {
-  type: typeof SET_INVITER;
-  payload: string;
-}
-
-export interface SetAwaiter {
-  type: typeof SET_AWAITER;
-  payload: string;
-}
-
 export interface SetRequestedUserShareableId {
   type: typeof SET_REQUESTED_USER_SHAREABLE_ID;
   payload: string | null;
 }
 
-export type InteractionStateActionType =
+export type IAction =
     SetIsPageLocked
   | SetIsSearchPopupVisible
   | SetIsSpendFreeViewPopupVisible
@@ -100,6 +84,4 @@ export type InteractionStateActionType =
   | SetIsProfileAboutTabLoading
   | SetIsProfileHistoryTabLoading
   | SetIsProfileReviewsTabLoading
-  | SetInviter
-  | SetAwaiter
   | SetRequestedUserShareableId;

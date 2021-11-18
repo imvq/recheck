@@ -1,4 +1,4 @@
-import * as generalTypes from 'commons/types/general';
+import { ICompany, ICompanyWithMembers, ISearchedProfile } from 'commons/types';
 
 export const CLEAR_COLLEAGUES = 'CLEAR_COLLEAGUES';
 export const SET_COLLEAGUES = 'SET_COLLEAGUES';
@@ -13,16 +13,16 @@ export const SET_CURRENT_OBSERVED_USER = 'SET_CURRENT_OBSERVED_USER';
 
 export interface SearchState {
   colleaguesState: {
-    colleagues: generalTypes.ISearchProfileInfo[];
+    colleagues: ISearchedProfile[];
     areLoaded: boolean;
   }
-  quickSearchMatchedCompanies: generalTypes.ICompanyReduced[];
-  quickSearchMatchedUsers: generalTypes.ISearchProfileInfo[];
-  recommendations: generalTypes.ICompany[];
-  recommendedCompaniesShownMembers: generalTypes.ISearchProfileInfo[];
+  quickSearchMatchedCompanies: ICompany[];
+  quickSearchMatchedUsers: ISearchedProfile[];
+  recommendations: ICompanyWithMembers[];
+  recommendedCompaniesShownMembers: ISearchedProfile[];
   searchText: string;
-  userSearchResults: generalTypes.ISearchProfileInfo[];
-  currentObservedUser: generalTypes.ISearchProfileInfo | null;
+  userSearchResults: ISearchedProfile[];
+  currentObservedUser: ISearchedProfile | null;
 }
 
 export interface ClearColleagues {
@@ -31,32 +31,32 @@ export interface ClearColleagues {
 
 export interface SetColleagues {
   type: typeof SET_COLLEAGUES;
-  payload: generalTypes.ISearchProfileInfo[];
+  payload: ISearchedProfile[];
 }
 
 export interface SetQuickSearchMatchedCompanies {
   type: typeof SET_QUICK_SEARCH_MATCHED_COMPANIES;
-  payload: generalTypes.ICompanyReduced[];
+  payload: ICompany[];
 }
 
 export interface SetQuickSearchMatchedUsers {
   type: typeof SET_QUICK_SEARCH_MATCHED_USERS;
-  payload: generalTypes.ISearchProfileInfo[];
+  payload: ISearchedProfile[];
 }
 
 export interface SetRecommendations {
   type: typeof SET_RECOMMENDATIONS;
-  payload: generalTypes.ICompany[];
+  payload: ICompanyWithMembers[];
 }
 
 export interface AppendRecommendations {
   type: typeof APPEND_RECOMMENDATIONS;
-  payload: generalTypes.ICompany[];
+  payload: ICompanyWithMembers[];
 }
 
 export interface SetRecommendedCompaniesShownMembers {
   type: typeof SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS;
-  payload: generalTypes.ISearchProfileInfo[];
+  payload: ISearchedProfile[];
 }
 
 export interface SetSearchText {
@@ -66,15 +66,15 @@ export interface SetSearchText {
 
 export interface SetCurrentUserSearchResults {
   type: typeof SET_CURRENT_USER_SEARCH_RESULTS;
-  payload: generalTypes.ISearchProfileInfo[];
+  payload: ISearchedProfile[];
 }
 
 export interface SetCurrentObservedUser {
   type: typeof SET_CURRENT_OBSERVED_USER;
-  payload: generalTypes.ISearchProfileInfo;
+  payload: ISearchedProfile;
 }
 
-export type SearchActionType =
+export type IAction =
     ClearColleagues
   | SetColleagues
   | SetQuickSearchMatchedCompanies

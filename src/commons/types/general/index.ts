@@ -1,5 +1,5 @@
-import { AxiosResponse } from 'axios';
 import { ChangeEvent } from 'react';
+import { AxiosResponse } from 'axios';
 
 import { IReviewCardCommonData } from './basic';
 

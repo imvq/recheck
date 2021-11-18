@@ -6,7 +6,7 @@ import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 import { AppState, loadObservedReviewsData, loadTargetNthReviewGot, setIsObservedPageLoading, setPageUnlocked } from 'store';
 
-import { ISearchProfileData } from 'commons/types';
+import { ISearchedProfile } from 'commons/types';
 
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
@@ -46,7 +46,7 @@ const ContentEmpty = (
 function ObservedProfilePage(props: types.IProps) {
   const { targetShareableId } = useParams<{ targetShareableId: string }>();
 
-  const [observedUser, setObservedUser] = useState<ISearchProfileData>();
+  const [observedUser, setObservedUser] = useState<ISearchedProfile>();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

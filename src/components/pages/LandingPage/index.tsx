@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { jumpTo, useQuery } from 'commons/utils/misc';
-import { AppState, setIsLoginPopupVisible, setInviter, setAwaiter } from 'store';
+import { useQuery } from 'commons/utils/misc';
+import { AppState, setIsLoginPopupVisible, setInviterShareableId } from 'store';
 
 import AuthPopupManager from 'components/shared/AuthPopupManager';
 import CookiePopup from 'components/shared/CookiePopup';
@@ -23,8 +23,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 
 const mapDispatchToProps: types.IDispatchProps = {
   setIsLoginPopupVisible,
-  setInviter,
-  setAwaiter
+  setInviterShareableId
 };
 
 /**
@@ -33,25 +32,15 @@ const mapDispatchToProps: types.IDispatchProps = {
 const LandingPage = (props: types.IProps) => {
   const query = useQuery();
   const inviter = query.get('inviter');
-  const awaiter = query.get('awaiter');
 
   if (inviter) {
-    props.setInviter(inviter);
-  }
-
-  if (awaiter) {
-    props.setAwaiter(awaiter);
+    props.setInviterShareableId(inviter);
   }
 
   useEffect(() => {
     // props.isAuthorized can be null.
     if (inviter && props.isAuthorized === false) {
       props.setIsLoginPopupVisible(true);
-      return;
-    }
-
-    if (awaiter) {
-      jumpTo('/review/', awaiter);
     }
   }, [props.isAuthorized]);
 
