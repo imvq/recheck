@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 
 import * as primitive from './primitive';
 
+// Search.
+
 export const getQuickSearchMatchedUsersWithoutSelf = createSelector(
   [primitive.getCurrentShareableId, primitive.getQuickSearchMatchedUsers],
   (selfShareableId, matchedUsers) => {
@@ -20,5 +22,20 @@ export const getUserSearchResultsWithoutSelf = createSelector(
   [primitive.getCurrentShareableId, primitive.getUserSearchResults],
   (selfShareableId, searchResults) => {
     return searchResults.filter(user => user.shareableId !== selfShareableId);
+  }
+);
+
+// Reviews.
+
+export const getUntargetedCreatedReview = createSelector(
+  [
+    primitive.getCurrentPrivateToken,
+    primitive.getCreatedReviewQuestions,
+    primitive.getCreatedReviewAnswers,
+    primitive.getCreatedReviewMarks
+  ],
+  (privateToken, questions, answers, marks) => {
+    // Private token is guaranteed to be defined when the selector is used.
+    return { privateToken: privateToken || '', questions, answers, marks };
   }
 );

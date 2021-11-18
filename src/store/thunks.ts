@@ -14,8 +14,6 @@ import { AppActionType } from './types';
 
 export async function updateAuthorizationStatus() {
   return (dispatch: Dispatch<AppActionType>) => {
-    // If we have a saved access token then we are logged in with a social media.
-    // In that case we can try to retrieve profile info from the server.
     if (cookieManager.get('accessToken')) {
       apiClient.retrieveProfile()
         .then(profileData => loadProfileData(profileData))
@@ -85,14 +83,23 @@ export function loadAboutTabData(privateToken: string) {
   };
 }
 
-export const createReview = (reviewData: IReviewData, callback: () => void) => (
-  dispatch: Dispatch<AppActionType>
-) => {
-  apiClient.prepareReview({ ...reviewData })
-    .then(() => callback())
-    .catch(() => jumpTo('/404'));
+export function createReview(
+  privateToken: string,
+  targetShareableId: string,
+  reviewData: types.IReviewCreated,
+  callback?: () => void
+) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    const content = JSON.stringify({
+      questions: reviewData.questions,
+      answers: reviewData.answers,
+      marks: reviewData.marks
+    });
 
-  dispatch(clearTasks());
-  dispatch(clearRecommendationData());
-  dispatch(clearStrengths());
-};
+    apiClient.createReview(privateToken, targetShareableId, content)
+      .then(callback)
+      .catch(() => jumpTo('/404'));
+
+    dispatch(reviewsActions.clearAnswersAndMarks());
+  };
+}

@@ -30,10 +30,18 @@ export interface IRetrievedProfileData {
 
 export interface IReviewCreated {
   privateToken: string;
-  targetShareableId: string;
   questions: string[];
   answers: string[];
   marks: (number | null)[];
+}
+
+export interface IReviewCreator {
+  (
+    privateToken: string,
+    targetShareableId: string,
+    reviewData: IReviewCreated,
+    callback?: () => void
+  ): void;
 }
 
 export interface IReviewParsed {

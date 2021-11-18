@@ -7,12 +7,16 @@ const initialState: types.IState = {
   marks: [],
   receivedReviewsAmount: 0,
   leftReviewsAmount: 0,
-  currentReceivedReview: null,
-  currentCreatedReview: null
+  currentReceivedReview: null
 };
 
 export const reviewsReducer = (state = initialState, action: types.IAction): types.IState => {
   switch (action.type) {
+    case types.SET_CURRENT_REVIEW_TARGET_SHAREABLE_ID:
+      return {
+        ...state,
+        currentReviewTargetShareableId: action.payload
+      };
     case types.SET_QUESTIONS:
       return {
         ...state,
@@ -58,11 +62,6 @@ export const reviewsReducer = (state = initialState, action: types.IAction): typ
       return {
         ...state,
         currentReceivedReview: action.payload
-      };
-    case types.SET_CURRENT_CREATED_REVIEW:
-      return {
-        ...state,
-        currentCreatedReview: action.payload
       };
     default:
       return state;

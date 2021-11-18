@@ -1,5 +1,10 @@
 import * as types from './types';
 
+export const setCurrentReviewTargetShareableId = (shareableId: string): types.IAction => ({
+  type: types.SET_CURRENT_REVIEW_TARGET_SHAREABLE_ID,
+  payload: shareableId
+});
+
 export const setQuestions = (questions: string[]): types.IAction => ({
   type: types.SET_QUESTIONS,
   payload: questions

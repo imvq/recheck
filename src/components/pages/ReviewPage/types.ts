@@ -1,20 +1,23 @@
-import { IReviewData } from 'commons/types/general';
+import { IReviewCreated, IReviewCreator } from 'commons/types';
 import { MainToolbarEntry } from 'commons/types/unions';
+
+export interface IOwnProps {}
 
 export interface IStateProps {
   isAuthorized: boolean | null;
+  isPageLocked: boolean;
   privateToken: string | null;
   requestedUserShareableId: string | null;
-  reviewData: Omit<IReviewData, 'authorId'>;
+  reviewData: Omit<IReviewCreated, 'targetShareableId'>;
 }
 
 export interface IDispatchProps {
   setCurrentMainToolbarEntry(entry: MainToolbarEntry): void;
-  createReview(reviewData: IReviewData, callback: () => void): void;
+  setCurrentReviewTargetShareableId(shareableId: string): void;
+  createReview: IReviewCreator;
   setIsLoginPopupVisible(flag: boolean): void;
-  setTargetShareableId(id: string): void;
   lockPage(): void;
   unlockPage(): void;
 }
 
-export type IProps = IStateProps & IDispatchProps;
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

@@ -38,7 +38,9 @@ function PageAccessGuard(props: types.IProps) {
       window.location.replace(window.location.origin);
     }
 
-    props.setPageUnlocked();
+    if (!props.preventDefaultUnlock) {
+      props.setPageUnlocked();
+    }
   }, [props.isAuthorized]);
 
   return (

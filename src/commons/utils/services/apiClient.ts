@@ -66,3 +66,8 @@ export function getLeftReviewsAmount(privateToken: string)
   : ApiPromise<AmountResponse> {
   return apiInstance.get(`/reviews/${privateToken}/left/amount`);
 }
+
+export function createReview(privateToken: string, targetShareableId: string, content: string)
+  : ApiPromise<SimpleBooleanResponse> {
+  return apiInstance.post('/reviews/create', { privateToken, targetShareableId, content });
+}

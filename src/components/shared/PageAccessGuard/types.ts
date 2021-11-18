@@ -4,6 +4,7 @@ export interface IOwnProps {
   children?: ReactNode;
   hideContentOnLock?: boolean;
   forAuthorizedUsersOnly?: boolean;
+  preventDefaultUnlock?: boolean;
 }
 
 export interface IStateProps {

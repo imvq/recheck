@@ -7,13 +7,14 @@ import { jumpBack, jumpTo } from 'commons/utils/misc';
 import { apiClient, cookieManager } from 'commons/utils/services';
 import {
   AppState,
-  createReview,
   setIsLoginPopupVisible,
   setCurrentMainToolbarEntry,
+  setCurrentReviewTargetShareableId,
   setPageLocked,
-  setPageUnlocked,
-  setTargetShareableId
+  setPageUnlocked
 } from 'store';
+import { getUntargetedCreatedReview } from 'store/selectors';
+import { createReview } from 'store/thunks';
 
 import AuthPopupManager from 'components/shared/AuthPopupManager';
 import ProfileHead from 'components/shared/ProfileHead';
@@ -30,16 +31,17 @@ import * as styled from './styled';
 
 const mapSateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.profile.isAuthorized,
+  isPageLocked: store.interaction.isPageLocked,
   privateToken: store.profile.privateToken,
   requestedUserShareableId: store.interaction.requestedUserShareableId,
-  reviewData: { ...store.reviews }
+  reviewData: getUntargetedCreatedReview(store)
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
   createReview,
   setIsLoginPopupVisible,
   setCurrentMainToolbarEntry,
-  setTargetShareableId,
+  setCurrentReviewTargetShareableId,
   lockPage: setPageLocked,
   unlockPage: setPageUnlocked
 };
@@ -59,7 +61,14 @@ const BoxStepC = ComponentBoxWithMark(
   boxWithMarkMapping.mapStepCDispatchToProps
 );
 
-const jumpToProfile = () => jumpTo('/profile');
+function postRedirect(requestedUserShareableId: string | null) {
+  if (requestedUserShareableId) {
+    jumpTo('/profile/observe/', requestedUserShareableId);
+    return;
+  }
+
+  jumpTo('/profile');
+}
 
 function saveReviewToCookies(review: any) {
   const expires = new Date();
@@ -80,43 +89,51 @@ function ReviewPage(props: types.IProps) {
 
   const comeback = () => setStep(step - 1);
 
+  // We must check if there is a user with provided shareable ID.
+  // If not, then we must redirect to 404 page since there's no one to review.
   useEffect(() => {
     apiClient.searchUserByShareableId(targetShareableId)
       .then(searchResult => {
         setObservedUser(searchResult.data);
-        props.setTargetShareableId(searchResult.data.shareableId);
+        props.setCurrentReviewTargetShareableId(searchResult.data.shareableId);
       })
-      .catch(() => jumpTo('/404'))
-      .finally(() => props.unlockPage());
+      .catch(() => {
+        jumpTo('/404');
+        props.unlockPage();
+      });
   }, []);
 
+  // There are some conditions to review someone:
+  // 1) the reviewer must be registered and confirmed;
+  // 2) if the reviewer is registered and confirmed
+  //    2.1) reviewer and reviewed person must be connected to each other;
+  //    2.2) the review must not exist yet;
+  // 3) if the reviewer is not signed in, authorization can be deferred
+  //    till the review is saved.
   useEffect(() => {
-    // Do nothing until we get our user's profile data.
-    if (!props.isAuthorized) {
+    if (props.isAuthorized === null) {
+      // eslint-disable-next-line
       return;
     }
 
-    props.lockPage();
+    if (!props.isAuthorized) {
+      props.unlockPage();
+    }
 
     // TODO: check if the target is connected.
-    // apiClient.checkIsTargetConnected({
-    //   askerProfileId: props.currentProfileInfo.currentId,
-    //   targetShareableId
-    // })
-    //   .then(connectionData => {
-    //     if (!connectionData.data.success) {
-    //       jumpTo('/404');
-    //     }
-    //   })
-    //   .catch(() => jumpTo('/404'));
-  }, []);
+  }, [props.isAuthorized]);
 
   function finalize() {
+    // If an uthorized user has not been redirected yet (with PageAccessGuard),
+    // that means it is registered and confirmed,
+    // therefore, the conditions of the second scenario (look at the first useEffect)
+    // are satisfied.
     if (props.isAuthorized) {
       props.createReview(
         props.privateToken as string,
+        targetShareableId,
         props.reviewData,
-        () => jumpTo('/profile/observe/', props.requestedUserShareableId as string)
+        () => postRedirect(props.requestedUserShareableId)
       );
     } else {
       saveReviewToCookies(props.reviewData);
@@ -136,14 +153,14 @@ function ReviewPage(props: types.IProps) {
     </BoxStepC>
   ];
 
-  return (
+  const GuardedContent = (
     <styled.Wrapper>
       <styled.AdaptedHeader />
       <styled.ContentWrapper>
         {observedUser && (
-        <styled.ProfileHeadWrapper>
-          <ProfileHead profileInfo={observedUser} isSolid noButtons />
-        </styled.ProfileHeadWrapper>
+          <styled.ProfileHeadWrapper>
+            <ProfileHead profileInfo={observedUser} isSolid noButtons />
+          </styled.ProfileHeadWrapper>
         )}
 
         {boxes[step]}
@@ -153,6 +170,8 @@ function ReviewPage(props: types.IProps) {
       <AuthPopupManager />
     </styled.Wrapper>
   );
+
+  return props.isPageLocked ? null : GuardedContent;
 }
 
 export default connect(mapSateToProps, mapDispatchToProps)(ReviewPage);

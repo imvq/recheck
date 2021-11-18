@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 const LandingPage = lazy(() => import('components/pages/LandingPage'));
 const ObservedProfilePage = lazy(() => import('components/pages/ObservedProfilePage'));
 const OwnProfilePage = lazy(() => import('components/pages/OwnProfilePage'));
-const PrivacyPllicyPage = lazy(() => import('components/pages/PrivacyPolicyPage'));
+const PrivacyPolicyPage = lazy(() => import('components/pages/PrivacyPolicyPage'));
 const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
 const ReviewPage = lazy(() => import('components/pages/ReviewPage'));
 const SearchPage = lazy(() => import('components/pages/SearchPage'));
@@ -49,17 +49,14 @@ export default () => (
           </Route>
 
           {/* Page to complete user's registration. User UUID needed. */}
-          {/* Users are free to be unathorized but in that case they will be */}
-          {/* redirected to the landing page. */}
+          {/* Users are free to be unathorized because confirmation link is private. */}
           <Route exact path='/register/complete/:uuid'>
-            <PageAccessGuard>
-              <UserConfirmationPage />
-            </PageAccessGuard>
+            <UserConfirmationPage />
           </Route>
 
-          {/* Provacy Policy needed for legitimate usage of OAuth. */}
+          {/* Provacy Policy needed to legitimate usage of OAuth. */}
           <Route exact path='/privacy-policy'>
-            <PrivacyPllicyPage />
+            <PrivacyPolicyPage />
           </Route>
 
           {/* Own profile page. */}
@@ -80,8 +77,8 @@ export default () => (
           </Route>
 
           {/* Review page. Used to add new reviews. */}
-          <Route exact path='/review/:targetShareableId'>
-            <PageAccessGuard hideContentOnLock>
+          <Route exact path='/review/create/:targetShareableId'>
+            <PageAccessGuard hideContentOnLock preventDefaultUnlock>
               <ReviewPage />
             </PageAccessGuard>
           </Route>

@@ -50,6 +50,15 @@ export async function createNameTokenBinding(userId: string, tokenId: string) {
   }
 }
 
+export async function createReview(authorId: string, targetShareableId: string, content: string) {
+  try {
+    const accessor = sql('./sql/create/review.sql');
+    return database.one(accessor, { authorId, targetShareableId, content });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
 export async function readEmail(email: string) {
   try {
     const accessor = sql('./sql/read/email.sql');
@@ -135,6 +144,15 @@ export async function readReceivedReviewsAmount(targetShareableId: string) {
   try {
     const accessor = sql('./sql/read/reviewsReceivedAmount.sql');
     return database.one(accessor, { targetShareableId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readReview(privateToken: string, targetShareableId: string) {
+  try {
+    const accessor = sql('./sql/read/review.sql');
+    return database.oneOrNone(accessor, { privateToken, targetShareableId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
   }

@@ -1,20 +1,34 @@
 import { Request, Response } from 'express';
 
 import * as accessors from '@business/database/accessors';
+import * as errors from '@business/errors';
 
 import { assertBodyData, reply } from '@business/commons';
 
-export async function prepareReview(request: Request, response: Response) {
+/**
+ * Creating a review.
+ * One user can create one review for another one user.
+ */
+export async function createReview(request: Request, response: Response) {
   interface IBodyParams {
     privateToken: string;
     targetShareableId: string;
-    reviewContent: string;
+    content: string;
   }
 
-  const { privateToken, targetShareableId, reviewContent }: IBodyParams = request.body;
-  assertBodyData(privateToken, targetShareableId, reviewContent);
+  const { privateToken, targetShareableId, content }: IBodyParams = request.body;
+  assertBodyData(privateToken, targetShareableId, content);
 
-  // TODO: create review.
+  const author = await accessors.readUserByPrivateToken(privateToken);
+  const existingReview = await accessors.readReview(privateToken, targetShareableId);
+
+  if (existingReview) {
+    throw new errors.ConflictError('The review already exists');
+  }
+
+  await accessors.createReview(author.id, targetShareableId, content);
+
+  reply(response);
 }
 
 /**
