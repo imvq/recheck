@@ -7,20 +7,19 @@ import { connect } from 'react-redux';
 import { ReactComponent as CabinetSvg } from 'assets/images/shared/ProfileMenuBadge/Cabinet.svg';
 import { ReactComponent as DoorSvg } from 'assets/images/shared/ProfileMenuBadge/Door.svg';
 import { onExit } from 'commons/utils/misc';
-import { AppState, setPageLocked, setIsLoginPopupVisible, setCurrentProfileInfo } from 'store';
+import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 
 import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isAuthorized: store.auth.isAuthorized,
+  isAuthorized: store.profile.isAuthorized,
   isPageLocked: store.interaction.isPageLocked
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
   lockPage: setPageLocked,
   setIsLoginPopupVisible,
-  setCurrentProfileInfo
 };
 
 /**
