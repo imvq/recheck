@@ -1,4 +1,3 @@
-import { IAppProfileInfo } from 'commons/types/general';
 import { MainToolbarEntry } from 'commons/types/unions';
 
 export interface IOwnProps {
@@ -7,7 +6,7 @@ export interface IOwnProps {
 
 export interface IStateProps {
   currentMainToolbarEntry: MainToolbarEntry;
-  currentProfileInfo: IAppProfileInfo;
+  shareableId: string | null;
 }
 
 export interface IDispatchProps {

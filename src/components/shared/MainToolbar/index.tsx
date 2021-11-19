@@ -21,7 +21,7 @@ function copyLink(link: string) {
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   currentMainToolbarEntry: store.interaction.currentMainToolbarEntry,
-  currentProfileInfo: store.profile.currentProfileInfo
+  shareableId: store.profile.shareableId
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -106,7 +106,7 @@ function MainToolbar(props: types.IProps) {
         </styled.ButtonsGroupWrapper>
 
         <styled.ButtonWrapper>
-          <FakeEntry onClick={() => copyLink(props.currentProfileInfo.currentShareableId)}>
+          <FakeEntry onClick={() => copyLink(props.shareableId as string)}>
             Пригласить кандидата
           </FakeEntry>
         </styled.ButtonWrapper>
