@@ -1,9 +1,9 @@
-import { ISearchProfileInfo } from 'commons/types/general';
+import { ISearchedProfileBasic } from 'commons/types';
 
-export function mapUserSearchDataToOptions(users: ISearchProfileInfo[]) {
+export function mapUserSearchDataToOptions(users: ISearchedProfileBasic[]) {
   return users.map(user => ({
     key: user.shareableId,
-    text: user.name,
+    text: user.fullName,
     imageUrl: user.photoUrl
   }));
 }

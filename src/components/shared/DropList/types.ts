@@ -1,8 +1,8 @@
-import * as generalTypes from 'commons/types/general';
+import { IExtendedOptionType } from 'commons/types';
 
 export interface IOwnProps {
-  options: generalTypes.IExtendedOptionType[];
-  onOptionSelected(selectedOne: generalTypes.IExtendedOptionType): void;
+  options: IExtendedOptionType[];
+  onOptionSelected(selectedOne: IExtendedOptionType): void;
   onClose(): void;
   width?: string;
 }

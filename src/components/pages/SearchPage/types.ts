@@ -1,31 +1,31 @@
-import * as generalTypes from 'commons/types/general';
+import { ICompanyWithMembers, ISearchedProfile, ISearchedProfileBasic } from 'commons/types';
 
 import { MainToolbarEntry } from 'commons/types/unions';
 
 export interface IStateProps {
   colleaguesState: {
-    colleagues: Omit<generalTypes.ISearchProfileInfo, 'company'>[];
+    colleagues: ISearchedProfileBasic[];
     areLoaded: boolean;
   }
   isAuthorized: boolean | null;
-  quickSearchMatchedUsers: generalTypes.ISearchProfileInfo[];
-  recommendations: generalTypes.ICompany[];
-  userSearchResults: generalTypes.ISearchProfileInfo[];
+  quickSearchMatchedUsers: ISearchedProfile[];
+  recommendations: ICompanyWithMembers[];
+  userSearchResults: ISearchedProfile[];
 }
 
 export interface IDispatchProps {
   clearColleagues(): void;
   clearMatchedUsers(): void;
   clearSearchText(): void;
-  loadMatchedUsers(tokens: string[]): void;
+  quickSearchUsersByTokens(tokens: string[]): void;
   loadRecommendations(chunk: number): void;
   lockPage(): void;
-  searchUser(tokens: string[]): void;
+  searchUsersByTokens(tokens: string[]): void;
   searchUserByShareableId(shareableId: string): void;
   setCurrentMainToolbarEntry(entry: MainToolbarEntry): void;
-  setUserSearchResults(results: generalTypes.ISearchProfileInfo[]): void;
-  setRecommendations(companies: generalTypes.ICompany[]): void;
-  setRecommendedCompaniesShownMembers(members: generalTypes.ISearchProfileInfo[]): void;
+  setUserSearchResults(results: ISearchedProfile[]): void;
+  setRecommendations(companies: ICompanyWithMembers[]): void;
+  setRecommendedCompaniesShownMembers(members: ISearchedProfile[]): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

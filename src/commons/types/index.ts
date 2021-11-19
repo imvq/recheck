@@ -16,7 +16,16 @@ export interface ICompanyWithMembers extends ICompany {
   members: ISearchedProfileBasic[];
 }
 
+export interface IExtendedOptionType extends IOptionType {
+  imageUrl: string | null;
+}
+
 export type IInputEvent = ChangeEvent<HTMLInputElement>;
+
+export interface IOptionType {
+  key: any;
+  text: string;
+}
 
 export interface IRetrievedProfileData {
   registered: boolean;

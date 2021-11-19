@@ -11,11 +11,7 @@ import {
   clearColleagues,
   setRecommendations,
   setRecommendedCompaniesShownMembers,
-  loadMatchedUsers,
-  loadRecommendations,
   clearMatchedUsers,
-  searchUser,
-  searchUserByShareableId,
   setCurrentMainToolbarEntry,
   setSearchText,
   setUserSearchResults,
@@ -25,6 +21,12 @@ import {
   getQuickSearchMatchedUsersWithoutSelf,
   getUserSearchResultsWithoutSelf
 } from 'store/selectors';
+import {
+  loadRecommendations,
+  searchUsersByTokens,
+  searchUserByShareableId,
+  quickSearchUsersByTokens
+} from 'store/thunks';
 
 import DropList from 'components/shared/DropList';
 import PopupManager from 'components/shared/PopupManager';
@@ -43,7 +45,7 @@ import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   colleaguesState: store.search.colleaguesState,
-  isAuthorized: store.auth.isAuthorized,
+  isAuthorized: store.profile.isAuthorized,
   quickSearchMatchedUsers: getQuickSearchMatchedUsersWithoutSelf(store),
   recommendations: store.search.recommendations,
   userSearchResults: getUserSearchResultsWithoutSelf(store)
@@ -53,9 +55,9 @@ const mapDispatchToProps: types.IDispatchProps = {
   clearColleagues,
   clearMatchedUsers,
   clearSearchText: () => setSearchText(''),
-  loadMatchedUsers,
+  quickSearchUsersByTokens,
   loadRecommendations,
-  searchUser,
+  searchUsersByTokens,
   searchUserByShareableId,
   setCurrentMainToolbarEntry,
   setUserSearchResults,
@@ -90,7 +92,7 @@ function SearchPage(props: types.IProps) {
   };
 
   const findUsersMatches = (tokens: string[]) => {
-    props.loadMatchedUsers(tokens);
+    props.quickSearchUsersByTokens(tokens);
   };
 
   // Recommendations expansion popup. Absolute-positioned popup.
@@ -121,7 +123,7 @@ function SearchPage(props: types.IProps) {
     <SearchField
       lockPageCallback={props.lockPage}
       searchUserCallback={tokens => {
-        props.searchUser(tokens);
+        props.searchUsersByTokens(tokens);
         props.clearMatchedUsers();
         props.clearSearchText();
       }}
