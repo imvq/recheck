@@ -7,7 +7,7 @@ import * as reviewsLogic from '@business/reviews';
  */
 const router = Router();
 
-router.get('/reviews/:privateToken/received/amount', reviewsLogic.getReceivedReviewsAmount);
-router.get('/reviews/:privateToken/left/amount', reviewsLogic.getLeftReviewsAmount);
+router.get('/:privateToken/received/amount', reviewsLogic.getReceivedReviewsAmount);
+router.get('/:privateToken/left/amount', reviewsLogic.getLeftReviewsAmount);
 
 export default router;

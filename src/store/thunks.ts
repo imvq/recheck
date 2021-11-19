@@ -9,6 +9,7 @@ import { apiClient, cookieManager } from 'commons/utils/services';
 import * as interactionActions from './interaction/actions';
 import * as profileActions from './profile/actions';
 import * as reviewsActions from './reviews/actions';
+import * as searchActions from './search/actions';
 
 import { AppActionType } from './types';
 
@@ -104,31 +105,39 @@ export function createReview(
   };
 }
 
-export const searchUser = (tokens: string[]) => (dispatch: Dispatch<AppActionType>) => {
-  apiClient.searchUser(tokens)
-    .then((searchResults) => dispatch(setUserSearchResults(searchResults.data.results)))
-    .finally(() => dispatch(unlockPage()));
-};
+export function searchUsersByTokens(tokens: string[]) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    apiClient.searchUsersByTokens(tokens)
+      .then(searchResults => dispatch(searchActions.setUserSearchResults(searchResults.data)))
+      .finally(() => dispatch(interactionActions.setPageUnlocked()));
+  };
+}
 
-export const searchUserByShareableId = (shareableId: string) => (
-  dispatch: Dispatch<AppActionType>
-) => {
-  apiClient.searchUserByShareableId(shareableId)
-    .then((searchResult) => dispatch(setUserSearchResults([searchResult.data.result])))
-    .finally(() => dispatch(unlockPage()));
-};
+export function quickSearchUsersByTokens(tokens: string[]) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    apiClient.quickSearchUsersByTokens(tokens)
+      .then(matchData => dispatch(searchActions.setQuickSearchMatchedUsers(matchData.data)));
+  };
+}
 
-export const loadMatchedCompanies = (sequence: string) => (dispatch: Dispatch<AppActionType>) => {
-  apiClient.getMatchedCompanies(sequence)
-    .then(matchData => dispatch(setQuickSearchMatchedCompanies(matchData.data.results)));
-};
+export function searchUserByShareableId(shareableId: string) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    apiClient.searchUserByShareableId(shareableId)
+      .then(searchResult => dispatch(searchActions.setUserSearchResults([searchResult.data])))
+      .finally(() => dispatch(interactionActions.setPageUnlocked()));
+  };
+}
 
-export const loadMatchedUsers = (tokens: string[]) => (dispatch: Dispatch<AppActionType>) => {
-  apiClient.quickSearchUser(tokens)
-    .then(matchData => dispatch(setQuickSearchMatchedUsers(matchData.data.results)));
-};
+export function quickSearchCompanies(sequence: string) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    apiClient.quickSearchCompanies(sequence)
+      .then(matchData => dispatch(searchActions.setQuickSearchMatchedCompanies(matchData.data)));
+  };
+}
 
-export const loadRecommendations = (chunk: number) => (dispatch: Dispatch<AppActionType>) => {
-  apiClient.getRecommendations(chunk)
-    .then((recommendationsDto) => dispatch(appendRecommendations(recommendationsDto.data.results)));
-};
+export function loadRecommendations(last: number) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    apiClient.loadPredefinedCompanies(last)
+      .then(companiesData => dispatch(searchActions.appendRecommendations(companiesData.data)));
+  };
+}

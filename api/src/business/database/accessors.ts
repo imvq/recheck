@@ -59,6 +59,15 @@ export async function createReview(authorId: string, targetShareableId: string, 
   }
 }
 
+export async function readCompaniesMatched(sequence: string) {
+  try {
+    const accessor = sql('./sql/read/companiesMatched.sql');
+    return database.manyOrNone(accessor, { sequence });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
 export async function readEmail(email: string) {
   try {
     const accessor = sql('./sql/read/email.sql');
@@ -90,6 +99,24 @@ export async function readUserBySocialId(socialId: string) {
   try {
     const accessor = sql('./sql/read/userBySocialId');
     return database.oneOrNone(accessor, { socialId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readUsersWithPredefinedCompanies(last: string) {
+  try {
+    const accessor = sql('./sql/read/userWithPredefinedCompanies');
+    return database.manyOrNone(accessor, { last });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readUserWithCompanyByShareableId(shareableId: string) {
+  try {
+    const accessor = sql('./sql/read/userWithCompanyByShareableId');
+    return database.oneOrNone(accessor, { shareableId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
   }
@@ -153,6 +180,20 @@ export async function readReview(privateToken: string, targetShareableId: string
   try {
     const accessor = sql('./sql/read/review.sql');
     return database.oneOrNone(accessor, { privateToken, targetShareableId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readUserWithCompanyByTokens(
+  tokens: string[],
+  options?: { limited: boolean; }
+) {
+  try {
+    const accessor = options?.limited
+      ? sql('./sql/read/userWithCompanyByTokensLimited.sql')
+      : sql('./sql/read/userWithCompanyByTokens.sql');
+    return database.manyOrNone(accessor, { tokens });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
   }

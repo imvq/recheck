@@ -54,7 +54,27 @@ export function completeRegistration(confirmationCode: string)
 
 export function searchUserByShareableId(shareableId: string)
   : ApiPromise<commonTypes.ISearchedProfile> {
-  return apiInstance.post('/search/user', { shareableId });
+  return apiInstance.get(`/search/user/${shareableId}`);
+}
+
+export function searchUsersByTokens(tokens: string[])
+  : ApiPromise<commonTypes.ISearchedProfile[]> {
+  return apiInstance.post('/search/users/tokens', { tokens });
+}
+
+export function quickSearchUsersByTokens(tokens: string[])
+  : ApiPromise<commonTypes.ISearchedProfile[]> {
+  return apiInstance.post('/search/quick/users/tokens', { tokens });
+}
+
+export function quickSearchCompanies(sequence: string)
+  : ApiPromise<commonTypes.ICompany[]> {
+  return apiInstance.post('/search/quick/companies', { sequence });
+}
+
+export function loadPredefinedCompanies(last: number)
+  : ApiPromise<commonTypes.ICompanyWithMembers[]> {
+  return apiInstance.get(`/search/predefined/companies/${last}`);
 }
 
 export function getReceivedReviewsAmount(privateToken: string)

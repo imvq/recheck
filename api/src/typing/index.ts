@@ -1,3 +1,11 @@
+export interface ICompaniesDictionary {
+  [companyId: string]: {
+    name: string;
+    logoUrl: string | null;
+    members: ISearchedProfileBasic[];
+  };
+}
+
 export interface ICompanyData {
   name: string;
   logoUrl: string | null;
@@ -14,4 +22,11 @@ export interface IReplacements {
 
 export interface IStringIndexable {
   [key: string]: string;
+}
+
+export interface ISearchedProfileBasic {
+  fullName: string;
+  shareableId: string;
+  photoUrl: string;
+  currentPosition: string;
 }

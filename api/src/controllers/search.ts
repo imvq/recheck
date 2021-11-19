@@ -7,6 +7,11 @@ import * as searchLogic from '@business/search';
  */
 const router = Router();
 
-// router.post('/availability/email', searchLogic.searchUserByShareableId);
+router.get('/user/:shareableId', searchLogic.searchUserByShareableId);
+router.get('/predefined/companies/:last', searchLogic.getPredefinedCompanies);
+
+router.post('/users/tokens', searchLogic.searchUsersByTokens);
+router.post('/quick/users/tokens', searchLogic.quickSearchUsersByTokens);
+router.post('/quick/companies', searchLogic.quickSearchCompanies);
 
 export default router;
