@@ -1,7 +1,7 @@
-import { IAppProfileInfo } from 'commons/types/general';
+export interface IOwnProps {}
 
 export interface IStateProps {
-  currentProfileInfo: IAppProfileInfo;
+  privateToken: string | null;
   requestedUserShareableId: string | null;
 }
 
@@ -10,4 +10,4 @@ export interface IDispatchProps {
   setIsSearchPopupVisible(flag: boolean): void;
 }
 
-export type IProps = IStateProps & IDispatchProps;
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

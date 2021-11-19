@@ -37,6 +37,11 @@ export function checkIfUserCanBeViewed(privateToken: string, targetShareableId: 
   return apiInstance.post('/users/availability/user', { privateToken, targetShareableId });
 }
 
+export function makeUserAvailable(privateToken: string, targetShareableId: string)
+  : ApiPromise<SimpleBooleanResponse> {
+  return apiInstance.post('/availability/user/provide', { privateToken, targetShareableId });
+}
+
 export function prepareUser(preparationData: commonTypes.IUserPreparationData)
   : ApiPromise<SimpleBooleanResponse> {
   return apiInstance.post('/users/registration/prepare', preparationData);

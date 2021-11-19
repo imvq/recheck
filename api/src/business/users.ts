@@ -318,3 +318,33 @@ export async function getColleagues(request: Request, response: Response) {
   const result = colleagues.map(colleague => mappers.normalizePublicUserInfo(colleague));
   reply(response, result);
 }
+
+/**
+ * Make a user available to another one.
+ */
+export async function makeUserAvailable(request: Request, response: Response) {
+  interface IBodyParams {
+    privateToken: string;
+    targetShareableId: string;
+  }
+
+  const { privateToken, targetShareableId }: IBodyParams = request.body;
+  assertBodyData(privateToken, targetShareableId);
+
+  const user = await accessors.readUserByPrivateToken(privateToken);
+
+  if (parseInt(user['reviews_available']) === 0) {
+    throw new errors.ConflictError('Akser does not have available reviews.');
+  }
+
+  const availability = await accessors.readUserAvailability(user.id, targetShareableId);
+
+  if (availability) {
+    throw new errors.ConflictError('Availability is already provided.');
+  }
+
+  await accessors.decreaseReviewsAvailable(privateToken);
+  await accessors.createUserAvailability(privateToken, targetShareableId);
+
+  reply(response);
+}

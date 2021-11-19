@@ -1,6 +1,6 @@
 UPDATE
     users
 SET
-    email = ${email}
+    reviews_available = reviews_available - 1
 WHERE
     private_token = ${privateToken};

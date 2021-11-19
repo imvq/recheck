@@ -11,7 +11,7 @@ import * as types from './types';
 import * as styled from '../Popups/styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo,
+  privateToken: store.profile.privateToken,
   requestedUserShareableId: store.interaction.requestedUserShareableId
 });
 
@@ -33,10 +33,10 @@ function SpendFreeViewsPopup(props: types.IProps) {
   }
 
   function handleProceed() {
-    apiClient.makeUserAvailable({
-      askerProfileId: props.currentProfileInfo.currentId,
-      targetShareableId: props.requestedUserShareableId as string
-    }).then(responseDto => {
+    apiClient.makeUserAvailable(
+      props.privateToken as string,
+      props.requestedUserShareableId as string
+    ).then(responseDto => {
       if (responseDto.data.success) {
         jumpTo('/profile/observe/', props.requestedUserShareableId as string);
       }
