@@ -158,10 +158,28 @@ export async function readNameToken(tokenValue: string) {
   }
 }
 
+export async function readReceivedReviews(privateToken: string) {
+  try {
+    const accessor = sql('./sql/read/reviewsReceived.sql');
+    return database.manyOrNone(accessor, { privateToken });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
 export async function readLeftReviewsAmount(authorId: string) {
   try {
     const accessor = sql('./sql/read/reviewsLeftAmount.sql');
     return database.one(accessor, { authorId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
+export async function readLeftReviews(privateToken: string) {
+  try {
+    const accessor = sql('./sql/read/reviewsLeft.sql');
+    return database.manyOrNone(accessor, { privateToken });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
   }

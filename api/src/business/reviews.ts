@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import * as accessors from '@business/database/accessors';
+import * as mappers from '@business/database/mappers';
 import * as errors from '@business/errors';
 
 import { assertBodyData, reply } from '@business/commons';
@@ -37,11 +38,11 @@ export async function createReview(request: Request, response: Response) {
  * of all the reviews recevied.
  */
 export async function getReceivedReviewsAmount(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IPathParams {
     privateToken: string;
   }
 
-  const { privateToken }: IBodyParams = request.params as { privateToken: string; };
+  const { privateToken }: IPathParams = request.params as { privateToken: string; };
   assertBodyData(privateToken);
 
   const author = await accessors.readUserByPrivateToken(privateToken);
@@ -56,15 +57,59 @@ export async function getReceivedReviewsAmount(request: Request, response: Respo
  * of all the reviews recevied.
  */
 export async function getLeftReviewsAmount(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IPathParams {
     privateToken: string;
   }
 
-  const { privateToken }: IBodyParams = request.params as { privateToken: string; };
+  const { privateToken }: IPathParams = request.params as { privateToken: string; };
   assertBodyData(privateToken);
 
   const author = await accessors.readUserByPrivateToken(privateToken);
   const amount = await accessors.readLeftReviewsAmount(author.id);
 
   reply(response, { result: +amount });
+}
+
+/**
+ * Get n-th of the reviews received by asker.
+ */
+export async function getNthReceivedReview(request: Request, response: Response) {
+  interface IPathParams {
+    privateToken: string;
+    n: string;
+  }
+
+  const { privateToken, n }: IPathParams = request.params as { privateToken: string; n: string; };
+  assertBodyData(privateToken, n);
+
+  const reviews = await accessors.readReceivedReviews(privateToken) || [];
+
+  if (reviews.length <= parseInt(n)) {
+    throw new errors.NotFoundError(`No review with index ${n}.`);
+  }
+
+  const review = mappers.normalizeReviewWithTarget(reviews[parseInt(n)]);
+  reply(response, review);
+}
+
+/**
+ * Get n-th of the reviews left by asker.
+ */
+export async function getNthLeftReview(request: Request, response: Response) {
+  interface IPathParams {
+    privateToken: string;
+    n: string;
+  }
+
+  const { privateToken, n }: IPathParams = request.params as { privateToken: string; n: string; };
+  assertBodyData(privateToken, n);
+
+  const reviews = await accessors.readLeftReviews(privateToken) || [];
+
+  if (reviews.length <= parseInt(n)) {
+    throw new errors.NotFoundError(`No review with index ${n}.`);
+  }
+
+  const review = mappers.normalizeReviewWithTarget(reviews[parseInt(n)]);
+  reply(response, review);
 }

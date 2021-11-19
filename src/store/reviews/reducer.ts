@@ -7,7 +7,8 @@ const initialState: types.IState = {
   marks: [],
   receivedReviewsAmount: 0,
   leftReviewsAmount: 0,
-  currentReceivedReview: null
+  currentObservedReceivedReview: null,
+  currentObservedLeftReview: null
 };
 
 export const reviewsReducer = (state = initialState, action: types.IAction): types.IState => {
@@ -58,10 +59,15 @@ export const reviewsReducer = (state = initialState, action: types.IAction): typ
         ...state,
         leftReviewsAmount: action.payload
       };
-    case types.SET_CURRENT_RECEIVED_REVIEW:
+    case types.SET_CURRENT_OBSERVED_RECEIVED_REVIEW:
       return {
         ...state,
-        currentReceivedReview: action.payload
+        currentObservedReceivedReview: action.payload
+      };
+    case types.SET_CURRENT_OBSERVED_LEFT_REVIEW:
+      return {
+        ...state,
+        currentObservedLeftReview: action.payload
       };
     default:
       return state;

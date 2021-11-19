@@ -64,6 +64,11 @@ export interface IReviewParsed {
 
 export interface IReviewReceived {
   targetShareableId: string;
+  targetPhotoUrl: string;
+  targetName: string;
+  targetPosition: string;
+  targetCompanyName: string;
+  date: string;
   content: string;
 }
 

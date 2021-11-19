@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import { showToast } from 'commons/utils/misc';
-import { AppState, loadAboutTabData, loadNthReviewGot } from 'store';
+import { AppState } from 'store';
+import { loadAboutTabData, loadNthReceivedReview } from 'store/thunks';
 
 import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';
@@ -17,12 +18,12 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
   shareableId: store.profile.shareableId,
   isLoading: store.interaction.isProfileAboutTabLoading,
   receivedReviewsAmount: store.reviews.receivedReviewsAmount,
-  currentReviewData: store.reviews.currentReceivedReview
+  currentReviewData: store.reviews.currentObservedReceivedReview
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
   loadTabData: loadAboutTabData,
-  loadNthReview: loadNthReviewGot
+  loadNthReview: loadNthReceivedReview
 };
 
 function copyAwaiterLink(awaiterId: string) {

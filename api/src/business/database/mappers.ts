@@ -32,3 +32,13 @@ export const normalizeConfirmationEntity = (entity: any) => ({
   codeValue: entity['code_value'],
   userId: entity['user_id']
 });
+
+export const normalizeReviewWithTarget = (entity: any) => ({
+  targetShareableId: entity['target_shareable_id'],
+  targetPhotoUrl: entity['photo_url'],
+  targetName: entity['full_name'],
+  targetPosition: entity['current_position'],
+  targetCompanyName: entity['company_name'],
+  date: entity['creation_date'],
+  content: entity['content']
+});

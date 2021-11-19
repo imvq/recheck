@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 import { AxiosResponse } from 'axios';
 
 import * as types from 'commons/types';
@@ -66,19 +67,35 @@ function loadProfileData(profileData: AxiosResponse<types.IUserSelf>) {
 }
 
 export function loadAboutTabData(privateToken: string) {
-  return (dispatch: Dispatch<AppActionType>) => {
-    apiClient.getReceivedReviewsAmount(privateToken)
+  return (dispatch: ThunkDispatch<any, void, AppActionType>) => {
+    dispatch(interactionActions.setIsProfileAboutTabLoading(true));
 
+    apiClient.getReceivedReviewsAmount(privateToken)
       .then(amountData => {
         dispatch(reviewsActions.setReceivedReviewsAmount(amountData.data.result));
 
-        // TODO: load Nth review.
-
-        dispatch(interactionActions.setIsProfileAboutTabLoading(false));
+        if (amountData.data.result > 0) {
+          dispatch(loadNthReceivedReview(privateToken, 0));
+        }
       })
-
       .catch(() => {
         dispatch(reviewsActions.setReceivedReviewsAmount(0));
+      })
+      .finally(() => {
+        dispatch(interactionActions.setIsProfileAboutTabLoading(false));
+      });
+  };
+}
+
+export function loadNthReceivedReview(privateToken: string, n: number | string) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    dispatch(interactionActions.setIsProfileAboutTabLoading(true));
+
+    apiClient.getNthReceivedReview(privateToken, n)
+      .then(reviewData => {
+        dispatch(reviewsActions.setCurrentObservedReceivedReview(reviewData.data));
+      })
+      .finally(() => {
         dispatch(interactionActions.setIsProfileAboutTabLoading(false));
       });
   };
