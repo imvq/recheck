@@ -16,7 +16,7 @@ import * as types from './types';
 import * as styled from '../Popups/styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo
+  privateToken: store.profile.privateToken
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -86,8 +86,8 @@ function SearchPopup(props: types.IProps) {
   function onWriteReviewClickHandler() {
     props.lockPage();
 
-    apiClient.getColleagues(props.currentProfileInfo.currentId)
-      .then(colleaguesData => props.setColleagues(colleaguesData.data.results))
+    apiClient.getColleagues(props.privateToken as string)
+      .then(colleaguesData => props.setColleagues(colleaguesData.data))
       .finally(() => props.unlockPage());
 
     props.onClose();

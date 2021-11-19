@@ -1,17 +1,17 @@
-import { IAppProfileInfo, ISearchProfileInfo } from 'commons/types/general';
+import { ISearchedProfileBasic } from 'commons/types';
 
 export interface IOwnProps {
   onClose(): void;
 }
 
 export interface IStateProps {
-  currentProfileInfo: IAppProfileInfo;
+  privateToken: string | null;
 }
 
 export interface IDispatchProps {
   lockPage(): void;
   unlockPage(): void;
-  setColleagues(colleagues: Omit<ISearchProfileInfo, 'company'>[]): void;
+  setColleagues(colleagues: ISearchedProfileBasic[]): void;
   setIsVisible(flag: boolean): void;
 }
 
