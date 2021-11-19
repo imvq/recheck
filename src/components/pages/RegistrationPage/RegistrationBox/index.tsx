@@ -4,7 +4,8 @@ import { validate as validateEmail } from 'email-validator';
 
 import { ICompanyBasic } from 'commons/types';
 import { apiClient } from 'commons/utils/services';
-import { AppState, clearMatchedCompanies, loadMatchedCompanies } from 'store';
+import { AppState, clearMatchedCompanies } from 'store';
+import { quickSearchCompanies } from 'store/thunks';
 
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
@@ -16,11 +17,11 @@ import * as styled from '../../../shared/BoxBase';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   matchedCompanies: store.search.quickSearchMatchedCompanies,
-  inviter: store.interaction.inviter
+  inviter: store.profile.inviterShareableId
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  loadMatchedCompanies,
+  quickSearchCompanies,
   clearMatchedCompanies
 };
 
@@ -144,7 +145,7 @@ function RegistrationBox(props: types.IProps) {
       onChange={event => misc.companySelectorHandler(
         event,
         setCompany,
-        props.loadMatchedCompanies,
+        props.quickSearchCompanies,
         props.clearMatchedCompanies
       )}
     />

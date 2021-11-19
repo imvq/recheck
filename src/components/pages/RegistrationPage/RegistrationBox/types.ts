@@ -18,7 +18,7 @@ export interface IStateProps {
 }
 
 export interface IDispatchProps {
-  loadMatchedCompanies(sequence: string): void;
+  quickSearchCompanies(sequence: string): void;
   clearMatchedCompanies(): void;
 }
 
