@@ -1,11 +1,11 @@
-import { IReviewCardLeftData, ISearchProfileInfo } from 'commons/types/general';
+import { IReviewReceived } from 'commons/types';
 
 export interface IStateProps {
-  currentProfileId: string;
+  privateToken: string | null;
   isAuthorized: boolean | null;
   isLoading: boolean;
-  reviewsLeftChunksAmount: number;
-  currentReviewCardData: IReviewCardLeftData | null;
+  leftReviewsAmount: number;
+  currentReviewData: IReviewReceived | null;
 }
 
 export interface IDispatchProps {

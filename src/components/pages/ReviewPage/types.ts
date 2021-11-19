@@ -12,7 +12,6 @@ export interface IStateProps {
 }
 
 export interface IDispatchProps {
-  setCurrentMainToolbarEntry(entry: MainToolbarEntry): void;
   setCurrentReviewTargetShareableId(shareableId: string): void;
   createReview: IReviewCreator;
   setIsLoginPopupVisible(flag: boolean): void;

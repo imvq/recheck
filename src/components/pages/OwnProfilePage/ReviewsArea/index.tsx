@@ -1,16 +1,10 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
-import {
-  AppState,
-  loadReviewsTabData,
-  loadNthReviewLeft,
-  setColleagues,
-  setPageLocked,
-  setPageUnlocked
-} from 'store';
+import { AppState, setColleagues, setPageLocked, setPageUnlocked } from 'store';
+import { loadReviewsTabData, loadNthLeftReview } from 'store/thunks';
 
 import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';
@@ -20,16 +14,16 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileId: store.profile.currentProfileInfo.currentId,
-  isAuthorized: store.auth.isAuthorized,
+  privateToken: store.profile.privateToken,
+  isAuthorized: store.profile.isAuthorized,
   isLoading: store.interaction.isProfileReviewsTabLoading,
-  reviewsLeftChunksAmount: store.interaction.reviewsLeftChunksAmount,
-  currentReviewCardData: store.interaction.currentReviewLeft
+  leftReviewsAmount: store.reviews.leftReviewsAmount,
+  currentReviewData: store.reviews.currentObservedLeftReview
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
   loadTabData: loadReviewsTabData,
-  loadNthReview: loadNthReviewLeft,
+  loadNthReview: loadNthLeftReview,
   setColleagues,
   lockPage: setPageLocked,
   unlockPage: setPageUnlocked
@@ -43,7 +37,7 @@ function ReviewsArea(props: types.IProps) {
 
   useEffect(() => {
     if (props.isAuthorized) {
-      props.loadTabData(props.currentProfileId);
+      props.loadTabData(props.privateToken as string);
     }
   }, [props.isAuthorized]);
 
@@ -51,8 +45,8 @@ function ReviewsArea(props: types.IProps) {
     <styled.TitleWrapper>
       {props.isLoading
         ? <styled.Title isHighlighted>Загрузка...</styled.Title>
-        : props.currentReviewCardData
-          ? <ReviewCard showTarget reviewCardData={props.currentReviewCardData} />
+        : props.currentReviewData
+          ? <ReviewCard showTarget reviewCardData={props.currentReviewData} />
           : <styled.Title isHighlighted>Оставьте свой первый отзыв!</styled.Title>}
     </styled.TitleWrapper>
   );
@@ -60,10 +54,10 @@ function ReviewsArea(props: types.IProps) {
   function onWriteReviewClickHandler() {
     props.lockPage();
 
-    apiClient.getColleagues(props.currentProfileId)
+    apiClient.getColleagues(props.privateToken as string)
       .then(colleaguesData => {
+        props.setColleagues(colleaguesData.data);
         jumpTo('/search', '?no-colleagues-update=true');
-        props.setColleagues(colleaguesData.data.results);
       })
       .finally(() => props.unlockPage());
   }
@@ -86,21 +80,21 @@ function ReviewsArea(props: types.IProps) {
     <styled.Wrapper>
       {Results}
 
-      {!props.currentReviewCardData && NoResults}
+      {!props.currentReviewData && NoResults}
 
-      {props.reviewsLeftChunksAmount > 0 && (
+      {props.leftReviewsAmount > 0 && (
         <Pagination
-          nPages={props.reviewsLeftChunksAmount}
+          nPages={props.leftReviewsAmount}
           onNextClick={() => {
-            props.loadNthReview(props.currentProfileId, currentIndex + 1);
+            props.loadNthReview(props.privateToken as string, currentIndex + 1);
             setCurrentIndex(currentIndex + 1);
           }}
           onPageClick={(page: number) => {
-            props.loadNthReview(props.currentProfileId, page - 1);
+            props.loadNthReview(props.privateToken as string, page - 1);
             setCurrentIndex(page - 1);
           }}
           onPrevClick={() => {
-            props.loadNthReview(props.currentProfileId, currentIndex - 1);
+            props.loadNthReview(props.privateToken as string, currentIndex - 1);
             setCurrentIndex(currentIndex - 1);
           }}
         />
@@ -109,4 +103,4 @@ function ReviewsArea(props: types.IProps) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReviewsArea);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(ReviewsArea));

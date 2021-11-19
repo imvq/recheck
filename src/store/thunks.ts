@@ -87,6 +87,27 @@ export function loadAboutTabData(privateToken: string) {
   };
 }
 
+export function loadReviewsTabData(privateToken: string) {
+  return (dispatch: ThunkDispatch<any, void, AppActionType>) => {
+    dispatch(interactionActions.setIsProfileReviewsTabLoading(true));
+
+    apiClient.getLeftReviewsAmount(privateToken)
+      .then(amountData => {
+        dispatch(reviewsActions.setLeftReviewsAmount(amountData.data.result));
+
+        if (amountData.data.result > 0) {
+          dispatch(loadNthLeftReview(privateToken, 0));
+        }
+      })
+      .catch(() => {
+        dispatch(reviewsActions.setLeftReviewsAmount(0));
+      })
+      .finally(() => {
+        dispatch(interactionActions.setIsProfileReviewsTabLoading(false));
+      });
+  };
+}
+
 export function loadNthReceivedReview(privateToken: string, n: number | string) {
   return (dispatch: Dispatch<AppActionType>) => {
     dispatch(interactionActions.setIsProfileAboutTabLoading(true));
@@ -97,6 +118,20 @@ export function loadNthReceivedReview(privateToken: string, n: number | string) 
       })
       .finally(() => {
         dispatch(interactionActions.setIsProfileAboutTabLoading(false));
+      });
+  };
+}
+
+export function loadNthLeftReview(privateToken: string, n: number | string) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    dispatch(interactionActions.setIsProfileReviewsTabLoading(true));
+
+    apiClient.getNthLeftReview(privateToken, n)
+      .then(reviewData => {
+        dispatch(reviewsActions.setCurrentObservedLeftReview(reviewData.data));
+      })
+      .finally(() => {
+        dispatch(interactionActions.setIsProfileReviewsTabLoading(false));
       });
   };
 }

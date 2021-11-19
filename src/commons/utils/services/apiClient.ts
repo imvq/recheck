@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import * as commonTypes from 'commons/types';
 
-import { ApiPromise } from 'commons/types';
+import { ApiPromise, ISearchedProfile } from 'commons/types';
 
 const apiInstance = axios.create({ baseURL: process.env.REACT_APP_API });
 
@@ -87,7 +87,7 @@ export function getNthReceivedReview(privateToken: string, n: number | string)
   return apiInstance.get(`/reviews/${privateToken}/received/${n}`);
 }
 
-export function getNthLeftReview(privateToken: string, n: number | number)
+export function getNthLeftReview(privateToken: string, n: number | string)
   : ApiPromise<commonTypes.IReviewReceived> {
   return apiInstance.get(`/reviews/${privateToken}/left/${n}`);
 }
@@ -95,6 +95,11 @@ export function getNthLeftReview(privateToken: string, n: number | number)
 export function getLeftReviewsAmount(privateToken: string)
   : ApiPromise<AmountResponse> {
   return apiInstance.get(`/reviews/${privateToken}/left/amount`);
+}
+
+export function getColleagues(privateToken: string)
+  : ApiPromise<ISearchedProfile[]> {
+  return apiInstance.post('/users/colleagues', privateToken);
 }
 
 export function createReview(privateToken: string, targetShareableId: string, content: string)

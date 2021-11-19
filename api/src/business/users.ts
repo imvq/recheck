@@ -207,7 +207,7 @@ export async function confirmRegistration(request: Request, response: Response) 
   }
 
   const { confirmationCode }: IBodyParams = request.body;
-  assertBodyData(confirmRegistration);
+  assertBodyData(confirmationCode);
 
   await accessors.deleteConfirmation(confirmationCode);
 
@@ -299,4 +299,22 @@ async function retrieveLocalProfileData(socialId: string) {
     registered: true,
     confirmed: !await accessors.readConfirmationBySocialId(socialId)
   };
+}
+
+/**
+ * Retrieve users working at the same company with the asker.
+ */
+export async function getColleagues(request: Request, response: Response) {
+  interface IBodyParams {
+    privateToken: string;
+  }
+
+  const { privateToken }: IBodyParams = request.body;
+  assertBodyData(privateToken);
+
+  const user = await accessors.readUserByPrivateToken(privateToken);
+  const colleagues = await accessors.readColleagues(user['company_id']);
+
+  const result = colleagues.map(colleague => mappers.normalizePublicUserInfo(colleague));
+  reply(response, result);
 }

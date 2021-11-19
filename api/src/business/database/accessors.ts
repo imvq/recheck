@@ -59,6 +59,15 @@ export async function createReview(authorId: string, targetShareableId: string, 
   }
 }
 
+export async function readColleagues(companyId: string) {
+  try {
+    const accessor = sql('./sql/read/colleagues.sql');
+    return database.manyOrNone(accessor, { companyId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
 export async function readCompaniesMatched(sequence: string) {
   try {
     const accessor = sql('./sql/read/companiesMatched.sql');

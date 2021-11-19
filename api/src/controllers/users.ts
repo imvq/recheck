@@ -14,5 +14,6 @@ router.post('/availability/user', usersLogic.checkIfUserCanBeViewed);
 router.post('/registration/prepare', usersLogic.prepareUser);
 router.post('/registration/confirming/apply', usersLogic.confirmRegistration);
 router.post('/registration/confirming/resend', usersLogic.resendConfirmation);
+router.post('/colleagues', usersLogic.getColleagues);
 
 export default router;

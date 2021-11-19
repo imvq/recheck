@@ -8,7 +8,6 @@ import { apiClient, cookieManager } from 'commons/utils/services';
 import {
   AppState,
   setIsLoginPopupVisible,
-  setCurrentMainToolbarEntry,
   setCurrentReviewTargetShareableId,
   setPageLocked,
   setPageUnlocked
@@ -40,7 +39,6 @@ const mapSateToProps = (store: AppState): types.IStateProps => ({
 const mapDispatchToProps: types.IDispatchProps = {
   createReview,
   setIsLoginPopupVisible,
-  setCurrentMainToolbarEntry,
   setCurrentReviewTargetShareableId,
   lockPage: setPageLocked,
   unlockPage: setPageUnlocked
