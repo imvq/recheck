@@ -89,7 +89,14 @@ export interface ISearchedProfileBasic {
 }
 
 export interface ISearchedProfile extends ISearchedProfileBasic {
-  currentCompanyId: string;
+  currentCompanyId: string | number;
+  currentCompanyName: string;
+}
+
+export interface IDisplayedProfileHeadInfo {
+  fullName: string;
+  photoUrl: string;
+  currentPosition: string;
   currentCompanyName: string;
 }
 

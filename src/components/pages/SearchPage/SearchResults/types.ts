@@ -1,11 +1,11 @@
-import { IAppProfileInfo, ISearchProfileInfo } from 'commons/types/general';
+import { ISearchedProfile } from 'commons/types';
 
 export interface IOwnProps {
-  userSearchResults: ISearchProfileInfo[];
+  userSearchResults: ISearchedProfile[];
 }
 
 export interface IStateProps {
-  currentProfileInfo: IAppProfileInfo;
+  privateToken: string | null;
 }
 
 export interface IDispatchProps {

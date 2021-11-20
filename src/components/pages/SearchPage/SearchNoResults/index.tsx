@@ -11,7 +11,7 @@ import * as types from './types';
 import * as styled from '../styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentShareableId: store.profile.currentProfileInfo.currentShareableId
+  shareableId: store.profile.shareableId
 });
 
 function copyLink(link: string) {
@@ -32,7 +32,7 @@ const Title = (
 function SearchNoResults(props: types.IProps) {
   function handlerClick() {
     showToast('Ссылка скопирована');
-    copyLink(props.currentShareableId);
+    copyLink(props.shareableId as string);
   }
 
   const Button = (

@@ -3,13 +3,13 @@ import * as dispatchers from 'store';
 import * as types from './types';
 
 export const mapStepCStateToProps = (store: AppState): types.IStateProps => ({
-  mark: store.reviews.recommendationMark,
-  comment: store.reviews.recommendation
+  mark: store.reviews.marks[2],
+  comment: store.reviews.answers[2]
 });
 
 export const mapStepCDispatchToProps: types.IDispatchProps = {
-  clearPrevious: dispatchers.clearStrengths,
-  clearCurrent: dispatchers.clearRecommendationData,
-  setCurrentMark: dispatchers.setReviewRecommendationMark,
-  setCurrentComment: dispatchers.setReviewRecommendation
+  clearPrevious: dispatchers.popAnswerAndMark,
+  clearCurrent: dispatchers.popAnswerAndMark,
+  setCurrentMark: dispatchers.pushMark,
+  setCurrentComment: dispatchers.pushAnswer
 };

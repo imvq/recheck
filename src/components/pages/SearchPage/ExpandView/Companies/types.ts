@@ -1,14 +1,15 @@
-import { IAppProfileInfo, ICompany, ISearchProfileInfo } from 'commons/types/general';
+import { ICompanyWithMembers, ISearchedProfile } from 'commons/types';
 
 export interface IOwnProps {
-  recommendations: ICompany[];
+  recommendations: ICompanyWithMembers[];
   loadNextChunkCallback(chunk: number): void;
   onClose(): void;
 }
 
 export interface IStateProps {
-  currentProfileInfo: IAppProfileInfo;
-  recommendedCompaniesShownMembers: ISearchProfileInfo[];
+  privateToken: string | null;
+  shareableId: string | null;
+  recommendedCompaniesShownMembers: ISearchedProfile[];
 }
 
 export interface IDispatchProps {
@@ -16,7 +17,7 @@ export interface IDispatchProps {
   unlockPage(): void;
   setIsSearchPopupVisible(flag: boolean): void;
   setIsSpendFreeViewPopupVisible(flag: boolean): void;
-  setRecommendedCompaniesShownMembers(members: ISearchProfileInfo[]): void;
+  setRecommendedCompaniesShownMembers(members: ISearchedProfile[]): void;
   setRequestedUserShareableId(shareableId: string) : void;
 }
 

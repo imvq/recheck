@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
-import { AppState, loadObservedReviewsData, loadTargetNthReviewGot, setIsObservedPageLoading, setPageUnlocked } from 'store';
+import { AppState, setIsObservedPageLoading, setPageUnlocked } from 'store';
 
 import { ISearchedProfile } from 'commons/types';
 
@@ -21,13 +21,13 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
   isAuthorized: store.profile.isAuthorized,
   isLoading: store.interaction.isObservedReviewsPageLoading,
   isObservedReviewsPageLoading: store.interaction.isObservedReviewsPageLoading,
-  observedReviewsChunksAmount: store.interaction.observedReviewsChunksAmount,
-  currentReviewCardData: store.interaction.currentObservedReviewGot
+  observedReviewsChunksAmount: 0,
+  currentReviewCardData: null
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  loadObservedReviewsData,
-  loadNthReview: loadTargetNthReviewGot,
+  loadObservedReviewsData: () => {},
+  loadNthReview: () => {},
   setIsLoading: () => setIsObservedPageLoading(true),
   unlockPage: setPageUnlocked
 };

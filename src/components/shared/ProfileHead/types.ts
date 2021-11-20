@@ -1,9 +1,13 @@
-import { ISearchedProfile } from 'commons/types';
+import { IDisplayedProfileHeadInfo } from 'commons/types';
 
 export interface IOwnProps {
-  profileInfo: ISearchedProfile;
+  profileInfo: IDisplayedProfileHeadInfo;
   isSolid?: boolean;
   noButtons?: boolean;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {}
+
+export interface IDispatchProps {}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

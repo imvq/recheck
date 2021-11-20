@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 import { connect } from 'react-redux';
 
-import { ISearchProfileInfo } from 'commons/types/general';
+import { ISearchedProfile } from 'commons/types';
 import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 import {
@@ -26,7 +26,8 @@ import * as types from './types';
 import * as styled from '../styled';
 
 const mapSTateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo,
+  privateToken: store.profile.privateToken,
+  shareableId: store.profile.shareableId,
   recommendedCompaniesShownMembers: getRecommendedCompaniesShownMembersWithoutSelf(store)
 });
 
@@ -53,32 +54,30 @@ function Companies(props: types.IProps) {
   });
 
   function requestReviewsAmount(targetShareableId: string) {
-    apiClient.checkIsUserCanBeViewed({
-      askerProfileId: props.currentProfileInfo.currentId,
-      targetShareableId
-    }).then(checkData => {
-      if (checkData.data.success) {
-        jumpTo('/profile/observe/', targetShareableId);
-      } else {
-        apiClient.doesUserHasAvailableProfilesViews(props.currentProfileInfo.currentId)
-          .then(viewsAvailabilityData => {
-            if (viewsAvailabilityData.data.success) {
-              props.setIsSpendFreeViewPopupVisible(true);
-            } else {
-              props.setIsSearchPopupVisible(true);
-            }
-          })
-          .finally(props.unlockPage);
-      }
-    }).catch(error => {
-      // Any other errors are not meant to be seen while using the website interface.
-      if (error.response && error.response.status === StatusCodes.FORBIDDEN) {
-        props.setIsSearchPopupVisible(true);
-      }
-    }).finally(props.unlockPage);
+    apiClient.checkIfUserCanBeViewed(props.privateToken as string, targetShareableId)
+      .then(checkData => {
+        if (checkData.data.success) {
+          jumpTo('/profile/observe/', targetShareableId);
+        } else {
+          apiClient.checkIfUserHasViewsAvailable(props.privateToken as string)
+            .then(viewsAvailabilityData => {
+              if (viewsAvailabilityData.data.success) {
+                props.setIsSpendFreeViewPopupVisible(true);
+              } else {
+                props.setIsSearchPopupVisible(true);
+              }
+            })
+            .finally(props.unlockPage);
+        }
+      }).catch(error => {
+        // Any other errors are not meant to be seen while using the website interface.
+        if (error.response && error.response.status === StatusCodes.FORBIDDEN) {
+          props.setIsSearchPopupVisible(true);
+        }
+      }).finally(props.unlockPage);
   }
 
-  function handlePersonCardButtonClick(userData: ISearchProfileInfo) {
+  function handlePersonCardButtonClick(userData: ISearchedProfile) {
     props.lockPage();
     props.setRequestedUserShareableId(userData.shareableId);
     requestReviewsAmount(userData.shareableId);
@@ -94,7 +93,7 @@ function Companies(props: types.IProps) {
   ));
 
   const CurrentMembers = props.recommendedCompaniesShownMembers
-    .filter(member => member.shareableId !== props.currentProfileInfo.currentShareableId)
+    .filter(member => member.shareableId !== props.shareableId)
     .map(memberData => (
       <styled.CardWrapper key={memberData.shareableId}>
         <PersonCard

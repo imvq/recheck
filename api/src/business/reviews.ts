@@ -21,7 +21,7 @@ export async function createReview(request: Request, response: Response) {
   assertBodyData(privateToken, targetShareableId, content);
 
   const author = await accessors.readUserByPrivateToken(privateToken);
-  const existingReview = await accessors.readReview(privateToken, targetShareableId);
+  const existingReview = await accessors.readReview(author.id, targetShareableId);
 
   if (existingReview) {
     throw new errors.ConflictError('The review already exists');
@@ -112,4 +112,22 @@ export async function getNthLeftReview(request: Request, response: Response) {
 
   const review = mappers.normalizeReviewWithTarget(reviews[parseInt(n)]);
   reply(response, review);
+}
+
+/**
+ * Check if a user can leave a review to another one.
+ */
+export async function checkIfUserIsAvailableForReview(request: Request, response: Response) {
+  interface IBodyParams {
+    privateToken: string;
+    targetShareableId: string;
+  }
+
+  const { privateToken, targetShareableId }: IBodyParams = request.body;
+  assertBodyData(privateToken, targetShareableId);
+
+  const author = await accessors.readUserByPrivateToken(privateToken);
+  const review = await accessors.readReview(author.id, targetShareableId);
+
+  reply(response, { success: !review });
 }

@@ -1,11 +1,13 @@
-import { IAppProfileInfo, ISearchProfileInfo } from 'commons/types/general';
+import { ISearchedProfile } from 'commons/types';
+
+export interface IOwnProps {}
 
 export interface IStateProps {
+  privateToken: string | null;
   colleaguesState: {
-    colleagues: ISearchProfileInfo[];
+    colleagues: ISearchedProfile[];
     areLoaded: boolean;
   }
-  currentProfileInfo: IAppProfileInfo;
 }
 
 export interface IDispatchProps {
@@ -13,4 +15,4 @@ export interface IDispatchProps {
   unlockPage(): void;
 }
 
-export type IProps = IStateProps & IDispatchProps;
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

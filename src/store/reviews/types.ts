@@ -3,9 +3,8 @@ import { IReviewReceived } from 'commons/types';
 export const SET_CURRENT_REVIEW_TARGET_SHAREABLE_ID = 'SET_CURRENT_REVIEW_TARGET_SHAREABLE_ID';
 export const SET_QUESTIONS = 'SET_QUESTIONS';
 export const PUSH_ANSWER = 'PUSH_ANSWER';
-export const POP_ANSWER = 'POP_ANSWER';
+export const POP_ANSWER_AND_MARK = 'POP_ANSWER_AND_MARK';
 export const PUSH_MARK = 'PUSH_MARK';
-export const POP_MARK = 'POP_MARK';
 export const CLEAR_ANSWERS_AND_MARKS = 'CLEAR_ANSWERS_AND_MARKS';
 export const SET_RECEIVED_REVIEWS_AMOUNT = 'SET_RECEIVED_REVIEWS_AMOUNT';
 export const SET_LEFT_REVIEWS_AMOUNT = 'SET_LEFT_REVIEWS_AMOUNT';
@@ -38,17 +37,13 @@ export interface PushAnswer {
   payload: string;
 }
 
-export interface PopAnswer {
-  type: typeof POP_ANSWER
-}
-
 export interface PushMark {
   type: typeof PUSH_MARK,
   payload: number | null;
 }
 
-export interface PopMark {
-  type: typeof POP_MARK
+export interface PopAnswerAndMark {
+  type: typeof POP_ANSWER_AND_MARK
 }
 
 export interface ClearAnswersAndMarks {
@@ -79,9 +74,8 @@ export type IAction =
     SetCurrentReviewTargetShareableId
   | SetQuestions
   | PushAnswer
-  | PopAnswer
   | PushMark
-  | PopMark
+  | PopAnswerAndMark
   | ClearAnswersAndMarks
   | SetReceivedReviewsAmount
   | SetLeftReviewsAmount

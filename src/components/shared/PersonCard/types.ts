@@ -1,9 +1,13 @@
-import * as generalTypes from 'commons/types/general';
+import { ISearchedProfile } from 'commons/types';
 
 export interface IOwnProps {
   buttonText: string;
   onButtonClick(): void;
-  userData: generalTypes.ISearchProfileInfo;
+  userData: ISearchedProfile;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {}
+
+export interface IDispatchProps {}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

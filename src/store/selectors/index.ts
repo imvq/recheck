@@ -2,6 +2,25 @@ import { createSelector } from 'reselect';
 
 import * as primitive from './primitive';
 
+// Profile.
+
+export const getCurrentProfileInfo = createSelector(
+  [
+    primitive.getFullName,
+    primitive.getPhotoUrl,
+    primitive.getCurrentPosition,
+    primitive.getCurrentCompanyName
+  ],
+  (fullName, photoUrl, currentPosition, currentCompanyName) => {
+    return {
+      fullName,
+      photoUrl: photoUrl || '',
+      currentPosition: currentPosition || '',
+      currentCompanyName: currentCompanyName || ''
+    };
+  }
+);
+
 // Search.
 
 export const getQuickSearchMatchedUsersWithoutSelf = createSelector(

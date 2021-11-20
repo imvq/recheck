@@ -11,6 +11,7 @@ router.get('/profile', usersLogic.retrieveProfile);
 
 router.post('/availability/email', usersLogic.checkIfEmailIsAvailable);
 router.post('/availability/user', usersLogic.checkIfUserCanBeViewed);
+router.post('/availability/views', usersLogic.checkIfUserHasViewsAvailable);
 router.post('/availability/user/provide', usersLogic.makeUserAvailable);
 router.post('/registration/prepare', usersLogic.prepareUser);
 router.post('/registration/confirming/apply', usersLogic.confirmRegistration);

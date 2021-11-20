@@ -10,6 +10,22 @@ export function getCurrentShareableId(store: AppState) {
   return store.profile.shareableId;
 }
 
+export function getFullName(store: AppState) {
+  return store.profile.fullName;
+}
+
+export function getPhotoUrl(store: AppState) {
+  return store.profile.photoUrl;
+}
+
+export function getCurrentPosition(store: AppState) {
+  return store.profile.currentPosition;
+}
+
+export function getCurrentCompanyName(store: AppState) {
+  return store.profile.company?.name;
+}
+
 // Search.
 
 export function getQuickSearchMatchedUsers(store: AppState) {

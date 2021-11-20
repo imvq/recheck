@@ -2,24 +2,24 @@ import axios from 'axios';
 
 import * as commonTypes from 'commons/types';
 
-import { ApiPromise, ISearchedProfile } from 'commons/types';
+import { ApiPromise } from 'commons/types';
 
 const apiInstance = axios.create({ baseURL: process.env.REACT_APP_API });
 
-interface SimpleBooleanResponse {
+interface ISimpleBooleanResponse {
   success: boolean;
 }
 
-interface AccesstokenResponse {
+interface IAccesstokenResponse {
   accessToken: string;
 }
 
-interface AmountResponse {
+interface IAmountResponse {
   result: number;
 }
 
 export function exchangeLinkedInCode(authCode: string, redirectPath: string)
-  : ApiPromise<AccesstokenResponse> {
+  : ApiPromise<IAccesstokenResponse> {
   return apiInstance.post('/login/linkedin/exchange', { authCode, redirectPath });
 }
 
@@ -28,32 +28,37 @@ export function retrieveProfile(): ApiPromise<commonTypes.IUserSelf> {
 }
 
 export function checkIfEmailIsAvailable(email: string)
-  : ApiPromise<SimpleBooleanResponse> {
+  : ApiPromise<ISimpleBooleanResponse> {
   return apiInstance.post('/users/availability/email', email);
 }
 
 export function checkIfUserCanBeViewed(privateToken: string, targetShareableId: string)
-  : ApiPromise<SimpleBooleanResponse> {
+  : ApiPromise<ISimpleBooleanResponse> {
   return apiInstance.post('/users/availability/user', { privateToken, targetShareableId });
 }
 
+export function checkIfUserHasViewsAvailable(privateToken: string)
+  : ApiPromise<ISimpleBooleanResponse> {
+  return apiInstance.post('/users/availability/views', { privateToken });
+}
+
 export function makeUserAvailable(privateToken: string, targetShareableId: string)
-  : ApiPromise<SimpleBooleanResponse> {
+  : ApiPromise<ISimpleBooleanResponse> {
   return apiInstance.post('/availability/user/provide', { privateToken, targetShareableId });
 }
 
 export function prepareUser(preparationData: commonTypes.IUserPreparationData)
-  : ApiPromise<SimpleBooleanResponse> {
+  : ApiPromise<ISimpleBooleanResponse> {
   return apiInstance.post('/users/registration/prepare', preparationData);
 }
 
 export function resendConfirmation(privateToken: string, updatedEmail?: string)
-  : ApiPromise<SimpleBooleanResponse> {
+  : ApiPromise<ISimpleBooleanResponse> {
   return apiInstance.post('/users/registration/confirming/resend', { privateToken, updatedEmail });
 }
 
 export function completeRegistration(confirmationCode: string)
-  : ApiPromise<SimpleBooleanResponse> {
+  : ApiPromise<ISimpleBooleanResponse> {
   return apiInstance.post('/users/registration/confirming/apply', { confirmationCode });
 }
 
@@ -82,8 +87,13 @@ export function loadPredefinedCompanies(last: number)
   return apiInstance.get(`/search/predefined/companies/${last}`);
 }
 
+export function checkIsUserAvailableForReview(privateToken: string, targetShareableId: string)
+  : ApiPromise<ISimpleBooleanResponse> {
+  return apiInstance.post('/reviews/availability', { privateToken, targetShareableId });
+}
+
 export function getReceivedReviewsAmount(privateToken: string)
-  : ApiPromise<AmountResponse> {
+  : ApiPromise<IAmountResponse> {
   return apiInstance.get(`/reviews/${privateToken}/received/amount`);
 }
 
@@ -98,7 +108,7 @@ export function getNthLeftReview(privateToken: string, n: number | string)
 }
 
 export function getLeftReviewsAmount(privateToken: string)
-  : ApiPromise<AmountResponse> {
+  : ApiPromise<IAmountResponse> {
   return apiInstance.get(`/reviews/${privateToken}/left/amount`);
 }
 
@@ -108,6 +118,6 @@ export function getColleagues(privateToken: string)
 }
 
 export function createReview(privateToken: string, targetShareableId: string, content: string)
-  : ApiPromise<SimpleBooleanResponse> {
+  : ApiPromise<ISimpleBooleanResponse> {
   return apiInstance.post('/reviews/create', { privateToken, targetShareableId, content });
 }

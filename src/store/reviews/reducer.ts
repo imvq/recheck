@@ -4,7 +4,7 @@ const initialState: types.IState = {
   currentReviewTargetShareableId: null,
   questions: [],
   answers: [],
-  marks: [],
+  marks: [null, null],
   receivedReviewsAmount: 0,
   leftReviewsAmount: 0,
   currentObservedReceivedReview: null,
@@ -28,20 +28,16 @@ export const reviewsReducer = (state = initialState, action: types.IAction): typ
         ...state,
         answers: [...state.answers, action.payload]
       };
-    case types.POP_ANSWER:
+    case types.POP_ANSWER_AND_MARK:
       return {
         ...state,
-        answers: state.answers.slice(0, -1)
+        answers: state.answers.slice(0, -1),
+        marks: state.marks.slice(0, -1)
       };
     case types.PUSH_MARK:
       return {
         ...state,
         marks: [...state.marks, action.payload]
-      };
-    case types.POP_MARK:
-      return {
-        ...state,
-        marks: state.marks.slice(0, -1)
       };
     case types.CLEAR_ANSWERS_AND_MARKS:
       return {

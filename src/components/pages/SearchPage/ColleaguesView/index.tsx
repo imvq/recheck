@@ -13,8 +13,8 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  colleaguesState: store.search.colleaguesState,
-  currentProfileInfo: store.profile.currentProfileInfo
+  privateToken: store.profile.privateToken,
+  colleaguesState: store.search.colleaguesState
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -39,9 +39,7 @@ function ColleaguesView(props: types.IProps) {
   function checkIsUserAvailableForReview(targetShareableId: string) {
     props.lockPage();
 
-    const askerProfileId = props.currentProfileInfo.currentId;
-
-    apiClient.checkIsUserAvailableForReview({ askerProfileId, targetShareableId })
+    apiClient.checkIsUserAvailableForReview(props.privateToken as string, targetShareableId)
       .then(checkData => {
         if (checkData.data.success) {
           jumpTo('/review/', targetShareableId);

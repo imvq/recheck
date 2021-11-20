@@ -1,8 +1,8 @@
-import { IAppProfileInfo } from 'commons/types/general';
+import { IDisplayedProfileHeadInfo } from 'commons/types';
 import { MainToolbarEntry } from 'commons/types/unions';
 
 export interface IStateProps {
-  currentProfileInfo: IAppProfileInfo;
+  currentProfileInfo: IDisplayedProfileHeadInfo;
   currentMainToolbarEntry: MainToolbarEntry;
 }
 

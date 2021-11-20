@@ -212,10 +212,10 @@ export async function readReceivedReviewsAmount(targetShareableId: string) {
   }
 }
 
-export async function readReview(privateToken: string, targetShareableId: string) {
+export async function readReview(authorId: string, targetShareableId: string) {
   try {
     const accessor = sql('./sql/read/review.sql');
-    return database.oneOrNone(accessor, { privateToken, targetShareableId });
+    return database.oneOrNone(accessor, { authorId, targetShareableId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
   }

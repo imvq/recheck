@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import { mainToolbarEntries } from 'commons/types/unions';
 import { AppState } from 'store';
+import { getCurrentProfileInfo } from 'store/selectors';
 
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
@@ -14,7 +15,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo,
+  currentProfileInfo: getCurrentProfileInfo(store),
   currentMainToolbarEntry: store.interaction.currentMainToolbarEntry
 });
 

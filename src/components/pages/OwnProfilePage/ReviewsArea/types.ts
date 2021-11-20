@@ -1,4 +1,4 @@
-import { IReviewReceived } from 'commons/types';
+import { IReviewReceived, ISearchedProfileBasic } from 'commons/types';
 
 export interface IStateProps {
   privateToken: string | null;
@@ -13,7 +13,7 @@ export interface IDispatchProps {
   loadNthReview: (profileId: string, nthReview: number) => void;
   lockPage(): void;
   unlockPage(): void;
-  setColleagues(colleagues: Omit<ISearchProfileInfo, 'company'>[]): void;
+  setColleagues(colleagues: ISearchedProfileBasic[]): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

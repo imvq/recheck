@@ -1,8 +1,8 @@
-import { ICompany, ISearchProfileInfo } from 'commons/types/general';
+import { ICompanyWithMembers, ISearchedProfile } from 'commons/types';
 
 export interface IOwnProps {
-  companies: ICompany[];
-  setUserSearchResults(results: ISearchProfileInfo[]): void;
+  companies: ICompanyWithMembers[];
+  setUserSearchResults(results: ISearchedProfile[]): void;
 }
 
 export type IProps = IOwnProps;

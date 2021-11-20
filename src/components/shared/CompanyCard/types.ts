@@ -1,8 +1,12 @@
-import * as generalTypes from 'commons/types/general';
+import { ICompanyWithMembers, ISearchedProfile } from 'commons/types';
 
 export interface IOwnProps {
-  companyData: generalTypes.ICompany;
-  setCurrentMembers(members: generalTypes.ISearchProfileInfo[]): void;
+  companyData: ICompanyWithMembers;
+  setCurrentMembers(members: ISearchedProfile[]): void;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {}
+
+export interface IDispatchProps {}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

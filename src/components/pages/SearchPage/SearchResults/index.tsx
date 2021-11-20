@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { StatusCodes } from 'http-status-codes';
 import { connect } from 'react-redux';
 
-import { ISearchProfileInfo } from 'commons/types/general';
+import { ISearchedProfile } from 'commons/types';
 import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 import {
@@ -20,7 +20,7 @@ import * as types from './types';
 import * as styled from '../styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileInfo: store.profile.currentProfileInfo
+  privateToken: store.profile.privateToken
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -33,14 +33,14 @@ const mapDispatchToProps: types.IDispatchProps = {
 
 function SearchResults(props: types.IProps) {
   function processTarget(targetShareableId: string) {
-    apiClient.checkIsUserCanBeViewed({
-      askerProfileId: props.currentProfileInfo.currentId,
+    apiClient.checkIfUserCanBeViewed(
+      props.privateToken as string,
       targetShareableId
-    }).then(checkData => {
+    ).then(checkData => {
       if (checkData.data.success) {
         jumpTo('/profile/observe/', targetShareableId);
       } else {
-        apiClient.doesUserHasAvailableProfilesViews(props.currentProfileInfo.currentId)
+        apiClient.checkIfUserHasViewsAvailable(props.privateToken as string)
           .then(viewsAvailabilityData => {
             if (viewsAvailabilityData.data.success) {
               props.setIsSpendFreeViewPopupVisible(true);
@@ -58,7 +58,7 @@ function SearchResults(props: types.IProps) {
     }).finally(() => props.unlockPage());
   }
 
-  function handlePersonCardButtonClick(userData: ISearchProfileInfo) {
+  function handlePersonCardButtonClick(userData: ISearchedProfile) {
     props.lockPage();
     props.setRequestedUserShareableId(userData.shareableId);
     processTarget(userData.shareableId);

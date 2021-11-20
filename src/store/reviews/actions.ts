@@ -17,17 +17,13 @@ export const pushAnswer = (answer: string): types.IAction => ({
   payload: answer
 });
 
-export const popAnswer = (): types.IAction => ({
-  type: types.POP_ANSWER
-});
-
 export const pushMark = (mark: number | null): types.IAction => ({
   type: types.PUSH_MARK,
   payload: mark
 });
 
-export const popMark = (): types.IAction => ({
-  type: types.POP_MARK
+export const popAnswerAndMark = (): types.IAction => ({
+  type: types.POP_ANSWER_AND_MARK
 });
 
 export const clearAnswersAndMarks = (): types.IAction => ({

@@ -1,35 +1,40 @@
+import { memo } from 'react';
+
 import CustomButton from 'components/shared/CustomButton';
 
-import { mergeMembersWithCompany } from './functions';
-
+import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
-export default (props: types.IProps) => (
-  <styled.Wrapper>
-    <styled.TopBar />
-    <styled.BodyWrapper>
-      <styled.LogoWrapper>
-        <styled.Logo src={props.companyData.logoUrl || ''} />
-      </styled.LogoWrapper>
+function CompanyCard(props: types.IProps) {
+  return (
+    <styled.Wrapper>
+      <styled.TopBar />
+      <styled.BodyWrapper>
+        <styled.LogoWrapper>
+          <styled.Logo src={props.companyData.logoUrl || ''} />
+        </styled.LogoWrapper>
 
-      <styled.Span isEnlarged>{props.companyData.name}</styled.Span>
-      <styled.ButtonWrapper>
-        <CustomButton
-          isDisabled={!props.companyData.members.length}
-          isHollow
-          height='2.2rem'
-          color='#33c7ba'
-          onClick={() => {
-            props.setCurrentMembers(mergeMembersWithCompany(
-              props.companyData.members,
-              props.companyData
-            ));
-          }}
-        >
-          Посмотреть
-        </CustomButton>
-      </styled.ButtonWrapper>
-    </styled.BodyWrapper>
-  </styled.Wrapper>
-);
+        <styled.Span isEnlarged>{props.companyData.name}</styled.Span>
+        <styled.ButtonWrapper>
+          <CustomButton
+            isDisabled={!props.companyData.members.length}
+            isHollow
+            height='2.2rem'
+            color='#33c7ba'
+            onClick={() => {
+              props.setCurrentMembers(misc.mergeMembersWithCompany(
+                props.companyData.members,
+                props.companyData
+              ));
+            }}
+          >
+            Посмотреть
+          </CustomButton>
+        </styled.ButtonWrapper>
+      </styled.BodyWrapper>
+    </styled.Wrapper>
+  );
+}
+
+export default memo(CompanyCard);

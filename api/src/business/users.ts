@@ -58,6 +58,22 @@ export async function checkIfUserCanBeViewed(request: Request, response: Respons
 }
 
 /**
+ * Check if a user has free views.
+ */
+export async function checkIfUserHasViewsAvailable(request: Request, response: Response) {
+  interface IBodyParams {
+    privateToken: string;
+  }
+
+  const { privateToken }: IBodyParams = request.body;
+  assertBodyData(privateToken);
+
+  const user = await accessors.readUserByPrivateToken(privateToken);
+
+  reply(response, { success: parseInt(user['reviews_available']) > 0 });
+}
+
+/**
  * As there is no guarantee that users' photos are available all the time
  * (since they located on third-party resourses) the photos must be saved locally.
  *

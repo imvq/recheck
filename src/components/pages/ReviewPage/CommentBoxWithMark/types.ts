@@ -9,7 +9,7 @@ export interface IOwnProps {
 }
 
 export interface IStateProps {
-  mark: number;
+  mark: number | null;
   comment: string;
 }
 
