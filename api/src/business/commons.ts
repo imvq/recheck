@@ -15,7 +15,7 @@ export function reply(responseInjection: Response, message: object = successRepl
 }
 
 export class AccessToken {
-  private static testRegex = /(linkedin|google)@\w+/gm;
+  private static readonly testRegex = /^(linkedin|google)@\S+$/gm;
 
   private _socialMedia: 'linkedin' | 'google' | null = null;
 
@@ -40,11 +40,11 @@ export class AccessToken {
   }
 
   private parseAccessToken(fullToken: string) {
-    const parsed = [...fullToken.matchAll(AccessToken.testRegex)][0];
+    const parsed = fullToken.split('@');
 
-    if (AccessToken.isSocialMedia(parsed[1])) {
-      this._socialMedia = parsed[1];
-      this._tokenValue = parsed[2];
+    if (AccessToken.isSocialMedia(parsed[0])) {
+      this._socialMedia = parsed[0];
+      this._tokenValue = parsed[1];
     }
   }
 }

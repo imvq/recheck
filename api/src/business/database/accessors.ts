@@ -107,7 +107,7 @@ export async function readUserByPrivateToken(privateToken: string) {
 export async function readUserWithCompanyBySocialId(socialId: string) {
   try {
     const accessor = sql('./sql/read/userWithCompanyBySocialId.sql');
-    return database.oneOrNone(accessor, { socialId });
+    return await database.oneOrNone(accessor, { socialId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
   }
