@@ -1,7 +1,7 @@
 SELECT
     users.*,
     companies.id AS company_id,
-    companies.name AS company_name
+    companies.company_name AS company_name
 FROM
     name_tokens_bindings
     INNER JOIN name_tokens ON name_tokens_bindings.name_token_id = name_tokens.id

@@ -10,7 +10,8 @@
     "migration:run:down": "env-cmd -f .env.production db-migrate down",
     "prepare-media-dir": "cp -R ./media ./dist",
     "prepare-templates-dir": "mkdir ./dist/business -p && cp -R src/business/templates dist/business",
-    "prepare-dirs": "yarn run prepare-media-dir && yarn run prepare-templates-dir",
+    "prepare-sql-dir": "mkdir ./dist/business/database -p && cp -R src/business/database/sql dist/business/database",
+    "prepare-dirs": "yarn run prepare-media-dir && yarn run prepare-templates-dir && yarn run prepare-sql-dir",
     "prepare-all": "mkdir ./dist && yarn run prepare-dirs",
     "start": "rm -rf ./dist && yarn run prepare-all && env-cmd -f .env.development ts-node src/dev-watch",
     "build": "rm -rf ./dist && yarn run prepare-all && yarn run ecosystem:generate && env-cmd -f .env.production tsc"

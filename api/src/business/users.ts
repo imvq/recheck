@@ -286,9 +286,9 @@ async function retrieveSocialIdFromLinkedIn(accessToken: string) {
   try {
     const profileLink = 'https://api.linkedin.com/v2/me';
     const profileOptions = { headers: { Authorization: `Bearer ${accessToken}` } };
-    const profile = await axios.get<any, { id: string; }>(profileLink, profileOptions);
+    const profile = await axios.get(profileLink, profileOptions);
 
-    return profile.id;
+    return profile.data.id;
   } catch {
     throw new errors.ForbiddenError('LinkedIn refused to authorize.');
   }
