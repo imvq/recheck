@@ -20,7 +20,7 @@ export interface IState {
   email: string | null;
   photoUrl: string | null;
   currentPosition: string | null;
-  company: { id: string; name: string; } | null;
+  company: { id: number | string; name: string; } | null;
   currentWorkStartDay: { year: number; month: number; } | null;
 }
 
@@ -71,7 +71,7 @@ interface ISetCurrentPosition {
 
 interface ISetCompany {
   type: typeof SET_CURRENT_COMPANY;
-  payload: { id: string; name: string; };
+  payload: { id: number | string; name: string; };
 }
 
 interface ISetWorkStartPeriod {

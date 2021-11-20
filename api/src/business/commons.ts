@@ -15,8 +15,6 @@ export function reply(responseInjection: Response, message: object = successRepl
 }
 
 export class AccessToken {
-  private static readonly testRegex = /^(linkedin|google)@\S+$/gm;
-
   private _socialMedia: 'linkedin' | 'google' | null = null;
 
   private _tokenValue: string | null = null;
@@ -32,7 +30,7 @@ export class AccessToken {
   }
 
   private static testAccessToken(fullToken: any) {
-    return typeof fullToken === 'string' && AccessToken.testRegex.test(fullToken);
+    return typeof fullToken === 'string' && /^(linkedin|google)@\S+$/gm.test(fullToken);
   }
 
   private static isSocialMedia(maybeSocialMedia: any): maybeSocialMedia is 'linkedin' | 'google' {

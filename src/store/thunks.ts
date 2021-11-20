@@ -18,7 +18,7 @@ export function updateAuthorizationStatus() {
   return (dispatch: Dispatch<AppActionType>) => {
     if (cookieManager.get('accessToken')) {
       apiClient.retrieveProfile()
-        .then(profileData => loadProfileData(profileData))
+        .then(profileData => loadProfileData(dispatch, profileData))
         .catch(() => {
           cookieManager.remove('accessToken');
           dispatch(profileActions.setIsAuthorized(false));
@@ -31,18 +31,21 @@ export function updateAuthorizationStatus() {
   };
 }
 
-function loadProfileData(profileData: AxiosResponse<types.IUserSelf>) {
+function loadProfileData(
+  dispatch: Dispatch<AppActionType>,
+  profileData: AxiosResponse<types.IUserSelf>
+) {
   if (!profileData.data.registered) {
-    profileActions.setSocialId(profileData.data.socialId);
+    dispatch(profileActions.setSocialId(profileData.data.socialId));
     jumpTo('/register');
 
     return;
   }
 
   if (!profileData.data.confirmed) {
-    profileActions.setSocialId(profileData.data.socialId);
-    profileActions.setPrivateToken(profileData.data.privateToken);
-    profileActions.setEmail(profileData.data.email);
+    dispatch(profileActions.setSocialId(profileData.data.socialId));
+    dispatch(profileActions.setPrivateToken(profileData.data.privateToken as string));
+    dispatch(profileActions.setEmail(profileData.data.email as string));
     jumpTo('/await-user-confirmation');
 
     return;
@@ -51,17 +54,23 @@ function loadProfileData(profileData: AxiosResponse<types.IUserSelf>) {
   const { companyId, companyName } = profileData.data;
   const { currentWorkYearFrom: year, currentWorkMonthFrom: month } = profileData.data;
 
-  profileActions.setPrivateToken(profileData.data.privateToken);
-  profileActions.setShareableId(profileData.data.shareableId);
-  profileActions.setSocialId(profileData.data.socialId);
-  profileActions.setFullName(profileData.data.fullName);
-  profileActions.setEmail(profileData.data.email);
-  profileActions.setPhotoUrl(profileData.data.photoUrl);
-  profileActions.setCurrentPosition(profileData.data.currentPosition);
-  profileActions.setCurrentCompany({ id: companyId, name: companyName });
-  profileActions.setCurrentWorkStarPeriod({ year, month });
+  dispatch(profileActions.setPrivateToken(profileData.data.privateToken as string));
+  dispatch(profileActions.setShareableId(profileData.data.shareableId as string));
+  dispatch(profileActions.setSocialId(profileData.data.socialId));
+  dispatch(profileActions.setFullName(profileData.data.fullName as string));
+  dispatch(profileActions.setEmail(profileData.data.email as string));
+  dispatch(profileActions.setPhotoUrl(profileData.data.photoUrl as string));
+  dispatch(profileActions.setCurrentPosition(profileData.data.currentPosition as string));
+  dispatch(profileActions.setCurrentCompany({
+    id: companyId as string,
+    name: companyName as string
+  }));
+  dispatch(profileActions.setCurrentWorkStarPeriod({
+    year: year as number,
+    month: month as number
+  }));
 
-  profileActions.setIsAuthorized(true);
+  dispatch(profileActions.setIsAuthorized(true));
 
   jumpTo('/profile');
 }

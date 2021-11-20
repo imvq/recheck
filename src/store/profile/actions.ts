@@ -45,7 +45,8 @@ export const setCurrentPosition = (currentPosition: string): types.IAction => ({
   payload: currentPosition
 });
 
-export const setCurrentCompany = (company: { id: string; name: string; }): types.IAction => ({
+export const setCurrentCompany = (company: { id: number | string; name: string; })
+  : types.IAction => ({
   type: types.SET_CURRENT_COMPANY,
   payload: company
 });

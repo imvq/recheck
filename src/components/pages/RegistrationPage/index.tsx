@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 import ScaleStage2 from 'assets/images/pages/RegistrationPage/ScaleStage2.png';
@@ -23,10 +23,11 @@ function RegistrationPage(props: types.IProps) {
   // because they cannot be authorized before they become registered.
   // However, only those users who passed social network authorization are allowed to be registered.
   // Therefore, we have to filter and redirect home those who don't have a social ID stored.
-  if (!props.socialId) {
-    jumpTo('/');
-    return null;
-  }
+  useEffect(() => {
+    if (!props.socialId) {
+      jumpTo('/');
+    }
+  });
 
   // When user press registretion button
   // we must show a popup telling that they must check their email.

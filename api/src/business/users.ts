@@ -273,7 +273,7 @@ export async function retrieveProfile(request: Request, response: Response) {
     const socialId = await retrieveSocialIdFromLinkedIn(accessToken.tokenValue);
     const savedLocalUser = await retrieveLocalProfileData(socialId);
 
-    reply(response, { result: savedLocalUser });
+    reply(response, savedLocalUser);
   }
 
   // TODO: Google profile retrieving.

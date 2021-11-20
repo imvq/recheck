@@ -108,17 +108,17 @@ export interface ISelectOptionType {
 export interface IUserSelf {
   registered: boolean;
   confirmed: boolean;
-  privateToken: string;
-  shareableId: string;
+  privateToken?: string;
+  shareableId?: string;
   socialId: string;
-  fullName: string;
-  email: string;
-  photoUrl: string;
-  currentPosition: string;
-  currentWorkYearFrom: number;
-  currentWorkMonthFrom: number;
-  companyId: string;
-  companyName: string;
+  fullName?: string;
+  email?: string;
+  photoUrl?: string;
+  currentPosition?: string;
+  currentWorkYearFrom?: number;
+  currentWorkMonthFrom?: number;
+  companyId?: string;
+  companyName?: string;
 }
 
 export interface IUserPreparationData {
