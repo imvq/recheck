@@ -14,7 +14,7 @@ import * as searchActions from './search/actions';
 
 import { AppActionType } from './types';
 
-export async function updateAuthorizationStatus() {
+export function updateAuthorizationStatus() {
   return (dispatch: Dispatch<AppActionType>) => {
     if (cookieManager.get('accessToken')) {
       apiClient.retrieveProfile()
