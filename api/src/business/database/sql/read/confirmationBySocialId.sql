@@ -2,6 +2,6 @@ SELECT
     *
 FROM
     confirmations
-    INNER JOIN users ON confirmations.id = users.id
+    INNER JOIN users ON confirmations.user_id = users.id
 WHERE
-    users.social_id = ${userSocialId};
+    users.social_id = ${socialId};
