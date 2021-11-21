@@ -87,7 +87,7 @@ async function saveUserPhoto(photoUrl: string, userSocialId: string) {
     await downloadPhoto(photoUrl, localPhotoPath);
     return localPhotoPath;
   } catch {
-    return `${process.env.ORIGIN}/media/user-default.png`;
+    return `${process.env.API_ORIGIN || process.env.ORIGIN}/media/user-default.png`;
   }
 }
 
@@ -155,11 +155,14 @@ export async function prepareUser(request: Request, response: Response) {
 
   const createdUser = mappers.normalizeCreatedUser(createdUserEntity);
 
+  const confirmationEntity = await accessors.createConfirmation(createdUser.id);
+  const confirmation = mappers.normalizeConfirmation(confirmationEntity);
+
   // The ID is guaranteed to be defined.
   await nameTokensLogic.saveName(createdUser.id, fullName);
 
   // All the fields are guaranteed to be defined.
-  await sendFirstConfirmation(createdUser.email, createdUser.confirmationCode);
+  await sendFirstConfirmation(createdUser.email, confirmation.codeValue);
 
   reply(response);
 }

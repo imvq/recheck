@@ -23,6 +23,16 @@ export async function createCompany(name: string | null) {
   }
 }
 
+export async function createConfirmation(userId: string) {
+  try {
+    const accessor = sql('./sql/create/confirmation.sql');
+    return await database.one(accessor, { userId });
+  } catch (e) {
+    console.log(e);
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
 export async function createUser(parameters: any) {
   try {
     const accessor = sql('./sql/create/user.sql');

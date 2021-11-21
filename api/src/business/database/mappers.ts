@@ -6,8 +6,11 @@ export const normalizeCompany = (entity: any) => ({
 
 export const normalizeCreatedUser = (entity: any) => ({
   id: `${entity['id']}`,
-  email: `${entity['email']}`,
-  confirmationCode: `${entity['confirmation_code']}`
+  email: `${entity['email']}`
+});
+
+export const normalizeConfirmation = (entity: any) => ({
+  codeValue: entity['code_value']
 });
 
 export const normalizePublicUserInfo = (entity: any) => ({
