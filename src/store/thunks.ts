@@ -51,7 +51,7 @@ function loadProfileData(
     return;
   }
 
-  const { companyId, companyName } = profileData.data;
+  const { currentCompanyId: companyId, currentCompanyName: companyName } = profileData.data;
   const { currentWorkYearFrom: year, currentWorkMonthFrom: month } = profileData.data;
 
   dispatch(profileActions.setPrivateToken(profileData.data.privateToken as string));

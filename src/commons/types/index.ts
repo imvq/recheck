@@ -117,8 +117,8 @@ export interface IUserSelf {
   currentPosition?: string;
   currentWorkYearFrom?: number;
   currentWorkMonthFrom?: number;
-  companyId?: string;
-  companyName?: string;
+  currentCompanyId?: string;
+  currentCompanyName?: string;
 }
 
 export interface IUserPreparationData {
