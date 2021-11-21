@@ -29,7 +29,7 @@ export function retrieveProfile(): ApiPromise<commonTypes.IUserSelf> {
 
 export function checkIfEmailIsAvailable(email: string)
   : ApiPromise<ISimpleBooleanResponse> {
-  return apiInstance.post('/users/availability/email', email);
+  return apiInstance.post('/users/availability/email', { email });
 }
 
 export function checkIfUserCanBeViewed(privateToken: string, targetShareableId: string)
