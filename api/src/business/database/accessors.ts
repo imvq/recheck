@@ -133,7 +133,8 @@ export async function readUsersWithPredefinedCompanies(last: string) {
 
 export async function readUserWithCompanyByShareableId(shareableId: string) {
   try {
-    const accessor = sql('./sql/read/userWithCompanyByShareableId');
+    console.log(shareableId);
+    const accessor = sql('./sql/read/userWithCompanyByShareableId.sql');
     return await database.oneOrNone(accessor, { shareableId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
