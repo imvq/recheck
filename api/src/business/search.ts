@@ -67,9 +67,9 @@ export async function quickSearchCompanies(request: Request, response: Response)
   const { sequence }: IBodyParams = request.body;
   assertBodyData(sequence);
 
-  const results = await accessors.readCompaniesMatched(sequence);
+  const results = await accessors.readCompaniesMatched(`${sequence.toLocaleLowerCase()}%`);
 
-  reply(response, results);
+  reply(response, results.map(company => mappers.normalizeCompany(company)));
 }
 
 /**

@@ -1,3 +1,9 @@
+export const normalizeCompany = (entity: any) => ({
+  id: `${entity['id']}`,
+  name: `${entity['company_name']}`,
+  logoUrl: `${entity['logo_url']}`
+});
+
 export const normalizeCreatedUser = (entity: any) => ({
   id: `${entity['id']}`,
   email: `${entity['email']}`,
