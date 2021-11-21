@@ -44,6 +44,7 @@ export default class BackendApplication {
   });
 
   private registerMidlewares() {
+    this.app.use('/media', express.static('media'));
     this.app.use(cors({ credentials: true, origin: process.env.ORIGIN || '*' }));
     this.app.use(express.json());
     this.app.use(cookieParser());

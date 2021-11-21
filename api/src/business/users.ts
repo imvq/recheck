@@ -87,7 +87,7 @@ async function saveUserPhoto(photoUrl: string, userSocialId: string) {
     await downloadPhoto(photoUrl, localPhotoPath);
     return localPhotoPath;
   } catch {
-    return 'media/user-default.png';
+    return `${process.env.ORIGIN}/media/user-default.png`;
   }
 }
 
