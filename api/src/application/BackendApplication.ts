@@ -53,8 +53,9 @@ export default class BackendApplication {
 
   private applyControllers() {
     this.app.use('/api/v1/login', require('@controllers/login').default);
-    this.app.use('/api/v1/users', require('@controllers/users').default);
+    this.app.use('/api/v1/reviews', require('@controllers/reviews').default);
     this.app.use('/api/v1/search', require('@controllers/search').default);
+    this.app.use('/api/v1/users', require('@controllers/users').default);
   }
 
   private applyJsonErrorHandler() {
