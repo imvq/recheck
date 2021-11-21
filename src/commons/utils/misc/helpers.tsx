@@ -10,7 +10,7 @@ import { cookieManager } from 'commons/utils/services/cookies';
 
 export function onExit(lockPageCallback: () => void) {
   lockPageCallback();
-  cookieManager.remove('access_token');
+  cookieManager.remove('accessToken');
   window.location.replace(window.location.origin);
 }
 
