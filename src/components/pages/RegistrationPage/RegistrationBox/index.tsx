@@ -16,6 +16,7 @@ import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
+  socialId: store.profile.socialId,
   matchedCompanies: store.search.quickSearchMatchedCompanies,
   inviter: store.profile.inviterShareableId
 });
@@ -87,7 +88,7 @@ function RegistrationBox(props: types.IProps) {
   function proceedIfAllowed() {
     if (canProceed) {
       props.onRegisterButtonPressed({
-        socialId: '',
+        socialId: props.socialId as string,
         inviterId: props.inviter,
         fullName,
         photoUrl: null,

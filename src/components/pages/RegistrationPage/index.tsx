@@ -38,7 +38,7 @@ function RegistrationPage(props: types.IProps) {
 
   function prepareUser(userPreparationData: IUserPreparationData) {
     apiClient.prepareUser(userPreparationData)
-      .finally(() => {
+      .then(() => {
         setEmailToShow(userPreparationData.email);
         setIsConfirmationVisible(true);
       });

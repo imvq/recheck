@@ -118,15 +118,14 @@ export async function prepareUser(request: Request, response: Response) {
     fullName: string;
     photoUrl: string;
     currentPosition: string;
-    companyId: string;
-    createdCompanyName: string | null;
+    company: { id: string; name: string | null; }
     currentWorkYearFrom: number;
     currentWorkMonthFrom: number;
   }
 
   const { photoUrl = constants.DEFAULT_PHOTO_PLACEHOLDER_URL, ...rest }: IBodyParams = request.body;
-  const { email, inviterId, socialId, fullName, companyId, createdCompanyName } = rest;
-  assertBodyData(photoUrl, email, inviterId, socialId, fullName, companyId, createdCompanyName);
+  const { email, inviterId, socialId, fullName, company } = rest;
+  assertBodyData(photoUrl, email, inviterId, socialId, fullName, company);
 
   // We have to check for conflicts despite existing API checker
   // since we cannot expext the API's users to make all needed checks before calling
@@ -143,7 +142,7 @@ export async function prepareUser(request: Request, response: Response) {
   }
 
   // Get predefined company if found otherwice create a new one and use it.
-  const company = await getPreparedCompany(companyId, createdCompanyName);
+  const companyEntity = await getPreparedCompany(company.id, company.name);
 
   // Save user photo at the server (or provide link to a default placeholder).
   const savedPhotoUrl = await saveUserPhoto(photoUrl, socialId);
@@ -151,7 +150,7 @@ export async function prepareUser(request: Request, response: Response) {
   const createdUserEntity = await accessors.createUser({
     ...request.body,
     photoUrl: savedPhotoUrl,
-    companyId: company.id
+    companyId: companyEntity.id
   });
 
   const createdUser = mappers.normalizeCreatedUser(createdUserEntity);

@@ -3,4 +3,4 @@ SELECT
 FROM
     companies
 WHERE
-    id = ${id};
+    id = ${companyId};

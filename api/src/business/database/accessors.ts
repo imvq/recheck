@@ -115,7 +115,7 @@ export async function readUserWithCompanyBySocialId(socialId: string) {
 
 export async function readUserBySocialId(socialId: string) {
   try {
-    const accessor = sql('./sql/read/userBySocialId');
+    const accessor = sql('./sql/read/userBySocialId.sql');
     return await database.oneOrNone(accessor, { socialId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');

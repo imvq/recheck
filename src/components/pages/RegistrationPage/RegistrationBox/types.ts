@@ -13,6 +13,7 @@ export interface IOwnProps {
 }
 
 export interface IStateProps {
+  socialId: string | null;
   matchedCompanies: ICompany[];
   inviter: string | null;
 }
