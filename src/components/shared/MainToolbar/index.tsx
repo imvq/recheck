@@ -14,9 +14,14 @@ import MenuEntry from './MenuEntry';
 import * as types from './types';
 import * as styled from './styled';
 
-function copyLink(link: string) {
-  navigator.clipboard.writeText(`${window.location.origin}?referral=${link}`);
-  showToast('Ссылка приглашения скопирована. Отправьте её кандидату');
+function copyInviteLink(targetShareableId: string) {
+  navigator.clipboard.writeText(`${window.location.origin}?inviter=${targetShareableId}`);
+  showToast('Ссылка приглашения скопирована.');
+}
+
+function copyReviewLink(targetShareableId: string) {
+  navigator.clipboard.writeText(`${window.location.origin}/review/create/${targetShareableId}`);
+  showToast('Ссылка на оставление отзыва скопирована.');
 }
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
@@ -106,8 +111,14 @@ function MainToolbar(props: types.IProps) {
         </styled.ButtonsGroupWrapper>
 
         <styled.ButtonWrapper>
-          <FakeEntry onClick={() => copyLink(props.shareableId as string)}>
+          <FakeEntry onClick={() => copyInviteLink(props.shareableId as string)}>
             Пригласить кандидата
+          </FakeEntry>
+        </styled.ButtonWrapper>
+
+        <styled.ButtonWrapper>
+          <FakeEntry onClick={() => copyReviewLink(props.shareableId as string)}>
+            Запросить отзыв о себе
           </FakeEntry>
         </styled.ButtonWrapper>
 
