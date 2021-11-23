@@ -8,7 +8,7 @@ const cssVarsLocal = {
   defaultHeight: '3rem'
 };
 
-export const Wrapper = styled.button<IStyledProps>`
+export const CustomButton = styled.button<IStyledProps>`
   cursor: pointer;
   display: flex;
   justify-content: center;

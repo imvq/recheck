@@ -12,6 +12,10 @@ export interface IStyledOwnProps {
 
 export type IStyledProps = IStyledOwnProps;
 
-export type IOwnProps = IStyledOwnProps & { onClick?: () => void };
+export type IOwnProps = PropsWithChildren<IStyledOwnProps & { onClick?: () => void }>;
 
-export type IProps = PropsWithChildren<IOwnProps>;
+export interface IStateProps {}
+
+export interface IDispatchProps {}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

@@ -13,10 +13,6 @@ import * as styled from '../../../shared/BoxBase';
 
 /**
  * Higher order component for generating comment review box with mark selector.
- *
- * @param mapStateToProps State mapper function
- * @param mapDispatchToProps Dispatch mapper object
- * @returns Redux-connected component
  */
 export default function CommentBoxWithMark(
   mapStateToProps: types.IStatePropsMapped,
