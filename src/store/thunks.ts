@@ -154,7 +154,7 @@ export function createReview(
   return (dispatch: Dispatch<AppActionType>) => {
     const content = JSON.stringify({
       questions: reviewData.questions,
-      answers: reviewData.answers,
+      answers: reviewData.comments,
       marks: reviewData.marks
     });
 

@@ -1,24 +1,12 @@
-import { AppState } from 'store';
-
 export interface IOwnProps {
-  page: number;
-  onNextStep(): void;
-  onBack(): void;
+  pageLabel: string;
+  onStepBack(): void;
+  onStepForward(commentToPush: string): void;
   children: string;
 }
 
-export interface IStateProps {
-  comment: string;
-}
+export interface IStateProps {}
 
-export interface IStatePropsMapped {
-  (store: AppState): IStateProps;
-}
-
-export interface IDispatchProps {
-  clearPrevious: (() => void) | null;
-  clearCurrent(): void;
-  setCurrent(value: string): void;
-}
+export interface IDispatchProps {}
 
 export type IProps = IOwnProps & IStateProps & IDispatchProps;

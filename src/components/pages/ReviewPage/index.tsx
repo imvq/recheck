@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react';
+import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { ISearchedProfile } from 'commons/types';
 import { jumpBack, jumpTo } from 'commons/utils/misc';
-import { apiClient, cookieManager } from 'commons/utils/services';
+import { apiClient } from 'commons/utils/services';
 import {
   AppState,
+  pushAnswer,
+  popAnswer,
   setIsLoginPopupVisible,
   setCurrentReviewTargetShareableId,
   setPageLocked,
@@ -18,13 +20,10 @@ import { createReview } from 'store/thunks';
 import AuthPopupManager from 'components/shared/AuthPopupManager';
 import ProfileHead from 'components/shared/ProfileHead';
 
-import * as boxSimpleMapping from './CommentBoxSimple/mapping';
-import * as boxWithMarkLabels from './CommentBoxWithMark/labels';
-import * as boxWithMarkMapping from './CommentBoxWithMark/mapping';
-
 import CommentBoxSimple from './CommentBoxSimple';
 import ComponentBoxWithMark from './CommentBoxWithMark';
 
+import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
@@ -38,41 +37,13 @@ const mapSateToProps = (store: AppState): types.IStateProps => ({
 
 const mapDispatchToProps: types.IDispatchProps = {
   createReview,
+  pushAnswer,
+  popAnswer,
   setIsLoginPopupVisible,
   setCurrentReviewTargetShareableId,
   lockPage: setPageLocked,
   unlockPage: setPageUnlocked
 };
-
-const BoxStepA = CommentBoxSimple(
-  boxSimpleMapping.mapStepAStateToProps,
-  boxSimpleMapping.mapStepADispatchToProps
-);
-
-const BoxStepB = CommentBoxSimple(
-  boxSimpleMapping.mapStepBStateToProps,
-  boxSimpleMapping.mapStepBDispatchToProps
-);
-
-const BoxStepC = ComponentBoxWithMark(
-  boxWithMarkMapping.mapStepCStateToProps,
-  boxWithMarkMapping.mapStepCDispatchToProps
-);
-
-function postRedirect(requestedUserShareableId: string | null) {
-  if (requestedUserShareableId) {
-    jumpTo('/profile/observe/', requestedUserShareableId);
-    return;
-  }
-
-  jumpTo('/profile');
-}
-
-function saveReviewToCookies(review: any) {
-  const expires = new Date();
-  expires.setFullYear(expires.getFullYear() + 1);
-  cookieManager.set('preparedReview', review, { expires });
-}
 
 /**
  * Page in charge of adding a review.
@@ -83,9 +54,35 @@ function ReviewPage(props: types.IProps) {
   const [observedUser, setObservedUser] = useState<ISearchedProfile>();
   const [step, setStep] = useState(0);
 
-  const proceed = () => setStep(step + 1);
+  function proceed(comment: string, mark: number | null = null) {
+    props.pushAnswer(comment, mark);
+    setStep(step + 1);
+  }
 
-  const comeback = () => setStep(step - 1);
+  function comeback() {
+    props.popAnswer();
+    setStep(step - 1);
+  }
+
+  function finalize(comment: string, mark: number | null = null) {
+    props.pushAnswer(comment, mark);
+
+    // If an uthorized user has not been redirected yet (with PageAccessGuard),
+    // that means it is registered and confirmed,
+    // therefore, the conditions of the second scenario (look at the first useEffect)
+    // are satisfied.
+    if (props.isAuthorized) {
+      props.createReview(
+        props.privateToken as string,
+        targetShareableId,
+        props.reviewData,
+        () => misc.postRedirect(props.requestedUserShareableId)
+      );
+    } else {
+      misc.saveReviewLocally(JSON.stringify(props.reviewData));
+      props.setIsLoginPopupVisible(true);
+    }
+  }
 
   // We must check if there is a user with provided shareable ID.
   // If not, then we must redirect to 404 page since there's no one to review.
@@ -121,34 +118,24 @@ function ReviewPage(props: types.IProps) {
     // TODO: check if the target is connected.
   }, [props.isAuthorized]);
 
-  function finalize() {
-    // If an uthorized user has not been redirected yet (with PageAccessGuard),
-    // that means it is registered and confirmed,
-    // therefore, the conditions of the second scenario (look at the first useEffect)
-    // are satisfied.
-    if (props.isAuthorized) {
-      props.createReview(
-        props.privateToken as string,
-        targetShareableId,
-        props.reviewData,
-        () => postRedirect(props.requestedUserShareableId)
-      );
-    } else {
-      saveReviewToCookies(props.reviewData);
-      props.setIsLoginPopupVisible(true);
-    }
-  }
-
   const boxes = [
-    <BoxStepA page={1} onNextStep={proceed} onBack={jumpBack}>
+    <CommentBoxSimple key={1} pageLabel='1 / 3' onStepForward={proceed} onStepBack={jumpBack}>
       Опишите какие задачи и обязанности были у кандидата. Как он с ними справился?
-    </BoxStepA>,
-    <BoxStepB page={2} onNextStep={proceed} onBack={comeback}>
+    </CommentBoxSimple>,
+
+    <CommentBoxSimple key={2} pageLabel='2 / 3' onStepForward={proceed} onStepBack={comeback}>
       Опишите сильные стороны кандидата в работе
-    </BoxStepB>,
-    <BoxStepC page={3} onNextStep={finalize} onBack={comeback} labels={boxWithMarkLabels.stepC}>
+    </CommentBoxSimple>,
+
+    <ComponentBoxWithMark
+      key={3}
+      pageLabel='3 / 3'
+      onStepForward={finalize}
+      onStepBack={comeback}
+      labels={['Не рекомендую', 'Рекомендую', 'Превзошёл ожидания']}
+    >
       Насколько вероятно, что вы порекомендуете кандидата?
-    </BoxStepC>
+    </ComponentBoxWithMark>
   ];
 
   const GuardedContent = (
@@ -172,4 +159,4 @@ function ReviewPage(props: types.IProps) {
   return props.isPageLocked ? null : GuardedContent;
 }
 
-export default connect(mapSateToProps, mapDispatchToProps)(ReviewPage);
+export default connect(mapSateToProps, mapDispatchToProps)(memo(ReviewPage));

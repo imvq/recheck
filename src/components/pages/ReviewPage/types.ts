@@ -1,5 +1,4 @@
 import { IReviewCreated, IReviewCreator } from 'commons/types';
-import { MainToolbarEntry } from 'commons/types/unions';
 
 export interface IOwnProps {}
 
@@ -13,6 +12,8 @@ export interface IStateProps {
 
 export interface IDispatchProps {
   setCurrentReviewTargetShareableId(shareableId: string): void;
+  pushAnswer(comment: string, mark: number | null): void;
+  popAnswer(): void
   createReview: IReviewCreator;
   setIsLoginPopupVisible(flag: boolean): void;
   lockPage(): void;

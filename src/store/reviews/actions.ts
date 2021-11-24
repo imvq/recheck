@@ -12,22 +12,17 @@ export const setQuestions = (questions: string[]): types.IAction => ({
   payload: questions
 });
 
-export const pushAnswer = (answer: string): types.IAction => ({
+export const pushAnswer = (comment: string, mark: number | null): types.IAction => ({
   type: types.PUSH_ANSWER,
-  payload: answer
+  payload: { comment, mark }
 });
 
-export const pushMark = (mark: number | null): types.IAction => ({
-  type: types.PUSH_MARK,
-  payload: mark
-});
-
-export const popAnswerAndMark = (): types.IAction => ({
-  type: types.POP_ANSWER_AND_MARK
+export const popAnswer = (): types.IAction => ({
+  type: types.POP_ANSWER
 });
 
 export const clearAnswersAndMarks = (): types.IAction => ({
-  type: types.CLEAR_ANSWERS_AND_MARKS
+  type: types.CLEAR_ANSWERS
 });
 
 export const setReceivedReviewsAmount = (amount: number): types.IAction => ({

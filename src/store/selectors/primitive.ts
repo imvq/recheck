@@ -47,9 +47,9 @@ export function getCreatedReviewQuestions(store: AppState) {
 }
 
 export function getCreatedReviewAnswers(store: AppState) {
-  return store.reviews.answers;
+  return store.reviews.currentReviewComments;
 }
 
 export function getCreatedReviewMarks(store: AppState) {
-  return store.reviews.marks;
+  return store.reviews.currentReviewMarks;
 }

@@ -3,8 +3,8 @@ import * as types from './types';
 const initialState: types.IState = {
   currentReviewTargetShareableId: null,
   questions: [],
-  answers: [],
-  marks: [null, null],
+  currentReviewComments: [],
+  currentReviewMarks: [],
   receivedReviewsAmount: 0,
   leftReviewsAmount: 0,
   currentObservedReceivedReview: null,
@@ -26,24 +26,20 @@ export const reviewsReducer = (state = initialState, action: types.IAction): typ
     case types.PUSH_ANSWER:
       return {
         ...state,
-        answers: [...state.answers, action.payload]
+        currentReviewComments: [...state.currentReviewComments, action.payload.comment],
+        currentReviewMarks: [...state.currentReviewMarks, action.payload.mark]
       };
-    case types.POP_ANSWER_AND_MARK:
+    case types.POP_ANSWER:
       return {
         ...state,
-        answers: state.answers.slice(0, -1),
-        marks: state.marks.slice(0, -1)
+        currentReviewComments: state.currentReviewComments.slice(0, -1),
+        currentReviewMarks: state.currentReviewMarks.slice(0, -1)
       };
-    case types.PUSH_MARK:
+    case types.CLEAR_ANSWERS:
       return {
         ...state,
-        marks: [...state.marks, action.payload]
-      };
-    case types.CLEAR_ANSWERS_AND_MARKS:
-      return {
-        ...state,
-        answers: [],
-        marks: []
+        currentReviewComments: [],
+        currentReviewMarks: []
       };
     case types.SET_RECEIVED_REVIEWS_AMOUNT:
       return {

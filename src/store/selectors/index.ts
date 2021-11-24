@@ -53,8 +53,8 @@ export const getUntargetedCreatedReview = createSelector(
     primitive.getCreatedReviewAnswers,
     primitive.getCreatedReviewMarks
   ],
-  (privateToken, questions, answers, marks) => {
+  (privateToken, questions, comments, marks) => {
     // Private token is guaranteed to be defined when the selector is used.
-    return { privateToken: privateToken || '', questions, answers, marks };
+    return { privateToken: privateToken || '', questions, comments, marks };
   }
 );
