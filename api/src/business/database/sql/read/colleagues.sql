@@ -4,4 +4,5 @@ FROM
     users
     INNER JOIN companies ON users.company_id = companies.id
 WHERE
-    users.company_id = ${companyId};
+    users.company_id = ${companyId}
+    AND users.private_token <> ${privateToken};

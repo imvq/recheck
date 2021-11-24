@@ -78,10 +78,10 @@ export async function createUserAvailability(ownerId: string, targetShareableId:
   }
 }
 
-export async function readColleagues(companyId: string) {
+export async function readColleagues(privateToken: string, companyId: string) {
   try {
     const accessor = sql('./sql/read/colleagues.sql');
-    return await database.manyOrNone(accessor, { companyId });
+    return await database.manyOrNone(accessor, { privateToken, companyId });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
   }
@@ -111,6 +111,15 @@ export async function readUserByPrivateToken(privateToken: string) {
     return await database.one(accessor, { privateToken });
   } catch {
     throw new errors.ForbiddenError('Unacceptable private token.');
+  }
+}
+
+export async function readUserWithCompanyByPrivateToken(privateToken: string) {
+  try {
+    const accessor = sql('./sql/read/userWithCompanyByPrivateToken.sql');
+    return await database.oneOrNone(accessor, { privateToken });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
   }
 }
 

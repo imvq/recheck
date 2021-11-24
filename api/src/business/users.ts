@@ -331,8 +331,10 @@ export async function getColleagues(request: Request, response: Response) {
   const { privateToken }: IBodyParams = request.body;
   assertBodyData(privateToken);
 
-  const user = await accessors.readUserByPrivateToken(privateToken);
-  const colleagues = await accessors.readColleagues(user['company_id']);
+  const userEntity = await accessors.readUserWithCompanyByPrivateToken(privateToken);
+  const user = mappers.normalizePersonalUserInfo(userEntity);
+
+  const colleagues = await accessors.readColleagues(user.privateToken, user.currentCompanyId);
 
   const result = colleagues.map(colleague => mappers.normalizePublicUserInfo(colleague));
   reply(response, result);

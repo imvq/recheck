@@ -114,7 +114,7 @@ export function getLeftReviewsAmount(privateToken: string)
 
 export function getColleagues(privateToken: string)
   : ApiPromise<commonTypes.ISearchedProfileBasic[]> {
-  return apiInstance.post('/users/colleagues', privateToken);
+  return apiInstance.post('/users/colleagues', { privateToken });
 }
 
 export function createReview(privateToken: string, targetShareableId: string, content: string)
