@@ -1,7 +1,7 @@
 import * as types from './types';
 
 export const setIsConfirmed = (isConfirmed: boolean): types.IAction => ({
-  type: types.SET_IS_AUTHORIZED,
+  type: types.SET_IS_CONFIRMED,
   payload: isConfirmed
 });
 
@@ -18,6 +18,11 @@ export const setShareableId = (shareableId: string): types.IAction => ({
 export const setSocialId = (socialId: string): types.IAction => ({
   type: types.SET_SOCIAL_ID,
   payload: socialId
+});
+
+export const setMandatoryBasicFields = (socialId: string, isConfirmed: boolean): types.IAction => ({
+  type: types.SET_MANDATORY_BASIC_FIELDS,
+  payload: { socialId, isConfirmed }
 });
 
 export const setInviterShareableId = (inviterShareableId: string): types.IAction => ({

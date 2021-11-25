@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
+
+import * as store from 'store';
 
 import ScaleStage2 from 'assets/images/pages/RegistrationPage/ScaleStage2.png';
 
-import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 import { IUserPreparationData } from 'commons/types';
-import { AppState } from 'store';
 
 import RegistrationBox from './RegistrationBox';
 import ConfirmationPopup from './ConfirmationPopup';
@@ -14,22 +14,12 @@ import ConfirmationPopup from './ConfirmationPopup';
 import * as types from './types';
 import * as styled from './styled';
 
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  socialId: store.profile.socialId
+const mapStateToProps = (state: store.AppState): types.IStateProps => ({
+  isAuthenticated: store.getIsUserAuthenticated(state)
 });
 
 function RegistrationPage(props: types.IProps) {
-  // Registration page is suppose to accept users who are not authorized yet
-  // because they cannot be authorized before they become registered.
-  // However, only those users who passed social network authorization are allowed to be registered.
-  // Therefore, we have to filter and redirect home those who don't have a social ID stored.
-  useEffect(() => {
-    if (!props.socialId) {
-      jumpTo('/');
-    }
-  });
-
-  // When user press registretion button
+  // When user press registration button
   // we must show a popup telling that they must check their email.
   // For that purpose we need email to show in the popup and flag
   // defining that the popup must be visualized.
@@ -46,11 +36,12 @@ function RegistrationPage(props: types.IProps) {
 
   // We cannot allow to show the registration page untill we got
   // the confirmation that the user is authenticated and we have their social ID.
-  return props.socialId ? (
+  //
+  // PageAccessGuard is responsible for redirecting those users who are not authenticated.
+  // However, the page can be loaded before the authentication check is passed.
+  // Therefore, we must hide the registration page content by the time we pass all checks.
+  return props.isAuthenticated ? (
     <styled.Wrapper>
-      {/* Absolute-positioned confirmation popup. */}
-      {isConfirmationVisible && <ConfirmationPopup email={emailToShow} />}
-
       <styled.AdaptedHeader isProfilePageAvailable={false} />
       <styled.ContentWrapper>
         <styled.StageBreadcrumpWrapper>
@@ -60,6 +51,9 @@ function RegistrationPage(props: types.IProps) {
         <RegistrationBox onRegisterButtonPressed={prepareUser} />
       </styled.ContentWrapper>
       <styled.AdaptedFooter />
+
+      {/* Absolute-positioned confirmation popup. */}
+      {isConfirmationVisible && <ConfirmationPopup email={emailToShow} />}
     </styled.Wrapper>
   ) : null;
 }

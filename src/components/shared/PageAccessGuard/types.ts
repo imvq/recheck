@@ -4,17 +4,18 @@ export interface IOwnProps {
   children?: ReactNode;
   hideContentOnLock?: boolean;
   forConfirmedUsersOnly?: boolean;
-  forUnconfirmedUsersOnly?: boolean;
+  forAuthenticatedUsersOnly?: boolean;
   preventDefaultUnlock?: boolean;
 }
 
 export interface IStateProps {
+  isAuthenticated: boolean | null;
   isConfirmed: boolean | null;
   isPageLocked: boolean;
 }
 
 export interface IDispatchProps {
-  setPageUnlocked: () => void;
+  setIsPageLocked: (flag: boolean) => void;
   updateAuthorizationStatus: () => void;
 }
 

@@ -1,7 +1,8 @@
-export const SET_IS_AUTHORIZED = 'SET_IS_AUTHORIZED';
+export const SET_IS_CONFIRMED = 'SET_IS_CONFIRMED';
+export const SET_SOCIAL_ID = 'SET_SOCIAL_ID';
+export const SET_MANDATORY_BASIC_FIELDS = 'SET_MANDATORY_BASIC_FIELDS';
 export const SET_PRIVATE_TOKEN = 'SET_PRIVATE_TOKEN';
 export const SET_SHAREABLE_ID = 'SET_SHAREABLE_ID';
-export const SET_SOCIAL_ID = 'SET_SOCIAL_ID';
 export const SET_INVITER_SHAREABLE_ID = 'SET_INVITER_SHAREABLE_ID';
 export const SET_FULL_NAME = 'SET_FULL_NAME';
 export const SET_EMAIL = 'SET_EMAIL';
@@ -25,8 +26,18 @@ export interface IState {
 }
 
 interface ISetisConfirmed {
-  type: typeof SET_IS_AUTHORIZED;
+  type: typeof SET_IS_CONFIRMED;
   payload: boolean;
+}
+
+interface ISetSocialId {
+  type: typeof SET_SOCIAL_ID;
+  payload: string;
+}
+
+interface ISetMandatiryBasicFields {
+  type: typeof SET_MANDATORY_BASIC_FIELDS;
+  payload: { socialId: string; isConfirmed: boolean; };
 }
 
 interface ISetPrivateToken {
@@ -36,11 +47,6 @@ interface ISetPrivateToken {
 
 interface ISetShareableId {
   type: typeof SET_SHAREABLE_ID;
-  payload: string;
-}
-
-interface ISetSocialId {
-  type: typeof SET_SOCIAL_ID;
   payload: string;
 }
 
@@ -81,9 +87,10 @@ interface ISetWorkStartPeriod {
 
 export type IAction =
     ISetisConfirmed
+  | ISetSocialId
+  | ISetMandatiryBasicFields
   | ISetPrivateToken
   | ISetShareableId
-  | ISetSocialId
   | ISetInviterShareableId
   | ISetFullName
   | ISetEmail

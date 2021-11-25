@@ -303,7 +303,6 @@ async function retrieveSocialIdFromLinkedIn(accessToken: string) {
  */
 async function retrieveLocalProfileData(socialId: string) {
   const targetUserEntity = await accessors.readUserWithCompanyBySocialId(socialId);
-  console.log(targetUserEntity);
 
   if (!targetUserEntity) {
     return {

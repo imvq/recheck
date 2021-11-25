@@ -36,16 +36,18 @@ function loadProfileData(
   profileData: AxiosResponse<types.IUserSelf>
 ) {
   if (!profileData.data.registered) {
-    dispatch(profileActions.setSocialId(profileData.data.socialId));
+    dispatch(profileActions.setMandatoryBasicFields(profileData.data.socialId, false));
+
     jumpTo('/register');
 
     return;
   }
 
   if (!profileData.data.confirmed) {
-    dispatch(profileActions.setSocialId(profileData.data.socialId));
+    dispatch(profileActions.setMandatoryBasicFields(profileData.data.socialId, false));
     dispatch(profileActions.setPrivateToken(profileData.data.privateToken as string));
     dispatch(profileActions.setEmail(profileData.data.email as string));
+
     jumpTo('/await-user-confirmation');
 
     return;

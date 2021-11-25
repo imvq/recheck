@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 
 import * as primitive from './primitive';
 
+export * from './primitive';
+
 // Profile.
 
 export const getCurrentProfileInfo = createSelector(

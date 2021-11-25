@@ -16,10 +16,21 @@ const initialState: types.IState = {
 
 export function profileReducer(state = initialState, action: types.IAction): types.IState {
   switch (action.type) {
-    case types.SET_IS_AUTHORIZED:
+    case types.SET_IS_CONFIRMED:
       return {
         ...state,
         isConfirmed: action.payload
+      };
+    case types.SET_SOCIAL_ID:
+      return {
+        ...state,
+        socialId: action.payload
+      };
+    case types.SET_MANDATORY_BASIC_FIELDS:
+      return {
+        ...state,
+        socialId: action.payload.socialId,
+        isConfirmed: action.payload.isConfirmed
       };
     case types.SET_PRIVATE_TOKEN:
       return {
@@ -31,11 +42,7 @@ export function profileReducer(state = initialState, action: types.IAction): typ
         ...state,
         shareableId: action.payload
       };
-    case types.SET_SOCIAL_ID:
-      return {
-        ...state,
-        socialId: action.payload
-      };
+
     case types.SET_INVITER_SHAREABLE_ID:
       return {
         ...state,

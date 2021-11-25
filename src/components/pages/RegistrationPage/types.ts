@@ -1,7 +1,7 @@
 export interface IOwnProps {}
 
 export interface IStateProps {
-  socialId: string | null;
+  isAuthenticated: boolean | null;
 }
 
 export interface IDispatchProps {}

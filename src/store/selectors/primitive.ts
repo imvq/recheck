@@ -2,54 +2,32 @@ import { AppState } from 'store';
 
 // Profile.
 
-export function getCurrentPrivateToken(store: AppState) {
-  return store.profile.privateToken;
-}
+export const getCurrentPrivateToken = (store: AppState) => store.profile.privateToken;
+export const getCurrentShareableId = (store: AppState) => store.profile.shareableId;
+export const getFullName = (store: AppState) => store.profile.fullName;
+export const getPhotoUrl = (store: AppState) => store.profile.photoUrl;
+export const getCurrentPosition = (store: AppState) => store.profile.currentPosition;
+export const getCurrentCompanyName = (store: AppState) => store.profile.company?.name;
 
-export function getCurrentShareableId(store: AppState) {
-  return store.profile.shareableId;
-}
-
-export function getFullName(store: AppState) {
-  return store.profile.fullName;
-}
-
-export function getPhotoUrl(store: AppState) {
-  return store.profile.photoUrl;
-}
-
-export function getCurrentPosition(store: AppState) {
-  return store.profile.currentPosition;
-}
-
-export function getCurrentCompanyName(store: AppState) {
-  return store.profile.company?.name;
-}
+// When a user logs in they got a social ID and confirmation status.
+// If the login attempt was failed the social ID store field remains null
+// but the confirmation status field becomes false.
+// Only null values for both mean that authorization is pending.
+export const getIsUserAuthenticated = (store: AppState) => (
+  (store.profile.socialId === null && store.profile.isConfirmed === null)
+    ? null : !!store.profile.socialId
+);
 
 // Search.
 
-export function getQuickSearchMatchedUsers(store: AppState) {
-  return store.search.quickSearchMatchedUsers;
-}
-
-export function getRecommendedCompaniesShownMembers(store: AppState) {
-  return store.search.recommendedCompaniesShownMembers;
-}
-
-export function getUserSearchResults(store: AppState) {
-  return store.search.userSearchResults;
-}
+export const getQuickSearchMatchedUsers = (store: AppState) => store.search.quickSearchMatchedUsers;
+export const getRecommendedCompaniesShownMembers = (store: AppState) => (
+  store.search.recommendedCompaniesShownMembers
+);
+export const getUserSearchResults = (store: AppState) => store.search.userSearchResults;
 
 // Reviews.
 
-export function getCreatedReviewQuestions(store: AppState) {
-  return store.reviews.questions;
-}
-
-export function getCreatedReviewAnswers(store: AppState) {
-  return store.reviews.currentReviewComments;
-}
-
-export function getCreatedReviewMarks(store: AppState) {
-  return store.reviews.currentReviewMarks;
-}
+export const getCreatedReviewQuestions = (store: AppState) => store.reviews.questions;
+export const getCreatedReviewAnswers = (store: AppState) => store.reviews.currentReviewComments;
+export const getCreatedReviewMarks = (store: AppState) => store.reviews.currentReviewMarks;

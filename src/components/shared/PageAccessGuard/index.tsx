@@ -1,21 +1,26 @@
-import { memo, useEffect } from 'react';
+import { lazy, memo, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Router, Switch, Route } from 'react-router-dom';
 
-import { AppState, setPageUnlocked } from 'store';
-import { updateAuthorizationStatus } from 'store/thunks';
+import * as store from 'store';
 
 import PageLoader from 'components/shared/PageLockManager/PageLoader';
 
+import { memoryHistoryManager } from 'commons/utils/services';
+
 import * as types from './types';
 
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isConfirmed: store.profile.isConfirmed,
-  isPageLocked: store.interaction.isPageLocked
+const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
+
+const mapStateToProps = (state: store.AppState): types.IStateProps => ({
+  isAuthenticated: store.getIsUserAuthenticated(state),
+  isConfirmed: state.profile.isConfirmed,
+  isPageLocked: state.interaction.isPageLocked
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  setPageUnlocked,
-  updateAuthorizationStatus
+  setIsPageLocked: store.setIsPageLocked,
+  updateAuthorizationStatus: store.updateAuthorizationStatus
 };
 
 function PageAccessGuard(props: types.IProps) {
@@ -34,26 +39,45 @@ function PageAccessGuard(props: types.IProps) {
   }, []);
 
   useEffect(() => {
-    // If the page is for confirmed users only,
-    // unconfirmed users must be redirected to the home page.
+    // If the page is for confirmed (authenticated) users only,
+    // unconfirmed (unauthenticated) users must be redirected to the home page.
     //
     // Since it can be a complicated flow that leads to a page
     // wrapped with PageAccessGuard, native redirecting is used
     // It is needed to refresh the state of the app so that many issues can be avoided.
+
     if (props.forConfirmedUsersOnly && props.isConfirmed === false) {
       window.location.replace(window.location.origin);
+      return;
+    }
+
+    if (props.forAuthenticatedUsersOnly && props.isAuthenticated === false) {
+      window.location.replace(window.location.origin);
+      return;
     }
 
     if (!props.preventDefaultUnlock) {
-      props.setPageUnlocked();
+      props.setIsPageLocked(false);
     }
-  }, [props.isConfirmed]);
+  }, [props.isAuthenticated, props.isConfirmed]);
 
   return (
-    <>
-      {props.isPageLocked && <PageLoader isTransparent={!props.hideContentOnLock} />}
-      {props.children}
-    </>
+    <Router history={memoryHistoryManager}>
+      <Switch>
+        {/* The registration page must be unaccessible directly to avoid manual entering */}
+        {/* as it can cause state incoherence. */}
+        <Route exact path='/register'>
+          <RegistrationPage />
+        </Route>
+
+        <Route>
+          <>
+            {props.isPageLocked && <PageLoader isTransparent={!props.hideContentOnLock} />}
+            {props.children}
+          </>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

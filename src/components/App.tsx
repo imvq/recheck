@@ -16,7 +16,6 @@ const LandingPage = lazy(() => import('components/pages/LandingPage'));
 const ObservedProfilePage = lazy(() => import('components/pages/ObservedProfilePage'));
 const OwnProfilePage = lazy(() => import('components/pages/OwnProfilePage'));
 const PrivacyPolicyPage = lazy(() => import('components/pages/PrivacyPolicyPage'));
-const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
 const ReviewPage = lazy(() => import('components/pages/ReviewPage'));
 const SearchPage = lazy(() => import('components/pages/SearchPage'));
 const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
@@ -40,12 +39,6 @@ export default () => (
             <PageAccessGuard>
               <LandingPage />
             </PageAccessGuard>
-          </Route>
-
-          {/* Registration page. Users are supposed to be partilly authorized */}
-          {/* i. e. they must have social ID loaded, but no other profile info. */}
-          <Route exact path='/register'>
-            <RegistrationPage />
           </Route>
 
           {/* Page to complete user's registration. User UUID needed. */}
