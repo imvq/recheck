@@ -231,7 +231,12 @@ function RegistrationBox(props: types.IProps) {
       {PositionSection}
       {DatePickers}
 
-      <styled.TextAlert>Все поля обязательны к заполнению</styled.TextAlert>
+      <styled.TextAlert>Все поля обязательны к заполнению.</styled.TextAlert>
+      <styled.TextAlert>
+        Необходимо предоставить рабочую почту той компании, в которой вы работаете.
+        Таким образом мы сможем найти ваших коллег и предоставить возможность вам
+        оставлять на них отзывы.
+      </styled.TextAlert>
 
       {ProceedButton}
     </styled.BoxBaseWrapper>
