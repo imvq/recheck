@@ -14,7 +14,8 @@ type Page = '/'
   | '/register'
   | '/register/complete'
   | '/await-user-confirmation'
-  | '/search';
+  | '/search'
+  | '/colleagues';
 
 export function jumpBack() {
   historyManager.goBack();

@@ -1,7 +1,7 @@
 import * as types from './types';
 
 const initialState: types.IState = {
-  isAuthorized: null,
+  isConfirmed: null,
   privateToken: null,
   shareableId: null,
   socialId: null,
@@ -19,7 +19,7 @@ export function profileReducer(state = initialState, action: types.IAction): typ
     case types.SET_IS_AUTHORIZED:
       return {
         ...state,
-        isAuthorized: action.payload
+        isConfirmed: action.payload
       };
     case types.SET_PRIVATE_TOKEN:
       return {

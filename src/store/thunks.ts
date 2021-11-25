@@ -21,13 +21,13 @@ export function updateAuthorizationStatus() {
         .then(profileData => loadProfileData(dispatch, profileData))
         .catch(() => {
           cookieManager.remove('accessToken');
-          dispatch(profileActions.setIsAuthorized(false));
+          dispatch(profileActions.setIsConfirmed(false));
         });
 
       return;
     }
 
-    dispatch(profileActions.setIsAuthorized(false));
+    dispatch(profileActions.setIsConfirmed(false));
   };
 }
 
@@ -70,9 +70,7 @@ function loadProfileData(
     month: month as number
   }));
 
-  dispatch(profileActions.setIsAuthorized(true));
-
-  jumpTo('/profile');
+  dispatch(profileActions.setIsConfirmed(true));
 }
 
 export function loadAboutTabData(privateToken: string) {

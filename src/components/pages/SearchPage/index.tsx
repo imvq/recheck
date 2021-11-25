@@ -45,7 +45,7 @@ import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   colleaguesState: store.search.colleaguesState,
-  isAuthorized: store.profile.isAuthorized,
+  isConfirmed: store.profile.isConfirmed,
   quickSearchMatchedUsers: getQuickSearchMatchedUsersWithoutSelf(store),
   recommendations: store.search.recommendations,
   userSearchResults: getUserSearchResultsWithoutSelf(store)
@@ -159,7 +159,7 @@ function SearchPage(props: types.IProps) {
   const firstRender = useRef(true);
 
   useLayoutEffect(() => {
-    if (props.isAuthorized) {
+    if (props.isConfirmed) {
       if (firstRender.current) {
         firstRender.current = false;
         return;

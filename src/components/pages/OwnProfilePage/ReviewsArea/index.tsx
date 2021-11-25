@@ -15,7 +15,7 @@ import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   privateToken: store.profile.privateToken,
-  isAuthorized: store.profile.isAuthorized,
+  isConfirmed: store.profile.isConfirmed,
   isLoading: store.interaction.isProfileReviewsTabLoading,
   leftReviewsAmount: store.reviews.leftReviewsAmount,
   currentReviewData: store.reviews.currentObservedLeftReview
@@ -36,10 +36,10 @@ function ReviewsArea(props: types.IProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    if (props.isAuthorized) {
+    if (props.isConfirmed) {
       props.loadTabData(props.privateToken as string);
     }
-  }, [props.isAuthorized]);
+  }, [props.isConfirmed]);
 
   const Results = (
     <styled.TitleWrapper>
@@ -57,7 +57,7 @@ function ReviewsArea(props: types.IProps) {
     apiClient.getColleagues(props.privateToken as string)
       .then(colleaguesData => {
         props.setColleagues(colleaguesData.data);
-        jumpTo('/search', '?no-colleagues-update=true');
+        jumpTo('/colleagues', '?no-colleagues-update=true');
       })
       .finally(() => props.unlockPage());
   }

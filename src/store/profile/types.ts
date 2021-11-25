@@ -11,7 +11,7 @@ export const SET_CURRENT_COMPANY = 'SET_CURRENT_COMPANY';
 export const SET_CURRENT_WORK_START_PERIOD = 'SET_CURRENT_WORK_START_PERIOD';
 
 export interface IState {
-  isAuthorized: boolean | null;
+  isConfirmed: boolean | null;
   privateToken: string | null;
   shareableId: string | null;
   socialId: string | null;
@@ -24,7 +24,7 @@ export interface IState {
   currentWorkStartDay: { year: number; month: number; } | null;
 }
 
-interface ISetIsAuthorized {
+interface ISetisConfirmed {
   type: typeof SET_IS_AUTHORIZED;
   payload: boolean;
 }
@@ -80,7 +80,7 @@ interface ISetWorkStartPeriod {
 }
 
 export type IAction =
-    ISetIsAuthorized
+    ISetisConfirmed
   | ISetPrivateToken
   | ISetShareableId
   | ISetSocialId

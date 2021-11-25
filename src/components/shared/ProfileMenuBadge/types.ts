@@ -3,7 +3,7 @@ export interface IOwnProps {
 }
 
 export interface IStateProps {
-  isAuthorized: boolean | null;
+  isConfirmed: boolean | null;
   isPageLocked: boolean;
 }
 

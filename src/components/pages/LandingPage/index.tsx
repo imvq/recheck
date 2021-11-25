@@ -18,7 +18,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isAuthorized: store.profile.isAuthorized
+  isConfirmed: store.profile.isConfirmed
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -38,11 +38,11 @@ const LandingPage = (props: types.IProps) => {
   }
 
   useEffect(() => {
-    // props.isAuthorized can be null.
-    if (inviter && props.isAuthorized === false) {
+    // props.isConfirmed can be null.
+    if (inviter && props.isConfirmed === false) {
       props.setIsLoginPopupVisible(true);
     }
-  }, [props.isAuthorized]);
+  }, [props.isConfirmed]);
 
   return (
     <styled.Wrapper>

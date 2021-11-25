@@ -1,8 +1,8 @@
 import * as types from './types';
 
-export const setIsAuthorized = (isAuthorized: boolean): types.IAction => ({
+export const setIsConfirmed = (isConfirmed: boolean): types.IAction => ({
   type: types.SET_IS_AUTHORIZED,
-  payload: isAuthorized
+  payload: isConfirmed
 });
 
 export const setPrivateToken = (privateToken: string): types.IAction => ({

@@ -1,9 +1,9 @@
-import { memo } from 'react';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import { jumpTo } from 'commons/utils/misc';
-import { AppState, setPageLocked, setPageUnlocked } from 'store';
+import { apiClient } from 'commons/utils/services';
+import { AppState, setColleagues, setPageLocked, setPageUnlocked } from 'store';
 
 import PersonCard from 'components/shared/PersonCard';
 
@@ -16,6 +16,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
+  setColleagues,
   lockPage: setPageLocked,
   unlockPage: setPageUnlocked
 };
@@ -29,11 +30,11 @@ const Title = (
 
 const NoColleaguesView = (
   <styled.NoColleaguesViewWrapper>
-    Похоже, у вас нет коллег, на которых можно оставить отзыв
+    Похоже, ваши коллеги еще не с нами
   </styled.NoColleaguesViewWrapper>
 );
 
-function ColleaguesView(props: types.IProps) {
+function ColleaguesPage(props: types.IProps) {
   const ColleaguesCards = (
     <styled.CardsWrapper>
       {props.colleaguesState.colleagues.map(colleague => (
@@ -64,4 +65,4 @@ function ColleaguesView(props: types.IProps) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(ColleaguesView));
+export default connect(mapStateToProps, mapDispatchToProps)(ColleaguesPage);

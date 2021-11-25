@@ -3,12 +3,13 @@ import { ReactNode } from 'react';
 export interface IOwnProps {
   children?: ReactNode;
   hideContentOnLock?: boolean;
-  forAuthorizedUsersOnly?: boolean;
+  forConfirmedUsersOnly?: boolean;
+  forUnconfirmedUsersOnly?: boolean;
   preventDefaultUnlock?: boolean;
 }
 
 export interface IStateProps {
-  isAuthorized: boolean | null;
+  isConfirmed: boolean | null;
   isPageLocked: boolean;
 }
 

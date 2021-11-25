@@ -10,7 +10,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isAuthorized: store.profile.isAuthorized
+  isConfirmed: store.profile.isConfirmed
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
@@ -29,7 +29,7 @@ function FindButton(props: types.IProps) {
       const pendingFinishedCallback = getPendingFinishedCallback();
       pendingFinishedCallback();
     }
-  }, [props.isAuthorized]);
+  }, [props.isConfirmed]);
 
   const onClickWhilePending = () => {
     props.lockPage();
@@ -37,13 +37,13 @@ function FindButton(props: types.IProps) {
   };
 
   const getPendingFinishedCallback = () => {
-    return props.isAuthorized
+    return props.isConfirmed
       ? () => jumpTo('/search')
       : () => props.setIsLoginPopupVisible(true);
   };
 
   const getMainHandler = () => (
-    props.isAuthorized === null
+    props.isConfirmed === null
       ? onClickWhilePending
       : getPendingFinishedCallback()
   );

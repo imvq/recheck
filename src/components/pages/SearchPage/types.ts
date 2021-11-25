@@ -7,7 +7,7 @@ export interface IStateProps {
     colleagues: ISearchedProfileBasic[];
     areLoaded: boolean;
   }
-  isAuthorized: boolean | null;
+  isConfirmed: boolean | null;
   quickSearchMatchedUsers: ISearchedProfile[];
   recommendations: ICompanyWithMembers[];
   userSearchResults: ISearchedProfile[];

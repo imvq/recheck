@@ -1,5 +1,5 @@
 export interface IStateProps {
-  isAuthorized: boolean | null;
+  isConfirmed: boolean | null;
 }
 
 export interface IDispatchProps {

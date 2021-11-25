@@ -2,7 +2,7 @@ import { IReviewReceived, ISearchedProfileBasic } from 'commons/types';
 
 export interface IStateProps {
   privateToken: string | null;
-  isAuthorized: boolean | null;
+  isConfirmed: boolean | null;
   isLoading: boolean;
   leftReviewsAmount: number;
   currentReviewData: IReviewReceived | null;

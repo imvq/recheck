@@ -28,7 +28,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapSateToProps = (store: AppState): types.IStateProps => ({
-  isAuthorized: store.profile.isAuthorized,
+  isConfirmed: store.profile.isConfirmed,
   isPageLocked: store.interaction.isPageLocked,
   privateToken: store.profile.privateToken,
   requestedUserShareableId: store.interaction.requestedUserShareableId,
@@ -71,7 +71,7 @@ function ReviewPage(props: types.IProps) {
     // that means it is registered and confirmed,
     // therefore, the conditions of the second scenario (look at the first useEffect)
     // are satisfied.
-    if (props.isAuthorized) {
+    if (props.isConfirmed) {
       props.createReview(
         props.privateToken as string,
         targetShareableId,
@@ -106,17 +106,17 @@ function ReviewPage(props: types.IProps) {
   // 3) if the reviewer is not signed in, authorization can be deferred
   //    till the review is saved.
   useEffect(() => {
-    if (props.isAuthorized === null) {
+    if (props.isConfirmed === null) {
       // eslint-disable-next-line
       return;
     }
 
-    if (!props.isAuthorized) {
+    if (!props.isConfirmed) {
       props.unlockPage();
     }
 
     // TODO: check if the target is connected.
-  }, [props.isAuthorized]);
+  }, [props.isConfirmed]);
 
   const boxes = [
     <CommentBoxSimple key={1} pageLabel='1 / 3' onStepForward={proceed} onStepBack={jumpBack}>

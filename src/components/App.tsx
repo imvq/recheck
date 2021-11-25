@@ -64,14 +64,14 @@ export default () => (
           {/* Check is needed to determine if we can show the page to user. */}
           {/* The result of the check is stored so that no check will be further. */}
           <Route exact path='/profile'>
-            <PageAccessGuard forAuthorizedUsersOnly>
+            <PageAccessGuard forConfirmedUsersOnly>
               <OwnProfilePage />
             </PageAccessGuard>
           </Route>
 
           {/* Profile of another user. */}
           <Route exact path='/profile/observe/:targetShareableId'>
-            <PageAccessGuard forAuthorizedUsersOnly hideContentOnLock>
+            <PageAccessGuard forConfirmedUsersOnly hideContentOnLock>
               <ObservedProfilePage />
             </PageAccessGuard>
           </Route>

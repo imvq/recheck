@@ -13,7 +13,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isAuthorized: store.profile.isAuthorized,
+  isConfirmed: store.profile.isConfirmed,
   isPageLocked: store.interaction.isPageLocked
 });
 
@@ -42,12 +42,12 @@ function LoginBadge(props: types.IProps) {
         <styled.LoginButton onClick={
           // true       | false          | null
           // authorized | not authorized | check is pending
-          props.isAuthorized === null
+          props.isConfirmed === null
             ? () => {
               props.lockPage();
               setIsExpansionAwaited(true);
             }
-            : props.isAuthorized
+            : props.isConfirmed
               ? () => setIsExpanded(true)
               : () => props.setIsLoginPopupVisible(true)
         }

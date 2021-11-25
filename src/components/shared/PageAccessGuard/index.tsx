@@ -9,7 +9,7 @@ import PageLoader from 'components/shared/PageLockManager/PageLoader';
 import * as types from './types';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isAuthorized: store.profile.isAuthorized,
+  isConfirmed: store.profile.isConfirmed,
   isPageLocked: store.interaction.isPageLocked
 });
 
@@ -28,20 +28,26 @@ function PageAccessGuard(props: types.IProps) {
   // 3. We visit the page while not being authorized and there's no access token stored.
   //    Reaction: we just do nothing (if the page needs user to be authorized then jump home).
   useEffect(() => {
-    if (props.isAuthorized === null) {
+    if (props.isConfirmed === null) {
       props.updateAuthorizationStatus();
     }
   }, []);
 
   useEffect(() => {
-    if (props.forAuthorizedUsersOnly && props.isAuthorized === false) {
+    // If the page is for confirmed users only,
+    // unconfirmed users must be redirected to the home page.
+    //
+    // Since it can be a complicated flow that leads to a page
+    // wrapped with PageAccessGuard, native redirecting is used
+    // It is needed to refresh the state of the app so that many issues can be avoided.
+    if (props.forConfirmedUsersOnly && props.isConfirmed === false) {
       window.location.replace(window.location.origin);
     }
 
     if (!props.preventDefaultUnlock) {
       props.setPageUnlocked();
     }
-  }, [props.isAuthorized]);
+  }, [props.isConfirmed]);
 
   return (
     <>

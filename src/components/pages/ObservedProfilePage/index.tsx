@@ -18,7 +18,7 @@ import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   privateToken: store.profile.privateToken,
-  isAuthorized: store.profile.isAuthorized,
+  isConfirmed: store.profile.isConfirmed,
   isLoading: store.interaction.isObservedReviewsPageLoading,
   isObservedReviewsPageLoading: store.interaction.isObservedReviewsPageLoading,
   observedReviewsChunksAmount: 0,
