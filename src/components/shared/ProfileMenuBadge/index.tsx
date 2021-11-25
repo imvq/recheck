@@ -1,9 +1,10 @@
+import { memo, useState, useEffect } from 'react';
+
 import OutsideClickHandler from 'react-outside-click-handler';
 
-import { memo, useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { historyManager } from 'commons/utils/services';
 import { ReactComponent as CabinetSvg } from 'assets/images/shared/ProfileMenuBadge/Cabinet.svg';
 import { ReactComponent as DoorSvg } from 'assets/images/shared/ProfileMenuBadge/Door.svg';
 import { onExit } from 'commons/utils/misc';
@@ -28,7 +29,6 @@ const mapDispatchToProps: types.IDispatchProps = {
 function LoginBadge(props: types.IProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isExpansionAwaited, setIsExpansionAwaited] = useState(false);
-  const history = useHistory();
 
   useEffect(() => {
     if (isExpansionAwaited && !props.isPageLocked) {
@@ -54,7 +54,7 @@ function LoginBadge(props: types.IProps) {
         />
         <styled.Menu isExpanded={isExpanded}>
           {props.isProfilePageAvailable && (
-          <styled.MenuEntry onClick={() => history.push('/profile')}>
+          <styled.MenuEntry onClick={() => historyManager.push('/profile')}>
             <styled.SvgWrapper><CabinetSvg /></styled.SvgWrapper>
             <span>Профиль</span>
           </styled.MenuEntry>
