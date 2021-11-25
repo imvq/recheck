@@ -44,7 +44,9 @@ function RegistrationPage(props: types.IProps) {
       });
   }
 
-  return (
+  // We cannot allow to show the registration page untill we got
+  // the confirmation that the user is authenticated and we have their social ID.
+  return props.socialId ? (
     <styled.Wrapper>
       {/* Absolute-positioned confirmation popup. */}
       {isConfirmationVisible && <ConfirmationPopup email={emailToShow} />}
@@ -59,7 +61,7 @@ function RegistrationPage(props: types.IProps) {
       </styled.ContentWrapper>
       <styled.AdaptedFooter />
     </styled.Wrapper>
-  );
+  ) : null;
 }
 
 export default connect(mapStateToProps)(RegistrationPage);
