@@ -1,5 +1,8 @@
 export interface ICompaniesDictionary {
-  [companyId: string]: {
+  [id: string]: {
+    // Values contain duplicates of the ID field
+    // since the values of the dictionary have to be retrieved without keys.
+    id: string;
     name: string;
     logoUrl: string | null;
     members: ISearchedProfileBasic[];

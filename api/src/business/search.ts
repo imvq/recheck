@@ -88,8 +88,8 @@ export async function getPredefinedCompanies(request: Request, response: Respons
   const companiesDictionary: ICompaniesDictionary = {};
 
   usersWithCompanies.forEach(user => {
-    const normalizedUser = mappers.normalizePublicUserInfo(user);
-    getMembersArray(companiesDictionary, normalizedUser.currentCompanyId)
+    const normalizedUser = mappers.normalizeSearchedUserInfo(user);
+    getMembersArray(companiesDictionary, normalizedUser)
       .members
       .push(normalizedUser);
   });
@@ -103,6 +103,7 @@ function getMembersArray(
 ) {
   if (!companiesDictionary[user.currentCompanyId]) {
     companiesDictionary[user.currentCompanyId] = {
+      id: user.currentCompanyId,
       name: user.currentCompanyName,
       logoUrl: user.currentCompanyLogoUrl,
       members: []
