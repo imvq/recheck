@@ -143,7 +143,7 @@ export async function readUserBySocialId(socialId: string) {
 
 export async function readUsersWithPredefinedCompanies(last: string) {
   try {
-    const accessor = sql('./sql/read/userWithPredefinedCompanies');
+    const accessor = sql('./sql/read/usersWithPredefinedCompanies.sql');
     return await database.manyOrNone(accessor, { last });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
