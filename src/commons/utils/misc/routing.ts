@@ -27,5 +27,10 @@ export function jumpTo(page: Page, continuation?: string) {
     return;
   }
 
+  if (page === '/await-user-confirmation') {
+    memoryHistoryManager.push(page);
+    return;
+  }
+
   historyManager.push(`${page}${continuation || ''}`);
 }

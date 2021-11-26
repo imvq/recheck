@@ -11,6 +11,7 @@ import { memoryHistoryManager } from 'commons/utils/services';
 import * as types from './types';
 
 const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
+const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
 
 const mapStateToProps = (state: store.AppState): types.IStateProps => ({
   isAuthenticated: store.getIsUserAuthenticated(state),
@@ -68,6 +69,11 @@ function PageAccessGuard(props: types.IProps) {
         {/* as it can cause state incoherence. */}
         <Route exact path='/register'>
           <RegistrationPage />
+        </Route>
+
+        {/* Page with message persuading to check user's email. */}
+        <Route exact path='/await-user-confirmation'>
+          <UserConfirmationAwaiterPage />
         </Route>
 
         <Route>

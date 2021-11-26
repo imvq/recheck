@@ -18,7 +18,6 @@ const OwnProfilePage = lazy(() => import('components/pages/OwnProfilePage'));
 const PrivacyPolicyPage = lazy(() => import('components/pages/PrivacyPolicyPage'));
 const ReviewPage = lazy(() => import('components/pages/ReviewPage'));
 const SearchPage = lazy(() => import('components/pages/SearchPage'));
-const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
 const UserConfirmationPage = lazy(() => import('components/pages/UserConfirmationPage'));
 
 /**
@@ -73,13 +72,6 @@ export default () => (
           <Route exact path='/review/create/:targetShareableId'>
             <PageAccessGuard hideContentOnLock preventDefaultUnlock>
               <ReviewPage />
-            </PageAccessGuard>
-          </Route>
-
-          {/* Page with message persuading to check user's email. */}
-          <Route exact path='/await-user-confirmation'>
-            <PageAccessGuard>
-              <UserConfirmationAwaiterPage />
             </PageAccessGuard>
           </Route>
 
