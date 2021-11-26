@@ -10,6 +10,7 @@ import { memoryHistoryManager } from 'commons/utils/services';
 
 import * as types from './types';
 
+const ColleaguesPage = lazy(() => import('components/pages/ColleaguesPage'));
 const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
 const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
 
@@ -74,6 +75,11 @@ function PageAccessGuard(props: types.IProps) {
         {/* Page with message persuading to check user's email. */}
         <Route exact path='/await-user-confirmation'>
           <UserConfirmationAwaiterPage />
+        </Route>
+
+        {/* List of colleagues available for review. */}
+        <Route exact path='/colleagues'>
+          <ColleaguesPage />
         </Route>
 
         <Route>

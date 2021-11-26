@@ -1,12 +1,8 @@
-import { ICompanyWithMembers, ISearchedProfile, ISearchedProfileBasic } from 'commons/types';
+import { ICompanyWithMembers, ISearchedProfile } from 'commons/types';
 
 import { MainToolbarEntry } from 'commons/types/unions';
 
 export interface IStateProps {
-  colleaguesState: {
-    colleagues: ISearchedProfileBasic[];
-    areLoaded: boolean;
-  }
   isConfirmed: boolean | null;
   quickSearchMatchedUsers: ISearchedProfile[];
   recommendations: ICompanyWithMembers[];
@@ -14,7 +10,6 @@ export interface IStateProps {
 }
 
 export interface IDispatchProps {
-  clearColleagues(): void;
   clearMatchedUsers(): void;
   clearSearchText(): void;
   quickSearchUsersByTokens(tokens: string[]): void;

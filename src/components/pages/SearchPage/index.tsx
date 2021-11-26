@@ -5,10 +5,8 @@ import * as generalTypes from 'commons/types/general';
 import * as constants from 'commons/utils/constants';
 
 import { mainToolbarEntries } from 'commons/types/unions';
-import { useQuery } from 'commons/utils/misc/hooks';
 import {
   AppState,
-  clearColleagues,
   setRecommendations,
   setRecommendedCompaniesShownMembers,
   clearMatchedUsers,
@@ -31,7 +29,6 @@ import {
 import DropList from 'components/shared/DropList';
 import PopupManager from 'components/shared/PopupManager';
 
-import ColleaguesView from './ColleaguesView';
 import CompaniesExpansionLabel from './CompaniesExpansionLabel';
 import CompaniesResults from './CompaniesResults';
 import CompaniesPopup from './ExpandView/Companies';
@@ -44,7 +41,6 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  colleaguesState: store.search.colleaguesState,
   isConfirmed: store.profile.isConfirmed,
   quickSearchMatchedUsers: getQuickSearchMatchedUsersWithoutSelf(store),
   recommendations: store.search.recommendations,
@@ -52,7 +48,6 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  clearColleagues,
   clearMatchedUsers,
   clearSearchText: () => setSearchText(''),
   quickSearchUsersByTokens,
@@ -67,18 +62,9 @@ const mapDispatchToProps: types.IDispatchProps = {
 };
 
 function SearchPage(props: types.IProps) {
-  const query = useQuery();
-  const colleaguesUpdateQueryFlag = query.get('no-colleagues-update') !== 'true';
-
   const [isRecommendationsViewVisible, setIsRecommendationsViewVisible] = useState(false);
 
   useEffect(() => {
-    // Clear the colleagues array to avoid invalid conditional render
-    // due to the colleagues array dependency.
-    if (colleaguesUpdateQueryFlag) {
-      props.clearColleagues();
-    }
-
     props.setCurrentMainToolbarEntry(mainToolbarEntries.NewSearch);
 
     // Load recommendations only one time and never reload them again.
@@ -176,27 +162,22 @@ function SearchPage(props: types.IProps) {
       <styled.AdaptedHeader id='Header' />
 
       {/* Main view with search field and search results area. */}
-      {!props.colleaguesState.areLoaded && (
-        <styled.ContentWrapper>
-          {SearchInput}
-          {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
-          {/* The search results. */}
-          {props.userSearchResults.length
-            ? <SearchResults userSearchResults={props.userSearchResults} />
-            : <SearchNoResults isFirstSearch={isFirstSearch} />}
-          {props.recommendations.length > 0 && RecommendedCompaniesList}
-          {/* 'Show all recommendations' label. */}
-          {props.recommendations.length > 4
-            && <CompaniesExpansionLabel onClick={() => setIsRecommendationsViewVisible(true)} />}
-        </styled.ContentWrapper>
-      )}
+      <styled.ContentWrapper>
+        {SearchInput}
+        {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
 
-      {/* Colleagues view. */}
-      {/* Supposed to be rendered when we need to choose a colleague */}
-      {/* to give a review about. */}
-      {props.colleaguesState.areLoaded && (
-        <ColleaguesView />
-      )}
+        {/* The search results. */}
+        {props.userSearchResults.length
+          ? <SearchResults userSearchResults={props.userSearchResults} />
+          : <SearchNoResults isFirstSearch={isFirstSearch} />}
+
+        {/* Recommended companies (predefined ones). */}
+        {props.recommendations.length > 0 && RecommendedCompaniesList}
+
+        {/* 'Show all recommendations' label. */}
+        {props.recommendations.length > 4
+            && <CompaniesExpansionLabel onClick={() => setIsRecommendationsViewVisible(true)} />}
+      </styled.ContentWrapper>
       <styled.AdaptedFooter />
 
       {/* Recommended companies' stuff. */}
