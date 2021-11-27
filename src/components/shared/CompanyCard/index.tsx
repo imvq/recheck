@@ -12,7 +12,8 @@ function CompanyCard(props: types.IProps) {
       <styled.TopBar />
       <styled.BodyWrapper>
         <styled.LogoWrapper>
-          <styled.Logo src={props.companyData.logoUrl || ''} />
+          {/* Logo URL is guaranteed to be defined. */}
+          <styled.Logo src={props.companyData.logoUrl as string} />
         </styled.LogoWrapper>
 
         <styled.Span isEnlarged>{props.companyData.name}</styled.Span>

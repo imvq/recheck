@@ -3,6 +3,7 @@ import { ICompanyWithMembers, ISearchedProfile } from 'commons/types';
 import { MainToolbarEntry } from 'commons/types/unions';
 
 export interface IStateProps {
+  privateToken: string | null;
   isConfirmed: boolean | null;
   quickSearchMatchedUsers: ISearchedProfile[];
   recommendations: ICompanyWithMembers[];
@@ -13,7 +14,7 @@ export interface IDispatchProps {
   clearMatchedUsers(): void;
   clearSearchText(): void;
   quickSearchUsersByTokens(tokens: string[]): void;
-  loadRecommendations(chunk: number): void;
+  loadRecommendations(privateToken: string, chunk: number, recreate?: boolean): void;
   lockPage(): void;
   searchUsersByTokens(tokens: string[]): void;
   searchUserByShareableId(shareableId: string): void;

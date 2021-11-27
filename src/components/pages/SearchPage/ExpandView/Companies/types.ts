@@ -2,7 +2,7 @@ import { ICompanyWithMembers, ISearchedProfile } from 'commons/types';
 
 export interface IOwnProps {
   recommendations: ICompanyWithMembers[];
-  loadNextChunkCallback(chunk: number): void;
+  loadNextChunkCallback(privateToken: string, chunk: number): void;
   onClose(): void;
 }
 

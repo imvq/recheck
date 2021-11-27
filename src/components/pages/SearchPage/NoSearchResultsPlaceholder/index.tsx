@@ -29,7 +29,7 @@ const Title = (
   </>
 );
 
-function SearchNoResults(props: types.IProps) {
+function NoSearchResultsPlaceholder(props: types.IProps) {
   function handlerClick() {
     showToast('Ссылка скопирована');
     copyLink(props.shareableId as string);
@@ -57,4 +57,4 @@ function SearchNoResults(props: types.IProps) {
     );
 }
 
-export default connect(mapStateToProps)(memo(SearchNoResults));
+export default connect(mapStateToProps)(memo(NoSearchResultsPlaceholder));

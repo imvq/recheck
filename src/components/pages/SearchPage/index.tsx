@@ -1,30 +1,10 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 
-import * as generalTypes from 'commons/types/general';
-import * as constants from 'commons/utils/constants';
+import * as store from 'store';
 
+import { IInputEvent } from 'commons/types';
 import { mainToolbarEntries } from 'commons/types/unions';
-import {
-  AppState,
-  setRecommendations,
-  setRecommendedCompaniesShownMembers,
-  clearMatchedUsers,
-  setCurrentMainToolbarEntry,
-  setSearchText,
-  setUserSearchResults,
-  setPageLocked
-} from 'store';
-import {
-  getQuickSearchMatchedUsersWithoutSelf,
-  getUserSearchResultsWithoutSelf
-} from 'store/selectors';
-import {
-  loadRecommendations,
-  searchUsersByTokens,
-  searchUserByShareableId,
-  quickSearchUsersByTokens
-} from 'store/thunks';
 
 import DropList from 'components/shared/DropList';
 import PopupManager from 'components/shared/PopupManager';
@@ -33,53 +13,52 @@ import CompaniesExpansionLabel from './CompaniesExpansionLabel';
 import CompaniesResults from './CompaniesResults';
 import CompaniesPopup from './ExpandView/Companies';
 import SearchField from './SearchField';
-import SearchNoResults from './SearchNoResults';
+import NoSearchResultsPlaceholder from './NoSearchResultsPlaceholder';
 import SearchResults from './SearchResults';
 
 import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isConfirmed: store.profile.isConfirmed,
-  quickSearchMatchedUsers: getQuickSearchMatchedUsersWithoutSelf(store),
-  recommendations: store.search.recommendations,
-  userSearchResults: getUserSearchResultsWithoutSelf(store)
+const mapStateToProps = (state: store.AppState): types.IStateProps => ({
+  privateToken: store.getCurrentPrivateToken(state),
+  isConfirmed: store.getIsUserConfirmed(state),
+  quickSearchMatchedUsers: store.getQuickSearchMatchedUsersWithoutSelf(state),
+  recommendations: store.getRecommendations(state),
+  userSearchResults: store.getUserSearchResultsWithoutSelf(state)
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  clearMatchedUsers,
-  clearSearchText: () => setSearchText(''),
-  quickSearchUsersByTokens,
-  loadRecommendations,
-  searchUsersByTokens,
-  searchUserByShareableId,
-  setCurrentMainToolbarEntry,
-  setUserSearchResults,
-  setRecommendations,
-  setRecommendedCompaniesShownMembers,
-  lockPage: setPageLocked
+  clearMatchedUsers: store.clearMatchedUsers,
+  clearSearchText: () => store.setSearchText(''),
+  quickSearchUsersByTokens: store.quickSearchUsersByTokens,
+  loadRecommendations: store.loadRecommendations,
+  searchUsersByTokens: store.searchUsersByTokens,
+  searchUserByShareableId: store.searchUserByShareableId,
+  setCurrentMainToolbarEntry: store.setCurrentMainToolbarEntry,
+  setUserSearchResults: store.setUserSearchResults,
+  setRecommendations: store.setRecommendations,
+  setRecommendedCompaniesShownMembers: store.setRecommendedCompaniesShownMembers,
+  lockPage: store.setPageLocked
 };
 
 function SearchPage(props: types.IProps) {
   const [isRecommendationsViewVisible, setIsRecommendationsViewVisible] = useState(false);
 
+  // Flags to prevent display of a placeholder for no search results.
+  const [isFirstSearch, setIsFirstSearch] = useState(true);
+  const firstRender = useRef(true);
+
   useEffect(() => {
+    // Set the toolbar menu to NewSearch.
     props.setCurrentMainToolbarEntry(mainToolbarEntries.NewSearch);
 
-    // Load recommendations only one time and never reload them again.
-    if (props.recommendations.length === 0) {
-      props.loadRecommendations(0);
+    // We must load recommendations only when a user is authenticated
+    // and only in case the recommendations list is empty.
+    if (props.privateToken && props.recommendations.length === 0) {
+      props.loadRecommendations(props.privateToken as string, 0);
     }
-  }, []);
-
-  const resetRecommendations = () => {
-    props.setRecommendations(props.recommendations.slice(0, constants.RECOMMENDATIONS_LENGTH));
-  };
-
-  const findUsersMatches = (tokens: string[]) => {
-    props.quickSearchUsersByTokens(tokens);
-  };
+  }, [props.privateToken]);
 
   // Recommendations expansion popup. Absolute-positioned popup.
   const RecommendationsPopup = (
@@ -88,7 +67,8 @@ function SearchPage(props: types.IProps) {
       loadNextChunkCallback={props.loadRecommendations}
       onClose={() => {
         setIsRecommendationsViewVisible(false);
-        resetRecommendations();
+        // Each time we close the recommendation popup we must drop all companies we loaded.
+        props.loadRecommendations(props.privateToken as string, 0, true);
       }}
     />
   );
@@ -104,7 +84,7 @@ function SearchPage(props: types.IProps) {
     />
   );
 
-  // The search input.
+  // The search input field.
   const SearchInput = (
     <SearchField
       lockPageCallback={props.lockPage}
@@ -113,9 +93,9 @@ function SearchPage(props: types.IProps) {
         props.clearMatchedUsers();
         props.clearSearchText();
       }}
-      quickSearchCallback={(event: generalTypes.IInputEvent) => {
+      quickSearchCallback={(event: IInputEvent) => {
         if (event.target.value) {
-          findUsersMatches(event.target.value.trim().split(' '));
+          props.quickSearchUsersByTokens(event.target.value.trim().split(' '));
         } else {
           props.clearMatchedUsers();
         }
@@ -138,12 +118,50 @@ function SearchPage(props: types.IProps) {
     </styled.DropListWrapper>
   );
 
-  // Don't show anything until the user starts its search.
-  // If the user search request returned empty list than show
-  // a 'no results' label.
-  const [isFirstSearch, setIsFirstSearch] = useState(true);
-  const firstRender = useRef(true);
+  // Main results area.
+  // Displays users if they match search query
+  // or shows a predefined placeholder.
+  const MainSearchResultsArea = props.userSearchResults.length
+    // A list with search results if any.
+    ? <SearchResults userSearchResults={props.userSearchResults} />
 
+    // A placeholder in case there is no results.
+    : <NoSearchResultsPlaceholder isFirstSearch={isFirstSearch} />;
+
+  // Composition of the constituent components.
+  // Must not be displayed until users get their private tokens.
+  const GuardedContent = (
+    <styled.Wrapper>
+      <styled.Sidebar />
+
+      <styled.AdaptedHeader id='Header' />
+
+      {/* Main view with search field and search results area. */}
+      <styled.ContentWrapper>
+        {SearchInput}
+        {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
+        {/* The search results. */}
+        {MainSearchResultsArea}
+        {/* Recommended companies (predefined ones). */}
+        {/* This is a reduced list. */}
+        {props.recommendations.length > 0 && RecommendedCompaniesList}
+        {/* If the list of recommended companies does not fit in the reduced list */}
+        {/* we must display a 'Show all recommendations' label. */}
+        {props.recommendations.length > 4
+            && <CompaniesExpansionLabel onClick={() => setIsRecommendationsViewVisible(true)} />}
+      </styled.ContentWrapper>
+
+      <styled.AdaptedFooter />
+
+      {/* Recommended companies' stuff. */}
+      {isRecommendationsViewVisible && RecommendationsPopup}
+      <PopupManager onPopupClose={() => setIsRecommendationsViewVisible(false)} />
+    </styled.Wrapper>
+  );
+
+  // Don't show anything until users start their search.
+  // If search request returns empty list then show
+  // a 'no results' label.
   useLayoutEffect(() => {
     if (props.isConfirmed) {
       if (firstRender.current) {
@@ -155,37 +173,7 @@ function SearchPage(props: types.IProps) {
     }
   }, [props.userSearchResults]);
 
-  return (
-    <styled.Wrapper>
-      <styled.Sidebar />
-
-      <styled.AdaptedHeader id='Header' />
-
-      {/* Main view with search field and search results area. */}
-      <styled.ContentWrapper>
-        {SearchInput}
-        {props.quickSearchMatchedUsers.length > 0 && QuickSearchResults}
-
-        {/* The search results. */}
-        {props.userSearchResults.length
-          ? <SearchResults userSearchResults={props.userSearchResults} />
-          : <SearchNoResults isFirstSearch={isFirstSearch} />}
-
-        {/* Recommended companies (predefined ones). */}
-        {props.recommendations.length > 0 && RecommendedCompaniesList}
-
-        {/* 'Show all recommendations' label. */}
-        {props.recommendations.length > 4
-            && <CompaniesExpansionLabel onClick={() => setIsRecommendationsViewVisible(true)} />}
-      </styled.ContentWrapper>
-      <styled.AdaptedFooter />
-
-      {/* Recommended companies' stuff. */}
-      {isRecommendationsViewVisible && RecommendationsPopup}
-      <PopupManager onPopupClose={() => setIsRecommendationsViewVisible(false)} />
-
-    </styled.Wrapper>
-  );
+  return props.privateToken ? GuardedContent : null;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);

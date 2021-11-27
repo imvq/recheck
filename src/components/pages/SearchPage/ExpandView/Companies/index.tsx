@@ -44,7 +44,7 @@ function Companies(props: types.IProps) {
   const [chunk, setChunk] = useState(0);
 
   const loadNewChunk = () => {
-    props.loadNextChunkCallback(chunk + 1);
+    props.loadNextChunkCallback(props.privateToken as string, chunk + 1);
     setChunk(chunk + 1);
   };
 
