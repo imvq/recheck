@@ -196,9 +196,11 @@ export function quickSearchCompanies(sequence: string) {
   };
 }
 
-export function loadRecommendations(last: number) {
+export function loadRecommendations(privateToken: string, last: number, recreate?: boolean) {
+  const updater = recreate ? searchActions.setRecommendations : searchActions.appendRecommendations;
+
   return (dispatch: Dispatch<AppActionType>) => {
-    apiClient.loadPredefinedCompanies(last)
-      .then(companiesData => dispatch(searchActions.appendRecommendations(companiesData.data)));
+    apiClient.loadPredefinedCompanies(privateToken, last)
+      .then(companiesData => dispatch(updater(companiesData.data)));
   };
 }

@@ -2,32 +2,34 @@ import { AppState } from 'store';
 
 // Profile.
 
-export const getCurrentPrivateToken = (store: AppState) => store.profile.privateToken;
-export const getCurrentShareableId = (store: AppState) => store.profile.shareableId;
-export const getFullName = (store: AppState) => store.profile.fullName;
-export const getPhotoUrl = (store: AppState) => store.profile.photoUrl;
-export const getCurrentPosition = (store: AppState) => store.profile.currentPosition;
-export const getCurrentCompanyName = (store: AppState) => store.profile.company?.name;
+export const getCurrentPrivateToken = (state: AppState) => state.profile.privateToken;
+export const getCurrentShareableId = (state: AppState) => state.profile.shareableId;
+export const getFullName = (state: AppState) => state.profile.fullName;
+export const getPhotoUrl = (state: AppState) => state.profile.photoUrl;
+export const getCurrentPosition = (state: AppState) => state.profile.currentPosition;
+export const getCurrentCompanyName = (state: AppState) => state.profile.company?.name;
+export const getIsUserConfirmed = (state: AppState) => state.profile.isConfirmed;
 
 // When a user logs in they got a social ID and confirmation status.
 // If the login attempt was failed the social ID store field remains null
 // but the confirmation status field becomes false.
 // Only null values for both mean that authorization is pending.
-export const getIsUserAuthenticated = (store: AppState) => (
-  (store.profile.socialId === null && store.profile.isConfirmed === null)
-    ? null : !!store.profile.socialId
+export const getIsUserAuthenticated = (state: AppState) => (
+  (state.profile.socialId === null && state.profile.isConfirmed === null)
+    ? null : !!state.profile.socialId
 );
 
 // Search.
 
-export const getQuickSearchMatchedUsers = (store: AppState) => store.search.quickSearchMatchedUsers;
+export const getQuickSearchMatchedUsers = (state: AppState) => state.search.quickSearchMatchedUsers;
+export const getRecommendations = (state: AppState) => state.search.recommendations;
 export const getRecommendedCompaniesShownMembers = (store: AppState) => (
   store.search.recommendedCompaniesShownMembers
 );
-export const getUserSearchResults = (store: AppState) => store.search.userSearchResults;
+export const getUserSearchResults = (state: AppState) => state.search.userSearchResults;
 
 // Reviews.
 
-export const getCreatedReviewQuestions = (store: AppState) => store.reviews.questions;
-export const getCreatedReviewAnswers = (store: AppState) => store.reviews.currentReviewComments;
-export const getCreatedReviewMarks = (store: AppState) => store.reviews.currentReviewMarks;
+export const getCreatedReviewQuestions = (state: AppState) => state.reviews.questions;
+export const getCreatedReviewAnswers = (state: AppState) => state.reviews.currentReviewComments;
+export const getCreatedReviewMarks = (state: AppState) => state.reviews.currentReviewMarks;
