@@ -2,9 +2,17 @@ import { Response } from 'express';
 
 import { BadRequestError } from '@business/errors';
 
+export function assertParamsData(...args: any[]) {
+  assertRequestData('Not all required params fields are defined or formatted correctly.', args);
+}
+
 export function assertBodyData(...args: any[]) {
+  assertRequestData('Not all required body fields are defined or formatted correctly.', args);
+}
+
+export function assertRequestData(errorMessage: string, ...args: any[]) {
   if (!args.every(value => value !== undefined)) {
-    throw new BadRequestError('Not all required body fields are defined or formatted correctly.');
+    throw new BadRequestError(errorMessage);
   }
 }
 
