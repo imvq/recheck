@@ -82,9 +82,9 @@ export function quickSearchCompanies(sequence: string)
   return apiInstance.post('/search/quick/companies', { sequence });
 }
 
-export function loadPredefinedCompanies(last: number)
+export function loadPredefinedCompanies(privateToken: string, last: number)
   : ApiPromise<commonTypes.ICompanyWithMembers[]> {
-  return apiInstance.get(`/search/predefined/companies/${last}`);
+  return apiInstance.post(`/search/predefined/companies/${last}`, { privateToken });
 }
 
 export function checkIsUserAvailableForReview(privateToken: string, targetShareableId: string)

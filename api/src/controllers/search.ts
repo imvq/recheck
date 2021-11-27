@@ -8,10 +8,10 @@ import * as searchLogic from '@business/search';
 const router = Router();
 
 router.get('/user/:shareableId', searchLogic.searchUserByShareableId);
-router.get('/predefined/companies/:last', searchLogic.getPredefinedCompanies);
 
 router.post('/users/tokens', searchLogic.searchUsersByTokens);
 router.post('/quick/users/tokens', searchLogic.quickSearchUsersByTokens);
 router.post('/quick/companies', searchLogic.quickSearchCompanies);
+router.post('/predefined/companies/:last', searchLogic.getPredefinedCompanies);
 
 export default router;

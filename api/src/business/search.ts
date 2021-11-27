@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import * as accessors from '@business/database/accessors';
 import * as mappers from '@business/database/mappers';
 
-import { assertBodyData, reply } from '@business/commons';
+import { assertParamsData, assertBodyData, reply } from '@business/commons';
 import { ICompaniesDictionary } from '@typing';
 
 /**
@@ -80,8 +80,17 @@ export async function getPredefinedCompanies(request: Request, response: Respons
     last: string;
   }
 
+  interface IBodyParams {
+    privateToken: string;
+  }
+
   const { last }: IPathParams = request.params as { last: string; };
-  assertBodyData(last);
+  const { privateToken }: IBodyParams = request.body;
+  assertParamsData(last);
+  assertBodyData(last, privateToken);
+
+  const askerEntity = await accessors.readUserByPrivateToken(privateToken);
+  const asker = mappers.normalizePublicUserInfo(askerEntity);
 
   const usersWithCompanies = await accessors.readUsersWithPredefinedCompanies(last);
 
@@ -89,6 +98,12 @@ export async function getPredefinedCompanies(request: Request, response: Respons
 
   usersWithCompanies.forEach(user => {
     const normalizedUser = mappers.normalizeSearchedUserInfo(user);
+
+    // By design, the asker must not get themselves.
+    if (normalizedUser.shareableId === asker.shareableId) {
+      return;
+    }
+
     getMembersArray(companiesDictionary, normalizedUser)
       .members
       .push(normalizedUser);
