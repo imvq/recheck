@@ -38,6 +38,7 @@ function loadProfileData(
   if (!profileData.data.registered) {
     dispatch(profileActions.setMandatoryBasicFields(profileData.data.socialId, false));
 
+    dispatch(interactionActions.setIsRedirectedFromOrigin(true));
     jumpTo('/register');
 
     return;
@@ -48,6 +49,7 @@ function loadProfileData(
     dispatch(profileActions.setPrivateToken(profileData.data.privateToken as string));
     dispatch(profileActions.setEmail(profileData.data.email as string));
 
+    dispatch(interactionActions.setIsRedirectedFromOrigin(true));
     jumpTo('/await-user-confirmation');
 
     return;

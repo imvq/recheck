@@ -2,9 +2,14 @@ import { MainToolbarEntry } from 'commons/types/unions';
 
 import * as types from './types';
 
-export const setIsPageLocked = (value: boolean): types.IAction => ({
+export const setIsRedirectedFromOrigin = (flag: boolean): types.IAction => ({
+  type: types.SET_IS_REDIRECTED_FROM_ORIGIN,
+  payload: flag
+});
+
+export const setIsPageLocked = (flag: boolean): types.IAction => ({
   type: types.SET_IS_PAGE_LOCKED,
-  payload: value
+  payload: flag
 });
 
 export const setPageLocked = () => setIsPageLocked(true);
@@ -20,9 +25,9 @@ export const setIsSpendFreeViewPopupVisible = (flag: boolean): types.IAction => 
   payload: flag
 });
 
-export const setIsLoginPopupVisible = (value: boolean): types.IAction => ({
+export const setIsLoginPopupVisible = (flag: boolean): types.IAction => ({
   type: types.SET_IS_LOGIN_POPUP_VISIBILE,
-  payload: value
+  payload: flag
 });
 
 export const setCurrentMainToolbarEntry = (entry: MainToolbarEntry): types.IAction => ({

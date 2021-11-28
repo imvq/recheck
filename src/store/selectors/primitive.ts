@@ -1,5 +1,11 @@
 import { AppState } from 'store';
 
+// Interaction.
+
+export const getIsRedirectedFromOrigin = (state: AppState) => (
+  state.interaction.isRedirectedFromOrigin
+);
+
 // Profile.
 
 export const getCurrentPrivateToken = (state: AppState) => state.profile.privateToken;

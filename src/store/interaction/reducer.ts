@@ -3,6 +3,7 @@ import { mainToolbarEntries } from 'commons/types/unions';
 import * as types from './types';
 
 const initialState: types.IState = {
+  isRedirectedFromOrigin: false,
   isPageLocked: true,
   isSearchPopupVisible: false,
   isSpendFreeViewPopupVisible: false,
@@ -17,6 +18,11 @@ const initialState: types.IState = {
 
 export function interactionStateReducer(state = initialState, action: types.IAction): types.IState {
   switch (action.type) {
+    case types.SET_IS_REDIRECTED_FROM_ORIGIN:
+      return {
+        ...state,
+        isRedirectedFromOrigin: action.payload
+      };
     case types.SET_IS_PAGE_LOCKED:
       return {
         ...state,
