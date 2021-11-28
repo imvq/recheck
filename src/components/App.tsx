@@ -13,11 +13,15 @@ import PageAccessGuard from 'components/shared/PageAccessGuard';
 import 'react-toastify/dist/ReactToastify.min.css';
 
 const LandingPage = lazy(() => import('components/pages/LandingPage'));
+
+const ColleaguesPage = lazy(() => import('components/pages/ColleaguesPage'));
 const ObservedProfilePage = lazy(() => import('components/pages/ObservedProfilePage'));
 const OwnProfilePage = lazy(() => import('components/pages/OwnProfilePage'));
 const PrivacyPolicyPage = lazy(() => import('components/pages/PrivacyPolicyPage'));
+const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
 const ReviewPage = lazy(() => import('components/pages/ReviewPage'));
 const SearchPage = lazy(() => import('components/pages/SearchPage'));
+const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
 const UserConfirmationPage = lazy(() => import('components/pages/UserConfirmationPage'));
 
 /**
@@ -40,15 +44,16 @@ export default () => (
             </PageAccessGuard>
           </Route>
 
-          {/* Page to complete user's registration. User UUID needed. */}
-          {/* Users are free to be unathorized because confirmation link is private. */}
-          <Route exact path='/register/complete/:uuid'>
-            <UserConfirmationPage />
+          {/* List of colleagues available for review. */}
+          <Route exact path='/colleagues'>
+            <ColleaguesPage />
           </Route>
 
-          {/* Provacy Policy needed to legitimate usage of OAuth. */}
-          <Route exact path='/privacy-policy'>
-            <PrivacyPolicyPage />
+          {/* Profile of another user. */}
+          <Route exact path='/profile/observe/:targetShareableId'>
+            <PageAccessGuard forConfirmedUsersOnly hideContentOnLock>
+              <ObservedProfilePage />
+            </PageAccessGuard>
           </Route>
 
           {/* Own profile page. */}
@@ -61,11 +66,15 @@ export default () => (
             </PageAccessGuard>
           </Route>
 
-          {/* Profile of another user. */}
-          <Route exact path='/profile/observe/:targetShareableId'>
-            <PageAccessGuard forConfirmedUsersOnly hideContentOnLock>
-              <ObservedProfilePage />
-            </PageAccessGuard>
+          {/* Provacy Policy needed to legitimate usage of OAuth. */}
+          <Route exact path='/privacy-policy'>
+            <PrivacyPolicyPage />
+          </Route>
+
+          {/* The registration page must be unaccessible directly to avoid manual entering */}
+          {/* as it can cause state incoherence. */}
+          <Route exact path='/register'>
+            <RegistrationPage />
           </Route>
 
           {/* Review page. Used to add new reviews. */}
@@ -80,6 +89,17 @@ export default () => (
             <PageAccessGuard>
               <SearchPage />
             </PageAccessGuard>
+          </Route>
+
+          {/* Page with message persuading to check user's email. */}
+          <Route exact path='/await-user-confirmation'>
+            <UserConfirmationAwaiterPage />
+          </Route>
+
+          {/* Page to complete user's registration. User UUID needed. */}
+          {/* Users are free to be unathorized because confirmation link is private. */}
+          <Route exact path='/register/complete/:uuid'>
+            <UserConfirmationPage />
           </Route>
 
           {/* LinkedIn's OAuth2 window. */}

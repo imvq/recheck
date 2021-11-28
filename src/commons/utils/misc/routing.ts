@@ -2,7 +2,7 @@
  * Routing stuff.
  */
 
-import { historyManager, memoryHistoryManager } from 'commons/utils/services';
+import { historyManager } from 'commons/utils/services';
 
 type Page = '/'
   | '/404'
@@ -22,15 +22,5 @@ export function jumpBack() {
 }
 
 export function jumpTo(page: Page, continuation?: string) {
-  if (page === '/register') {
-    memoryHistoryManager.push(page);
-    return;
-  }
-
-  if (page === '/await-user-confirmation') {
-    memoryHistoryManager.push(page);
-    return;
-  }
-
   historyManager.push(`${page}${continuation || ''}`);
 }

@@ -1,18 +1,11 @@
-import { lazy, memo, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Router, Switch, Route } from 'react-router-dom';
 
 import * as store from 'store';
 
 import PageLoader from 'components/shared/PageLockManager/PageLoader';
 
-import { memoryHistoryManager } from 'commons/utils/services';
-
 import * as types from './types';
-
-const ColleaguesPage = lazy(() => import('components/pages/ColleaguesPage'));
-const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
-const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
 
 const mapStateToProps = (state: store.AppState): types.IStateProps => ({
   isAuthenticated: store.getIsUserAuthenticated(state),
@@ -64,32 +57,10 @@ function PageAccessGuard(props: types.IProps) {
   }, [props.isAuthenticated, props.isConfirmed]);
 
   return (
-    <Router history={memoryHistoryManager}>
-      <Switch>
-        {/* The registration page must be unaccessible directly to avoid manual entering */}
-        {/* as it can cause state incoherence. */}
-        <Route exact path='/register'>
-          <RegistrationPage />
-        </Route>
-
-        {/* Page with message persuading to check user's email. */}
-        <Route exact path='/await-user-confirmation'>
-          <UserConfirmationAwaiterPage />
-        </Route>
-
-        {/* List of colleagues available for review. */}
-        <Route exact path='/colleagues'>
-          <ColleaguesPage />
-        </Route>
-
-        <Route>
-          <>
-            {props.isPageLocked && <PageLoader isTransparent={!props.hideContentOnLock} />}
-            {props.children}
-          </>
-        </Route>
-      </Switch>
-    </Router>
+    <>
+      {props.isPageLocked && <PageLoader isTransparent={!props.hideContentOnLock} />}
+      {props.children}
+    </>
   );
 }
 
