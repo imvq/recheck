@@ -21,6 +21,7 @@ export interface IStateProps {
 export interface IDispatchProps {
   quickSearchCompanies(sequence: string): void;
   clearMatchedCompanies(): void;
+  setIsPageLocked(flag: boolean): void;
 }
 
 export type IProps = IStateProps & IOwnProps & IDispatchProps;

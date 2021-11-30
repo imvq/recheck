@@ -9,4 +9,6 @@ export interface IStateProps {
   isPageLocked: boolean;
 }
 
-export type IProps = IOwnProps & IStateProps;
+export interface IDispatchProps {}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

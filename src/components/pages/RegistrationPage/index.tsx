@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 
 import * as store from 'store';
 
-import ScaleStage2 from 'assets/images/pages/RegistrationPage/ScaleStage2.png';
-
 import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 import { IUserPreparationData } from 'commons/types';
@@ -61,15 +59,10 @@ function RegistrationPage(props: types.IProps) {
   // Therefore, we must hide the registration page content by the time we pass all checks.
   return props.isAuthenticated ? (
     <styled.Wrapper>
-      <styled.AdaptedHeader isProfilePageAvailable={false} />
       <styled.ContentWrapper>
-        <styled.StageBreadcrumpWrapper>
-          <styled.StageBreadcrumpImage src={ScaleStage2} draggable='false' />
-        </styled.StageBreadcrumpWrapper>
 
         <RegistrationBox onRegisterButtonPressed={prepareUser} />
       </styled.ContentWrapper>
-      <styled.AdaptedFooter />
 
       {/* Absolute-positioned confirmation popup. */}
       {isConfirmationVisible && <ConfirmationPopup email={emailToShow} />}

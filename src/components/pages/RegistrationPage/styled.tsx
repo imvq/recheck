@@ -2,9 +2,6 @@ import styled from 'styled-components';
 
 import BackgroundSvgPath from 'assets/images/common/BackgroundDefault.png';
 
-import Footer from 'components/shared/Footer';
-import Header from 'components/shared/Header';
-
 export const Wrapper = styled.div`
   background-image: url(${BackgroundSvgPath});
   background-size: cover;
@@ -12,16 +9,7 @@ export const Wrapper = styled.div`
   display: grid;
   grid-template:
     'Header'
-    'Content' 1fr
-    'Footer';
-`;
-
-export const AdaptedHeader = styled(Header)`
-  grid-area: Header;
-`;
-
-export const AdaptedFooter = styled(Footer)`
-  grid-area: Footer;
+    'Content' 1fr;
 `;
 
 export const ContentWrapper = styled.div`
@@ -32,13 +20,4 @@ export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const StageBreadcrumpWrapper = styled.div`
-  width: 55rem;
-  margin-bottom: 5rem;
-`;
-
-export const StageBreadcrumpImage = styled.img`
-  width: 100%;
 `;

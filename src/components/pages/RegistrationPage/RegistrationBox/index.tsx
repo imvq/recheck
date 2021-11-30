@@ -2,10 +2,11 @@ import { useState, useRef, memo } from 'react';
 import { connect } from 'react-redux';
 import { validate as validateEmail } from 'email-validator';
 
+import * as store from 'store';
+
 import { ICompanyBasic } from 'commons/types';
 import { apiClient } from 'commons/utils/services';
-import { AppState, clearMatchedCompanies } from 'store';
-import { quickSearchCompanies } from 'store/thunks';
+import { onExit } from 'commons/utils/misc';
 
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
@@ -15,15 +16,16 @@ import * as misc from './misc';
 import * as types from './types';
 import * as styled from '../../../shared/BoxBase';
 
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  socialId: store.profile.socialId,
-  matchedCompanies: store.search.quickSearchMatchedCompanies,
-  inviter: store.profile.inviterShareableId
+const mapStateToProps = (state: store.AppState): types.IStateProps => ({
+  socialId: store.getCurrentSocialId(state),
+  matchedCompanies: store.getQuickSearchMatchedCompanies(state),
+  inviter: store.getInviterShareableId(state)
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  quickSearchCompanies,
-  clearMatchedCompanies
+  quickSearchCompanies: store.quickSearchCompanies,
+  clearMatchedCompanies: store.clearMatchedCompanies,
+  setIsPageLocked: store.setIsPageLocked
 };
 
 function RegistrationBox(props: types.IProps) {
@@ -101,11 +103,15 @@ function RegistrationBox(props: types.IProps) {
     }
   }
 
+  function onExitCallback() {
+    onExit(() => props.setIsPageLocked(true));
+  }
+
   // Full name section. Users must choose how others will see them.
   const NameSection = (
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
-        <styled.InputDescription>Ваше имя (то, как Вас будут видеть):</styled.InputDescription>
+        <styled.InputDescription>* Ваше имя (то, как Вас будут видеть)</styled.InputDescription>
       </styled.InputDescriptionWrapper>
       <styled.Input type='text' onChange={event => setFullName(event.target.value)} />
     </styled.InputGroupWrapper>
@@ -115,7 +121,7 @@ function RegistrationBox(props: types.IProps) {
   const EmailSection = (
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
-        <styled.InputDescription>Рабочий email:</styled.InputDescription>
+        <styled.InputDescription>** Рабочий email</styled.InputDescription>
       </styled.InputDescriptionWrapper>
 
       <styled.Input
@@ -129,9 +135,7 @@ function RegistrationBox(props: types.IProps) {
       {emailState.isEmailValidationErrorVisible && (
         <styled.TextAlert isHighlighted>
           Некорректная почта. Предоставляемое значение должно быть валидным почтовым адресом
-          вида myemail@example.com,
-          а сам почтовый адрес должен относиться к домену, принадлежащему компании, в которой вы
-          работаете.
+          вида myemail@example.com.
         </styled.TextAlert>
       )}
     </styled.InputGroupWrapper>
@@ -173,6 +177,14 @@ function RegistrationBox(props: types.IProps) {
       >
         Продолжить
       </CustomButton>
+
+      <CustomButton
+        isHollow
+        isDisabled={false}
+        onClick={onExitCallback}
+      >
+        Отменить
+      </CustomButton>
     </styled.ButtonGroupWrapper>
   );
 
@@ -181,7 +193,8 @@ function RegistrationBox(props: types.IProps) {
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
         <styled.InputDescription>
-          Название компании, где вы работаете:
+          *** Текущая компания или организация, в которой Вы работаете
+          (либо последняя, в которой работали)
         </styled.InputDescription>
       </styled.InputDescriptionWrapper>
 
@@ -195,7 +208,7 @@ function RegistrationBox(props: types.IProps) {
   const PositionSection = (
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
-        <styled.InputDescription>Ваша должность:</styled.InputDescription>
+        <styled.InputDescription>* Ваша должность</styled.InputDescription>
       </styled.InputDescriptionWrapper>
       <styled.Input type='text' onChange={event => misc.positionHandler(event, setCurrentPosition)} />
     </styled.InputGroupWrapper>
@@ -204,7 +217,7 @@ function RegistrationBox(props: types.IProps) {
   const DatePickers = (
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
-        <styled.InputDescription>Дата начала работы:</styled.InputDescription>
+        <styled.InputDescription>* Дата начала работы</styled.InputDescription>
       </styled.InputDescriptionWrapper>
       <styled.InputRowWrapper>
         <CustomSelect
@@ -231,11 +244,24 @@ function RegistrationBox(props: types.IProps) {
       {PositionSection}
       {DatePickers}
 
-      <styled.TextAlert>Все поля обязательны к заполнению.</styled.TextAlert>
+      <styled.TextAlert>* Поля обязательны к заполнению.</styled.TextAlert>
+
       <styled.TextAlert>
-        Необходимо предоставить рабочую почту той компании, в которой вы работаете.
-        Таким образом мы сможем найти ваших коллег и предоставить возможность вам
-        оставлять на них отзывы.
+        ** Необходимо предоставить рабочую почту той компании, в которой вы работаете
+        в данный момент (при отсутствии таковой следует указать рабочую почту последнего
+        места работы, к которой у Вас есть доступ).
+        Таким образом мы сможем сопоставить Вас с коллегами по работе.
+      </styled.TextAlert>
+
+      <styled.TextAlert>
+        *** Домен предоставленной рабочей почты должен соответствовать одному из
+        подтверждённых владельцем компании (организации).
+        В случае отсутствия Вашей компании в нашей базе данных, Вы можете
+        ввести имя текстом или же оставить данное поле пустым — в таком случае
+        поиск Ваших коллег будет осуществляться по домену Вашей почты (если это возможно).
+        В дальнейшем эта информация можеть быть дополнена и отредактирована (см.&nbsp;
+        <a href='/tutorial'>подробнее</a>
+        ).
       </styled.TextAlert>
 
       {ProceedButton}

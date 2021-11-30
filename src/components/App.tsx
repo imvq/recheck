@@ -9,6 +9,7 @@ import { store as appStore } from 'store';
 import NotFoundPage from 'components/pages/NotFoundPage';
 import GlobalStyle from 'components/shared/GlobalStyle';
 import PageAccessGuard from 'components/shared/PageAccessGuard';
+import PurePageLockGuard from 'components/shared/PurePageLockGuard';
 
 import 'react-toastify/dist/ReactToastify.min.css';
 
@@ -74,7 +75,9 @@ export default () => (
           {/* The registration page must be unaccessible directly to avoid manual entering */}
           {/* as it can cause state incoherence. */}
           <Route exact path='/register'>
-            <RegistrationPage />
+            <PurePageLockGuard>
+              <RegistrationPage />
+            </PurePageLockGuard>
           </Route>
 
           {/* Review page. Used to add new reviews. */}

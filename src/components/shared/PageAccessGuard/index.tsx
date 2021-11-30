@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as store from 'store';
 
-import PageLoader from 'components/shared/PageLockManager/PageLoader';
+import PageLoader from 'components/shared/PageLoader';
 
 import * as types from './types';
 

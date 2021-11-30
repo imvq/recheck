@@ -5,11 +5,14 @@ import { AppState } from 'store';
 export const getIsRedirectedFromOrigin = (state: AppState) => (
   state.interaction.isRedirectedFromOrigin
 );
+export const getIsPageLocked = (state: AppState) => state.interaction.isPageLocked;
 
 // Profile.
 
 export const getCurrentPrivateToken = (state: AppState) => state.profile.privateToken;
 export const getCurrentShareableId = (state: AppState) => state.profile.shareableId;
+export const getCurrentSocialId = (state: AppState) => state.profile.socialId;
+export const getInviterShareableId = (state: AppState) => state.profile.inviterShareableId;
 export const getFullName = (state: AppState) => state.profile.fullName;
 export const getPhotoUrl = (state: AppState) => state.profile.photoUrl;
 export const getCurrentPosition = (state: AppState) => state.profile.currentPosition;
@@ -28,6 +31,9 @@ export const getIsUserAuthenticated = (state: AppState) => (
 // Search.
 
 export const getQuickSearchMatchedUsers = (state: AppState) => state.search.quickSearchMatchedUsers;
+export const getQuickSearchMatchedCompanies = (state: AppState) => (
+  state.search.quickSearchMatchedCompanies
+);
 export const getRecommendations = (state: AppState) => state.search.recommendations;
 export const getRecommendedCompaniesShownMembers = (store: AppState) => (
   store.search.recommendedCompaniesShownMembers
