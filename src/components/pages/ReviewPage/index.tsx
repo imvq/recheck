@@ -57,6 +57,12 @@ function ReviewPage(props: types.IProps) {
 
   function finalize(comment: string, mark: number | null = null) {
     props.pushAnswer(comment, mark);
+    // First we have to add the last answer to our review data.
+    const reviewData = {
+      questions: props.reviewData.questions,
+      comments: [...props.reviewData.comments, comment],
+      marks: [...props.reviewData.marks, mark]
+    };
 
     // If an authorized user has not been redirected yet (with PageAccessGuard),
     // that means it is registered and confirmed,
@@ -66,7 +72,7 @@ function ReviewPage(props: types.IProps) {
       props.createReview(
         props.privateToken as string,
         targetShareableId,
-        props.reviewData,
+        reviewData,
         () => misc.postRedirect(props.requestedUserShareableId)
       );
     } else {

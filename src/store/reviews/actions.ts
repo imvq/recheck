@@ -21,7 +21,7 @@ export const popAnswer = (): types.IAction => ({
   type: types.POP_ANSWER
 });
 
-export const clearAnswersAndMarks = (): types.IAction => ({
+export const clearAnswers = (): types.IAction => ({
   type: types.CLEAR_ANSWERS
 });
 

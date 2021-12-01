@@ -194,7 +194,7 @@ export function createReview(
       .then(callback)
       .catch(() => jumpTo('/404'));
 
-    dispatch(reviewsActions.clearAnswersAndMarks());
+    dispatch(reviewsActions.clearAnswers());
   };
 }
 

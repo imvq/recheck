@@ -13,7 +13,7 @@ export interface IStateProps {
 export interface IDispatchProps {
   setCurrentReviewTargetShareableId(shareableId: string): void;
   pushAnswer(comment: string, mark: number | null): void;
-  popAnswer(): void
+  popAnswer(): void;
   createReview: IReviewCreator;
   setIsRedirectHomePending(flag: boolean): void;
   setIsLoginPopupVisible(flag: boolean): void;
