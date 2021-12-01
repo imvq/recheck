@@ -25,6 +25,18 @@ const SearchPage = lazy(() => import('components/pages/SearchPage'));
 const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
 const UserConfirmationPage = lazy(() => import('components/pages/UserConfirmationPage'));
 
+const GuardedProfilePage = () => (
+  <PageAccessGuard forConfirmedUsersOnly>
+    <OwnProfilePage />
+  </PageAccessGuard>
+);
+
+const GuardedReviewPage = () => (
+  <PageAccessGuard hideContentOnLock preventDefaultUnlock>
+    <ReviewPage />
+  </PageAccessGuard>
+);
+
 /**
  * Main wrapper.
  * Container component.
@@ -61,11 +73,7 @@ export default () => (
           {/* Use StartupManager to do checkAuth request to LinkedIn. */}
           {/* Check is needed to determine if we can show the page to user. */}
           {/* The result of the check is stored so that no check will be further. */}
-          <Route exact path='/profile'>
-            <PageAccessGuard forConfirmedUsersOnly>
-              <OwnProfilePage />
-            </PageAccessGuard>
-          </Route>
+          <Route exact path='/profile' component={GuardedProfilePage} />
 
           {/* Provacy Policy needed to legitimate usage of OAuth. */}
           <Route exact path='/privacy-policy'>
@@ -81,11 +89,7 @@ export default () => (
           </Route>
 
           {/* Review page. Used to add new reviews. */}
-          <Route exact path='/review/create/:targetShareableId'>
-            <PageAccessGuard hideContentOnLock preventDefaultUnlock>
-              <ReviewPage />
-            </PageAccessGuard>
-          </Route>
+          <Route exact path='/review/create/:targetShareableId' component={GuardedReviewPage} />
 
           {/* Search page. Used to search users and companies. */}
           <Route exact path='/search'>

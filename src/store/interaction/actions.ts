@@ -7,6 +7,11 @@ export const setIsRedirectedFromOrigin = (flag: boolean): types.IAction => ({
   payload: flag
 });
 
+export const setIsRedirectHomePending = (flag: boolean): types.IAction => ({
+  type: types.SET_IS_REDIRECT_HOME_PENDING,
+  payload: flag
+});
+
 export const setIsPageLocked = (flag: boolean): types.IAction => ({
   type: types.SET_IS_PAGE_LOCKED,
   payload: flag

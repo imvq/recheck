@@ -3,7 +3,7 @@ import { IReviewCreated, IReviewCreator } from 'commons/types';
 export interface IOwnProps {}
 
 export interface IStateProps {
-  isConfirmed: boolean | null;
+  isAuthenticated: boolean | null;
   isPageLocked: boolean;
   privateToken: string | null;
   requestedUserShareableId: string | null;
@@ -15,9 +15,9 @@ export interface IDispatchProps {
   pushAnswer(comment: string, mark: number | null): void;
   popAnswer(): void
   createReview: IReviewCreator;
+  setIsRedirectHomePending(flag: boolean): void;
   setIsLoginPopupVisible(flag: boolean): void;
-  lockPage(): void;
-  unlockPage(): void;
+  setIsPageLocked(flag: boolean): void;
 }
 
 export type IProps = IOwnProps & IStateProps & IDispatchProps;

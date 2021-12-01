@@ -1,6 +1,7 @@
 import { MainToolbarEntry } from 'commons/types/unions';
 
 export const SET_IS_REDIRECTED_FROM_ORIGIN = 'SET_IS_REDIRECTED_FROM_ORIGIN';
+export const SET_IS_REDIRECT_HOME_PENDING = 'SET_IS_REDIRECT_HOME_PENDING';
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
 export const SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE = 'SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE';
 export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';
@@ -14,6 +15,7 @@ export const SET_REQUESTED_USER_SHAREABLE_ID = 'SET_REQUESTED_USER_SHAREABLE_ID'
 
 export interface IState {
   isRedirectedFromOrigin: boolean;
+  isRedirectHomePending: boolean;
   isPageLocked: boolean;
   isSearchPopupVisible: boolean;
   isSpendFreeViewPopupVisible: boolean;
@@ -28,6 +30,11 @@ export interface IState {
 
 export interface SetIsRedirectedFromOrigin {
   type: typeof SET_IS_REDIRECTED_FROM_ORIGIN;
+  payload: boolean;
+}
+
+export interface SetIsRedirectHomePending {
+  type: typeof SET_IS_REDIRECT_HOME_PENDING;
   payload: boolean;
 }
 
@@ -83,6 +90,7 @@ export interface SetRequestedUserShareableId {
 
 export type IAction =
     SetIsRedirectedFromOrigin
+  | SetIsRedirectHomePending
   | SetIsPageLocked
   | SetIsSearchPopupVisible
   | SetIsSpendFreeViewPopupVisible

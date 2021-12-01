@@ -7,7 +7,7 @@ import * as usersLogic from '@business/users';
  */
 const router = Router();
 
-router.get('/profile', usersLogic.retrieveProfile);
+router.get('/profile/:accessToken', usersLogic.retrieveProfile);
 
 router.post('/availability/email', usersLogic.checkIfEmailIsAvailable);
 router.post('/availability/user', usersLogic.checkIfUserCanBeViewed);

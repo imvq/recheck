@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { LinkedIn, LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import { connect } from 'react-redux';
 
-import { apiClient, cookieManager } from 'commons/utils/services';
+import { apiClient } from 'commons/utils/services';
 import { setPageLocked, setIsLoginPopupVisible } from 'store';
 import { updateAuthorizationStatus } from 'store/thunks';
 
@@ -21,7 +21,7 @@ function AuthPopup(props: types.IProps) {
 
     apiClient.exchangeLinkedInCode(data.code, `${window.location.origin}/linkedin`)
       .then(linkedinResponse => {
-        cookieManager.set('accessToken', linkedinResponse.data.accessToken);
+        localStorage.setItem('accessToken', linkedinResponse.data.accessToken);
         props.updateAuthorizationStatus();
       })
       .finally(() => {

@@ -5,22 +5,25 @@ import { AxiosResponse } from 'axios';
 import * as types from 'commons/types';
 
 import { jumpTo } from 'commons/utils/misc';
-import { apiClient, cookieManager } from 'commons/utils/services';
+import { apiClient } from 'commons/utils/services';
 
 import * as interactionActions from './interaction/actions';
 import * as profileActions from './profile/actions';
 import * as reviewsActions from './reviews/actions';
 import * as searchActions from './search/actions';
 
+import { store } from './setup';
 import { AppActionType } from './types';
 
 export function updateAuthorizationStatus() {
-  return (dispatch: Dispatch<AppActionType>) => {
-    if (cookieManager.get('accessToken')) {
-      apiClient.retrieveProfile()
-        .then(profileData => loadProfileData(dispatch, profileData))
+  return (dispatch: Dispatch<AppActionType>, getState: typeof store.getState) => {
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (accessToken) {
+      apiClient.retrieveProfile(accessToken)
+        .then(profileData => postProcessProfileRetrieving(dispatch, getState, profileData))
         .catch(() => {
-          cookieManager.remove('accessToken');
+          localStorage.removeItem('accessToken');
           dispatch(profileActions.setIsConfirmed(false));
         });
 
@@ -31,8 +34,9 @@ export function updateAuthorizationStatus() {
   };
 }
 
-function loadProfileData(
+function postProcessProfileRetrieving(
   dispatch: Dispatch<AppActionType>,
+  getState: typeof store.getState,
   profileData: AxiosResponse<types.IUserSelf>
 ) {
   if (!profileData.data.registered) {
@@ -75,6 +79,12 @@ function loadProfileData(
   }));
 
   dispatch(profileActions.setIsConfirmed(true));
+
+  if (getState().interaction.isRedirectHomePending) {
+    dispatch(interactionActions.setIsRedirectHomePending(false));
+
+    jumpTo('/profile');
+  }
 }
 
 export function loadAboutTabData(privateToken: string) {

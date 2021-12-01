@@ -6,6 +6,9 @@ export const getIsRedirectedFromOrigin = (state: AppState) => (
   state.interaction.isRedirectedFromOrigin
 );
 export const getIsPageLocked = (state: AppState) => state.interaction.isPageLocked;
+export const getRequestedUserShareableId = (state: AppState) => (
+  state.interaction.requestedUserShareableId
+);
 
 // Profile.
 

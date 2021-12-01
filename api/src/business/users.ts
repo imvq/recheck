@@ -11,7 +11,7 @@ import * as accessors from '@business/database/accessors';
 import * as mappers from '@business/database/mappers';
 import * as errors from '@business/errors';
 
-import { assertBodyData, reply, AccessToken } from '@business/commons';
+import { assertBodyData, assertParamsData, reply, AccessToken } from '@business/commons';
 
 import * as mailingLogic from './mailing';
 import * as nameTokensLogic from './nameTokens';
@@ -265,14 +265,21 @@ export async function getPreparedCompany(id: string, name: string | null) {
  * and sends the asker the info including a private token the user can get private access with.
  */
 export async function retrieveProfile(request: Request, response: Response) {
-  const accessToken = new AccessToken(request.cookies['accessToken']);
+  interface PathParams {
+    accessToken: string;
+  }
 
-  if (!accessToken.socialMedia || !accessToken.tokenValue) {
+  const { accessToken }: PathParams = request.params as { accessToken: string; };
+  assertParamsData(accessToken);
+
+  const parsedAccessToken = new AccessToken(accessToken);
+
+  if (!parsedAccessToken.socialMedia || !parsedAccessToken.tokenValue) {
     throw new errors.ForbiddenError('No valid access token provided.');
   }
 
-  if (accessToken.socialMedia === 'linkedin') {
-    const socialId = await retrieveSocialIdFromLinkedIn(accessToken.tokenValue);
+  if (parsedAccessToken.socialMedia === 'linkedin') {
+    const socialId = await retrieveSocialIdFromLinkedIn(parsedAccessToken.tokenValue);
     const savedLocalUser = await retrieveLocalProfileData(socialId);
 
     reply(response, savedLocalUser);

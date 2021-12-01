@@ -2,20 +2,11 @@ import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import * as store from 'store';
+
 import { ISearchedProfile } from 'commons/types';
 import { jumpBack, jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
-import {
-  AppState,
-  pushAnswer,
-  popAnswer,
-  setIsLoginPopupVisible,
-  setCurrentReviewTargetShareableId,
-  setPageLocked,
-  setPageUnlocked
-} from 'store';
-import { getUntargetedCreatedReview } from 'store/selectors';
-import { createReview } from 'store/thunks';
 
 import AuthPopupManager from 'components/shared/AuthPopupManager';
 import ProfileHead from 'components/shared/ProfileHead';
@@ -27,22 +18,22 @@ import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
-const mapSateToProps = (store: AppState): types.IStateProps => ({
-  isConfirmed: store.profile.isConfirmed,
-  isPageLocked: store.interaction.isPageLocked,
-  privateToken: store.profile.privateToken,
-  requestedUserShareableId: store.interaction.requestedUserShareableId,
-  reviewData: getUntargetedCreatedReview(store)
+const mapSateToProps = (state: store.AppState): types.IStateProps => ({
+  isAuthenticated: store.getIsUserAuthenticated(state),
+  isPageLocked: store.getIsPageLocked(state),
+  privateToken: store.getCurrentPrivateToken(state),
+  requestedUserShareableId: store.getRequestedUserShareableId(state),
+  reviewData: store.getUntargetedCreatedReview(state)
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  createReview,
-  pushAnswer,
-  popAnswer,
-  setIsLoginPopupVisible,
-  setCurrentReviewTargetShareableId,
-  lockPage: setPageLocked,
-  unlockPage: setPageUnlocked
+  createReview: store.createReview,
+  pushAnswer: store.pushAnswer,
+  popAnswer: store.popAnswer,
+  setIsRedirectHomePending: store.setIsRedirectHomePending,
+  setIsLoginPopupVisible: store.setIsLoginPopupVisible,
+  setCurrentReviewTargetShareableId: store.setCurrentReviewTargetShareableId,
+  setIsPageLocked: store.setIsPageLocked
 };
 
 /**
@@ -67,11 +58,11 @@ function ReviewPage(props: types.IProps) {
   function finalize(comment: string, mark: number | null = null) {
     props.pushAnswer(comment, mark);
 
-    // If an uthorized user has not been redirected yet (with PageAccessGuard),
+    // If an authorized user has not been redirected yet (with PageAccessGuard),
     // that means it is registered and confirmed,
-    // therefore, the conditions of the second scenario (look at the first useEffect)
+    // therefore, the conditions of the second scenario (look at the second useEffect)
     // are satisfied.
-    if (props.isConfirmed) {
+    if (props.isAuthenticated) {
       props.createReview(
         props.privateToken as string,
         targetShareableId,
@@ -93,8 +84,8 @@ function ReviewPage(props: types.IProps) {
         props.setCurrentReviewTargetShareableId(searchResult.data.shareableId);
       })
       .catch(() => {
+        props.setIsPageLocked(false);
         jumpTo('/404');
-        props.unlockPage();
       });
   }, []);
 
@@ -106,17 +97,17 @@ function ReviewPage(props: types.IProps) {
   // 3) if the reviewer is not signed in, authorization can be deferred
   //    till the review is saved.
   useEffect(() => {
-    if (props.isConfirmed === null) {
-      // eslint-disable-next-line
+    if (props.isAuthenticated === null) {
       return;
     }
 
-    if (!props.isConfirmed) {
-      props.unlockPage();
+    if (!props.isAuthenticated) {
+      props.setIsRedirectHomePending(true);
+      props.setIsPageLocked(false);
     }
 
     // TODO: check if the target is connected.
-  }, [props.isConfirmed]);
+  }, [props.isAuthenticated]);
 
   const boxes = [
     <CommentBoxSimple key={1} pageLabel='1 / 3' onStepForward={proceed} onStepBack={jumpBack}>

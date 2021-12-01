@@ -23,8 +23,8 @@ export function exchangeLinkedInCode(authCode: string, redirectPath: string)
   return apiInstance.post('/login/linkedin/exchange', { authCode, redirectPath });
 }
 
-export function retrieveProfile(): ApiPromise<commonTypes.IUserSelf> {
-  return apiInstance.get('/users/profile', { withCredentials: true });
+export function retrieveProfile(accessToken: string): ApiPromise<commonTypes.IUserSelf> {
+  return apiInstance.get(`/users/profile/${accessToken}`, { withCredentials: true });
 }
 
 export function checkIfEmailIsAvailable(email: string)

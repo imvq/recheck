@@ -4,6 +4,7 @@ import * as types from './types';
 
 const initialState: types.IState = {
   isRedirectedFromOrigin: false,
+  isRedirectHomePending: false,
   isPageLocked: true,
   isSearchPopupVisible: false,
   isSpendFreeViewPopupVisible: false,
@@ -22,6 +23,11 @@ export function interactionStateReducer(state = initialState, action: types.IAct
       return {
         ...state,
         isRedirectedFromOrigin: action.payload
+      };
+    case types.SET_IS_REDIRECT_HOME_PENDING:
+      return {
+        ...state,
+        isRedirectHomePending: action.payload
       };
     case types.SET_IS_PAGE_LOCKED:
       return {

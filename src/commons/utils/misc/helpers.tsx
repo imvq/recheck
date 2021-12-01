@@ -6,11 +6,10 @@ import { toast } from 'react-toastify';
 
 import { IRetrievedProfileDto } from 'commons/types/responses/basic';
 import { ScreenBreakpoint, toastVariants } from 'commons/types/unions';
-import { cookieManager } from 'commons/utils/services/cookies';
 
 export function onExit(lockPageCallback: () => void) {
   lockPageCallback();
-  cookieManager.remove('accessToken');
+  localStorage.removeItem('accessToken');
   window.location.replace(window.location.origin);
 }
 
