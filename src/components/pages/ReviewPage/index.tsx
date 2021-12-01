@@ -20,7 +20,7 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapSateToProps = (state: store.AppState): types.IStateProps => ({
-  isAuthenticated: store.getIsUserAuthenticated(state),
+  isConfirmed: store.getIsUserConfirmed(state),
   isPageLocked: store.getIsPageLocked(state),
   privateToken: store.getCurrentPrivateToken(state),
   requestedUserShareableId: store.getRequestedUserShareableId(state),
@@ -66,11 +66,7 @@ function ReviewPage(props: types.IProps) {
       marks: [...props.reviewData.marks, mark]
     };
 
-    // If an authorized user has not been redirected yet (with PageAccessGuard),
-    // that means it is registered and confirmed,
-    // therefore, the conditions of the second scenario (look at the second useEffect)
-    // are satisfied.
-    if (props.isAuthenticated) {
+    if (props.isConfirmed) {
       props.createReview(
         props.privateToken as string,
         targetShareableId,
@@ -111,11 +107,11 @@ function ReviewPage(props: types.IProps) {
   // 3) if the reviewer is not signed in, authorization can be deferred
   //    till the review is saved.
   useEffect(() => {
-    if (props.isAuthenticated === null) {
+    if (props.isConfirmed === null) {
       return;
     }
 
-    if (!props.isAuthenticated) {
+    if (!props.isConfirmed) {
       props.setIsRedirectHomePending(true);
       props.setIsPageLocked(false);
       return;
@@ -131,7 +127,7 @@ function ReviewPage(props: types.IProps) {
         jumpTo('/404');
       })
       .catch(() => jumpTo('/404'));
-  }, [props.isAuthenticated]);
+  }, [props.isConfirmed]);
 
   const boxesBasic = [
     <CommentBoxSimple key={1} pageLabel='1 / 3' onStepForward={proceed} onStepBack={jumpBack}>

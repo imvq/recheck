@@ -3,7 +3,7 @@ import { IReviewCreated, IReviewCreator } from 'commons/types';
 export interface IOwnProps {}
 
 export interface IStateProps {
-  isAuthenticated: boolean | null;
+  isConfirmed: boolean | null;
   isPageLocked: boolean;
   privateToken: string | null;
   requestedUserShareableId: string | null;
