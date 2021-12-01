@@ -12,6 +12,7 @@ export interface IStateProps {
 
 export interface IDispatchProps {
   setCurrentReviewTargetShareableId(shareableId: string): void;
+  setQuestions(questions: string[]): void;
   pushAnswer(comment: string, mark: number | null): void;
   popAnswer(): void;
   createReview: IReviewCreator;

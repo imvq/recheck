@@ -2,6 +2,7 @@ import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import * as constants from 'commons/utils/constants';
 import * as store from 'store';
 
 import { ISearchedProfile } from 'commons/types';
@@ -28,6 +29,7 @@ const mapSateToProps = (state: store.AppState): types.IStateProps => ({
 
 const mapDispatchToProps: types.IDispatchProps = {
   createReview: store.createReview,
+  setQuestions: store.setQuestions,
   pushAnswer: store.pushAnswer,
   popAnswer: store.popAnswer,
   setIsRedirectHomePending: store.setIsRedirectHomePending,
@@ -96,6 +98,11 @@ function ReviewPage(props: types.IProps) {
       });
   }, []);
 
+  // Set questions set depending on user's choice (basic questions set is the default one).
+  useEffect(() => {
+    props.setQuestions(constants.REVIEW_QESTIONS_BASIC);
+  }, []);
+
   // There are some conditions to review someone:
   // 1) the reviewer must be registered and confirmed;
   // 2) if the reviewer is registered and confirmed
@@ -126,13 +133,13 @@ function ReviewPage(props: types.IProps) {
       .catch(() => jumpTo('/404'));
   }, [props.isAuthenticated]);
 
-  const boxes = [
+  const boxesBasic = [
     <CommentBoxSimple key={1} pageLabel='1 / 3' onStepForward={proceed} onStepBack={jumpBack}>
-      Опишите какие задачи и обязанности были у кандидата. Как он с ними справился?
+      {constants.REVIEW_QESTIONS_BASIC[0]}
     </CommentBoxSimple>,
 
     <CommentBoxSimple key={2} pageLabel='2 / 3' onStepForward={proceed} onStepBack={comeback}>
-      Опишите сильные стороны кандидата в работе
+      {constants.REVIEW_QESTIONS_BASIC[1]}
     </CommentBoxSimple>,
 
     <ComponentBoxWithMark
@@ -142,7 +149,7 @@ function ReviewPage(props: types.IProps) {
       onStepBack={comeback}
       labels={['Не рекомендую', 'Рекомендую', 'Превзошёл ожидания']}
     >
-      Насколько вероятно, что вы порекомендуете кандидата?
+      {constants.REVIEW_QESTIONS_BASIC[2]}
     </ComponentBoxWithMark>
   ];
 
@@ -156,7 +163,7 @@ function ReviewPage(props: types.IProps) {
           </styled.ProfileHeadWrapper>
         )}
 
-        {boxes[step]}
+        {boxesBasic[step]}
       </styled.ContentWrapper>
       <styled.AdaptedFooter />
 
