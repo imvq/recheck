@@ -38,7 +38,7 @@ function SpendFreeViewsPopup(props: types.IProps) {
       props.requestedUserShareableId as string
     ).then(responseDto => {
       if (responseDto.data.success) {
-        jumpTo('/profile/observe/', props.requestedUserShareableId as string);
+        jumpTo('/profile/', props.requestedUserShareableId as string);
       }
     }).finally(() => props.setVisible(false));
   }

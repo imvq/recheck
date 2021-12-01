@@ -25,6 +25,24 @@ const SearchPage = lazy(() => import('components/pages/SearchPage'));
 const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
 const UserConfirmationPage = lazy(() => import('components/pages/UserConfirmationPage'));
 
+const GuardedLandingPage = () => (
+  <PageAccessGuard>
+    <LandingPage />
+  </PageAccessGuard>
+);
+
+const GuardedColleaguesPage = () => (
+  <PageAccessGuard>
+    <ColleaguesPage />
+  </PageAccessGuard>
+);
+
+const GuardedObservedProfilePage = () => (
+  <PageAccessGuard forConfirmedUsersOnly hideContentOnLock>
+    <ObservedProfilePage />
+  </PageAccessGuard>
+);
+
 const GuardedProfilePage = () => (
   <PageAccessGuard forConfirmedUsersOnly>
     <OwnProfilePage />
@@ -37,13 +55,27 @@ const GuardedReviewPage = () => (
   </PageAccessGuard>
 );
 
+const GuardedRegistrationPage = () => (
+  <PurePageLockGuard>
+    <RegistrationPage />
+  </PurePageLockGuard>
+);
+
+const GuardedSearchPage = () => (
+  <PageAccessGuard>
+    <SearchPage />
+  </PageAccessGuard>
+);
+
 /**
  * Main wrapper.
  * Container component.
  */
 export default () => (
   <Suspense fallback={<></>}>
+
     <GlobalStyle />
+
     <Provider store={appStore}>
       <Router history={historyManager}>
         <Switch>
@@ -51,23 +83,13 @@ export default () => (
           {/* Home page. */}
           {/* Use StartupManager to do checkAuth request to LinkedIn. */}
           {/* The result of the check is stored so that no check will be further. */}
-          <Route exact path='/'>
-            <PageAccessGuard>
-              <LandingPage />
-            </PageAccessGuard>
-          </Route>
+          <Route exact path='/' component={GuardedLandingPage} />
 
           {/* List of colleagues available for review. */}
-          <Route exact path='/colleagues'>
-            <ColleaguesPage />
-          </Route>
+          <Route exact path='/colleagues' component={GuardedColleaguesPage} />
 
           {/* Profile of another user. */}
-          <Route exact path='/profile/observe/:targetShareableId'>
-            <PageAccessGuard forConfirmedUsersOnly hideContentOnLock>
-              <ObservedProfilePage />
-            </PageAccessGuard>
-          </Route>
+          <Route exact path='/profile/:targetShareableId' component={GuardedObservedProfilePage} />
 
           {/* Own profile page. */}
           {/* Use StartupManager to do checkAuth request to LinkedIn. */}
@@ -76,48 +98,30 @@ export default () => (
           <Route exact path='/profile' component={GuardedProfilePage} />
 
           {/* Provacy Policy needed to legitimate usage of OAuth. */}
-          <Route exact path='/privacy-policy'>
-            <PrivacyPolicyPage />
-          </Route>
+          <Route exact path='/privacy-policy' component={PrivacyPolicyPage} />
 
           {/* The registration page must be unaccessible directly to avoid manual entering */}
           {/* as it can cause state incoherence. */}
-          <Route exact path='/register'>
-            <PurePageLockGuard>
-              <RegistrationPage />
-            </PurePageLockGuard>
-          </Route>
+          <Route exact path='/register' component={GuardedRegistrationPage} />
 
           {/* Review page. Used to add new reviews. */}
           <Route exact path='/review/create/:targetShareableId' component={GuardedReviewPage} />
 
           {/* Search page. Used to search users and companies. */}
-          <Route exact path='/search'>
-            <PageAccessGuard>
-              <SearchPage />
-            </PageAccessGuard>
-          </Route>
+          <Route exact path='/search' component={GuardedSearchPage} />
 
           {/* Page with message persuading to check user's email. */}
-          <Route exact path='/await-user-confirmation'>
-            <UserConfirmationAwaiterPage />
-          </Route>
+          <Route exact path='/await-user-confirmation' component={UserConfirmationAwaiterPage} />
 
           {/* Page to complete user's registration. User UUID needed. */}
           {/* Users are free to be unathorized because confirmation link is private. */}
-          <Route exact path='/register/complete/:uuid'>
-            <UserConfirmationPage />
-          </Route>
+          <Route exact path='/register/complete/:uuid' component={UserConfirmationPage} />
 
           {/* LinkedIn's OAuth2 window. */}
-          <Route exact path='/linkedin'>
-            <LinkedInPopUp />
-          </Route>
+          <Route exact path='/linkedin' component={LinkedInPopUp} />
 
           {/* 404 page. Used when proceed to invalid location. */}
-          <Route>
-            <NotFoundPage />
-          </Route>
+          <Route component={NotFoundPage} />
 
         </Switch>
       </Router>

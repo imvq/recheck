@@ -57,7 +57,7 @@ function Companies(props: types.IProps) {
     apiClient.checkIfUserCanBeViewed(props.privateToken as string, targetShareableId)
       .then(checkData => {
         if (checkData.data.success) {
-          jumpTo('/profile/observe/', targetShareableId);
+          jumpTo('/profile/', targetShareableId);
         } else {
           apiClient.checkIfUserHasViewsAvailable(props.privateToken as string)
             .then(viewsAvailabilityData => {

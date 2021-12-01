@@ -7,7 +7,7 @@ export function textAreaHandler(event: ITextAreaEvent, setter: (value: string) =
 
 export function postRedirect(requestedUserShareableId: string | null) {
   if (requestedUserShareableId) {
-    jumpTo('/profile/observe/', requestedUserShareableId);
+    jumpTo('/profile/', requestedUserShareableId);
     return;
   }
 
