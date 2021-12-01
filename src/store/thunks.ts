@@ -84,6 +84,26 @@ function postProcessProfileRetrieving(
     dispatch(interactionActions.setIsRedirectHomePending(false));
 
     jumpTo('/profile');
+
+    processPreparedReview(dispatch, getState);
+  }
+}
+
+function processPreparedReview(
+  dispatch: ThunkDispatch<any, void, AppActionType>,
+  getState: typeof store.getState,
+) {
+  const preparedReview = localStorage.getItem('preparedReview');
+
+  if (preparedReview) {
+    type PreparedReview = { targetShareableId: string; reviewData: types.IReviewCreated; };
+    const { targetShareableId, reviewData }: PreparedReview = JSON.parse(preparedReview);
+
+    dispatch(createReview(
+      getState().profile.privateToken as string,
+      targetShareableId,
+      reviewData
+    ));
   }
 }
 

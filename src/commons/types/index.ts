@@ -44,7 +44,6 @@ export interface IRetrievedProfileData {
 }
 
 export interface IReviewCreated {
-  privateToken: string;
   questions: string[];
   comments: string[];
   marks: (number | null)[];

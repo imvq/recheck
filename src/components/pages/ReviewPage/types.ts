@@ -7,7 +7,7 @@ export interface IStateProps {
   isPageLocked: boolean;
   privateToken: string | null;
   requestedUserShareableId: string | null;
-  reviewData: Omit<IReviewCreated, 'targetShareableId'>;
+  reviewData: IReviewCreated;
 }
 
 export interface IDispatchProps {

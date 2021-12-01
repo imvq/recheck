@@ -70,7 +70,8 @@ function ReviewPage(props: types.IProps) {
         () => misc.postRedirect(props.requestedUserShareableId)
       );
     } else {
-      misc.saveReviewLocally(JSON.stringify(props.reviewData));
+      const serialziedReview = { targetShareableId, reviewData: props.reviewData };
+      misc.saveReviewLocally(JSON.stringify(serialziedReview));
       props.setIsLoginPopupVisible(true);
     }
   }
