@@ -10,11 +10,11 @@ import { ICompaniesDictionary } from '@typing';
  * When targeting users by their shareable IDs we must be able to find their public data.
  */
 export async function searchUserByShareableId(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     shareableId: string;
   }
 
-  const { shareableId }: IBodyParams = request.params as { shareableId: string; };
+  const { shareableId }: IBodyData = request.params as { shareableId: string; };
   assertBodyData(shareableId);
 
   const targetEntity = await accessors.readUserWithCompanyByShareableId(shareableId);
@@ -27,11 +27,11 @@ export async function searchUserByShareableId(request: Request, response: Respon
  * Search by parts of users' names.
  */
 export async function searchUsersByTokens(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     tokens: string[];
   }
 
-  const { tokens }: IBodyParams = request.body;
+  const { tokens }: IBodyData = request.body;
   assertBodyData(tokens);
 
   const results = await accessors.readUserWithCompanyByTokens(tokens) || [];
@@ -60,11 +60,11 @@ export async function quickSearchUsersByTokens(request: Request, response: Respo
  * Find matched companies (by the beginning of their names).
  */
 export async function quickSearchCompanies(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     sequence: string;
   }
 
-  const { sequence }: IBodyParams = request.body;
+  const { sequence }: IBodyData = request.body;
   assertBodyData(sequence);
 
   const results = await accessors.readCompaniesMatched(`${sequence.toLocaleLowerCase()}%`);
@@ -80,12 +80,12 @@ export async function getPredefinedCompanies(request: Request, response: Respons
     last: string;
   }
 
-  interface IBodyParams {
+  interface IBodyData {
     privateToken: string;
   }
 
   const { last }: IPathParams = request.params as { last: string; };
-  const { privateToken }: IBodyParams = request.body;
+  const { privateToken }: IBodyData = request.body;
   assertParamsData(last);
   assertBodyData(last, privateToken);
 

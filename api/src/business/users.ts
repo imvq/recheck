@@ -22,11 +22,11 @@ import * as nameTokensLogic from './nameTokens';
  * The function is used to check if an email is already present in the database.
  */
 export async function checkIfEmailIsAvailable(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     email: string;
   }
 
-  const { email }: IBodyParams = request.body;
+  const { email }: IBodyData = request.body;
   assertBodyData(email);
 
   const targetedEmail = await accessors.readEmail(email);
@@ -43,12 +43,12 @@ export async function checkIfEmailIsAvailable(request: Request, response: Respon
  * before the user proceeds to that profile page.
  */
 export async function checkIfUserCanBeViewed(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     privateToken: string;
     targetShareableId: string;
   }
 
-  const { privateToken, targetShareableId }: IBodyParams = request.body;
+  const { privateToken, targetShareableId }: IBodyData = request.body;
   assertBodyData(privateToken, targetShareableId);
 
   const asker = await accessors.readUserByPrivateToken(privateToken);
@@ -61,11 +61,11 @@ export async function checkIfUserCanBeViewed(request: Request, response: Respons
  * Check if a user has free views.
  */
 export async function checkIfUserHasViewsAvailable(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     privateToken: string;
   }
 
-  const { privateToken }: IBodyParams = request.body;
+  const { privateToken }: IBodyData = request.body;
   assertBodyData(privateToken);
 
   const user = await accessors.readUserByPrivateToken(privateToken);
@@ -111,7 +111,7 @@ function downloadPhoto(photoUrl: string, outputPath: string) {
  * themselves first.
  */
 export async function prepareUser(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     email: string;
     inviterId: string | null;
     socialId: string;
@@ -123,7 +123,7 @@ export async function prepareUser(request: Request, response: Response) {
     currentWorkMonthFrom: number;
   }
 
-  const { photoUrl = constants.DEFAULT_PHOTO_PLACEHOLDER_URL, ...rest }: IBodyParams = request.body;
+  const { photoUrl = constants.DEFAULT_PHOTO_PLACEHOLDER_URL, ...rest }: IBodyData = request.body;
   const { email, inviterId, socialId, fullName, company } = rest;
   assertBodyData(photoUrl, email, inviterId, socialId, fullName, company);
 
@@ -220,11 +220,11 @@ export async function resendConfirmation(request: Request, response: Response) {
  * If a user doesn't have a corresponding confirmation code record they are considered confirmed.
  */
 export async function confirmRegistration(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     confirmationCode: string;
   }
 
-  const { confirmationCode }: IBodyParams = request.body;
+  const { confirmationCode }: IBodyData = request.body;
   assertBodyData(confirmationCode);
 
   await accessors.deleteConfirmation(confirmationCode);
@@ -330,11 +330,11 @@ async function retrieveLocalProfileData(socialId: string) {
  * Retrieve users working at the same company with the asker.
  */
 export async function getColleagues(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     privateToken: string;
   }
 
-  const { privateToken }: IBodyParams = request.body;
+  const { privateToken }: IBodyData = request.body;
   assertBodyData(privateToken);
 
   const userEntity = await accessors.readUserWithCompanyByPrivateToken(privateToken);
@@ -350,12 +350,12 @@ export async function getColleagues(request: Request, response: Response) {
  * Make a user available to another one.
  */
 export async function makeUserAvailable(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     privateToken: string;
     targetShareableId: string;
   }
 
-  const { privateToken, targetShareableId }: IBodyParams = request.body;
+  const { privateToken, targetShareableId }: IBodyData = request.body;
   assertBodyData(privateToken, targetShareableId);
 
   const user = await accessors.readUserByPrivateToken(privateToken);

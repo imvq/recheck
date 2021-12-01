@@ -11,13 +11,13 @@ import { assertBodyData, reply } from '@business/commons';
  * One user can create one review for another one user.
  */
 export async function createReview(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     privateToken: string;
     targetShareableId: string;
     content: string;
   }
 
-  const { privateToken, targetShareableId, content }: IBodyParams = request.body;
+  const { privateToken, targetShareableId, content }: IBodyData = request.body;
   assertBodyData(privateToken, targetShareableId, content);
 
   const author = await accessors.readUserByPrivateToken(privateToken);
@@ -118,12 +118,12 @@ export async function getNthLeftReview(request: Request, response: Response) {
  * Check if a user can leave a review to another one.
  */
 export async function checkIfUserIsAvailableForReview(request: Request, response: Response) {
-  interface IBodyParams {
+  interface IBodyData {
     privateToken: string;
     targetShareableId: string;
   }
 
-  const { privateToken, targetShareableId }: IBodyParams = request.body;
+  const { privateToken, targetShareableId }: IBodyData = request.body;
   assertBodyData(privateToken, targetShareableId);
 
   const author = await accessors.readUserByPrivateToken(privateToken);
