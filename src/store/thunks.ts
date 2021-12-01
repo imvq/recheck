@@ -43,6 +43,7 @@ function postProcessProfileRetrieving(
     dispatch(profileActions.setMandatoryBasicFields(profileData.data.socialId, false));
 
     dispatch(interactionActions.setIsRedirectedFromOrigin(true));
+    dispatch(interactionActions.setIsPageLocked(false));
     jumpTo('/register');
 
     return;
