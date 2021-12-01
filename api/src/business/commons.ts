@@ -2,8 +2,8 @@ import { Response } from 'express';
 
 import { BadRequestError } from '@business/errors';
 
-export function assertParamsData(...args: any[]) {
-  assertRequestData('Not all required params fields are defined or formatted correctly.', args);
+export function assertPathParamsData(...args: any[]) {
+  assertRequestData('Not all required path fields are defined or formatted correctly.', args);
 }
 
 export function assertBodyData(...args: any[]) {

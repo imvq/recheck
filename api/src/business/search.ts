@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import * as accessors from '@business/database/accessors';
 import * as mappers from '@business/database/mappers';
 
-import { assertParamsData, assertBodyData, reply } from '@business/commons';
+import { assertPathParamsData, assertBodyData, reply } from '@business/commons';
 import { ICompaniesDictionary } from '@typing';
 
 /**
@@ -86,7 +86,7 @@ export async function getPredefinedCompanies(request: Request, response: Respons
 
   const { last }: IPathParams = request.params as { last: string; };
   const { privateToken }: IBodyData = request.body;
-  assertParamsData(last);
+  assertPathParamsData(last);
   assertBodyData(last, privateToken);
 
   const askerEntity = await accessors.readUserByPrivateToken(privateToken);

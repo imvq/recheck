@@ -11,7 +11,7 @@ import * as accessors from '@business/database/accessors';
 import * as mappers from '@business/database/mappers';
 import * as errors from '@business/errors';
 
-import { assertBodyData, assertParamsData, reply, AccessToken } from '@business/commons';
+import { assertBodyData, assertPathParamsData, reply, AccessToken } from '@business/commons';
 
 import * as mailingLogic from './mailing';
 import * as nameTokensLogic from './nameTokens';
@@ -265,12 +265,13 @@ export async function getPreparedCompany(id: string, name: string | null) {
  * and sends the asker the info including a private token the user can get private access with.
  */
 export async function retrieveProfile(request: Request, response: Response) {
-  interface PathParams {
+  interface IPathParams {
     accessToken: string;
   }
 
-  const { accessToken }: PathParams = request.params as { accessToken: string; };
-  assertParamsData(accessToken);
+  // @ts-ignore: Request<ParamsDictionary> is guarenteed to be compatible with IPathParams.
+  const { accessToken }: IPathParams = request.params as IPathParams;
+  assertPathParamsData(accessToken);
 
   const parsedAccessToken = new AccessToken(accessToken);
 
@@ -344,6 +345,27 @@ export async function getColleagues(request: Request, response: Response) {
 
   const result = colleagues.map(colleague => mappers.normalizePublicUserInfo(colleague));
   reply(response, result);
+}
+
+/**
+ * Check if a user can leave a review about another one.
+ */
+export async function canUserLeaveReview(request: Request, response: Response) {
+  interface IPathParams {
+    privateToken: string;
+    targetShareableId: string;
+  }
+
+  // @ts-ignore: Request<ParamsDictionary> is guarenteed to be compatible with IPathParams.
+  const { privateToken, targetShareableId }: IPathParams = request.params as IPathParams;
+  assertPathParamsData(privateToken, targetShareableId);
+
+  const askerEntity = await accessors.readUserWithCompanyByPrivateToken(privateToken);
+  const asker = mappers.normalizePublicUserInfo(askerEntity);
+  const targetEntity = await accessors.readUserWithCompanyByShareableId(targetShareableId);
+  const target = mappers.normalizePublicUserInfo(targetEntity);
+
+  reply(response, { success: asker.currentCompanyId === target.currentCompanyId });
 }
 
 /**

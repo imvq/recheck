@@ -42,6 +42,11 @@ export function checkIfUserHasViewsAvailable(privateToken: string)
   return apiInstance.post('/users/availability/views', { privateToken });
 }
 
+export function checkIfUserCanLeaveReview(privateToken: string, targetShareableId: string)
+  : ApiPromise<ISimpleBooleanResponse> {
+  return apiInstance.get(`/users/${privateToken}/availability/review/${targetShareableId}`);
+}
+
 export function makeUserAvailable(privateToken: string, targetShareableId: string)
   : ApiPromise<ISimpleBooleanResponse> {
   return apiInstance.post('/availability/user/provide', { privateToken, targetShareableId });

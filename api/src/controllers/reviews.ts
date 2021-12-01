@@ -13,4 +13,6 @@ router.get('/:privateToken/received/:n', reviewsLogic.getNthReceivedReview);
 router.get('/:privateToken/left/amount', reviewsLogic.getLeftReviewsAmount);
 router.get('/:privateToken/left/:n', reviewsLogic.getNthLeftReview);
 
+router.post('/create', reviewsLogic.createReview);
+
 export default router;

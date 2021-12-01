@@ -105,9 +105,19 @@ function ReviewPage(props: types.IProps) {
     if (!props.isAuthenticated) {
       props.setIsRedirectHomePending(true);
       props.setIsPageLocked(false);
+      return;
     }
 
-    // TODO: check if the target is connected.
+    apiClient.checkIfUserCanLeaveReview(props.privateToken as string, targetShareableId)
+      .then(checkData => {
+        if (checkData.data.success) {
+          props.setIsPageLocked(false);
+          return;
+        }
+
+        jumpTo('/404');
+      })
+      .catch(() => jumpTo('/404'));
   }, [props.isAuthenticated]);
 
   const boxes = [
