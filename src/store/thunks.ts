@@ -40,26 +40,46 @@ function postProcessProfileRetrieving(
   profileData: AxiosResponse<types.IUserSelf>
 ) {
   if (!profileData.data.registered) {
-    dispatch(profileActions.setMandatoryBasicFields(profileData.data.socialId, false));
-
-    dispatch(interactionActions.setIsRedirectedFromOrigin(true));
-    dispatch(interactionActions.setIsPageLocked(false));
-    jumpTo('/register');
-
+    processProfileUnregistered(dispatch, profileData);
     return;
   }
 
   if (!profileData.data.confirmed) {
-    dispatch(profileActions.setMandatoryBasicFields(profileData.data.socialId, false));
-    dispatch(profileActions.setPrivateToken(profileData.data.privateToken as string));
-    dispatch(profileActions.setEmail(profileData.data.email as string));
-
-    dispatch(interactionActions.setIsRedirectedFromOrigin(true));
-    jumpTo('/await-user-confirmation');
-
+    processProfileUnconfirmed(dispatch, profileData);
     return;
   }
 
+  processProfileConfirmed(dispatch, profileData);
+  postProcessProfileConfirmed(dispatch, getState);
+}
+
+function processProfileUnregistered(
+  dispatch: Dispatch<AppActionType>,
+  profileData: AxiosResponse<types.IUserSelf>
+) {
+  dispatch(profileActions.setMandatoryBasicFields(profileData.data.socialId, false));
+
+  dispatch(interactionActions.setIsRedirectedFromOrigin(true));
+  dispatch(interactionActions.setIsPageLocked(false));
+  jumpTo('/register');
+}
+
+function processProfileUnconfirmed(
+  dispatch: Dispatch<AppActionType>,
+  profileData: AxiosResponse<types.IUserSelf>
+) {
+  dispatch(profileActions.setMandatoryBasicFields(profileData.data.socialId, false));
+  dispatch(profileActions.setPrivateToken(profileData.data.privateToken as string));
+  dispatch(profileActions.setEmail(profileData.data.email as string));
+
+  dispatch(interactionActions.setIsRedirectedFromOrigin(true));
+  jumpTo('/await-user-confirmation');
+}
+
+function processProfileConfirmed(
+  dispatch: Dispatch<AppActionType>,
+  profileData: AxiosResponse<types.IUserSelf>
+) {
   const { currentCompanyId: companyId, currentCompanyName: companyName } = profileData.data;
   const { currentWorkYearFrom: year, currentWorkMonthFrom: month } = profileData.data;
 
@@ -80,13 +100,24 @@ function postProcessProfileRetrieving(
   }));
 
   dispatch(profileActions.setIsConfirmed(true));
+}
 
+function postProcessProfileConfirmed(
+  dispatch: Dispatch<AppActionType>,
+  getState: typeof store.getState
+) {
+  processRedirectingFlag(dispatch, getState);
+  processPreparedReview(dispatch, getState);
+}
+
+function processRedirectingFlag(
+  dispatch: Dispatch<AppActionType>,
+  getState: typeof store.getState
+) {
   if (getState().interaction.isRedirectHomePending) {
     dispatch(interactionActions.setIsRedirectHomePending(false));
 
     jumpTo('/profile');
-
-    processPreparedReview(dispatch, getState);
   }
 }
 
@@ -105,6 +136,8 @@ function processPreparedReview(
       targetShareableId,
       reviewData
     ));
+
+    localStorage.removeItem('preparedReview');
   }
 }
 
