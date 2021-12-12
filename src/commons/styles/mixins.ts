@@ -12,7 +12,7 @@ const mixins = {
   DefaultButton: css`
     cursor: pointer;
     transition: .1s;
-    filter: drop-shadow(.2rem .3125rem .5rem rgba(0, 0, 0, .25));
+    filter: drop-shadow(.2rem .3rem .5rem rgba(0, 0, 0, .25));
 
     &:hover {
       opacity: ${cssVarsCommon.opacityButtonHover};
@@ -24,6 +24,7 @@ const mixins = {
       filter: alpha(opacity=${cssVarsCommon.opacityButtonActive} * 100);
     }
   `,
+
   DefaultInput: css`
     width: 100%;
     height: ${cssVarsCommon.inputHeightDefault};

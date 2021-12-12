@@ -2,11 +2,8 @@ import styled from 'styled-components';
 
 import BackgroundPath from 'assets/images/shared/AuthPopup/Background.jpg';
 import { ReactComponent as CloseCross } from 'assets/images/common/CloseCross.svg';
-import { ReactComponent as LoginButtonLi } from 'assets/images/shared/AuthPopup/LoginButtonLi.svg';
-import { ReactComponent as LoginButtonFa } from 'assets/images/shared/AuthPopup/LoginButtonFa.svg';
 import animations from 'commons/styles/animations';
 import cssVars from 'commons/styles/cssVars';
-import mixins from 'commons/styles/mixins';
 
 const cssVarsLocal = {
   background: '#f0f3ff',
@@ -90,7 +87,7 @@ export const Title = styled.h2`
 export const ButtonsGroupWrapper = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 `;
 
 export const ButtonsGroupSpan = styled.span`
@@ -99,16 +96,4 @@ export const ButtonsGroupSpan = styled.span`
   padding: 0 2rem 0;
   display: flex;
   align-items: center;
-`;
-
-export const AdaptedLoginButtonLi = styled(LoginButtonLi)`
-  ${mixins.DefaultButton};
-
-  width: 17rem;
-`;
-
-export const AdaptedLoginButtonFa = styled(LoginButtonFa)`
-  ${mixins.DefaultButton};
-
-  width: 17rem;
 `;

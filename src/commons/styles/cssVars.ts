@@ -21,6 +21,7 @@ export default {
   searchInputWidth: '65rem',
   sectionShadow: 'drop-shadow(1rem 1rem .6rem rgba(0, 0, 0, .1))',
   thiknessDefault: '0.078vw',
+  widthLoginButton: '20rem',
   widthMotivatorBadge: '25rem',
   widthReviewCard: '67.38em',
   zIndexDimmedContent: '801',

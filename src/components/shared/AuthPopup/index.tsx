@@ -7,6 +7,9 @@ import { apiClient } from 'commons/utils/services';
 import { setIsPageLocked, setIsLoginPopupVisible } from 'store';
 import { updateAuthorizationStatus } from 'store/thunks';
 
+import CustomLinkedInLoginButton from './loginButtons/LinkedInLoginButton';
+import CustomGoogleLoginButton from './loginButtons/GoogleLoginButton';
+
 import * as types from './types';
 import * as styled from './styled';
 
@@ -52,10 +55,10 @@ function AuthPopup(props: types.IProps) {
       clientId={process.env.REACT_APP_LINKEDIN_APP_CLIENT_ID as string}
       redirectUri={`${window.location.origin}/linkedin`}
       scope='r_liteprofile'
-      onFailure={() => window.location.reload()}
+      onFailure={() => {}}
       onSuccess={onLinkedInButtonClicked}
     >
-      <styled.AdaptedLoginButtonLi />
+      <CustomLinkedInLoginButton />
     </LinkedIn>
   );
 
@@ -63,10 +66,11 @@ function AuthPopup(props: types.IProps) {
     <GoogleLogin
       clientId={process.env.REACT_APP_GOOGLE_APP_CLIENT_ID as string}
       cookiePolicy='single_host_origin'
-      onFailure={() => window.location.reload()}
+      onFailure={() => {}}
       // @ts-ignore: GoogleLoginResponseOffline is guaranteed not to appear
       // via provided configuration.
       onSuccess={onGoogleButtonClicked}
+      render={renderProps => <CustomGoogleLoginButton onClick={renderProps.onClick} />}
     />
   );
 
@@ -77,8 +81,6 @@ function AuthPopup(props: types.IProps) {
       <styled.ButtonsGroupWrapper>
         {LinkedInLoginButton}
         {GoogleLoginButton}
-
-        {/* TODO: Organize Google login button here. */}
       </styled.ButtonsGroupWrapper>
     </styled.BodyWrapper>
   );
