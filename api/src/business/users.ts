@@ -286,7 +286,12 @@ export async function retrieveProfile(request: Request, response: Response) {
     reply(response, savedLocalUser);
   }
 
-  // TODO: Google profile retrieving.
+  if (parsedAccessToken.socialMedia === 'google') {
+    const socialId = await retrieveSocialIdFromGoogle(parsedAccessToken.tokenValue);
+    const savedLocalUser = await retrieveLocalProfileData(socialId);
+
+    reply(response, savedLocalUser);
+  }
 }
 
 /**
@@ -294,13 +299,27 @@ export async function retrieveProfile(request: Request, response: Response) {
  */
 async function retrieveSocialIdFromLinkedIn(accessToken: string) {
   try {
-    const profileLink = 'https://api.linkedin.com/v2/me';
+    const profileUrl = 'api.linkedin.com/v2/me';
     const profileOptions = { headers: { Authorization: `Bearer ${accessToken}` } };
-    const profile = await axios.get(profileLink, profileOptions);
+    const profile = await axios.get(profileUrl, profileOptions);
 
     return profile.data.id;
   } catch {
-    throw new errors.ForbiddenError('LinkedIn refused to authorize.');
+    throw new errors.ForbiddenError('LinkedIn refused to provide profile data.');
+  }
+}
+
+/**
+ * Retrieving social ID from Google.
+ */
+async function retrieveSocialIdFromGoogle(accessToken: string) {
+  try {
+    const profileUrl = `https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${accessToken}`;
+    const profile = await axios.get(profileUrl);
+
+    return profile.data.sub;
+  } catch {
+    throw new errors.ForbiddenError('Google refused to provide profile data.');
   }
 }
 

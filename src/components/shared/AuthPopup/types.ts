@@ -3,7 +3,7 @@ export interface IOwnProps {}
 export interface IStateProps {}
 
 export interface IDispatchProps {
-  setPageLocked(flag: boolean): void;
+  setIsPageLocked(flag: boolean): void;
   setIsLoginPopupVisible(flag: boolean): void;
   updateAuthorizationStatus(): void;
 }

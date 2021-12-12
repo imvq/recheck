@@ -1,33 +1,44 @@
 import { memo } from 'react';
+import { GoogleLogin } from 'react-google-login';
 import { LinkedIn, LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import { connect } from 'react-redux';
 
 import { apiClient } from 'commons/utils/services';
-import { setPageLocked, setIsLoginPopupVisible } from 'store';
+import { setIsPageLocked, setIsLoginPopupVisible } from 'store';
 import { updateAuthorizationStatus } from 'store/thunks';
 
 import * as types from './types';
 import * as styled from './styled';
 
 const mapDispatchToProps: types.IDispatchProps = {
-  setPageLocked,
+  setIsPageLocked,
   setIsLoginPopupVisible,
   updateAuthorizationStatus
 };
 
 function AuthPopup(props: types.IProps) {
-  function onLinkedInButtonClicked(data: { code: string }) {
-    props.setPageLocked(true);
+  function onLinkedInButtonClicked(authData: { code: string }) {
+    props.setIsPageLocked(true);
 
-    apiClient.exchangeLinkedInCode(data.code, `${window.location.origin}/linkedin`)
+    apiClient.exchangeLinkedInCode(authData.code, `${window.location.origin}/linkedin`)
       .then(linkedinResponse => {
-        localStorage.setItem('accessToken', linkedinResponse.data.accessToken);
+        localStorage.setItem('accessToken', `linkedin@${linkedinResponse.data.accessToken}`);
         props.updateAuthorizationStatus();
       })
       .finally(() => {
         props.setIsLoginPopupVisible(false);
-        props.setPageLocked(false);
+        props.setIsPageLocked(false);
       });
+  }
+
+  function onGoogleButtonClicked(authData: { accessToken: string }) {
+    props.setIsPageLocked(true);
+
+    localStorage.setItem('accessToken', `google@${authData.accessToken}`);
+    props.updateAuthorizationStatus();
+
+    props.setIsLoginPopupVisible(false);
+    props.setIsPageLocked(false);
   }
 
   const ClosingButton = (
@@ -38,7 +49,7 @@ function AuthPopup(props: types.IProps) {
 
   const LinkedInLoginButton = (
     <LinkedIn
-      clientId={process.env.REACT_APP_LINKEDIN_APP_CLIENT_ID}
+      clientId={process.env.REACT_APP_LINKEDIN_APP_CLIENT_ID as string}
       redirectUri={`${window.location.origin}/linkedin`}
       scope='r_liteprofile'
       onFailure={() => window.location.reload()}
@@ -48,12 +59,24 @@ function AuthPopup(props: types.IProps) {
     </LinkedIn>
   );
 
+  const GoogleLoginButton = (
+    <GoogleLogin
+      clientId={process.env.REACT_APP_GOOGLE_APP_CLIENT_ID as string}
+      cookiePolicy='single_host_origin'
+      onFailure={() => window.location.reload()}
+      // @ts-ignore: GoogleLoginResponseOffline is guaranteed not to appear
+      // via provided configuration.
+      onSuccess={onGoogleButtonClicked}
+    />
+  );
+
   const Body = (
     <styled.BodyWrapper>
       <styled.Title>Вход в личный кабинет</styled.Title>
 
       <styled.ButtonsGroupWrapper>
         {LinkedInLoginButton}
+        {GoogleLoginButton}
 
         {/* TODO: Organize Google login button here. */}
       </styled.ButtonsGroupWrapper>

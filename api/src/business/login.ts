@@ -27,7 +27,7 @@ export async function exchangeLinkedInCode(request: Request, response: Response)
 
     const { data } = await axios.post('https://www.linkedin.com/oauth/v2/accessToken', params, options);
 
-    reply(response, { accessToken: `linkedin@${data['access_token']}` });
+    reply(response, { accessToken: data['access_token'] });
   } catch {
     throw new errors.InternalServerError('Error while exchanging LinkedIn auth code.');
   }
