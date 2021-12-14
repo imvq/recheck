@@ -299,7 +299,7 @@ export async function retrieveProfile(request: Request, response: Response) {
  */
 async function retrieveSocialIdFromLinkedIn(accessToken: string) {
   try {
-    const profileUrl = 'api.linkedin.com/v2/me';
+    const profileUrl = 'https://api.linkedin.com/v2/me';
     const profileOptions = { headers: { Authorization: `Bearer ${accessToken}` } };
     const profile = await axios.get(profileUrl, profileOptions);
 
