@@ -1,6 +1,6 @@
 import { memo, useState, useEffect } from 'react';
 
-import DemoReviewCard from 'components/shared/DemoReviewCard';
+import DemoReviewCard from './DemoReviewCard';
 
 import examples from './examples';
 
@@ -13,8 +13,8 @@ function Swiper() {
   const [cards, setCards] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
-    setCards(examples.map(example => (
-      <DemoReviewCard key={example.name} {...example} />
+    setCards(examples.map(exampleData => (
+      <DemoReviewCard key={exampleData.name} {...exampleData} />
     )));
   }, []);
 

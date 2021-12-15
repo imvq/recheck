@@ -16,6 +16,15 @@ export interface ICompanyWithMembers extends ICompany {
   members: ISearchedProfileBasic[];
 }
 
+export interface IDemoReviewCardData {
+  name: string;
+  photoUrl: string;
+  position: string;
+  company: string;
+  review: string;
+  nReviews: number;
+}
+
 export interface IExtendedOptionType extends IOptionType {
   imageUrl: string | null;
 }

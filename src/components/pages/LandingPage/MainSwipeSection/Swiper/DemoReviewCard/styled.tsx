@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
+
 import { ReactComponent as LogoSvg } from 'assets/images/common/LogoFull.svg';
 import { ReactComponent as DetailsButtonSvg } from 'assets/images/shared/ReviewCard/Details.svg';
 import { ReactComponent as FeedbackButtonSvg } from 'assets/images/shared/ReviewCard/Feedback.svg';
@@ -26,7 +27,7 @@ const mixinsLocal = {
   `
 };
 
-export const Wrapper = styled.div`
+export const DemoReviewCard = styled.div`
   width: ${cssVars.widthReviewCard};
   height: fit-content;
   display: flex;
