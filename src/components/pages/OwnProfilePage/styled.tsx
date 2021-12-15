@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Header from 'components/shared/Header';
 import MainToolbar from 'components/shared/MainToolbar';
 
-export const Wrapper = styled.div`
-  height: 100%;
+export const OwnProfilePage = styled.div`
+  min-height: 100%;
   display: grid;
   grid-template:
     'Sidebar Header'  auto

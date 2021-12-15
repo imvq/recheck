@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Body = styled.div`
   width: 100%;
   font-size: 1.3rem;
   box-sizing: border-box;

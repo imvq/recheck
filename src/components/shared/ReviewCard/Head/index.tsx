@@ -1,5 +1,6 @@
 import { memo } from 'react';
 
+import * as misc from '../misc';
 import * as types from './types';
 import * as styled from './styled';
 
@@ -15,7 +16,7 @@ function Head(props: types.IProps) {
         </styled.TopBarText>
       </styled.NameWrapper>
 
-      <styled.TopBarText>{props.reviewCardData.date}</styled.TopBarText>
+      <styled.TopBarText>{misc.getFormattedDate(props.reviewCardData.date)}</styled.TopBarText>
     </styled.TopBar>
   );
 
@@ -49,12 +50,12 @@ function Head(props: types.IProps) {
   );
 
   return (
-    <styled.Wrapper>
+    <styled.Head>
       <styled.Menu>
         {TopBar}
         {props.showTarget && Content}
       </styled.Menu>
-    </styled.Wrapper>
+    </styled.Head>
   );
 }
 

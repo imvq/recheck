@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import Head from './Head';
 import Body from './Body';
 
@@ -8,7 +10,7 @@ import * as styled from './styled';
 /**
  * A card with full review info.
  */
-export default (props: types.IProps) => {
+function ReviewCard(props: types.IProps) {
   const parsedReview = misc.parseReviewContent(props.reviewCardData);
 
   return (
@@ -17,4 +19,6 @@ export default (props: types.IProps) => {
       <Body reviewCardData={parsedReview} />
     </styled.Wrapper>
   );
-};
+}
+
+export default memo(ReviewCard);

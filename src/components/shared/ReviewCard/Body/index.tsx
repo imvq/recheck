@@ -5,7 +5,7 @@ import * as styled from './styled';
 
 function Body(props: types.IProps) {
   return (
-    <styled.Wrapper>
+    <styled.Body>
       {props.reviewCardData.questions.map((question, index) => (
         <styled.EntryWrapper key={question}>
           <styled.QuestionTitle>{question}</styled.QuestionTitle>
@@ -15,7 +15,7 @@ function Body(props: types.IProps) {
             && <styled.Answer>{`Оценка: ${props.reviewCardData.marks[index]}`}</styled.Answer>}
         </styled.EntryWrapper>
       ))}
-    </styled.Wrapper>
+    </styled.Body>
   );
 }
 

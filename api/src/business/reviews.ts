@@ -104,6 +104,7 @@ export async function getNthLeftReview(request: Request, response: Response) {
   const { privateToken, n }: IPathParams = request.params as { privateToken: string; n: string; };
   assertBodyData(privateToken, n);
 
+  // TODO: optimize the query.
   const reviews = await accessors.readLeftReviews(privateToken) || [];
 
   if (reviews.length <= parseInt(n)) {
@@ -111,6 +112,7 @@ export async function getNthLeftReview(request: Request, response: Response) {
   }
 
   const review = mappers.normalizeReviewWithTarget(reviews[parseInt(n)]);
+  console.log(reviews[parseInt(n)]);
   reply(response, review);
 }
 

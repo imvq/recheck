@@ -24,7 +24,7 @@ const mapStateToProps = (store: AppState): types.IStateProps => ({
  */
 function OwnProfilePage(props: types.IProps) {
   return (
-    <styled.Wrapper>
+    <styled.OwnProfilePage>
       <styled.Sidebar />
 
       <styled.AdaptedHeader />
@@ -48,7 +48,7 @@ function OwnProfilePage(props: types.IProps) {
       </styled.ContentWrapper>
 
       <Footer />
-    </styled.Wrapper>
+    </styled.OwnProfilePage>
   );
 }
 

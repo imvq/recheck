@@ -6,7 +6,7 @@ const cssVarsLocal = {
   photoWrapperWidth: '12rem'
 };
 
-export const Wrapper = styled.div`
+export const Head = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
