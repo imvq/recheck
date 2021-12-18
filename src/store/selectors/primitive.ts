@@ -16,6 +16,7 @@ export const getCurrentPrivateToken = (state: AppState) => state.profile.private
 export const getCurrentShareableId = (state: AppState) => state.profile.shareableId;
 export const getCurrentSocialId = (state: AppState) => state.profile.socialId;
 export const getInviterShareableId = (state: AppState) => state.profile.inviterShareableId;
+export const getCurrentEmail = (state: AppState) => state.profile.email;
 export const getFullName = (state: AppState) => state.profile.fullName;
 export const getPhotoUrl = (state: AppState) => state.profile.photoUrl;
 export const getCurrentPosition = (state: AppState) => state.profile.currentPosition;

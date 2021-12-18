@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { validate as validateEmail } from 'email-validator';
 
+import * as store from 'store';
 import * as SvgLoaders from 'svg-loaders-react';
 
 import cssVars from 'commons/styles/cssVars';
@@ -8,9 +9,8 @@ import cssVars from 'commons/styles/cssVars';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
-import { onExit, showToast } from 'commons/utils/misc';
+import { jumpTo, onExit, showToast } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
-import { AppState, setPageLocked, setEmail } from 'store';
 
 import CustomButton from 'components/shared/CustomButton';
 
@@ -18,14 +18,16 @@ import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  email: store.profile.email,
-  privateToken: store.profile.privateToken
+const mapStateToProps = (state: store.AppState): types.IStateProps => ({
+  email: store.getCurrentEmail(state),
+  privateToken: store.getCurrentPrivateToken(state),
+  isRedirectedFromOrigin: store.getIsRedirectedFromOrigin(state)
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  setPageLocked,
-  setEmail
+  setIsPageLocked: store.setIsPageLocked,
+  setEmail: store.setEmail,
+  setIsRedirectedFromOrigin: store.setIsRedirectedFromOrigin
 };
 
 function UserConfirmationAwaiterPage(props: types.IProps) {
@@ -46,6 +48,19 @@ function UserConfirmationAwaiterPage(props: types.IProps) {
   // checkIsEmailAvailable's thennable gets outdated emailState from closure.
   // To avoid this we need to store actual email data value using reference.
   const latestEmailState = useRef(emailState);
+
+  useEffect(() => {
+    // If a user entered the page by typing the link directly
+    // it must be redirected away.
+    if (!props.isRedirectedFromOrigin) {
+      jumpTo('/');
+      return;
+    }
+
+    // If a user is redirected to the page 'legally'
+    // we must set the flag to its default value.
+    props.setIsRedirectedFromOrigin(false);
+  }, []);
 
   function recalculateEmailErrorState() {
     setEmailState(() => {
@@ -110,7 +125,7 @@ function UserConfirmationAwaiterPage(props: types.IProps) {
         width='16rem'
         isDisabled={false}
         isHollow
-        onClick={() => onExit(props.setPageLocked)}
+        onClick={() => onExit(() => props.setIsPageLocked(true))}
       >
         Выйти из учётной записи
       </CustomButton>
@@ -190,7 +205,7 @@ function UserConfirmationAwaiterPage(props: types.IProps) {
     </styled.InputWrapper>
   );
 
-  return (
+  return props.isRedirectedFromOrigin ? (
     <styled.Wrapper>
       <styled.MainFrame>
         <styled.Text>На вашу почту было отправлено письмо с дальнейшими указаниями.</styled.Text>
@@ -218,7 +233,7 @@ function UserConfirmationAwaiterPage(props: types.IProps) {
       {/* Toast notification wrapper. */}
       <ToastContainer />
     </styled.Wrapper>
-  );
+  ) : null;
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserConfirmationAwaiterPage);

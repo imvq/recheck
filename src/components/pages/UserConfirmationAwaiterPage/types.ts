@@ -9,11 +9,13 @@ export interface IEmailState {
 export interface IStateProps {
   email: string | null;
   privateToken: string | null;
+  isRedirectedFromOrigin: boolean;
 }
 
 export interface IDispatchProps {
-  setPageLocked(): void;
+  setIsPageLocked(flag: boolean): void;
   setEmail(email: string): void;
+  setIsRedirectedFromOrigin(flag: boolean): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

@@ -6,7 +6,7 @@ export interface IStateProps {
 }
 
 export interface IDispatchProps {
-  setIsRedirectedFromOrigin: (flag: boolean) => void;
+  setIsRedirectedFromOrigin(flag: boolean): void;
 }
 
 export type IProps = IOwnProps & IStateProps & IDispatchProps;

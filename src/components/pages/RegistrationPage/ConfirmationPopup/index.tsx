@@ -1,11 +1,21 @@
-import Man from 'assets/images/pages/RegistrationPage/ConfirmationPopup/Man.png';
+import { memo } from 'react';
 
-import { jumpTo } from 'commons/utils/misc';
+import * as store from 'store';
+
+import Man from 'assets/images/pages/RegistrationPage/ConfirmationPopup/Man.png';
 
 import * as types from './types';
 import * as styled from './styled';
 
-const onClose = () => jumpTo('/await-user-confirmation');
+const onClose = () => window.location.replace('/await-user-confirmation');
+
+const mapStateToProps = (state: store.AppState): types.IStateProps => ({
+  isRedirectedFromOrigin: store.getIsRedirectedFromOrigin(state)
+});
+
+const mapDispatchToProps: types.IDispatchProps = {
+  setIsRedirectedFromOrigin: store.setIsRedirectedFromOrigin
+};
 
 const ClosingButton = (
   <styled.TopWrapper>
@@ -39,4 +49,4 @@ function ConfirmationPopup(props: types.IProps) {
   );
 }
 
-export default ConfirmationPopup;
+export default memo(ConfirmationPopup);

@@ -9,9 +9,9 @@ import httpStatus from 'http-status';
 
 import * as constants from '@business/constants';
 
+import { reply } from '@business/commons';
 import { useDefaultErrorHandler } from '@business/errors';
 import { logger, morgan } from '@business/preloaded';
-import { reply } from '@business/commons';
 
 /**
  * Main server application class.
