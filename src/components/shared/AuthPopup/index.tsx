@@ -28,9 +28,11 @@ function AuthPopup(props: types.IProps) {
         localStorage.setItem('accessToken', `linkedin@${linkedinResponse.data.accessToken}`);
         props.updateAuthorizationStatus();
       })
+      .catch(() => {
+        props.setIsPageLocked(false);
+      })
       .finally(() => {
         props.setIsLoginPopupVisible(false);
-        props.setIsPageLocked(false);
       });
   }
 
@@ -41,7 +43,6 @@ function AuthPopup(props: types.IProps) {
     props.updateAuthorizationStatus();
 
     props.setIsLoginPopupVisible(false);
-    props.setIsPageLocked(false);
   }
 
   const ClosingButton = (

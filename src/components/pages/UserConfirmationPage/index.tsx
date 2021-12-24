@@ -9,7 +9,7 @@ function UserConfirmationPage() {
 
   useEffect(() => {
     apiClient.completeRegistration(pageUuid)
-      .then(() => window.location.replace(window.location.origin))
+      .then(() => window.location.replace('/profile'))
       .catch(() => jumpTo('/404'));
   }, []);
 

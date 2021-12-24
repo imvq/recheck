@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { connect } from 'react-redux';
 
 import AuthPopup from 'components/shared/AuthPopup';
@@ -17,4 +18,4 @@ const AuthPopupManager = (props: types.IProps) => {
   return props.isLoginPopupVisible ? <AuthPopup /> : null;
 };
 
-export default connect(mapStateToProps)(AuthPopupManager);
+export default connect(mapStateToProps)(memo(AuthPopupManager));
