@@ -269,9 +269,16 @@ export async function retrieveProfile(request: Request, response: Response) {
     accessToken: string;
   }
 
+  interface IBodyParams {
+    role: 'recruiter' | 'candidate'
+  }
+
   // @ts-ignore: Request<ParamsDictionary> is guarenteed to be compatible with IPathParams.
   const { accessToken }: IPathParams = request.params as IPathParams;
   assertPathParamsData(accessToken);
+
+  const { role }: IBodyParams = request.body;
+  assertBodyData(role);
 
   const parsedAccessToken = new AccessToken(accessToken);
 
@@ -282,6 +289,7 @@ export async function retrieveProfile(request: Request, response: Response) {
   if (parsedAccessToken.socialMedia === 'linkedin') {
     const socialId = await retrieveSocialIdFromLinkedIn(parsedAccessToken.tokenValue);
     const savedLocalUser = await retrieveLocalProfileData(socialId);
+    await accessors.updateLastRole(socialId, role);
 
     reply(response, savedLocalUser);
   }
@@ -289,6 +297,7 @@ export async function retrieveProfile(request: Request, response: Response) {
   if (parsedAccessToken.socialMedia === 'google') {
     const socialId = await retrieveSocialIdFromGoogle(parsedAccessToken.tokenValue);
     const savedLocalUser = await retrieveLocalProfileData(socialId);
+    await accessors.updateLastRole(socialId, role);
 
     reply(response, savedLocalUser);
   }

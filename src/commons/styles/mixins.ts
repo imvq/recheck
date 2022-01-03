@@ -24,7 +24,6 @@ const mixins = {
       filter: alpha(opacity=${cssVarsCommon.opacityButtonActive} * 100);
     }
   `,
-
   DefaultInput: css`
     width: 100%;
     height: ${cssVarsCommon.inputHeightDefault};

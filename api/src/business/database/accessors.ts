@@ -283,6 +283,15 @@ export async function updateEmail(privateToken: string, email: string) {
   }
 }
 
+export async function updateLastRole(socialId: string, role: 'recruiter' | 'candidate') {
+  try {
+    const query = QueryFileCacher.getQuery('./sql/update/lastRole.sql');
+    return await database.none(query, { socialId, role });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
 export async function deleteConfirmation(confirmationCode: string) {
   try {
     const query = QueryFileCacher.getQuery('./sql/delete/confirmation.sql');

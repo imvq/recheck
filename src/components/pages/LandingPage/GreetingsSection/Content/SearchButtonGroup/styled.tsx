@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
 `;
 
 export const SearchButton = styled(SearchButtonSvg)`
-  ${mixins.DefaultButton}
+  ${mixins.DefaultButton};
 
   filter: none;
   width: 16rem;
