@@ -9,9 +9,6 @@ import ContentSubareaDelimiter from 'components/shared/ContentSubareaDelimiter';
 
 import { apiClient } from 'commons/utils/services';
 
-import CustomLinkedInLoginButton from './loginButtons/LinkedInLoginButton';
-import CustomGoogleLoginButton from './loginButtons/GoogleLoginButton';
-
 import * as types from './types';
 import * as styled from './styled';
 
@@ -22,6 +19,7 @@ const mapStateToProps = (state: store.AppState): types.IStateProps => ({
 const mapDispatchToProps: types.IDispatchProps = {
   setIsPageLocked: store.setIsPageLocked,
   setIsLoginPopupVisible: store.setIsLoginPopupVisible,
+  setIsRedirectingHomePending: store.setIsRedirectHomePending,
   setCurrentUserRole: store.setCurrentUserRole,
   updateAuthorizationStatus: store.updateAuthorizationStatus
 };
@@ -29,6 +27,7 @@ const mapDispatchToProps: types.IDispatchProps = {
 function AuthPopup(props: types.IProps) {
   function onLinkedInButtonClicked(authData: { code: string }) {
     props.setIsPageLocked(true);
+    props.setIsRedirectingHomePending(true);
 
     apiClient.exchangeLinkedInCode(authData.code, `${window.location.origin}/linkedin`)
       .then(linkedinResponse => {
@@ -37,6 +36,7 @@ function AuthPopup(props: types.IProps) {
       })
       .catch(() => {
         props.setIsPageLocked(false);
+        props.setIsRedirectingHomePending(false);
       })
       .finally(() => {
         props.setIsLoginPopupVisible(false);
@@ -45,11 +45,13 @@ function AuthPopup(props: types.IProps) {
 
   function onGoogleButtonClicked(authData: { accessToken: string }) {
     props.setIsPageLocked(true);
+    props.setIsRedirectingHomePending(true);
 
     localStorage.setItem('accessToken', `google@${authData.accessToken}`);
     props.updateAuthorizationStatus();
 
     props.setIsLoginPopupVisible(false);
+    props.setIsRedirectingHomePending(false);
   }
 
   const ClosingButton = (

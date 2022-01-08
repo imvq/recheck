@@ -9,6 +9,7 @@ export interface IStateProps {
 export interface IDispatchProps {
   setIsPageLocked(flag: boolean): void;
   setIsLoginPopupVisible(flag: boolean): void;
+  setIsRedirectingHomePending(flag: boolean): void;
   setCurrentUserRole(role: UserRole): void;
   updateAuthorizationStatus(): void;
 }
