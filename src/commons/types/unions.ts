@@ -29,6 +29,16 @@ export const paginationDirections = {
 export type PaginationDirection = typeof paginationDirections[keyof typeof paginationDirections];
 
 /**
+ * User roles.
+ */
+export const userRoles = {
+  Recruiter: 'recruiter',
+  Candidate: 'candidate'
+} as const;
+
+export type UserRole = typeof userRoles[keyof typeof userRoles];
+
+/**
  * Represents width of the screen.
  * Supposed to be used with CSS media queries.
  */

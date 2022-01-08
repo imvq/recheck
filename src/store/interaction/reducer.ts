@@ -1,4 +1,4 @@
-import { mainToolbarEntries } from 'commons/types/unions';
+import { mainToolbarEntries, userRoles } from 'commons/types/unions';
 
 import * as types from './types';
 
@@ -10,6 +10,7 @@ const initialState: types.IState = {
   isSpendFreeViewPopupVisible: false,
   isLoginPopupVisible: false,
   currentMainToolbarEntry: mainToolbarEntries.ProfilePageMyReviews,
+  currentUserRole: userRoles.Recruiter,
   isObservedReviewsPageLoading: false,
   isProfileAboutTabLoading: true,
   isProfileHistoryTabLoading: true,
@@ -58,6 +59,11 @@ export function interactionStateReducer(state = initialState, action: types.IAct
       return {
         ...state,
         currentMainToolbarEntry: action.payload
+      };
+    case types.SET_CURRENT_USER_ROLE:
+      return {
+        ...state,
+        currentUserRole: action.payload
       };
     case types.SET_IS_PROFILE_ABOUT_TAB_LOADING:
       return {

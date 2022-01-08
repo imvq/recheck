@@ -1,4 +1,4 @@
-import { MainToolbarEntry } from 'commons/types/unions';
+import { MainToolbarEntry, UserRole } from 'commons/types/unions';
 
 export const SET_IS_REDIRECTED_FROM_ORIGIN = 'SET_IS_REDIRECTED_FROM_ORIGIN';
 export const SET_IS_REDIRECT_HOME_PENDING = 'SET_IS_REDIRECT_HOME_PENDING';
@@ -7,6 +7,7 @@ export const SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE = 'SET_IS_SPEND_FREE_VIEW_POP
 export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';
 export const SET_IS_LOGIN_POPUP_VISIBILE = 'SET_IS_LOGIN_POPUP_VISIBILE';
 export const SET_CURRENT_MAIN_TOOLBAR_ENTRY = 'SET_CURRENT_MAIN_TOOLBAR_ENTRY';
+export const SET_CURRENT_USER_ROLE = 'SET_CURRENT_USER_ROLE';
 export const SET_IS_OBSERVED_REVIEWS_PAGE_LOADING = 'SET_IS_OBSERVED_REVIEWS_PAGE_LOADING';
 export const SET_IS_PROFILE_ABOUT_TAB_LOADING = 'SET_IS_PROFILE_ABOUT_TAB_LOADING';
 export const SET_IS_PROFILE_HISTORY_TAB_LOADING = 'SET_IS_PROFILE_HISTORY_TAB_LOADING';
@@ -21,6 +22,7 @@ export interface IState {
   isSpendFreeViewPopupVisible: boolean;
   isLoginPopupVisible: boolean;
   currentMainToolbarEntry: MainToolbarEntry;
+  currentUserRole: UserRole;
   isObservedReviewsPageLoading: boolean;
   isProfileAboutTabLoading: boolean;
   isProfileHistoryTabLoading: boolean;
@@ -63,6 +65,11 @@ export interface SetCurrentMainToolbarEntry {
   payload: MainToolbarEntry;
 }
 
+export interface SetCurrentUserRole {
+  type: typeof SET_CURRENT_USER_ROLE;
+  payload: UserRole;
+}
+
 export interface SetIsObservedReviewsPageLoading {
   type: typeof SET_IS_OBSERVED_REVIEWS_PAGE_LOADING;
   payload: boolean;
@@ -96,6 +103,7 @@ export type IAction =
   | SetIsSpendFreeViewPopupVisible
   | SetIsLoginPopupVisible
   | SetCurrentMainToolbarEntry
+  | SetCurrentUserRole
   | SetIsObservedReviewsPageLoading
   | SetIsProfileAboutTabLoading
   | SetIsProfileHistoryTabLoading

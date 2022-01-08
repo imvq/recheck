@@ -1,4 +1,4 @@
-import { MainToolbarEntry } from 'commons/types/unions';
+import { MainToolbarEntry, UserRole } from 'commons/types/unions';
 
 import * as types from './types';
 
@@ -38,6 +38,11 @@ export const setIsLoginPopupVisible = (flag: boolean): types.IAction => ({
 export const setCurrentMainToolbarEntry = (entry: MainToolbarEntry): types.IAction => ({
   type: types.SET_CURRENT_MAIN_TOOLBAR_ENTRY,
   payload: entry
+});
+
+export const setCurrentUserRole = (role: UserRole): types.IAction => ({
+  type: types.SET_CURRENT_USER_ROLE,
+  payload: role
 });
 
 export const setIsObservedPageLoading = (flag: boolean): types.IAction => ({

@@ -9,6 +9,7 @@ export const getIsPageLocked = (state: AppState) => state.interaction.isPageLock
 export const getRequestedUserShareableId = (state: AppState) => (
   state.interaction.requestedUserShareableId
 );
+export const getCurrentUserRole = (state: AppState) => state.interaction.currentUserRole;
 
 // Profile.
 
