@@ -1,12 +1,14 @@
 import { lazy, Suspense } from 'react';
-import { Provider } from 'react-redux';
+import { Offline } from 'react-detect-offline';
 import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
+import { Provider } from 'react-redux';
 import { Router, Switch, Route } from 'react-router-dom';
 
 import { historyManager } from 'commons/utils/services';
 import { store as appStore } from 'store';
 
 import NotFoundPage from 'components/pages/NotFoundPage';
+import ConnectionErrorPopup from 'components/shared/ConnectionErrorPopup';
 import GlobalStyle from 'components/shared/GlobalStyle';
 import PageAccessGuard from 'components/shared/PageAccessGuard';
 import PurePageLockGuard from 'components/shared/PurePageLockGuard';
@@ -75,6 +77,8 @@ export default () => (
   <Suspense fallback={<></>}>
 
     <GlobalStyle />
+
+    <Offline><ConnectionErrorPopup /></Offline>
 
     <Provider store={appStore}>
       <Router history={historyManager}>
