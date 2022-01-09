@@ -1,12 +1,7 @@
-import { jumpTo } from 'commons/utils/misc';
-
-import CustomButton from 'components/shared/CustomButton';
 import PreviousSearchCard from 'components/shared/PreviousSearchCard';
 
 import * as types from './types';
 import * as styled from './styled';
-
-const jumpToSearchPage = () => jumpTo('/search');
 
 function HistoryArea(props: types.IProps) {
   const Results = (
@@ -22,10 +17,6 @@ function HistoryArea(props: types.IProps) {
 
   const NoResults = (
     <>
-      <styled.TitleWrapper>
-        <styled.Title isHighlighted>Упс.. у вас ещё не было поисков</styled.Title>
-      </styled.TitleWrapper>
-      <CustomButton isDisabled={false} onClick={jumpToSearchPage}>Новый поиск</CustomButton>
     </>
   );
 

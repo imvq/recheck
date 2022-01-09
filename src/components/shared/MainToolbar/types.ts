@@ -11,7 +11,6 @@ export interface IStateProps {
 }
 
 export interface IDispatchProps {
-  setIsPageLocked(flag: boolean): void;
   setCurrentMainToolbarEntry(entry: MainToolbarEntry): void;
 }
 

@@ -8,11 +8,11 @@
 export const mainToolbarEntries = {
   NoEntry: 'NoEntry',
   Welcome: 'Welcome',
-  ProfilePageMyReviews: 'ProfilePageMyReviews',
-  ProfilePageHistory: 'ProfilePageHistory',
-  ProfilePageAboutMe: 'ProfilePageAboutMe',
-  NewSearch: 'NewSearch',
-  NewReview: 'NewReview'
+  Invite: 'Invite',
+  MyReviews: 'MyReviews',
+  ObservedUsers: 'ObservedUsers',
+  AboutMe: 'AboutMe',
+  NewSearch: 'NewSearch'
 } as const;
 
 export type MainToolbarEntry = typeof mainToolbarEntries[keyof typeof mainToolbarEntries];

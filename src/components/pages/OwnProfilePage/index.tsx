@@ -5,7 +5,6 @@ import { AppState } from 'store';
 import { getCurrentProfileInfo } from 'store/selectors';
 
 import Footer from 'components/shared/Footer';
-import ProfileHead from 'components/shared/ProfileHead';
 
 import AboutArea from './AboutArea';
 import HistoryArea from './HistoryArea';
@@ -35,11 +34,11 @@ function OwnProfilePage(props: types.IProps) {
 
         {(() => {
           switch (props.currentMainToolbarEntry) {
-            case mainToolbarEntries.ProfilePageAboutMe:
+            case mainToolbarEntries.AboutMe:
               return <AboutArea />;
-            case mainToolbarEntries.ProfilePageMyReviews:
+            case mainToolbarEntries.MyReviews:
               return <ReviewsArea />;
-            case mainToolbarEntries.ProfilePageHistory:
+            case mainToolbarEntries.ObservedUsers:
               return <HistoryArea cardsData={[]} />;
             default:
               return <WelcomeArea />;

@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import * as store from 'store';
 
 import { mainToolbarEntries } from 'commons/types/unions';
-import { jumpTo, onExit, showToast } from 'commons/utils/misc';
+import { jumpTo, showToast } from 'commons/utils/misc';
 
 import Logo from 'components/shared/Logo';
 
@@ -32,11 +32,66 @@ const mapStateToProps = (state: store.AppState): types.IStateProps => ({
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  setIsPageLocked: store.setIsPageLocked,
   setCurrentMainToolbarEntry: store.setCurrentMainToolbarEntry
 };
 
 function MainToolbar(props: types.IProps) {
+  const RecruiterOptions = (
+    <>
+      <styled.ButtonWrapper>
+        <FakeEntry onClick={() => copyInviteLink(props.shareableId as string)}>
+          Пригласить кандидата
+        </FakeEntry>
+      </styled.ButtonWrapper>
+
+      <styled.ButtonWrapper>
+        <MenuEntry
+          onClick={() => {
+            props.setCurrentMainToolbarEntry(mainToolbarEntries.ObservedUsers);
+            jumpTo('/profile');
+          }}
+          isPressed={props.currentMainToolbarEntry === mainToolbarEntries.ObservedUsers}
+        >
+          Мои кандидаты
+        </MenuEntry>
+      </styled.ButtonWrapper>
+    </>
+  );
+
+  const CandidateOptions = (
+    <>
+      <styled.ButtonWrapper>
+        <MenuEntry
+          onClick={() => {
+            props.setCurrentMainToolbarEntry(mainToolbarEntries.AboutMe);
+            jumpTo('/profile');
+          }}
+          isPressed={props.currentMainToolbarEntry === mainToolbarEntries.AboutMe}
+        >
+          Мой профиль
+        </MenuEntry>
+      </styled.ButtonWrapper>
+
+      <styled.ButtonWrapper>
+        <FakeEntry onClick={() => copyReviewLink(props.shareableId as string)}>
+          Запросить отзыв о себе
+        </FakeEntry>
+      </styled.ButtonWrapper>
+
+      <styled.ButtonWrapper>
+        <MenuEntry
+          onClick={() => {
+            props.setCurrentMainToolbarEntry(mainToolbarEntries.MyReviews);
+            jumpTo('/profile');
+          }}
+          isPressed={props.currentMainToolbarEntry === mainToolbarEntries.MyReviews}
+        >
+          Отзывы, оставленные мной
+        </MenuEntry>
+      </styled.ButtonWrapper>
+    </>
+  );
+
   return (
     <styled.MainToolbar className={props.className}>
       <styled.LogoWrapper><Link to='/'><Logo /></Link></styled.LogoWrapper>
@@ -57,90 +112,10 @@ function MainToolbar(props: types.IProps) {
         </styled.ButtonsGroupWrapper>
 
         <styled.ButtonsGroupWrapper>
-          {props.currentUserRole === 'recruiter'
-          && (
-          <styled.ButtonWrapper>
-            <MenuEntry
-              onClick={() => {
-                props.setCurrentMainToolbarEntry(mainToolbarEntries.NewSearch);
-                jumpTo('/search');
-              }}
-              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.NewSearch}
-            >
-              Поиск
-            </MenuEntry>
-          </styled.ButtonWrapper>
-          )}
+          {props.currentUserRole === 'recruiter' && RecruiterOptions}
 
-          {props.currentUserRole === 'candidate'
-          && (
-          <styled.ButtonWrapper>
-            <MenuEntry
-              onClick={() => {
-                props.setCurrentMainToolbarEntry(mainToolbarEntries.ProfilePageAboutMe);
-                jumpTo('/profile');
-              }}
-              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.ProfilePageAboutMe}
-            >
-              Мой профиль
-            </MenuEntry>
-          </styled.ButtonWrapper>
-          )}
-
-          {props.currentUserRole === 'recruiter'
-          && (
-          <styled.ButtonWrapper>
-            <FakeEntry onClick={() => copyInviteLink(props.shareableId as string)}>
-              Пригласить кандидата
-            </FakeEntry>
-          </styled.ButtonWrapper>
-          )}
-
-          {props.currentUserRole === 'candidate'
-          && (
-          <styled.ButtonWrapper>
-            <FakeEntry onClick={() => copyReviewLink(props.shareableId as string)}>
-              Запросить отзыв о себе
-            </FakeEntry>
-          </styled.ButtonWrapper>
-          )}
-
-          {props.currentUserRole === 'recruiter'
-          && (
-          <styled.ButtonWrapper>
-            <MenuEntry
-              onClick={() => {
-                props.setCurrentMainToolbarEntry(mainToolbarEntries.ProfilePageHistory);
-                jumpTo('/profile');
-              }}
-              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.ProfilePageHistory}
-            >
-              Мои кандидаты
-            </MenuEntry>
-          </styled.ButtonWrapper>
-          )}
-
-          {props.currentUserRole === 'candidate'
-          && (
-          <styled.ButtonWrapper>
-            <MenuEntry
-              onClick={() => {
-                props.setCurrentMainToolbarEntry(mainToolbarEntries.ProfilePageMyReviews);
-                jumpTo('/profile');
-              }}
-              isPressed={props.currentMainToolbarEntry === mainToolbarEntries.ProfilePageMyReviews}
-            >
-              Отзывы, оставленные мной
-            </MenuEntry>
-          </styled.ButtonWrapper>
-          )}
+          {props.currentUserRole === 'candidate' && CandidateOptions}
         </styled.ButtonsGroupWrapper>
-
-        <styled.ButtonWrapper>
-          <FakeEntry onClick={() => onExit(() => props.setIsPageLocked(true))}>
-            Выйти
-          </FakeEntry>
-        </styled.ButtonWrapper>
 
       </styled.ButtonsWrapper>
 
