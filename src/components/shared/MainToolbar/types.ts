@@ -1,4 +1,4 @@
-import { MainToolbarEntry } from 'commons/types/unions';
+import { MainToolbarEntry, UserRole } from 'commons/types/unions';
 
 export interface IOwnProps {
   className?: string;
@@ -6,11 +6,12 @@ export interface IOwnProps {
 
 export interface IStateProps {
   currentMainToolbarEntry: MainToolbarEntry;
+  currentUserRole: UserRole;
   shareableId: string | null;
 }
 
 export interface IDispatchProps {
-  lockPage(): void;
+  setIsPageLocked(flag: boolean): void;
   setCurrentMainToolbarEntry(entry: MainToolbarEntry): void;
 }
 

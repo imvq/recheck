@@ -7,11 +7,10 @@
  */
 export const mainToolbarEntries = {
   NoEntry: 'NoEntry',
+  Welcome: 'Welcome',
   ProfilePageMyReviews: 'ProfilePageMyReviews',
   ProfilePageHistory: 'ProfilePageHistory',
   ProfilePageAboutMe: 'ProfilePageAboutMe',
-  TopUpAnAccount: 'TopUpAnAccount',
-  AddWorkplace: 'AddWorkplace',
   NewSearch: 'NewSearch',
   NewReview: 'NewReview'
 } as const;

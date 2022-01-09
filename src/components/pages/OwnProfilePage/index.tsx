@@ -10,6 +10,7 @@ import ProfileHead from 'components/shared/ProfileHead';
 import AboutArea from './AboutArea';
 import HistoryArea from './HistoryArea';
 import ReviewsArea from './ReviewsArea';
+import WelcomeArea from './WelcomeArea';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -30,19 +31,18 @@ function OwnProfilePage(props: types.IProps) {
       <styled.AdaptedHeader />
 
       <styled.ContentWrapper>
-        <styled.TitleWrapper id='ProfileTitle'>
-          <styled.Title>Мой профиль</styled.Title>
-        </styled.TitleWrapper>
+        <div id='ProfileTitle' />
 
-        <ProfileHead profileInfo={props.currentProfileInfo} />
         {(() => {
           switch (props.currentMainToolbarEntry) {
             case mainToolbarEntries.ProfilePageAboutMe:
               return <AboutArea />;
+            case mainToolbarEntries.ProfilePageMyReviews:
+              return <ReviewsArea />;
             case mainToolbarEntries.ProfilePageHistory:
               return <HistoryArea cardsData={[]} />;
             default:
-              return <ReviewsArea />;
+              return <WelcomeArea />;
           }
         })()}
       </styled.ContentWrapper>

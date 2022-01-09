@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.aside`
+export const MainToolbar = styled.aside`
   position: relative;
   height: 100%;
   background-color: white;

@@ -9,7 +9,7 @@ const initialState: types.IState = {
   isSearchPopupVisible: false,
   isSpendFreeViewPopupVisible: false,
   isLoginPopupVisible: false,
-  currentMainToolbarEntry: mainToolbarEntries.ProfilePageMyReviews,
+  currentMainToolbarEntry: mainToolbarEntries.Welcome,
   currentUserRole: userRoles.Recruiter,
   isObservedReviewsPageLoading: false,
   isProfileAboutTabLoading: true,
