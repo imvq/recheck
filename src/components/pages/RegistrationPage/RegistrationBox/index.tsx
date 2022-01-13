@@ -18,6 +18,7 @@ import * as styled from '../../../shared/BoxBase';
 
 const mapStateToProps = (state: store.AppState): types.IStateProps => ({
   socialId: store.getCurrentSocialId(state),
+  photoUrl: store.getPhotoUrl(state),
   matchedCompanies: store.getQuickSearchMatchedCompanies(state),
   inviter: store.getInviterShareableId(state)
 });
@@ -87,20 +88,18 @@ function RegistrationBox(props: types.IProps) {
       }));
   }
 
-  function proceedIfAllowed() {
-    if (canProceed) {
-      props.onRegisterButtonPressed({
-        socialId: props.socialId as string,
-        inviterId: props.inviter,
-        fullName,
-        photoUrl: null,
-        email: emailState.email,
-        company,
-        currentPosition,
-        currentWorkMonthFrom,
-        currentWorkYearFrom
-      });
-    }
+  function proceed() {
+    props.onRegisterButtonPressed({
+      socialId: props.socialId as string,
+      inviterId: props.inviter,
+      fullName,
+      photoUrl: props.photoUrl,
+      email: emailState.email,
+      company,
+      currentPosition,
+      currentWorkMonthFrom,
+      currentWorkYearFrom
+    });
   }
 
   function onExitCallback() {
@@ -173,7 +172,7 @@ function RegistrationBox(props: types.IProps) {
     <styled.ButtonGroupWrapper>
       <CustomButton
         isDisabled={!canProceed}
-        onClick={proceedIfAllowed}
+        onClick={proceed}
       >
         Продолжить
       </CustomButton>

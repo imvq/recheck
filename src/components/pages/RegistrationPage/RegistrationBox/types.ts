@@ -14,6 +14,7 @@ export interface IOwnProps {
 
 export interface IStateProps {
   socialId: string | null;
+  photoUrl: string | null;
   matchedCompanies: ICompany[];
   inviter: string | null;
 }
