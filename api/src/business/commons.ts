@@ -3,11 +3,11 @@ import { Response } from 'express';
 import { BadRequestError } from '@business/errors';
 
 export function assertPathParamsData(...args: any[]) {
-  assertRequestData('Not all required path fields are defined or formatted correctly.', args);
+  assertRequestData('Not all required path fields are defined or formatted correctly.', ...args);
 }
 
 export function assertBodyData(...args: any[]) {
-  assertRequestData('Not all required body fields are defined or formatted correctly.', args);
+  assertRequestData('Not all required body fields are defined or formatted correctly.', ...args);
 }
 
 export function assertRequestData(errorMessage: string, ...args: any[]) {

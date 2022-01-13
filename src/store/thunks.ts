@@ -20,7 +20,7 @@ export function updateAuthorizationStatus() {
     const accessToken = localStorage.getItem('accessToken');
 
     if (accessToken) {
-      apiClient.retrieveProfile(accessToken)
+      apiClient.retrieveProfile(accessToken, getState().interaction.currentUserRole)
         .then(profileData => postProcessProfileRetrieving(dispatch, getState, profileData))
         .catch(() => {
           localStorage.removeItem('accessToken');
@@ -39,6 +39,8 @@ function postProcessProfileRetrieving(
   getState: typeof store.getState,
   profileData: AxiosResponse<types.IUserSelf>
 ) {
+  dispatch(profileActions.setPhotoUrl(profileData.data.photoUrl as string));
+
   if (!profileData.data.registered) {
     processProfileUnregistered(dispatch, profileData);
     return;
@@ -88,7 +90,6 @@ function processProfileConfirmed(
   dispatch(profileActions.setSocialId(profileData.data.socialId));
   dispatch(profileActions.setFullName(profileData.data.fullName as string));
   dispatch(profileActions.setEmail(profileData.data.email as string));
-  dispatch(profileActions.setPhotoUrl(profileData.data.photoUrl as string));
   dispatch(profileActions.setCurrentPosition(profileData.data.currentPosition as string));
   dispatch(profileActions.setCurrentCompany({
     id: companyId as string,

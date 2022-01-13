@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as commonTypes from 'commons/types';
 
 import { ApiPromise } from 'commons/types';
+import { UserRole } from 'commons/types/unions';
 
 const apiInstance = axios.create({ baseURL: process.env.REACT_APP_API });
 
@@ -23,9 +24,9 @@ export function exchangeLinkedInCode(authCode: string, redirectPath: string)
   return apiInstance.post('/login/linkedin/exchange', { authCode, redirectPath });
 }
 
-export function retrieveProfile(accessToken: string)
+export function retrieveProfile(accessToken: string, role: UserRole)
   : ApiPromise<commonTypes.IUserSelf> {
-  return apiInstance.get(`/users/profile/${accessToken}`, { withCredentials: true });
+  return apiInstance.get(`/users/profile/${role}/${accessToken}`, { withCredentials: true });
 }
 
 export function checkIfEmailIsAvailable(email: string)

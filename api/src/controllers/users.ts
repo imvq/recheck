@@ -7,7 +7,7 @@ import * as usersLogic from '@business/users';
  */
 const router = Router();
 
-router.get('/profile/:accessToken', usersLogic.retrieveProfile);
+router.get('/profile/:role/:accessToken', usersLogic.retrieveProfile);
 router.get('/:privateToken/availability/review/:targetShareableId', usersLogic.canUserLeaveReview);
 
 router.post('/availability/email', usersLogic.checkIfEmailIsAvailable);

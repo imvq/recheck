@@ -1,3 +1,5 @@
+import { normalizePersonalUserInfo } from '@business/database/mappers';
+
 export interface ICompaniesDictionary {
   [id: string]: {
     // Values contain duplicates of the ID field
@@ -13,6 +15,13 @@ export interface ICompanyData {
   name: string;
   logoUrl: string | null;
 }
+
+export interface ILocalProfileData extends Partial<
+  ReturnType<typeof normalizePersonalUserInfo> & {
+    registered: boolean;
+    confirmed: boolean;
+  }
+> {}
 
 export interface ILogger {
   log(message: string): void;

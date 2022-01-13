@@ -12,6 +12,7 @@ import * as mappers from '@business/database/mappers';
 import * as errors from '@business/errors';
 
 import { assertBodyData, assertPathParamsData, reply, AccessToken } from '@business/commons';
+import { ILocalProfileData } from '@typing';
 
 import * as mailingLogic from './mailing';
 import * as nameTokensLogic from './nameTokens';
@@ -267,18 +268,12 @@ export async function getPreparedCompany(id: string, name: string | null) {
 export async function retrieveProfile(request: Request, response: Response) {
   interface IPathParams {
     accessToken: string;
-  }
-
-  interface IBodyParams {
-    role: 'recruiter' | 'candidate'
+    role: 'recruiter' | 'candidate';
   }
 
   // @ts-ignore: Request<ParamsDictionary> is guarenteed to be compatible with IPathParams.
-  const { accessToken }: IPathParams = request.params as IPathParams;
-  assertPathParamsData(accessToken);
-
-  const { role }: IBodyParams = request.body;
-  assertBodyData(role);
+  const { accessToken, role }: IPathParams = request.params as IPathParams;
+  assertPathParamsData(accessToken, role);
 
   const parsedAccessToken = new AccessToken(accessToken);
 
@@ -287,17 +282,34 @@ export async function retrieveProfile(request: Request, response: Response) {
   }
 
   if (parsedAccessToken.socialMedia === 'linkedin') {
-    const socialId = await retrieveSocialIdFromLinkedIn(parsedAccessToken.tokenValue);
-    const savedLocalUser = await retrieveLocalProfileData(socialId);
-    await accessors.updateLastRole(socialId, role);
+    const socialProfile = await retrieveSocialProfileFromLinkedIn(parsedAccessToken.tokenValue);
+    const savedLocalUser = await retrieveLocalProfileData(socialProfile.id);
+
+    if (savedLocalUser.confirmed) {
+      await accessors.updateLastRole(socialProfile.sub, role);
+    }
+
+    if (!savedLocalUser.photoUrl) {
+      savedLocalUser.photoUrl = socialProfile.profilePicture['displayImage~']
+        .elements.at(-1)
+        .identifiers[0]
+        .identifier;
+    }
 
     reply(response, savedLocalUser);
   }
 
   if (parsedAccessToken.socialMedia === 'google') {
-    const socialId = await retrieveSocialIdFromGoogle(parsedAccessToken.tokenValue);
-    const savedLocalUser = await retrieveLocalProfileData(socialId);
-    await accessors.updateLastRole(socialId, role);
+    const socialProfile = await retrieveSocialProfileFromGoogle(parsedAccessToken.tokenValue);
+    const savedLocalUser = await retrieveLocalProfileData(socialProfile.sub);
+
+    if (savedLocalUser.confirmed) {
+      await accessors.updateLastRole(socialProfile.sub, role);
+    }
+
+    if (!savedLocalUser.photoUrl) {
+      savedLocalUser.photoUrl = await retrieveOriginalGooglePhoto(savedLocalUser.socialId);
+    }
 
     reply(response, savedLocalUser);
   }
@@ -306,13 +318,14 @@ export async function retrieveProfile(request: Request, response: Response) {
 /**
  * Retrieving social ID from LinkedIn.
  */
-async function retrieveSocialIdFromLinkedIn(accessToken: string) {
+async function retrieveSocialProfileFromLinkedIn(accessToken: string) {
   try {
     const profileUrl = 'https://api.linkedin.com/v2/me';
+    const projection = '(id,profilePicture(displayImage~digitalmediaAsset:playableStreams))';
     const profileOptions = { headers: { Authorization: `Bearer ${accessToken}` } };
-    const profile = await axios.get(profileUrl, profileOptions);
+    const profile = await axios.get(`${profileUrl}?projection=${projection}`, profileOptions);
 
-    return profile.data.id;
+    return profile.data;
   } catch {
     throw new errors.ForbiddenError('LinkedIn refused to provide profile data.');
   }
@@ -321,12 +334,26 @@ async function retrieveSocialIdFromLinkedIn(accessToken: string) {
 /**
  * Retrieving social ID from Google.
  */
-async function retrieveSocialIdFromGoogle(accessToken: string) {
+async function retrieveSocialProfileFromGoogle(accessToken: string) {
   try {
     const profileUrl = `https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=${accessToken}`;
     const profile = await axios.get(profileUrl);
 
-    return profile.data.sub;
+    return profile.data;
+  } catch {
+    throw new errors.ForbiddenError('Google refused to provide profile data.');
+  }
+}
+
+/**
+ * Retrieve user's original photo from Google.
+ */
+async function retrieveOriginalGooglePhoto(userId: string) {
+  try {
+    const retrievingUrl = `https://people.googleapis.com/v1/people/${userId}`;
+    const options = `personFields=photos&key=${process.env.GOOGLE_PEOPLE_API_KEY}`;
+
+    return (await axios.get(`${retrievingUrl}?${options}`)).data.photos?.[0]?.url;
   } catch {
     throw new errors.ForbiddenError('Google refused to provide profile data.');
   }
@@ -337,7 +364,7 @@ async function retrieveSocialIdFromGoogle(accessToken: string) {
  * If no profile found then the user is not registered yet (therefore, not confirmed as well).
  * If no confirmation code record is present then the user is already confirmed.
  */
-async function retrieveLocalProfileData(socialId: string) {
+async function retrieveLocalProfileData(socialId: string): Promise<ILocalProfileData> {
   const targetUserEntity = await accessors.readUserWithCompanyBySocialId(socialId);
 
   if (!targetUserEntity) {
