@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import BackgroundSvgPath from 'assets/images/common/BackgroundDefault.png';
 
-export const Wrapper = styled.div`
+export const RegistrationPage = styled.div`
   background-image: url(${BackgroundSvgPath});
   background-size: cover;
   min-height: 100%;

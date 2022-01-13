@@ -58,7 +58,7 @@ function RegistrationPage(props: types.IProps) {
   // However, the page can be loaded before the authentication check is passed.
   // Therefore, we must hide the registration page content by the time we pass all checks.
   return props.isAuthenticated ? (
-    <styled.Wrapper>
+    <styled.RegistrationPage>
       <styled.ContentWrapper>
 
         <RegistrationBox onRegisterButtonPressed={prepareUser} />
@@ -66,7 +66,7 @@ function RegistrationPage(props: types.IProps) {
 
       {/* Absolute-positioned confirmation popup. */}
       {isConfirmationVisible && <ConfirmationPopup email={emailToShow} />}
-    </styled.Wrapper>
+    </styled.RegistrationPage>
   ) : null;
 }
 
