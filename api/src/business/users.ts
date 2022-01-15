@@ -86,14 +86,15 @@ async function saveUserPhoto(photoUrl: string, userSocialId: string) {
   const localPhotoPath = `media/${userSocialId}`;
 
   try {
-    const photoResponse = await axios({ method: 'GET', url: photoUrl, responseType: 'stream' });
+    const photoBuffer = await axios({ method: 'GET', url: photoUrl, responseType: 'arraybuffer' });
 
-    await sharp(photoResponse.data)
+    await sharp(photoBuffer.data)
       .resize(256, 256)
       .toFile(`${localPhotoPath}.png`);
 
-    return `${process.env.API_ORIGIN || process.env.ORIGIN}/${localPhotoPath}`;
-  } catch {
+    return `${process.env.API_ORIGIN || process.env.ORIGIN}/${localPhotoPath}.png`;
+  } catch (error) {
+    console.log(error);
     return `${process.env.API_ORIGIN || process.env.ORIGIN}/media/user-default.png`;
   }
 }
