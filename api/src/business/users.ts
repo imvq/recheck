@@ -1,6 +1,7 @@
 import * as stream from 'stream';
 
 import axios from 'axios';
+import sharp from 'sharp';
 
 import { Request, Response } from 'express';
 import { createWriteStream } from 'fs';
@@ -85,21 +86,16 @@ async function saveUserPhoto(photoUrl: string, userSocialId: string) {
   const localPhotoPath = `media/${userSocialId}`;
 
   try {
-    await downloadPhoto(photoUrl, localPhotoPath);
-    return localPhotoPath;
+    const photoResponse = await axios({ method: 'GET', url: photoUrl, responseType: 'stream' });
+
+    await sharp(photoResponse.data)
+      .resize(256, 256)
+      .toFile(`${localPhotoPath}.png`);
+
+    return `${process.env.API_ORIGIN || process.env.ORIGIN}/${localPhotoPath}`;
   } catch {
     return `${process.env.API_ORIGIN || process.env.ORIGIN}/media/user-default.png`;
   }
-}
-
-function downloadPhoto(photoUrl: string, outputPath: string) {
-  const writer = createWriteStream(outputPath);
-
-  return axios({ method: 'GET', url: photoUrl, responseType: 'stream' })
-    .then(async response => {
-      response.data.pipe(writer);
-      return promisify(stream.finished)(writer);
-    });
 }
 
 /**
@@ -199,15 +195,18 @@ export async function resendConfirmation(request: Request, response: Response) {
   const { privateToken, updatedEmail }: IBodyData = request.body;
   assertBodyData(privateToken);
 
-  const targetUser = await accessors.readUserByPrivateToken(privateToken);
-  const targetEmail = updatedEmail || targetUser.email;
+  const targetUserEntity = await accessors.readUserByPrivateToken(privateToken);
+  const targetUser = mappers.normalizePersonalUserInfo(targetUserEntity);
 
   // Update email if needed.
   if (updatedEmail) {
     await accessors.updateEmail(privateToken, updatedEmail);
   }
 
-  await mailingLogic.sendConfirmationMail(targetEmail, targetUser.confirmationCode);
+  const confirmationEntity = await accessors.readConfirmationBySocialId(targetUser.socialId);
+  const confirmation = mappers.normalizeConfirmation(confirmationEntity);
+
+  await mailingLogic.sendConfirmationMail(updatedEmail || targetUser.email, confirmation.codeValue);
 
   reply(response);
 }

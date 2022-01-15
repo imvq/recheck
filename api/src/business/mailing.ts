@@ -49,11 +49,8 @@ function getMailTransport() {
 export async function sendConfirmationMail(to: string, confirmationCode: string) {
   const templatesPath = `${__dirname}/templates/confirmation.handlebars`;
   const replacements = { origin: process.env.ORIGIN as string, uuid: confirmationCode };
-  try {
-    await sendMail(to, templatesPath, replacements);
-  } catch (error) {
-    console.log(error);
-  }
+
+  await sendMail(to, templatesPath, replacements);
 }
 
 export async function sendNotification(to: string, targetName: string, targetEmail: string) {

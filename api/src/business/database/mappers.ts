@@ -36,12 +36,6 @@ export const normalizePersonalUserInfo = (entity: any) => ({
   email: entity['email']
 });
 
-export const normalizeConfirmationEntity = (entity: any) => ({
-  id: entity['id'],
-  codeValue: entity['code_value'],
-  userId: entity['user_id']
-});
-
 export const normalizeReviewWithTarget = (entity: any) => ({
   targetShareableId: entity['target_shareable_id'],
   targetPhotoUrl: entity['photo_url'],
