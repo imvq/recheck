@@ -54,12 +54,7 @@ function UserConfirmationAwaiterPage(props: types.IProps) {
     // it must be redirected away.
     if (!props.isRedirectedFromOrigin) {
       jumpTo('/');
-      return;
     }
-
-    // If a user is redirected to the page 'legally'
-    // we must set the flag to its default value.
-    props.setIsRedirectedFromOrigin(false);
   }, []);
 
   function recalculateEmailErrorState() {
