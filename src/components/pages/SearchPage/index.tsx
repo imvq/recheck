@@ -39,7 +39,7 @@ const mapDispatchToProps: types.IDispatchProps = {
   setUserSearchResults: store.setUserSearchResults,
   setRecommendations: store.setRecommendations,
   setRecommendedCompaniesShownMembers: store.setRecommendedCompaniesShownMembers,
-  lockPage: store.setPageLocked
+  setIsPageLocked: store.setIsPageLocked
 };
 
 function SearchPage(props: types.IProps) {
@@ -87,7 +87,7 @@ function SearchPage(props: types.IProps) {
   // The search input field.
   const SearchInput = (
     <SearchField
-      lockPageCallback={props.lockPage}
+      lockPageCallback={() => props.setIsPageLocked(true)}
       searchUserCallback={tokens => {
         props.searchUsersByTokens(tokens);
         props.clearMatchedUsers();

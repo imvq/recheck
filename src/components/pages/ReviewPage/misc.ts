@@ -1,4 +1,4 @@
-import { ITextAreaEvent } from 'commons/types/general';
+import { ITextAreaEvent } from 'commons/types';
 import { jumpTo } from 'commons/utils/misc';
 
 export function textAreaHandler(event: ITextAreaEvent, setter: (value: string) => void) {

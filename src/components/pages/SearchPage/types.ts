@@ -15,13 +15,13 @@ export interface IDispatchProps {
   clearSearchText(): void;
   quickSearchUsersByTokens(tokens: string[]): void;
   loadRecommendations(privateToken: string, chunk: number, recreate?: boolean): void;
-  lockPage(): void;
   searchUsersByTokens(tokens: string[]): void;
   searchUserByShareableId(shareableId: string): void;
   setCurrentMainToolbarEntry(entry: MainToolbarEntry): void;
   setUserSearchResults(results: ISearchedProfile[]): void;
   setRecommendations(companies: ICompanyWithMembers[]): void;
   setRecommendedCompaniesShownMembers(members: ISearchedProfile[]): void;
+  setIsPageLocked(flag: boolean): void;
 }
 
 export type IProps = IStateProps & IDispatchProps;

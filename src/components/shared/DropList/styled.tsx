@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import animations from 'commons/styles/animations';
 import cssVars from 'commons/styles/cssVars';
 
-export const Wrapper = styled.div`
+export const DropList = styled.div`
   animation: ${animations.fadeDefault} .25s;
 
   width: 100%;

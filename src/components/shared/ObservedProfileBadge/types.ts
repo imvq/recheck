@@ -1,8 +1,7 @@
-import { IOptionType } from 'commons/types';
+import { ISearchedProfile } from 'commons/types';
 
 export interface IOwnProps {
-  optionData: IOptionType;
-  onClick: (selectedValue: IOptionType) => void;
+  observedUserData: ISearchedProfile;
 }
 
 export interface IStateProps {}

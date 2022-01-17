@@ -1,4 +1,4 @@
-import { IInputEvent } from 'commons/types/general';
+import { IInputEvent } from 'commons/types';
 
 export interface IOwnProps {
   lockPageCallback(): void;

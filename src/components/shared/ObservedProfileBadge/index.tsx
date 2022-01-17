@@ -1,0 +1,29 @@
+import { memo } from 'react';
+import * as types from './types';
+import * as styled from './styled';
+
+function ObservedProfileBadge(props: types.IProps) {
+  return (
+    <styled.ObservedProfileBadge>
+      <styled.PhotoWrapper>
+        <styled.Photo src={props.observedUserData.photoUrl} />
+      </styled.PhotoWrapper>
+
+      <styled.ContentWrapper>
+        <styled.Title>{props.observedUserData.fullName}</styled.Title>
+
+        <styled.Entry>
+          <styled.Entry isDimmed>Должность:&nbsp;&nbsp;</styled.Entry>
+          <styled.Entry>{props.observedUserData.currentPosition}</styled.Entry>
+        </styled.Entry>
+
+        <styled.Entry>
+          <styled.Entry isDimmed>Место работы:&nbsp;&nbsp;</styled.Entry>
+          <styled.Entry>{props.observedUserData.currentCompanyName}</styled.Entry>
+        </styled.Entry>
+      </styled.ContentWrapper>
+    </styled.ObservedProfileBadge>
+  );
+}
+
+export default memo(ObservedProfileBadge);

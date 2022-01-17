@@ -31,6 +31,8 @@ export interface IExtendedOptionType extends IOptionType {
 
 export type IInputEvent = ChangeEvent<HTMLInputElement>;
 
+export type ITextAreaEvent = ChangeEvent<HTMLTextAreaElement>;
+
 export interface IOptionType {
   key: any;
   text: string;

@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import { jumpTo } from 'commons/utils/misc';
-import { apiClient } from 'commons/utils/services';
 import { AppState, setColleagues, setPageLocked, setPageUnlocked } from 'store';
 
 import PersonCard from 'components/shared/PersonCard';

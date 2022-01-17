@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
 
-export const Wrapper = styled.div`
+export const ExtendedOption = styled.div`
   ${mixins.DefaultInput};
 
   height: 3.678rem;

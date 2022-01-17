@@ -1,8 +1,12 @@
-import * as generalTypes from 'commons/types/general';
+import { IExtendedOptionType, IOptionType } from 'commons/types';
 
 export interface IOwnProps {
-  optionData: generalTypes.IExtendedOptionType;
-  onClick: (selectedValue: generalTypes.IOptionType) => void;
+  optionData: IExtendedOptionType;
+  onClick: (selectedValue: IOptionType) => void;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {}
+
+export interface IDispacthProps {}
+
+export type IProps = IOwnProps & IStateProps & IDispacthProps;

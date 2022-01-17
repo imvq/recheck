@@ -54,6 +54,11 @@ export function makeUserAvailable(privateToken: string, targetShareableId: strin
   return apiInstance.post('/availability/user/provide', { privateToken, targetShareableId });
 }
 
+export function loadAvailableUsers(privateToken: string, last: number)
+  : ApiPromise<commonTypes.ISearchedProfile[]> {
+  return apiInstance.post(`/users/available/${last}`, { privateToken });
+}
+
 export function prepareUser(preparationData: commonTypes.IUserPreparationData)
   : ApiPromise<ISimpleBooleanResponse> {
   return apiInstance.post('/users/registration/prepare', preparationData);

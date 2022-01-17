@@ -1,12 +1,32 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+import mixins from 'commons/styles/mixins';
+
+export const ObservedProfileBadge = styled.div`
+  ${mixins.DefaultButton};
+
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(.2rem .2rem .5rem rgba(0, 0, 0, .2));
+
   width: 50rem;
   height: fit-content;
+
   background-color: #f0f3ff;
+
   border-radius: 1rem;
+
   display: flex;
-  filter: drop-shadow(.2rem .2rem .5rem rgba(0, 0, 0, .2));
+
+  &:hover {
+    opacity: .8;
+    filter: alpha(80);
+  }
+
+  &:active {
+    opacity: .7;
+    filter: alpha(opacity=70);
+  }
 `;
 
 export const PhotoWrapper = styled.div`

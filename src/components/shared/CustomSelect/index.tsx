@@ -1,21 +1,21 @@
 import { useState } from 'react';
+
 import OutsideClickHandler from 'react-outside-click-handler';
 
-import * as generalTypes from 'commons/types/general';
+import { IOptionType } from 'commons/types';
+
 import CustomOption from './CustomOption';
 
 import * as misc from './misc';
 import * as types from './types';
 import * as styled from './styled';
 
-type TCurrentValue = generalTypes.IOptionType | null;
-
-const CustomSelect = (props: types.IProps) => {
+function CustomSelect(props: types.IProps) {
   const [isDimmed, setIsDimmed] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [currentValue, setCurrentValue] = useState<TCurrentValue>(null);
+  const [currentValue, setCurrentValue] = useState<IOptionType | null>(null);
 
-  const callNewOptionHandler = (option: generalTypes.IOptionType) => {
+  const callNewOptionHandler = (option: IOptionType) => {
     props.onNewOptionSelected(option);
     setCurrentValue(option);
     setIsDimmed(false);
@@ -29,6 +29,7 @@ const CustomSelect = (props: types.IProps) => {
         <styled.SelectedItemWrapper isDimmed={isDimmed}>
           {trimmedValue || props.placeholder || 'Выбрать'}
         </styled.SelectedItemWrapper>
+
         {isExpanded && (
         <styled.OptionsBadgesWrapper>
           {props.options.map(option => (
@@ -40,11 +41,12 @@ const CustomSelect = (props: types.IProps) => {
           ))}
         </styled.OptionsBadgesWrapper>
         )}
+
         {isExpanded ? <styled.ArrowUp /> : <styled.ArrowDown />}
       </styled.Wrapper>
     </OutsideClickHandler>
   );
-};
+}
 
 CustomSelect.Option = CustomOption;
 

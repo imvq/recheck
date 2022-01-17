@@ -7,4 +7,8 @@ export interface IOwnProps {
   width?: string;
 }
 
+export interface IStateProps {}
+
+export interface IDispatchProps {}
+
 export type IProps = IOwnProps;

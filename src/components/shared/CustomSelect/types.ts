@@ -1,10 +1,14 @@
-import * as generalTypes from 'commons/types/general';
+import { IOptionType } from 'commons/types';
 
 export interface IOwnProps {
   width?: string;
   placeholder?: string;
-  options: generalTypes.IOptionType[];
-  onNewOptionSelected: (selectedOne: generalTypes.IOptionType) => void;
+  options: IOptionType[];
+  onNewOptionSelected: (selectedOne: IOptionType) => void;
 }
 
-export type IProps = IOwnProps;
+export interface IStateProps {}
+
+export interface IDispatchProps {}
+
+export type IProps = IOwnProps & IStateProps & IDispatchProps;

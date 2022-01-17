@@ -4,7 +4,6 @@
 
 import { toast } from 'react-toastify';
 
-import { IRetrievedProfileDto } from 'commons/types/responses/basic';
 import { ScreenBreakpoint, toastVariants } from 'commons/types/unions';
 
 export function onExit(lockPageCallback: () => void) {
@@ -12,16 +11,6 @@ export function onExit(lockPageCallback: () => void) {
   localStorage.removeItem('accessToken');
   window.location.replace(window.location.origin);
 }
-
-export const mapProfileDtoToState = (profileDto: IRetrievedProfileDto) => ({
-  currentId: profileDto.profileId,
-  currentShareableId: profileDto.shareableId || '',
-  currentName: profileDto.name,
-  currentEmail: profileDto.email || '',
-  currentCompany: profileDto.company || '',
-  currentPosition: profileDto.position || '',
-  currentPhotoUrl: profileDto.photoUrl
-});
 
 export const respond = (screen: ScreenBreakpoint) => `@media (max-width: ${screen}px)`;
 

@@ -1,10 +1,10 @@
-import * as generalTypes from 'commons/types/general';
+import { IDemoReviewCardData } from 'commons/types';
 
 import Andrey from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Andrey.png';
 import Natalie from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Natalie.png';
 import Oleg from 'assets/images/pages/LandingPage/MainSwipeSection/Swiper/Oleg.png';
 
-const examples: generalTypes.IDemoReviewCardData[] = [
+const examples: IDemoReviewCardData[] = [
   {
     name: 'Oleg Bagisky',
     photoUrl: Oleg,

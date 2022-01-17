@@ -1,4 +1,4 @@
-import { IReviewCardGotData } from 'commons/types/general';
+import { IReviewReceived } from 'commons/types';
 
 export interface IStateProps {
   privateToken: string | null;
@@ -6,7 +6,7 @@ export interface IStateProps {
   isLoading: boolean;
   isObservedReviewsPageLoading: boolean;
   observedReviewsChunksAmount: number;
-  currentReviewCardData: IReviewCardGotData | null;
+  currentReviewCardData: IReviewReceived | null;
 }
 
 export interface IDispatchProps {
