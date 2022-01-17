@@ -284,7 +284,7 @@ export async function retrieveProfile(request: Request, response: Response) {
     const savedLocalUser = await retrieveLocalProfileData(socialProfile.id);
 
     if (savedLocalUser.confirmed) {
-      await accessors.updateLastRole(socialProfile.sub, role);
+      await accessors.updateLastRole(socialProfile.id, role);
     }
 
     if (!savedLocalUser.photoUrl) {
