@@ -152,6 +152,15 @@ export async function readUserBySocialId(socialId: string) {
   }
 }
 
+export async function readUsersAvailable(ownerId: string, last: string) {
+  try {
+    const query = QueryFileCacher.getQuery('./sql/read/usersAvailable.sql');
+    return await database.manyOrNone(query, { ownerId, last });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
 export async function readUsersWithPredefinedCompanies(last: string) {
   try {
     const query = QueryFileCacher.getQuery('./sql/read/usersWithPredefinedCompanies.sql');

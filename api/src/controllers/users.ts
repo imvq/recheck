@@ -10,6 +10,7 @@ const router = Router();
 router.get('/profile/:role/:accessToken', usersLogic.retrieveProfile);
 router.get('/:privateToken/availability/review/:targetShareableId', usersLogic.canUserLeaveReview);
 
+router.post('/available/:last', usersLogic.getAvailableUsers);
 router.post('/availability/email', usersLogic.checkIfEmailIsAvailable);
 router.post('/availability/user', usersLogic.checkIfUserCanBeViewed);
 router.post('/availability/views', usersLogic.checkIfUserHasViewsAvailable);

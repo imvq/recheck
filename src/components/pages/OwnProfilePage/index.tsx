@@ -7,7 +7,7 @@ import { getCurrentProfileInfo } from 'store/selectors';
 import Footer from 'components/shared/Footer';
 
 import AboutArea from './AboutArea';
-import HistoryArea from './HistoryArea';
+import ObservedUsersArea from './ObservedUsersArea';
 import ReviewsArea from './ReviewsArea';
 import WelcomeArea from './WelcomeArea';
 
@@ -39,7 +39,7 @@ function OwnProfilePage(props: types.IProps) {
             case mainToolbarEntries.MyReviews:
               return <ReviewsArea />;
             case mainToolbarEntries.ObservedUsers:
-              return <HistoryArea cardsData={[]} />;
+              return <ObservedUsersArea />;
             default:
               return <WelcomeArea />;
           }

@@ -36,6 +36,10 @@ export const normalizePersonalUserInfo = (entity: any) => ({
   email: entity['email']
 });
 
+export const normalizeUserIdentifier = (entity: any) => ({
+  id: entity['id']
+});
+
 export const normalizeReviewWithTarget = (entity: any) => ({
   targetShareableId: entity['target_shareable_id'],
   targetPhotoUrl: entity['photo_url'],

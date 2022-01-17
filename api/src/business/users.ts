@@ -452,3 +452,29 @@ export async function makeUserAvailable(request: Request, response: Response) {
 
   reply(response);
 }
+
+/**
+ * Get list of available users.
+ */
+export async function getAvailableUsers(request: Request, response: Response) {
+  interface IPathParams {
+    last: string;
+  }
+
+  interface IBodyData {
+    privateToken: string;
+  }
+
+  const { last }: IPathParams = request.params as { last: string; };
+  const { privateToken }: IBodyData = request.body;
+  assertPathParamsData(last);
+  assertBodyData(privateToken);
+
+  const askerEntity = await accessors.readUserByPrivateToken(privateToken);
+  const asker = mappers.normalizeUserIdentifier(askerEntity);
+
+  const availableUsers = await accessors.readUsersAvailable(asker.id, last);
+  const normalizedUsers = availableUsers.map(user => mappers.normalizePublicUserInfo(user));
+
+  reply(response, normalizedUsers);
+}
