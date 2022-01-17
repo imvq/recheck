@@ -14,6 +14,10 @@ export const getCurrentMainToolbarEntry = (state: AppState) => (
 );
 export const getCurrentUserRole = (state: AppState) => state.interaction.currentUserRole;
 
+// Observing.
+
+export const getObservedUsers = (state: AppState) => state.observing.observedUsers;
+
 // Profile.
 
 export const getCurrentPrivateToken = (state: AppState) => state.profile.privateToken;

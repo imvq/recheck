@@ -53,11 +53,6 @@ export const setUserSearchResults = (results: ISearchedProfile[]): types.IAction
   payload: results
 });
 
-export const setCurrentObservedUser = (user: ISearchedProfile): types.IAction => ({
-  type: types.SET_CURRENT_OBSERVED_USER,
-  payload: user
-});
-
 export const setSearchText = (text: string): types.IAction => ({
   type: types.SET_SEARCH_TEXT,
   payload: text

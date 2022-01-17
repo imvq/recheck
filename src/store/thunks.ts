@@ -8,6 +8,7 @@ import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 
 import * as interactionActions from './interaction/actions';
+import * as observingActions from './observing/actions';
 import * as profileActions from './profile/actions';
 import * as reviewsActions from './reviews/actions';
 import * as searchActions from './search/actions';
@@ -269,5 +270,18 @@ export function loadRecommendations(privateToken: string, last: number, recreate
   return (dispatch: Dispatch<AppActionType>) => {
     apiClient.loadPredefinedCompanies(privateToken, last)
       .then(companiesData => dispatch(updater(companiesData.data)));
+  };
+}
+
+export function loadObservedUsers(
+  privateToken: string, last: number, finalize: () => void, recreate?: boolean
+) {
+  const updater = recreate ? observingActions.setObservedUsers
+    : observingActions.appendObservedUsers;
+
+  return (dispatch: Dispatch<AppActionType>) => {
+    apiClient.loadAvailableUsers(privateToken, last)
+      .then(observedUsersData => dispatch(updater(observedUsersData.data)))
+      .finally(finalize);
   };
 }

@@ -15,19 +15,29 @@ export const SET_IS_PROFILE_REVIEWS_TAB_LOADING = 'SET_IS_PROFILE_REVIEWS_TAB_LO
 export const SET_REQUESTED_USER_SHAREABLE_ID = 'SET_REQUESTED_USER_SHAREABLE_ID';
 
 export interface IState {
+  currentMainToolbarEntry: MainToolbarEntry;
+  currentUserRole: UserRole;
   isRedirectedFromOrigin: boolean;
   isRedirectHomePending: boolean;
   isPageLocked: boolean;
   isSearchPopupVisible: boolean;
   isSpendFreeViewPopupVisible: boolean;
   isLoginPopupVisible: boolean;
-  currentMainToolbarEntry: MainToolbarEntry;
-  currentUserRole: UserRole;
   isObservedReviewsPageLoading: boolean;
   isProfileAboutTabLoading: boolean;
   isProfileHistoryTabLoading: boolean;
   isProfileReviewsTabLoading: boolean;
   requestedUserShareableId: string | null;
+}
+
+export interface SetCurrentMainToolbarEntry {
+  type: typeof SET_CURRENT_MAIN_TOOLBAR_ENTRY;
+  payload: MainToolbarEntry;
+}
+
+export interface SetCurrentUserRole {
+  type: typeof SET_CURRENT_USER_ROLE;
+  payload: UserRole;
 }
 
 export interface SetIsRedirectedFromOrigin {
@@ -60,16 +70,6 @@ export interface SetIsLoginPopupVisible {
   payload: boolean;
 }
 
-export interface SetCurrentMainToolbarEntry {
-  type: typeof SET_CURRENT_MAIN_TOOLBAR_ENTRY;
-  payload: MainToolbarEntry;
-}
-
-export interface SetCurrentUserRole {
-  type: typeof SET_CURRENT_USER_ROLE;
-  payload: UserRole;
-}
-
 export interface SetIsObservedReviewsPageLoading {
   type: typeof SET_IS_OBSERVED_REVIEWS_PAGE_LOADING;
   payload: boolean;
@@ -96,14 +96,14 @@ export interface SetRequestedUserShareableId {
 }
 
 export type IAction =
-    SetIsRedirectedFromOrigin
+    SetCurrentMainToolbarEntry
+  | SetCurrentUserRole
+  | SetIsRedirectedFromOrigin
   | SetIsRedirectHomePending
   | SetIsPageLocked
   | SetIsSearchPopupVisible
   | SetIsSpendFreeViewPopupVisible
   | SetIsLoginPopupVisible
-  | SetCurrentMainToolbarEntry
-  | SetCurrentUserRole
   | SetIsObservedReviewsPageLoading
   | SetIsProfileAboutTabLoading
   | SetIsProfileHistoryTabLoading

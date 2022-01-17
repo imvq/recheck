@@ -9,9 +9,8 @@ export const APPEND_RECOMMENDATIONS = 'APPEND_RECOMMENDATIONS';
 export const SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS = 'SET_RECOMMENDED_COMPANIES_SHOWN_MEMBERS';
 export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 export const SET_CURRENT_USER_SEARCH_RESULTS = 'SET_CURRENT_USER_SEARCH_RESULTS';
-export const SET_CURRENT_OBSERVED_USER = 'SET_CURRENT_OBSERVED_USER';
 
-export interface SearchState {
+export interface IState {
   colleaguesState: {
     colleagues: ISearchedProfile[];
     areLoaded: boolean;
@@ -22,7 +21,6 @@ export interface SearchState {
   recommendedCompaniesShownMembers: ISearchedProfile[];
   searchText: string;
   userSearchResults: ISearchedProfile[];
-  currentObservedUser: ISearchedProfile | null;
 }
 
 export interface ClearColleagues {
@@ -69,18 +67,12 @@ export interface SetCurrentUserSearchResults {
   payload: ISearchedProfile[];
 }
 
-export interface SetCurrentObservedUser {
-  type: typeof SET_CURRENT_OBSERVED_USER;
-  payload: ISearchedProfile;
-}
-
 export type IAction =
     ClearColleagues
   | SetColleagues
   | SetQuickSearchMatchedCompanies
   | SetQuickSearchMatchedUsers
   | SetRecommendations
-  | SetCurrentObservedUser
   | AppendRecommendations
   | SetSearchText
   | SetRecommendedCompaniesShownMembers

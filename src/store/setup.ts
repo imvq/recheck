@@ -1,7 +1,9 @@
 import thunkMiddlware, { ThunkMiddleware } from 'redux-thunk';
+
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 
-import { interactionStateReducer } from './interaction/reducer';
+import { interactionStateReducer } from './interaction/reducers';
+import { observingReducer } from './observing/reducers';
 import { profileReducer } from './profile/reducers';
 import { reviewsReducer } from './reviews/reducer';
 import { searchReducer } from './search/reducers';
@@ -12,6 +14,7 @@ import { AppActionType } from './types';
  */
 const rootReducer = combineReducers({
   interaction: interactionStateReducer,
+  observing: observingReducer,
   profile: profileReducer,
   reviews: reviewsReducer,
   search: searchReducer

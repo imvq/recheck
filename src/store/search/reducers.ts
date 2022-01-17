@@ -1,6 +1,6 @@
 import * as types from './types';
 
-const initialState: types.SearchState = {
+const initialState: types.IState = {
   colleaguesState: {
     colleagues: [],
     areLoaded: false
@@ -10,11 +10,10 @@ const initialState: types.SearchState = {
   recommendations: [],
   recommendedCompaniesShownMembers: [],
   searchText: '',
-  userSearchResults: [],
-  currentObservedUser: null
+  userSearchResults: []
 };
 
-export function searchReducer(state = initialState, action: types.IAction): types.SearchState {
+export function searchReducer(state = initialState, action: types.IAction): types.IState {
   switch (action.type) {
     case types.CLEAR_COLLEAGUES:
       return {
@@ -72,11 +71,6 @@ export function searchReducer(state = initialState, action: types.IAction): type
       return {
         ...state,
         userSearchResults: action.payload
-      };
-    case types.SET_CURRENT_OBSERVED_USER:
-      return {
-        ...state,
-        currentObservedUser: action.payload
       };
     default:
       return state;
