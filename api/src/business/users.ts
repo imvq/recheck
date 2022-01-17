@@ -1,11 +1,9 @@
-import * as stream from 'stream';
-
 import axios from 'axios';
 import sharp from 'sharp';
 
+import path from 'path';
+
 import { Request, Response } from 'express';
-import { createWriteStream } from 'fs';
-import { promisify } from 'util';
 
 import * as constants from '@business/constants';
 import * as accessors from '@business/database/accessors';
@@ -90,7 +88,7 @@ async function saveUserPhoto(photoUrl: string, userSocialId: string) {
 
     await sharp(photoBuffer.data)
       .resize(256, 256)
-      .toFile(`${localPhotoPath}.png`);
+      .toFile(path.join(`${__dirname}/../../${localPhotoPath}.png`));
 
     return `${process.env.API_ORIGIN || process.env.ORIGIN}/${localPhotoPath}.png`;
   } catch (error) {

@@ -1,6 +1,7 @@
 import 'express-async-errors';
 
 import express, { Request, Response, NextFunction } from 'express';
+import path from 'path';
 
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -44,7 +45,10 @@ export default class BackendApplication {
   });
 
   private registerMidlewares() {
-    this.app.use('/media', express.static('media'));
+    if (process.env.NODE_ENV !== 'production') {
+      this.app.use('/media', express.static(path.join(`${__dirname}/../../media`)));
+    }
+
     this.app.use(cors({ credentials: true, origin: process.env.ORIGIN || '*' }));
     this.app.use(express.json());
     this.app.use(cookieParser());
