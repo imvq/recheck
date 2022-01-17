@@ -1,6 +1,5 @@
 import { memo, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 
 import { showToast } from 'commons/utils/misc';
 import { AppState } from 'store';
@@ -96,9 +95,6 @@ function AboutArea(props: types.IProps) {
           }}
         />
       )}
-
-      {/* Toast notification wrapper. */}
-      <ToastContainer />
     </styled.Wrapper>
   );
 }

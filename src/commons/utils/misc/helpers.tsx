@@ -2,7 +2,7 @@
  * Small helper functions.
  */
 
-import { toast } from 'react-toastify';
+import { toast, ToastTransition } from 'react-toastify';
 
 import { ScreenBreakpoint, toastVariants } from 'commons/types/unions';
 
@@ -17,11 +17,23 @@ export const respond = (screen: ScreenBreakpoint) => `@media (max-width: ${scree
 export const respondUp = (screen: ScreenBreakpoint) => `@media (min-width: ${screen}px)`;
 
 export const showToast = (text: string, variant = toastVariants.Success) => toast.dark(text, {
-  style: { backgroundColor: variant, textAlign: 'center', fontSize: '1.3rem' },
+  style: { width: '100%', backgroundColor: variant, textAlign: 'center', fontSize: '1.3rem' },
   position: 'bottom-left',
-  autoClose: 5000,
+  autoClose: 2000,
   hideProgressBar: true,
-  closeOnClick: true,
-  pauseOnHover: true,
-  draggable: true
+  closeOnClick: false,
+  pauseOnHover: false,
+  draggable: false,
+  closeButton: false
+});
+
+export const showInsignificantToast = (text: string) => toast.dark(text, {
+  style: { width: '100%', backgroundColor: '#3a3a3ac1', textAlign: 'center', fontSize: '1.3rem' },
+  position: 'bottom-left',
+  autoClose: 2000,
+  hideProgressBar: true,
+  closeOnClick: false,
+  pauseOnHover: false,
+  draggable: false,
+  closeButton: false
 });

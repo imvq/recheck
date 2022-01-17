@@ -18,6 +18,8 @@ export const ObservedProfileBadge = styled.div`
 
   display: flex;
 
+  transition: .3s;
+
   &:hover {
     opacity: .8;
     filter: alpha(80);

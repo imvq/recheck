@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 
 import { showToast } from 'commons/utils/misc';
 import { AppState } from 'store';
@@ -45,15 +44,10 @@ function NoSearchResultsPlaceholder(props: types.IProps) {
 
   return props.isFirstSearch ? null
     : (
-      <>
-        <styled.SpanWrapper>
-          {Title}
-          {Button}
-        </styled.SpanWrapper>
-
-        {/* Toast notification wrapper. */}
-        <ToastContainer />
-      </>
+      <styled.SpanWrapper>
+        {Title}
+        {Button}
+      </styled.SpanWrapper>
     );
 }
 

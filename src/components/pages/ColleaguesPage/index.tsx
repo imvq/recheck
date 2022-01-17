@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 
 import { jumpTo } from 'commons/utils/misc';
 import { AppState, setColleagues, setPageLocked, setPageUnlocked } from 'store';
@@ -57,9 +56,6 @@ function ColleaguesPage(props: types.IProps) {
 
       {props.colleaguesState.areLoaded && props.colleaguesState.colleagues.length === 0
         && NoColleaguesView}
-
-      {/* Toast to display message in case we cannot write a review. */}
-      <ToastContainer />
     </styled.Wrapper>
   );
 }

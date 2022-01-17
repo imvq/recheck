@@ -1,13 +1,11 @@
-import { useEffect, useState, useRef } from 'react';
 import { validate as validateEmail } from 'email-validator';
+import { useEffect, useState, useRef } from 'react';
+import { connect } from 'react-redux';
 
 import * as store from 'store';
 import * as SvgLoaders from 'svg-loaders-react';
 
 import cssVars from 'commons/styles/cssVars';
-
-import { connect } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
 
 import { jumpTo, onExit, showToast } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
@@ -224,9 +222,6 @@ function UserConfirmationAwaiterPage(props: types.IProps) {
         )}
 
       </styled.MainFrame>
-
-      {/* Toast notification wrapper. */}
-      <ToastContainer />
     </styled.Wrapper>
   ) : null;
 }

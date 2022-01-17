@@ -3,6 +3,7 @@ import { Offline } from 'react-detect-offline';
 import { LinkedInPopUp } from 'react-linkedin-login-oauth2';
 import { Provider } from 'react-redux';
 import { Router, Switch, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import { historyManager } from 'commons/utils/services';
 import { store as appStore } from 'store';
@@ -77,6 +78,8 @@ export default () => (
   <Suspense fallback={<></>}>
 
     <GlobalStyle />
+
+    <ToastContainer />
 
     <Offline><ConnectionErrorPopup /></Offline>
 

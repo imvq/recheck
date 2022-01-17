@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { BsArrowDownSquare } from 'react-icons/bs';
 import { connect } from 'react-redux';
 
@@ -7,6 +7,8 @@ import * as store from 'store';
 import ContentSubareaDelimiter from 'components/shared/ContentSubareaDelimiter';
 import Loader from 'components/shared/Loader';
 import ObservedProfileBadge from 'components/shared/ObservedProfileBadge';
+
+import { showInsignificantToast } from 'commons/utils/misc';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -23,9 +25,15 @@ const mapDispatchToProps: types.IDispatchProps = {
 
 function ObservedUsersArea(props: types.IProps) {
   const [isPending, setIsPending] = useState(true);
+  const [isLoadButonHidden, setIsLoadButtonHidden] = useState(false);
   const [last, setLast] = useState(0);
 
   function finalizeLoading(newLast: number) {
+    if (last === newLast) {
+      setIsLoadButtonHidden(true);
+      showInsignificantToast('Достигнут конец списка');
+    }
+
     setLast(newLast);
     setIsPending(false);
   }
@@ -48,12 +56,14 @@ function ObservedUsersArea(props: types.IProps) {
         </>
       ))}
 
+      {isLoadButonHidden && (
       <styled.LoadButtonWrapper>
         <styled.LoadButton onClick={loadNewChunk}>
           <span>Больше</span>
           <BsArrowDownSquare />
         </styled.LoadButton>
       </styled.LoadButtonWrapper>
+      )}
     </>
   );
 
@@ -70,4 +80,4 @@ function ObservedUsersArea(props: types.IProps) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ObservedUsersArea);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(ObservedUsersArea));

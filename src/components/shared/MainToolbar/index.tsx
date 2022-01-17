@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 
 import * as store from 'store';
 
@@ -118,9 +117,6 @@ function MainToolbar(props: types.IProps) {
         </styled.ButtonsGroupWrapper>
 
       </styled.ButtonsWrapper>
-
-      {/* Toast notification wrapper. */}
-      <ToastContainer />
     </styled.MainToolbar>
   );
 }
