@@ -10,7 +10,7 @@ export interface IStateProps {
 export interface IDispatchProps {
   setIsPageLocked(flag: boolean): void;
   loadObservedUsers(
-    privateToken: string, last: number, finalie: () => void, recreate?: boolean
+    privateToken: string, last: number, finalize: (newLast: number) => void, recreate?: boolean
   ): void;
 }
 

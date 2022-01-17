@@ -55,7 +55,7 @@ export function makeUserAvailable(privateToken: string, targetShareableId: strin
 }
 
 export function loadAvailableUsers(privateToken: string, last: number)
-  : ApiPromise<commonTypes.ISearchedProfile[]> {
+  : ApiPromise<(commonTypes.ISearchedProfile & { id: string; })[]> {
   return apiInstance.post(`/users/available/${last}`, { privateToken });
 }
 

@@ -24,6 +24,11 @@ export const normalizePublicUserInfo = (entity: any) => ({
   currentCompanyName: entity['company_name']
 });
 
+export const normalizeOrderedUserInfo = (entity: any) => ({
+  ...normalizePublicUserInfo(entity),
+  id: entity.id
+});
+
 export const normalizeSearchedUserInfo = (entity: any) => ({
   ...normalizePublicUserInfo(entity),
   currentCompanyLogoUrl: entity['logo_url']

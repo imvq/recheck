@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BsArrowDownSquare } from 'react-icons/bs';
 import { connect } from 'react-redux';
 
 import * as store from 'store';
@@ -22,18 +23,39 @@ const mapDispatchToProps: types.IDispatchProps = {
 
 function ObservedUsersArea(props: types.IProps) {
   const [isPending, setIsPending] = useState(true);
+  const [last, setLast] = useState(0);
+
+  function finalizeLoading(newLast: number) {
+    setLast(newLast);
+    setIsPending(false);
+  }
+
+  function loadNewChunk() {
+    setIsPending(true);
+    props.loadObservedUsers(props.privateToken as string, last, finalizeLoading);
+  }
 
   useEffect(() => {
-    props.loadObservedUsers(props.privateToken as string, 0, () => setIsPending(false), true);
+    props.loadObservedUsers(props.privateToken as string, 0, finalizeLoading, true);
   }, []);
 
-  const Results = props.observedUsers.map(card => (
+  const Results = (
     <>
-      <ObservedProfileBadge key={card.fullName} observedUserData={card} />
-      <ContentSubareaDelimiter />
-    </>
+      {props.observedUsers.map(card => (
+        <>
+          <ObservedProfileBadge key={card.fullName} observedUserData={card} />
+          <ContentSubareaDelimiter half />
+        </>
+      ))}
 
-  ));
+      <styled.LoadButtonWrapper>
+        <styled.LoadButton onClick={loadNewChunk}>
+          <span>Больше</span>
+          <BsArrowDownSquare />
+        </styled.LoadButton>
+      </styled.LoadButtonWrapper>
+    </>
+  );
 
   const NoResults = (
     <>

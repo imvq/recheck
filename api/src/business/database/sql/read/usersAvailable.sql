@@ -1,5 +1,6 @@
 SELECT
-    *
+    users.*,
+    companies.company_name
 FROM
     users
     INNER JOIN users_available ON users.shareable_id = users_available.target_shareable_id

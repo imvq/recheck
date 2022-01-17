@@ -472,7 +472,7 @@ export async function getAvailableUsers(request: Request, response: Response) {
   const asker = mappers.normalizeUserIdentifier(askerEntity);
 
   const availableUsers = await accessors.readUsersAvailable(asker.id, last);
-  const normalizedUsers = availableUsers.map(user => mappers.normalizePublicUserInfo(user));
+  const normalizedUsers = availableUsers.map(user => mappers.normalizeOrderedUserInfo(user));
 
   reply(response, normalizedUsers);
 }

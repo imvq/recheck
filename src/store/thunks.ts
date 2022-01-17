@@ -274,14 +274,22 @@ export function loadRecommendations(privateToken: string, last: number, recreate
 }
 
 export function loadObservedUsers(
-  privateToken: string, last: number, finalize: () => void, recreate?: boolean
+  privateToken: string, last: number, finalize: (newLast: number) => void, recreate?: boolean
 ) {
   const updater = recreate ? observingActions.setObservedUsers
     : observingActions.appendObservedUsers;
 
+  let newLast = last;
+
   return (dispatch: Dispatch<AppActionType>) => {
     apiClient.loadAvailableUsers(privateToken, last)
-      .then(observedUsersData => dispatch(updater(observedUsersData.data)))
-      .finally(finalize);
+      .then(observedUsersData => {
+        if (observedUsersData.data.length) {
+          newLast = +observedUsersData.data[observedUsersData.data.length - 1].id;
+        }
+
+        dispatch(updater(observedUsersData.data));
+      })
+      .finally(() => finalize(newLast));
   };
 }
