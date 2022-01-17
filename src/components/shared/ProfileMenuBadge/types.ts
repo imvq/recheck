@@ -3,12 +3,13 @@ export interface IOwnProps {
 }
 
 export interface IStateProps {
+  userPhotoUrl: string | null;
   isConfirmed: boolean | null;
   isPageLocked: boolean;
 }
 
 export interface IDispatchProps {
-  lockPage(): void;
+  setIsPageLocked(flag: boolean): void;
   setIsLoginPopupVisible(flag: boolean): void;
 }
 

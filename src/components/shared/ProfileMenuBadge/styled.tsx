@@ -2,26 +2,41 @@ import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
 import mixins from 'commons/styles/mixins';
-import { ReactComponent as CabinetSvg } from 'assets/images/shared/ProfileMenuBadge/Cabinet.svg';
 
-const cssVarsLocal = {
-  widthOffset: '12rem'
-};
-
-export const Wrapper = styled.div`
+export const ProfileMenuBadge = styled.div`
   position: relative;
   z-index: ${cssVars.zIndexLoginBadge};
 `;
 
-export const LoginButton = styled(CabinetSvg)`
-  ${mixins.DefaultButton}
+interface ILoginButtonProps {
+  isAuthorized: boolean;
+  isTriggered: boolean;
+}
+
+export const LoginButton = styled.img<ILoginButtonProps>`
+  cursor: pointer;
+  transition: .35s;
+  filter: drop-shadow(.2rem .3rem .5rem rgba(0, 0, 0, .25));
+
+  opacity: ${props => (props.isTriggered ? '.75' : 'initial')};
+
+  &:hover {
+    opacity: ${props => (props.isTriggered ? '.75' : '.80')};
+    filter: alpha(opacity=${props => (props.isTriggered ? '75' : '80')});
+  }
+
+  &:active {
+    opacity: .75;
+    filter: alpha(opacity=75);
+  }
 
   width: calc(
-      ${cssVars.greetingsViewHeadEdgeElemsWidthBase}
-    - ${cssVarsLocal.widthOffset}
+    ${cssVars.greetingsViewHeadEdgeElemsWidthBase}
+    - ${cssVars.widthOffsetProfileBadge}
   );
-  opacity: ${cssVars.opacityButtonIdleInversed};
-  filter: alpha(opacity=${cssVars.opacityButtonIdleInversed} * 100);
+
+  border: .3rem solid ${props => (props.isAuthorized ? 'orange' : '#cfcfcf')};
+  border-radius: 50%;
 `;
 
 export const Menu = styled.ul<{ isExpanded: boolean }>`

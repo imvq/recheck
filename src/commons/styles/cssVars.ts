@@ -23,6 +23,7 @@ export default {
   thiknessDefault: '0.078vw',
   widthLoginButton: '20rem',
   widthMotivatorBadge: '25rem',
+  widthOffsetProfileBadge: '10rem',
   widthReviewCard: '67.38em',
   zIndexDimmedContent: '801',
   zIndexDimmingWrapper: '800',

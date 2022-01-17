@@ -4,23 +4,25 @@ import OutsideClickHandler from 'react-outside-click-handler';
 
 import { connect } from 'react-redux';
 
+import * as store from 'store';
+
 import { historyManager } from 'commons/utils/services';
 import { ReactComponent as CabinetSvg } from 'assets/images/shared/ProfileMenuBadge/Cabinet.svg';
 import { ReactComponent as DoorSvg } from 'assets/images/shared/ProfileMenuBadge/Door.svg';
 import { onExit } from 'commons/utils/misc';
-import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
 
 import * as types from './types';
 import * as styled from './styled';
 
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isConfirmed: store.profile.isConfirmed,
-  isPageLocked: store.interaction.isPageLocked
+const mapStateToProps = (state: store.AppState): types.IStateProps => ({
+  userPhotoUrl: store.getPhotoUrl(state),
+  isConfirmed: store.getIsUserConfirmed(state),
+  isPageLocked: store.getIsPageLocked(state)
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
-  lockPage: setPageLocked,
-  setIsLoginPopupVisible,
+  setIsPageLocked: store.setIsPageLocked,
+  setIsLoginPopupVisible: store.setIsLoginPopupVisible,
 };
 
 /**
@@ -38,13 +40,17 @@ function LoginBadge(props: types.IProps) {
 
   return (
     <OutsideClickHandler onOutsideClick={() => setIsExpanded(false)}>
-      <styled.Wrapper>
-        <styled.LoginButton onClick={
+      <styled.ProfileMenuBadge>
+        <styled.LoginButton
+          src={props.userPhotoUrl || `${process.env.REACT_APP_MEDIA_URL}/user-default.png`}
+          isAuthorized={!!props.userPhotoUrl}
+          isTriggered={isExpanded}
+          onClick={
           // true       | false          | null
           // authorized | not authorized | check is pending
           props.isConfirmed === null
             ? () => {
-              props.lockPage();
+              props.setIsPageLocked(true);
               setIsExpansionAwaited(true);
             }
             : props.isConfirmed
@@ -60,12 +66,12 @@ function LoginBadge(props: types.IProps) {
           </styled.MenuEntry>
           )}
 
-          <styled.MenuEntry onClick={() => onExit(props.lockPage)}>
+          <styled.MenuEntry onClick={() => onExit(() => props.setIsPageLocked(true))}>
             <styled.SvgWrapper><DoorSvg /></styled.SvgWrapper>
             <span>Выйти</span>
           </styled.MenuEntry>
         </styled.Menu>
-      </styled.Wrapper>
+      </styled.ProfileMenuBadge>
     </OutsideClickHandler>
   );
 }

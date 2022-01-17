@@ -5,10 +5,6 @@ import cssVars from 'commons/styles/cssVars';
 import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/misc';
 
-const cssVarsLocal = {
-  widthOffset: '12rem'
-};
-
 export const Wrapper = styled.div`
   grid-area: Head;
   display: grid;
@@ -62,7 +58,7 @@ export const CabinetWrapper = styled.div`
   align-items: center;
   margin-left: calc(
       ${cssVars.greetingsViewHeadPaddingHorizontal}
-    + ${cssVarsLocal.widthOffset}
+    + ${cssVars.widthOffsetProfileBadge}
   );
 
   ${respond(screenBreakpoints.XS)} {
