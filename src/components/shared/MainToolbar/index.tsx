@@ -1,10 +1,11 @@
+import { memo } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import * as store from 'store';
 
 import { mainToolbarEntries } from 'commons/types/unions';
-import { jumpTo, showToast } from 'commons/utils/misc';
+import { showToast } from 'commons/utils/misc';
 
 import Logo from 'components/shared/Logo';
 
@@ -13,11 +14,6 @@ import MenuEntry from './MenuEntry';
 
 import * as types from './types';
 import * as styled from './styled';
-
-function copyInviteLink(targetShareableId: string) {
-  navigator.clipboard.writeText(`${window.location.origin}?inviter=${targetShareableId}`);
-  showToast('Ссылка приглашения скопирована.');
-}
 
 function copyReviewLink(targetShareableId: string) {
   navigator.clipboard.writeText(`${window.location.origin}/review/create/${targetShareableId}`);
@@ -38,16 +34,20 @@ function MainToolbar(props: types.IProps) {
   const RecruiterOptions = (
     <>
       <styled.ButtonWrapper>
-        <FakeEntry onClick={() => copyInviteLink(props.shareableId as string)}>
+        <MenuEntry
+          onClick={() => {
+            props.setCurrentMainToolbarEntry(mainToolbarEntries.Invite);
+          }}
+          isPressed={props.currentMainToolbarEntry === mainToolbarEntries.Invite}
+        >
           Пригласить кандидата
-        </FakeEntry>
+        </MenuEntry>
       </styled.ButtonWrapper>
 
       <styled.ButtonWrapper>
         <MenuEntry
           onClick={() => {
             props.setCurrentMainToolbarEntry(mainToolbarEntries.ObservedUsers);
-            jumpTo('/profile');
           }}
           isPressed={props.currentMainToolbarEntry === mainToolbarEntries.ObservedUsers}
         >
@@ -63,7 +63,6 @@ function MainToolbar(props: types.IProps) {
         <MenuEntry
           onClick={() => {
             props.setCurrentMainToolbarEntry(mainToolbarEntries.AboutMe);
-            jumpTo('/profile');
           }}
           isPressed={props.currentMainToolbarEntry === mainToolbarEntries.AboutMe}
         >
@@ -81,7 +80,6 @@ function MainToolbar(props: types.IProps) {
         <MenuEntry
           onClick={() => {
             props.setCurrentMainToolbarEntry(mainToolbarEntries.MyReviews);
-            jumpTo('/profile');
           }}
           isPressed={props.currentMainToolbarEntry === mainToolbarEntries.MyReviews}
         >
@@ -121,4 +119,4 @@ function MainToolbar(props: types.IProps) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainToolbar);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(MainToolbar));

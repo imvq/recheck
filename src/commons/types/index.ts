@@ -69,6 +69,11 @@ export interface IReviewCreator {
   ): void;
 }
 
+export interface IReviewFormData {
+  name: string;
+  // TBD
+}
+
 export interface IReviewParsed {
   targetShareableId: string;
   targetPhotoUrl: string;

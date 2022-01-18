@@ -29,9 +29,18 @@ export const SubtitleWrapper = styled.div`
   padding-bottom: 2rem;
 `;
 
-export const Subtitle = styled.h2`
-  font-size: 1.45rem;
+interface ISubtitleProps {
+  isReduced?: boolean;
+}
+
+export const Subtitle = styled.h2<ISubtitleProps>`
+  font-size: ${props => (props.isReduced ? '1.2rem' : '1.45rem')};
   font-weight: 700;
+`;
+
+export const SimpleText = styled.h3`
+  font-size: 1.2rem;
+  font-weight: 500;
 `;
 
 export const InputGroupWrapper = styled.div`
@@ -100,11 +109,15 @@ export const InputWithOptionsWrapper = styled.div`
 
 export const Input = mixins.prepared.DefaultInput;
 
-export const TextArea = styled.textarea`
+interface ITextAreaProps {
+  isReduced?: boolean;
+}
+
+export const TextArea = styled.textarea<ITextAreaProps>`
   ${mixins.DefaultInput};
 
   resize: none;
-  min-height: 20rem;
+  min-height: ${props => (props.isReduced ? '5rem' : '20rem')};
   font-family: Open Sans;
 `;
 

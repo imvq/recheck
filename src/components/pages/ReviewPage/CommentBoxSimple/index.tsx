@@ -2,8 +2,8 @@ import { memo, useState } from 'react';
 
 import CustomButton from 'components/shared/CustomButton';
 
+import * as styled from 'components/shared/BoxBase';
 import * as types from './types';
-import * as styled from '../../../shared/BoxBase';
 
 function CommentBoxSimple(props: types.IProps) {
   const [comment, setComment] = useState('');

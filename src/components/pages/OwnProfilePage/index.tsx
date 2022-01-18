@@ -7,6 +7,7 @@ import { getCurrentProfileInfo } from 'store/selectors';
 import Footer from 'components/shared/Footer';
 
 import AboutArea from './AboutArea';
+import InviteArea from './InviteArea';
 import ObservedUsersArea from './ObservedUsersArea';
 import ReviewsArea from './ReviewsArea';
 import WelcomeArea from './WelcomeArea';
@@ -36,6 +37,8 @@ function OwnProfilePage(props: types.IProps) {
           switch (props.currentMainToolbarEntry) {
             case mainToolbarEntries.AboutMe:
               return <AboutArea />;
+            case mainToolbarEntries.Invite:
+              return <InviteArea />;
             case mainToolbarEntries.MyReviews:
               return <ReviewsArea />;
             case mainToolbarEntries.ObservedUsers:

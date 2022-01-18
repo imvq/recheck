@@ -2,10 +2,11 @@ import { memo, useState } from 'react';
 
 import CustomButton from 'components/shared/CustomButton';
 
+import * as styled from 'components/shared/BoxBase';
+
 import MarkSelector from '../MarkSelector';
 
 import * as types from './types';
-import * as styled from '../../../shared/BoxBase';
 
 function CommentBoxWithMark(props: types.IProps) {
   const [comment, setComment] = useState('');
