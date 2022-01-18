@@ -1,8 +1,7 @@
 import * as types from './types';
 
 const initialState: types.IState = {
-  observedUsers: [],
-  currentObservedUser: null
+  observedUsers: []
 };
 
 export function observingReducer(state = initialState, action: types.IAction): types.IState {
@@ -23,11 +22,6 @@ export function observingReducer(state = initialState, action: types.IAction): t
         observedUsers: updatedObservedUsers
       };
     }
-    case types.SET_CURRENT_OBSERVED_USER:
-      return {
-        ...state,
-        currentObservedUser: action.payload
-      };
     default:
       return state;
   }

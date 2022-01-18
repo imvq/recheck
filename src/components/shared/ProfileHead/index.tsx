@@ -71,13 +71,13 @@ function ProfileHead(props: types.IProps) {
   );
 
   return (
-    <styled.Wrapper>
+    <styled.ProfileHead>
       <styled.Menu>
         {MenuBar}
         {MenuContent}
         {!props.noButtons && Button}
       </styled.Menu>
-    </styled.Wrapper>
+    </styled.ProfileHead>
   );
 }
 

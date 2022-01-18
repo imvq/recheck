@@ -8,7 +8,7 @@ import ContentSubareaDelimiter from 'components/shared/ContentSubareaDelimiter';
 import Loader from 'components/shared/Loader';
 import ObservedProfileBadge from 'components/shared/ObservedProfileBadge';
 
-import { showInsignificantToast } from 'commons/utils/misc';
+import { getDemoObservedUser, showInsignificantToast } from 'commons/utils/misc';
 
 import * as types from './types';
 import * as styled from './styled';
@@ -77,17 +77,7 @@ function ObservedUsersArea(props: types.IProps) {
     </>
   );
 
-  const NoResults = (
-    <ObservedProfileBadge observedUserData={{
-      currentCompanyId: -1,
-      currentCompanyName: 'reCheck',
-      currentPosition: 'Team Lead of Data Analysts team',
-      fullName: 'Екатерина Мазур',
-      photoUrl: `${process.env.REACT_APP_MEDIA_URL}/user-test.png`,
-      shareableId: 'user-test'
-    }}
-    />
-  );
+  const NoResults = <ObservedProfileBadge isDemoUser observedUserData={getDemoObservedUser()} />;
 
   return (
     <styled.ObservedUsersArea>

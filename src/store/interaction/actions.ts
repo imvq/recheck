@@ -45,11 +45,6 @@ export const setCurrentUserRole = (role: UserRole): types.IAction => ({
   payload: role
 });
 
-export const setIsObservedPageLoading = (flag: boolean): types.IAction => ({
-  type: types.SET_IS_OBSERVED_REVIEWS_PAGE_LOADING,
-  payload: flag
-});
-
 export const setIsProfileAboutTabLoading = (flag: boolean): types.IAction => ({
   type: types.SET_IS_PROFILE_ABOUT_TAB_LOADING,
   payload: flag

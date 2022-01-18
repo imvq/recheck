@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-import BackgroundSvgPath from 'assets/images/common/BackgroundDefault.png';
+import BackgroundPath from 'assets/images/common/BackgroundDefault.png';
 import Footer from 'components/shared/Footer';
 import Header from 'components/shared/Header';
 import MainToolbar from 'components/shared/MainToolbar';
+import mixins from 'commons/styles/mixins';
 
-export const Wrapper = styled.div`
-  background-image: url(${BackgroundSvgPath});
+export const ObservedProfilePage = styled.div`
+  background-image: url(${BackgroundPath});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
@@ -34,7 +35,6 @@ export const ContentWrapper = styled.div`
   padding: 2rem 0 5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
 `;
 
 export const Sidebar = styled(MainToolbar)`
@@ -46,6 +46,12 @@ export const ReviewSectionWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 4rem 0 3rem;
+`;
+
+export const BackButtonWrapper = styled.div`
+  ${mixins.DefaultButton};
+
+  padding-left: 10rem;
 `;
 
 export const TitleWrapper = styled.div`

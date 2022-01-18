@@ -91,6 +91,10 @@ export interface IReviewReceived {
   content: string;
 }
 
+export function isReviewReceived(review: any): review is IReviewReceived {
+  return review.content && typeof review.content === 'string';
+}
+
 export interface ISearchedProfileBasic {
   fullName: string;
   shareableId: string;

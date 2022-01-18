@@ -11,7 +11,6 @@ const initialState: types.IState = {
   isLoginPopupVisible: false,
   currentMainToolbarEntry: mainToolbarEntries.Welcome,
   currentUserRole: userRoles.Recruiter,
-  isObservedReviewsPageLoading: false,
   isProfileAboutTabLoading: true,
   isProfileHistoryTabLoading: true,
   isProfileReviewsTabLoading: true,
@@ -34,11 +33,6 @@ export function interactionStateReducer(state = initialState, action: types.IAct
       return {
         ...state,
         isPageLocked: action.payload
-      };
-    case types.SET_IS_OBSERVED_REVIEWS_PAGE_LOADING:
-      return {
-        ...state,
-        isObservedReviewsPageLoading: action.payload
       };
     case types.SET_IS_SEARCH_POPUP_VISIBILE:
       return {

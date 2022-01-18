@@ -1,4 +1,10 @@
 import { memo } from 'react';
+import { AiOutlineStar } from 'react-icons/ai';
+
+import CustomButton from 'components/shared/CustomButton';
+
+import { jumpTo } from 'commons/utils/misc';
+
 import * as types from './types';
 import * as styled from './styled';
 
@@ -21,6 +27,22 @@ function ObservedProfileBadge(props: types.IProps) {
           <styled.Entry isDimmed>Место работы:&nbsp;&nbsp;</styled.Entry>
           <styled.Entry>{props.observedUserData.currentCompanyName}</styled.Entry>
         </styled.Entry>
+
+        {props.isDemoUser && (
+          <styled.DemoLabel>
+            <AiOutlineStar />
+            <span>Тестовый кандидат</span>
+          </styled.DemoLabel>
+        )}
+
+        <styled.ButtonWrapper>
+          <CustomButton
+            height='2rem'
+            onClick={() => jumpTo('/profile/', props.observedUserData.shareableId)}
+          >
+            Открыть
+          </CustomButton>
+        </styled.ButtonWrapper>
       </styled.ContentWrapper>
     </styled.ObservedProfileBadge>
   );

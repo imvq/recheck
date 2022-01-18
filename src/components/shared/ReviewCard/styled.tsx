@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const ReviewCard = styled.div`
   height: 100%;
   width: 70rem;
   display: flex;

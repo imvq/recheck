@@ -1,7 +1,7 @@
-import { IReviewReceived } from 'commons/types';
+import { IReviewParsed, IReviewReceived } from 'commons/types';
 
 export interface IOwnProps {
-  reviewCardData: IReviewReceived;
+  reviewCardData: IReviewReceived | IReviewParsed;
   showTarget?: boolean;
 }
 

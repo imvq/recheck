@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
+import { BsArrowLeft } from 'react-icons/bs';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { jumpTo } from 'commons/utils/misc';
+import { getDemoObservedUser, getDemoReview, jumpTo, jumpBack } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
-import { AppState, setIsObservedPageLoading, setPageUnlocked } from 'store';
 
-import { ISearchedProfile } from 'commons/types';
+import * as store from 'store';
+
+import cssVars from 'commons/styles/cssVars';
+
+import { IReviewParsed, ISearchedProfile } from 'commons/types';
 
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
@@ -16,21 +20,9 @@ import ReviewCard from 'components/shared/ReviewCard';
 import * as types from './types';
 import * as styled from './styled';
 
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  privateToken: store.profile.privateToken,
-  isConfirmed: store.profile.isConfirmed,
-  isLoading: store.interaction.isObservedReviewsPageLoading,
-  isObservedReviewsPageLoading: store.interaction.isObservedReviewsPageLoading,
-  observedReviewsChunksAmount: 0,
-  currentReviewCardData: null
+const mapStateToProps = (state: store.AppState): types.IStateProps => ({
+  privateToken: store.getCurrentPrivateToken(state)
 });
-
-const mapDispatchToProps: types.IDispatchProps = {
-  loadObservedReviewsData: () => {},
-  loadNthReview: () => {},
-  setIsLoading: () => setIsObservedPageLoading(true),
-  unlockPage: setPageUnlocked
-};
 
 const NoContent = <styled.Title>Загрузка...</styled.Title>;
 
@@ -46,29 +38,44 @@ const ContentEmpty = (
 function ObservedProfilePage(props: types.IProps) {
   const { targetShareableId } = useParams<{ targetShareableId: string }>();
 
+  const [isPending, setIsPending] = useState(true);
   const [observedUser, setObservedUser] = useState<ISearchedProfile>();
+  const [reviewsAmount, setReviewsAmount] = useState(0);
+  const [currentReview, setCurrentReview] = useState<IReviewParsed>();
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  function obtainReviewsAmount() {
+    // TODO: obtain reviews amount.
+
+    return 0;
+  }
+
+  function loadNthReview(index: number) {
+    // TODO: load review.
+  }
 
   useEffect(() => {
     if (props.privateToken) {
-      props.setIsLoading();
+      if (targetShareableId === 'user-demo') {
+        setObservedUser(getDemoObservedUser());
+        setCurrentReview(getDemoReview());
+        setReviewsAmount(1);
+        setIsPending(false);
+
+        return;
+      }
 
       apiClient.checkIfUserCanBeViewed(props.privateToken as string, targetShareableId)
         .then(checkData => {
           if (!checkData.data.success) {
-            jumpTo('/404');
-            return;
+            return Promise.reject();
           }
 
-          apiClient.searchUserByShareableId(targetShareableId)
-            .then(searchResult => {
-              setObservedUser(searchResult.data);
-
-            // TODO: load reviews.
-            // props.loadObservedReviewsData(props.currentProfileId, targetShareableId);
-            });
+          return apiClient.searchUserByShareableId(targetShareableId);
         })
-        .catch(() => jumpTo('/404'));
+        .then(searchedProfileData => setObservedUser(searchedProfileData.data))
+        .catch(() => jumpTo('/404'))
+        .finally(() => setIsPending(false));
     }
   }, [props.privateToken]);
 
@@ -78,19 +85,23 @@ function ObservedProfilePage(props: types.IProps) {
         <styled.Title>Отзывы о кандидате:</styled.Title>
       </styled.TitleWrapper>
 
-      {/* @ts-ignore: Used only in case the data is not null. */}
-      <ReviewCard reviewCardData={props.currentReviewCardData} />
+      {/* @ts-ignore: currentReview is guaranteed to be defined. */}
+      <ReviewCard reviewCardData={currentReview} />
     </>
   );
 
   return (
-    <styled.Wrapper>
+    <styled.ObservedProfilePage>
       <styled.Sidebar />
 
       <styled.AdaptedHeader />
 
       {observedUser && (
         <styled.ContentWrapper>
+          <styled.BackButtonWrapper onClick={jumpBack}>
+            <BsArrowLeft size={30} color={cssVars.colorForegroundPickAux1} />
+          </styled.BackButtonWrapper>
+
           <styled.TitleWrapper id='ProfileTitle'>
             <styled.Title>Просмотр профиля</styled.Title>
           </styled.TitleWrapper>
@@ -98,45 +109,23 @@ function ObservedProfilePage(props: types.IProps) {
           <ProfileHead profileInfo={observedUser} />
 
           <styled.ReviewSectionWrapper>
-            {props.isLoading ? NoContent
-              : props.currentReviewCardData ? ContentAvailable : ContentEmpty}
+            {isPending ? NoContent : currentReview ? ContentAvailable : ContentEmpty}
           </styled.ReviewSectionWrapper>
 
-          {props.observedReviewsChunksAmount ? (
+          {reviewsAmount ? (
             <Pagination
-              nPages={props.observedReviewsChunksAmount}
-              onNextClick={() => {
-                props.loadNthReview(
-                  props.privateToken as string,
-                  targetShareableId,
-                  currentIndex + 1
-                );
-                setCurrentIndex(currentIndex + 1);
-              }}
-              onPageClick={(page: number) => {
-                props.loadNthReview(
-                  props.privateToken as string,
-                  targetShareableId,
-                  page - 1
-                );
-                setCurrentIndex(page - 1);
-              }}
-              onPrevClick={() => {
-                props.loadNthReview(
-                  props.privateToken as string,
-                  targetShareableId,
-                  currentIndex - 1
-                );
-                setCurrentIndex(currentIndex - 1);
-              }}
+              nPages={reviewsAmount}
+              onNextClick={() => loadNthReview(currentIndex + 1)}
+              onPageClick={(page: number) => loadNthReview(page)}
+              onPrevClick={() => loadNthReview(currentIndex - 1)}
             />
           ) : null}
         </styled.ContentWrapper>
       )}
 
       <Footer />
-    </styled.Wrapper>
+    </styled.ObservedProfilePage>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ObservedProfilePage);
+export default connect(mapStateToProps)(ObservedProfilePage);

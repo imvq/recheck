@@ -1,7 +1,7 @@
 SELECT
     *
 FROM
-    users_availability
+    users_available
 WHERE
     owner_id = ${askerId}
     AND target_shareable_id = ${targetShareableId};

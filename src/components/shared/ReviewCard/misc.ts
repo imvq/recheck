@@ -20,5 +20,5 @@ export function getFormattedDate(dateString: string) {
   const year = date.getFullYear();
   const yearRepr = year === new Date().getFullYear() ? '' : ` ${year}`;
 
-  return `${date.getDay()} ${month}${yearRepr}`;
+  return `${date.getDate()} ${month}${yearRepr}`;
 }

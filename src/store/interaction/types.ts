@@ -8,7 +8,6 @@ export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';
 export const SET_IS_LOGIN_POPUP_VISIBILE = 'SET_IS_LOGIN_POPUP_VISIBILE';
 export const SET_CURRENT_MAIN_TOOLBAR_ENTRY = 'SET_CURRENT_MAIN_TOOLBAR_ENTRY';
 export const SET_CURRENT_USER_ROLE = 'SET_CURRENT_USER_ROLE';
-export const SET_IS_OBSERVED_REVIEWS_PAGE_LOADING = 'SET_IS_OBSERVED_REVIEWS_PAGE_LOADING';
 export const SET_IS_PROFILE_ABOUT_TAB_LOADING = 'SET_IS_PROFILE_ABOUT_TAB_LOADING';
 export const SET_IS_PROFILE_HISTORY_TAB_LOADING = 'SET_IS_PROFILE_HISTORY_TAB_LOADING';
 export const SET_IS_PROFILE_REVIEWS_TAB_LOADING = 'SET_IS_PROFILE_REVIEWS_TAB_LOADING';
@@ -23,7 +22,6 @@ export interface IState {
   isSearchPopupVisible: boolean;
   isSpendFreeViewPopupVisible: boolean;
   isLoginPopupVisible: boolean;
-  isObservedReviewsPageLoading: boolean;
   isProfileAboutTabLoading: boolean;
   isProfileHistoryTabLoading: boolean;
   isProfileReviewsTabLoading: boolean;
@@ -70,11 +68,6 @@ export interface SetIsLoginPopupVisible {
   payload: boolean;
 }
 
-export interface SetIsObservedReviewsPageLoading {
-  type: typeof SET_IS_OBSERVED_REVIEWS_PAGE_LOADING;
-  payload: boolean;
-}
-
 export interface SetIsProfileAboutTabLoading {
   type: typeof SET_IS_PROFILE_ABOUT_TAB_LOADING;
   payload: boolean;
@@ -104,7 +97,6 @@ export type IAction =
   | SetIsSearchPopupVisible
   | SetIsSpendFreeViewPopupVisible
   | SetIsLoginPopupVisible
-  | SetIsObservedReviewsPageLoading
   | SetIsProfileAboutTabLoading
   | SetIsProfileHistoryTabLoading
   | SetIsProfileReviewsTabLoading

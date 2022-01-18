@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import cssVars from 'commons/styles/cssVars';
 
-export const Wrapper = styled.div`
+export const ProfileHead = styled.div`
   grid-area: MenuWrapper;
   display: flex;
   justify-content: center;
@@ -60,8 +60,8 @@ export const ProfilePictureWrapper = styled.div`
 
 export const ProfilePicture = styled.img`
   object-fit: cover;
-  width: 13rem;
-  height: 13rem;
+  width: 8rem;
+  height: 8rem;
   border-radius: 50%;
 `;
 
