@@ -226,6 +226,13 @@ export async function confirmRegistration(request: Request, response: Response) 
   const { confirmationCode }: IBodyData = request.body;
   assertBodyData(confirmationCode);
 
+  const userEntity = await accessors.readUserByConfirmationCode(confirmationCode);
+  const user = mappers.normalizePersonalUserInfo(userEntity);
+
+  if (user.inviterId) {
+    await accessors.createUserAvailability(user.privateToken, user.inviterId);
+  }
+
   await accessors.deleteConfirmation(confirmationCode);
 
   reply(response, { message: 'Success.' });

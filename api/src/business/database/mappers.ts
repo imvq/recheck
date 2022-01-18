@@ -38,7 +38,8 @@ export const normalizePersonalUserInfo = (entity: any) => ({
   ...normalizePublicUserInfo(entity),
   privateToken: entity['private_token'],
   socialId: entity['social_id'],
-  email: entity['email']
+  email: entity['email'],
+  inviterId: entity['inviter_id']
 });
 
 export const normalizeUserIdentifier = (entity: any) => ({

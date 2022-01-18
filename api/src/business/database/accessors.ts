@@ -197,6 +197,15 @@ export async function readUserAvailability(askerId: string, targetShareableId: s
   }
 }
 
+export async function readUserByConfirmationCode(code: string) {
+  try {
+    const query = QueryFileCacher.getQuery('./sql/read/userByConfirmation.sql');
+    return await database.oneOrNone(query, { code });
+  } catch {
+    throw new errors.InternalServerError('Database conflict');
+  }
+}
+
 export async function readCompany(companyId: string) {
   try {
     const query = QueryFileCacher.getQuery('./sql/read/company.sql');
