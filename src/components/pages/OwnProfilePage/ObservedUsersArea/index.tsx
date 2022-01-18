@@ -38,13 +38,23 @@ function ObservedUsersArea(props: types.IProps) {
     setIsPending(false);
   }
 
+  function finalizeLoadingFirstTry(newLast: number) {
+    if (last === newLast) {
+      setIsLoadButtonHidden(true);
+      showInsignificantToast('В данный момент у Вас еще нет кандидатов');
+    }
+
+    setLast(newLast);
+    setIsPending(false);
+  }
+
   function loadNewChunk() {
     setIsPending(true);
     props.loadObservedUsers(props.privateToken as string, last, finalizeLoading);
   }
 
   useEffect(() => {
-    props.loadObservedUsers(props.privateToken as string, 0, finalizeLoading, true);
+    props.loadObservedUsers(props.privateToken as string, 0, finalizeLoadingFirstTry, true);
   }, []);
 
   const Results = (
@@ -68,9 +78,15 @@ function ObservedUsersArea(props: types.IProps) {
   );
 
   const NoResults = (
-    <>
-      No results
-    </>
+    <ObservedProfileBadge observedUserData={{
+      currentCompanyId: -1,
+      currentCompanyName: 'reCheck',
+      currentPosition: 'Team Lead of Data Analysts team',
+      fullName: 'Екатерина Мазур',
+      photoUrl: `${process.env.REACT_APP_MEDIA_URL}/user-test.png`,
+      shareableId: 'user-test'
+    }}
+    />
   );
 
   return (
