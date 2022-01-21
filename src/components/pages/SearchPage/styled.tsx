@@ -3,16 +3,12 @@ import styled from 'styled-components';
 import { respondUp } from 'commons/utils/misc';
 import { screenBreakpoints } from 'commons/types/unions';
 import cssVars from 'commons/styles/cssVars';
-import BackgroundSvgPath from 'assets/images/common/BackgroundDefault.png';
 import Header from 'components/shared/Header';
 import Footer from 'components/shared/Footer';
 import MainToolbar from 'components/shared/MainToolbar';
 
 export const Wrapper = styled.div`
-  background-image: url(${BackgroundSvgPath});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: right;
+  background-color: white;
   min-height: 100%;
   display: grid;
   grid-template:

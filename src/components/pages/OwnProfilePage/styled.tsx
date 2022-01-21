@@ -1,14 +1,10 @@
 import styled from 'styled-components';
 
-import BackgroundPath from 'assets/images/common/BackgroundDefault.png';
 import Header from 'components/shared/Header';
 import MainToolbar from 'components/shared/MainToolbar';
 
 export const OwnProfilePage = styled.div`
-  background-image: url(${BackgroundPath});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: right;
+  background-color: white;
   min-height: 100%;
   display: grid;
   grid-template:

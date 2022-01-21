@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
-import BackgroundSvgPath from 'assets/images/common/BackgroundDefault.png';
-
 export const RegistrationPage = styled.div`
-  background-image: url(${BackgroundSvgPath});
-  background-size: cover;
+  background-color: white;
   min-height: 100%;
   display: grid;
   grid-template:

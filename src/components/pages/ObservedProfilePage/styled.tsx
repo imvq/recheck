@@ -1,16 +1,12 @@
 import styled from 'styled-components';
 
-import BackgroundPath from 'assets/images/common/BackgroundDefault.png';
 import Footer from 'components/shared/Footer';
 import Header from 'components/shared/Header';
 import MainToolbar from 'components/shared/MainToolbar';
 import mixins from 'commons/styles/mixins';
 
 export const ObservedProfilePage = styled.div`
-  background-image: url(${BackgroundPath});
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: right;
+  background-color: white;
   min-height: 100%;
   display: grid;
   grid-template:
