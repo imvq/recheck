@@ -18,25 +18,17 @@ import 'react-toastify/dist/ReactToastify.min.css';
 
 const LandingPage = lazy(() => import('components/pages/LandingPage'));
 
-const ColleaguesPage = lazy(() => import('components/pages/ColleaguesPage'));
 const ObservedProfilePage = lazy(() => import('components/pages/ObservedProfilePage'));
 const OwnProfilePage = lazy(() => import('components/pages/OwnProfilePage'));
 const PrivacyPolicyPage = lazy(() => import('components/pages/PrivacyPolicyPage'));
 const RegistrationPage = lazy(() => import('components/pages/RegistrationPage'));
 const ReviewPage = lazy(() => import('components/pages/ReviewPage'));
-const SearchPage = lazy(() => import('components/pages/SearchPage'));
 const UserConfirmationAwaiterPage = lazy(() => import('components/pages/UserConfirmationAwaiterPage'));
 const UserConfirmationPage = lazy(() => import('components/pages/UserConfirmationPage'));
 
 const GuardedLandingPage = () => (
   <PageAccessGuard>
     <LandingPage />
-  </PageAccessGuard>
-);
-
-const GuardedColleaguesPage = () => (
-  <PageAccessGuard>
-    <ColleaguesPage />
   </PageAccessGuard>
 );
 
@@ -64,12 +56,6 @@ const GuardedRegistrationPage = () => (
   </PurePageLockGuard>
 );
 
-const GuardedSearchPage = () => (
-  <PageAccessGuard>
-    <SearchPage />
-  </PageAccessGuard>
-);
-
 /**
  * Main wrapper.
  * Container component.
@@ -92,9 +78,6 @@ export default () => (
           {/* The result of the check is stored so that no check will be further. */}
           <Route exact path='/' component={GuardedLandingPage} />
 
-          {/* List of colleagues available for review. */}
-          <Route exact path='/colleagues' component={GuardedColleaguesPage} />
-
           {/* Profile of another user. */}
           <Route exact path='/profile/:targetShareableId' component={GuardedObservedProfilePage} />
 
@@ -113,9 +96,6 @@ export default () => (
 
           {/* Review page. Used to add new reviews. */}
           <Route exact path='/review/create/:targetShareableId' component={GuardedReviewPage} />
-
-          {/* Search page. Used to search users and companies. */}
-          <Route exact path='/search' component={GuardedSearchPage} />
 
           {/* Page with message persuading to check user's email. */}
           <Route exact path='/await-user-confirmation' component={UserConfirmationAwaiterPage} />

@@ -234,42 +234,10 @@ export function createReview(
   };
 }
 
-export function searchUsersByTokens(tokens: string[]) {
-  return (dispatch: Dispatch<AppActionType>) => {
-    apiClient.searchUsersByTokens(tokens)
-      .then(searchResults => dispatch(searchActions.setUserSearchResults(searchResults.data)))
-      .finally(() => dispatch(interactionActions.setPageUnlocked()));
-  };
-}
-
-export function quickSearchUsersByTokens(tokens: string[]) {
-  return (dispatch: Dispatch<AppActionType>) => {
-    apiClient.quickSearchUsersByTokens(tokens)
-      .then(matchData => dispatch(searchActions.setQuickSearchMatchedUsers(matchData.data)));
-  };
-}
-
-export function searchUserByShareableId(shareableId: string) {
-  return (dispatch: Dispatch<AppActionType>) => {
-    apiClient.searchUserByShareableId(shareableId)
-      .then(searchResult => dispatch(searchActions.setUserSearchResults([searchResult.data])))
-      .finally(() => dispatch(interactionActions.setPageUnlocked()));
-  };
-}
-
 export function quickSearchCompanies(sequence: string) {
   return (dispatch: Dispatch<AppActionType>) => {
     apiClient.quickSearchCompanies(sequence)
       .then(matchData => dispatch(searchActions.setQuickSearchMatchedCompanies(matchData.data)));
-  };
-}
-
-export function loadRecommendations(privateToken: string, last: number, recreate?: boolean) {
-  const updater = recreate ? searchActions.setRecommendations : searchActions.appendRecommendations;
-
-  return (dispatch: Dispatch<AppActionType>) => {
-    apiClient.loadPredefinedCompanies(privateToken, last)
-      .then(companiesData => dispatch(updater(companiesData.data)));
   };
 }
 

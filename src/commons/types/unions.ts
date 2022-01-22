@@ -6,13 +6,12 @@
  * Toolbar manu entries.
  */
 export const mainToolbarEntries = {
-  NoEntry: 'NoEntry',
-  Welcome: 'Welcome',
+  AboutMe: 'AboutMe',
   Invite: 'Invite',
   MyReviews: 'MyReviews',
+  NoEntry: 'NoEntry',
   ObservedUsers: 'ObservedUsers',
-  AboutMe: 'AboutMe',
-  NewSearch: 'NewSearch'
+  Welcome: 'Welcome'
 } as const;
 
 export type MainToolbarEntry = typeof mainToolbarEntries[keyof typeof mainToolbarEntries];
