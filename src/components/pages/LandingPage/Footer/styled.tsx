@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { Link as ScrollLink } from 'react-scroll';
 
-import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
-
 import { screenBreakpoints } from 'commons/types/unions';
 import { respond } from 'commons/utils/misc';
 
@@ -116,7 +114,3 @@ export const SocialLink = styled.a`
 const TelegramIcon = styled.img`
   width: 2.5em;
 `;
-
-export const TelegramIconWrapper = () => (
-  <TelegramIcon src={TelegramIconImage} alt='' />
-);

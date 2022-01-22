@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import { screenBreakpoints } from 'commons/types/unions';
 import cssVars from 'commons/styles/cssVars';
-import { respond } from 'commons/utils/misc';
 import Logo from 'components/shared/Logo';
-import TelegramIconImage from 'assets/images/shared/Footer/TelegramIcon.png';
+
+import { screenBreakpoints } from 'commons/types/unions';
+import { respond } from 'commons/utils/misc';
 
 export const Wrapper = styled.div`
   grid-area: Footer;
@@ -67,10 +67,15 @@ export const InnerLogo = styled(Logo)`
 `;
 
 export const MenuEntryText = styled.span`
-  cursor: pointer;
-  
   font-size: 1.25rem;
   line-height: 2.4rem;
+
+  display: flex;
+  align-items: center;
+
+  &>*:not(:last-child) {
+    margin-right: .4rem;
+  }
 
   &:hover {
     text-decoration: underline;
@@ -82,7 +87,17 @@ export const MenuEntryText = styled.span`
   }
 `;
 
+export const MenuEntryTextLink = styled(MenuEntryText)`
+  cursor: pointer;
+
+  font-weight: 600;
+
+  color: ${cssVars.colorForegroundPickAux1};
+`;
+
 export const MenuEntryTextMarked = styled(MenuEntryText)`
+  cursor: default;
+
   font-weight: 800;
 
   &:hover {
@@ -103,13 +118,10 @@ export const MenuEntryTextDisabled = styled(MenuEntryText)`
 `;
 
 export const SocialLink = styled.a`
-  width: fit-content;
-`;
+  display: flex;
+  align-items: center;
 
-const TelegramIcon = styled.img`
-  width: 2.5em;
+  &:hover, &:active, &:visited {
+    color: inherit;
+  }
 `;
-
-export const TelegramIconWrapper = () => (
-  <TelegramIcon src={TelegramIconImage} alt='' />
-);
