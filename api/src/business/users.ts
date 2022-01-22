@@ -421,11 +421,11 @@ export async function canUserLeaveReview(request: Request, response: Response) {
   assertPathParamsData(privateToken, targetShareableId);
 
   const askerEntity = await accessors.readUserWithCompanyByPrivateToken(privateToken);
-  const asker = mappers.normalizePublicUserInfo(askerEntity);
-  const targetEntity = await accessors.readUserWithCompanyByShareableId(targetShareableId);
-  const target = mappers.normalizePublicUserInfo(targetEntity);
+  const asker = mappers.normalizeUserIdentifier(askerEntity);
 
-  reply(response, { success: asker.currentCompanyId === target.currentCompanyId });
+  const review = await accessors.readReview(asker.id, targetShareableId);
+
+  reply(response, { success: !review });
 }
 
 /**
