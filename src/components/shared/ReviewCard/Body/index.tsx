@@ -12,7 +12,7 @@ function Body(props: types.IProps) {
           <styled.Answer>{props.reviewCardData.answers[index]}</styled.Answer>
 
           {props.reviewCardData.marks[index]
-            && <styled.Answer>{`Оценка: ${props.reviewCardData.marks[index]}`}</styled.Answer>}
+            && <styled.Answer isMark>{`Оценка: ${props.reviewCardData.marks[index]}`}</styled.Answer>}
         </styled.EntryWrapper>
       ))}
     </styled.Body>

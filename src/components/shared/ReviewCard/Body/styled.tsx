@@ -16,7 +16,12 @@ export const QuestionTitle = styled.h3`
   line-height: 2rem;
 `;
 
-export const Answer = styled.p`
+interface IAnswerProps {
+  isMark?: boolean;
+}
+
+export const Answer = styled.p<IAnswerProps>`
   color: #555555;
   line-height: 1.7rem;
+  font-weight: ${props => (props.isMark ? '700' : '400')};
 `;
