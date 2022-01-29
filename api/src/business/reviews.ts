@@ -45,8 +45,9 @@ export async function getReceivedReviewsAmount(request: Request, response: Respo
   const { privateToken }: IPathParams = request.params as { privateToken: string; };
   assertBodyData(privateToken);
 
-  const author = await accessors.readUserByPrivateToken(privateToken);
-  const amount = await accessors.readReceivedReviewsAmount(author.shareableId);
+  const targetEntity = await accessors.readUserByPrivateToken(privateToken);
+  const target = mappers.normalizePublicUserInfo(targetEntity);
+  const amount = await accessors.readReceivedReviewsAmount(target.shareableId);
 
   reply(response, { result: +amount.count });
 }
