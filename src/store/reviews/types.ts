@@ -6,8 +6,10 @@ export const PUSH_ANSWER = 'PUSH_ANSWER';
 export const POP_ANSWER = 'POP_ANSWER';
 export const CLEAR_ANSWERS = 'CLEAR_ANSWERS';
 export const SET_RECEIVED_REVIEWS_AMOUNT = 'SET_RECEIVED_REVIEWS_AMOUNT';
+export const SET_OBSERVED_REVIEWS_AMOUNT = 'SET_OBSERVED_REVIEWS_AMOUNT';
 export const SET_LEFT_REVIEWS_AMOUNT = 'SET_LEFT_REVIEWS_AMOUNT';
 export const SET_CURRENT_OBSERVED_RECEIVED_REVIEW = 'SET_CURRENT_OBSERVED_RECEIVED_REVIEW';
+export const SET_CURRENT_OBSERVED_REVIEW = 'SET_CURRENT_OBSERVED_REVIEW';
 export const SET_CURRENT_OBSERVED_LEFT_REVIEW = 'SET_CURRENT_OBSERVED_LEFT_REVIEW';
 
 export interface IState {
@@ -16,8 +18,10 @@ export interface IState {
   currentReviewComments: string[];
   currentReviewMarks: (number | null)[];
   receivedReviewsAmount: number;
+  observedReviewsAmount: number;
   leftReviewsAmount: number;
   currentObservedReceivedReview: IReviewReceived | null;
+  currentObservedReview: IReviewReceived | null;
   currentObservedLeftReview: IReviewReceived | null;
 }
 
@@ -49,6 +53,11 @@ export interface SetReceivedReviewsAmount {
   payload: number;
 }
 
+export interface SetObservedReviewsAmount {
+  type: typeof SET_OBSERVED_REVIEWS_AMOUNT;
+  payload: number;
+}
+
 export interface SetLeftReviewsAmount {
   type: typeof SET_LEFT_REVIEWS_AMOUNT;
   payload: number;
@@ -56,6 +65,11 @@ export interface SetLeftReviewsAmount {
 
 export interface SetCurrentObservedReceivedReview {
   type: typeof SET_CURRENT_OBSERVED_RECEIVED_REVIEW,
+  payload: IReviewReceived
+}
+
+export interface SetCurrentObservedReview {
+  type: typeof SET_CURRENT_OBSERVED_REVIEW,
   payload: IReviewReceived
 }
 
@@ -71,6 +85,8 @@ export type IAction =
   | PopAnswer
   | ClearAnswersAndMarks
   | SetReceivedReviewsAmount
+  | SetObservedReviewsAmount
   | SetLeftReviewsAmount
   | SetCurrentObservedReceivedReview
+  | SetCurrentObservedReview
   | SetCurrentObservedLeftReview;

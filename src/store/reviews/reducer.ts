@@ -6,8 +6,10 @@ const initialState: types.IState = {
   currentReviewComments: [],
   currentReviewMarks: [],
   receivedReviewsAmount: 0,
+  observedReviewsAmount: 0,
   leftReviewsAmount: 0,
   currentObservedReceivedReview: null,
+  currentObservedReview: null,
   currentObservedLeftReview: null
 };
 
@@ -46,6 +48,11 @@ export const reviewsReducer = (state = initialState, action: types.IAction): typ
         ...state,
         receivedReviewsAmount: action.payload
       };
+    case types.SET_OBSERVED_REVIEWS_AMOUNT:
+      return {
+        ...state,
+        observedReviewsAmount: action.payload
+      };
     case types.SET_LEFT_REVIEWS_AMOUNT:
       return {
         ...state,
@@ -55,6 +62,11 @@ export const reviewsReducer = (state = initialState, action: types.IAction): typ
       return {
         ...state,
         currentObservedReceivedReview: action.payload
+      };
+    case types.SET_CURRENT_OBSERVED_REVIEW:
+      return {
+        ...state,
+        currentObservedReview: action.payload
       };
     case types.SET_CURRENT_OBSERVED_LEFT_REVIEW:
       return {

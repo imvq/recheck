@@ -242,6 +242,15 @@ export async function readNameToken(tokenValue: string) {
   }
 }
 
+export async function readObservedReviews(targetShareableId: string) {
+  try {
+    const query = QueryFileCacher.getQuery('./sql/read/reviewsObserved.sql');
+    return await database.manyOrNone(query, { targetShareableId });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
 export async function readReceivedReviews(privateToken: string) {
   try {
     const query = QueryFileCacher.getQuery('./sql/read/reviewsReceived.sql');

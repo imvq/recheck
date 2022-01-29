@@ -114,9 +114,19 @@ export function getReceivedReviewsAmount(privateToken: string)
   return apiInstance.get(`/reviews/${privateToken}/received/amount`);
 }
 
+export function getObservedReviewsAmount(privateToken: string, shareableId: string)
+  : ApiPromise<IAmountResponse> {
+  return apiInstance.get(`/reviews/${privateToken}/${shareableId}/received/amount`);
+}
+
 export function getNthReceivedReview(privateToken: string, n: number | string)
   : ApiPromise<commonTypes.IReviewReceived> {
   return apiInstance.get(`/reviews/${privateToken}/received/${n}`);
+}
+
+export function getNthObservedReview(privateToken: string, shareableId: string, n: number | string)
+  : ApiPromise<commonTypes.IReviewReceived> {
+  return apiInstance.get(`/reviews/${privateToken}/${shareableId}/received/${n}`);
 }
 
 export function getNthLeftReview(privateToken: string, n: number | string)

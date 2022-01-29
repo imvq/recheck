@@ -52,6 +52,36 @@ export async function getReceivedReviewsAmount(request: Request, response: Respo
   reply(response, { result: +amount.count });
 }
 
+export async function getObservedReviewsAmount(request: Request, response: Response) {
+  interface IPathParams {
+    privateToken: string;
+    targetShareableId: string;
+  }
+
+  const { privateToken, targetShareableId }: IPathParams = request.params as {
+    privateToken: string;
+    targetShareableId: string;
+  };
+  assertBodyData(privateToken);
+
+  const askerEntity = await accessors.readUserByPrivateToken(privateToken);
+  const asker = {
+    ...mappers.normalizeUserIdentifier(askerEntity),
+    ...mappers.normalizePublicUserInfo(askerEntity)
+  };
+  const availability = await accessors.readUserAvailability(asker.id, targetShareableId);
+  const targetEntity = await accessors.readUserByShareableId(targetShareableId);
+  const target = mappers.normalizePersonalUserInfo(targetEntity);
+
+  if (!availability && target.inviterId !== asker.shareableId) {
+    throw new errors.NotFoundError('Any accessible target with shareble ID not found.');
+  }
+
+  const amount = await accessors.readReceivedReviewsAmount(targetShareableId);
+
+  reply(response, { result: +amount.count });
+}
+
 /**
  * By design, left reviews are shown one per page.
  * To provide pagination buttons the client needs to know the total amount
@@ -84,6 +114,43 @@ export async function getNthReceivedReview(request: Request, response: Response)
   assertBodyData(privateToken, n);
 
   const reviews = await accessors.readReceivedReviews(privateToken) || [];
+
+  if (reviews.length <= parseInt(n)) {
+    throw new errors.NotFoundError(`No review with index ${n}.`);
+  }
+
+  const review = mappers.normalizeReviewWithTarget(reviews[parseInt(n)]);
+  reply(response, review);
+}
+
+export async function getNthObservedReview(request: Request, response: Response) {
+  interface IPathParams {
+    privateToken: string;
+    targetShareableId: string;
+    n: string;
+  }
+
+  const { privateToken, targetShareableId, n }: IPathParams = request.params as {
+    privateToken: string;
+    targetShareableId: string;
+    n: string;
+  };
+  assertBodyData(privateToken, targetShareableId, n);
+
+  const askerEntity = await accessors.readUserByPrivateToken(privateToken);
+  const asker = {
+    ...mappers.normalizeUserIdentifier(askerEntity),
+    ...mappers.normalizePublicUserInfo(askerEntity)
+  };
+  const availability = await accessors.readUserAvailability(asker.id, targetShareableId);
+  const targetEntity = await accessors.readUserByShareableId(targetShareableId);
+  const target = mappers.normalizePersonalUserInfo(targetEntity);
+
+  if (!availability && target.inviterId !== asker.shareableId) {
+    throw new errors.NotFoundError('Any accessible target with shareble ID not found.');
+  }
+
+  const reviews = await accessors.readObservedReviews(target.shareableId) || [];
 
   if (reviews.length <= parseInt(n)) {
     throw new errors.NotFoundError(`No review with index ${n}.`);

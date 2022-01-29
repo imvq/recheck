@@ -185,6 +185,22 @@ export function loadReviewsTabData(privateToken: string) {
   };
 }
 
+export function loadObservedReviewPageData(privateToken: string, targetShareableId: string) {
+  return (dispatch: ThunkDispatch<any, void, AppActionType>) => {
+    apiClient.getObservedReviewsAmount(privateToken, targetShareableId)
+      .then(amountData => {
+        dispatch(reviewsActions.setObservedReviewsAmount(amountData.data.result));
+
+        if (amountData.data.result > 0) {
+          dispatch(loadNthObservedReview(privateToken, targetShareableId, 0));
+        }
+      })
+      .catch(() => {
+        dispatch(reviewsActions.setObservedReviewsAmount(0));
+      });
+  };
+}
+
 export function loadNthReceivedReview(privateToken: string, n: number | string) {
   return (dispatch: Dispatch<AppActionType>) => {
     dispatch(interactionActions.setIsProfileAboutTabLoading(true));
@@ -195,6 +211,19 @@ export function loadNthReceivedReview(privateToken: string, n: number | string) 
       })
       .finally(() => {
         dispatch(interactionActions.setIsProfileAboutTabLoading(false));
+      });
+  };
+}
+
+export function loadNthObservedReview(
+  privateToken: string, targetShareableId: string, n: number | string
+) {
+  return (dispatch: Dispatch<AppActionType>) => {
+    dispatch(interactionActions.setIsProfileAboutTabLoading(true));
+
+    apiClient.getNthObservedReview(privateToken, targetShareableId, n)
+      .then(reviewData => {
+        dispatch(reviewsActions.setCurrentObservedReview(reviewData.data));
       });
   };
 }

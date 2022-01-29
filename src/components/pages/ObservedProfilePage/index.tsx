@@ -10,7 +10,7 @@ import * as store from 'store';
 
 import cssVars from 'commons/styles/cssVars';
 
-import { IReviewParsed, ISearchedProfile } from 'commons/types';
+import { ISearchedProfile } from 'commons/types';
 
 import Footer from 'components/shared/Footer';
 import ProfileHead from 'components/shared/ProfileHead';
@@ -21,8 +21,16 @@ import * as types from './types';
 import * as styled from './styled';
 
 const mapStateToProps = (state: store.AppState): types.IStateProps => ({
-  privateToken: store.getCurrentPrivateToken(state)
+  privateToken: store.getCurrentPrivateToken(state),
+  observedReviewsAmount: state.reviews.observedReviewsAmount,
+  currentReviewData: state.reviews.currentObservedReview
 });
+
+const mapDispatchToProps: types.IDispatchProps = {
+  loadPageData: store.loadObservedReviewPageData,
+  loadNthReview: store.loadNthObservedReview,
+  setCurrentObservedReview: store.setCurrentObservedReview
+};
 
 const NoContent = <styled.Title>Загрузка...</styled.Title>;
 
@@ -40,26 +48,14 @@ function ObservedProfilePage(props: types.IProps) {
 
   const [isPending, setIsPending] = useState(true);
   const [observedUser, setObservedUser] = useState<ISearchedProfile>();
-  const [reviewsAmount, setReviewsAmount] = useState(0);
-  const [currentReview, setCurrentReview] = useState<IReviewParsed>();
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  function obtainReviewsAmount() {
-    // TODO: obtain reviews amount.
-
-    return 0;
-  }
-
-  function loadNthReview(index: number) {
-    // TODO: load review.
-  }
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     if (props.privateToken) {
       if (targetShareableId === 'user-demo') {
         setObservedUser(getDemoObservedUser());
-        setCurrentReview(getDemoReview());
-        setReviewsAmount(1);
+        setCurrentPage(1);
+        props.setCurrentObservedReview(getDemoReview());
         setIsPending(false);
 
         return;
@@ -73,7 +69,10 @@ function ObservedProfilePage(props: types.IProps) {
 
           return apiClient.searchUserByShareableId(targetShareableId);
         })
-        .then(searchedProfileData => setObservedUser(searchedProfileData.data))
+        .then(searchedProfileData => {
+          setObservedUser(searchedProfileData.data);
+          props.loadPageData(props.privateToken as string, targetShareableId);
+        })
         .catch(() => jumpTo('/404'))
         .finally(() => setIsPending(false));
     }
@@ -86,7 +85,7 @@ function ObservedProfilePage(props: types.IProps) {
       </styled.TitleWrapper>
 
       {/* @ts-ignore: currentReview is guaranteed to be defined. */}
-      <ReviewCard reviewCardData={currentReview} />
+      <ReviewCard reviewCardData={props.currentReviewData} />
     </>
   );
 
@@ -109,17 +108,26 @@ function ObservedProfilePage(props: types.IProps) {
           <ProfileHead profileInfo={observedUser} />
 
           <styled.ReviewSectionWrapper>
-            {isPending ? NoContent : currentReview ? ContentAvailable : ContentEmpty}
+            {isPending ? NoContent : props.currentReviewData ? ContentAvailable : ContentEmpty}
           </styled.ReviewSectionWrapper>
 
-          {reviewsAmount ? (
-            <Pagination
-              nPages={reviewsAmount}
-              onNextClick={() => loadNthReview(currentIndex + 1)}
-              onPageClick={(page: number) => loadNthReview(page)}
-              onPrevClick={() => loadNthReview(currentIndex - 1)}
-            />
-          ) : null}
+          {props.observedReviewsAmount > 0 && (
+          <Pagination
+            nPages={props.observedReviewsAmount || 1}
+            onNextClick={() => {
+              props.loadNthReview(props.privateToken as string, targetShareableId, currentPage + 1);
+              setCurrentPage(currentPage + 1);
+            }}
+            onPageClick={(page: number) => {
+              props.loadNthReview(props.privateToken as string, targetShareableId, page - 1);
+              setCurrentPage(page - 1);
+            }}
+            onPrevClick={() => {
+              props.loadNthReview(props.privateToken as string, targetShareableId, currentPage - 1);
+              setCurrentPage(currentPage - 1);
+            }}
+          />
+          )}
         </styled.ContentWrapper>
       )}
 
@@ -128,4 +136,4 @@ function ObservedProfilePage(props: types.IProps) {
   );
 }
 
-export default connect(mapStateToProps)(ObservedProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(ObservedProfilePage);
