@@ -36,7 +36,18 @@ function Head(props: types.IProps) {
       <styled.PlainText isDimmed>
         Место работы:&nbsp;&nbsp;
         <styled.PlainText>
-          {props.reviewCardData.targetCompanyName}
+          {props.reviewCardData.authorCompanySnapshot}
+        </styled.PlainText>
+      </styled.PlainText>
+    </styled.PlainTextWrapper>
+  );
+
+  const Email = (
+    <styled.PlainTextWrapper>
+      <styled.PlainText isDimmed>
+        Почта:&nbsp;&nbsp;
+        <styled.PlainText>
+          {props.reviewCardData.authorEmailSnapshot}
         </styled.PlainText>
       </styled.PlainText>
     </styled.PlainTextWrapper>
@@ -46,6 +57,7 @@ function Head(props: types.IProps) {
     <styled.MenuContent>
       {Position}
       {Company}
+      {Email}
     </styled.MenuContent>
   );
 

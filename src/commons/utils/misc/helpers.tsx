@@ -41,8 +41,8 @@ export const showInsignificantToast = (text: string) => toast.dark(text, {
 
 export const getDemoObservedUser = (): ISearchedProfile => ({
   currentCompanyId: -1,
-  currentCompanyName: 'reCheck',
-  currentPosition: 'Team Lead of Data Analysts team',
+  currentCompanyName: 'Kingcross',
+  currentPosition: 'Designer',
   fullName: 'Екатерина Мазур',
   photoUrl: `${process.env.REACT_APP_MEDIA_URL}/user-test.png`,
   shareableId: 'user-demo'
@@ -70,8 +70,10 @@ export const getDemoReview = (): IReviewParsed => ({
     'Больше системного подхода и документирования гипотез и тестов.'
   ],
   marks: [null, null, null, 9, null],
-  targetCompanyName: 'reCheck',
-  targetPosition: 'Team Lead of Data Analysts team',
+  authorCompanySnapshot: 'Kingcross',
+  authorEmailSnapshot: 'r*****@kingcross.io',
+  targetCompanyName: 'Kingcross',
+  targetPosition: 'Designer',
   targetName: 'Екатерина Мазур',
   targetPhotoUrl: `${process.env.REACT_APP_MEDIA_URL}/user-test.png`,
   targetShareableId: 'user-demo'

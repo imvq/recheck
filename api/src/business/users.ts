@@ -51,10 +51,16 @@ export async function checkIfUserCanBeViewed(request: Request, response: Respons
   const { privateToken, targetShareableId }: IBodyData = request.body;
   assertBodyData(privateToken, targetShareableId);
 
-  const asker = await accessors.readUserByPrivateToken(privateToken);
+  const askerEntity = await accessors.readUserByPrivateToken(privateToken);
+  const asker = {
+    ...mappers.normalizeUserIdentifier(askerEntity),
+    ...mappers.normalizePublicUserInfo(askerEntity)
+  };
   const availability = await accessors.readUserAvailability(asker.id, targetShareableId);
+  const targetEntity = await accessors.readUserByShareableId(targetShareableId);
+  const target = mappers.normalizePersonalUserInfo(targetEntity);
 
-  reply(response, { success: !!availability });
+  reply(response, { success: availability || target.inviterId === asker.shareableId });
 }
 
 /**

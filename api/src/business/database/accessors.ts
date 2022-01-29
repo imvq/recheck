@@ -116,6 +116,15 @@ export async function readEmail(email: string) {
   }
 }
 
+export async function readUserByShareableId(shareableId: string) {
+  try {
+    const query = QueryFileCacher.getQuery('./sql/read/userByShareableId.sql');
+    return await database.one(query, { shareableId });
+  } catch {
+    throw new errors.ForbiddenError('Database conflict.');
+  }
+}
+
 export async function readUserByPrivateToken(privateToken: string) {
   try {
     const query = QueryFileCacher.getQuery('./sql/read/userByPrivateToken.sql');

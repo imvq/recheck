@@ -250,7 +250,7 @@ export function loadObservedUsers(
   let newLast = last;
 
   return (dispatch: Dispatch<AppActionType>) => {
-    apiClient.loadAvailableUsers(privateToken, last)
+    apiClient.loadAssociatedUsers(privateToken, last)
       .then(observedUsersData => {
         if (observedUsersData.data.length) {
           newLast = +observedUsersData.data[observedUsersData.data.length - 1].id;
