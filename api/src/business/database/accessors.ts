@@ -152,6 +152,15 @@ export async function readUserBySocialId(socialId: string) {
   }
 }
 
+export async function readUsersAssociated(ownerShareableId: string, last: string) {
+  try {
+    const query = QueryFileCacher.getQuery('./sql/read/usersAssociated.sql');
+    return await database.manyOrNone(query, { ownerShareableId, last });
+  } catch {
+    throw new errors.InternalServerError('Database conflict.');
+  }
+}
+
 export async function readUsersAvailable(ownerId: string, last: string) {
   try {
     const query = QueryFileCacher.getQuery('./sql/read/usersAvailable.sql');

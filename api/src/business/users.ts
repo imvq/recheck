@@ -459,6 +459,32 @@ export async function makeUserAvailable(request: Request, response: Response) {
 }
 
 /**
+ * Get list of associated users.
+ */
+export async function getAssociatedUsers(request: Request, response: Response) {
+  interface IPathParams {
+    last: string;
+  }
+
+  interface IBodyData {
+    privateToken: string;
+  }
+
+  const { last }: IPathParams = request.params as { last: string; };
+  const { privateToken }: IBodyData = request.body;
+  assertPathParamsData(last);
+  assertBodyData(privateToken);
+
+  const askerEntity = await accessors.readUserByPrivateToken(privateToken);
+  const asker = mappers.normalizePublicUserInfo(askerEntity);
+
+  const associatedUsers = await accessors.readUsersAssociated(asker.shareableId, last);
+  const normalizedUsers = associatedUsers.map(user => mappers.normalizeOrderedUserInfo(user));
+
+  reply(response, normalizedUsers);
+}
+
+/**
  * Get list of available users.
  */
 export async function getAvailableUsers(request: Request, response: Response) {
