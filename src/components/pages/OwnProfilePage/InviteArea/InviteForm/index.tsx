@@ -1,27 +1,31 @@
 import { memo, useState } from 'react';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { MdContentCopy } from 'react-icons/md';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { IReviewFormData } from 'commons/types';
 
 import * as styledFormBase from 'components/shared/BoxBase';
-import * as store from 'store';
 
 import cssVars from 'commons/styles/cssVars';
 import ContentSubareaDelimiter from 'components/shared/ContentSubareaDelimiter';
 import CustomButton from 'components/shared/CustomButton';
 
-import * as types from './types';
+import * as store from 'store';
 import * as styledLocal from './styled';
-import * as misc from './misc';
 
 const styled = { ...styledFormBase, ...styledLocal };
 
-const mapStateToProps = (state: store.AppState): types.IStateProps => ({
-  shareableId: store.getCurrentShareableId(state)
-});
+interface Props {
+  reviewFormData: IReviewFormData;
+}
 
-function InviteForm(props: types.IProps) {
+function InviteForm(props: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const dispatch = useDispatch<store.AppDispatch>();
+
+  const showPopup = () => dispatch(store.setIsInvitePopupVisible(true));
 
   return (
     <styled.InviteFormBadge>
@@ -29,7 +33,7 @@ function InviteForm(props: types.IProps) {
         <span>{props.reviewFormData.name}</span>
         <styled.ControlsWrapper>
           <MdContentCopy
-            onClick={() => misc.copyInviteLink(props.shareableId as string)}
+            onClick={showPopup}
             size={15}
             color={cssVars.colorForegroundPickAux1}
           />
@@ -157,7 +161,7 @@ function InviteForm(props: types.IProps) {
           <ContentSubareaDelimiter half />
 
           <styled.ButtonGroupWrapper>
-            <CustomButton onClick={() => misc.copyInviteLink(props.shareableId as string)}>
+            <CustomButton onClick={showPopup}>
               Пригласить кандидата
             </CustomButton>
           </styled.ButtonGroupWrapper>
@@ -167,4 +171,4 @@ function InviteForm(props: types.IProps) {
   );
 }
 
-export default connect(mapStateToProps)(memo(InviteForm));
+export default memo(InviteForm);

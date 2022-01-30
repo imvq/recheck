@@ -5,7 +5,8 @@ export const SET_IS_REDIRECT_HOME_PENDING = 'SET_IS_REDIRECT_HOME_PENDING';
 export const SET_IS_PAGE_LOCKED = 'SET_IS_PAGE_LOCKED';
 export const SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE = 'SET_IS_SPEND_FREE_VIEW_POPUP_VISIBILE';
 export const SET_IS_SEARCH_POPUP_VISIBILE = 'SET_IS_SEARCH_POPUP_VISIBILE';
-export const SET_IS_LOGIN_POPUP_VISIBILE = 'SET_IS_LOGIN_POPUP_VISIBILE';
+export const SET_IS_LOGIN_POPUP_VISIBLE = 'SET_IS_LOGIN_POPUP_VISIBILE';
+export const SET_IS_INVITE_POPUP_VISIBLE = 'SET_IS_INVITE_POPUP_VISIBLE';
 export const SET_CURRENT_MAIN_TOOLBAR_ENTRY = 'SET_CURRENT_MAIN_TOOLBAR_ENTRY';
 export const SET_CURRENT_USER_ROLE = 'SET_CURRENT_USER_ROLE';
 export const SET_IS_PROFILE_ABOUT_TAB_LOADING = 'SET_IS_PROFILE_ABOUT_TAB_LOADING';
@@ -22,6 +23,7 @@ export interface IState {
   isSearchPopupVisible: boolean;
   isSpendFreeViewPopupVisible: boolean;
   isLoginPopupVisible: boolean;
+  isInvitePopupVisible: boolean;
   isProfileAboutTabLoading: boolean;
   isProfileHistoryTabLoading: boolean;
   isProfileReviewsTabLoading: boolean;
@@ -64,7 +66,12 @@ export interface SetIsSpendFreeViewPopupVisible {
 }
 
 export interface SetIsLoginPopupVisible {
-  type: typeof SET_IS_LOGIN_POPUP_VISIBILE;
+  type: typeof SET_IS_LOGIN_POPUP_VISIBLE;
+  payload: boolean;
+}
+
+export interface SetIsInvitePopupVisible {
+  type: typeof SET_IS_INVITE_POPUP_VISIBLE;
   payload: boolean;
 }
 
@@ -97,6 +104,7 @@ export type IAction =
   | SetIsSearchPopupVisible
   | SetIsSpendFreeViewPopupVisible
   | SetIsLoginPopupVisible
+  | SetIsInvitePopupVisible
   | SetIsProfileAboutTabLoading
   | SetIsProfileHistoryTabLoading
   | SetIsProfileReviewsTabLoading

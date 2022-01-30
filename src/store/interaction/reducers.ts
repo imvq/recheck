@@ -9,6 +9,7 @@ const initialState: types.IState = {
   isSearchPopupVisible: false,
   isSpendFreeViewPopupVisible: false,
   isLoginPopupVisible: false,
+  isInvitePopupVisible: false,
   currentMainToolbarEntry: mainToolbarEntries.Welcome,
   currentUserRole: userRoles.Recruiter,
   isProfileAboutTabLoading: true,
@@ -44,10 +45,15 @@ export function interactionStateReducer(state = initialState, action: types.IAct
         ...state,
         isSpendFreeViewPopupVisible: action.payload
       };
-    case types.SET_IS_LOGIN_POPUP_VISIBILE:
+    case types.SET_IS_LOGIN_POPUP_VISIBLE:
       return {
         ...state,
         isLoginPopupVisible: action.payload
+      };
+    case types.SET_IS_INVITE_POPUP_VISIBLE:
+      return {
+        ...state,
+        isInvitePopupVisible: action.payload
       };
     case types.SET_CURRENT_MAIN_TOOLBAR_ENTRY:
       return {

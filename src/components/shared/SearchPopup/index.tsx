@@ -13,7 +13,7 @@ import CustomButton from 'components/shared/CustomButton';
 import OptionBadge from './OptionBadge';
 
 import * as types from './types';
-import * as styled from '../Popups/styled';
+import * as styled from '../Popups';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   privateToken: store.profile.privateToken
@@ -130,7 +130,7 @@ function SearchPopup(props: types.IProps) {
   );
 
   return (
-    <styled.Wrapper>
+    <styled.Popup>
       <styled.Frame>
         {TopWrapper}
         {TitleWrapper}
@@ -142,7 +142,7 @@ function SearchPopup(props: types.IProps) {
 
       </styled.Frame>
       <styled.ClickableBackground onClick={() => props.setIsVisible(false)} />
-    </styled.Wrapper>
+    </styled.Popup>
   );
 }
 

@@ -31,7 +31,12 @@ export const setIsSpendFreeViewPopupVisible = (flag: boolean): types.IAction => 
 });
 
 export const setIsLoginPopupVisible = (flag: boolean): types.IAction => ({
-  type: types.SET_IS_LOGIN_POPUP_VISIBILE,
+  type: types.SET_IS_LOGIN_POPUP_VISIBLE,
+  payload: flag
+});
+
+export const setIsInvitePopupVisible = (flag: boolean): types.IAction => ({
+  type: types.SET_IS_INVITE_POPUP_VISIBLE,
   payload: flag
 });
 

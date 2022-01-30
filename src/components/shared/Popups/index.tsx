@@ -9,7 +9,7 @@ const cssVarsLocal = {
   background: '#f0f3ff'
 };
 
-export const Wrapper = styled.div`
+export const Popup = styled.div`
   position: fixed;
   display: flex;
   justify-content: center;
@@ -102,6 +102,17 @@ export const BuyHiddenBadgeWrapper = styled.div`
   border: none;
   background-color: white;
   text-align: center;
+`;
+
+export const TextBadge = styled.p`
+  width: 50rem;
+  border-radius: 1.6rem;
+  box-sizing: border-box;
+  padding: 2rem 4rem;
+
+  background-color: rgba(193, 238, 237, 0.5);
+  color: rgba(85, 85, 85, 1);
+  box-shadow: -5px -5px 15px rgba(255, 255, 255, .25), 5px 5px 15px rgba(0, 0, 0, .25);
 `;
 
 export const BadgeTitleWrapper = styled.div`

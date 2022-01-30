@@ -1,32 +1,24 @@
-import { memo } from 'react';
-import { connect } from 'react-redux';
+import { lazy, memo } from 'react';
+import { useSelector } from 'react-redux';
 
-import SearchPopup from 'components/shared/SearchPopup';
-import SpendFreeViewPopup from 'components/shared/SpendFreeViewPopup';
+import * as store from 'store';
 
-import { AppState } from 'store';
-
-import * as types from './types';
-
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isSearchPopupVisible: store.interaction.isSearchPopupVisible,
-  isSpendFreeViewPopupVisible: store.interaction.isSpendFreeViewPopupVisible
-});
+const InvitePopup = lazy(() => import('components/shared/InvitePopup'));
 
 /**
  * Component controlling search popup appearing/disappearing.
  * Non-presentational component.
  */
-function PopupManager(props: types.IProps) {
-  if (props.isSearchPopupVisible) {
-    return <SearchPopup onClose={props.onPopupClose} />;
-  }
+function PopupManager() {
+  const isInvitePopupVisible = useSelector((state: store.AppState) => (
+    state.interaction.isInvitePopupVisible
+  ));
 
-  if (props.isSpendFreeViewPopupVisible) {
-    return <SpendFreeViewPopup />;
+  if (isInvitePopupVisible) {
+    return <InvitePopup />;
   }
 
   return null;
 }
 
-export default connect(mapStateToProps)(memo(PopupManager));
+export default memo(PopupManager);

@@ -12,6 +12,7 @@ import NotFoundPage from 'components/pages/NotFoundPage';
 import ConnectionErrorPopup from 'components/shared/ConnectionErrorPopup';
 import GlobalStyle from 'components/shared/GlobalStyle';
 import PageAccessGuard from 'components/shared/PageAccessGuard';
+import PopupManager from 'components/shared/PopupManager';
 import PurePageLockGuard from 'components/shared/PurePageLockGuard';
 
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -61,7 +62,7 @@ const GuardedRegistrationPage = () => (
  * Container component.
  */
 export default () => (
-  <Suspense fallback={<></>}>
+  <Suspense fallback={null}>
 
     <GlobalStyle />
 
@@ -70,6 +71,8 @@ export default () => (
     <Offline><ConnectionErrorPopup /></Offline>
 
     <Provider store={appStore}>
+      <PopupManager />
+
       <Router history={historyManager}>
         <Switch>
 

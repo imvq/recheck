@@ -8,7 +8,7 @@ import { AppState, setIsSearchPopupVisible, setIsSpendFreeViewPopupVisible } fro
 import CustomButton from 'components/shared/CustomButton';
 
 import * as types from './types';
-import * as styled from '../Popups/styled';
+import * as styled from '../Popups';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   privateToken: store.profile.privateToken,
@@ -70,7 +70,7 @@ function SpendFreeViewsPopup(props: types.IProps) {
   );
 
   return (
-    <styled.Wrapper>
+    <styled.Popup>
       <styled.Frame>
         {TopWrapper}
         {TitleWrapper}
@@ -82,7 +82,7 @@ function SpendFreeViewsPopup(props: types.IProps) {
       </styled.Frame>
 
       <styled.ClickableBackground onClick={() => props.setVisible(false)} />
-    </styled.Wrapper>
+    </styled.Popup>
   );
 }
 
