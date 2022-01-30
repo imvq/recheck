@@ -35,6 +35,7 @@ const mapDispatchToProps: types.IDispatchProps = {
   setIsRedirectHomePending: store.setIsRedirectHomePending,
   setIsLoginPopupVisible: store.setIsLoginPopupVisible,
   setCurrentReviewTargetShareableId: store.setCurrentReviewTargetShareableId,
+  setCurrentUserRole: store.setCurrentUserRole,
   setIsPageLocked: store.setIsPageLocked
 };
 
@@ -67,6 +68,7 @@ function ReviewPage(props: types.IProps) {
     };
 
     if (props.isConfirmed) {
+      props.setCurrentUserRole('candidate');
       props.createReview(
         props.privateToken as string,
         targetShareableId,
