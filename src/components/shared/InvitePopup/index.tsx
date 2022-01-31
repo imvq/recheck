@@ -36,7 +36,7 @@ function InvitePopup() {
             Отправьте ссылку с приглашением кандидату. После регистрации его профиль
             появится у вас в разделе «Мои кандидаты».
           </styled.TextBadge>
-          <ContentSubareaDelimiter half />
+          <ContentSubareaDelimiter />
           <CustomButton onClick={() => misc.copyInviteLink(shareableId as string)}>
             Скопировать ссылку
           </CustomButton>
