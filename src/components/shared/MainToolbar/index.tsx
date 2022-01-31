@@ -50,7 +50,8 @@ function MainToolbar(props: Props) {
             dispatch(store.setCurrentMainToolbarEntry(mainToolbarEntries.ObservedUsers));
             jumpTo('/profile');
           }}
-          isPressed={entry === mainToolbarEntries.ObservedUsers}
+          isPressed={entry === mainToolbarEntries.ObservedUsers
+            || (entry === mainToolbarEntries.Welcome && role === 'recruiter')}
         >
           Мои кандидаты
         </MenuEntry>
@@ -66,7 +67,8 @@ function MainToolbar(props: Props) {
             dispatch(store.setCurrentMainToolbarEntry(mainToolbarEntries.AboutMe));
             jumpTo('/profile');
           }}
-          isPressed={entry === mainToolbarEntries.AboutMe}
+          isPressed={entry === mainToolbarEntries.AboutMe
+            || (entry === mainToolbarEntries.Welcome && role === 'candidate')}
         >
           Мой профиль
         </MenuEntry>
@@ -97,27 +99,11 @@ function MainToolbar(props: Props) {
       <styled.LogoWrapper><Link to='/'><Logo /></Link></styled.LogoWrapper>
 
       <styled.ButtonsWrapper>
-
-        <styled.ButtonsGroupWrapper>
-          <styled.ButtonWrapper>
-            <MenuEntry
-              onClick={() => {
-                dispatch(store.setCurrentMainToolbarEntry(mainToolbarEntries.Welcome));
-                jumpTo('/profile');
-              }}
-              isPressed={entry === mainToolbarEntries.Welcome}
-            >
-              Добро пожаловать
-            </MenuEntry>
-          </styled.ButtonWrapper>
-        </styled.ButtonsGroupWrapper>
-
         <styled.ButtonsGroupWrapper>
           {role === 'recruiter' && RecruiterOptions}
 
           {role === 'candidate' && CandidateOptions}
         </styled.ButtonsGroupWrapper>
-
       </styled.ButtonsWrapper>
     </styled.MainToolbar>
   );

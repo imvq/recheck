@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { mainToolbarEntries } from 'commons/types/unions';
-import { AppState } from 'store';
-import { getCurrentProfileInfo } from 'store/selectors';
+import * as store from 'store';
 
 import Footer from 'components/shared/Footer';
+
+import { mainToolbarEntries } from 'commons/types/unions';
 
 import AboutArea from './AboutArea';
 import InviteArea from './InviteArea';
@@ -12,18 +12,14 @@ import ObservedUsersArea from './ObservedUsersArea';
 import ReviewsArea from './ReviewsArea';
 import WelcomeArea from './WelcomeArea';
 
-import * as types from './types';
 import * as styled from './styled';
-
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  currentProfileInfo: getCurrentProfileInfo(store),
-  currentMainToolbarEntry: store.interaction.currentMainToolbarEntry
-});
 
 /**
  * Profile page. Used to view reviews.
  */
-function OwnProfilePage(props: types.IProps) {
+function OwnProfilePage() {
+  const menu = useSelector((state: store.AppState) => state.interaction.currentMainToolbarEntry);
+
   return (
     <styled.OwnProfilePage>
       <styled.Sidebar />
@@ -34,17 +30,12 @@ function OwnProfilePage(props: types.IProps) {
         <div id='ProfileTitle' />
 
         {(() => {
-          switch (props.currentMainToolbarEntry) {
-            case mainToolbarEntries.AboutMe:
-              return <AboutArea />;
-            case mainToolbarEntries.Invite:
-              return <InviteArea />;
-            case mainToolbarEntries.MyReviews:
-              return <ReviewsArea />;
-            case mainToolbarEntries.ObservedUsers:
-              return <ObservedUsersArea />;
-            default:
-              return <WelcomeArea />;
+          switch (menu) {
+            case mainToolbarEntries.AboutMe: return <AboutArea />;
+            case mainToolbarEntries.Invite: return <InviteArea />;
+            case mainToolbarEntries.MyReviews: return <ReviewsArea />;
+            case mainToolbarEntries.ObservedUsers: return <ObservedUsersArea />;
+            default: return <WelcomeArea />;
           }
         })()}
       </styled.ContentWrapper>
@@ -54,4 +45,4 @@ function OwnProfilePage(props: types.IProps) {
   );
 }
 
-export default connect(mapStateToProps)(OwnProfilePage);
+export default OwnProfilePage;
