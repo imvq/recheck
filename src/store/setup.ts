@@ -1,6 +1,6 @@
-import thunkMiddlware, { ThunkMiddleware } from 'redux-thunk';
+import thunkMiddlware, { ThunkDispatch, ThunkMiddleware } from 'redux-thunk';
 
-import { combineReducers, createStore, applyMiddleware, compose, Store } from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose, Dispatch } from 'redux';
 
 import { interactionStateReducer } from './interaction/reducers';
 import { observingReducer } from './observing/reducers';
@@ -45,4 +45,4 @@ export const store = createStore(
   ))
 );
 
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = Dispatch<AppActionType> & ThunkDispatch<AppState, null, AppActionType>;
