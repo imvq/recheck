@@ -14,7 +14,7 @@ const isArrowNext = (page: number | PaginationDirection) => page === paginationD
 function PaginationButton(props: types.IProps) {
   if (isArrowPrev(props.page)) {
     return (
-      <ScrollLink to='ProfileTitle' smooth duration={300}>
+      <ScrollLink to='content-scroll-anchor' smooth duration={300}>
         <styled.ArrowLeftWrapper isEnabled={props.isEnabled}>
           <ArrowLeftSvg onClick={() => props.callback(props.page)} />
         </styled.ArrowLeftWrapper>
@@ -24,7 +24,7 @@ function PaginationButton(props: types.IProps) {
 
   if (isArrowNext(props.page)) {
     return (
-      <ScrollLink to='ProfileTitle' smooth duration={300}>
+      <ScrollLink to='scroll-anchor' smooth duration={300}>
         <styled.ArrowRightWrapper isEnabled={props.isEnabled}>
           <ArrowRightSvg onClick={() => props.callback(props.page)} />
         </styled.ArrowRightWrapper>

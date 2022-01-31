@@ -63,7 +63,9 @@ export function interactionStateReducer(state = initialState, action: types.IAct
     case types.SET_CURRENT_USER_ROLE:
       return {
         ...state,
-        currentUserRole: action.payload
+        currentUserRole: action.payload,
+        currentMainToolbarEntry: action.payload === 'candidate'
+          ? 'AboutMe' : 'ObservedUsers'
       };
     case types.SET_IS_PROFILE_ABOUT_TAB_LOADING:
       return {

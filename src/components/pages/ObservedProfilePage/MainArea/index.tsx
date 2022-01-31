@@ -85,7 +85,7 @@ function MainArea() {
         <BsArrowLeft size={30} color={cssVars.colorForegroundPickAux1} />
       </styled.BackButtonWrapper>
 
-      <styled.TitleWrapper id='ProfileTitle'>
+      <styled.TitleWrapper id='content-scroll-anchor'>
         <styled.Title>Просмотр профиля</styled.Title>
       </styled.TitleWrapper>
 

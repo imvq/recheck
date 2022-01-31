@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react';
 import { BsArrowDownSquare } from 'react-icons/bs';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import * as store from 'store';
 
@@ -10,23 +10,17 @@ import ObservedProfileBadge from 'components/shared/ObservedProfileBadge';
 
 import { getDemoObservedUser, showInsignificantToast } from 'commons/utils/misc';
 
-import * as types from './types';
 import * as styled from './styled';
 
-const mapStateToProps = (state: store.AppState): types.IStateProps => ({
-  privateToken: store.getCurrentPrivateToken(state),
-  observedUsers: store.getObservedUsers(state)
-});
-
-const mapDispatchToProps: types.IDispatchProps = {
-  loadObservedUsers: store.loadObservedUsers,
-  setIsPageLocked: store.setIsPageLocked
-};
-
-function ObservedUsersArea(props: types.IProps) {
+function ObservedUsersArea() {
   const [isPending, setIsPending] = useState(true);
   const [isLoadButonHidden, setIsLoadButtonHidden] = useState(false);
   const [last, setLast] = useState(0);
+
+  const privateToken = useSelector((state: store.AppState) => state.profile.privateToken);
+  const observedUsers = useSelector((state: store.AppState) => state.observing.observedUsers);
+
+  const dispatch = useDispatch<store.AppDispatch>();
 
   function finalizeLoading(newLast: number) {
     if (last === newLast) {
@@ -50,16 +44,18 @@ function ObservedUsersArea(props: types.IProps) {
 
   function loadNewChunk() {
     setIsPending(true);
-    props.loadObservedUsers(props.privateToken as string, last, finalizeLoading);
+    dispatch(store.loadObservedUsers(privateToken!, last, finalizeLoading));
   }
 
   useEffect(() => {
-    props.loadObservedUsers(props.privateToken as string, 0, finalizeLoadingFirstTry, true);
-  }, []);
+    if (privateToken) {
+      dispatch(store.loadObservedUsers(privateToken, 0, finalizeLoadingFirstTry, true));
+    }
+  }, [privateToken]);
 
   const Results = (
     <>
-      {props.observedUsers.map(card => (
+      {observedUsers.map(card => (
         <>
           <ObservedProfileBadge key={card.fullName} observedUserData={card} />
           <ContentSubareaDelimiter half />
@@ -81,9 +77,9 @@ function ObservedUsersArea(props: types.IProps) {
 
   return (
     <styled.ObservedUsersArea>
-      {isPending ? <Loader size='5rem' /> : props.observedUsers.length ? Results : NoResults}
+      {isPending ? <Loader size='5rem' /> : observedUsers.length ? Results : NoResults}
     </styled.ObservedUsersArea>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(ObservedUsersArea));
+export default memo(ObservedUsersArea);

@@ -7,7 +7,7 @@ import * as styled from './styled';
  * The header.
  */
 export default (props: types.IProps) => (
-  <styled.Wrapper id={props.id}>
+  <styled.Wrapper id='top-scroll-anchor'>
     <styled.LoginBadgeWrapper>
       <ProfileMenuBadge isProfilePageAvailable={props.isProfilePageAvailable} />
     </styled.LoginBadgeWrapper>

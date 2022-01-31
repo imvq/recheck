@@ -1,41 +1,41 @@
 import { memo } from 'react';
 import { BsTelegram } from 'react-icons/bs';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link as ScrollLink } from 'react-scroll';
 
 import * as store from 'store';
 
-import * as types from './types';
+import { jumpTo } from 'commons/utils/misc';
+
 import * as styled from './styled';
 
-const mapStateToProps = (state: store.AppState): types.IStateProps => ({
-  privateToken: store.getCurrentPrivateToken(state),
-  currentRole: store.getCurrentUserRole(state)
-});
+function Footer() {
+  const privateToken = useSelector((state: store.AppState) => state.profile.privateToken);
+  const role = useSelector((state: store.AppState) => state.interaction.currentUserRole);
 
-const mapDispatchToProps: types.IDispatchProps = {
-  setCurrentRole: store.setCurrentUserRole
-};
+  const dispatch = useDispatch<store.AppDispatch>();
 
-function Footer(props: types.IProps) {
   return (
     <styled.Wrapper>
       <styled.SectionWrapper>
         <styled.InnerLogo />
       </styled.SectionWrapper>
 
-      {props.privateToken
-        && (
+      {privateToken && (
         <styled.SectionWrapper>
           <styled.MenuEntryTextMarked>Меню:</styled.MenuEntryTextMarked>
-          <styled.MenuEntryTextLink
-            onClick={() => {
-              props.setCurrentRole(props.currentRole === 'candidate' ? 'recruiter' : 'candidate');
-            }}
-          >
-            {props.currentRole === 'candidate' ? 'Вы рекрутёр?' : 'Вы кандидат?'}
-          </styled.MenuEntryTextLink>
+          <ScrollLink to='top-scroll-anchor' smooth duration={300}>
+            <styled.MenuEntryTextLink
+              onClick={() => {
+                dispatch(store.setCurrentUserRole(role === 'candidate' ? 'recruiter' : 'candidate'));
+                jumpTo('/profile');
+              }}
+            >
+              {role === 'candidate' ? 'Вы рекрутёр?' : 'Вы кандидат?'}
+            </styled.MenuEntryTextLink>
+          </ScrollLink>
         </styled.SectionWrapper>
-        )}
+      )}
 
       <styled.SectionWrapper>
         <styled.MenuEntryTextMarked>Контакты:</styled.MenuEntryTextMarked>
@@ -50,4 +50,4 @@ function Footer(props: types.IProps) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Footer));
+export default memo(Footer);

@@ -18,6 +18,7 @@ import * as styled from './styled';
  * Profile page. Used to view reviews.
  */
 function OwnProfilePage() {
+  const role = useSelector((state: store.AppState) => state.interaction.currentUserRole);
   const menu = useSelector((state: store.AppState) => state.interaction.currentMainToolbarEntry);
 
   return (
@@ -35,6 +36,9 @@ function OwnProfilePage() {
             case mainToolbarEntries.Invite: return <InviteArea />;
             case mainToolbarEntries.MyReviews: return <ReviewsArea />;
             case mainToolbarEntries.ObservedUsers: return <ObservedUsersArea />;
+            case mainToolbarEntries.Welcome: return role === 'recruiter'
+              ? <ObservedUsersArea />
+              : <AboutArea />;
             default: return <WelcomeArea />;
           }
         })()}
