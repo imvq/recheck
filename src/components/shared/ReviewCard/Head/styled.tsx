@@ -55,9 +55,15 @@ export const NameWrapper = styled.div`
   padding-left: 2rem;
 `;
 
-export const TopBarText = styled.span`
+interface TopBarTextProps {
+  isDimmed?: boolean;
+}
+
+export const TopBarText = styled.span<TopBarTextProps>`
   font-size: 1.3rem;
   font-weight: 600;
+
+  color: ${props => (props.isDimmed ? 'rgba(85, 85, 85, 1)' : 'inherit')};
 `;
 
 export const PlainTextWrapper = mixins.prepared.DefaultWrapper;

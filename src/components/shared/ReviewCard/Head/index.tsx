@@ -1,10 +1,16 @@
 import { memo } from 'react';
 
+import { IReviewParsed } from 'commons/types';
+
 import * as misc from '../misc';
-import * as types from './types';
 import * as styled from './styled';
 
-function Head(props: types.IProps) {
+export interface Props {
+  reviewCardData: IReviewParsed;
+  showTarget?: boolean;
+}
+
+function Head(props: Props) {
   const TopBar = (
     <styled.TopBar>
       {props.showTarget && <styled.Photo src={props.reviewCardData.targetPhotoUrl} />}
@@ -16,7 +22,9 @@ function Head(props: types.IProps) {
         </styled.TopBarText>
       </styled.NameWrapper>
 
-      <styled.TopBarText>{misc.getFormattedDate(props.reviewCardData.date)}</styled.TopBarText>
+      <styled.TopBarText isDimmed>
+        {`Дата отзыва: ${misc.getFormattedDate(props.reviewCardData.date)}`}
+      </styled.TopBarText>
     </styled.TopBar>
   );
 
