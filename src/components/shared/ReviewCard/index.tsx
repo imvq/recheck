@@ -2,8 +2,9 @@ import { memo } from 'react';
 
 import { isReviewReceived } from 'commons/types';
 
+import AuthorSection from './AuthorSection';
 import Head from './Head';
-import Body from './Body';
+import Body from './ReviewBody';
 
 import * as misc from './misc';
 import * as types from './types';
@@ -20,6 +21,7 @@ function ReviewCard(props: types.IProps) {
   return (
     <styled.ReviewCard>
       <Head reviewCardData={parsedReview} showTarget={props.showTarget} />
+      <AuthorSection reviewCardData={parsedReview} />
       <Body reviewCardData={parsedReview} />
     </styled.ReviewCard>
   );

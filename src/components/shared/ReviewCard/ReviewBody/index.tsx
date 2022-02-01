@@ -1,11 +1,16 @@
 import { memo } from 'react';
 
-import * as types from './types';
+import { IReviewParsed } from 'commons/types';
+
 import * as styled from './styled';
 
-function Body(props: types.IProps) {
+export interface Props {
+  reviewCardData: IReviewParsed;
+}
+
+function Body(props: Props) {
   return (
-    <styled.Body>
+    <styled.ReviewBody>
       {props.reviewCardData.questions.map((question, index) => (
         <styled.EntryWrapper key={question}>
           <styled.QuestionTitle>{question}</styled.QuestionTitle>
@@ -15,7 +20,7 @@ function Body(props: types.IProps) {
             && <styled.Answer isMark>{`Оценка: ${props.reviewCardData.marks[index]}`}</styled.Answer>}
         </styled.EntryWrapper>
       ))}
-    </styled.Body>
+    </styled.ReviewBody>
   );
 }
 

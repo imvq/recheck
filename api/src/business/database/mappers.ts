@@ -46,7 +46,20 @@ export const normalizeUserIdentifier = (entity: any) => ({
   id: entity['id']
 });
 
+function censorWord(word: string) {
+  return `${word[0]}${'*'.repeat(word.length - 1)}`;
+}
+
+function censorEmail(email: string) {
+  const emailParts = email.split('@');
+
+  return `${censorWord(emailParts[0])}@${emailParts[1]}`;
+}
+
 export const normalizeReviewWithTarget = (entity: any) => ({
+  authorCompany: entity['author_company'],
+  authorPosition: entity['author_position'],
+  authorEmail: censorEmail(entity['author_email']),
   targetShareableId: entity['target_shareable_id'],
   targetPhotoUrl: entity['photo_url'],
   targetName: entity['full_name'],
