@@ -15,10 +15,10 @@ const initialState: types.IState = {
   isProfileAboutTabLoading: true,
   isProfileHistoryTabLoading: true,
   isProfileReviewsTabLoading: true,
-  requestedUserShareableId: null
+  requestedShareableId: null
 };
 
-export function interactionStateReducer(state = initialState, action: types.IAction): types.IState {
+export function miscStateReducer(state = initialState, action: types.IAction): types.IState {
   switch (action.type) {
     case types.SET_IS_REDIRECTED_FROM_ORIGIN:
       return {
@@ -85,7 +85,7 @@ export function interactionStateReducer(state = initialState, action: types.IAct
     case types.SET_REQUESTED_USER_SHAREABLE_ID:
       return {
         ...state,
-        requestedUserShareableId: action.payload
+        requestedShareableId: action.payload
       };
     default:
       return state;

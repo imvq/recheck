@@ -12,7 +12,7 @@ import * as styled from '../Popups';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   privateToken: store.profile.privateToken,
-  requestedUserShareableId: store.interaction.requestedUserShareableId
+  requestedUserShareableId: store.misc.requestedShareableId
 });
 
 const mapDispatchToProps: types.IDispatchProps = {

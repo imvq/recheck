@@ -7,7 +7,7 @@ import * as types from 'commons/types';
 import { jumpTo } from 'commons/utils/misc';
 import { apiClient } from 'commons/utils/services';
 
-import * as interactionActions from './interaction/actions';
+import * as miscActions from './misc/actions';
 import * as observingActions from './observing/actions';
 import * as profileActions from './profile/actions';
 import * as reviewsActions from './reviews/actions';
@@ -21,7 +21,7 @@ export function updateAuthorizationStatus() {
     const accessToken = localStorage.getItem('accessToken');
 
     if (accessToken) {
-      apiClient.retrieveProfile(accessToken, getState().interaction.currentUserRole)
+      apiClient.retrieveProfile(accessToken, getState().misc.currentUserRole)
         .then(profileData => postProcessProfileRetrieving(dispatch, getState, profileData))
         .catch(() => {
           localStorage.removeItem('accessToken');
@@ -62,8 +62,8 @@ function processProfileUnregistered(
 ) {
   dispatch(profileActions.setMandatoryBasicFields(profileData.data.socialId, false));
 
-  dispatch(interactionActions.setIsRedirectedFromOrigin(true));
-  dispatch(interactionActions.setIsPageLocked(false));
+  dispatch(miscActions.setIsRedirectedFromOrigin(true));
+  dispatch(miscActions.setIsPageLocked(false));
   jumpTo('/register');
 }
 
@@ -75,7 +75,7 @@ function processProfileUnconfirmed(
   dispatch(profileActions.setPrivateToken(profileData.data.privateToken as string));
   dispatch(profileActions.setEmail(profileData.data.email as string));
 
-  dispatch(interactionActions.setIsRedirectedFromOrigin(true));
+  dispatch(miscActions.setIsRedirectedFromOrigin(true));
   jumpTo('/await-user-confirmation');
 }
 
@@ -116,8 +116,8 @@ function processRedirectingFlag(
   dispatch: Dispatch<AppActionType>,
   getState: typeof store.getState
 ) {
-  if (getState().interaction.isRedirectHomePending) {
-    dispatch(interactionActions.setIsRedirectHomePending(false));
+  if (getState().misc.isRedirectHomePending) {
+    dispatch(miscActions.setIsRedirectHomePending(false));
 
     jumpTo('/profile');
   }
@@ -145,7 +145,7 @@ function processPreparedReview(
 
 export function loadAboutTabData(privateToken: string) {
   return (dispatch: ThunkDispatch<any, void, AppActionType>) => {
-    dispatch(interactionActions.setIsProfileAboutTabLoading(true));
+    dispatch(miscActions.setIsProfileAboutTabLoading(true));
 
     apiClient.getReceivedReviewsAmount(privateToken)
       .then(amountData => {
@@ -159,14 +159,14 @@ export function loadAboutTabData(privateToken: string) {
         dispatch(reviewsActions.setReceivedReviewsAmount(0));
       })
       .finally(() => {
-        dispatch(interactionActions.setIsProfileAboutTabLoading(false));
+        dispatch(miscActions.setIsProfileAboutTabLoading(false));
       });
   };
 }
 
 export function loadReviewsTabData(privateToken: string) {
   return (dispatch: ThunkDispatch<any, void, AppActionType>) => {
-    dispatch(interactionActions.setIsProfileReviewsTabLoading(true));
+    dispatch(miscActions.setIsProfileReviewsTabLoading(true));
 
     apiClient.getLeftReviewsAmount(privateToken)
       .then(amountData => {
@@ -180,7 +180,7 @@ export function loadReviewsTabData(privateToken: string) {
         dispatch(reviewsActions.setLeftReviewsAmount(0));
       })
       .finally(() => {
-        dispatch(interactionActions.setIsProfileReviewsTabLoading(false));
+        dispatch(miscActions.setIsProfileReviewsTabLoading(false));
       });
   };
 }
@@ -203,14 +203,14 @@ export function loadObservedReviewPageData(privateToken: string, targetShareable
 
 export function loadNthReceivedReview(privateToken: string, n: number | string) {
   return (dispatch: Dispatch<AppActionType>) => {
-    dispatch(interactionActions.setIsProfileAboutTabLoading(true));
+    dispatch(miscActions.setIsProfileAboutTabLoading(true));
 
     apiClient.getNthReceivedReview(privateToken, n)
       .then(reviewData => {
         dispatch(reviewsActions.setCurrentObservedReceivedReview(reviewData.data));
       })
       .finally(() => {
-        dispatch(interactionActions.setIsProfileAboutTabLoading(false));
+        dispatch(miscActions.setIsProfileAboutTabLoading(false));
       });
   };
 }
@@ -219,7 +219,7 @@ export function loadNthObservedReview(
   privateToken: string, targetShareableId: string, n: number | string
 ) {
   return (dispatch: Dispatch<AppActionType>) => {
-    dispatch(interactionActions.setIsProfileAboutTabLoading(true));
+    dispatch(miscActions.setIsProfileAboutTabLoading(true));
 
     apiClient.getNthObservedReview(privateToken, targetShareableId, n)
       .then(reviewData => {
@@ -230,14 +230,14 @@ export function loadNthObservedReview(
 
 export function loadNthLeftReview(privateToken: string, n: number | string) {
   return (dispatch: Dispatch<AppActionType>) => {
-    dispatch(interactionActions.setIsProfileReviewsTabLoading(true));
+    dispatch(miscActions.setIsProfileReviewsTabLoading(true));
 
     apiClient.getNthLeftReview(privateToken, n)
       .then(reviewData => {
         dispatch(reviewsActions.setCurrentObservedLeftReview(reviewData.data));
       })
       .finally(() => {
-        dispatch(interactionActions.setIsProfileReviewsTabLoading(false));
+        dispatch(miscActions.setIsProfileReviewsTabLoading(false));
       });
   };
 }

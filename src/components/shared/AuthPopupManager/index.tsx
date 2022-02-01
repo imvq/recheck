@@ -7,7 +7,7 @@ import { AppState } from 'store';
 import * as types from './types';
 
 const mapStateToProps = (store: AppState): types.IStateProps => ({
-  isLoginPopupVisible: store.interaction.isLoginPopupVisible
+  isLoginPopupVisible: store.misc.isLoginPopupVisible
 });
 
 /**

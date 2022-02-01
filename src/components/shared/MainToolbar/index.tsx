@@ -24,8 +24,8 @@ interface Props {
 }
 
 function MainToolbar(props: Props) {
-  const entry = useSelector((state: store.AppState) => state.interaction.currentMainToolbarEntry);
-  const role = useSelector((state: store.AppState) => state.interaction.currentUserRole);
+  const entry = useSelector((state: store.AppState) => state.misc.currentMainToolbarEntry);
+  const role = useSelector((state: store.AppState) => state.misc.currentUserRole);
   const shareableId = useSelector((state: store.AppState) => state.profile.shareableId);
 
   const dispatch = useDispatch<store.AppDispatch>();

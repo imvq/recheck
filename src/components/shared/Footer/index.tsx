@@ -11,7 +11,7 @@ import * as styled from './styled';
 
 function Footer() {
   const privateToken = useSelector((state: store.AppState) => state.profile.privateToken);
-  const role = useSelector((state: store.AppState) => state.interaction.currentUserRole);
+  const role = useSelector((state: store.AppState) => state.misc.currentUserRole);
 
   const dispatch = useDispatch<store.AppDispatch>();
 

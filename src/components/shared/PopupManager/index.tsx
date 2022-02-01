@@ -11,7 +11,7 @@ const InvitePopup = lazy(() => import('components/shared/InvitePopup'));
  */
 function PopupManager() {
   const isInvitePopupVisible = useSelector((state: store.AppState) => (
-    state.interaction.isInvitePopupVisible
+    state.misc.isInvitePopupVisible
   ));
 
   if (isInvitePopupVisible) {

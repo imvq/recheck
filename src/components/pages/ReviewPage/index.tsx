@@ -1,9 +1,10 @@
 import { memo, useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import * as constants from 'commons/utils/constants';
 import * as store from 'store';
+import { AppState, AppDispatch } from 'store';
 
 import { ISearchedProfile } from 'commons/types';
 import { jumpBack, jumpTo } from 'commons/utils/misc';
@@ -16,89 +17,79 @@ import CommentBoxSimple from './CommentBoxSimple';
 import ComponentBoxWithMark from './CommentBoxWithMark';
 
 import * as misc from './misc';
-import * as types from './types';
 import * as styled from './styled';
-
-const mapSateToProps = (state: store.AppState): types.IStateProps => ({
-  isConfirmed: store.getIsUserConfirmed(state),
-  isPageLocked: store.getIsPageLocked(state),
-  privateToken: store.getCurrentPrivateToken(state),
-  requestedUserShareableId: store.getRequestedUserShareableId(state),
-  reviewData: store.getUntargetedCreatedReview(state)
-});
-
-const mapDispatchToProps: types.IDispatchProps = {
-  createReview: store.createReview,
-  setQuestions: store.setQuestions,
-  pushAnswer: store.pushAnswer,
-  popAnswer: store.popAnswer,
-  setIsRedirectHomePending: store.setIsRedirectHomePending,
-  setIsLoginPopupVisible: store.setIsLoginPopupVisible,
-  setCurrentReviewTargetShareableId: store.setCurrentReviewTargetShareableId,
-  setCurrentUserRole: store.setCurrentUserRole,
-  setIsPageLocked: store.setIsPageLocked
-};
 
 /**
  * Page in charge of adding a review.
  */
-function ReviewPage(props: types.IProps) {
+function ReviewPage() {
   const { targetShareableId } = useParams<{ targetShareableId: string }>();
 
   const [observedUser, setObservedUser] = useState<ISearchedProfile>();
   const [step, setStep] = useState(0);
 
+  const isPageLocked = useSelector((state: AppState) => state.misc.isPageLocked);
+  const isCurrentUserConfirmed = useSelector((state: AppState) => state.profile.isConfirmed);
+  const privateToken = useSelector((state: AppState) => state.profile.privateToken);
+  const requestedShareableId = useSelector((state: AppState) => state.misc.requestedShareableId);
+  const reviewData = useSelector((state: AppState) => store.getUntargetedCreatedReview(state));
+
+  const dispatch = useDispatch<AppDispatch>();
+
   function proceed(comment: string, mark: number | null = null) {
-    props.pushAnswer(comment, mark);
+    dispatch(store.pushAnswer(comment, mark));
     setStep(step + 1);
   }
 
   function comeback() {
-    props.popAnswer();
+    dispatch(store.popAnswer());
     setStep(step - 1);
   }
 
   function finalize(comment: string, mark: number | null = null) {
-    props.pushAnswer(comment, mark);
+    dispatch(store.pushAnswer(comment, mark));
     // First we have to add the last answer to our review data.
-    const reviewData = {
-      questions: props.reviewData.questions,
-      comments: [...props.reviewData.comments, comment],
-      marks: [...props.reviewData.marks, mark]
+    const extendedReviewData = {
+      questions: reviewData.questions,
+      comments: [...reviewData.comments, comment],
+      marks: [...reviewData.marks, mark]
     };
 
-    if (props.isConfirmed) {
-      props.setCurrentUserRole('candidate');
-      props.createReview(
-        props.privateToken as string,
+    if (isCurrentUserConfirmed) {
+      dispatch(store.setCurrentUserRole('candidate'));
+      dispatch(store.createReview(
+        privateToken!,
         targetShareableId,
-        reviewData,
-        () => misc.postRedirect(props.requestedUserShareableId)
-      );
+        extendedReviewData,
+        () => misc.postRedirect(requestedShareableId)
+      ));
     } else {
-      const serialziedReview = { targetShareableId, reviewData: props.reviewData };
+      const serialziedReview = { targetShareableId, reviewData };
       misc.saveReviewLocally(JSON.stringify(serialziedReview));
-      props.setIsLoginPopupVisible(true);
+
+      dispatch(store.setIsLoginPopupVisible(true));
     }
   }
 
   // We must check if there is a user with provided shareable ID.
-  // If not, then we must redirect to 404 page since there's no one to review.
+  // If not, then we must redirect to 404 page since there's no one to be reviewed.
   useEffect(() => {
     apiClient.searchUserByShareableId(targetShareableId)
       .then(searchResult => {
         setObservedUser(searchResult.data);
-        props.setCurrentReviewTargetShareableId(searchResult.data.shareableId);
+
+        dispatch(store.setCurrentReviewTargetShareableId(searchResult.data.shareableId));
       })
       .catch(() => {
-        props.setIsPageLocked(false);
+        dispatch(store.setIsPageLocked(false));
+
         jumpTo('/404');
       });
   }, []);
 
   // Set questions set depending on user's choice (basic questions set is the default one).
   useEffect(() => {
-    props.setQuestions(constants.REVIEW_QESTIONS_BASIC);
+    dispatch(store.setQuestions(constants.REVIEW_QESTIONS_BASIC));
   }, []);
 
   // There are some conditions to review someone:
@@ -109,27 +100,29 @@ function ReviewPage(props: types.IProps) {
   // 3) if the reviewer is not signed in, authorization can be deferred
   //    till the review is saved.
   useEffect(() => {
-    if (props.isConfirmed === null) {
+    if (isCurrentUserConfirmed === null) {
       return;
     }
 
-    if (!props.isConfirmed) {
-      props.setIsRedirectHomePending(true);
-      props.setIsPageLocked(false);
+    if (!isCurrentUserConfirmed) {
+      dispatch(store.setIsRedirectHomePending(true));
+      dispatch(store.setIsPageLocked(false));
+
       return;
     }
 
-    apiClient.checkIfUserCanLeaveReview(props.privateToken as string, targetShareableId)
+    apiClient.checkIfUserCanLeaveReview(privateToken!, targetShareableId)
       .then(checkData => {
         if (checkData.data.success) {
-          props.setIsPageLocked(false);
+          dispatch(store.setIsPageLocked(false));
+
           return;
         }
 
         jumpTo('/404');
       })
       .catch(() => jumpTo('/404'));
-  }, [props.isConfirmed]);
+  }, [isCurrentUserConfirmed]);
 
   const boxesBasic = [
     <CommentBoxSimple key={1} pageLabel='1 / 3' onStepForward={proceed} onStepBack={jumpBack}>
@@ -169,7 +162,7 @@ function ReviewPage(props: types.IProps) {
     </styled.Wrapper>
   );
 
-  return props.isPageLocked ? null : GuardedContent;
+  return isPageLocked ? null : GuardedContent;
 }
 
-export default connect(mapSateToProps, mapDispatchToProps)(memo(ReviewPage));
+export default memo(ReviewPage);

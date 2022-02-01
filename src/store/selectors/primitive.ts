@@ -3,16 +3,16 @@ import { AppState } from 'store';
 // Interaction.
 
 export const getIsRedirectedFromOrigin = (state: AppState) => (
-  state.interaction.isRedirectedFromOrigin
+  state.misc.isRedirectedFromOrigin
 );
-export const getIsPageLocked = (state: AppState) => state.interaction.isPageLocked;
+export const getIsPageLocked = (state: AppState) => state.misc.isPageLocked;
 export const getRequestedUserShareableId = (state: AppState) => (
-  state.interaction.requestedUserShareableId
+  state.misc.requestedShareableId
 );
 export const getCurrentMainToolbarEntry = (state: AppState) => (
-  state.interaction.currentMainToolbarEntry
+  state.misc.currentMainToolbarEntry
 );
-export const getCurrentUserRole = (state: AppState) => state.interaction.currentUserRole;
+export const getCurrentUserRole = (state: AppState) => state.misc.currentUserRole;
 
 // Observing.
 

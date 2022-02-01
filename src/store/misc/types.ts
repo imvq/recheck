@@ -27,7 +27,7 @@ export interface IState {
   isProfileAboutTabLoading: boolean;
   isProfileHistoryTabLoading: boolean;
   isProfileReviewsTabLoading: boolean;
-  requestedUserShareableId: string | null;
+  requestedShareableId: string | null;
 }
 
 export interface SetCurrentMainToolbarEntry {
@@ -90,7 +90,7 @@ export interface SetIsProfileReviewsTabLoading {
   payload: boolean;
 }
 
-export interface SetRequestedUserShareableId {
+export interface SetRequestedShareableId {
   type: typeof SET_REQUESTED_USER_SHAREABLE_ID;
   payload: string | null;
 }
@@ -108,4 +108,4 @@ export type IAction =
   | SetIsProfileAboutTabLoading
   | SetIsProfileHistoryTabLoading
   | SetIsProfileReviewsTabLoading
-  | SetRequestedUserShareableId;
+  | SetRequestedShareableId;

@@ -18,8 +18,8 @@ import * as styled from './styled';
  * Profile page. Used to view reviews.
  */
 function OwnProfilePage() {
-  const role = useSelector((state: store.AppState) => state.interaction.currentUserRole);
-  const menu = useSelector((state: store.AppState) => state.interaction.currentMainToolbarEntry);
+  const role = useSelector((state: store.AppState) => state.misc.currentUserRole);
+  const menu = useSelector((state: store.AppState) => state.misc.currentMainToolbarEntry);
 
   return (
     <styled.OwnProfilePage>

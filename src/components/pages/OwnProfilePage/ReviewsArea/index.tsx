@@ -16,7 +16,7 @@ import * as styled from './styled';
 const mapStateToProps = (store: AppState): types.IStateProps => ({
   privateToken: store.profile.privateToken,
   isConfirmed: store.profile.isConfirmed,
-  isLoading: store.interaction.isProfileReviewsTabLoading,
+  isLoading: store.misc.isProfileReviewsTabLoading,
   leftReviewsAmount: store.reviews.leftReviewsAmount,
   currentReviewData: store.reviews.currentObservedLeftReview
 });

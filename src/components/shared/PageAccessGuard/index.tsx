@@ -10,7 +10,7 @@ import * as types from './types';
 const mapStateToProps = (state: store.AppState): types.IStateProps => ({
   isAuthenticated: store.getIsUserAuthenticated(state),
   isConfirmed: state.profile.isConfirmed,
-  isPageLocked: state.interaction.isPageLocked
+  isPageLocked: state.misc.isPageLocked
 });
 
 const mapDispatchToProps: types.IDispatchProps = {
