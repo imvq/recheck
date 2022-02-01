@@ -3,7 +3,6 @@ import { IDisplayedProfileHeadInfo } from 'commons/types';
 export interface IOwnProps {
   profileInfo: IDisplayedProfileHeadInfo;
   isSolid?: boolean;
-  noButtons?: boolean;
 }
 
 export interface IStateProps {}

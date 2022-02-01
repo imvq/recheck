@@ -1,7 +1,7 @@
 import { memo, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import FindCandidateSvg from 'assets/images/pages/LandingPage/MotivatorSection/FindCandidateBtn.svg';
+import CustomButton from 'components/shared/CustomButton';
 
 import { jumpTo } from 'commons/utils/misc';
 import { AppState, setPageLocked, setIsLoginPopupVisible } from 'store';
@@ -19,9 +19,10 @@ const mapDispatchToProps: types.IDispatchProps = {
 };
 
 /**
- * Button to redirect to search page from the bottom landing page section.
+ * Group of Programmed SVG components representing a profile button
+ * and a decorated SVG rocket attached to.
  */
-function FindButton(props: types.IProps) {
+function ProfileButtonGroup(props: types.IProps) {
   const [isClickRequested, setIsClickRequested] = useState(false);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ function FindButton(props: types.IProps) {
 
   const getPendingFinishedCallback = () => {
     return props.isConfirmed
-      ? () => jumpTo('/search')
+      ? () => jumpTo('/profile')
       : () => props.setIsLoginPopupVisible(true);
   };
 
@@ -49,13 +50,14 @@ function FindButton(props: types.IProps) {
   );
 
   return (
-    <styled.Wrapper
-      role='none'
-      src={FindCandidateSvg}
-      alt=''
-      onClick={getMainHandler()}
-    />
+    <styled.ProfileButtonGroup>
+      <CustomButton onClick={getMainHandler()}>Перейти в профиль</CustomButton>
+      <styled.ImagesWrapper>
+        <styled.Line />
+        <styled.Rocket />
+      </styled.ImagesWrapper>
+    </styled.ProfileButtonGroup>
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(FindButton));
+export default connect(mapStateToProps, mapDispatchToProps)(memo(ProfileButtonGroup));

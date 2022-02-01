@@ -3,7 +3,6 @@ import { memo } from 'react';
 import PhoneImage from 'assets/images/pages/LandingPage/MotivatorSection/Phone.png';
 
 import Badge from './Badge';
-import FindButton from './FindButton';
 
 import * as styled from './styled';
 
@@ -34,7 +33,6 @@ const Anchor = (
 const StickyAnchor = (
   <styled.AnchorSticky>
     <styled.Image src={PhoneImage} alt='' />
-    <styled.ButtonWrapper><FindButton /></styled.ButtonWrapper>
   </styled.AnchorSticky>
 );
 

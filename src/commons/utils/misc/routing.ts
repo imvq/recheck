@@ -14,7 +14,6 @@ type Page = '/'
   | '/register'
   | '/register/complete'
   | '/await-user-confirmation'
-  | '/search'
   | '/colleagues';
 
 export function jumpBack() {

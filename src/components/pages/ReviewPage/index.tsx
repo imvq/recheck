@@ -156,7 +156,7 @@ function ReviewPage() {
       <styled.ContentWrapper>
         {observedUser && (
           <styled.ProfileHeadWrapper>
-            <ProfileHead profileInfo={observedUser} isSolid noButtons />
+            <ProfileHead profileInfo={observedUser} isSolid />
           </styled.ProfileHeadWrapper>
         )}
 

@@ -49,8 +49,9 @@ export const getDemoObservedUser = (): ISearchedProfile => ({
 });
 
 export const getDemoReview = (): IReviewReceived => ({
-  authorCompanySnapshot: 'Kingcross',
-  authorEmailSnapshot: 'r*****@kingcross.io',
+  authorCompany: 'Ringostat',
+  authorPosition: 'Head of Design',
+  authorEmail: 'r*****@ringostat.com',
   targetCompanyName: 'Kingcross',
   targetPosition: 'Designer',
   targetName: 'Екатерина Мазур',

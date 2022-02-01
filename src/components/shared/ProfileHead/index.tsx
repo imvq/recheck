@@ -2,14 +2,8 @@ import { memo } from 'react';
 
 import cssVars from 'commons/styles/cssVars';
 
-import { jumpTo } from 'commons/utils/misc';
-
-import CustomButton from 'components/shared/CustomButton';
-
 import * as types from './types';
 import * as styled from './styled';
-
-const jumpToSearchPage = () => jumpTo('/search');
 
 /**
  * Menu with basic profile info.
@@ -61,21 +55,11 @@ function ProfileHead(props: types.IProps) {
     </styled.MenuContent>
   );
 
-  // Button panel.
-  const Button = (
-    <styled.ButtonWrapper>
-      <CustomButton height='2.3rem' isDisabled={false} onClick={jumpToSearchPage}>
-        Новый поиск
-      </CustomButton>
-    </styled.ButtonWrapper>
-  );
-
   return (
     <styled.ProfileHead>
       <styled.Menu>
         {MenuBar}
         {MenuContent}
-        {!props.noButtons && Button}
       </styled.Menu>
     </styled.ProfileHead>
   );

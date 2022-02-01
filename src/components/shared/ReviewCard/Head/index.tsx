@@ -44,7 +44,7 @@ function Head(props: Props) {
       <styled.PlainText isDimmed>
         Место работы:&nbsp;&nbsp;
         <styled.PlainText>
-          {props.reviewCardData.authorCompanySnapshot}
+          {props.reviewCardData.authorCompany}
         </styled.PlainText>
       </styled.PlainText>
     </styled.PlainTextWrapper>
@@ -55,7 +55,7 @@ function Head(props: Props) {
       <styled.PlainText isDimmed>
         Почта:&nbsp;&nbsp;
         <styled.PlainText>
-          {props.reviewCardData.authorEmailSnapshot}
+          {props.reviewCardData.authorEmail}
         </styled.PlainText>
       </styled.PlainText>
     </styled.PlainTextWrapper>

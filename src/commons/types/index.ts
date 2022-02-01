@@ -75,8 +75,9 @@ export interface IReviewFormData {
 }
 
 export interface IReviewParsed {
-  authorCompanySnapshot?: string;
-  authorEmailSnapshot?: string;
+  authorCompany: string;
+  authorPosition: string;
+  authorEmail: string;
   targetShareableId: string;
   targetPhotoUrl: string;
   targetName: string;
@@ -89,8 +90,9 @@ export interface IReviewParsed {
 }
 
 export interface IReviewReceived {
-  authorCompanySnapshot?: string;
-  authorEmailSnapshot?: string;
+  authorCompany: string;
+  authorPosition: string;
+  authorEmail: string;
   targetShareableId: string;
   targetPhotoUrl: string;
   targetName: string;

@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import ContentPic from 'assets/images/pages/LandingPage/GreetingsSection/Content/ContentPic.svg';
 
-import SearchButtonGroup from './SearchButtonGroup';
+import ProfileButtonGroup from './ProfileButtonGroup';
 
 import * as styled from './styled';
 
@@ -18,7 +18,7 @@ const TextSection = (
       <styled.ActionGroupText>
         Найди отзывы о кандидате с прошлых мест работы
       </styled.ActionGroupText>
-      <SearchButtonGroup />
+      <ProfileButtonGroup />
     </styled.ActionGroup>
   </styled.TextWrapper>
 );
