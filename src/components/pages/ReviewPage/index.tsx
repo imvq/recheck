@@ -31,6 +31,9 @@ function ReviewPage() {
   const isPageLocked = useSelector((state: AppState) => state.misc.isPageLocked);
   const isCurrentUserConfirmed = useSelector((state: AppState) => state.profile.isConfirmed);
   const privateToken = useSelector((state: AppState) => state.profile.privateToken);
+  const company = useSelector((state: AppState) => state.profile.company);
+  const currentPosition = useSelector((state: AppState) => state.profile.currentPosition);
+  const email = useSelector((state: AppState) => state.profile.email);
   const requestedShareableId = useSelector((state: AppState) => state.misc.requestedShareableId);
   const reviewData = useSelector((state: AppState) => store.getUntargetedCreatedReview(state));
 
@@ -59,6 +62,9 @@ function ReviewPage() {
       dispatch(store.setCurrentUserRole('candidate'));
       dispatch(store.createReview(
         privateToken!,
+        company!.name,
+        currentPosition!,
+        email!,
         targetShareableId,
         extendedReviewData,
         () => misc.postRedirect(requestedShareableId)

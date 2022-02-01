@@ -13,12 +13,19 @@ import { assertBodyData, reply } from '@business/commons';
 export async function createReview(request: Request, response: Response) {
   interface IBodyData {
     privateToken: string;
+    authorCompanyAtm: string;
+    authorPositionAtm: string;
+    authorEmailAtm: string;
     targetShareableId: string;
     content: string;
   }
 
-  const { privateToken, targetShareableId, content }: IBodyData = request.body;
-  assertBodyData(privateToken, targetShareableId, content);
+  const {
+    privateToken, authorCompanyAtm, authorPositionAtm, authorEmailAtm, targetShareableId, content
+  }: IBodyData = request.body;
+  assertBodyData(
+    privateToken, authorCompanyAtm, authorPositionAtm, authorEmailAtm, targetShareableId, content
+  );
 
   const author = await accessors.readUserByPrivateToken(privateToken);
   const existingReview = await accessors.readReview(author.id, targetShareableId);
@@ -27,7 +34,9 @@ export async function createReview(request: Request, response: Response) {
     throw new errors.ConflictError('The review already exists');
   }
 
-  await accessors.createReview(author.id, targetShareableId, content);
+  await accessors.createReview(
+    author.id, authorCompanyAtm, authorPositionAtm, authorEmailAtm, targetShareableId, content
+  );
 
   reply(response);
 }

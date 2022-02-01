@@ -144,7 +144,16 @@ export function getColleagues(privateToken: string)
   return apiInstance.post('/users/colleagues', { privateToken });
 }
 
-export function createReview(privateToken: string, targetShareableId: string, content: string)
+export function createReview(
+  privateToken: string,
+  authorCompanyAtm: string,
+  authorPositionAtm: string,
+  authorEmailAtm: string,
+  targetShareableId: string,
+  content: string
+)
   : ApiPromise<ISimpleBooleanResponse> {
-  return apiInstance.post('/reviews/create', { privateToken, targetShareableId, content });
+  return apiInstance.post('/reviews/create', {
+    privateToken, authorCompanyAtm, authorPositionAtm, authorEmailAtm, targetShareableId, content
+  });
 }

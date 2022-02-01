@@ -134,7 +134,10 @@ function processPreparedReview(
     const { targetShareableId, reviewData }: PreparedReview = JSON.parse(preparedReview);
 
     dispatch(createReview(
-      getState().profile.privateToken as string,
+      getState().profile.privateToken!,
+      getState().profile.company!.name,
+      getState().profile.currentPosition!,
+      getState().profile.email!,
       targetShareableId,
       reviewData
     ));
@@ -244,6 +247,9 @@ export function loadNthLeftReview(privateToken: string, n: number | string) {
 
 export function createReview(
   privateToken: string,
+  authorCompanyAtm: string,
+  authorPositionAtm: string,
+  authorEmailAtm: string,
   targetShareableId: string,
   reviewData: types.IReviewCreated,
   callback?: () => void
@@ -255,7 +261,9 @@ export function createReview(
       marks: reviewData.marks
     });
 
-    apiClient.createReview(privateToken, targetShareableId, content)
+    apiClient.createReview(
+      privateToken, authorCompanyAtm, authorPositionAtm, authorEmailAtm, targetShareableId, content
+    )
       .then(callback)
       .catch(() => jumpTo('/404'));
 
