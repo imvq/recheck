@@ -1,29 +1,17 @@
 import { memo, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import * as store from 'store';
+import { AppState, AppDispatch } from 'store';
 
 import { showToast } from 'commons/utils/misc';
-import { AppState } from 'store';
-import { loadAboutTabData, loadNthReceivedReview } from 'store/thunks';
 
 import CustomButton from 'components/shared/CustomButton';
 import Pagination from 'components/shared/Pagination';
+import ProfileHead from 'components/shared/ProfileHead';
 import ReviewCard from 'components/shared/ReviewCard';
 
-import * as types from './types';
 import * as styled from './styled';
-
-const mapStateToProps = (store: AppState): types.IStateProps => ({
-  privateToken: store.profile.privateToken,
-  shareableId: store.profile.shareableId,
-  isLoading: store.misc.isProfileAboutTabLoading,
-  receivedReviewsAmount: store.reviews.receivedReviewsAmount,
-  currentReviewData: store.reviews.currentObservedReceivedReview
-});
-
-const mapDispatchToProps: types.IDispatchProps = {
-  loadTabData: loadAboutTabData,
-  loadNthReview: loadNthReceivedReview
-};
 
 function copyAwaiterLink(awaiterId: string) {
   showToast('Ссылка скопрована');
@@ -35,11 +23,20 @@ const NoContent = <styled.Title isHighlighted>Загрузка...</styled.Title>
 /**
  * Section with user's reviews.
  */
-function AboutArea(props: types.IProps) {
+function AboutArea() {
   const [currentPage, setCurrentPage] = useState(0);
 
+  const privateToken = useSelector((state: AppState) => state.profile.privateToken);
+  const shareableId = useSelector((state: AppState) => state.profile.shareableId);
+  const currentProfile = useSelector((state: AppState) => store.getCurrentProfileInfo(state));
+  const isTabDataLoading = useSelector((state: AppState) => state.misc.isProfileAboutTabLoading);
+  const reviewsAmount = useSelector((state: AppState) => state.reviews.receivedReviewsAmount);
+  const review = useSelector((state: AppState) => state.reviews.currentObservedReceivedReview);
+
+  const dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    props.loadTabData(props.privateToken as string);
+    dispatch(store.loadAboutTabData(privateToken!));
   }, []);
 
   const ContentEmpty = (
@@ -54,7 +51,7 @@ function AboutArea(props: types.IProps) {
       </styled.Title>
 
       <styled.ButtonWrapper>
-        <CustomButton onClick={() => copyAwaiterLink(props.shareableId as string)}>
+        <CustomButton onClick={() => copyAwaiterLink(shareableId!)}>
           Копировать ссылку
         </CustomButton>
       </styled.ButtonWrapper>
@@ -67,30 +64,31 @@ function AboutArea(props: types.IProps) {
         <styled.Title isHighlighted>Отзывы обо мне:</styled.Title>
       </styled.TitleWrapper>
 
-      {/* @ts-ignore: Used only in case the data is not null. */}
-      <ReviewCard reviewCardData={props.currentReviewData} />
+      <ReviewCard reviewCardData={review!} />
     </>
   );
 
   return (
     <styled.Wrapper>
+      <ProfileHead profileInfo={currentProfile} />
+
       <styled.ReviewSectionWrapper>
-        {props.isLoading ? NoContent : props.currentReviewData ? ContentAvailable : ContentEmpty}
+        {isTabDataLoading ? NoContent : review ? ContentAvailable : ContentEmpty}
       </styled.ReviewSectionWrapper>
 
-      {props.receivedReviewsAmount > 0 && (
+      {reviewsAmount > 0 && (
         <Pagination
-          nPages={props.receivedReviewsAmount}
+          nPages={reviewsAmount}
           onNextClick={() => {
-            props.loadNthReview(props.privateToken as string, currentPage + 1);
+            dispatch(store.loadNthReceivedReview(privateToken!, currentPage + 1));
             setCurrentPage(currentPage + 1);
           }}
           onPageClick={(page: number) => {
-            props.loadNthReview(props.privateToken as string, page - 1);
+            dispatch(store.loadNthReceivedReview(privateToken!, page - 1));
             setCurrentPage(page - 1);
           }}
           onPrevClick={() => {
-            props.loadNthReview(props.privateToken as string, currentPage - 1);
+            dispatch(store.loadNthReceivedReview(privateToken!, currentPage - 1));
             setCurrentPage(currentPage - 1);
           }}
         />
@@ -99,4 +97,4 @@ function AboutArea(props: types.IProps) {
   );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(memo(AboutArea));
+export default memo(AboutArea);
