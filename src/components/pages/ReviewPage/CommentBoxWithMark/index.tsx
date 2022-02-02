@@ -6,9 +6,15 @@ import * as styled from 'components/shared/BoxBase';
 
 import MarkSelector from '../MarkSelector';
 
-import * as types from './types';
+interface Props {
+  labels: string[];
+  pageLabel: string;
+  onStepBack(): void;
+  onStepForward(commentToPush: string, marktoPush: number): void;
+  children: string;
+}
 
-function CommentBoxWithMark(props: types.IProps) {
+function CommentBoxWithMark(props: Props) {
   const [comment, setComment] = useState('');
   const [mark, setMark] = useState<number | null>(null);
 

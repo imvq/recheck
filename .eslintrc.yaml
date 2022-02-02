@@ -35,6 +35,10 @@ rules:
   import/no-extraneous-dependencies: 0
   import/no-named-as-default: 0
   import/prefer-default-export: 0
+  jsx-a11y/label-has-associated-control:
+    ['error', { 'required': { 'some': ['nesting', 'id'] } }]
+  jsx-a11y/label-has-for:
+    ['error', { 'required': { 'some': ['nesting', 'id'] } }]
   jsx-quotes: ['error', 'prefer-single']
   max-classes-per-file: 0
   no-bitwise: 0

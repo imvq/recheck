@@ -3,9 +3,15 @@ import { memo, useState } from 'react';
 import CustomButton from 'components/shared/CustomButton';
 
 import * as styled from 'components/shared/BoxBase';
-import * as types from './types';
 
-function CommentBoxSimple(props: types.IProps) {
+interface Props {
+  pageLabel: string;
+  onStepBack(): void;
+  onStepForward(commentToPush: string): void;
+  children: string;
+}
+
+function CommentBoxSimple(props: Props) {
   const [comment, setComment] = useState('');
 
   const onForwardHandler = () => (comment ? props.onStepForward(comment) : () => {});

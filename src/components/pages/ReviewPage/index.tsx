@@ -15,6 +15,7 @@ import ProfileHead from 'components/shared/ProfileHead';
 
 import CommentBoxSimple from './CommentBoxSimple';
 import ComponentBoxWithMark from './CommentBoxWithMark';
+import JobDatesBox from './JobDatesBox';
 
 import * as misc from './misc';
 import * as styled from './styled';
@@ -135,9 +136,9 @@ function ReviewPage() {
       {constants.REVIEW_QESTIONS_BASIC[0]}
     </CommentBoxSimple>,
 
-    <CommentBoxSimple key={2} pageLabel='2 / 5' onStepForward={proceed} onStepBack={comeback}>
+    <JobDatesBox key={2} pageLabel='2 / 5' onStepForward={proceed} onStepBack={comeback}>
       {constants.REVIEW_QESTIONS_BASIC[1]}
-    </CommentBoxSimple>,
+    </JobDatesBox>,
 
     <CommentBoxSimple key={3} pageLabel='3 / 5' onStepForward={proceed} onStepBack={comeback}>
       {constants.REVIEW_QESTIONS_BASIC[2]}
