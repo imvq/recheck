@@ -4,27 +4,6 @@ import { ICompanyBasic, ICompany, IInputEvent, ISelectOptionType } from 'commons
 
 import { IEmailState } from './types';
 
-export const months: ISelectOptionType[] = [
-  { key: 0, text: 'Январь' },
-  { key: 1, text: 'Февраль' },
-  { key: 2, text: 'Март' },
-  { key: 3, text: 'Апрель' },
-  { key: 4, text: 'Май' },
-  { key: 5, text: 'Июнь' },
-  { key: 6, text: 'Июль' },
-  { key: 7, text: 'Август' },
-  { key: 8, text: 'Сентябрь' },
-  { key: 9, text: 'Октябрь' },
-  { key: 10, text: 'Ноябрь' },
-  { key: 11, text: 'Декабрь' },
-];
-
-// 50 years till current year.
-const yearsDown = Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i);
-
-// Optionified years array.
-export const years = yearsDown.map((value, index) => ({ key: index, text: value.toString() }));
-
 export function findCompanyMatches(sequence: string, callback: (sequence: string) => void) {
   callback(sequence);
 }
@@ -52,14 +31,6 @@ export function companyNameHandler(event: IInputEvent, callback: (company: IComp
 
 export function positionHandler(event: IInputEvent, callback: (position: string) => void) {
   inputHandler(event, callback);
-}
-
-export function monthHandler(option: ISelectOptionType, callback: (month: number) => void) {
-  callback(option.key);
-}
-
-export function yearHandler(option: ISelectOptionType, callback: (year: number) => void) {
-  callback(Number.parseInt(option.text));
 }
 
 /**

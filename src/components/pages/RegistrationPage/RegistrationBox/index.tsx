@@ -6,7 +6,7 @@ import * as store from 'store';
 
 import { ICompanyBasic } from 'commons/types';
 import { apiClient } from 'commons/utils/services';
-import { onExit } from 'commons/utils/misc';
+import { getMonthName, months, monthHandler, years, yearHandler, onExit } from 'commons/utils/misc';
 
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
@@ -221,15 +221,17 @@ function RegistrationBox(props: types.IProps) {
       <styled.InputRowWrapper>
         <CustomSelect
           width='49%'
-          options={misc.months}
+          options={months}
           placeholder='Месяц'
-          onNewOptionSelected={option => misc.monthHandler(option, setCurrentWorkMonthFrom)}
+          currentValue={getMonthName(currentWorkMonthFrom)}
+          onNewOptionSelected={option => monthHandler(option, setCurrentWorkMonthFrom)}
         />
         <CustomSelect
           width='49%'
-          options={misc.years}
+          options={years}
           placeholder='Год'
-          onNewOptionSelected={option => misc.yearHandler(option, setCurrentWorkYearFrom)}
+          currentValue={currentWorkYearFrom}
+          onNewOptionSelected={option => yearHandler(option, setCurrentWorkYearFrom)}
         />
       </styled.InputRowWrapper>
     </styled.InputGroupWrapper>

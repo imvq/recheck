@@ -13,19 +13,32 @@ const mixinsLocal = {
   `
 };
 
-export const Wrapper = styled.div`
+interface SelectWrapperProps {
+  isDisabled?: boolean;
+}
+
+export const SelectWrapper = styled.div<SelectWrapperProps>`
   position: relative;
   cursor: pointer;
   user-select: none;
   display: flex;
   align-items: center;
+
+  pointer-events: ${props => (props.isDisabled ? 'none' : 'all')};
 `;
 
-export const SelectedItemWrapper = styled.div<{ isDimmed?: boolean; }>`
+interface SelectedItemWrapperProps {
+  isDimmed?: boolean;
+  isDisabled?: boolean;
+}
+
+export const SelectedItemWrapper = styled.div<SelectedItemWrapperProps>`
   ${mixins.DefaultInput};
 
   display: flex;
   align-items: center;
+
+  background-color: ${props => (props.isDisabled ? '#e0e0e0' : 'white')};
   color: ${props => (props.isDimmed ? 'grey' : 'black')};
 
   &:hover {

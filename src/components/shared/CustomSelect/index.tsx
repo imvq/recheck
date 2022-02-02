@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import OutsideClickHandler from 'react-outside-click-handler';
 
@@ -7,26 +7,42 @@ import { IOptionType } from 'commons/types';
 import CustomOption from './CustomOption';
 
 import * as misc from './misc';
-import * as types from './types';
 import * as styled from './styled';
 
-function CustomSelect(props: types.IProps) {
+interface Props {
+  width?: string;
+  placeholder?: string;
+  isDisabled?: boolean;
+  options: IOptionType[];
+  currentValue: string | number | null;
+  onNewOptionSelected: (selectedOne: IOptionType) => void;
+}
+
+function CustomSelect(props: Props) {
   const [isDimmed, setIsDimmed] = useState(true);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [currentValue, setCurrentValue] = useState<IOptionType | null>(null);
 
   const callNewOptionHandler = (option: IOptionType) => {
     props.onNewOptionSelected(option);
-    setCurrentValue(option);
     setIsDimmed(false);
   };
 
-  const trimmedValue = currentValue ? misc.trimText(currentValue.text, 32) : null;
+  const trimmedValue = props.currentValue ? misc.trimText(`${props.currentValue}`, 32) : null;
+
+  useEffect(() => {
+    if (props.currentValue === null) {
+      setIsDimmed(true);
+    }
+  }, [props.currentValue]);
 
   return (
     <OutsideClickHandler display='contents' onOutsideClick={() => setIsExpanded(false)}>
-      <styled.Wrapper style={{ width: props.width }} onClick={() => setIsExpanded(!isExpanded)}>
-        <styled.SelectedItemWrapper isDimmed={isDimmed}>
+      <styled.SelectWrapper
+        style={{ width: props.width }}
+        isDisabled={props.isDisabled}
+        onClick={() => setIsExpanded(!isExpanded)}
+      >
+        <styled.SelectedItemWrapper isDimmed={isDimmed} isDisabled={props.isDisabled}>
           {trimmedValue || props.placeholder || 'Выбрать'}
         </styled.SelectedItemWrapper>
 
@@ -43,7 +59,7 @@ function CustomSelect(props: types.IProps) {
         )}
 
         {isExpanded ? <styled.ArrowUp /> : <styled.ArrowDown />}
-      </styled.Wrapper>
+      </styled.SelectWrapper>
     </OutsideClickHandler>
   );
 }

@@ -4,8 +4,69 @@
 
 import { toast } from 'react-toastify';
 
-import { ISearchedProfile, IReviewReceived } from 'commons/types';
+import { ISearchedProfile, ISelectOptionType, IReviewReceived } from 'commons/types';
 import { ScreenBreakpoint, toastVariants } from 'commons/types/unions';
+
+export const months: ISelectOptionType[] = [
+  { key: 0, text: 'Январь' },
+  { key: 1, text: 'Февраль' },
+  { key: 2, text: 'Март' },
+  { key: 3, text: 'Апрель' },
+  { key: 4, text: 'Май' },
+  { key: 5, text: 'Июнь' },
+  { key: 6, text: 'Июль' },
+  { key: 7, text: 'Август' },
+  { key: 8, text: 'Сентябрь' },
+  { key: 9, text: 'Октябрь' },
+  { key: 10, text: 'Ноябрь' },
+  { key: 11, text: 'Декабрь' },
+];
+
+export const getMonthName = (month: number | null) => (
+  month !== null
+    ? months[month]?.text || null
+    : null
+);
+
+export function getAvailableYears(minYear: number | null) {
+  if (minYear === null) return [];
+
+  const currentDate = new Date();
+  const yearsDiff = currentDate.getFullYear() - minYear + 1;
+  return years.slice(0, yearsDiff);
+}
+
+export function getAvailableMonths(
+  year: number | null, minYear?: number | null, minMonth?: number | null
+) {
+  if (year === null) return [];
+
+  const currentDate = new Date();
+
+  if (year === minYear && year === currentDate.getFullYear()) {
+    return months.slice(Math.min(currentDate.getMonth(), minMonth!));
+  }
+
+  if (year === minYear) {
+    return months.slice(minMonth!);
+  }
+
+  return year === currentDate.getFullYear() ? months.slice(0, currentDate.getMonth() + 1) : months;
+}
+
+// 50 years till current year.
+const yearsDown = Array.from({ length: 50 }, (_, i) => new Date().getFullYear() - i);
+
+// Optionified years array.
+export const years = yearsDown.map((value, index) => ({ key: index, text: value.toString() }));
+
+export function monthHandler(option: ISelectOptionType, callback: (month: number) => void) {
+  callback(option.key);
+}
+
+export function yearHandler(option: ISelectOptionType, callback: (year: number) => void) {
+  callback(Number.parseInt(option.text));
+}
 
 export function onExit(lockPageCallback: () => void) {
   lockPageCallback();
