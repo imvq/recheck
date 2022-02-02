@@ -30,7 +30,7 @@ function JobDatesBox(props: Props) {
     dates.hasNotFinished || (dates.yearTo && dates.monthTo)
   );
 
-  const onForwardHandler = () => (canProceed ? proceed : () => {});
+  const onForwardHandler = canProceed ? proceed : () => {};
 
   function proceed() {
     const answer = c`

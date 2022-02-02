@@ -45,7 +45,7 @@ function ReviewPage() {
     setStep(step + 1);
   }
 
-  function comeback() {
+  function toPrevious() {
     dispatch(store.popAnswer());
     setStep(step - 1);
   }
@@ -132,30 +132,34 @@ function ReviewPage() {
   }, [isCurrentUserConfirmed]);
 
   const boxesBasic = [
-    <CommentBoxSimple key={1} pageLabel='1 / 5' onStepForward={proceed} onStepBack={jumpBack}>
+    <CommentBoxSimple key={1} pageLabel='1 / 6' onStepForward={proceed} onStepBack={jumpBack}>
       {constants.REVIEW_QESTIONS_BASIC[0]}
     </CommentBoxSimple>,
 
-    <JobDatesBox key={2} pageLabel='2 / 5' onStepForward={proceed} onStepBack={comeback}>
+    <CommentBoxSimple key={2} pageLabel='2 / 6' onStepForward={proceed} onStepBack={toPrevious}>
       {constants.REVIEW_QESTIONS_BASIC[1]}
+    </CommentBoxSimple>,
+
+    <JobDatesBox key={3} pageLabel='3 / 6' onStepForward={proceed} onStepBack={toPrevious}>
+      {constants.REVIEW_QESTIONS_BASIC[2]}
     </JobDatesBox>,
 
-    <CommentBoxSimple key={3} pageLabel='3 / 5' onStepForward={proceed} onStepBack={comeback}>
-      {constants.REVIEW_QESTIONS_BASIC[2]}
+    <CommentBoxSimple key={4} pageLabel='4 / 6' onStepForward={proceed} onStepBack={toPrevious}>
+      {constants.REVIEW_QESTIONS_BASIC[3]}
     </CommentBoxSimple>,
 
     <ComponentBoxWithMark
-      key={4}
-      pageLabel='4 / 5'
+      key={5}
+      pageLabel='5 / 6'
       onStepForward={proceed}
-      onStepBack={comeback}
+      onStepBack={toPrevious}
       labels={['Не рекомендую', 'Рекомендую', 'Превзошёл ожидания']}
     >
-      {constants.REVIEW_QESTIONS_BASIC[3]}
+      {constants.REVIEW_QESTIONS_BASIC[4]}
     </ComponentBoxWithMark>,
 
-    <CommentBoxSimple key={5} pageLabel='5 / 5' onStepForward={finalize} onStepBack={comeback}>
-      {constants.REVIEW_QESTIONS_BASIC[4]}
+    <CommentBoxSimple key={6} pageLabel='6 / 6' onStepForward={finalize} onStepBack={toPrevious}>
+      {constants.REVIEW_QESTIONS_BASIC[5]}
     </CommentBoxSimple>,
   ];
 
