@@ -131,23 +131,31 @@ function ReviewPage() {
   }, [isCurrentUserConfirmed]);
 
   const boxesBasic = [
-    <CommentBoxSimple key={1} pageLabel='1 / 3' onStepForward={proceed} onStepBack={jumpBack}>
+    <CommentBoxSimple key={1} pageLabel='1 / 5' onStepForward={proceed} onStepBack={jumpBack}>
       {constants.REVIEW_QESTIONS_BASIC[0]}
     </CommentBoxSimple>,
 
-    <CommentBoxSimple key={2} pageLabel='2 / 3' onStepForward={proceed} onStepBack={comeback}>
+    <CommentBoxSimple key={2} pageLabel='2 / 5' onStepForward={proceed} onStepBack={comeback}>
       {constants.REVIEW_QESTIONS_BASIC[1]}
     </CommentBoxSimple>,
 
+    <CommentBoxSimple key={3} pageLabel='3 / 5' onStepForward={proceed} onStepBack={comeback}>
+      {constants.REVIEW_QESTIONS_BASIC[2]}
+    </CommentBoxSimple>,
+
     <ComponentBoxWithMark
-      key={3}
-      pageLabel='3 / 3'
-      onStepForward={finalize}
+      key={4}
+      pageLabel='4 / 5'
+      onStepForward={proceed}
       onStepBack={comeback}
       labels={['Не рекомендую', 'Рекомендую', 'Превзошёл ожидания']}
     >
-      {constants.REVIEW_QESTIONS_BASIC[2]}
-    </ComponentBoxWithMark>
+      {constants.REVIEW_QESTIONS_BASIC[3]}
+    </ComponentBoxWithMark>,
+
+    <CommentBoxSimple key={5} pageLabel='5 / 5' onStepForward={finalize} onStepBack={comeback}>
+      {constants.REVIEW_QESTIONS_BASIC[4]}
+    </CommentBoxSimple>,
   ];
 
   const GuardedContent = (
