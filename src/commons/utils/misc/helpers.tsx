@@ -118,7 +118,7 @@ export const getDemoReview = (): IReviewReceived => ({
   targetName: 'Екатерина Мазур',
   targetPhotoUrl: `${process.env.REACT_APP_MEDIA_URL}/user-test.png`,
   targetShareableId: 'user-demo',
-  date: '2022-01-18 08:48:08.852658',
+  date: '2022-02-03T12:26:56Z',
   content: JSON.stringify({
     questions: [
       'Укажите название компании и позицию, которую занимал(-а) кандидат',
