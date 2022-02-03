@@ -14,11 +14,6 @@ import MenuEntry from './MenuEntry';
 
 import * as styled from './styled';
 
-function copyReviewLink(targetShareableId: string) {
-  navigator.clipboard.writeText(`${window.location.origin}/review/create/${targetShareableId}`);
-  showToast('Ссылка на оставление отзыва скопирована.');
-}
-
 interface Props {
   className?: string;
 }
@@ -26,7 +21,6 @@ interface Props {
 function MainToolbar(props: Props) {
   const entry = useSelector((state: store.AppState) => state.misc.currentMainToolbarEntry);
   const role = useSelector((state: store.AppState) => state.misc.currentUserRole);
-  const shareableId = useSelector((state: store.AppState) => state.profile.shareableId);
 
   const dispatch = useDispatch<store.AppDispatch>();
 
@@ -75,7 +69,7 @@ function MainToolbar(props: Props) {
       </styled.ButtonWrapper>
 
       <styled.ButtonWrapper>
-        <FakeEntry onClick={() => copyReviewLink(shareableId!)}>
+        <FakeEntry onClick={() => dispatch(store.setIsAskForReviewPopupVisible(true))}>
           Запросить отзыв о себе
         </FakeEntry>
       </styled.ButtonWrapper>

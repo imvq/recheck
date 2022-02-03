@@ -51,7 +51,7 @@ function AboutArea() {
       </styled.Title>
 
       <styled.ButtonWrapper>
-        <CustomButton onClick={() => copyAwaiterLink(shareableId!)}>
+        <CustomButton onClick={() => dispatch(store.setIsAskForReviewPopupVisible(true))}>
           Копировать ссылку
         </CustomButton>
       </styled.ButtonWrapper>

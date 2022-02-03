@@ -9,6 +9,7 @@ const initialState: types.IState = {
   isSearchPopupVisible: false,
   isSpendFreeViewPopupVisible: false,
   isLoginPopupVisible: false,
+  isAskForReviewPopupVisible: false,
   isInvitePopupVisible: false,
   currentMainToolbarEntry: mainToolbarEntries.Welcome,
   currentUserRole: userRoles.Recruiter,
@@ -49,6 +50,11 @@ export function miscStateReducer(state = initialState, action: types.IAction): t
       return {
         ...state,
         isLoginPopupVisible: action.payload
+      };
+    case types.SET_IS_ASK_FOR_REVIEW_POPUP_VISIBLE:
+      return {
+        ...state,
+        isAskForReviewPopupVisible: action.payload
       };
     case types.SET_IS_INVITE_POPUP_VISIBLE:
       return {

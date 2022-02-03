@@ -35,6 +35,11 @@ export const setIsLoginPopupVisible = (flag: boolean): types.IAction => ({
   payload: flag
 });
 
+export const setIsAskForReviewPopupVisible = (flag: boolean): types.IAction => ({
+  type: types.SET_IS_ASK_FOR_REVIEW_POPUP_VISIBLE,
+  payload: flag
+});
+
 export const setIsInvitePopupVisible = (flag: boolean): types.IAction => ({
   type: types.SET_IS_INVITE_POPUP_VISIBLE,
   payload: flag
