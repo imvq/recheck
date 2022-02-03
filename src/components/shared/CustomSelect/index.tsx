@@ -40,7 +40,11 @@ function CustomSelect(props: Props) {
       <styled.SelectWrapper
         style={{ width: props.width }}
         isDisabled={props.isDisabled}
-        onClick={() => setIsExpanded(!isExpanded)}
+        onClick={() => {
+          if (props.options.length) {
+            setIsExpanded(!isExpanded);
+          }
+        }}
       >
         <styled.SelectedItemWrapper isDimmed={isDimmed} isDisabled={props.isDisabled}>
           {trimmedValue || props.placeholder || 'Выбрать'}

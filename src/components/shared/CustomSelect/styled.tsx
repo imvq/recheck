@@ -41,6 +41,8 @@ export const SelectedItemWrapper = styled.div<SelectedItemWrapperProps>`
   background-color: ${props => (props.isDisabled ? '#e0e0e0' : 'white')};
   color: ${props => (props.isDimmed ? 'grey' : 'black')};
 
+  font-weight: 400;
+
   &:hover {
     filter: brightness(99.2%);
   }

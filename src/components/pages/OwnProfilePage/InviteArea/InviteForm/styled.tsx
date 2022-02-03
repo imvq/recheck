@@ -4,12 +4,12 @@ export const InviteFormBadge = styled.div`
   position: relative;
 
   box-sizing: border-box;
-  width: 50rem;
+  width: 60rem;
   padding: 1.5rem;
 
   border-radius: 1rem;
 
-  background-color: #e5e5e5;
+  background-color: rgba(196, 196, 196, .2);
 
   font-size: 1.4rem;
   font-weight: 600;
@@ -39,22 +39,24 @@ export const ControlsWrapper = styled.div`
 `;
 
 export const FormPreview = styled.div`
-  width: 30rem;
+  width: 35rem;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  line-height: 1.6rem;
 `;
 
 export const Warn = styled.div`
-  width: 35rem;
+  width: 42rem;
   box-sizing: border-box;
   padding: 1rem 5rem;
 
-  background-color: #c1eeed;
+  background-color: rgba(193, 238, 237, .5);
 
-  filter: drop-shadow(.2rem .3rem .5rem rgba(0, 0, 0, .25));
+  box-shadow: -5px -5px 15px rgba(255, 255, 255, .25), 5px 5px 15px rgba(0, 0, 0, .25);
 
   border-radius: 1rem;
 

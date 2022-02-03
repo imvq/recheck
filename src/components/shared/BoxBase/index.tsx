@@ -43,12 +43,16 @@ export const SimpleText = styled.h3`
   font-weight: 500;
 `;
 
-export const InputGroupWrapper = styled.div`
+interface InputGroupWrapperProps {
+  isInbox?: boolean;
+}
+
+export const InputGroupWrapper = styled.div<InputGroupWrapperProps>`
   width: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: .8rem 11rem .8rem 11rem;
+  padding: ${props => (props.isInbox ? 'initial' : '.8rem 11rem .8rem 11rem')};
 `;
 
 export const InputRowWrapper = styled.div`

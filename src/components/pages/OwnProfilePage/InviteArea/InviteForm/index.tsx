@@ -10,6 +10,8 @@ import * as styledFormBase from 'components/shared/BoxBase';
 import cssVars from 'commons/styles/cssVars';
 import ContentSubareaDelimiter from 'components/shared/ContentSubareaDelimiter';
 import CustomButton from 'components/shared/CustomButton';
+import CustomCheckbox from 'components/shared/CustomCheckbox';
+import CustomSelect from 'components/shared/CustomSelect';
 
 import * as store from 'store';
 import * as styledLocal from './styled';
@@ -90,37 +92,61 @@ function InviteForm(props: Props) {
 
           <ContentSubareaDelimiter half />
 
-          <styled.Subtitle isReduced>
-            2. Укажите даты работы кандидата в этой компании:
-          </styled.Subtitle>
+          <styled.InputGroupWrapper isInbox>
+            <styled.Subtitle isReduced>
+              2. Укажите даты работы кандидата в этой компании:
+            </styled.Subtitle>
 
-          <ContentSubareaDelimiter quarter />
+            <ContentSubareaDelimiter quarter />
 
-          <styled.InputRowWrapper>
-            <styled.SimpleText>Дата начала работы:</styled.SimpleText>
-          </styled.InputRowWrapper>
+            <styled.InputRowWrapper>
+              <CustomSelect
+                width='49%'
+                options={[]}
+                placeholder='Год'
+                currentValue={null}
+                onNewOptionSelected={() => {}}
+              />
+              <CustomSelect
+                width='49%'
+                options={[]}
+                placeholder='Месяц'
+                currentValue={null}
+                onNewOptionSelected={() => {}}
+              />
+            </styled.InputRowWrapper>
 
-          <ContentSubareaDelimiter quarter />
+            <ContentSubareaDelimiter quarter />
 
-          <styled.InputRowWrapper>
-            <styled.Input disabled placeholder='Месяц' />
-            <styled.Input disabled placeholder='Год' />
-          </styled.InputRowWrapper>
+            <CustomCheckbox isChecked={false} onChange={() => {}}>
+              Текущее место работы
+            </CustomCheckbox>
 
-          <ContentSubareaDelimiter quarter />
+            <ContentSubareaDelimiter quarter />
 
-          <styled.InputRowWrapper>
             <styled.SimpleText>Дата окончания работы:</styled.SimpleText>
-          </styled.InputRowWrapper>
+
+            <ContentSubareaDelimiter eighth />
+
+            <styled.InputRowWrapper>
+              <CustomSelect
+                width='49%'
+                options={[]}
+                placeholder='Год'
+                currentValue={null}
+                onNewOptionSelected={() => {}}
+              />
+              <CustomSelect
+                width='49%'
+                options={[]}
+                placeholder='Месяц'
+                currentValue={null}
+                onNewOptionSelected={() => {}}
+              />
+            </styled.InputRowWrapper>
+          </styled.InputGroupWrapper>
 
           <ContentSubareaDelimiter quarter />
-
-          <styled.InputRowWrapper>
-            <styled.Input disabled placeholder='Месяц' />
-            <styled.Input disabled placeholder='Год' />
-          </styled.InputRowWrapper>
-
-          <ContentSubareaDelimiter half />
 
           <styled.Subtitle isReduced>
             3. Назовите три основных задачи, которые выполнял(-а) кандидат на этой позиции?
