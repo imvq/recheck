@@ -63,17 +63,11 @@ function ReviewsArea(props: types.IProps) {
   }
 
   const NoResults = (
-    <>
-      <CustomButton isDisabled={false} onClick={onWriteReviewClickHandler}>
-        Написать отзыв
-      </CustomButton>
-
-      <styled.TitleWrapper isReduced>
-        <styled.Title isReduced>
-          *За каждый оставленный вами отзыв вы получаете +1 поиск отзыва бесплатно
-        </styled.Title>
-      </styled.TitleWrapper>
-    </>
+    <styled.TitleWrapper isReduced>
+      <styled.Title isReduced>
+        Пригласите коллегу и оставьте свой первый отзыв о нём
+      </styled.Title>
+    </styled.TitleWrapper>
   );
 
   return (
