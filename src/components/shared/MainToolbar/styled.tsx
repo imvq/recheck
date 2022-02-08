@@ -40,6 +40,7 @@ export const ButtonsWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
+  padding-top: 2.5rem;
 `;
 
 export const ButtonWrapper = styled.div`
