@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import * as store from 'store';
 
 import { mainToolbarEntries } from 'commons/types/unions';
-import { jumpTo, showToast } from 'commons/utils/misc';
+import { jumpTo } from 'commons/utils/misc';
 
 import Logo from 'components/shared/Logo';
 

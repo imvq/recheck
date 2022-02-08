@@ -5,9 +5,9 @@ import * as styled from '../BaseEntryStyled/styled';
 
 function FakeEntry(props: types.IProps) {
   return (
-    <styled.Wrapper onClick={props.onClick}>
+    <styled.Entry onClick={props.onClick}>
       {props.children}
-    </styled.Wrapper>
+    </styled.Entry>
   );
 }
 

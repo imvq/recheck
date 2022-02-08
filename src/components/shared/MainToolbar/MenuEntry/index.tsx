@@ -5,12 +5,12 @@ import * as styled from '../BaseEntryStyled/styled';
 
 function MenuEntry(props: types.IProps) {
   return (
-    <styled.Wrapper
+    <styled.Entry
       onClick={props.onClick}
       isPressed={props.isPressed}
     >
       {props.children}
-    </styled.Wrapper>
+    </styled.Entry>
   );
 }
 
