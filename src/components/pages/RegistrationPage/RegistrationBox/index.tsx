@@ -6,7 +6,7 @@ import * as store from 'store';
 
 import { ICompanyBasic } from 'commons/types';
 import { apiClient } from 'commons/utils/services';
-import { getMonthName, months, monthHandler, years, yearHandler, onExit } from 'commons/utils/misc';
+import { getAvailableMonths, getMonthName, monthHandler, years, yearHandler, onExit } from 'commons/utils/misc';
 
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
@@ -33,8 +33,8 @@ function RegistrationBox(props: types.IProps) {
   const [fullName, setFullName] = useState('');
   const [company, setCompany] = useState<ICompanyBasic>({ id: -1, name: null });
   const [currentPosition, setCurrentPosition] = useState('');
-  const [currentWorkMonthFrom, setCurrentWorkMonthFrom] = useState(-1);
-  const [currentWorkYearFrom, setCurrentWorkYearFrom] = useState(-1);
+  const [currentWorkMonthFrom, setCurrentWorkMonthFrom] = useState<number | null>(null);
+  const [currentWorkYearFrom, setCurrentWorkYearFrom] = useState<number | null>(null);
 
   // Flags defining email validation state and the fact the validation errors are visible.
   // Validation errors are not supposed to be always visible when the email
@@ -90,15 +90,15 @@ function RegistrationBox(props: types.IProps) {
 
   function proceed() {
     props.onRegisterButtonPressed({
-      socialId: props.socialId as string,
+      socialId: props.socialId!,
       inviterId: props.inviter,
       fullName,
       photoUrl: props.photoUrl,
       email: emailState.email,
       company,
       currentPosition,
-      currentWorkMonthFrom,
-      currentWorkYearFrom
+      currentWorkMonthFrom: currentWorkMonthFrom!,
+      currentWorkYearFrom: currentWorkYearFrom!
     });
   }
 
@@ -221,17 +221,18 @@ function RegistrationBox(props: types.IProps) {
       <styled.InputRowWrapper>
         <CustomSelect
           width='49%'
-          options={months}
-          placeholder='Месяц'
-          currentValue={getMonthName(currentWorkMonthFrom)}
-          onNewOptionSelected={option => monthHandler(option, setCurrentWorkMonthFrom)}
-        />
-        <CustomSelect
-          width='49%'
           options={years}
           placeholder='Год'
           currentValue={currentWorkYearFrom}
           onNewOptionSelected={option => yearHandler(option, setCurrentWorkYearFrom)}
+        />
+        <CustomSelect
+          width='49%'
+          options={getAvailableMonths(currentWorkYearFrom)}
+          placeholder='Месяц'
+          currentValue={getMonthName(currentWorkMonthFrom)}
+          onNewOptionSelected={option => monthHandler(option, setCurrentWorkMonthFrom)}
+          isDisabled={!currentWorkYearFrom}
         />
       </styled.InputRowWrapper>
     </styled.InputGroupWrapper>

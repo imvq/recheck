@@ -73,13 +73,13 @@ export function canProceed(
   emailState: IEmailState,
   company: ICompanyBasic,
   position: string,
-  currentWorkMonthFrom: number,
-  currentWorkYearFrom: number
+  currentWorkMonthFrom: number | null,
+  currentWorkYearFrom: number | null
 ) {
   return fullName !== ''
     && emailState.isEmailValid
     && !emailState.isEmailAvailabilityErrorVisible
     && emailState.isEmailAvailabilityErrorVisible !== null
     && !!company && !!position
-    && currentWorkMonthFrom > -1 && currentWorkYearFrom > -1;
+    && currentWorkMonthFrom !== null && currentWorkYearFrom !== null;
 }
