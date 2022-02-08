@@ -13,11 +13,6 @@ import ReviewCard from 'components/shared/ReviewCard';
 
 import * as styled from './styled';
 
-function copyAwaiterLink(awaiterId: string) {
-  showToast('Ссылка скопрована');
-  navigator.clipboard.writeText(`${window.location.origin}?awaiter=${awaiterId}`);
-}
-
 const NoContent = <styled.Title isHighlighted>Загрузка...</styled.Title>;
 
 /**
@@ -27,7 +22,6 @@ function AboutArea() {
   const [currentPage, setCurrentPage] = useState(0);
 
   const privateToken = useSelector((state: AppState) => state.profile.privateToken);
-  const shareableId = useSelector((state: AppState) => state.profile.shareableId);
   const currentProfile = useSelector((state: AppState) => store.getCurrentProfileInfo(state));
   const isTabDataLoading = useSelector((state: AppState) => state.misc.isProfileAboutTabLoading);
   const reviewsAmount = useSelector((state: AppState) => state.reviews.receivedReviewsAmount);
