@@ -10,6 +10,7 @@ import { store as appStore } from 'store';
 
 import NotFoundPage from 'components/pages/NotFoundPage';
 import ConnectionErrorPopup from 'components/shared/ConnectionErrorPopup';
+import GlobalStyle from 'components/shared/GlobalStyle';
 import PageAccessGuard from 'components/shared/PageAccessGuard';
 import PopupManager from 'components/shared/PopupManager';
 import PurePageLockGuard from 'components/shared/PurePageLockGuard';
@@ -62,6 +63,8 @@ const GuardedRegistrationPage = () => (
  */
 export default () => (
   <Suspense fallback={null}>
+    <GlobalStyle />
+
     <ToastContainer />
 
     <Offline><ConnectionErrorPopup /></Offline>

@@ -23,7 +23,7 @@ interface Props {
 }
 
 function InviteForm(props: Props) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const dispatch = useDispatch<store.AppDispatch>();
 
