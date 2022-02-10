@@ -73,16 +73,16 @@ export async function createNameTokenBinding(userId: string, tokenId: string) {
 
 export async function createReview(
   authorId: string,
-  authorCompanyAtm: string,
-  authorPositionAtm: string,
-  authorEmailAtm: string,
+  authorCompany: string,
+  authorPosition: string,
+  authorEmail: string,
   targetShareableId: string,
   content: string
 ) {
   try {
     const query = QueryFileCacher.getQuery('./sql/create/review.sql');
     return await database.one(query, {
-      authorId, authorCompanyAtm, authorPositionAtm, authorEmailAtm, targetShareableId, content
+      authorId, authorCompany, authorPosition, authorEmail, targetShareableId, content
     });
   } catch {
     throw new errors.InternalServerError('Database conflict.');
