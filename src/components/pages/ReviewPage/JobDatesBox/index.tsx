@@ -26,8 +26,8 @@ function JobDatesBox(props: Props) {
     yearTo: null as (null | number)
   });
 
-  const canProceed = dates.yearFrom && dates.monthFrom && (
-    dates.hasNotFinished || (dates.yearTo && dates.monthTo)
+  const canProceed = dates.yearFrom !== null && dates.monthFrom !== null && (
+    dates.hasNotFinished || (dates.yearTo !== null && dates.monthTo !== null)
   );
 
   const onForwardHandler = canProceed ? proceed : () => {};
