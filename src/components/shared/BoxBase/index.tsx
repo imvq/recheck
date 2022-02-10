@@ -101,9 +101,17 @@ export const InputDescriptionWrapper = styled(InputElementWrapper)``;
 
 export const InputWrapper = styled(InputElementWrapper)``;
 
-export const InputDescription = styled.span`
+interface InputDescriptionProps {
+  reducedAccent?: boolean;
+}
+
+export const InputDescription = styled.span<InputDescriptionProps>`
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: ${props => (props.reducedAccent ? '400' : '600')};
+
+  &>*:not(:last-child) {
+    margin-right: .4rem;
+  }
 `;
 
 export const InputWithOptionsWrapper = styled.div`

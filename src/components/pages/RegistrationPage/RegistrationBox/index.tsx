@@ -8,6 +8,7 @@ import { ICompanyBasic } from 'commons/types';
 import { apiClient } from 'commons/utils/services';
 import { getAvailableMonths, getMonthName, monthHandler, years, yearHandler, onExit } from 'commons/utils/misc';
 
+import ContentSubareaDelimiter from 'components/shared/ContentSubareaDelimiter';
 import CustomButton from 'components/shared/CustomButton';
 import CustomSelect from 'components/shared/CustomSelect';
 import DropList from 'components/shared/DropList';
@@ -110,7 +111,9 @@ function RegistrationBox(props: types.IProps) {
   const NameSection = (
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
-        <styled.InputDescription>* Ваше имя (то, как Вас будут видеть)</styled.InputDescription>
+        <styled.InputDescription>Полное имя</styled.InputDescription>
+        <ContentSubareaDelimiter eighth />
+        <styled.InputDescription reducedAccent>Как Вас будут видеть</styled.InputDescription>
       </styled.InputDescriptionWrapper>
       <styled.Input type='text' onChange={event => setFullName(event.target.value)} />
     </styled.InputGroupWrapper>
@@ -120,7 +123,9 @@ function RegistrationBox(props: types.IProps) {
   const EmailSection = (
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
-        <styled.InputDescription>** Рабочий email</styled.InputDescription>
+        <styled.InputDescription>
+          <span>Рабочий email</span>
+        </styled.InputDescription>
       </styled.InputDescriptionWrapper>
 
       <styled.Input
@@ -192,8 +197,7 @@ function RegistrationBox(props: types.IProps) {
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
         <styled.InputDescription>
-          *** Текущая компания или организация, в которой Вы работаете
-          (либо последняя, в которой работали)
+          Текущая компания (либо последняя)
         </styled.InputDescription>
       </styled.InputDescriptionWrapper>
 
@@ -207,7 +211,7 @@ function RegistrationBox(props: types.IProps) {
   const PositionSection = (
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
-        <styled.InputDescription>* Ваша должность</styled.InputDescription>
+        <styled.InputDescription>Ваша должность</styled.InputDescription>
       </styled.InputDescriptionWrapper>
       <styled.Input type='text' onChange={event => misc.positionHandler(event, setCurrentPosition)} />
     </styled.InputGroupWrapper>
@@ -216,7 +220,7 @@ function RegistrationBox(props: types.IProps) {
   const DatePickers = (
     <styled.InputGroupWrapper>
       <styled.InputDescriptionWrapper>
-        <styled.InputDescription>* Дата начала работы</styled.InputDescription>
+        <styled.InputDescription>Дата начала работы</styled.InputDescription>
       </styled.InputDescriptionWrapper>
       <styled.InputRowWrapper>
         <CustomSelect
@@ -245,27 +249,6 @@ function RegistrationBox(props: types.IProps) {
       {CompaniesSection}
       {PositionSection}
       {DatePickers}
-
-      <styled.TextAlert>* Поля обязательны к заполнению.</styled.TextAlert>
-
-      <styled.TextAlert>
-        ** Необходимо предоставить рабочую почту той компании, в которой вы работаете
-        в данный момент (при отсутствии таковой следует указать рабочую почту последнего
-        места работы, к которой у Вас есть доступ).
-        Таким образом мы сможем сопоставить Вас с коллегами по работе.
-      </styled.TextAlert>
-
-      <styled.TextAlert>
-        *** Домен предоставленной рабочей почты должен соответствовать одному из
-        подтверждённых владельцем компании (организации).
-        В случае отсутствия Вашей компании в нашей базе данных, Вы можете
-        ввести имя текстом или же оставить данное поле пустым — в таком случае
-        поиск Ваших коллег будет осуществляться по домену Вашей почты (если это возможно).
-        В дальнейшем эта информация можеть быть дополнена и отредактирована (см.&nbsp;
-        <a href='/tutorial'>подробнее</a>
-        ).
-      </styled.TextAlert>
-
       {ProceedButton}
     </styled.BoxBaseWrapper>
   );
